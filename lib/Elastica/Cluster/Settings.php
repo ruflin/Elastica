@@ -103,10 +103,7 @@ class Settings
     /**
      * Sets persistent setting.
      *
-     * @param string $key
-     * @param mixed  $value
-     *
-     * @return Response
+     * @param mixed $value
      */
     public function setPersistent(string $key, $value): Response
     {
@@ -122,10 +119,7 @@ class Settings
     /**
      * Sets transient settings.
      *
-     * @param string $key
-     * @param mixed  $value
-     *
-     * @return Response
+     * @param mixed $value
      */
     public function setTransient(string $key, $value): Response
     {
@@ -142,9 +136,6 @@ class Settings
      * Sets the cluster to read only.
      *
      * Second param can be used to set it persistent
-     *
-     * @param bool $readOnly
-     * @param bool $persistent
      *
      * @return Response $response
      */
@@ -163,8 +154,6 @@ class Settings
      * Set settings for cluster.
      *
      * @param array $settings Raw settings (including persistent or transient)
-     *
-     * @return Response
      */
     public function set(array $settings): Response
     {
@@ -173,8 +162,6 @@ class Settings
 
     /**
      * Get the client.
-     *
-     * @return Client
      */
     public function getClient(): Client
     {

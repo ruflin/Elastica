@@ -55,8 +55,6 @@ class Query implements DSL
 {
     /**
      * must return type for QueryBuilder usage.
-     *
-     * @return string
      */
     public function getType(): string
     {
@@ -70,8 +68,6 @@ class Query implements DSL
      *
      * @param string $field
      * @param mixed  $values
-     *
-     * @return Match
      */
     public function match(string $field = null, $values = null): Match
     {
@@ -82,8 +78,6 @@ class Query implements DSL
      * multi match query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html
-     *
-     * @return MultiMatch
      */
     public function multi_match(): MultiMatch
     {
@@ -94,8 +88,6 @@ class Query implements DSL
      * bool query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html
-     *
-     * @return BoolQuery
      */
     public function bool(): BoolQuery
     {
@@ -106,8 +98,6 @@ class Query implements DSL
      * boosting query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html
-     *
-     * @return Boosting
      */
     public function boosting(): Boosting
     {
@@ -119,11 +109,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-common-terms-query.html
      *
-     * @param string $field
-     * @param string $query
-     * @param float  $cutoffFrequency percentage in decimal form (.001 == 0.1%)
-     *
-     * @return Common
+     * @param float $cutoffFrequency percentage in decimal form (.001 == 0.1%)
      */
     public function common_terms(string $field, string $query, float $cutoffFrequency): Common
     {
@@ -134,10 +120,6 @@ class Query implements DSL
      * constant score query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-constant-score-query.html
-     *
-     * @param AbstractQuery|null $filter
-     *
-     * @return ConstantScore
      */
     public function constant_score(AbstractQuery $filter = null): ConstantScore
     {
@@ -148,8 +130,6 @@ class Query implements DSL
      * dis max query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-dis-max-query.html
-     *
-     * @return DisMax
      */
     public function dis_max(): DisMax
     {
@@ -160,8 +140,6 @@ class Query implements DSL
      * function score query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html
-     *
-     * @return FunctionScore
      */
     public function function_score(): FunctionScore
     {
@@ -175,8 +153,6 @@ class Query implements DSL
      *
      * @param string $fieldName Field name
      * @param string $value     String to search for
-     *
-     * @return Fuzzy
      */
     public function fuzzy(string $fieldName = null, string $value = null): Fuzzy
     {
@@ -200,8 +176,6 @@ class Query implements DSL
      *
      * @param string|BaseQuery|AbstractQuery $query
      * @param string                         $type  Parent document type
-     *
-     * @return HasChild
      */
     public function has_child($query, string $type = null): HasChild
     {
@@ -215,8 +189,6 @@ class Query implements DSL
      *
      * @param string|BaseQuery|AbstractQuery $query
      * @param string                         $type  Parent document type
-     *
-     * @return HasParent
      */
     public function has_parent($query, string $type): HasParent
     {
@@ -227,10 +199,6 @@ class Query implements DSL
      * ids query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html
-     *
-     * @param array $ids
-     *
-     * @return Ids
      */
     public function ids(array $ids = []): Ids
     {
@@ -241,8 +209,6 @@ class Query implements DSL
      * match all query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-all-query.html
-     *
-     * @return MatchAll
      */
     public function match_all(): MatchAll
     {
@@ -253,8 +219,6 @@ class Query implements DSL
      * match none query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-all-query.html#query-dsl-match-none-query
-     *
-     * @return MatchNone
      */
     public function match_none(): MatchNone
     {
@@ -265,8 +229,6 @@ class Query implements DSL
      * more like this query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-mlt-query.html
-     *
-     * @return MoreLikeThis
      */
     public function more_like_this(): MoreLikeThis
     {
@@ -277,8 +239,6 @@ class Query implements DSL
      * nested query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html
-     *
-     * @return Nested
      */
     public function nested(): Nested
     {
@@ -286,9 +246,7 @@ class Query implements DSL
     }
 
     /**
-     * @param string     $type
      * @param int|string $id
-     * @param bool       $ignoreUnmapped
      *
      * @return ParentId ParentId
      */
@@ -303,8 +261,6 @@ class Query implements DSL
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html
      *
      * @param array $prefix Prefix array
-     *
-     * @return Prefix
      */
     public function prefix(array $prefix = []): Prefix
     {
@@ -317,8 +273,6 @@ class Query implements DSL
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html
      *
      * @param string $queryString OPTIONAL Query string for object
-     *
-     * @return QueryString
      */
     public function query_string(string $queryString = ''): QueryString
     {
@@ -329,11 +283,6 @@ class Query implements DSL
      * simple_query_string query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html
-     *
-     * @param string $query
-     * @param array  $fields
-     *
-     * @return SimpleQueryString
      */
     public function simple_query_string(string $query, array $fields = []): SimpleQueryString
     {
@@ -346,9 +295,6 @@ class Query implements DSL
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html
      *
      * @param string $fieldName
-     * @param array  $args
-     *
-     * @return Range
      */
     public function range(string $fieldName = null, array $args = []): Range
     {
@@ -358,11 +304,7 @@ class Query implements DSL
     /**
      * regexp query.
      *
-     * @param string $key
      * @param string $value
-     * @param float  $boost
-     *
-     * @return Regexp
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html
      */
@@ -377,8 +319,6 @@ class Query implements DSL
      * @param AbstractQuery|array $match
      * @param int                 $end
      *
-     * @return SpanFirst
-     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-first-query.html
      */
     public function span_first($match = null, int $end = null): SpanFirst
@@ -391,8 +331,6 @@ class Query implements DSL
      *
      * @param AbstractQuery|array $match
      *
-     * @return SpanMulti
-     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-multi-term-query.html
      */
     public function span_multi_term($match = null): SpanMulti
@@ -402,12 +340,6 @@ class Query implements DSL
 
     /**
      * span near query.
-     *
-     * @param array $clauses
-     * @param int   $slop
-     * @param bool  $inOrder
-     *
-     * @return SpanNear
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-near-query.html
      */
@@ -419,11 +351,6 @@ class Query implements DSL
     /**
      * span not query.
      *
-     * @param AbstractSpanQuery|null $include
-     * @param AbstractSpanQuery|null $exclude
-     *
-     * @return SpanNot
-     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-not-query.html
      */
     public function span_not(AbstractSpanQuery $include = null, AbstractSpanQuery $exclude = null): SpanNot
@@ -433,10 +360,6 @@ class Query implements DSL
 
     /**
      * span_or query.
-     *
-     * @param array $clauses
-     *
-     * @return SpanOr
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-or-query.html
      */
@@ -448,10 +371,6 @@ class Query implements DSL
     /**
      * span_term query.
      *
-     * @param array $term
-     *
-     * @return SpanTerm
-     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-term-query.html
      */
     public function span_term(array $term = []): SpanTerm
@@ -462,11 +381,6 @@ class Query implements DSL
     /**
      * span_containing query.
      *
-     * @param AbstractSpanQuery|null $little
-     * @param AbstractSpanQuery|null $big
-     *
-     * @return SpanContaining
-     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-containing-query.html
      */
     public function span_containing(AbstractSpanQuery $little = null, AbstractSpanQuery $big = null): SpanContaining
@@ -476,11 +390,6 @@ class Query implements DSL
 
     /**
      * span_within query.
-     *
-     * @param AbstractSpanQuery|null $little
-     * @param AbstractSpanQuery|null $big
-     *
-     * @return SpanWithin
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-within-query.html
      */
@@ -493,10 +402,6 @@ class Query implements DSL
      * term query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html
-     *
-     * @param array $term
-     *
-     * @return Term
      */
     public function term(array $term = []): Term
     {
@@ -507,11 +412,6 @@ class Query implements DSL
      * terms query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html
-     *
-     * @param string $key
-     * @param array  $terms
-     *
-     * @return Terms
      */
     public function terms(string $key = '', array $terms = []): Terms
     {
@@ -526,8 +426,6 @@ class Query implements DSL
      * @param string $key   OPTIONAL Wildcard key
      * @param string $value OPTIONAL Wildcard value
      * @param float  $boost OPTIONAL Boost value (default = 1)
-     *
-     * @return Wildcard
      */
     public function wildcard(string $key = '', string $value = null, float $boost = 1.0): Wildcard
     {
@@ -539,11 +437,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-query.html
      *
-     * @param string       $key
      * @param array|string $location
-     * @param string       $distance
-     *
-     * @return GeoDistance
      */
     public function geo_distance(string $key, $location, string $distance): GeoDistance
     {
@@ -554,10 +448,6 @@ class Query implements DSL
      * exists query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html
-     *
-     * @param string $field
-     *
-     * @return Exists
      */
     public function exists(string $field): Exists
     {
@@ -568,8 +458,6 @@ class Query implements DSL
      * type query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-percolate-query.html
-     *
-     * @return Percolate
      */
     public function percolate(): Percolate
     {

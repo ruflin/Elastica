@@ -35,8 +35,6 @@ class Health
 
     /**
      * Retrieves the health data from the cluster.
-     *
-     * @return array
      */
     protected function _retrieveHealthData(): array
     {
@@ -50,8 +48,6 @@ class Health
 
     /**
      * Gets the health data.
-     *
-     * @return array
      */
     public function getData(): array
     {
@@ -72,8 +68,6 @@ class Health
 
     /**
      * Gets the name of the cluster.
-     *
-     * @return string
      */
     public function getClusterName(): string
     {
@@ -92,8 +86,6 @@ class Health
 
     /**
      * TODO determine the purpose of this.
-     *
-     * @return bool
      */
     public function getTimedOut(): bool
     {
@@ -102,8 +94,6 @@ class Health
 
     /**
      * Gets the number of nodes in the cluster.
-     *
-     * @return int
      */
     public function getNumberOfNodes(): int
     {
@@ -112,8 +102,6 @@ class Health
 
     /**
      * Gets the number of data nodes in the cluster.
-     *
-     * @return int
      */
     public function getNumberOfDataNodes(): int
     {
@@ -122,8 +110,6 @@ class Health
 
     /**
      * Gets the number of active primary shards.
-     *
-     * @return int
      */
     public function getActivePrimaryShards(): int
     {
@@ -132,8 +118,6 @@ class Health
 
     /**
      * Gets the number of active shards.
-     *
-     * @return int
      */
     public function getActiveShards(): int
     {
@@ -142,8 +126,6 @@ class Health
 
     /**
      * Gets the number of relocating shards.
-     *
-     * @return int
      */
     public function getRelocatingShards(): int
     {
@@ -152,8 +134,6 @@ class Health
 
     /**
      * Gets the number of initializing shards.
-     *
-     * @return int
      */
     public function getInitializingShards(): int
     {
@@ -162,8 +142,6 @@ class Health
 
     /**
      * Gets the number of unassigned shards.
-     *
-     * @return int
      */
     public function getUnassignedShards(): int
     {
@@ -172,41 +150,27 @@ class Health
 
     /**
      * get the number of delayed unassined shards.
-     *
-     * @return int
      */
     public function getDelayedUnassignedShards(): int
     {
         return $this->_data['delayed_unassigned_shards'];
     }
 
-    /**
-     * @return int
-     */
     public function getNumberOfPendingTasks(): int
     {
         return $this->_data['number_of_pending_tasks'];
     }
 
-    /**
-     * @return int
-     */
     public function getNumberOfInFlightFetch(): int
     {
         return $this->_data['number_of_in_flight_fetch'];
     }
 
-    /**
-     * @return int
-     */
     public function getTaskMaxWaitingInQueueMillis(): int
     {
         return $this->_data['task_max_waiting_in_queue_millis'];
     }
 
-    /**
-     * @return int
-     */
     public function getActiveShardsPercentAsNumber(): int
     {
         return $this->_data['active_shards_percent_as_number'];

@@ -38,11 +38,6 @@ class Action
      */
     protected $_source = [];
 
-    /**
-     * @param string $opType
-     * @param array  $metadata
-     * @param array  $source
-     */
     public function __construct(string $opType = self::OP_TYPE_INDEX, array $metadata = [], array $source = [])
     {
         $this->setOpType($opType);
@@ -51,8 +46,6 @@ class Action
     }
 
     /**
-     * @param string $type
-     *
      * @return $this
      */
     public function setOpType(string $type): self
@@ -62,17 +55,12 @@ class Action
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getOpType(): string
     {
         return $this->_opType;
     }
 
     /**
-     * @param array $metadata
-     *
      * @return $this
      */
     public function setMetadata(array $metadata): self
@@ -82,17 +70,11 @@ class Action
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function getMetadata(): array
     {
         return $this->_metadata;
     }
 
-    /**
-     * @return array
-     */
     public function getActionMetadata(): array
     {
         return [$this->_opType => $this->getMetadata()];
@@ -118,9 +100,6 @@ class Action
         return $this->_source;
     }
 
-    /**
-     * @return bool
-     */
     public function hasSource(): bool
     {
         return !empty($this->_source);
@@ -142,8 +121,6 @@ class Action
     }
 
     /**
-     * @param string $id
-     *
      * @return $this
      */
     public function setId(string $id): self
@@ -165,9 +142,6 @@ class Action
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $data[] = $this->getActionMetadata();
@@ -178,9 +152,6 @@ class Action
         return $data;
     }
 
-    /**
-     * @return string
-     */
     public function toString(): string
     {
         $string = JSON::stringify($this->getActionMetadata(), JSON_FORCE_OBJECT).Bulk::DELIMITER;
@@ -204,11 +175,6 @@ class Action
         return $string;
     }
 
-    /**
-     * @param string|null $opType
-     *
-     * @return bool
-     */
     public static function isValidOpType(string $opType = null): bool
     {
         return \in_array($opType, self::$opTypes, true);

@@ -17,9 +17,6 @@ class Date extends AbstractProcessor
 
     /**
      * Date constructor.
-     *
-     * @param string $field
-     * @param array  $formats
      */
     public function __construct(string $field, array $formats)
     {
@@ -29,8 +26,6 @@ class Date extends AbstractProcessor
 
     /**
      * Set field.
-     *
-     * @param string $field
      *
      * @return $this
      */
@@ -42,8 +37,6 @@ class Date extends AbstractProcessor
     /**
      * Set field format. Joda pattern or one of the following formats ISO8601, UNIX, UNIX_MS, or TAI64N.
      *
-     * @param array $formats
-     *
      * @return $this
      */
     public function setFormats(array $formats): self
@@ -53,8 +46,6 @@ class Date extends AbstractProcessor
 
     /**
      * Set target_field. Default value @timestamp.
-     *
-     * @param string $targetField
      *
      * @return $this
      */
@@ -66,8 +57,6 @@ class Date extends AbstractProcessor
     /**
      * Set the timezone use when parsing the date. Default UTC.
      *
-     * @param string $timezone
-     *
      * @return $this
      */
     public function setTimezone(string $timezone): self
@@ -77,8 +66,6 @@ class Date extends AbstractProcessor
 
     /**
      * Set the locale to use when parsing the date.
-     *
-     * @param string $locale
      *
      * @return $this
      */

@@ -13,8 +13,6 @@ interface StrategyInterface
 {
     /**
      * @param Connection[] $connections
-     *
-     * @return Connection
      */
     public function getConnection(array $connections): Connection;
 }

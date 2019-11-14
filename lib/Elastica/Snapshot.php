@@ -18,9 +18,6 @@ class Snapshot
      */
     protected $_client;
 
-    /**
-     * @param Client $client
-     */
     public function __construct(Client $client)
     {
         $this->_client = $client;

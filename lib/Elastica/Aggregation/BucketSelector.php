@@ -9,11 +9,6 @@ namespace Elastica\Aggregation;
  */
 class BucketSelector extends AbstractSimpleAggregation
 {
-    /**
-     * @param string      $name
-     * @param array|null  $bucketsPath
-     * @param string|null $script
-     */
     public function __construct(string $name, array $bucketsPath = null, string $script = null)
     {
         parent::__construct($name);
@@ -41,8 +36,6 @@ class BucketSelector extends AbstractSimpleAggregation
 
     /**
      * Set the gap policy for this aggregation.
-     *
-     * @param string $gapPolicy
      *
      * @return $this
      */

@@ -14,10 +14,6 @@ class AvgBucket extends AbstractAggregation
     const DEFAULT_GAP_POLICY_VALUE = 'skip';
     const DEFAULT_FORMAT_VALUE = null;
 
-    /**
-     * @param string      $name
-     * @param string|null $bucketsPath
-     */
     public function __construct(string $name, string $bucketsPath = null)
     {
         parent::__construct($name);
@@ -30,8 +26,6 @@ class AvgBucket extends AbstractAggregation
     /**
      * Set the buckets_path for this aggregation.
      *
-     * @param string $bucketsPath
-     *
      * @return $this
      */
     public function setBucketsPath(string $bucketsPath): self
@@ -41,8 +35,6 @@ class AvgBucket extends AbstractAggregation
 
     /**
      * Set the gap policy for this aggregation.
-     *
-     * @param string $gapPolicy
      *
      * @return $this
      */
@@ -54,8 +46,6 @@ class AvgBucket extends AbstractAggregation
     /**
      * Set the format for this aggregation.
      *
-     * @param string|null $format
-     *
      * @return $this
      */
     public function setFormat(string $format = null): self
@@ -65,8 +55,6 @@ class AvgBucket extends AbstractAggregation
 
     /**
      * @throws InvalidException If buckets path or script is not set
-     *
-     * @return array
      */
     public function toArray(): array
     {

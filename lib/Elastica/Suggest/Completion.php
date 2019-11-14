@@ -16,8 +16,6 @@ class Completion extends AbstractSuggest
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html#fuzzy
      *
-     * @param array $fuzzy
-     *
      * @return $this
      */
     public function setFuzzy(array $fuzzy): Completion

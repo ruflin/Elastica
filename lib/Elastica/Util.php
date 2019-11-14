@@ -198,8 +198,7 @@ class Util
      *
      * Converts it to the lucene format, including the appropriate TimeZone
      *
-     * @param \DateTime $dateTime
-     * @param bool      $includeTimezone
+     * @param bool $includeTimezone
      *
      * @return string
      */
@@ -234,8 +233,6 @@ class Util
 
     /**
      * Converts Request to Curl console command.
-     *
-     * @param Request $request
      *
      * @return string
      */

@@ -33,8 +33,6 @@ class Shard
 
     /**
      * Gets the index/number of this shard.
-     *
-     * @return int
      */
     public function getShardNumber(): int
     {
@@ -53,8 +51,6 @@ class Shard
 
     /**
      * Is the primary active?
-     *
-     * @return bool
      */
     public function isPrimaryActive(): bool
     {
@@ -63,8 +59,6 @@ class Shard
 
     /**
      * Is this shard active?
-     *
-     * @return bool
      */
     public function isActive(): bool
     {
@@ -73,8 +67,6 @@ class Shard
 
     /**
      * Is this shard relocating?
-     *
-     * @return bool
      */
     public function isRelocating(): bool
     {
@@ -83,8 +75,6 @@ class Shard
 
     /**
      * Is this shard initialized?
-     *
-     * @return bool
      */
     public function isInitialized(): bool
     {
@@ -93,8 +83,6 @@ class Shard
 
     /**
      * Is this shard unassigned?
-     *
-     * @return bool
      */
     public function isUnassigned(): bool
     {

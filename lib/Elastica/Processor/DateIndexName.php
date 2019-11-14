@@ -18,9 +18,6 @@ class DateIndexName extends AbstractProcessor
 
     /**
      * DateIndexName constructor.
-     *
-     * @param string $field
-     * @param string $dateRounding
      */
     public function __construct(string $field, string $dateRounding)
     {
@@ -30,8 +27,6 @@ class DateIndexName extends AbstractProcessor
 
     /**
      * Set field.
-     *
-     * @param string $field
      *
      * @return $this
      */
@@ -43,8 +38,6 @@ class DateIndexName extends AbstractProcessor
     /**
      * Set date_rounding. Valid values are: y (year), M (month), w (week), d (day), h (hour), m (minute) and s (second).
      *
-     * @param string $dateRounding
-     *
      * @return $this
      */
     public function setDateRounding(string $dateRounding): self
@@ -54,8 +47,6 @@ class DateIndexName extends AbstractProcessor
 
     /**
      * Set field formats. Joda pattern or one of the following formats ISO8601, UNIX, UNIX_MS, or TAI64N.
-     *
-     * @param array $formats
      *
      * @return $this
      */
@@ -67,8 +58,6 @@ class DateIndexName extends AbstractProcessor
     /**
      * Set index_prefix_name.
      *
-     * @param string $indexPrefixName
-     *
      * @return $this
      */
     public function setIndexNamePrefix(string $indexPrefixName): self
@@ -78,8 +67,6 @@ class DateIndexName extends AbstractProcessor
 
     /**
      * Set format to be used when printing parsed date. An valid Joda pattern is expected here. Default yyyy-MM-dd.
-     *
-     * @param string $indexNameFormat
      *
      * @return $this
      */
@@ -91,8 +78,6 @@ class DateIndexName extends AbstractProcessor
     /**
      * Set the timezone use when parsing the date. Default UTC.
      *
-     * @param string $timezone
-     *
      * @return $this
      */
     public function setTimezone(string $timezone): self
@@ -102,8 +87,6 @@ class DateIndexName extends AbstractProcessor
 
     /**
      * Set the locale to use when parsing the date.
-     *
-     * @param string $locale
      *
      * @return $this
      */

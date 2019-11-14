@@ -16,9 +16,6 @@ class Convert extends AbstractProcessor
 
     /**
      * Convert constructor.
-     *
-     * @param string $field
-     * @param string $type
      */
     public function __construct(string $field, string $type)
     {
@@ -28,8 +25,6 @@ class Convert extends AbstractProcessor
 
     /**
      * Set field.
-     *
-     * @param string $field
      *
      * @return $this
      */
@@ -41,8 +36,6 @@ class Convert extends AbstractProcessor
     /**
      * Set field value.
      *
-     * @param string $type
-     *
      * @return $this
      */
     public function setType(string $type): self
@@ -52,8 +45,6 @@ class Convert extends AbstractProcessor
 
     /**
      * Set target_field. Default value field.
-     *
-     * @param string $targetField
      *
      * @return $this
      */

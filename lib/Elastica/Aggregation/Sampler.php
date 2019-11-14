@@ -12,8 +12,6 @@ class Sampler extends AbstractAggregation
     /**
      * Set the number of top-scoring documents to be returned from each shard.
      *
-     * @param int $shardSize
-     *
      * @return $this
      */
     public function setShardSize(int $shardSize): self

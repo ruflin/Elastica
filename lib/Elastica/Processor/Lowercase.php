@@ -13,8 +13,6 @@ class Lowercase extends AbstractProcessor
 {
     /**
      * Lowercase constructor.
-     *
-     * @param string $field
      */
     public function __construct(string $field)
     {
@@ -23,8 +21,6 @@ class Lowercase extends AbstractProcessor
 
     /**
      * Set field.
-     *
-     * @param string $field
      *
      * @return $this
      */

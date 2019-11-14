@@ -13,8 +13,6 @@ class Fail extends AbstractProcessor
 {
     /**
      * Fail constructor.
-     *
-     * @param string $message
      */
     public function __construct(string $message)
     {
@@ -23,8 +21,6 @@ class Fail extends AbstractProcessor
 
     /**
      * Set Fail message.
-     *
-     * @param string $message
      *
      * @return $this
      */

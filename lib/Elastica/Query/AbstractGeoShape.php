@@ -40,8 +40,6 @@ abstract class AbstractGeoShape extends AbstractQuery
      *
      * Possible values: intersects, disjoint, within, contains (see constants).
      *
-     * @param string $relation
-     *
      * @return $this
      */
     public function setRelation(string $relation): self
@@ -53,8 +51,6 @@ abstract class AbstractGeoShape extends AbstractQuery
 
     /**
      * Gets the relation of the geo_shape field and the query geometry.
-     *
-     * @return string
      */
     public function getRelation(): string
     {

@@ -42,8 +42,6 @@ class Pipeline extends Param
 
     /**
      * Create a new Pipeline Object.
-     *
-     * @param Client $client
      */
     public function __construct(Client $client)
     {
@@ -137,8 +135,6 @@ class Pipeline extends Param
     /**
      * Add a processor.
      *
-     * @param AbstractProcessor $processor
-     *
      * @return $this
      */
     public function addProcessor(AbstractProcessor $processor)
@@ -155,8 +151,6 @@ class Pipeline extends Param
 
     /**
      * Set pipeline id.
-     *
-     * @param string $id
      */
     public function setId(string $id)
     {
@@ -177,8 +171,6 @@ class Pipeline extends Param
 
     /**
      * Set Description.
-     *
-     * @param string $description
      *
      * @return $this
      */
@@ -213,8 +205,6 @@ class Pipeline extends Param
 
     /**
      * Makes calls to the elasticsearch server with usage official client Endpoint based on this index.
-     *
-     * @param AbstractEndpoint $endpoint
      *
      * @return Response
      */

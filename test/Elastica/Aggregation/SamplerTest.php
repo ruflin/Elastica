@@ -62,9 +62,6 @@ class SamplerTest extends BaseAggregationTest
     /**
      * @dataProvider shardSizeProvider
      * @group functional
-     *
-     * @param int $shardSize
-     * @param int $docCount
      */
     public function testSamplerAggregation(int $shardSize, int $docCount)
     {

@@ -28,8 +28,6 @@ class NullTransport extends AbstractTransport
      * Set response object the transport returns.
      *
      * @param array $params Hostname, port, path, ...
-     *
-     * @return Response
      */
     public function getResponse(array $params = []): Response
     {
@@ -38,8 +36,6 @@ class NullTransport extends AbstractTransport
 
     /**
      * Set response object the transport returns.
-     *
-     * @param \Elastica\Response $response
      *
      * @return $this
      */
@@ -81,8 +77,7 @@ class NullTransport extends AbstractTransport
     /**
      * Null transport.
      *
-     * @param Request $request
-     * @param array   $params  Hostname, port, path, ...
+     * @param array $params Hostname, port, path, ...
      *
      * @return Response Response empty object
      */

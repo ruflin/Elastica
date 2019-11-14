@@ -64,8 +64,6 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     /**
      * Extract exception name from error response.
      *
-     * @param string $error
-     *
      * @return string|null
      */
     protected function _extractException(string $error)
@@ -89,8 +87,6 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
 
     /**
      * Returns whether exception was local to server node or remote.
-     *
-     * @return bool
      */
     public function isRemoteTransportException(): bool
     {

@@ -56,8 +56,6 @@ class MultiMatch extends AbstractQuery
      *
      * If not set, defaults to true.
      *
-     * @param bool $useDisMax
-     *
      * @return $this
      */
     public function setUseDisMax(bool $useDisMax = true): self
@@ -70,8 +68,6 @@ class MultiMatch extends AbstractQuery
      *
      * If not set, defaults to 0.0.
      *
-     * @param float $tieBreaker
-     *
      * @return $this
      */
     public function setTieBreaker(float $tieBreaker = 0.0): self
@@ -83,8 +79,6 @@ class MultiMatch extends AbstractQuery
      * Sets operator for Match Query.
      *
      * If not set, defaults to 'or'
-     *
-     * @param string $operator
      *
      * @return $this
      */
@@ -110,8 +104,6 @@ class MultiMatch extends AbstractQuery
      *
      * If not set, default to 'none'
      *
-     * @param string $zeroTermQuery
-     *
      * @return $this
      */
     public function setZeroTermsQuery(string $zeroTermQuery = self::ZERO_TERM_NONE): self
@@ -122,8 +114,6 @@ class MultiMatch extends AbstractQuery
     /**
      * Set cutoff frequency for Match Query.
      *
-     * @param float $cutoffFrequency
-     *
      * @return $this
      */
     public function setCutoffFrequency(float $cutoffFrequency): self
@@ -133,8 +123,6 @@ class MultiMatch extends AbstractQuery
 
     /**
      * Set type.
-     *
-     * @param string $type
      *
      * @return $this
      */
@@ -158,8 +146,6 @@ class MultiMatch extends AbstractQuery
     /**
      * Set prefix length.
      *
-     * @param int $prefixLength
-     *
      * @return $this
      */
     public function setPrefixLength(int $prefixLength): self
@@ -170,8 +156,6 @@ class MultiMatch extends AbstractQuery
     /**
      * Set max expansions.
      *
-     * @param int $maxExpansions
-     *
      * @return $this
      */
     public function setMaxExpansions(int $maxExpansions): self
@@ -181,8 +165,6 @@ class MultiMatch extends AbstractQuery
 
     /**
      * Set analyzer.
-     *
-     * @param string $analyzer
      *
      * @return $this
      */

@@ -16,9 +16,6 @@ class CallbackStrategy implements StrategyInterface
      */
     protected $_callback;
 
-    /**
-     * @param callable $callback
-     */
     public function __construct(callable $callback)
     {
         $this->_callback = $callback;

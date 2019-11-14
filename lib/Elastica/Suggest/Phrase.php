@@ -18,8 +18,6 @@ class Phrase extends AbstractSuggest
     const DEFAULT_LAPLACE_SMOOTHING_ALPHA = 0.5;
 
     /**
-     * @param string $analyzer
-     *
      * @return $this
      */
     public function setAnalyzer(string $analyzer): Phrase
@@ -29,8 +27,6 @@ class Phrase extends AbstractSuggest
 
     /**
      * Set the max size of the n-grams (shingles) in the field.
-     *
-     * @param int $size
      *
      * @return $this
      */
@@ -67,8 +63,6 @@ class Phrase extends AbstractSuggest
     /**
      * Set the maximum percentage of the terms considered to be misspellings in order to form a correction.
      *
-     * @param float $max
-     *
      * @return $this
      */
     public function setMaxErrors(float $max): Phrase
@@ -77,8 +71,6 @@ class Phrase extends AbstractSuggest
     }
 
     /**
-     * @param string $separator
-     *
      * @return $this
      */
     public function setSeparator(string $separator): Phrase
@@ -88,9 +80,6 @@ class Phrase extends AbstractSuggest
 
     /**
      * Set suggestion highlighting.
-     *
-     * @param string $preTag
-     * @param string $postTag
      *
      * @return $this
      */
@@ -103,8 +92,6 @@ class Phrase extends AbstractSuggest
     }
 
     /**
-     * @param float $discount
-     *
      * @return $this
      */
     public function setStupidBackoffSmoothing(float $discount): Phrase
@@ -115,8 +102,6 @@ class Phrase extends AbstractSuggest
     }
 
     /**
-     * @param float $alpha
-     *
      * @return $this
      */
     public function setLaplaceSmoothing(float $alpha): Phrase
@@ -127,10 +112,6 @@ class Phrase extends AbstractSuggest
     }
 
     /**
-     * @param float $trigramLambda
-     * @param float $bigramLambda
-     * @param float $unigramLambda
-     *
      * @return $this
      */
     public function setLinearInterpolationSmoothing(float $trigramLambda, float $bigramLambda, float $unigramLambda): Phrase
@@ -143,8 +124,7 @@ class Phrase extends AbstractSuggest
     }
 
     /**
-     * @param string $model  the name of the smoothing model
-     * @param array  $params
+     * @param string $model the name of the smoothing model
      *
      * @return $this
      */
@@ -156,8 +136,6 @@ class Phrase extends AbstractSuggest
     }
 
     /**
-     * @param AbstractCandidateGenerator $generator
-     *
      * @return $this
      */
     public function addCandidateGenerator(AbstractCandidateGenerator $generator): Phrase

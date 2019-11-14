@@ -28,8 +28,6 @@ class Collapse extends Param
     /**
      * Set inner hits for collapsed field.
      *
-     * @param InnerHits $innerHits
-     *
      * @return $this
      */
     public function setInnerHits(InnerHits $innerHits): self
@@ -38,8 +36,6 @@ class Collapse extends Param
     }
 
     /**
-     * @param InnerHits $innerHits
-     *
      * @return Collapse
      */
     public function addInnerHits(InnerHits $innerHits): self
@@ -58,8 +54,6 @@ class Collapse extends Param
     }
 
     /**
-     * @param int $groupSearches
-     *
      * @return $this
      */
     public function setMaxConcurrentGroupSearches(int $groupSearches): self
@@ -67,9 +61,6 @@ class Collapse extends Param
         return $this->setParam('max_concurrent_group_searches', $groupSearches);
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $data = $this->getParams();

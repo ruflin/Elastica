@@ -16,10 +16,6 @@ abstract class AbstractSuggest extends Param implements NameableInterface
      */
     protected $_name;
 
-    /**
-     * @param string $name
-     * @param string $field
-     */
     public function __construct(string $name, string $field)
     {
         $this->setName($name);
@@ -28,8 +24,6 @@ abstract class AbstractSuggest extends Param implements NameableInterface
 
     /**
      * Suggest text must be set either globally or per suggestion.
-     *
-     * @param string $text
      *
      * @return $this
      */
@@ -41,8 +35,6 @@ abstract class AbstractSuggest extends Param implements NameableInterface
     /**
      * Suggest prefix must be set either globally or per suggestion.
      *
-     * @param string $prefix
-     *
      * @return $this
      */
     public function setPrefix(string $prefix): AbstractSuggest
@@ -52,8 +44,6 @@ abstract class AbstractSuggest extends Param implements NameableInterface
 
     /**
      * Suggest regex must be set either globally or per suggestion.
-     *
-     * @param string $regex
      *
      * @return $this
      */
@@ -66,8 +56,6 @@ abstract class AbstractSuggest extends Param implements NameableInterface
      * Expects one of the next params: max_determinized_states - defaults to 10000,
      * flags are ALL (default), ANYSTRING, COMPLEMENT, EMPTY, INTERSECTION, INTERVAL, or NONE.
      *
-     * @param array $value
-     *
      * @return $this
      */
     public function setRegexOptions(array $value): AbstractSuggest
@@ -76,8 +64,6 @@ abstract class AbstractSuggest extends Param implements NameableInterface
     }
 
     /**
-     * @param string $field
-     *
      * @return $this
      */
     public function setField(string $field): AbstractSuggest
@@ -86,8 +72,6 @@ abstract class AbstractSuggest extends Param implements NameableInterface
     }
 
     /**
-     * @param int $size
-     *
      * @return $this
      */
     public function setSize(int $size): AbstractSuggest
@@ -127,8 +111,6 @@ abstract class AbstractSuggest extends Param implements NameableInterface
 
     /**
      * Retrieve the name of this suggestion.
-     *
-     * @return string
      */
     public function getName(): string
     {

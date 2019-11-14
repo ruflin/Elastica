@@ -15,8 +15,6 @@ class StrategyFactory
      * @param mixed|callable|string|StrategyInterface $strategyName
      *
      * @throws InvalidException
-     *
-     * @return StrategyInterface
      */
     public static function create($strategyName): StrategyInterface
     {

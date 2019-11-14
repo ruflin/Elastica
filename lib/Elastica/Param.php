@@ -48,8 +48,6 @@ class Param implements ArrayableInterface, \Countable
     /**
      * Cast objects to arrays.
      *
-     * @param array $array
-     *
      * @return array
      */
     protected function _convertArrayable(array $array)

@@ -23,9 +23,6 @@ class Facade
 
     /**
      * Constructor.
-     *
-     * @param DSL     $dsl
-     * @param Version $version
      */
     public function __construct(DSL $dsl, Version $version)
     {
@@ -36,9 +33,6 @@ class Facade
     /**
      * Executes DSL methods.
      *
-     * @param string $name
-     * @param array  $arguments
-     *
      * @throws QueryBuilderException
      *
      * @return mixed
@@ -47,17 +41,13 @@ class Facade
     {
         // defined check
         if (false === \method_exists($this->_dsl, $name)) {
-            throw new QueryBuilderException(
-                'undefined '.$this->_dsl->getType().' "'.$name.'"'
-            );
+            throw new QueryBuilderException('undefined '.$this->_dsl->getType().' "'.$name.'"');
         }
 
         // version support check
         if (false === $this->_version->supports($name, $this->_dsl->getType())) {
             $reflection = new \ReflectionClass($this->_version);
-            throw new QueryBuilderException(
-                $this->_dsl->getType().' "'.$name.'" in '.$reflection->getShortName().' not supported'
-            );
+            throw new QueryBuilderException($this->_dsl->getType().' "'.$name.'" in '.$reflection->getShortName().' not supported');
         }
 
         return \call_user_func_array([$this->_dsl, $name], $arguments);

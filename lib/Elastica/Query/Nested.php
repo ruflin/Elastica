@@ -26,8 +26,6 @@ class Nested extends AbstractQuery
     /**
      * Sets nested query.
      *
-     * @param AbstractQuery $query
-     *
      * @return $this
      */
     public function setQuery(AbstractQuery $query): self
@@ -49,8 +47,6 @@ class Nested extends AbstractQuery
 
     /**
      * Set inner hits.
-     *
-     * @param InnerHits $innerHits
      *
      * @return $this
      */

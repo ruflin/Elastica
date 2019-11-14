@@ -56,8 +56,6 @@ class ClientConfiguration
     /**
      * Create configuration from Dsn string.
      *
-     * @param string $dsn
-     *
      * @return ClientConfiguration
      */
     public static function fromDsn(string $dsn): self
@@ -139,8 +137,6 @@ class ClientConfiguration
      * Returns boolean indicates if configuration has key.
      *
      * @param string $key Key to check
-     *
-     * @return bool
      */
     public function has(string $key): bool
     {
@@ -149,8 +145,6 @@ class ClientConfiguration
 
     /**
      * Return all configuration.
-     *
-     * @return array
      */
     public function getAll(): array
     {

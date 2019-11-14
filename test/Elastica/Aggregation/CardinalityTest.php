@@ -59,8 +59,6 @@ class CardinalityTest extends BaseAggregationTest
     /**
      * @dataProvider validPrecisionThresholdProvider
      * @group unit
-     *
-     * @param int $threshold
      */
     public function testPrecisionThreshold(int $threshold)
     {

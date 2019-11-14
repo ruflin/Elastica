@@ -51,8 +51,6 @@ class Common extends AbstractQuery
     /**
      * Set the query string for this query.
      *
-     * @param string $query
-     *
      * @return $this
      */
     public function setQuery(string $query): self
@@ -113,8 +111,6 @@ class Common extends AbstractQuery
     /**
      * Set the boost for this query.
      *
-     * @param float $boost
-     *
      * @return $this
      */
     public function setBoost(float $boost): self
@@ -124,8 +120,6 @@ class Common extends AbstractQuery
 
     /**
      * Set the analyzer for this query.
-     *
-     * @param string $analyzer
      *
      * @return $this
      */

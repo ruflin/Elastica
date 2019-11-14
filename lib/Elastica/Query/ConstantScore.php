@@ -13,8 +13,6 @@ class ConstantScore extends AbstractQuery
 {
     /**
      * Construct constant score query.
-     *
-     * @param AbstractQuery|null $filter
      */
     public function __construct(AbstractQuery $filter = null)
     {
@@ -26,8 +24,6 @@ class ConstantScore extends AbstractQuery
     /**
      * Set filter.
      *
-     * @param AbstractQuery $filter
-     *
      * @return $this
      */
     public function setFilter(AbstractQuery $filter): self
@@ -37,8 +33,6 @@ class ConstantScore extends AbstractQuery
 
     /**
      * Set boost.
-     *
-     * @param float $boost
      *
      * @return $this
      */

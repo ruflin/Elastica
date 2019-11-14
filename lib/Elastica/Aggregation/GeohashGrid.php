@@ -61,8 +61,6 @@ class GeohashGrid extends AbstractAggregation
     /**
      * Set the number of results returned from each shard.
      *
-     * @param int $shardSize
-     *
      * @return $this
      */
     public function setShardSize(int $shardSize): self

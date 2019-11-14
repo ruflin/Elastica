@@ -39,11 +39,6 @@ abstract class Version
 
     /**
      * returns true if $name is supported, false otherwise.
-     *
-     * @param string $name
-     * @param string $type
-     *
-     * @return bool
      */
     public function supports(string $name, string $type): bool
     {

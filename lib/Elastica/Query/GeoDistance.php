@@ -31,8 +31,6 @@ class GeoDistance extends AbstractGeoDistance
     }
 
     /**
-     * @param string $distance
-     *
      * @return $this
      */
     public function setDistance(string $distance): self

@@ -273,8 +273,6 @@ class Query extends Param
 
     /**
      * Adds an Aggregation to the query.
-     *
-     * @param AbstractAggregation $agg
      */
     public function addAggregation(AbstractAggregation $agg): self
     {
@@ -382,8 +380,6 @@ class Query extends Param
 
     /**
      * Allows to collapse search results based on field values.
-     *
-     * @param Collapse $collapse
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-collapse
      */

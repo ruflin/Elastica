@@ -31,8 +31,6 @@ abstract class AbstractAggregation extends Param implements NameableInterface
     /**
      * Set the name of this aggregation.
      *
-     * @param string $name
-     *
      * @return $this
      */
     public function setName(string $name): NameableInterface
@@ -44,8 +42,6 @@ abstract class AbstractAggregation extends Param implements NameableInterface
 
     /**
      * Retrieve the name of this aggregation.
-     *
-     * @return string
      */
     public function getName(): string
     {
@@ -54,8 +50,6 @@ abstract class AbstractAggregation extends Param implements NameableInterface
 
     /**
      * Retrieve all subaggregations belonging to this aggregation.
-     *
-     * @return array
      */
     public function getAggs(): array
     {
@@ -64,8 +58,6 @@ abstract class AbstractAggregation extends Param implements NameableInterface
 
     /**
      * Add a sub-aggregation.
-     *
-     * @param AbstractAggregation $aggregation
      *
      * @throws \Elastica\Exception\InvalidException
      *
@@ -110,8 +102,6 @@ abstract class AbstractAggregation extends Param implements NameableInterface
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/agg-metadata.html
      * @see \Elastica\Aggregation\AbstractAggregation::setMeta()
      * @see \Elastica\Aggregation\AbstractAggregation::clearMeta()
-     *
-     * @return array|null
      */
     public function getMeta(): ?array
     {
@@ -134,9 +124,6 @@ abstract class AbstractAggregation extends Param implements NameableInterface
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();

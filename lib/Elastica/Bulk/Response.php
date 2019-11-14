@@ -18,8 +18,6 @@ class Response extends BaseResponse
 
     /**
      * @param array|string $responseData
-     * @param Action       $action
-     * @param string       $opType
      */
     public function __construct($responseData, Action $action, string $opType)
     {
@@ -29,17 +27,11 @@ class Response extends BaseResponse
         $this->_opType = $opType;
     }
 
-    /**
-     * @return Action
-     */
     public function getAction(): Action
     {
         return $this->_action;
     }
 
-    /**
-     * @return string
-     */
     public function getOpType(): string
     {
         return $this->_opType;

@@ -84,7 +84,6 @@ abstract class AbstractScript extends AbstractUpdateAction
     }
 
     /**
-     * @param array|null  $params
      * @param string|null $lang       Script language, see constants
      * @param string|null $documentId Document ID the script action should be performed on (only relevant in update context)
      */
@@ -117,8 +116,6 @@ abstract class AbstractScript extends AbstractUpdateAction
 
     /**
      * Returns an array with the script type as key and the script content as value.
-     *
-     * @return array
      */
     abstract protected function getScriptTypeArray(): array;
 

@@ -36,9 +36,7 @@ abstract class AbstractSimpleAggregation extends AbstractAggregation
     public function toArray(): array
     {
         if (!$this->hasParam('field') && !$this->hasParam('script')) {
-            throw new InvalidException(
-                'Either the field param or the script param should be set'
-            );
+            throw new InvalidException('Either the field param or the script param should be set');
         }
         $array = parent::toArray();
 

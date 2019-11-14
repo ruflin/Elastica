@@ -26,8 +26,7 @@ class MatchPhrase extends AbstractQuery
     /**
      * Sets a param for the message array.
      *
-     * @param string $field
-     * @param mixed  $values
+     * @param mixed $values
      *
      * @return $this
      */
@@ -38,10 +37,6 @@ class MatchPhrase extends AbstractQuery
 
     /**
      * Sets a param for the given field.
-     *
-     * @param string $field
-     * @param string $key
-     * @param string $value
      *
      * @return $this
      */
@@ -59,9 +54,6 @@ class MatchPhrase extends AbstractQuery
     /**
      * Sets the query string.
      *
-     * @param string $field
-     * @param string $query
-     *
      * @return $this
      */
     public function setFieldQuery(string $field, string $query): self
@@ -71,9 +63,6 @@ class MatchPhrase extends AbstractQuery
 
     /**
      * Set field analyzer.
-     *
-     * @param string $field
-     * @param string $analyzer
      *
      * @return $this
      */
@@ -86,9 +75,6 @@ class MatchPhrase extends AbstractQuery
      * Set field boost value.
      *
      * If not set, defaults to 1.0.
-     *
-     * @param string $field
-     * @param float  $boost
      *
      * @return $this
      */

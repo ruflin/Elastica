@@ -37,8 +37,7 @@ class Http extends AbstractTransport
      *
      * All calls that are made to the server are done through this function
      *
-     * @param Request $request
-     * @param array   $params  Host, Port, ...
+     * @param array $params Host, Port, ...
      *
      * @throws ConnectionException
      * @throws ResponseException

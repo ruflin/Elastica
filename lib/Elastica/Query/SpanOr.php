@@ -23,9 +23,7 @@ class SpanOr extends AbstractSpanQuery
         if (!empty($clauses)) {
             foreach ($clauses as $clause) {
                 if (!$clause instanceof AbstractSpanQuery) {
-                    throw new InvalidException(
-                        'Invalid parameter. Has to be array or instance of '.AbstractSpanQuery::class
-                    );
+                    throw new InvalidException('Invalid parameter. Has to be array or instance of '.AbstractSpanQuery::class);
                 }
             }
         }
@@ -34,8 +32,6 @@ class SpanOr extends AbstractSpanQuery
 
     /**
      * Add clause part to query.
-     *
-     * @param AbstractSpanQuery $clause
      *
      * @throws InvalidException If not valid query
      *

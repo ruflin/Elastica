@@ -34,8 +34,7 @@ class Match extends AbstractQuery
     /**
      * Sets a param for the message array.
      *
-     * @param string $field
-     * @param mixed  $values
+     * @param mixed $values
      *
      * @return $this
      */
@@ -46,10 +45,6 @@ class Match extends AbstractQuery
 
     /**
      * Sets a param for the given field.
-     *
-     * @param string $field
-     * @param string $key
-     * @param string $value
      *
      * @return $this
      */
@@ -67,9 +62,6 @@ class Match extends AbstractQuery
     /**
      * Sets the query string.
      *
-     * @param string $field
-     * @param string $query
-     *
      * @return $this
      */
     public function setFieldQuery(string $field, string $query): self
@@ -80,9 +72,6 @@ class Match extends AbstractQuery
     /**
      * Set field operator.
      *
-     * @param string $field
-     * @param string $operator
-     *
      * @return $this
      */
     public function setFieldOperator(string $field, string $operator = self::OPERATOR_OR): self
@@ -92,9 +81,6 @@ class Match extends AbstractQuery
 
     /**
      * Set field analyzer.
-     *
-     * @param string $field
-     * @param string $analyzer
      *
      * @return $this
      */
@@ -108,9 +94,6 @@ class Match extends AbstractQuery
      *
      * If not set, defaults to 1.0.
      *
-     * @param string $field
-     * @param float  $boost
-     *
      * @return $this
      */
     public function setFieldBoost(string $field, float $boost = 1.0): self
@@ -121,7 +104,6 @@ class Match extends AbstractQuery
     /**
      * Set field minimum should match.
      *
-     * @param string     $field
      * @param int|string $minimumShouldMatch
      *
      * @return $this
@@ -136,8 +118,7 @@ class Match extends AbstractQuery
     /**
      * Set field fuzziness.
      *
-     * @param string $field
-     * @param mixed  $fuzziness
+     * @param mixed $fuzziness
      *
      * @return $this
      */
@@ -149,9 +130,6 @@ class Match extends AbstractQuery
     /**
      * Set field fuzzy rewrite.
      *
-     * @param string $field
-     * @param string $fuzzyRewrite
-     *
      * @return $this
      */
     public function setFieldFuzzyRewrite(string $field, string $fuzzyRewrite): self
@@ -162,9 +140,6 @@ class Match extends AbstractQuery
     /**
      * Set field prefix length.
      *
-     * @param string $field
-     * @param int    $prefixLength
-     *
      * @return $this
      */
     public function setFieldPrefixLength(string $field, int $prefixLength): self
@@ -174,9 +149,6 @@ class Match extends AbstractQuery
 
     /**
      * Set field max expansions.
-     *
-     * @param string $field
-     * @param int    $maxExpansions
      *
      * @return $this
      */
@@ -190,9 +162,6 @@ class Match extends AbstractQuery
      *
      * If not set, default to 'none'
      *
-     * @param string $field
-     * @param string $zeroTermQuery
-     *
      * @return $this
      */
     public function setFieldZeroTermsQuery(string $field, string $zeroTermQuery = self::ZERO_TERM_NONE): self
@@ -202,9 +171,6 @@ class Match extends AbstractQuery
 
     /**
      * Set cutoff frequency.
-     *
-     * @param string $field
-     * @param float  $cutoffFrequency
      *
      * @return $this
      */

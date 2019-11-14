@@ -11,11 +11,6 @@ use Elastica\Exception\InvalidException;
  */
 class BucketScript extends AbstractAggregation
 {
-    /**
-     * @param string      $name
-     * @param array|null  $bucketsPath
-     * @param string|null $script
-     */
     public function __construct(string $name, array $bucketsPath = null, string $script = null)
     {
         parent::__construct($name);
@@ -32,8 +27,6 @@ class BucketScript extends AbstractAggregation
     /**
      * Set the buckets_path for this aggregation.
      *
-     * @param array $bucketsPath
-     *
      * @return $this
      */
     public function setBucketsPath(array $bucketsPath): self
@@ -43,8 +36,6 @@ class BucketScript extends AbstractAggregation
 
     /**
      * Set the script for this aggregation.
-     *
-     * @param string $script
      *
      * @return $this
      */
@@ -56,8 +47,6 @@ class BucketScript extends AbstractAggregation
     /**
      * Set the gap policy for this aggregation.
      *
-     * @param string $gapPolicy
-     *
      * @return $this
      */
     public function setGapPolicy(string $gapPolicy = 'skip'): self
@@ -68,8 +57,6 @@ class BucketScript extends AbstractAggregation
     /**
      * Set the format for this aggregation.
      *
-     * @param string|null $format
-     *
      * @return $this
      */
     public function setFormat(string $format = null): self
@@ -79,8 +66,6 @@ class BucketScript extends AbstractAggregation
 
     /**
      * @throws InvalidException If buckets path or script is not set
-     *
-     * @return array
      */
     public function toArray(): array
     {

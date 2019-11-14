@@ -11,11 +11,6 @@ class DefaultBuilder implements BuilderInterface
 {
     /**
      * Builds a ResultSet for a given Response.
-     *
-     * @param Response $response
-     * @param Query    $query
-     *
-     * @return ResultSet
      */
     public function buildResultSet(Response $response, Query $query): ResultSet
     {
@@ -27,8 +22,6 @@ class DefaultBuilder implements BuilderInterface
 
     /**
      * Builds individual result objects.
-     *
-     * @param Response $response
      *
      * @return Result[]
      */

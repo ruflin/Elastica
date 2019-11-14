@@ -41,8 +41,7 @@ class Guzzle extends AbstractTransport
      *
      * All calls that are made to the server are done through this function
      *
-     * @param \Elastica\Request $request
-     * @param array             $params  Host, Port, ...
+     * @param array $params Host, Port, ...
      *
      * @throws \Elastica\Exception\ConnectionException
      * @throws \Elastica\Exception\ResponseException
@@ -114,9 +113,6 @@ class Guzzle extends AbstractTransport
     }
 
     /**
-     * @param Request    $request
-     * @param Connection $connection
-     *
      * @return Psr7\Request
      */
     protected function _createPsr7Request(Request $request, Connection $connection)
@@ -155,8 +151,6 @@ class Guzzle extends AbstractTransport
      * Return Guzzle resource.
      *
      * @param bool $persistent False if not persistent connection
-     *
-     * @return Client
      */
     protected function _getGuzzleClient(bool $persistent = true): Client
     {
@@ -169,10 +163,6 @@ class Guzzle extends AbstractTransport
 
     /**
      * Builds the base url for the guzzle connection.
-     *
-     * @param Connection $connection
-     *
-     * @return string
      */
     protected function _getBaseUrl(Connection $connection): string
     {
@@ -195,10 +185,6 @@ class Guzzle extends AbstractTransport
 
     /**
      * Builds the action path url for each request.
-     *
-     * @param Request $request
-     *
-     * @return string
      */
     protected function _getActionPath(Request $request): string
     {

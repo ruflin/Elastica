@@ -126,8 +126,6 @@ class Request extends Param
     }
 
     /**
-     * @param array $query
-     *
      * @return $this
      */
     public function setQuery(array $query = [])

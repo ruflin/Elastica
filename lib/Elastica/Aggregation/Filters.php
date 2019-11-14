@@ -25,8 +25,7 @@ class Filters extends AbstractAggregation
      *
      * If a name is given, it will be added as a key, otherwise considered as an anonymous filter
      *
-     * @param AbstractQuery $filter
-     * @param string        $name
+     * @param string $name
      *
      * @return $this
      */
@@ -56,8 +55,6 @@ class Filters extends AbstractAggregation
     }
 
     /**
-     * @param bool $otherBucket
-     *
      * @return $this
      */
     public function setOtherBucket(bool $otherBucket): self
@@ -66,8 +63,6 @@ class Filters extends AbstractAggregation
     }
 
     /**
-     * @param string $otherBucketKey
-     *
      * @return $this
      */
     public function setOtherBucketKey(string $otherBucketKey): self
@@ -75,9 +70,6 @@ class Filters extends AbstractAggregation
         return $this->setParam('other_bucket_key', $otherBucketKey);
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [];

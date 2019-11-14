@@ -28,8 +28,6 @@ class Set extends AbstractProcessor
     /**
      * Set field.
      *
-     * @param string $field
-     *
      * @return $this
      */
     public function setField(string $field): self
@@ -40,8 +38,6 @@ class Set extends AbstractProcessor
     /**
      * Set field value.
      *
-     * @param string $value
-     *
      * @return $this
      */
     public function setValue(string $value): self
@@ -51,8 +47,6 @@ class Set extends AbstractProcessor
 
     /**
      * Set override. Default true.
-     *
-     * @param bool $override
      *
      * @return $this
      */

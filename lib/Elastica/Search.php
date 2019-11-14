@@ -114,8 +114,6 @@ class Search
     /**
      * Add array of indices at once.
      *
-     * @param array $indices
-     *
      * @return $this
      */
     public function addIndices(array $indices = [])
@@ -155,8 +153,6 @@ class Search
     }
 
     /**
-     * @param array $options
-     *
      * @return $this
      */
     public function setOptions(array $options)
@@ -318,8 +314,6 @@ class Search
     /**
      * Creates new search object.
      *
-     * @param SearchableInterface $searchObject
-     *
      * @return Search
      */
     public static function create(SearchableInterface $searchObject)
@@ -436,8 +430,6 @@ class Search
     }
 
     /**
-     * @param Suggest $suggest
-     *
      * @return $this
      */
     public function setSuggest(Suggest $suggest)

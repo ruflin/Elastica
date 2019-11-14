@@ -13,10 +13,6 @@ class SerialDiff extends AbstractAggregation
 {
     const DEFAULT_GAP_POLICY_VALUE = 'insert_zero';
 
-    /**
-     * @param string      $name
-     * @param string|null $bucketsPath
-     */
     public function __construct(string $name, string $bucketsPath = null)
     {
         parent::__construct($name);
@@ -29,8 +25,6 @@ class SerialDiff extends AbstractAggregation
     /**
      * Set the buckets_path for this aggregation.
      *
-     * @param string $bucketsPath
-     *
      * @return $this
      */
     public function setBucketsPath(string $bucketsPath): self
@@ -41,8 +35,6 @@ class SerialDiff extends AbstractAggregation
     /**
      * Set the lag for this aggregation.
      *
-     * @param int $lag
-     *
      * @return $this
      */
     public function setLag(int $lag = 1): self
@@ -52,8 +44,6 @@ class SerialDiff extends AbstractAggregation
 
     /**
      * Set the gap policy for this aggregation.
-     *
-     * @param string $gapPolicy
      *
      * @return $this
      */
@@ -76,8 +66,6 @@ class SerialDiff extends AbstractAggregation
 
     /**
      * @throws InvalidException If buckets path is not set
-     *
-     * @return array
      */
     public function toArray(): array
     {

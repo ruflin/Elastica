@@ -79,12 +79,6 @@ class AwsAuthV4 extends Guzzle
         }
     }
 
-    /**
-     * @param Connection $conn
-     * @param bool       $default
-     *
-     * @return bool
-     */
     private function isSslRequired(Connection $conn, bool $default = false): bool
     {
         return $conn->hasParam('ssl')

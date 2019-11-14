@@ -25,8 +25,6 @@ class Percentiles extends AbstractSimpleAggregation
     /**
      * Set compression parameter.
      *
-     * @param float $value
-     *
      * @return $this
      */
     public function setCompression(float $value): self
@@ -38,9 +36,6 @@ class Percentiles extends AbstractSimpleAggregation
 
     /**
      * Set hdr parameter.
-     *
-     * @param string $key
-     * @param float  $value
      *
      * @return $this
      */
@@ -55,8 +50,6 @@ class Percentiles extends AbstractSimpleAggregation
      * the keyed flag is set to true which associates a unique string
      * key with each bucket and returns the ranges as a hash
      * rather than an array.
-     *
-     * @param bool $keyed
      *
      * @return $this
      */
@@ -80,8 +73,6 @@ class Percentiles extends AbstractSimpleAggregation
     /**
      * Add yet another percent to result.
      *
-     * @param float $percent
-     *
      * @return $this
      */
     public function addPercent(float $percent): self
@@ -92,8 +83,6 @@ class Percentiles extends AbstractSimpleAggregation
     /**
      * Defines how documents that are missing a value should
      * be treated.
-     *
-     * @param float $missing
      *
      * @return $this
      */

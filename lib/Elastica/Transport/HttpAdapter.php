@@ -30,8 +30,7 @@ class HttpAdapter extends AbstractTransport
     /**
      * Construct transport.
      *
-     * @param Connection           $connection
-     * @param HttpAdapterInterface $httpAdapter
+     * @param Connection $connection
      */
     public function __construct(Connection $connection = null, HttpAdapterInterface $httpAdapter)
     {
@@ -44,8 +43,7 @@ class HttpAdapter extends AbstractTransport
      *
      * All calls that are made to the server are done through this function
      *
-     * @param ElasticaRequest $elasticaRequest
-     * @param array           $params          Host, Port, ...
+     * @param array $params Host, Port, ...
      *
      * @throws \Elastica\Exception\ConnectionException
      * @throws \Elastica\Exception\ResponseException
@@ -88,22 +86,11 @@ class HttpAdapter extends AbstractTransport
         return $elasticaResponse;
     }
 
-    /**
-     * @param HttpAdapterResponse $httpAdapterResponse
-     *
-     * @return ElasticaResponse
-     */
     protected function _createElasticaResponse(HttpAdapterResponse $httpAdapterResponse): ElasticaResponse
     {
         return new ElasticaResponse((string) $httpAdapterResponse->getBody(), $httpAdapterResponse->getStatusCode());
     }
 
-    /**
-     * @param ElasticaRequest $elasticaRequest
-     * @param Connection      $connection
-     *
-     * @return HttpAdapterRequest
-     */
     protected function _createHttpAdapterRequest(ElasticaRequest $elasticaRequest, Connection $connection): HttpAdapterRequest
     {
         $data = $elasticaRequest->getData();
@@ -133,12 +120,6 @@ class HttpAdapter extends AbstractTransport
         return new HttpAdapterRequest($url, $method, HttpAdapterRequest::PROTOCOL_VERSION_1_1, $headers, $streamBody);
     }
 
-    /**
-     * @param ElasticaRequest      $request
-     * @param \Elastica\Connection $connection
-     *
-     * @return string
-     */
     protected function _getUri(ElasticaRequest $request, Connection $connection): string
     {
         $url = $connection->hasConfig('url') ? $connection->getConfig('url') : '';

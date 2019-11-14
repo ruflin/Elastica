@@ -15,9 +15,6 @@ class Rename extends AbstractProcessor
 
     /**
      * Rename constructor.
-     *
-     * @param string $field
-     * @param string $targetField
      */
     public function __construct(string $field, string $targetField)
     {
@@ -28,8 +25,6 @@ class Rename extends AbstractProcessor
     /**
      * Set field.
      *
-     * @param string $field
-     *
      * @return $this
      */
     public function setField(string $field): self
@@ -39,8 +34,6 @@ class Rename extends AbstractProcessor
 
     /**
      * Set target_field.
-     *
-     * @param string $targetField
      *
      * @return $this
      */

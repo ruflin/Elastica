@@ -13,8 +13,6 @@ class Trim extends AbstractProcessor
 {
     /**
      * Trim constructor.
-     *
-     * @param string $field
      */
     public function __construct(string $field)
     {
@@ -23,8 +21,6 @@ class Trim extends AbstractProcessor
 
     /**
      * Set the field.
-     *
-     * @param string $field
      *
      * @return $this
      */

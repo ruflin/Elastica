@@ -17,8 +17,6 @@ class Attachment extends AbstractProcessor
 
     /**
      * Attachment constructor.
-     *
-     * @param string $field
      */
     public function __construct(string $field)
     {
@@ -27,8 +25,6 @@ class Attachment extends AbstractProcessor
 
     /**
      * Set field.
-     *
-     * @param string $field
      *
      * @return $this
      */
@@ -40,8 +36,6 @@ class Attachment extends AbstractProcessor
     /**
      * Set target_field. Default attachment.
      *
-     * @param string $targetField
-     *
      * @return $this
      */
     public function setTargetField(string $targetField): self
@@ -51,8 +45,6 @@ class Attachment extends AbstractProcessor
 
     /**
      * Set indexed_chars. Default 100000.
-     *
-     * @param int $indexedChars
      *
      * @return $this
      */
@@ -64,8 +56,6 @@ class Attachment extends AbstractProcessor
     /**
      * Set properties. Default all properties. Can be content, title, name, author, keywords, date, content_type, content_length, language.
      *
-     * @param array $properties
-     *
      * @return $this
      */
     public function setProperties(array $properties): self
@@ -75,8 +65,6 @@ class Attachment extends AbstractProcessor
 
     /**
      * Set ignore_missing. Default value false.
-     *
-     * @param bool $ignoreMissing
      *
      * @return $this
      */

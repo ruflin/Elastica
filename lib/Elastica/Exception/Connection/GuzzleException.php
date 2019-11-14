@@ -21,9 +21,7 @@ class GuzzleException extends ConnectionException
     protected $_guzzleException;
 
     /**
-     * @param TransferException $guzzleException
-     * @param Request           $request
-     * @param Response|null     $response
+     * @param Request $request
      */
     public function __construct(TransferException $guzzleException, Request $request = null, Response $response = null)
     {
@@ -32,11 +30,6 @@ class GuzzleException extends ConnectionException
         parent::__construct($message, $request, $response);
     }
 
-    /**
-     * @param TransferException $guzzleException
-     *
-     * @return string
-     */
     public function getErrorMessage(TransferException $guzzleException): string
     {
         return $guzzleException->getMessage();

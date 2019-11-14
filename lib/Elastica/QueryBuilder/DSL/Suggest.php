@@ -19,8 +19,6 @@ class Suggest implements DSL
 {
     /**
      * must return type for QueryBuilder usage.
-     *
-     * @return string
      */
     public function getType(): string
     {
@@ -34,8 +32,6 @@ class Suggest implements DSL
      *
      * @param $name
      * @param $field
-     *
-     * @return Term
      */
     public function term($name, $field): Term
     {
@@ -49,8 +45,6 @@ class Suggest implements DSL
      *
      * @param $name
      * @param $field
-     *
-     * @return Phrase
      */
     public function phrase($name, $field): Phrase
     {
@@ -64,8 +58,6 @@ class Suggest implements DSL
      *
      * @param string $name
      * @param string $field
-     *
-     * @return Completion
      */
     public function completion($name, $field): Completion
     {

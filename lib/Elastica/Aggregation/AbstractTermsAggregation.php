@@ -10,8 +10,6 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
     /**
      * Set the minimum number of documents in which a term must appear in order to be returned in a bucket.
      *
-     * @param int $count
-     *
      * @return $this
      */
     public function setMinimumDocumentCount(int $count): self

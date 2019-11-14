@@ -117,8 +117,6 @@ class Settings
      * whichever string representation is used like 'true', '1', 'on', 'yes'.
      *
      * @param string $setting Setting name to return
-     *
-     * @return bool
      */
     public function getBool(string $setting): bool
     {
@@ -167,25 +165,17 @@ class Settings
      * Sets the index to read only.
      *
      * @param bool $readOnly (default = true)
-     *
-     * @return Response
      */
     public function setReadOnly(bool $readOnly = true): Response
     {
         return $this->set(['blocks.read_only' => $readOnly]);
     }
 
-    /**
-     * @return bool
-     */
     public function getReadOnly(): bool
     {
         return $this->getBool('blocks.read_only');
     }
 
-    /**
-     * @return bool
-     */
     public function getBlocksRead(): bool
     {
         return $this->getBool('blocks.read');
@@ -193,17 +183,12 @@ class Settings
 
     /**
      * @param bool $state OPTIONAL (default = true)
-     *
-     * @return Response
      */
     public function setBlocksRead(bool $state = true): Response
     {
         return $this->set(['blocks.read' => $state]);
     }
 
-    /**
-     * @return bool
-     */
     public function getBlocksWrite(): bool
     {
         return $this->getBool('blocks.write');
@@ -211,17 +196,12 @@ class Settings
 
     /**
      * @param bool $state OPTIONAL (default = true)
-     *
-     * @return Response
      */
     public function setBlocksWrite(bool $state = true): Response
     {
         return $this->set(['blocks.write' => $state]);
     }
 
-    /**
-     * @return bool
-     */
     public function getBlocksMetadata(): bool
     {
         // When blocks.metadata is enabled, reading the settings is not possible anymore.
@@ -241,8 +221,6 @@ class Settings
      * Set to true to disable index metadata reads and writes.
      *
      * @param bool $state OPTIONAL (default = true)
-     *
-     * @return Response
      */
     public function setBlocksMetadata(bool $state = true): Response
     {
@@ -281,10 +259,7 @@ class Settings
      *
      * To have this changes made the index has to be closed and reopened
      *
-     * @param string $key   Merge policy key (for ex. expunge_deletes_allowed)
-     * @param string $value
-     *
-     * @return Response
+     * @param string $key Merge policy key (for ex. expunge_deletes_allowed)
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
      */

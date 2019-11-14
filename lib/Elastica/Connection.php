@@ -264,8 +264,6 @@ class Connection extends Param
     }
 
     /**
-     * @param array $config
-     *
      * @return $this
      */
     public function setConfig(array $config)

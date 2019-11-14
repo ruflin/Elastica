@@ -13,8 +13,6 @@ class Exists extends AbstractQuery
 {
     /**
      * Construct exists query.
-     *
-     * @param string $field
      */
     public function __construct(string $field)
     {
@@ -23,8 +21,6 @@ class Exists extends AbstractQuery
 
     /**
      * Set field.
-     *
-     * @param string $field
      *
      * @return $this
      */

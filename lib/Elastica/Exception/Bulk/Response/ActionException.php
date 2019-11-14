@@ -14,9 +14,6 @@ class ActionException extends BulkException
      */
     protected $_response;
 
-    /**
-     * @param BulkResponse $response
-     */
     public function __construct(BulkResponse $response)
     {
         $this->_response = $response;
@@ -24,27 +21,16 @@ class ActionException extends BulkException
         parent::__construct($this->getErrorMessage($response));
     }
 
-    /**
-     * @return Action
-     */
     public function getAction(): Action
     {
         return $this->getResponse()->getAction();
     }
 
-    /**
-     * @return BulkResponse
-     */
     public function getResponse(): BulkResponse
     {
         return $this->_response;
     }
 
-    /**
-     * @param BulkResponse $response
-     *
-     * @return string
-     */
     public function getErrorMessage(BulkResponse $response): string
     {
         $error = $response->getError();

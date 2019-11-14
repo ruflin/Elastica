@@ -100,9 +100,6 @@ class Task extends Param
         $this->_data = $this->getResponse()->getData();
     }
 
-    /**
-     * @return bool
-     */
     public function isCompleted(): bool
     {
         $data = $this->getData();

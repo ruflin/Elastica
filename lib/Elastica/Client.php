@@ -136,8 +136,6 @@ class Client
     /**
      * Creates a Connection params array from a Client or server config array.
      *
-     * @param array $config
-     *
      * @return array
      */
     protected function _prepareConnectionParams(array $config)
@@ -291,8 +289,7 @@ class Client
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
-     * @param array|\Elastica\Document[] $docs          Array of Elastica\Document
-     * @param array                      $requestParams
+     * @param array|\Elastica\Document[] $docs Array of Elastica\Document
      *
      * @throws \Elastica\Exception\InvalidException If docs is empty
      *
@@ -323,8 +320,7 @@ class Client
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
-     * @param array|\Elastica\Document[] $docs          Array of Elastica\Document
-     * @param array                      $requestParams
+     * @param array|\Elastica\Document[] $docs Array of Elastica\Document
      *
      * @throws \Elastica\Exception\InvalidException If docs is empty
      *
@@ -422,7 +418,6 @@ class Client
      * Bulk deletes documents.
      *
      * @param array|\Elastica\Document[] $docs
-     * @param array                      $requestParams
      *
      * @throws \Elastica\Exception\InvalidException
      *
@@ -657,8 +652,6 @@ class Client
     /**
      * Makes calls to the elasticsearch server with usage official client Endpoint.
      *
-     * @param AbstractEndpoint $endpoint
-     *
      * @return Response
      */
     public function requestEndpoint(AbstractEndpoint $endpoint)
@@ -718,8 +711,6 @@ class Client
 
     /**
      * Replace the existing logger.
-     *
-     * @param LoggerInterface $logger
      *
      * @return $this
      */

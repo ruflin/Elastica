@@ -26,8 +26,6 @@ class Append extends AbstractProcessor
     /**
      * Set field.
      *
-     * @param string $field
-     *
      * @return $this
      */
     public function setField(string $field): self

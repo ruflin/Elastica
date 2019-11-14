@@ -31,9 +31,7 @@ class ConnectionPool
     protected $_callback;
 
     /**
-     * @param array             $connections
-     * @param StrategyInterface $strategy
-     * @param callback|null     $callback
+     * @param callback|null $callback
      */
     public function __construct(array $connections, StrategyInterface $strategy, callable $callback = null)
     {
@@ -45,8 +43,6 @@ class ConnectionPool
     }
 
     /**
-     * @param Connection $connection
-     *
      * @return $this
      */
     public function addConnection(Connection $connection): self
@@ -68,9 +64,6 @@ class ConnectionPool
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function hasConnection(): bool
     {
         foreach ($this->_connections as $connection) {
@@ -92,19 +85,12 @@ class ConnectionPool
 
     /**
      * @throws ClientException
-     *
-     * @return Connection
      */
     public function getConnection(): Connection
     {
         return $this->_strategy->getConnection($this->getConnections());
     }
 
-    /**
-     * @param Connection $connection
-     * @param \Exception $e
-     * @param Client     $client
-     */
     public function onFail(Connection $connection, Exception $e, Client $client)
     {
         $connection->setEnabled(false);
@@ -114,9 +100,6 @@ class ConnectionPool
         }
     }
 
-    /**
-     * @return StrategyInterface
-     */
     public function getStrategy(): StrategyInterface
     {
         return $this->_strategy;
