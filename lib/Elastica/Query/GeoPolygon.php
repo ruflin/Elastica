@@ -56,6 +56,6 @@ class GeoPolygon extends AbstractQuery
      */
     public function count(): int
     {
-        return \count($this->_key);
+        return \count($this->_points);
     }
 }
