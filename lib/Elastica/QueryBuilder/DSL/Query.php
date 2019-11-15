@@ -14,13 +14,17 @@ use Elastica\Query\DisMax;
 use Elastica\Query\Exists;
 use Elastica\Query\FunctionScore;
 use Elastica\Query\Fuzzy;
+use Elastica\Query\GeoBoundingBox;
 use Elastica\Query\GeoDistance;
+use Elastica\Query\GeoPolygon;
 use Elastica\Query\HasChild;
 use Elastica\Query\HasParent;
 use Elastica\Query\Ids;
 use Elastica\Query\Match;
 use Elastica\Query\MatchAll;
 use Elastica\Query\MatchNone;
+use Elastica\Query\MatchPhrase;
+use Elastica\Query\MatchPhrasePrefix;
 use Elastica\Query\MoreLikeThis;
 use Elastica\Query\MultiMatch;
 use Elastica\Query\Nested;
@@ -160,6 +164,38 @@ class Query implements DSL
     }
 
     /**
+     * geo bounding box query.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-bounding-box-query.html
+     */
+    public function geo_bounding_box(string $key, array $coordinates): GeoBoundingBox
+    {
+        return new GeoBoundingBox($key, $coordinates);
+    }
+
+    /**
+     * geo distance query.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-query.html
+     *
+     * @param array|string $location
+     */
+    public function geo_distance(string $key, $location, string $distance): GeoDistance
+    {
+        return new GeoDistance($key, $location, $distance);
+    }
+
+    /**
+     * geo polygon query.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-polygon-query.html
+     */
+    public function geo_polygon(string $key, array $points): GeoPolygon
+    {
+        return new GeoPolygon($key, $points);
+    }
+
+    /**
      * geo shape query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-query.html
@@ -223,6 +259,26 @@ class Query implements DSL
     public function match_none(): MatchNone
     {
         return new MatchNone();
+    }
+
+    /**
+     * match phrase query.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase.html
+     */
+    public function match_phrase(string $field = null, $values = null): MatchPhrase
+    {
+        return new MatchPhrase($field, $values);
+    }
+
+    /**
+     * match phrase prefix query.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase-prefix.html
+     */
+    public function match_phrase_prefix(string $field = null, $values = null): MatchPhrasePrefix
+    {
+        return new MatchPhrasePrefix($field, $values);
     }
 
     /**
@@ -430,18 +486,6 @@ class Query implements DSL
     public function wildcard(string $key = '', string $value = null, float $boost = 1.0): Wildcard
     {
         return new Wildcard($key, $value, $boost);
-    }
-
-    /**
-     * geo distance query.
-     *
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-query.html
-     *
-     * @param array|string $location
-     */
-    public function geo_distance(string $key, $location, string $distance): GeoDistance
-    {
-        return new GeoDistance($key, $location, $distance);
     }
 
     /**
