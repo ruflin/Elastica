@@ -9,10 +9,10 @@ namespace Elastica\QueryBuilder;
  */
 interface DSL
 {
-    const TYPE_QUERY = 'query';
-    const TYPE_AGGREGATION = 'aggregation';
-    const TYPE_SUGGEST = 'suggest';
-    const TYPE_COLLAPSE = 'collapse';
+    public const TYPE_QUERY = 'query';
+    public const TYPE_AGGREGATION = 'aggregation';
+    public const TYPE_SUGGEST = 'suggest';
+    public const TYPE_COLLAPSE = 'collapse';
 
     /**
      * must return type for QueryBuilder usage.
