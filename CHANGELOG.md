@@ -18,6 +18,8 @@ All notable changes to this project will be documented in this file based on the
 
 ### Improvements
 
+* Launch tests with PHP 7.4
+
 ### Deprecated
 
 
