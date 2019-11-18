@@ -679,7 +679,7 @@ $indices[$indexName]
 - Update Elasticsearch dependency to 1.7.1 and update plugin dependencies [#909](https://github.com/ruflin/Elastica/pull/909)
 - Update php-cs-fixer to 1.10 [#898](https://github.com/ruflin/Elastica/pull/898)
 - Elastica\QueryBuilder now uses Elastica\QueryBuilder\Version\Latest as default version to avoid empty version classes. [#897](https://github.com/ruflin/Elastica/pull/897)
-- Update elasticseach-image to work with ES 1.7.1 [#907](https://github.com/ruflin/Elastica/pull/907)
+- Update elasticsearch-image to work with ES 1.7.1 [#907](https://github.com/ruflin/Elastica/pull/907)
 - Local dev environment was refactored to fully work in docker environment. Running tests is now only one command: `make tests` [#901](https://github.com/ruflin/Elastica/pull/901)
 
 ### Deprecated
