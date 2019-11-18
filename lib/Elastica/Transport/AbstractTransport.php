@@ -66,8 +66,6 @@ abstract class AbstractTransport extends Param
      * BOOL values true|false should be sanityzed and passed to Elasticsearch
      * as string.
      *
-     * @param array $query
-     *
      * @return mixed
      */
     public function sanityzeQueryStringBool(array $query)
@@ -96,8 +94,6 @@ abstract class AbstractTransport extends Param
      * @param array      $params     Parameters for the transport class
      *
      * @throws InvalidException
-     *
-     * @return AbstractTransport
      */
     public static function create($transport, Connection $connection, array $params = []): AbstractTransport
     {

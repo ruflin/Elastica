@@ -25,9 +25,7 @@ class SpanNear extends AbstractSpanQuery
         if (!empty($clauses)) {
             foreach ($clauses as $clause) {
                 if (!$clause instanceof AbstractSpanQuery) {
-                    throw new InvalidException(
-                        'Invalid parameter. Has to be array or instance of '.AbstractSpanQuery::class
-                    );
+                    throw new InvalidException('Invalid parameter. Has to be array or instance of '.AbstractSpanQuery::class);
                 }
             }
         }
@@ -37,8 +35,6 @@ class SpanNear extends AbstractSpanQuery
     }
 
     /**
-     * @param int $slop
-     *
      * @return $this
      */
     public function setSlop(int $slop): self
@@ -47,8 +43,6 @@ class SpanNear extends AbstractSpanQuery
     }
 
     /**
-     * @param bool $inOrder
-     *
      * @return $this
      */
     public function setInOrder(bool $inOrder): self
@@ -58,8 +52,6 @@ class SpanNear extends AbstractSpanQuery
 
     /**
      * Add clause part to query.
-     *
-     * @param AbstractSpanQuery $clause
      *
      * @return $this
      */

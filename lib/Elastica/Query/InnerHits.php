@@ -34,8 +34,6 @@ class InnerHits extends AbstractQuery
      * The name to be used for the particular inner hit definition in the response.
      * Useful when multiple inner hits have been defined in a single search request.
      *
-     * @param string $name
-     *
      * @return $this
      */
     public function setName(string $name): self
@@ -45,8 +43,6 @@ class InnerHits extends AbstractQuery
 
     /**
      * The maximum number of inner matching hits to return per bucket. By default the top three matching hits are returned.
-     *
-     * @param int $size
      *
      * @return $this
      */
@@ -58,8 +54,6 @@ class InnerHits extends AbstractQuery
     /**
      * The offset from the first result you want to fetch.
      *
-     * @param int $from
-     *
      * @return $this
      */
     public function setFrom(int $from)
@@ -69,8 +63,6 @@ class InnerHits extends AbstractQuery
 
     /**
      * How the inner matching hits should be sorted. By default the hits are sorted by the score of the main query.
-     *
-     * @param array $sortArgs
      *
      * @return $this
      */
@@ -94,8 +86,6 @@ class InnerHits extends AbstractQuery
     /**
      * Returns a version for each search hit.
      *
-     * @param bool $version
-     *
      * @return $this
      */
     public function setVersion(bool $version): self
@@ -105,8 +95,6 @@ class InnerHits extends AbstractQuery
 
     /**
      * Enables explanation for each hit on how its score was computed.
-     *
-     * @param bool $explain
      *
      * @return $this
      */
@@ -118,8 +106,6 @@ class InnerHits extends AbstractQuery
     /**
      * Set script fields.
      *
-     * @param ScriptFields $scriptFields
-     *
      * @return $this
      */
     public function setScriptFields(ScriptFields $scriptFields): self
@@ -129,9 +115,6 @@ class InnerHits extends AbstractQuery
 
     /**
      * Adds a Script to the aggregation.
-     *
-     * @param string         $name
-     * @param AbstractScript $script
      *
      * @return $this
      */
@@ -149,8 +132,6 @@ class InnerHits extends AbstractQuery
     /**
      * Sets highlight arguments for the results.
      *
-     * @param array $highlightArgs
-     *
      * @return $this
      */
     public function setHighlight(array $highlightArgs): self
@@ -160,8 +141,6 @@ class InnerHits extends AbstractQuery
 
     /**
      * Allows to return the field data representation of a field for each hit.
-     *
-     * @param array $fields
      *
      * @return $this
      */

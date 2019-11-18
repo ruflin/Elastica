@@ -12,8 +12,6 @@ class Cardinality extends AbstractSimpleAggregation
     const DEFAULT_PRECISION_THRESHOLD_VALUE = 3000;
 
     /**
-     * @param int $precisionThreshold
-     *
      * @return $this
      */
     public function setPrecisionThreshold(int $precisionThreshold): self
@@ -22,8 +20,6 @@ class Cardinality extends AbstractSimpleAggregation
     }
 
     /**
-     * @param bool $rehash
-     *
      * @return $this
      */
     public function setRehash(bool $rehash): self

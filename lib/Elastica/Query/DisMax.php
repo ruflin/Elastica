@@ -34,8 +34,6 @@ class DisMax extends AbstractQuery
     /**
      * Set boost.
      *
-     * @param float $boost
-     *
      * @return $this
      */
     public function setBoost(float $boost): self
@@ -47,8 +45,6 @@ class DisMax extends AbstractQuery
      * Sets tie breaker to multiplier value to balance the scores between lower and higher scoring fields.
      *
      * If not set, defaults to 0.0
-     *
-     * @param float $tieBreaker
      *
      * @return $this
      */

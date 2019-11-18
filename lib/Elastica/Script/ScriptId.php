@@ -19,8 +19,6 @@ class ScriptId extends AbstractScript
 
     /**
      * @param string      $scriptId   Script ID
-     * @param array|null  $params
-     * @param string|null $lang
      * @param string|null $documentId Document ID the script action should be performed on (only relevant in update context)
      */
     public function __construct(string $scriptId, array $params = null, string $lang = null, string $documentId = null)

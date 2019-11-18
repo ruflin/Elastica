@@ -20,8 +20,6 @@ class Script extends AbstractScript
 
     /**
      * @param string      $scriptCode Script source code
-     * @param array|null  $params
-     * @param string|null $lang
      * @param string|null $documentId Document ID the script action should be performed on (only relevant in update context)
      */
     public function __construct(string $scriptCode, array $params = null, string $lang = null, string $documentId = null)
@@ -32,8 +30,6 @@ class Script extends AbstractScript
     }
 
     /**
-     * @param string $scriptCode
-     *
      * @return $this
      */
     public function setScript(string $scriptCode): Script
@@ -43,9 +39,6 @@ class Script extends AbstractScript
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getScript(): string
     {
         return $this->_scriptCode;

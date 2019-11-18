@@ -50,7 +50,6 @@ class Search
     /**
      * Constructs search object.
      *
-     * @param Client                $client
      * @param MultiBuilderInterface $builder
      */
     public function __construct(Client $client, MultiBuilderInterface $builder = null)
@@ -59,9 +58,6 @@ class Search
         $this->_client = $client;
     }
 
-    /**
-     * @return Client
-     */
     public function getClient(): Client
     {
         return $this->_client;
@@ -78,8 +74,7 @@ class Search
     }
 
     /**
-     * @param BaseSearch $search
-     * @param string     $key
+     * @param string $key
      *
      * @return $this
      */
@@ -130,8 +125,6 @@ class Search
     }
 
     /**
-     * @param string $searchType
-     *
      * @return $this
      */
     public function setSearchType(string $searchType): self
@@ -141,9 +134,6 @@ class Search
         return $this;
     }
 
-    /**
-     * @return ResultSet
-     */
     public function search(): ResultSet
     {
         $data = $this->_getData();
@@ -159,9 +149,6 @@ class Search
         return $this->_builder->buildMultiResultSet($response, $this->getSearches());
     }
 
-    /**
-     * @return string
-     */
     protected function _getData(): string
     {
         $data = '';
@@ -172,11 +159,6 @@ class Search
         return $data;
     }
 
-    /**
-     * @param BaseSearch $search
-     *
-     * @return string
-     */
     protected function _getSearchData(BaseSearch $search): string
     {
         $header = $this->_getSearchDataHeader($search);
@@ -193,11 +175,6 @@ class Search
         return $data;
     }
 
-    /**
-     * @param BaseSearch $search
-     *
-     * @return array
-     */
     protected function _getSearchDataHeader(BaseSearch $search): array
     {
         $header = $search->getOptions();

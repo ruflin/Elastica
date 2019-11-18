@@ -62,8 +62,6 @@ class MoreLikeThis extends AbstractQuery
     /**
      * Set min term frequency.
      *
-     * @param int $minTermFreq
-     *
      * @return $this
      */
     public function setMinTermFrequency(int $minTermFreq = 2): self
@@ -73,8 +71,6 @@ class MoreLikeThis extends AbstractQuery
 
     /**
      * set min document frequency.
-     *
-     * @param int $minDocFreq
      *
      * @return $this
      */
@@ -86,8 +82,6 @@ class MoreLikeThis extends AbstractQuery
     /**
      * set max document frequency.
      *
-     * @param int $maxDocFreq
-     *
      * @return $this
      */
     public function setMaxDocFrequency(int $maxDocFreq = 0): self
@@ -97,8 +91,6 @@ class MoreLikeThis extends AbstractQuery
 
     /**
      * Set min word length.
-     *
-     * @param int $minWordLength
      *
      * @return $this
      */
@@ -110,8 +102,6 @@ class MoreLikeThis extends AbstractQuery
     /**
      * Set max word length.
      *
-     * @param int $maxWordLength
-     *
      * @return $this
      */
     public function setMaxWordLength(int $maxWordLength = 0): self
@@ -122,8 +112,6 @@ class MoreLikeThis extends AbstractQuery
     /**
      * Set boost terms.
      *
-     * @param bool $boostTerms
-     *
      * @return $this
      */
     public function setBoostTerms(bool $boostTerms = false): self
@@ -133,8 +121,6 @@ class MoreLikeThis extends AbstractQuery
 
     /**
      * Set analyzer.
-     *
-     * @param string $analyzer
      *
      * @return $this
      */
@@ -147,8 +133,6 @@ class MoreLikeThis extends AbstractQuery
 
     /**
      * Set stop words.
-     *
-     * @param array $stopWords
      *
      * @return $this
      */

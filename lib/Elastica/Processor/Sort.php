@@ -26,8 +26,6 @@ class Sort extends AbstractProcessor
     /**
      * Set the field.
      *
-     * @param string $field
-     *
      * @return $this
      */
     public function setField(string $field): self
@@ -37,8 +35,6 @@ class Sort extends AbstractProcessor
 
     /**
      * Set order. Default 'asc'.
-     *
-     * @param string $order
      *
      * @return $this
      */

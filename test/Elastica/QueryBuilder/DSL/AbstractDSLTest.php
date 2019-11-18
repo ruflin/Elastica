@@ -8,12 +8,6 @@ use Elastica\Test\Base as BaseTest;
 
 abstract class AbstractDSLTest extends BaseTest
 {
-    /**
-     * @param DSL    $dsl
-     * @param string $methodName
-     * @param string $className
-     * @param array  $arguments
-     */
     protected function _assertImplemented(DSL $dsl, string $methodName, string $className, array $arguments)
     {
         // Check method existence
@@ -34,11 +28,6 @@ abstract class AbstractDSLTest extends BaseTest
         }
     }
 
-    /**
-     * @param DSL    $dsl
-     * @param string $methodName
-     * @param array  $arguments
-     */
     protected function _assertNotImplemented(DSL $dsl, string $methodName, array $arguments)
     {
         try {
@@ -67,8 +56,6 @@ abstract class AbstractDSLTest extends BaseTest
     }
 
     /**
-     * @param \ReflectionParameter $param
-     *
      * @return string|null
      */
     protected function _getDefaultValue(\ReflectionParameter $param)
@@ -81,8 +68,6 @@ abstract class AbstractDSLTest extends BaseTest
     }
 
     /**
-     * @param \ReflectionParameter $param
-     *
      * @return string|null
      */
     protected function _getHintName(\ReflectionParameter $param)

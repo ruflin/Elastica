@@ -28,10 +28,6 @@ class Wildcard extends AbstractQuery
     /**
      * Sets the query expression for a key with its boost value.
      *
-     * @param string $key
-     * @param string $value
-     * @param float  $boost
-     *
      * @return $this
      */
     public function setValue(string $key, string $value, float $boost = 1.0): self

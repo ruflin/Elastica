@@ -102,9 +102,6 @@ class TaskTest extends Base
         return new Task($this->_getClient(), $id);
     }
 
-    /**
-     * @return \Elastica\Index
-     */
     protected function _createIndexWithDocument(): \Elastica\Index
     {
         $index = $this->_createIndex();

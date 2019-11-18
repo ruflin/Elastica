@@ -24,9 +24,6 @@ class ResponseException extends \RuntimeException implements ExceptionInterface
 
     /**
      * Construct Exception.
-     *
-     * @param Request  $request
-     * @param Response $response
      */
     public function __construct(Request $request, Response $response)
     {
@@ -57,8 +54,6 @@ class ResponseException extends \RuntimeException implements ExceptionInterface
 
     /**
      * Returns elasticsearch exception.
-     *
-     * @return ElasticsearchException
      */
     public function getElasticsearchException(): ElasticsearchException
     {

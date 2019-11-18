@@ -53,8 +53,6 @@ class FunctionScore extends AbstractQuery
     /**
      * Set the child query for this function_score query.
      *
-     * @param AbstractQuery $query
-     *
      * @return $this
      */
     public function setQuery(AbstractQuery $query): self
@@ -156,13 +154,6 @@ class FunctionScore extends AbstractQuery
     }
 
     /**
-     * @param string             $field
-     * @param float|null         $factor
-     * @param string|null        $modifier
-     * @param float|null         $missing
-     * @param float|null         $weight
-     * @param AbstractQuery|null $filter
-     *
      * @return $this
      */
     public function addFieldValueFactorFunction(
@@ -233,8 +224,6 @@ class FunctionScore extends AbstractQuery
     /**
      * Set an overall boost value for this query.
      *
-     * @param float $boost
-     *
      * @return $this
      */
     public function setBoost(float $boost): self
@@ -244,8 +233,6 @@ class FunctionScore extends AbstractQuery
 
     /**
      * Restrict the combined boost of the function_score query and its child query.
-     *
-     * @param float $maxBoost
      *
      * @return $this
      */
@@ -297,8 +284,6 @@ class FunctionScore extends AbstractQuery
 
     /**
      * Set min_score option.
-     *
-     * @param float $minScore
      *
      * @return $this
      */

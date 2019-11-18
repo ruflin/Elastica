@@ -12,9 +12,6 @@ use Elastica\Script\ScriptFields;
  */
 class TopHits extends AbstractAggregation
 {
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();
@@ -31,8 +28,6 @@ class TopHits extends AbstractAggregation
     /**
      * The maximum number of top matching hits to return per bucket. By default the top three matching hits are returned.
      *
-     * @param int $size
-     *
      * @return $this
      */
     public function setSize(int $size): self
@@ -43,8 +38,6 @@ class TopHits extends AbstractAggregation
     /**
      * The offset from the first result you want to fetch.
      *
-     * @param int $from
-     *
      * @return $this
      */
     public function setFrom(int $from): self
@@ -54,8 +47,6 @@ class TopHits extends AbstractAggregation
 
     /**
      * How the top matching hits should be sorted. By default the hits are sorted by the score of the main query.
-     *
-     * @param array $sortArgs
      *
      * @return $this
      */
@@ -79,8 +70,6 @@ class TopHits extends AbstractAggregation
     /**
      * Returns a version for each search hit.
      *
-     * @param bool $version
-     *
      * @return $this
      */
     public function setVersion(bool $version): self
@@ -90,8 +79,6 @@ class TopHits extends AbstractAggregation
 
     /**
      * Enables explanation for each hit on how its score was computed.
-     *
-     * @param bool $explain
      *
      * @return $this
      */
@@ -119,9 +106,6 @@ class TopHits extends AbstractAggregation
     /**
      * Adds a Script to the aggregation.
      *
-     * @param string                          $name
-     * @param \Elastica\Script\AbstractScript $script
-     *
      * @return $this
      */
     public function addScriptField(string $name, AbstractScript $script): self
@@ -138,8 +122,6 @@ class TopHits extends AbstractAggregation
     /**
      * Sets highlight arguments for the results.
      *
-     * @param array $highlightArgs
-     *
      * @return $this
      */
     public function setHighlight(array $highlightArgs): self
@@ -149,8 +131,6 @@ class TopHits extends AbstractAggregation
 
     /**
      * Allows to return the field data representation of a field for each hit.
-     *
-     * @param array $fields
      *
      * @return $this
      */

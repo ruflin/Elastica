@@ -9,10 +9,7 @@ use Elastica\Search as BaseSearch;
 class MultiBuilder implements MultiBuilderInterface
 {
     /**
-     * @param Response     $response
      * @param BaseSearch[] $searches
-     *
-     * @return ResultSet
      */
     public function buildMultiResultSet(Response $response, array $searches): ResultSet
     {
@@ -21,19 +18,12 @@ class MultiBuilder implements MultiBuilderInterface
         return new ResultSet($response, $resultSets);
     }
 
-    /**
-     * @param Response   $childResponse
-     * @param BaseSearch $search
-     *
-     * @return BaseResultSet
-     */
     private function buildResultSet(Response $childResponse, BaseSearch $search): BaseResultSet
     {
         return $search->getResultSetBuilder()->buildResultSet($childResponse, $search->getQuery());
     }
 
     /**
-     * @param Response     $response
      * @param BaseSearch[] $searches
      *
      * @return BaseResultSet[]

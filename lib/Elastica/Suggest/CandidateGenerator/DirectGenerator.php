@@ -22,9 +22,6 @@ class DirectGenerator extends AbstractCandidateGenerator
     const DEFAULT_MIN_DOC_FREQ = 0.0;
     const DEFAULT_MAX_TERM_FREQ = 0.01;
 
-    /**
-     * @param string $field
-     */
     public function __construct(string $field)
     {
         $this->setField($field);
@@ -32,8 +29,6 @@ class DirectGenerator extends AbstractCandidateGenerator
 
     /**
      * Set the field name from which to fetch candidate suggestions.
-     *
-     * @param string $field
      *
      * @return $this
      */
@@ -44,8 +39,6 @@ class DirectGenerator extends AbstractCandidateGenerator
 
     /**
      * Set the maximum corrections to be returned per suggest text token.
-     *
-     * @param int $size
      *
      * @return $this
      */
@@ -95,8 +88,6 @@ class DirectGenerator extends AbstractCandidateGenerator
     }
 
     /**
-     * @param int $max
-     *
      * @return $this
      */
     public function setMaxInspections(int $max)
@@ -105,8 +96,6 @@ class DirectGenerator extends AbstractCandidateGenerator
     }
 
     /**
-     * @param float $min
-     *
      * @return $this
      */
     public function setMinDocFrequency(float $min)
@@ -115,8 +104,6 @@ class DirectGenerator extends AbstractCandidateGenerator
     }
 
     /**
-     * @param float $max
-     *
      * @return $this
      */
     public function setMaxTermFrequency(float $max)
@@ -138,8 +125,6 @@ class DirectGenerator extends AbstractCandidateGenerator
 
     /**
      * Set an analyzer to be applied to generated tokens before they are passed to the phrase scorer.
-     *
-     * @param string $post
      *
      * @return $this
      */

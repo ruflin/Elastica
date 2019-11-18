@@ -23,8 +23,6 @@ class ResponseException extends BulkException
 
     /**
      * Construct Exception.
-     *
-     * @param ResponseSet $responseSet
      */
     public function __construct(ResponseSet $responseSet)
     {
@@ -36,9 +34,6 @@ class ResponseException extends BulkException
         parent::__construct($message);
     }
 
-    /**
-     * @param ResponseSet $responseSet
-     */
     protected function _init(ResponseSet $responseSet)
     {
         $this->_responseSet = $responseSet;
@@ -52,8 +47,6 @@ class ResponseException extends BulkException
 
     /**
      * Returns bulk response set object.
-     *
-     * @return ResponseSet
      */
     public function getResponseSet(): ResponseSet
     {
@@ -84,9 +77,6 @@ class ResponseException extends BulkException
         return $this->_actionExceptions;
     }
 
-    /**
-     * @return string
-     */
     public function getActionExceptionsAsString(): string
     {
         $message = '';

@@ -48,8 +48,6 @@ class Range extends AbstractSimpleAggregation
     /**
      * If set to true, a unique string key will be associated with each bucket, and ranges will be returned as an associative array.
      *
-     * @param bool $keyed
-     *
      * @return $this
      */
     public function setKeyedResponse(bool $keyed = true)

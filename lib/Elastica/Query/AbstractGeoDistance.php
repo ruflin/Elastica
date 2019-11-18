@@ -69,8 +69,6 @@ abstract class AbstractGeoDistance extends AbstractQuery
     }
 
     /**
-     * @param string $key
-     *
      * @return $this
      */
     public function setKey(string $key): self
@@ -114,8 +112,6 @@ abstract class AbstractGeoDistance extends AbstractQuery
     }
 
     /**
-     * @param float $latitude
-     *
      * @return $this
      */
     public function setLatitude(float $latitude): self
@@ -127,8 +123,6 @@ abstract class AbstractGeoDistance extends AbstractQuery
     }
 
     /**
-     * @param float $longitude
-     *
      * @return $this
      */
     public function setLongitude(float $longitude): self
@@ -140,8 +134,6 @@ abstract class AbstractGeoDistance extends AbstractQuery
     }
 
     /**
-     * @param string $geohash
-     *
      * @return $this
      */
     public function setGeohash(string $geohash): self

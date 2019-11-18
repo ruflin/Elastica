@@ -29,8 +29,6 @@ class SpanWithin extends AbstractSpanQuery
     }
 
     /**
-     * @param AbstractSpanQuery $little
-     *
      * @return $this
      */
     public function setLittle(AbstractSpanQuery $little): self
@@ -39,8 +37,6 @@ class SpanWithin extends AbstractSpanQuery
     }
 
     /**
-     * @param AbstractSpanQuery $big
-     *
      * @return $this
      */
     public function setBig(AbstractSpanQuery $big): self

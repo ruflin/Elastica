@@ -29,8 +29,6 @@ class SpanNot extends AbstractSpanQuery
     }
 
     /**
-     * @param AbstractSpanQuery $include
-     *
      * @return $this
      */
     public function setInclude(AbstractSpanQuery $include): self
@@ -39,8 +37,6 @@ class SpanNot extends AbstractSpanQuery
     }
 
     /**
-     * @param AbstractSpanQuery $exclude
-     *
      * @return $this
      */
     public function setExclude(AbstractSpanQuery $exclude): self

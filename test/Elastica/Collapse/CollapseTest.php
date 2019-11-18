@@ -324,8 +324,6 @@ class CollapseTest extends BaseTest
     }
 
     /**
-     * @param Query $query
-     *
      * @return \Elastica\ResultSet
      */
     private function search(Query $query)

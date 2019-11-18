@@ -14,8 +14,6 @@ class DateHistogram extends Histogram
     /**
      * Set time_zone option.
      *
-     * @param string $timezone
-     *
      * @return $this
      */
     public function setTimezone(string $timezone): self
@@ -37,8 +35,6 @@ class DateHistogram extends Histogram
 
     /**
      * Set offset option.
-     *
-     * @param string $offset
      *
      * @return $this
      */

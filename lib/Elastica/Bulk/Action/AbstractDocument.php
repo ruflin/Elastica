@@ -23,8 +23,6 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @param Document $document
-     *
      * @return $this
      */
     public function setDocument(Document $document): self
@@ -39,8 +37,6 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @param AbstractScript $script
-     *
      * @return $this
      */
     public function setScript(AbstractScript $script): self
@@ -113,11 +109,6 @@ abstract class AbstractDocument extends Action
         return $this->_data;
     }
 
-    /**
-     * @param AbstractUpdateAction $source
-     *
-     * @return array
-     */
     abstract protected function _getMetadata(AbstractUpdateAction $source): array;
 
     /**

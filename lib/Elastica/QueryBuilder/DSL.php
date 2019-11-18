@@ -16,8 +16,6 @@ interface DSL
 
     /**
      * must return type for QueryBuilder usage.
-     *
-     * @return string
      */
     public function getType(): string;
 }

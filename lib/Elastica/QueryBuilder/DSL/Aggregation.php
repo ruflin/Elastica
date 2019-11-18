@@ -49,8 +49,6 @@ class Aggregation implements DSL
 {
     /**
      * must return type for QueryBuilder usage.
-     *
-     * @return string
      */
     public function getType(): string
     {
@@ -61,10 +59,6 @@ class Aggregation implements DSL
      * min aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-min-aggregation.html
-     *
-     * @param string $name
-     *
-     * @return Min
      */
     public function min(string $name): Min
     {
@@ -75,10 +69,6 @@ class Aggregation implements DSL
      * max aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-max-aggregation.html
-     *
-     * @param string $name
-     *
-     * @return Max
      */
     public function max(string $name): Max
     {
@@ -89,10 +79,6 @@ class Aggregation implements DSL
      * sum aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-sum-aggregation.html
-     *
-     * @param string $name
-     *
-     * @return Sum
      */
     public function sum(string $name): Sum
     {
@@ -103,11 +89,6 @@ class Aggregation implements DSL
      * sum bucket aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-sum-bucket-aggregation.html
-     *
-     * @param string      $name
-     * @param string|null $bucketsPath
-     *
-     * @return SumBucket
      */
     public function sum_bucket(string $name, string $bucketsPath = null): SumBucket
     {
@@ -118,10 +99,6 @@ class Aggregation implements DSL
      * avg aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-avg-aggregation.html
-     *
-     * @param string $name
-     *
-     * @return Avg
      */
     public function avg(string $name): Avg
     {
@@ -132,11 +109,6 @@ class Aggregation implements DSL
      * avg bucket aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-avg-bucket-aggregation.html
-     *
-     * @param string      $name
-     * @param string|null $bucketsPath
-     *
-     * @return AvgBucket
      */
     public function avg_bucket(string $name, string $bucketsPath = null): AvgBucket
     {
@@ -147,10 +119,6 @@ class Aggregation implements DSL
      * stats aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-stats-aggregation.html
-     *
-     * @param string $name
-     *
-     * @return Stats
      */
     public function stats(string $name): Stats
     {
@@ -161,10 +129,6 @@ class Aggregation implements DSL
      * extended stats aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-extendedstats-aggregation.html
-     *
-     * @param string $name
-     *
-     * @return ExtendedStats
      */
     public function extended_stats(string $name): ExtendedStats
     {
@@ -175,11 +139,6 @@ class Aggregation implements DSL
      * value count aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-valuecount-aggregation.html
-     *
-     * @param string $name
-     * @param string $field
-     *
-     * @return ValueCount
      */
     public function value_count(string $name, string $field): ValueCount
     {
@@ -193,8 +152,6 @@ class Aggregation implements DSL
      *
      * @param string $name  the name of this aggregation
      * @param string $field the field on which to perform this aggregation
-     *
-     * @return Percentiles
      */
     public function percentiles(string $name, string $field = null): Percentiles
     {
@@ -217,10 +174,6 @@ class Aggregation implements DSL
      * cardinality aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html
-     *
-     * @param string $name
-     *
-     * @return Cardinality
      */
     public function cardinality(string $name): Cardinality
     {
@@ -243,10 +196,6 @@ class Aggregation implements DSL
      * top hits aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html
-     *
-     * @param string $name
-     *
-     * @return TopHits
      */
     public function top_hits(string $name): TopHits
     {
@@ -257,14 +206,6 @@ class Aggregation implements DSL
      * scripted metric aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-scripted-metric-aggregation.html
-     *
-     * @param string      $name
-     * @param string|null $initScript
-     * @param string|null $mapScript
-     * @param string|null $combineScript
-     * @param string|null $reduceScript
-     *
-     * @return ScriptedMetric
      */
     public function scripted_metric(
         string $name,
@@ -280,10 +221,6 @@ class Aggregation implements DSL
      * global aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-global-aggregation.html
-     *
-     * @param string $name
-     *
-     * @return GlobalAggregation
      */
     public function global_agg(string $name): GlobalAggregation
     {
@@ -295,10 +232,7 @@ class Aggregation implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html
      *
-     * @param string        $name
      * @param AbstractQuery $filter
-     *
-     * @return Filter
      */
     public function filter(string $name, AbstractQuery $filter = null): Filter
     {
@@ -309,10 +243,6 @@ class Aggregation implements DSL
      * filters aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filters-aggregation.html
-     *
-     * @param string $name
-     *
-     * @return Filters
      */
     public function filters(string $name): Filters
     {
@@ -323,11 +253,6 @@ class Aggregation implements DSL
      * missing aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-missing-aggregation.html
-     *
-     * @param string $name
-     * @param string $field
-     *
-     * @return Missing
      */
     public function missing(string $name, string $field): Missing
     {
@@ -339,10 +264,7 @@ class Aggregation implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-nested-aggregation.html
      *
-     * @param string $name
      * @param string $path the nested path for this aggregation
-     *
-     * @return Nested
      */
     public function nested(string $name, string $path): Nested
     {
@@ -356,8 +278,6 @@ class Aggregation implements DSL
      *
      * @param string $name The name of this aggregation
      * @param string $path Optional path to the nested object for this aggregation. Defaults to the root of the main document.
-     *
-     * @return ReverseNested
      */
     public function reverse_nested(string $name, string $path = null): ReverseNested
     {
@@ -380,10 +300,6 @@ class Aggregation implements DSL
      * terms aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html
-     *
-     * @param string $name
-     *
-     * @return Terms
      */
     public function terms(string $name): Terms
     {
@@ -394,10 +310,6 @@ class Aggregation implements DSL
      * significant terms aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-significantterms-aggregation.html
-     *
-     * @param string $name
-     *
-     * @return SignificantTerms
      */
     public function significant_terms(string $name): SignificantTerms
     {
@@ -408,10 +320,6 @@ class Aggregation implements DSL
      * range aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-range-aggregation.html
-     *
-     * @param string $name
-     *
-     * @return Range
      */
     public function range(string $name): Range
     {
@@ -422,10 +330,6 @@ class Aggregation implements DSL
      * date range aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-daterange-aggregation.html
-     *
-     * @param string $name
-     *
-     * @return DateRange
      */
     public function date_range(string $name): DateRange
     {
@@ -436,11 +340,6 @@ class Aggregation implements DSL
      * ipv4 range aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-iprange-aggregation.html
-     *
-     * @param string $name
-     * @param string $field
-     *
-     * @return IpRange
      */
     public function ipv4_range(string $name, string $field): IpRange
     {
@@ -455,8 +354,6 @@ class Aggregation implements DSL
      * @param string $name     the name of this aggregation
      * @param string $field    the name of the field on which to perform the aggregation
      * @param int    $interval the interval by which documents will be bucketed
-     *
-     * @return Histogram
      */
     public function histogram(string $name, string $field, $interval): Histogram
     {
@@ -471,8 +368,6 @@ class Aggregation implements DSL
      * @param string     $name     the name of this aggregation
      * @param string     $field    the name of the field on which to perform the aggregation
      * @param int|string $interval the interval by which documents will be bucketed
-     *
-     * @return DateHistogram
      */
     public function date_histogram(string $name, string $field, $interval): DateHistogram
     {
@@ -487,8 +382,6 @@ class Aggregation implements DSL
      * @param string       $name   the name if this aggregation
      * @param string       $field  the field on which to perform this aggregation
      * @param string|array $origin the point from which distances will be calculated
-     *
-     * @return GeoDistance
      */
     public function geo_distance(string $name, string $field, $origin): GeoDistance
     {
@@ -502,8 +395,6 @@ class Aggregation implements DSL
      *
      * @param string $name  the name of this aggregation
      * @param string $field the field on which to perform this aggregation
-     *
-     * @return GeohashGrid
      */
     public function geohash_grid(string $name, string $field): GeohashGrid
     {
@@ -514,12 +405,6 @@ class Aggregation implements DSL
      * bucket script aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-script-aggregation.html
-     *
-     * @param string      $name
-     * @param array|null  $bucketsPath
-     * @param string|null $script
-     *
-     * @return BucketScript
      */
     public function bucket_script(string $name, array $bucketsPath = null, string $script = null): BucketScript
     {
@@ -530,11 +415,6 @@ class Aggregation implements DSL
      * serial diff aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-serialdiff-aggregation.html
-     *
-     * @param string      $name
-     * @param string|null $bucketsPath
-     *
-     * @return SerialDiff
      */
     public function serial_diff(string $name, string $bucketsPath = null): SerialDiff
     {
@@ -545,10 +425,6 @@ class Aggregation implements DSL
      * adjacency matrix aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-adjacency-matrix-aggregation.html
-     *
-     * @param string $name
-     *
-     * @return AdjacencyMatrix
      */
     public function adjacency_matrix(string $name): AdjacencyMatrix
     {
@@ -560,8 +436,6 @@ class Aggregation implements DSL
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-sampler-aggregation.html
      *
      * @param string $name
-     *
-     * @return Sampler
      */
     public function sampler($name): Sampler
     {

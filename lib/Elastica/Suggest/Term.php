@@ -17,8 +17,6 @@ class Term extends AbstractSuggest
     const SUGGEST_MODE_ALWAYS = 'always';
 
     /**
-     * @param string $analyzer
-     *
      * @return $this
      */
     public function setAnalyzer(string $analyzer): Term
@@ -48,8 +46,6 @@ class Term extends AbstractSuggest
 
     /**
      * If true, suggest terms will be lower cased after text analysis.
-     *
-     * @param bool $lowercase
      *
      * @return $this
      */
@@ -119,8 +115,6 @@ class Term extends AbstractSuggest
     /**
      * Set the maximum number of documents in which a suggest text token can exist in order to be included.
      *
-     * @param float $max
-     *
      * @return $this
      */
     public function setMaxTermFrequency(float $max = 0.01): Term
@@ -137,8 +131,6 @@ class Term extends AbstractSuggest
      * - levenshtein
      * - jaro_winkler
      * - ngram
-     *
-     * @param string $distanceAlgorithm
      *
      * @return $this
      */

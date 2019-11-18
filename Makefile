@@ -86,7 +86,7 @@ lint:
 .PHONY: check-style
 check-style:
 	docker build -t ruflin/elastica-dev-base-linter -f env/elastica/Lint env/elastica/
-	${RUN_ENV_LINT} php-cs-fixer fix --allow-risky=yes --dry-run
+	${RUN_ENV_LINT} php-cs-fixer fix --allow-risky=yes --dry-run --diff
 
 .PHONY: loc
 loc:

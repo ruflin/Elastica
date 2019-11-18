@@ -33,8 +33,6 @@ class Index
 
     /**
      * Gets the name of the index.
-     *
-     * @return string
      */
     public function getName(): string
     {
@@ -53,8 +51,6 @@ class Index
 
     /**
      * Gets the number of nodes in the index.
-     *
-     * @return int
      */
     public function getNumberOfShards(): int
     {
@@ -63,8 +59,6 @@ class Index
 
     /**
      * Gets the number of data nodes in the index.
-     *
-     * @return int
      */
     public function getNumberOfReplicas(): int
     {
@@ -73,8 +67,6 @@ class Index
 
     /**
      * Gets the number of active primary shards.
-     *
-     * @return int
      */
     public function getActivePrimaryShards(): int
     {
@@ -83,8 +75,6 @@ class Index
 
     /**
      * Gets the number of active shards.
-     *
-     * @return int
      */
     public function getActiveShards(): int
     {
@@ -93,8 +83,6 @@ class Index
 
     /**
      * Gets the number of relocating shards.
-     *
-     * @return int
      */
     public function getRelocatingShards(): int
     {
@@ -103,8 +91,6 @@ class Index
 
     /**
      * Gets the number of initializing shards.
-     *
-     * @return int
      */
     public function getInitializingShards(): int
     {
@@ -113,8 +99,6 @@ class Index
 
     /**
      * Gets the number of unassigned shards.
-     *
-     * @return int
      */
     public function getUnassignedShards(): int
     {

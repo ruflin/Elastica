@@ -10,8 +10,7 @@ class AdjacencyMatrix extends AbstractAggregation
     /**
      * Add a named filter.
      *
-     * @param AbstractQuery $filter
-     * @param string        $name
+     * @param string $name
      *
      * @return $this
      */
@@ -28,8 +27,6 @@ class AdjacencyMatrix extends AbstractAggregation
     }
 
     /**
-     * @param string $separator
-     *
      * @return $this
      */
     public function setSeparator(string $separator = '&'): self
@@ -37,9 +34,6 @@ class AdjacencyMatrix extends AbstractAggregation
         return $this->setParam('separator', $separator);
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = [];

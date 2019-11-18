@@ -20,8 +20,6 @@ use Elastica\Query\InnerHits as BaseInnerHits;
 class InnerHits extends BaseInnerHits
 {
     /**
-     * @param Collapse $collapse
-     *
      * @return $this
      */
     public function setCollapse(Collapse $collapse): self

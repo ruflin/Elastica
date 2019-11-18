@@ -40,9 +40,6 @@ class Bulk
      */
     protected $_requestParams = [];
 
-    /**
-     * @param Client $client
-     */
     public function __construct(Client $client)
     {
         $this->_client = $client;
@@ -72,17 +69,11 @@ class Bulk
         return $this->_index;
     }
 
-    /**
-     * @return bool
-     */
     public function hasIndex(): bool
     {
         return null !== $this->getIndex() && '' !== $this->getIndex();
     }
 
-    /**
-     * @return string
-     */
     public function getPath(): string
     {
         $path = '';
@@ -95,8 +86,6 @@ class Bulk
     }
 
     /**
-     * @param Action $action
-     *
      * @return $this
      */
     public function addAction(Action $action): self
@@ -129,8 +118,7 @@ class Bulk
     }
 
     /**
-     * @param Document $document
-     * @param string   $opType
+     * @param string $opType
      *
      * @return $this
      */
@@ -157,8 +145,7 @@ class Bulk
     }
 
     /**
-     * @param AbstractScript $script
-     * @param string         $opType
+     * @param string $opType
      *
      * @return $this
      */
@@ -210,8 +197,6 @@ class Bulk
     }
 
     /**
-     * @param array $data
-     *
      * @throws InvalidException
      *
      * @return $this
@@ -276,17 +261,11 @@ class Bulk
         return $this->setRequestParam('timeout', $time);
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return $this->toString();
     }
 
-    /**
-     * @return string
-     */
     public function toString(): string
     {
         $data = '';
@@ -297,9 +276,6 @@ class Bulk
         return $data;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $data = [];
@@ -312,9 +288,6 @@ class Bulk
         return $data;
     }
 
-    /**
-     * @return ResponseSet
-     */
     public function send(): ResponseSet
     {
         $path = $this->getPath();
@@ -326,12 +299,8 @@ class Bulk
     }
 
     /**
-     * @param Response $response
-     *
      * @throws ResponseException
      * @throws InvalidException
-     *
-     * @return ResponseSet
      */
     protected function _processResponse(Response $response): ResponseSet
     {

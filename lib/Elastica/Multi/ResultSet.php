@@ -37,7 +37,6 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     /**
      * Constructs ResultSet object.
      *
-     * @param Response        $response
      * @param BaseResultSet[] $resultSets
      */
     public function __construct(Response $response, array $resultSets)
@@ -66,8 +65,6 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
 
     /**
      * There is at least one result set with error.
-     *
-     * @return bool
      */
     public function hasError(): bool
     {

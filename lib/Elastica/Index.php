@@ -93,8 +93,6 @@ class Index implements SearchableInterface
      *
      * @param Mapping $mapping MappingType object
      * @param array   $query   querystring when put mapping (for example update_all_types)
-     *
-     * @return Response
      */
     public function setMapping(Mapping $mapping, array $query = []): Response
     {
@@ -103,8 +101,6 @@ class Index implements SearchableInterface
 
     /**
      * Gets all mappings for the current index.
-     *
-     * @return array
      */
     public function getMapping(): array
     {
@@ -128,7 +124,6 @@ class Index implements SearchableInterface
     }
 
     /**
-     * @param string       $id
      * @param array|string $data
      *
      * @return Document
@@ -262,8 +257,6 @@ class Index implements SearchableInterface
      *
      * @throws \Elastica\Exception\ResponseException
      * @throws NotFoundException
-     *
-     * @return Document
      */
     public function getDocument($id, array $options = []): Document
     {
@@ -297,8 +290,7 @@ class Index implements SearchableInterface
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete.html
      *
-     * @param string $id      Document id
-     * @param array  $options
+     * @param string $id Document id
      *
      * @throws NotFoundException
      *
@@ -656,8 +648,6 @@ class Index implements SearchableInterface
     /**
      * Flushes the index to storage.
      *
-     * @param array $options
-     *
      * @return Response Response object
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-flush.html
@@ -706,8 +696,6 @@ class Index implements SearchableInterface
 
     /**
      * Makes calls to the elasticsearch server with usage official client Endpoint based on this index.
-     *
-     * @param AbstractEndpoint $endpoint
      *
      * @return Response
      */

@@ -11,10 +11,6 @@ use Elastica\Exception\InvalidException;
  */
 class StatsBucket extends AbstractAggregation
 {
-    /**
-     * @param string      $name
-     * @param string|null $bucketsPath
-     */
     public function __construct(string $name, string $bucketsPath = null)
     {
         parent::__construct($name);
@@ -27,8 +23,6 @@ class StatsBucket extends AbstractAggregation
     /**
      * Set the buckets_path for this aggregation.
      *
-     * @param string $bucketsPath
-     *
      * @return $this
      */
     public function setBucketsPath(string $bucketsPath): self
@@ -38,8 +32,6 @@ class StatsBucket extends AbstractAggregation
 
     /**
      * Set the gap policy for this aggregation.
-     *
-     * @param string $gapPolicy
      *
      * @return $this
      */
@@ -51,8 +43,6 @@ class StatsBucket extends AbstractAggregation
     /**
      * Set the format for this aggregation.
      *
-     * @param string $format
-     *
      * @return $this
      */
     public function setFormat(string $format): self
@@ -62,8 +52,6 @@ class StatsBucket extends AbstractAggregation
 
     /**
      * @throws InvalidException If buckets path or script is not set
-     *
-     * @return array
      */
     public function toArray(): array
     {

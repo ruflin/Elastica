@@ -31,8 +31,6 @@ class TransportBenchmarkTest extends BaseTest
     }
 
     /**
-     * @param array $config
-     *
      * @return Index
      */
     protected function getIndex(array $config)
@@ -204,7 +202,6 @@ class TransportBenchmarkTest extends BaseTest
     /**
      * @param $name
      * @param $transport
-     * @param array $times
      */
     protected static function logResults($name, $transport, array $times)
     {

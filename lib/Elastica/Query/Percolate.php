@@ -19,8 +19,6 @@ class Percolate extends AbstractQuery
     /**
      * The field of type percolator and that holds the indexed queries. This is a required parameter.
      *
-     * @param string $field
-     *
      * @return $this
      */
     public function setField(string $field): self
@@ -42,8 +40,6 @@ class Percolate extends AbstractQuery
 
     /**
      * The index the document resides in.
-     *
-     * @param string $index
      *
      * @return $this
      */
@@ -67,8 +63,6 @@ class Percolate extends AbstractQuery
     /**
      * Optionally, routing to be used to fetch document to percolate.
      *
-     * @param string $routing
-     *
      * @return $this
      */
     public function setDocumentRouting(string $routing): self
@@ -79,8 +73,6 @@ class Percolate extends AbstractQuery
     /**
      * Optionally, preference to be used to fetch document to percolate.
      *
-     * @param array $preference
-     *
      * @return $this
      */
     public function setDocumentPreference(array $preference): self
@@ -90,8 +82,6 @@ class Percolate extends AbstractQuery
 
     /**
      * Optionally, the expected version of the document to be fetched.
-     *
-     * @param int $version
      *
      * @return $this
      */

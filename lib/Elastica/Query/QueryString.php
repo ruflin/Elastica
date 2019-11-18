@@ -86,8 +86,6 @@ class QueryString extends AbstractQuery
      *
      * If not set, defaults to true.
      *
-     * @param bool $allow
-     *
      * @return $this
      */
     public function setAllowLeadingWildcard(bool $allow = true): self
@@ -99,8 +97,6 @@ class QueryString extends AbstractQuery
      * Sets the parameter to enable the position increments in result queries.
      *
      * If not set, defaults to true.
-     *
-     * @param bool $enabled
      *
      * @return $this
      */
@@ -114,8 +110,6 @@ class QueryString extends AbstractQuery
      *
      * If not set, defaults to 0.
      *
-     * @param int $length
-     *
      * @return $this
      */
     public function setFuzzyPrefixLength(int $length = 0): self
@@ -127,8 +121,6 @@ class QueryString extends AbstractQuery
      * Sets the fuzzy minimal similarity parameter.
      *
      * If not set, defaults to 0.5
-     *
-     * @param float $minSim
      *
      * @return $this
      */
@@ -143,8 +135,6 @@ class QueryString extends AbstractQuery
      * If zero, exact phrases are required.
      * If not set, defaults to zero.
      *
-     * @param int $phraseSlop
-     *
      * @return $this
      */
     public function setPhraseSlop(int $phraseSlop = 0): self
@@ -157,8 +147,6 @@ class QueryString extends AbstractQuery
      *
      * If not set, defaults to 1.0.
      *
-     * @param float $boost
-     *
      * @return $this
      */
     public function setBoost(float $boost = 1.0): self
@@ -170,8 +158,6 @@ class QueryString extends AbstractQuery
      * Allows analyzing of wildcard terms.
      *
      * If not set, defaults to true
-     *
-     * @param bool $analyze
      *
      * @return $this
      */
@@ -210,8 +196,6 @@ class QueryString extends AbstractQuery
      *
      * If not set, defaults to 0.0.
      *
-     * @param float $tieBreaker
-     *
      * @return $this
      */
     public function setTieBreaker(float $tieBreaker = 0.0): self
@@ -222,8 +206,6 @@ class QueryString extends AbstractQuery
     /**
      * Set a re-write condition. See https://github.com/elasticsearch/elasticsearch/issues/1186 for additional information.
      *
-     * @param string $rewrite
-     *
      * @return $this
      */
     public function setRewrite(string $rewrite = ''): self
@@ -233,8 +215,6 @@ class QueryString extends AbstractQuery
 
     /**
      * Set timezone option.
-     *
-     * @param string $timezone
      *
      * @return $this
      */

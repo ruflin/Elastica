@@ -12,10 +12,6 @@ class SimpleQueryString extends AbstractQuery
     const OPERATOR_AND = 'and';
     const OPERATOR_OR = 'or';
 
-    /**
-     * @param string $query
-     * @param array  $fields
-     */
     public function __construct(string $query, array $fields = [])
     {
         $this->setQuery($query);
@@ -60,8 +56,6 @@ class SimpleQueryString extends AbstractQuery
 
     /**
      * Set the analyzer used to analyze each term of the query.
-     *
-     * @param string $analyzer
      *
      * @return $this
      */

@@ -47,8 +47,6 @@ class SpanFirst extends AbstractSpanQuery
     /**
      * Set the maximum end position for the match query.
      *
-     * @param int $end
-     *
      * @return $this
      */
     public function setEnd(int $end): self

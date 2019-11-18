@@ -102,12 +102,8 @@ class ScrollTest extends Base
     /**
      * index: 11 docs default
      * query size: 5.
-     *
-     * @param int $indexSize
-     *
-     * @return Search
      */
-    private function _prepareSearch($indexSize = 11)
+    private function _prepareSearch(int $indexSize = 11): Search
     {
         $index = $this->_createIndex();
         $index->refresh();
@@ -130,11 +126,8 @@ class ScrollTest extends Base
 
     /**
      * Tests the number of open search contexts on ES.
-     *
-     * @param Client $client
-     * @param int    $count
      */
-    private function _assertOpenSearchContexts(Client $client, $count)
+    private function _assertOpenSearchContexts(Client $client, int $count)
     {
         $stats = $client->getStatus()->getData();
         $this->assertSame($count, $stats['_all']['total']['search']['open_contexts'], 'Open search contexts should match');

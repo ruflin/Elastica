@@ -13,7 +13,6 @@ use Elastica\Query\AbstractQuery;
 class Filter extends AbstractAggregation
 {
     /**
-     * @param string        $name
      * @param AbstractQuery $filter
      */
     public function __construct(string $name, AbstractQuery $filter = null)
@@ -28,8 +27,6 @@ class Filter extends AbstractAggregation
     /**
      * Set the filter for this aggregation.
      *
-     * @param AbstractQuery $filter
-     *
      * @return $this
      */
     public function setFilter(AbstractQuery $filter)
@@ -39,8 +36,6 @@ class Filter extends AbstractAggregation
 
     /**
      * @throws \Elastica\Exception\InvalidException If filter is not set
-     *
-     * @return array
      */
     public function toArray(): array
     {

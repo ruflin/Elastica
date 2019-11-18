@@ -25,8 +25,7 @@ class ScriptFields extends Param
     }
 
     /**
-     * @param string         $name   Name of the Script field
-     * @param AbstractScript $script
+     * @param string $name Name of the Script field
      *
      * @throws InvalidException
      *
@@ -57,9 +56,6 @@ class ScriptFields extends Param
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         return $this->_convertArrayable($this->_params);

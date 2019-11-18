@@ -16,8 +16,6 @@ class Json extends AbstractProcessor
 
     /**
      * Json constructor.
-     *
-     * @param string $field
      */
     public function __construct(string $field)
     {
@@ -26,8 +24,6 @@ class Json extends AbstractProcessor
 
     /**
      * Set the field.
-     *
-     * @param string $field
      *
      * @return $this
      */
@@ -39,8 +35,6 @@ class Json extends AbstractProcessor
     /**
      * Set target_field. Default field.
      *
-     * @param string $targetField
-     *
      * @return $this
      */
     public function setTargetField(string $targetField): self
@@ -50,8 +44,6 @@ class Json extends AbstractProcessor
 
     /**
      * Set add_to_root. Default value false.
-     *
-     * @param bool $addToRoot
      *
      * @return $this
      */

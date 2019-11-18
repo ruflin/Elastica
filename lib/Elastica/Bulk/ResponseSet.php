@@ -17,8 +17,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     protected $_position = 0;
 
     /**
-     * @param BaseResponse $response
-     * @param Response[]   $bulkResponses
+     * @param Response[] $bulkResponses
      */
     public function __construct(BaseResponse $response, array $bulkResponses)
     {
@@ -37,8 +36,6 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
 
     /**
      * Returns first found error.
-     *
-     * @return string
      */
     public function getError(): string
     {
@@ -67,9 +64,6 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
         return '';
     }
 
-    /**
-     * @return bool
-     */
     public function isOk(): bool
     {
         foreach ($this->getBulkResponses() as $bulkResponse) {
@@ -81,9 +75,6 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
         return true;
     }
 
-    /**
-     * @return bool
-     */
     public function hasError(): bool
     {
         foreach ($this->getBulkResponses() as $bulkResponse) {
@@ -95,9 +86,6 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
         return false;
     }
 
-    /**
-     * @return Response
-     */
     public function current(): Response
     {
         return $this->_bulkResponses[$this->key()];

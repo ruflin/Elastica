@@ -11,7 +11,6 @@ class BasePipeline extends BaseTest
      * Create Pipeline object.
      *
      * @param string $id
-     * @param string $description
      *
      * @return Pipeline
      */

@@ -18,10 +18,6 @@ class ProcessingBuilder implements BuilderInterface
      */
     private $processor;
 
-    /**
-     * @param BuilderInterface   $builder
-     * @param ProcessorInterface $processor
-     */
     public function __construct(BuilderInterface $builder, ProcessorInterface $processor)
     {
         $this->builder = $builder;
@@ -32,11 +28,6 @@ class ProcessingBuilder implements BuilderInterface
      * Runs any registered transformers on the ResultSet before
      * returning it, allowing the transformers to inject additional
      * data into each Result.
-     *
-     * @param Response $response
-     * @param Query    $query
-     *
-     * @return ResultSet
      */
     public function buildResultSet(Response $response, Query $query): ResultSet
     {

@@ -5,7 +5,6 @@ namespace Elastica;
 /**
  * Interface for named objects.
  *
- *
  * @author Evgeniy Sokolov <ewgraf@gmail.com>
  */
 interface NameableInterface
@@ -19,8 +18,6 @@ interface NameableInterface
 
     /**
      * Set the name of this object.
-     *
-     * @param string $name
      *
      * @return $this
      */

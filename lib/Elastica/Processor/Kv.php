@@ -16,10 +16,6 @@ class Kv extends AbstractProcessor
 
     /**
      * Kv constructor.
-     *
-     * @param string $field
-     * @param string $fieldSplit
-     * @param string $valueSplit
      */
     public function __construct(string $field, string $fieldSplit, string $valueSplit)
     {
@@ -31,8 +27,6 @@ class Kv extends AbstractProcessor
     /**
      * Set field name.
      *
-     * @param string $field
-     *
      * @return $this
      */
     public function setField(string $field): self
@@ -42,8 +36,6 @@ class Kv extends AbstractProcessor
 
     /**
      * Set field_split.
-     *
-     * @param string $fieldSplit
      *
      * @return $this
      */
@@ -55,8 +47,6 @@ class Kv extends AbstractProcessor
     /**
      * Set value_split.
      *
-     * @param string $valueSplit
-     *
      * @return $this
      */
     public function setValueSplit(string $valueSplit): self
@@ -66,8 +56,6 @@ class Kv extends AbstractProcessor
 
     /**
      * Set target_field. Default value null.
-     *
-     * @param string $targetField
      *
      * @return $this
      */
@@ -79,8 +67,6 @@ class Kv extends AbstractProcessor
     /**
      * Set include_keys.
      *
-     * @param array $listOfKeys
-     *
      * @return $this
      */
     public function setIncludeKeys(array $listOfKeys): self
@@ -90,8 +76,6 @@ class Kv extends AbstractProcessor
 
     /**
      * Set exclude_keys.
-     *
-     * @param array $listOfKeys
      *
      * @return $this
      */

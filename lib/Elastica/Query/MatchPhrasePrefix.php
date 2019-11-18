@@ -19,9 +19,6 @@ class MatchPhrasePrefix extends MatchPhrase
      *
      * Controls to how many prefixes the last term will be expanded (default 50).
      *
-     * @param string $field
-     * @param int    $maxExpansions
-     *
      * @return $this
      */
     public function setFieldMaxExpansions(string $field, int $maxExpansions = self::DEFAULT_MAX_EXPANSIONS): self

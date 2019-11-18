@@ -25,8 +25,6 @@ class ReverseNested extends AbstractAggregation
     /**
      * Set the nested path for this aggregation.
      *
-     * @param string $path
-     *
      * @return $this
      */
     public function setPath(string $path)

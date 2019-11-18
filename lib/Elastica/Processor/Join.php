@@ -13,9 +13,6 @@ class Join extends AbstractProcessor
 {
     /**
      * Join constructor.
-     *
-     * @param string $field
-     * @param string $separator
      */
     public function __construct(string $field, string $separator)
     {
@@ -26,8 +23,6 @@ class Join extends AbstractProcessor
     /**
      * Set the field.
      *
-     * @param string $field
-     *
      * @return $this
      */
     public function setField(string $field): self
@@ -37,8 +32,6 @@ class Join extends AbstractProcessor
 
     /**
      * Set the separator.
-     *
-     * @param string $separator
      *
      * @return $this
      */

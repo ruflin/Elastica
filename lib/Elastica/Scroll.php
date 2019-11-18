@@ -45,7 +45,6 @@ class Scroll implements \Iterator
     /**
      * Constructor.
      *
-     * @param Search $search
      * @param string $expiryTime
      */
     public function __construct(Search $search, $expiryTime = '1m')
@@ -153,8 +152,6 @@ class Scroll implements \Iterator
 
     /**
      * Prepares Scroll for next request.
-     *
-     * @param ResultSet $resultSet
      */
     protected function _setScrollId(ResultSet $resultSet)
     {

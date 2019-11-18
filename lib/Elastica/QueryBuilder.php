@@ -42,7 +42,6 @@ class QueryBuilder
      * Returns Facade for custom DSL object.
      *
      * @param $dsl
-     * @param array $arguments
      *
      * @throws QueryBuilderException
      *
@@ -59,8 +58,6 @@ class QueryBuilder
 
     /**
      * Adds a new DSL object.
-     *
-     * @param DSL $dsl
      */
     public function addDSL(DSL $dsl)
     {

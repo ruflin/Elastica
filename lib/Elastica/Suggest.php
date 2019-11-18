@@ -37,8 +37,6 @@ class Suggest extends Param
     /**
      * Add a suggestion to this suggest clause.
      *
-     * @param AbstractSuggest $suggestion
-     *
      * @return $this
      */
     public function addSuggestion(AbstractSuggest $suggestion)
