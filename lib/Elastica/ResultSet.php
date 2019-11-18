@@ -161,6 +161,16 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     }
 
     /**
+     * Returns the total number relation of found hits.
+     */
+    public function getTotalHitsRelation(): string
+    {
+        $data = $this->_response->getData();
+
+        return $data['hits']['total']['relation'] ?? 'eq';
+    }
+
+    /**
      * Returns the max score of the results found.
      *
      * @return float Max Score

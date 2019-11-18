@@ -27,6 +27,7 @@ class ResultSetTest extends BaseTest
 
         $this->assertInstanceOf(ResultSet::class, $resultSet);
         $this->assertEquals(3, $resultSet->getTotalHits());
+        $this->assertEquals('eq', $resultSet->getTotalHitsRelation());
         $this->assertGreaterThan(0, $resultSet->getMaxScore());
         $this->assertNotTrue($resultSet->hasTimedOut());
         $this->assertNotTrue($resultSet->hasAggregations());

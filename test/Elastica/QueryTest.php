@@ -572,13 +572,16 @@ class QueryTest extends BaseTest
 
         $resultSet = $index->search($query);
         $this->assertEquals(50, $resultSet->getTotalHits());
+        $this->assertEquals('eq', $resultSet->getTotalHitsRelation());
 
         $query->setTrackTotalHits(false);
         $resultSet = $index->search($query);
         $this->assertEquals(0, $resultSet->getTotalHits());
+        $this->assertEquals('eq', $resultSet->getTotalHitsRelation());
 
         $query->setTrackTotalHits(25);
         $resultSet = $index->search($query);
         $this->assertEquals(25, $resultSet->getTotalHits());
+        $this->assertEquals('gte', $resultSet->getTotalHitsRelation());
     }
 }
