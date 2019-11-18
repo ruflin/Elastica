@@ -49,8 +49,6 @@ class Search
 
     /**
      * Constructs search object.
-     *
-     * @param MultiBuilderInterface $builder
      */
     public function __construct(Client $client, ?MultiBuilderInterface $builder = null)
     {
@@ -74,8 +72,6 @@ class Search
     }
 
     /**
-     * @param string $key
-     *
      * @return $this
      */
     public function addSearch(BaseSearch $search, ?string $key = null): self

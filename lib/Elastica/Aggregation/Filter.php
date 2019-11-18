@@ -12,9 +12,6 @@ use Elastica\Query\AbstractQuery;
  */
 class Filter extends AbstractAggregation
 {
-    /**
-     * @param AbstractQuery $filter
-     */
     public function __construct(string $name, ?AbstractQuery $filter = null)
     {
         parent::__construct($name);
@@ -29,7 +26,7 @@ class Filter extends AbstractAggregation
      *
      * @return $this
      */
-    public function setFilter(AbstractQuery $filter)
+    public function setFilter(AbstractQuery $filter): self
     {
         return $this->setParam('filter', $filter);
     }

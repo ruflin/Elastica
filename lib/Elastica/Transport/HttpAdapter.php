@@ -29,8 +29,6 @@ class HttpAdapter extends AbstractTransport
 
     /**
      * Construct transport.
-     *
-     * @param Connection $connection
      */
     public function __construct(?Connection $connection = null, HttpAdapterInterface $httpAdapter)
     {
@@ -48,8 +46,6 @@ class HttpAdapter extends AbstractTransport
      * @throws \Elastica\Exception\ConnectionException
      * @throws \Elastica\Exception\ResponseException
      * @throws \Elastica\Exception\Connection\HttpException
-     *
-     * @return \Elastica\Response Response object
      */
     public function exec(ElasticaRequest $elasticaRequest, array $params): Response
     {

@@ -55,8 +55,6 @@ class SerialDiff extends AbstractAggregation
     /**
      * Set the format for this aggregation.
      *
-     * @param string $format
-     *
      * @return $this
      */
     public function setFormat(?string $format = null): self

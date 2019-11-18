@@ -77,9 +77,6 @@ class Search
 
     /**
      * Constructs search object.
-     *
-     * @param \Elastica\Client $client  Client object
-     * @param BuilderInterface $builder
      */
     public function __construct(Client $client, ?BuilderInterface $builder = null)
     {
@@ -441,12 +438,8 @@ class Search
      * Returns the Scroll Iterator.
      *
      * @see Scroll
-     *
-     * @param string $expiryTime
-     *
-     * @return Scroll
      */
-    public function scroll($expiryTime = '1m')
+    public function scroll(string $expiryTime = '1m'): Scroll
     {
         return new Scroll($this, $expiryTime);
     }

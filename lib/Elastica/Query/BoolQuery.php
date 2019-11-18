@@ -52,8 +52,6 @@ class BoolQuery extends AbstractQuery
     /**
      * Sets the filter.
      *
-     * @param AbstractQuery $filter Filter object
-     *
      * @return $this
      */
     public function addFilter(AbstractQuery $filter): self

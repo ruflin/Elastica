@@ -27,7 +27,7 @@ class ReverseNested extends AbstractAggregation
      *
      * @return $this
      */
-    public function setPath(string $path)
+    public function setPath(string $path): self
     {
         return $this->setParam('path', $path);
     }

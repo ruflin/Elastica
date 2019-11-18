@@ -118,8 +118,6 @@ class Bulk
     }
 
     /**
-     * @param string $opType
-     *
      * @return $this
      */
     public function addDocument(Document $document, ?string $opType = null): self
@@ -131,7 +129,6 @@ class Bulk
 
     /**
      * @param Document[] $documents
-     * @param string     $opType
      *
      * @return $this
      */
@@ -145,8 +142,6 @@ class Bulk
     }
 
     /**
-     * @param string $opType
-     *
      * @return $this
      */
     public function addScript(AbstractScript $script, ?string $opType = null): self
@@ -158,7 +153,6 @@ class Bulk
 
     /**
      * @param Document[] $scripts
-     * @param string     $opType
      *
      * @return $this
      */
@@ -173,7 +167,6 @@ class Bulk
 
     /**
      * @param \Elastica\Script\AbstractScript|\Elastica\Document|array $data
-     * @param string                                                   $opType
      *
      * @return $this
      */

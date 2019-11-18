@@ -70,8 +70,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html
      *
-     * @param string $field
-     * @param mixed  $values
+     * @param mixed $values
      */
     public function match(?string $field = null, $values = null): Match
     {
@@ -155,8 +154,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html
      *
-     * @param string $fieldName Field name
-     * @param string $value     String to search for
+     * @param string $value String to search for
      */
     public function fuzzy(?string $fieldName = null, ?string $value = null): Fuzzy
     {
@@ -266,7 +264,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase.html
      */
-    public function match_phrase(string $field = null, $values = null): MatchPhrase
+    public function match_phrase(?string $field = null, $values = null): MatchPhrase
     {
         return new MatchPhrase($field, $values);
     }
@@ -276,7 +274,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase-prefix.html
      */
-    public function match_phrase_prefix(string $field = null, $values = null): MatchPhrasePrefix
+    public function match_phrase_prefix(?string $field = null, $values = null): MatchPhrasePrefix
     {
         return new MatchPhrasePrefix($field, $values);
     }
@@ -303,8 +301,6 @@ class Query implements DSL
 
     /**
      * @param int|string $id
-     *
-     * @return ParentId ParentId
      */
     public function parent_id(string $type, $id, bool $ignoreUnmapped = false): ParentId
     {
@@ -349,8 +345,6 @@ class Query implements DSL
      * range query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html
-     *
-     * @param string $fieldName
      */
     public function range(?string $fieldName = null, array $args = []): Range
     {
@@ -359,8 +353,6 @@ class Query implements DSL
 
     /**
      * regexp query.
-     *
-     * @param string $value
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html
      */
@@ -373,7 +365,6 @@ class Query implements DSL
      * span first query.
      *
      * @param AbstractQuery|array $match
-     * @param int                 $end
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-first-query.html
      */
@@ -479,9 +470,9 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html
      *
-     * @param string $key   OPTIONAL Wildcard key
-     * @param string $value OPTIONAL Wildcard value
-     * @param float  $boost OPTIONAL Boost value (default = 1)
+     * @param string      $key   OPTIONAL Wildcard key
+     * @param string|null $value OPTIONAL Wildcard value
+     * @param float       $boost OPTIONAL Boost value (default = 1)
      */
     public function wildcard(string $key = '', ?string $value = null, float $boost = 1.0): Wildcard
     {

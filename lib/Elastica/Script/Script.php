@@ -29,10 +29,7 @@ class Script extends AbstractScript
         $this->setScript($scriptCode);
     }
 
-    /**
-     * @return $this
-     */
-    public function setScript(string $scriptCode): Script
+    public function setScript(string $scriptCode): self
     {
         $this->_scriptCode = $scriptCode;
 

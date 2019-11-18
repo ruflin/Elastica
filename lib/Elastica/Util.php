@@ -198,11 +198,9 @@ class Util
      *
      * Converts it to the lucene format, including the appropriate TimeZone
      *
-     * @param bool $includeTimezone
-     *
      * @return string
      */
-    public static function convertDateTimeObject(\DateTime $dateTime, $includeTimezone = true)
+    public static function convertDateTimeObject(\DateTime $dateTime, bool $includeTimezone = true)
     {
         $formatString = 'Y-m-d\TH:i:s'.(true === $includeTimezone ? 'P' : '\Z');
         $string = $dateTime->format($formatString);

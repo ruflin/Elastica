@@ -9,12 +9,8 @@ class BasePipeline extends BaseTest
 {
     /**
      * Create Pipeline object.
-     *
-     * @param string $id
-     *
-     * @return Pipeline
      */
-    protected function _createPipeline(?string $id = null, string $description = '')
+    protected function _createPipeline(?string $id = null, string $description = ''): Pipeline
     {
         if (\is_null($id)) {
             $id = \preg_replace('/[^a-z]/i', '', \strtolower(\get_called_class()).\uniqid());
