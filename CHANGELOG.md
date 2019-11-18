@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Added
 
+* Added `geo_bounding_box`, `geo_polygon`, `match_phrase`, `match_phrase_prefix`, `match_none` to `\Elastica\QueryBuilder\Version\Version700` [#1702](https://github.com/ruflin/Elastica/pull/1702)
 * Added `\Elastica\ResultSet::getTotalHitsRelation()` to get relation for total hits [#1694](https://github.com/ruflin/Elastica/pull/1694)
 * Added `Sampler` aggregation [#1688](https://github.com/ruflin/Elastica/pull/1688)
 
