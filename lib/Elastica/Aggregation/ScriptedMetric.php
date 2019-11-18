@@ -18,10 +18,10 @@ class ScriptedMetric extends AbstractAggregation
      */
     public function __construct(
         string $name,
-        string $initScript = null,
-        string $mapScript = null,
-        string $combineScript = null,
-        string $reduceScript = null
+        ?string $initScript = null,
+        ?string $mapScript = null,
+        ?string $combineScript = null,
+        ?string $reduceScript = null
     ) {
         parent::__construct($name);
         if ($initScript) {

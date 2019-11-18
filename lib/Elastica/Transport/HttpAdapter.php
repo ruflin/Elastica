@@ -32,7 +32,7 @@ class HttpAdapter extends AbstractTransport
      *
      * @param Connection $connection
      */
-    public function __construct(Connection $connection = null, HttpAdapterInterface $httpAdapter)
+    public function __construct(?Connection $connection = null, HttpAdapterInterface $httpAdapter)
     {
         parent::__construct($connection);
         $this->httpAdapter = $httpAdapter;

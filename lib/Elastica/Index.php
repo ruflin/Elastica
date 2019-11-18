@@ -462,7 +462,7 @@ class Index implements SearchableInterface
      *
      * @return Search
      */
-    public function createSearch($query = '', $options = null, BuilderInterface $builder = null)
+    public function createSearch($query = '', $options = null, ?BuilderInterface $builder = null)
     {
         $search = new Search($this->getClient(), $builder);
         $search->addIndex($this);

@@ -15,7 +15,7 @@ class Suggest extends Param
     /**
      * @param AbstractSuggest $suggestion
      */
-    public function __construct(AbstractSuggest $suggestion = null)
+    public function __construct(?AbstractSuggest $suggestion = null)
     {
         if (!\is_null($suggestion)) {
             $this->addSuggestion($suggestion);

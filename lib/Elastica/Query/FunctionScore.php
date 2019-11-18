@@ -73,8 +73,8 @@ class FunctionScore extends AbstractQuery
     public function addFunction(
         string $functionType,
         $functionParams,
-        AbstractQuery $filter = null,
-        float $weight = null
+        ?AbstractQuery $filter = null,
+        ?float $weight = null
     ): self {
         $function = [
             $functionType => $functionParams,
@@ -102,7 +102,7 @@ class FunctionScore extends AbstractQuery
      *
      * @return $this
      */
-    public function addScriptScoreFunction(AbstractScript $script, AbstractQuery $filter = null, float $weight = null)
+    public function addScriptScoreFunction(AbstractScript $script, ?AbstractQuery $filter = null, ?float $weight = null)
     {
         return $this->addFunction('script_score', $script, $filter, $weight);
     }
@@ -127,11 +127,11 @@ class FunctionScore extends AbstractQuery
         string $field,
         string $origin,
         string $scale,
-        string $offset = null,
-        float $decay = null,
-        float $weight = null,
-        AbstractQuery $filter = null,
-        string $multiValueMode = null
+        ?string $offset = null,
+        ?float $decay = null,
+        ?float $weight = null,
+        ?AbstractQuery $filter = null,
+        ?string $multiValueMode = null
     ) {
         $functionParams = [
             $field => [
@@ -158,11 +158,11 @@ class FunctionScore extends AbstractQuery
      */
     public function addFieldValueFactorFunction(
         string $field,
-        float $factor = null,
-        string $modifier = null,
-        float $missing = null,
-        float $weight = null,
-        AbstractQuery $filter = null
+        ?float $factor = null,
+        ?string $modifier = null,
+        ?float $missing = null,
+        ?float $weight = null,
+        ?AbstractQuery $filter = null
     ): self {
         $functionParams = [
             'field' => $field,
@@ -189,7 +189,7 @@ class FunctionScore extends AbstractQuery
      *
      * @return $this
      */
-    public function addWeightFunction(float $weight, AbstractQuery $filter = null): self
+    public function addWeightFunction(float $weight, ?AbstractQuery $filter = null): self
     {
         return $this->addFunction('weight', $weight, $filter);
     }
@@ -206,9 +206,9 @@ class FunctionScore extends AbstractQuery
      */
     public function addRandomScoreFunction(
         int $seed,
-        AbstractQuery $filter = null,
-        float $weight = null,
-        string $field = null
+        ?AbstractQuery $filter = null,
+        ?float $weight = null,
+        ?string $field = null
     ): self {
         $functionParams = [
             'seed' => $seed,
@@ -260,7 +260,7 @@ class FunctionScore extends AbstractQuery
      *
      * @return $this
      */
-    public function setRandomScore(int $seed = null): self
+    public function setRandomScore(?int $seed = null): self
     {
         $seedParam = new \stdClass();
         if (null !== $seed) {

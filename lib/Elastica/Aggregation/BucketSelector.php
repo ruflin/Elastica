@@ -9,7 +9,7 @@ namespace Elastica\Aggregation;
  */
 class BucketSelector extends AbstractSimpleAggregation
 {
-    public function __construct(string $name, array $bucketsPath = null, string $script = null)
+    public function __construct(string $name, ?array $bucketsPath = null, ?string $script = null)
     {
         parent::__construct($name);
 

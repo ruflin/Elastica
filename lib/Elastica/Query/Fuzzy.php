@@ -19,7 +19,7 @@ class Fuzzy extends AbstractQuery
      * @param string $fieldName Field name
      * @param string $value     String to search for
      */
-    public function __construct(string $fieldName = null, string $value = null)
+    public function __construct(?string $fieldName = null, ?string $value = null)
     {
         if (null !== $fieldName && null !== $value) {
             $this->setField($fieldName, $value);

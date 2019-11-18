@@ -52,7 +52,7 @@ class Search
      *
      * @param MultiBuilderInterface $builder
      */
-    public function __construct(Client $client, MultiBuilderInterface $builder = null)
+    public function __construct(Client $client, ?MultiBuilderInterface $builder = null)
     {
         $this->_builder = $builder ?? new MultiBuilder();
         $this->_client = $client;
@@ -78,7 +78,7 @@ class Search
      *
      * @return $this
      */
-    public function addSearch(BaseSearch $search, string $key = null): self
+    public function addSearch(BaseSearch $search, ?string $key = null): self
     {
         if ($key) {
             $this->_searches[$key] = $search;

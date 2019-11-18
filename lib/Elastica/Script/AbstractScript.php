@@ -87,7 +87,7 @@ abstract class AbstractScript extends AbstractUpdateAction
      * @param string|null $lang       Script language, see constants
      * @param string|null $documentId Document ID the script action should be performed on (only relevant in update context)
      */
-    public function __construct(array $params = null, string $lang = null, string $documentId = null)
+    public function __construct(?array $params = null, ?string $lang = null, ?string $documentId = null)
     {
         if ($params) {
             $this->setParams($params);

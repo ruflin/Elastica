@@ -43,7 +43,7 @@ class IpRange extends AbstractAggregation
      *
      * @return $this
      */
-    public function addRange(string $fromValue = null, string $toValue = null): self
+    public function addRange(?string $fromValue = null, ?string $toValue = null): self
     {
         if (null === $fromValue && null === $toValue) {
             throw new InvalidException('Either fromValue or toValue must be set. Both cannot be null.');

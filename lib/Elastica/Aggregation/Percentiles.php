@@ -13,7 +13,7 @@ class Percentiles extends AbstractSimpleAggregation
      * @param string $name  the name of this aggregation
      * @param string $field the field on which to perform this aggregation
      */
-    public function __construct(string $name, string $field = null)
+    public function __construct(string $name, ?string $field = null)
     {
         parent::__construct($name);
 

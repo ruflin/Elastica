@@ -33,7 +33,7 @@ class ConnectionPool
     /**
      * @param callback|null $callback
      */
-    public function __construct(array $connections, StrategyInterface $strategy, callable $callback = null)
+    public function __construct(array $connections, StrategyInterface $strategy, ?callable $callback = null)
     {
         $this->_connections = $connections;
 

@@ -73,7 +73,7 @@ class Query implements DSL
      * @param string $field
      * @param mixed  $values
      */
-    public function match(string $field = null, $values = null): Match
+    public function match(?string $field = null, $values = null): Match
     {
         return new Match($field, $values);
     }
@@ -125,7 +125,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-constant-score-query.html
      */
-    public function constant_score(AbstractQuery $filter = null): ConstantScore
+    public function constant_score(?AbstractQuery $filter = null): ConstantScore
     {
         return new ConstantScore($filter);
     }
@@ -158,7 +158,7 @@ class Query implements DSL
      * @param string $fieldName Field name
      * @param string $value     String to search for
      */
-    public function fuzzy(string $fieldName = null, string $value = null): Fuzzy
+    public function fuzzy(?string $fieldName = null, ?string $value = null): Fuzzy
     {
         return new Fuzzy($fieldName, $value);
     }
@@ -213,7 +213,7 @@ class Query implements DSL
      * @param string|BaseQuery|AbstractQuery $query
      * @param string                         $type  Parent document type
      */
-    public function has_child($query, string $type = null): HasChild
+    public function has_child($query, ?string $type = null): HasChild
     {
         return new HasChild($query, $type);
     }
@@ -352,7 +352,7 @@ class Query implements DSL
      *
      * @param string $fieldName
      */
-    public function range(string $fieldName = null, array $args = []): Range
+    public function range(?string $fieldName = null, array $args = []): Range
     {
         return new Range($fieldName, $args);
     }
@@ -364,7 +364,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html
      */
-    public function regexp(string $key = '', string $value = null, float $boost = 1.0): Regexp
+    public function regexp(string $key = '', ?string $value = null, float $boost = 1.0): Regexp
     {
         return new Regexp($key, $value, $boost);
     }
@@ -377,7 +377,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-first-query.html
      */
-    public function span_first($match = null, int $end = null): SpanFirst
+    public function span_first($match = null, ?int $end = null): SpanFirst
     {
         return new SpanFirst($match, $end);
     }
@@ -409,7 +409,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-not-query.html
      */
-    public function span_not(AbstractSpanQuery $include = null, AbstractSpanQuery $exclude = null): SpanNot
+    public function span_not(?AbstractSpanQuery $include = null, ?AbstractSpanQuery $exclude = null): SpanNot
     {
         return new SpanNot($include, $exclude);
     }
@@ -439,7 +439,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-containing-query.html
      */
-    public function span_containing(AbstractSpanQuery $little = null, AbstractSpanQuery $big = null): SpanContaining
+    public function span_containing(?AbstractSpanQuery $little = null, ?AbstractSpanQuery $big = null): SpanContaining
     {
         return new SpanContaining($little, $big);
     }
@@ -449,7 +449,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-within-query.html
      */
-    public function span_within(AbstractSpanQuery $little = null, AbstractSpanQuery $big = null): SpanWithin
+    public function span_within(?AbstractSpanQuery $little = null, ?AbstractSpanQuery $big = null): SpanWithin
     {
         return new SpanWithin($little, $big);
     }
@@ -483,7 +483,7 @@ class Query implements DSL
      * @param string $value OPTIONAL Wildcard value
      * @param float  $boost OPTIONAL Boost value (default = 1)
      */
-    public function wildcard(string $key = '', string $value = null, float $boost = 1.0): Wildcard
+    public function wildcard(string $key = '', ?string $value = null, float $boost = 1.0): Wildcard
     {
         return new Wildcard($key, $value, $boost);
     }

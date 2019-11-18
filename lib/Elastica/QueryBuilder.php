@@ -27,7 +27,7 @@ class QueryBuilder
     /**
      * Constructor.
      */
-    public function __construct(Version $version = null)
+    public function __construct(?Version $version = null)
     {
         $this->_version = $version ?? new Version\Latest();
 

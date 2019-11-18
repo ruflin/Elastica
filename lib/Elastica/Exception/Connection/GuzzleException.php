@@ -23,7 +23,7 @@ class GuzzleException extends ConnectionException
     /**
      * @param Request $request
      */
-    public function __construct(TransferException $guzzleException, Request $request = null, Response $response = null)
+    public function __construct(TransferException $guzzleException, ?Request $request = null, ?Response $response = null)
     {
         $this->_guzzleException = $guzzleException;
         $message = $this->getErrorMessage($this->getGuzzleException());

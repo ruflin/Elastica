@@ -175,7 +175,7 @@ class Action
         return $string;
     }
 
-    public static function isValidOpType(string $opType = null): bool
+    public static function isValidOpType(?string $opType = null): bool
     {
         return \in_array($opType, self::$opTypes, true);
     }

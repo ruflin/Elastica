@@ -64,7 +64,7 @@ class Client
      *
      * @throws \Elastica\Exception\InvalidException
      */
-    public function __construct($config = [], callable $callback = null, LoggerInterface $logger = null)
+    public function __construct($config = [], ?callable $callback = null, ?LoggerInterface $logger = null)
     {
         if (\is_string($config)) {
             $configuration = ClientConfiguration::fromDsn($config);

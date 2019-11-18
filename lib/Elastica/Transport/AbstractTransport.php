@@ -25,7 +25,7 @@ abstract class AbstractTransport extends Param
      *
      * @param Connection $connection Connection object
      */
-    public function __construct(Connection $connection = null)
+    public function __construct(?Connection $connection = null)
     {
         if ($connection) {
             $this->setConnection($connection);

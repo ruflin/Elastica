@@ -62,7 +62,7 @@ class GeoDistance extends AbstractAggregation
      *
      * @return $this
      */
-    public function addRange(int $fromValue = null, int $toValue = null): self
+    public function addRange(?int $fromValue = null, ?int $toValue = null): self
     {
         if (null === $fromValue && null === $toValue) {
             throw new InvalidException('Either fromValue or toValue must be set. Both cannot be null.');

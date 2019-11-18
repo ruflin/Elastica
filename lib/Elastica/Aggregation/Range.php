@@ -22,7 +22,7 @@ class Range extends AbstractSimpleAggregation
      *
      * @return $this
      */
-    public function addRange($fromValue = null, $toValue = null, string $key = null)
+    public function addRange($fromValue = null, $toValue = null, ?string $key = null)
     {
         if (null === $fromValue && null === $toValue) {
             throw new InvalidException('Either fromValue or toValue must be set. Both cannot be null.');

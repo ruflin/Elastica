@@ -64,7 +64,7 @@ class Base extends TestCase
      *
      * @return Client
      */
-    protected function _getClient(array $params = [], $callback = null, LoggerInterface $logger = null)
+    protected function _getClient(array $params = [], $callback = null, ?LoggerInterface $logger = null)
     {
         $config = [
             'host' => $this->_getHost(),
@@ -112,7 +112,7 @@ class Base extends TestCase
         return 'http://'.$proxyHost.':12346';
     }
 
-    protected function _createIndex(string $name = null, bool $delete = true, int $shards = 1): Index
+    protected function _createIndex(?string $name = null, bool $delete = true, int $shards = 1): Index
     {
         if (null === $name) {
             $name = \preg_replace('/[^a-z]/i', '', \strtolower(\get_called_class()).\uniqid());

@@ -29,7 +29,7 @@ class Filters extends AbstractAggregation
      *
      * @return $this
      */
-    public function addFilter(AbstractQuery $filter, string $name = null): self
+    public function addFilter(AbstractQuery $filter, ?string $name = null): self
     {
         $filterArray = [];
 

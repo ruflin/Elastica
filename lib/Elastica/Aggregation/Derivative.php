@@ -11,7 +11,7 @@ use Elastica\Exception\InvalidException;
  */
 class Derivative extends AbstractAggregation
 {
-    public function __construct(string $name, string $bucketsPath = null)
+    public function __construct(string $name, ?string $bucketsPath = null)
     {
         parent::__construct($name);
 

@@ -18,7 +18,7 @@ class Wildcard extends AbstractQuery
      * @param string $value OPTIONAL Wildcard value
      * @param float  $boost OPTIONAL Boost value (default = 1)
      */
-    public function __construct(string $key = '', string $value = null, float $boost = 1.0)
+    public function __construct(string $key = '', ?string $value = null, float $boost = 1.0)
     {
         if (!empty($key)) {
             $this->setValue($key, $value, $boost);
