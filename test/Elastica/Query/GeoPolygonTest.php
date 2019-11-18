@@ -46,6 +46,7 @@ class GeoPolygonTest extends BaseTest
         // Only one point should be in polygon
         $points = [[16, 16], [16, 20], [20, 20], [20, 16], [16, 16]];
         $geoQuery = new GeoPolygon('location', $points);
+        $this->assertCount(\count($points), $geoQuery);
 
         $query = new Query(new MatchAll());
         $query->setPostFilter($geoQuery);
