@@ -26,12 +26,10 @@ class QueryBuilder
 
     /**
      * Constructor.
-     *
-     * @param Version $version
      */
     public function __construct(Version $version = null)
     {
-        $this->_version = $version ?: new Version\Latest();
+        $this->_version = $version ?? new Version\Latest();
 
         $this->addDSL(new DSL\Query());
         $this->addDSL(new DSL\Aggregation());
@@ -41,13 +39,9 @@ class QueryBuilder
     /**
      * Returns Facade for custom DSL object.
      *
-     * @param $dsl
-     *
      * @throws QueryBuilderException
-     *
-     * @return Facade
      */
-    public function __call($dsl, array $arguments)
+    public function __call(string $dsl, array $arguments): Facade
     {
         if (false === isset($this->_facades[$dsl])) {
             throw new QueryBuilderException('DSL "'.$dsl.'" not supported');

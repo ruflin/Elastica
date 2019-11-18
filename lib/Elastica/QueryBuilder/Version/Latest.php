@@ -11,7 +11,7 @@ namespace Elastica\QueryBuilder\Version;
  *
  * @author Manuel Andreo Garcia <andreo.garcia@gmail.com>
  */
-class Latest extends Version240
+class Latest extends Version700
 {
     // this class always points to the latest valid DSL version
 }

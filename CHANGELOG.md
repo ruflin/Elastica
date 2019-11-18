@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Backward Compatibility Breaks
 * The class `\Elastica\Type\Mapping` has been moved to `\Elastica\Mapping` [#1666](https://github.com/ruflin/Elastica/pull/1666)
+* The class `\Elastica\QueryBuilder\Version\Version240` has been moved to `\Elastica\QueryBuilder\Version\Version700` and type query was removed [#1693](https://github.com/ruflin/Elastica/pull/1693)
 * The `\Elastica\Query::$_suggest` property has been renamed to `$hasSuggest` and is now private, it should not be used from extending classes [#1679](https://github.com/ruflin/Elastica/pull/1679)
 * `\Elastica\Document` expects a string as ID, not an int [#1672](https://github.com/ruflin/Elastica/pull/1672).
 * Removed `\Elastica\Query\GeohashCell` query, use `\Elastica\Query\GeoBoundingBox` instead [#1672](https://github.com/ruflin/Elastica/pull/1672).

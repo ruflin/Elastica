@@ -5,13 +5,13 @@ namespace Elastica\QueryBuilder\Version;
 use Elastica\QueryBuilder\Version;
 
 /**
- * elasticsearch 2.4 DSL.
+ * elasticsearch 7.0 DSL.
  *
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/2.4/index.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/7.0/index.html
  *
  * @author Cariou Pierre-Yves <cariou.p@gmail.com>
  */
-class Version240 extends Version
+class Version700 extends Version
 {
     protected $queries = [
         'match',
