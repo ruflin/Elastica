@@ -75,7 +75,7 @@ class Term extends AbstractSuggest
      */
     public function setPrefixLength(int $length = 1): Term
     {
-        return $this->setParam('prefix_len', $length);
+        return $this->setParam('prefix_length', $length);
     }
 
     /**
