@@ -11,7 +11,7 @@ use Elastica\Exception\InvalidException;
  */
 class BucketScript extends AbstractAggregation
 {
-    public function __construct(string $name, array $bucketsPath = null, string $script = null)
+    public function __construct(string $name, ?array $bucketsPath = null, ?string $script = null)
     {
         parent::__construct($name);
 
@@ -59,7 +59,7 @@ class BucketScript extends AbstractAggregation
      *
      * @return $this
      */
-    public function setFormat(string $format = null): self
+    public function setFormat(?string $format = null): self
     {
         return $this->setParam('format', $format);
     }

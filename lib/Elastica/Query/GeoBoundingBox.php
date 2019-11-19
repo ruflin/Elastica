@@ -16,8 +16,7 @@ class GeoBoundingBox extends AbstractQuery
     /**
      * Construct BoundingBoxQuery.
      *
-     * @param string $key         Key
-     * @param array  $coordinates Array with top left coordinate as first and bottom right coordinate as second element
+     * @param array $coordinates Array with top left coordinate as first and bottom right coordinate as second element
      */
     public function __construct(string $key, array $coordinates)
     {
@@ -27,8 +26,7 @@ class GeoBoundingBox extends AbstractQuery
     /**
      * Add coordinates.
      *
-     * @param string $key         Key
-     * @param array  $coordinates Array with top left coordinate as first and bottom right coordinate as second element
+     * @param array $coordinates Array with top left coordinate as first and bottom right coordinate as second element
      *
      * @throws \Elastica\Exception\InvalidException If $coordinates doesn't have two elements
      *

@@ -26,19 +26,14 @@ class ConnectionPool
     protected $_strategy;
 
     /**
-     * @var callable Function called on connection fail
+     * @var callable|null Function called on connection fail
      */
     protected $_callback;
 
-    /**
-     * @param callback|null $callback
-     */
-    public function __construct(array $connections, StrategyInterface $strategy, callable $callback = null)
+    public function __construct(array $connections, StrategyInterface $strategy, ?callable $callback = null)
     {
         $this->_connections = $connections;
-
         $this->_strategy = $strategy;
-
         $this->_callback = $callback;
     }
 

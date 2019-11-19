@@ -9,7 +9,7 @@ namespace Elastica\Aggregation;
  */
 class BucketSelector extends AbstractSimpleAggregation
 {
-    public function __construct(string $name, array $bucketsPath = null, string $script = null)
+    public function __construct(string $name, ?array $bucketsPath = null, ?string $script = null)
     {
         parent::__construct($name);
 
@@ -25,11 +25,9 @@ class BucketSelector extends AbstractSimpleAggregation
     /**
      * Set the buckets_path for this aggregation.
      *
-     * @param array $bucketsPath
-     *
      * @return $this
      */
-    public function setBucketsPath($bucketsPath)
+    public function setBucketsPath(array $bucketsPath): self
     {
         return $this->setParam('buckets_path', $bucketsPath);
     }
@@ -39,7 +37,7 @@ class BucketSelector extends AbstractSimpleAggregation
      *
      * @return $this
      */
-    public function setGapPolicy(string $gapPolicy = 'skip')
+    public function setGapPolicy(string $gapPolicy = 'skip'): self
     {
         return $this->setParam('gap_policy', $gapPolicy);
     }

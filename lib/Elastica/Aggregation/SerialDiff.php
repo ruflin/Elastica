@@ -13,7 +13,7 @@ class SerialDiff extends AbstractAggregation
 {
     const DEFAULT_GAP_POLICY_VALUE = 'insert_zero';
 
-    public function __construct(string $name, string $bucketsPath = null)
+    public function __construct(string $name, ?string $bucketsPath = null)
     {
         parent::__construct($name);
 
@@ -55,11 +55,9 @@ class SerialDiff extends AbstractAggregation
     /**
      * Set the format for this aggregation.
      *
-     * @param string $format
-     *
      * @return $this
      */
-    public function setFormat(string $format = null): self
+    public function setFormat(?string $format = null): self
     {
         return $this->setParam('format', $format);
     }

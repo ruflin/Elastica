@@ -22,17 +22,14 @@ class Script extends AbstractScript
      * @param string      $scriptCode Script source code
      * @param string|null $documentId Document ID the script action should be performed on (only relevant in update context)
      */
-    public function __construct(string $scriptCode, array $params = null, string $lang = null, string $documentId = null)
+    public function __construct(string $scriptCode, ?array $params = null, ?string $lang = null, ?string $documentId = null)
     {
         parent::__construct($params, $lang, $documentId);
 
         $this->setScript($scriptCode);
     }
 
-    /**
-     * @return $this
-     */
-    public function setScript(string $scriptCode): Script
+    public function setScript(string $scriptCode): self
     {
         $this->_scriptCode = $scriptCode;
 

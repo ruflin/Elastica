@@ -25,7 +25,7 @@ class ConnectionException extends \RuntimeException implements ExceptionInterfac
     /**
      * Construct Exception.
      */
-    public function __construct(string $message, Request $request = null, Response $response = null)
+    public function __construct(string $message, ?Request $request = null, ?Response $response = null)
     {
         $this->_request = $request;
         $this->_response = $response;

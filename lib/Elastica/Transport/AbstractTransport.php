@@ -22,27 +22,20 @@ abstract class AbstractTransport extends Param
 
     /**
      * Construct transport.
-     *
-     * @param Connection $connection Connection object
      */
-    public function __construct(Connection $connection = null)
+    public function __construct(?Connection $connection = null)
     {
         if ($connection) {
             $this->setConnection($connection);
         }
     }
 
-    /**
-     * @return Connection Connection object
-     */
     public function getConnection(): Connection
     {
         return $this->_connection;
     }
 
     /**
-     * @param Connection $connection Connection object
-     *
      * @return $this
      */
     public function setConnection(Connection $connection): AbstractTransport
@@ -57,8 +50,6 @@ abstract class AbstractTransport extends Param
      *
      * @param Request $request Request object
      * @param array   $params  Hostname, port, path, ...
-     *
-     * @return Response Response object
      */
     abstract public function exec(Request $request, array $params): Response;
 

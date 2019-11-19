@@ -57,7 +57,6 @@ abstract class AbstractGeoDistance extends AbstractQuery
     /**
      * Create GeoDistance object.
      *
-     * @param string       $key      Key
      * @param array|string $location Location as array or geohash: array('lat' => 48.86, 'lon' => 2.35) OR 'drm3btev3e86'
      *
      * @internal param string $distance Distance

@@ -25,7 +25,7 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
      *
      * @return $this
      */
-    public function setInclude(string $pattern, string $flags = null): self
+    public function setInclude(string $pattern, ?string $flags = null): self
     {
         if (null === $flags) {
             return $this->setParam('include', $pattern);
@@ -45,7 +45,7 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
      *
      * @return $this
      */
-    public function setExclude(string $pattern, string $flags = null): self
+    public function setExclude(string $pattern, ?string $flags = null): self
     {
         if (null === $flags) {
             return $this->setParam('exclude', $pattern);

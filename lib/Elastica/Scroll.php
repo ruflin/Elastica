@@ -44,10 +44,8 @@ class Scroll implements \Iterator
 
     /**
      * Constructor.
-     *
-     * @param string $expiryTime
      */
-    public function __construct(Search $search, $expiryTime = '1m')
+    public function __construct(Search $search, string $expiryTime = '1m')
     {
         $this->_search = $search;
         $this->expiryTime = $expiryTime;
@@ -57,10 +55,8 @@ class Scroll implements \Iterator
      * Returns current result set.
      *
      * @see http://php.net/manual/en/iterator.current.php
-     *
-     * @return ResultSet
      */
-    public function current()
+    public function current(): ?ResultSet
     {
         return $this->_currentResultSet;
     }
@@ -92,10 +88,8 @@ class Scroll implements \Iterator
      * Returns scroll id.
      *
      * @see http://php.net/manual/en/iterator.key.php
-     *
-     * @return string
      */
-    public function key()
+    public function key(): ?string
     {
         return $this->_nextScrollId;
     }
@@ -104,10 +98,8 @@ class Scroll implements \Iterator
      * Returns true if current result set contains at least one hit.
      *
      * @see http://php.net/manual/en/iterator.valid.php
-     *
-     * @return bool
      */
-    public function valid()
+    public function valid(): bool
     {
         return null !== $this->_nextScrollId;
     }
@@ -117,7 +109,7 @@ class Scroll implements \Iterator
      *
      * @see http://php.net/manual/en/iterator.rewind.php
      */
-    public function rewind()
+    public function rewind(): void
     {
         // reset state
         $this->_options = [null, null];

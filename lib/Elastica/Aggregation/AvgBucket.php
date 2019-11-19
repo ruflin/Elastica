@@ -14,7 +14,7 @@ class AvgBucket extends AbstractAggregation
     const DEFAULT_GAP_POLICY_VALUE = 'skip';
     const DEFAULT_FORMAT_VALUE = null;
 
-    public function __construct(string $name, string $bucketsPath = null)
+    public function __construct(string $name, ?string $bucketsPath = null)
     {
         parent::__construct($name);
 
@@ -48,7 +48,7 @@ class AvgBucket extends AbstractAggregation
      *
      * @return $this
      */
-    public function setFormat(string $format = null): self
+    public function setFormat(?string $format = null): self
     {
         return $this->setParam('format', $format);
     }

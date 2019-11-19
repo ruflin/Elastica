@@ -118,11 +118,9 @@ class Bulk
     }
 
     /**
-     * @param string $opType
-     *
      * @return $this
      */
-    public function addDocument(Document $document, string $opType = null): self
+    public function addDocument(Document $document, ?string $opType = null): self
     {
         $action = AbstractDocumentAction::create($document, $opType);
 
@@ -131,11 +129,10 @@ class Bulk
 
     /**
      * @param Document[] $documents
-     * @param string     $opType
      *
      * @return $this
      */
-    public function addDocuments(array $documents, string $opType = null): self
+    public function addDocuments(array $documents, ?string $opType = null): self
     {
         foreach ($documents as $document) {
             $this->addDocument($document, $opType);
@@ -145,11 +142,9 @@ class Bulk
     }
 
     /**
-     * @param string $opType
-     *
      * @return $this
      */
-    public function addScript(AbstractScript $script, string $opType = null): self
+    public function addScript(AbstractScript $script, ?string $opType = null): self
     {
         $action = AbstractDocumentAction::create($script, $opType);
 
@@ -158,7 +153,6 @@ class Bulk
 
     /**
      * @param Document[] $scripts
-     * @param string     $opType
      *
      * @return $this
      */
@@ -173,11 +167,10 @@ class Bulk
 
     /**
      * @param \Elastica\Script\AbstractScript|\Elastica\Document|array $data
-     * @param string                                                   $opType
      *
      * @return $this
      */
-    public function addData($data, string $opType = null)
+    public function addData($data, ?string $opType = null)
     {
         if (!\is_array($data)) {
             $data = [$data];

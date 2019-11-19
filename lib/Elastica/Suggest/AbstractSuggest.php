@@ -27,7 +27,7 @@ abstract class AbstractSuggest extends Param implements NameableInterface
      *
      * @return $this
      */
-    public function setText(string $text): AbstractSuggest
+    public function setText(string $text): self
     {
         return $this->_setRawParam('text', $text);
     }
@@ -37,7 +37,7 @@ abstract class AbstractSuggest extends Param implements NameableInterface
      *
      * @return $this
      */
-    public function setPrefix(string $prefix): AbstractSuggest
+    public function setPrefix(string $prefix): self
     {
         return $this->_setRawParam('prefix', $prefix);
     }
@@ -47,7 +47,7 @@ abstract class AbstractSuggest extends Param implements NameableInterface
      *
      * @return $this
      */
-    public function setRegex(string $regex): AbstractSuggest
+    public function setRegex(string $regex): self
     {
         return $this->_setRawParam('regex', $regex);
     }
@@ -58,7 +58,7 @@ abstract class AbstractSuggest extends Param implements NameableInterface
      *
      * @return $this
      */
-    public function setRegexOptions(array $value): AbstractSuggest
+    public function setRegexOptions(array $value): self
     {
         return $this->setParam('regex', $value);
     }
@@ -66,7 +66,7 @@ abstract class AbstractSuggest extends Param implements NameableInterface
     /**
      * @return $this
      */
-    public function setField(string $field): AbstractSuggest
+    public function setField(string $field): self
     {
         return $this->setParam('field', $field);
     }
@@ -74,7 +74,7 @@ abstract class AbstractSuggest extends Param implements NameableInterface
     /**
      * @return $this
      */
-    public function setSize(int $size): AbstractSuggest
+    public function setSize(int $size): self
     {
         return $this->setParam('size', $size);
     }
@@ -84,7 +84,7 @@ abstract class AbstractSuggest extends Param implements NameableInterface
      *
      * @return $this
      */
-    public function setShardSize(int $size): AbstractSuggest
+    public function setShardSize(int $size): self
     {
         return $this->setParam('shard_size', $size);
     }
@@ -99,7 +99,7 @@ abstract class AbstractSuggest extends Param implements NameableInterface
      *
      * @return $this
      */
-    public function setName(string $name): AbstractSuggest
+    public function setName(string $name): self
     {
         if (empty($name)) {
             throw new InvalidException('Suggest name has to be set');

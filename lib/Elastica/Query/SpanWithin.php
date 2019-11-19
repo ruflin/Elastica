@@ -17,7 +17,7 @@ class SpanWithin extends AbstractSpanQuery
      * @param AbstractSpanQuery $little
      * @param AbstractSpanQuery $big
      */
-    public function __construct(AbstractSpanQuery $little = null, AbstractSpanQuery $big = null)
+    public function __construct(?AbstractSpanQuery $little = null, ?AbstractSpanQuery $big = null)
     {
         if (null !== $little) {
             $this->setLittle($little);

@@ -17,7 +17,7 @@ class SpanContaining extends AbstractSpanQuery
      * @param AbstractSpanQuery $little OPTIONAL
      * @param AbstractSpanQuery $big    OPTIONAL
      */
-    public function __construct(AbstractSpanQuery $little = null, AbstractSpanQuery $big = null)
+    public function __construct(?AbstractSpanQuery $little = null, ?AbstractSpanQuery $big = null)
     {
         if (null !== $little) {
             $this->setLittle($little);

@@ -16,7 +16,7 @@ class MatchPhrase extends AbstractQuery
      * @param string $field
      * @param mixed  $values
      */
-    public function __construct(string $field = null, $values = null)
+    public function __construct(?string $field = null, $values = null)
     {
         if (null !== $field && null !== $values) {
             $this->setParam($field, $values);

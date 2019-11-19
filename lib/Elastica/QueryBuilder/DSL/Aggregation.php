@@ -90,7 +90,7 @@ class Aggregation implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-sum-bucket-aggregation.html
      */
-    public function sum_bucket(string $name, string $bucketsPath = null): SumBucket
+    public function sum_bucket(string $name, ?string $bucketsPath = null): SumBucket
     {
         return new SumBucket($name, $bucketsPath);
     }
@@ -110,7 +110,7 @@ class Aggregation implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-avg-bucket-aggregation.html
      */
-    public function avg_bucket(string $name, string $bucketsPath = null): AvgBucket
+    public function avg_bucket(string $name, ?string $bucketsPath = null): AvgBucket
     {
         return new AvgBucket($name, $bucketsPath);
     }
@@ -153,7 +153,7 @@ class Aggregation implements DSL
      * @param string $name  the name of this aggregation
      * @param string $field the field on which to perform this aggregation
      */
-    public function percentiles(string $name, string $field = null): Percentiles
+    public function percentiles(string $name, ?string $field = null): Percentiles
     {
         return new Percentiles($name, $field);
     }
@@ -209,10 +209,10 @@ class Aggregation implements DSL
      */
     public function scripted_metric(
         string $name,
-        string $initScript = null,
-        string $mapScript = null,
-        string $combineScript = null,
-        string $reduceScript = null
+        ?string $initScript = null,
+        ?string $mapScript = null,
+        ?string $combineScript = null,
+        ?string $reduceScript = null
     ): ScriptedMetric {
         return new ScriptedMetric($name, $initScript, $mapScript, $combineScript, $reduceScript);
     }
@@ -234,7 +234,7 @@ class Aggregation implements DSL
      *
      * @param AbstractQuery $filter
      */
-    public function filter(string $name, AbstractQuery $filter = null): Filter
+    public function filter(string $name, ?AbstractQuery $filter = null): Filter
     {
         return new Filter($name, $filter);
     }
@@ -279,7 +279,7 @@ class Aggregation implements DSL
      * @param string $name The name of this aggregation
      * @param string $path Optional path to the nested object for this aggregation. Defaults to the root of the main document.
      */
-    public function reverse_nested(string $name, string $path = null): ReverseNested
+    public function reverse_nested(string $name, ?string $path = null): ReverseNested
     {
         return new ReverseNested($name, $path);
     }
@@ -406,7 +406,7 @@ class Aggregation implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-script-aggregation.html
      */
-    public function bucket_script(string $name, array $bucketsPath = null, string $script = null): BucketScript
+    public function bucket_script(string $name, ?array $bucketsPath = null, ?string $script = null): BucketScript
     {
         return new BucketScript($name, $bucketsPath, $script);
     }
@@ -416,7 +416,7 @@ class Aggregation implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-serialdiff-aggregation.html
      */
-    public function serial_diff(string $name, string $bucketsPath = null): SerialDiff
+    public function serial_diff(string $name, ?string $bucketsPath = null): SerialDiff
     {
         return new SerialDiff($name, $bucketsPath);
     }

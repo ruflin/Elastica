@@ -121,7 +121,7 @@ abstract class AbstractDocument extends Action
      *
      * @return static
      */
-    public static function create($data, string $opType = null): self
+    public static function create($data, ?string $opType = null): self
     {
         //Check type
         if (!$data instanceof Document && !$data instanceof AbstractScript) {

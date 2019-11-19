@@ -11,7 +11,7 @@ use Elastica\Exception\InvalidException;
  */
 class Derivative extends AbstractAggregation
 {
-    public function __construct(string $name, string $bucketsPath = null)
+    public function __construct(string $name, ?string $bucketsPath = null)
     {
         parent::__construct($name);
 
@@ -25,7 +25,7 @@ class Derivative extends AbstractAggregation
      *
      * @return $this
      */
-    public function setBucketsPath(string $bucketsPath)
+    public function setBucketsPath(string $bucketsPath): self
     {
         return $this->setParam('buckets_path', $bucketsPath);
     }
@@ -35,7 +35,7 @@ class Derivative extends AbstractAggregation
      *
      * @return $this
      */
-    public function setGapPolicy(string $gapPolicy = 'skip')
+    public function setGapPolicy(string $gapPolicy = 'skip'): self
     {
         return $this->setParam('gap_policy', $gapPolicy);
     }
@@ -45,7 +45,7 @@ class Derivative extends AbstractAggregation
      *
      * @return $this
      */
-    public function setFormat(string $format)
+    public function setFormat(string $format): self
     {
         return $this->setParam('format', $format);
     }

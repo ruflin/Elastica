@@ -27,16 +27,13 @@ class Request extends Param
     /**
      * Construct.
      *
-     * @param string     $path        Request path
-     * @param string     $method      OPTIONAL Request method (use const's) (default = self::GET)
-     * @param array      $data        OPTIONAL Data array
-     * @param array      $query       OPTIONAL Query params
-     * @param Connection $connection
-     * @param string     $contentType Content-Type sent with this request
-     *
-     * @return \Elastica\Request OPTIONAL Connection object
+     * @param string $path        Request path
+     * @param string $method      OPTIONAL Request method (use const's) (default = self::GET)
+     * @param array  $data        OPTIONAL Data array
+     * @param array  $query       OPTIONAL Query params
+     * @param string $contentType Content-Type sent with this request
      */
-    public function __construct($path, $method = self::GET, $data = [], array $query = [], Connection $connection = null, $contentType = self::DEFAULT_CONTENT_TYPE)
+    public function __construct(string $path, string $method = self::GET, $data = [], array $query = [], ?Connection $connection = null, string $contentType = self::DEFAULT_CONTENT_TYPE)
     {
         $this->setPath($path);
         $this->setMethod($method);
@@ -52,21 +49,17 @@ class Request extends Param
     /**
      * Sets the request method. Use one of the for consts.
      *
-     * @param string $method Request method
-     *
      * @return $this
      */
-    public function setMethod($method)
+    public function setMethod(string $method)
     {
         return $this->setParam('method', $method);
     }
 
     /**
      * Get request method.
-     *
-     * @return string Request method
      */
-    public function getMethod()
+    public function getMethod(): string
     {
         return $this->getParam('method');
     }
@@ -96,21 +89,17 @@ class Request extends Param
     /**
      * Sets the request path.
      *
-     * @param string $path Request path
-     *
      * @return $this
      */
-    public function setPath($path)
+    public function setPath(string $path)
     {
         return $this->setParam('path', $path);
     }
 
     /**
      * Return request path.
-     *
-     * @return string Request path
      */
-    public function getPath()
+    public function getPath(): string
     {
         return $this->getParam('path');
     }
@@ -120,7 +109,7 @@ class Request extends Param
      *
      * @return array Query params
      */
-    public function getQuery()
+    public function getQuery(): array
     {
         return $this->getParam('query');
     }
@@ -134,8 +123,6 @@ class Request extends Param
     }
 
     /**
-     * @param \Elastica\Connection $connection
-     *
      * @return $this
      */
     public function setConnection(Connection $connection)
@@ -148,13 +135,11 @@ class Request extends Param
     /**
      * Return Connection Object.
      *
-     * @throws Exception\InvalidException If no valid connection was setted
-     *
-     * @return \Elastica\Connection
+     * @throws Exception\InvalidException If no valid connection was set
      */
-    public function getConnection()
+    public function getConnection(): Connection
     {
-        if (empty($this->_connection)) {
+        if (null === $this->_connection) {
             throw new InvalidException('No valid connection object set');
         }
 
@@ -163,10 +148,8 @@ class Request extends Param
 
     /**
      * Set the Content-Type of this request.
-     *
-     * @param string $contentType
      */
-    public function setContentType($contentType)
+    public function setContentType(string $contentType)
     {
         return $this->setParam('contentType', $contentType);
     }
@@ -174,17 +157,15 @@ class Request extends Param
     /**
      * Get the Content-Type of this request.
      */
-    public function getContentType()
+    public function getContentType(): string
     {
         return $this->getParam('contentType');
     }
 
     /**
      * Sends request to server.
-     *
-     * @return \Elastica\Response Response object
      */
-    public function send()
+    public function send(): Response
     {
         $transport = $this->getConnection()->getTransportObject();
 

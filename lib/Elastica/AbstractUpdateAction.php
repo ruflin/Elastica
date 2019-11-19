@@ -18,7 +18,7 @@ class AbstractUpdateAction extends Param
     /**
      * Sets the id of the document.
      */
-    public function setId(string $id = null): self
+    public function setId(?string $id = null): self
     {
         return $this->setParam('_id', $id);
     }

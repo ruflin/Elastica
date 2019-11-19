@@ -14,7 +14,7 @@ class ConstantScore extends AbstractQuery
     /**
      * Construct constant score query.
      */
-    public function __construct(AbstractQuery $filter = null)
+    public function __construct(?AbstractQuery $filter = null)
     {
         if (null !== $filter) {
             $this->setFilter($filter);

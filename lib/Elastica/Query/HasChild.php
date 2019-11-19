@@ -19,7 +19,7 @@ class HasChild extends AbstractQuery
      * @param string|BaseQuery|AbstractQuery $query
      * @param string                         $type  Parent document type
      */
-    public function __construct($query, string $type = null)
+    public function __construct($query, ?string $type = null)
     {
         $this->setType($type);
         $this->setQuery($query);
@@ -44,7 +44,7 @@ class HasChild extends AbstractQuery
      *
      * @return $this
      */
-    public function setType(string $type = null): self
+    public function setType(?string $type = null): self
     {
         return $this->setParam('type', $type);
     }
