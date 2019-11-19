@@ -241,7 +241,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function countSuggests()
     {
-        return \sizeof($this->getSuggests());
+        return \count($this->getSuggests());
     }
 
     /**

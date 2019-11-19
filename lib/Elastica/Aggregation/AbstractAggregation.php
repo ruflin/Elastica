@@ -132,7 +132,7 @@ abstract class AbstractAggregation extends Param implements NameableInterface
             // compensate for class name GlobalAggregation
             $array = ['global' => new \stdClass()];
         }
-        if (\sizeof($this->_aggs)) {
+        if (\count($this->_aggs)) {
             $array['aggs'] = $this->_convertArrayable($this->_aggs);
         }
 
