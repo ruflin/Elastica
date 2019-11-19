@@ -14,8 +14,6 @@ use Elastica\QueryBuilder\Version;
 class Version700 extends Version
 {
     protected $queries = [
-        'match',
-        'multi_match',
         'bool',
         'boosting',
         'common_terms',
@@ -23,12 +21,20 @@ class Version700 extends Version
         'dis_max',
         'function_score',
         'fuzzy',
+        'geo_bounding_box',
+        'geo_distance',
+        'geo_polygon',
         'geo_shape',
         'has_child',
         'has_parent',
         'ids',
+        'match',
         'match_all',
+        'match_none',
+        'match_phrase',
+        'match_phrase_prefix',
         'more_like_this',
+        'multi_match',
         'nested',
         'parent_id',
         'prefix',
@@ -45,7 +51,6 @@ class Version700 extends Version
         'term',
         'terms',
         'wildcard',
-        'geo_distance',
         'exists',
         'percolate',
     ];
