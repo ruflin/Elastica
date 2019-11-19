@@ -745,7 +745,7 @@ class ClientTest extends BaseTest
         try {
             $client->updateDocument(1, $badDocument, $index->getName());
             $this->fail('Tried to update using an object that is not a Document or a Script but no exception was thrown');
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             //Good. An exception was thrown.
         }
     }

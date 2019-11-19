@@ -19,6 +19,7 @@ env:
     - TARGET="71"
     - TARGET="72"
     - TARGET="73"
+    - TARGET="74"
     - TARGET="Lint"
 
 before_install:
