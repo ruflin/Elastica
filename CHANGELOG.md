@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Bugfixes
 
+* Renamed `\Elastica\Suggest\Term` deprecated option `prefix_len` to `prefix_length` [#1707](https://github.com/ruflin/Elastica/pull/1707)
 * The `\Elastica\Query\GeoPolygon::count()` method now returns the count of points passed to the filter [#1696](https://github.com/ruflin/Elastica/pull/1696)
 * Fix issue in `\Elastica\Client::request()` which causes request data to not be sent to the logger [#1682](https://github.com/ruflin/Elastica/pull/1682)
 
