@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file based on the
 ### Backward Compatibility Breaks
 
 * The class `\Elastica\QueryBuilder\Version\Version240` has been moved to `\Elastica\QueryBuilder\Version\Version700` [#1693](https://github.com/ruflin/Elastica/pull/1693)
+* Dropped support for PHP 7.1
 
 ### Bugfixes
 
