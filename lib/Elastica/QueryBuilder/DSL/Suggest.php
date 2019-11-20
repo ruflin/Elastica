@@ -29,11 +29,8 @@ class Suggest implements DSL
      * term suggester.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-term.html
-     *
-     * @param $name
-     * @param $field
      */
-    public function term($name, $field): Term
+    public function term(string $name, string $field): Term
     {
         return new Term($name, $field);
     }
@@ -42,11 +39,8 @@ class Suggest implements DSL
      * phrase suggester.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-phrase.html
-     *
-     * @param $name
-     * @param $field
      */
-    public function phrase($name, $field): Phrase
+    public function phrase(string $name, string $field): Phrase
     {
         return new Phrase($name, $field);
     }
@@ -55,11 +49,8 @@ class Suggest implements DSL
      * completion suggester.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html
-     *
-     * @param string $name
-     * @param string $field
      */
-    public function completion($name, $field): Completion
+    public function completion(string $name, string $field): Completion
     {
         return new Completion($name, $field);
     }
