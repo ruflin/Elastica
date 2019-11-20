@@ -2,7 +2,6 @@
 
 namespace Elastica\Aggregation;
 
-use Elastica\Exception\InvalidException;
 use Elastica\Query\AbstractQuery;
 
 class AdjacencyMatrix extends AbstractAggregation
