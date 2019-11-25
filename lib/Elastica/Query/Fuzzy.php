@@ -34,9 +34,6 @@ class Fuzzy extends AbstractQuery
      */
     public function setField(string $fieldName, string $value): self
     {
-        if (!\is_string($value) || !\is_string($fieldName)) {
-            throw new InvalidException('The field and value arguments must be of type string.');
-        }
         if (\count($this->getParams()) > 0 && \key($this->getParams()) !== $fieldName) {
             throw new InvalidException('Fuzzy query can only support a single field.');
         }

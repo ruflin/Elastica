@@ -2,7 +2,6 @@
 
 namespace Elastica\Aggregation;
 
-use Elastica\Exception\InvalidException;
 use Elastica\Query\AbstractQuery;
 
 class AdjacencyMatrix extends AbstractAggregation
@@ -10,16 +9,10 @@ class AdjacencyMatrix extends AbstractAggregation
     /**
      * Add a named filter.
      *
-     * @param string $name
-     *
      * @return $this
      */
-    public function addFilter(AbstractQuery $filter, $name): self
+    public function addFilter(AbstractQuery $filter, string $name): self
     {
-        if (!\is_string($name)) {
-            throw new InvalidException('Name must be a string');
-        }
-
         $filterArray = [];
         $filterArray[$name] = $filter;
 

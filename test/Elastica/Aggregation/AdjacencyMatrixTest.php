@@ -5,7 +5,6 @@ namespace Elastica\Test\Aggregation;
 use Elastica\Aggregation\AdjacencyMatrix;
 use Elastica\Aggregation\Avg;
 use Elastica\Document;
-use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\Term;
@@ -66,21 +65,6 @@ class AdjacencyMatrixTest extends BaseAggregationTest
         $agg->addAggregation($avg);
 
         $this->assertEquals($expected, $agg->toArray());
-    }
-
-    /**
-     * @group unit
-     */
-    public function testNonStringNamedFilters()
-    {
-        $this->expectException(InvalidException::class);
-        $this->expectExceptionMessage('Name must be a string');
-
-        $agg = new AdjacencyMatrix('by_color');
-
-        $agg->addFilter(new Term(['color' => '0']), 5);
-        $agg->addFilter(new Term(['color' => '1']), 'A');
-        $agg->addFilter(new Term(['color' => '2']), true);
     }
 
     /**
