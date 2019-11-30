@@ -33,7 +33,7 @@ ENV PATH=/root/composer/vendor/bin:$PATH
 COPY composer.json /root/composer/
 
 RUN composer global remove --no-update phpdocumentor/phpdocumentor -vvv
-RUN composer global require --no-update friendsofphp/php-cs-fixer:^2.14
+RUN composer global require --no-update friendsofphp/php-cs-fixer:~2.16.0
 
 # Install development tools, prefer source removed as automatic fallback now
 RUN composer global install -vvv
