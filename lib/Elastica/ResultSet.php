@@ -45,8 +45,6 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Constructs ResultSet object.
      *
-     * @param Response $response Response object
-     * @param Query    $query    Query object
      * @param Result[] $results
      */
     public function __construct(Response $response, Query $query, $results)
@@ -59,7 +57,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Returns all results.
      *
-     * @return Result[] Results
+     * @return Result[]
      */
     public function getResults()
     {
@@ -69,7 +67,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Returns all Documents.
      *
-     * @return array Documents \Elastica\Document
+     * @return Document[]
      */
     public function getDocuments()
     {
@@ -83,10 +81,8 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
 
     /**
      * Returns true if the response contains suggestion results; false otherwise.
-     *
-     * @return bool
      */
-    public function hasSuggests()
+    public function hasSuggests(): bool
     {
         $data = $this->_response->getData();
 
@@ -98,7 +94,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      *
      * @return array suggest results
      */
-    public function getSuggests()
+    public function getSuggests(): array
     {
         $data = $this->_response->getData();
 
@@ -107,10 +103,8 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
 
     /**
      * Returns whether aggregations exist.
-     *
-     * @return bool Aggregation existence
      */
-    public function hasAggregations()
+    public function hasAggregations(): bool
     {
         $data = $this->_response->getData();
 
@@ -119,10 +113,8 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
 
     /**
      * Returns all aggregation results.
-     *
-     * @return array
      */
-    public function getAggregations()
+    public function getAggregations(): array
     {
         $data = $this->_response->getData();
 
@@ -135,25 +127,22 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      * @param string $name the name of the desired aggregation
      *
      * @throws Exception\InvalidException if an aggregation by the given name cannot be found
-     *
-     * @return array
      */
-    public function getAggregation($name)
+    public function getAggregation(string $name): array
     {
         $data = $this->_response->getData();
 
-        if (isset($data['aggregations']) && isset($data['aggregations'][$name])) {
+        if (isset($data['aggregations'][$name])) {
             return $data['aggregations'][$name];
         }
+
         throw new InvalidException("This result set does not contain an aggregation named {$name}.");
     }
 
     /**
      * Returns the total number of found hits.
-     *
-     * @return int Total hits
      */
-    public function getTotalHits()
+    public function getTotalHits(): int
     {
         $data = $this->_response->getData();
 
@@ -172,10 +161,8 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
 
     /**
      * Returns the max score of the results found.
-     *
-     * @return float Max Score
      */
-    public function getMaxScore()
+    public function getMaxScore(): float
     {
         $data = $this->_response->getData();
 
@@ -184,10 +171,8 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
 
     /**
      * Returns the total number of ms for this search to complete.
-     *
-     * @return int Total time
      */
-    public function getTotalTime()
+    public function getTotalTime(): int
     {
         $data = $this->_response->getData();
 
@@ -196,10 +181,8 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
 
     /**
      * Returns true if the query has timed out.
-     *
-     * @return bool Timed out
      */
-    public function hasTimedOut()
+    public function hasTimedOut(): bool
     {
         $data = $this->_response->getData();
 
@@ -208,38 +191,29 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
 
     /**
      * Returns response object.
-     *
-     * @return Response Response object
      */
-    public function getResponse()
+    public function getResponse(): Response
     {
         return $this->_response;
     }
 
-    /**
-     * @return Query
-     */
-    public function getQuery()
+    public function getQuery(): Query
     {
         return $this->_query;
     }
 
     /**
      * Returns size of current set.
-     *
-     * @return int Size of set
      */
-    public function count()
+    public function count(): int
     {
         return \count($this->_results);
     }
 
     /**
      * Returns size of current suggests.
-     *
-     * @return int Size of suggests
      */
-    public function countSuggests()
+    public function countSuggests(): int
     {
         return \count($this->getSuggests());
     }
@@ -249,7 +223,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      *
      * @return \Elastica\Result Set object
      */
-    public function current()
+    public function current(): Result
     {
         return $this->_results[$this->key()];
     }
@@ -257,7 +231,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Sets pointer (current) to the next item of the set.
      */
-    public function next()
+    public function next(): void
     {
         ++$this->_position;
     }
@@ -267,7 +241,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      *
      * @return int Current position
      */
-    public function key()
+    public function key(): int
     {
         return $this->_position;
     }
@@ -277,7 +251,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      *
      * @return bool True if object exists
      */
-    public function valid()
+    public function valid(): bool
     {
         return isset($this->_results[$this->key()]);
     }
@@ -285,7 +259,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Resets position to 0, restarts iterator.
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->_position = 0;
     }
@@ -296,10 +270,8 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      * @see http://php.net/manual/en/arrayaccess.offsetexists.php
      *
      * @param int $offset
-     *
-     * @return bool true on success or false on failure
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->_results[$offset]);
     }
@@ -312,10 +284,8 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      * @param int $offset
      *
      * @throws Exception\InvalidException If offset doesn't exist
-     *
-     * @return Result
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): Result
     {
         if ($this->offsetExists($offset)) {
             return $this->_results[$offset];
@@ -334,7 +304,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      *
      * @throws Exception\InvalidException
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (!($value instanceof Result)) {
             throw new InvalidException('ResultSet is a collection of Result only.');
@@ -354,7 +324,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      *
      * @param int $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->_results[$offset]);
     }
