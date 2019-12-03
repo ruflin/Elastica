@@ -7,7 +7,7 @@ use Elastica\Test\Base as BaseTest;
 
 class ScriptIdTest extends BaseTest
 {
-    const SCRIPT_ID = 'my_script';
+    private const SCRIPT_ID = 'my_script';
 
     /**
      * @group unit

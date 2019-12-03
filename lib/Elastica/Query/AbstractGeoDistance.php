@@ -13,8 +13,8 @@ use Elastica\Exception\InvalidException;
  */
 abstract class AbstractGeoDistance extends AbstractQuery
 {
-    const LOCATION_TYPE_GEOHASH = 'geohash';
-    const LOCATION_TYPE_LATLON = 'latlon';
+    public const LOCATION_TYPE_GEOHASH = 'geohash';
+    public const LOCATION_TYPE_LATLON = 'latlon';
 
     /**
      * Location type.

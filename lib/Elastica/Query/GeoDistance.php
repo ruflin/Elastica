@@ -11,8 +11,8 @@ namespace Elastica\Query;
  */
 class GeoDistance extends AbstractGeoDistance
 {
-    const DISTANCE_TYPE_ARC = 'arc';
-    const DISTANCE_TYPE_PLANE = 'plane';
+    public const DISTANCE_TYPE_ARC = 'arc';
+    public const DISTANCE_TYPE_PLANE = 'plane';
 
     /**
      * Create GeoDistance object.

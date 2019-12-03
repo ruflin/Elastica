@@ -12,13 +12,13 @@ namespace Elastica\Query;
  */
 class Match extends AbstractQuery
 {
-    const OPERATOR_OR = 'or';
-    const OPERATOR_AND = 'and';
+    public const OPERATOR_OR = 'or';
+    public const OPERATOR_AND = 'and';
 
-    const ZERO_TERM_NONE = 'none';
-    const ZERO_TERM_ALL = 'all';
+    public const ZERO_TERM_NONE = 'none';
+    public const ZERO_TERM_ALL = 'all';
 
-    const FUZZINESS_AUTO = 'AUTO';
+    public const FUZZINESS_AUTO = 'AUTO';
 
     /**
      * @param string $field

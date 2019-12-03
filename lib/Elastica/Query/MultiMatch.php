@@ -13,19 +13,19 @@ namespace Elastica\Query;
  */
 class MultiMatch extends AbstractQuery
 {
-    const TYPE_BEST_FIELDS = 'best_fields';
-    const TYPE_MOST_FIELDS = 'most_fields';
-    const TYPE_CROSS_FIELDS = 'cross_fields';
-    const TYPE_PHRASE = 'phrase';
-    const TYPE_PHRASE_PREFIX = 'phrase_prefix';
+    public const TYPE_BEST_FIELDS = 'best_fields';
+    public const TYPE_MOST_FIELDS = 'most_fields';
+    public const TYPE_CROSS_FIELDS = 'cross_fields';
+    public const TYPE_PHRASE = 'phrase';
+    public const TYPE_PHRASE_PREFIX = 'phrase_prefix';
 
-    const OPERATOR_OR = 'or';
-    const OPERATOR_AND = 'and';
+    public const OPERATOR_OR = 'or';
+    public const OPERATOR_AND = 'and';
 
-    const ZERO_TERM_NONE = 'none';
-    const ZERO_TERM_ALL = 'all';
+    public const ZERO_TERM_NONE = 'none';
+    public const ZERO_TERM_ALL = 'all';
 
-    const FUZZINESS_AUTO = 'AUTO';
+    public const FUZZINESS_AUTO = 'AUTO';
 
     /**
      * Sets the query.

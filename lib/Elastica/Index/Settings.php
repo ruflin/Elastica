@@ -22,11 +22,11 @@ use Elastica\Response;
  */
 class Settings
 {
-    const DEFAULT_REFRESH_INTERVAL = '1s';
+    public const DEFAULT_REFRESH_INTERVAL = '1s';
 
-    const DEFAULT_NUMBER_OF_REPLICAS = 1;
+    public const DEFAULT_NUMBER_OF_REPLICAS = 1;
 
-    const DEFAULT_NUMBER_OF_SHARDS = 1;
+    public const DEFAULT_NUMBER_OF_SHARDS = 1;
 
     /**
      * Response.

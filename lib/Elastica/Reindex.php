@@ -8,27 +8,27 @@ use Elastica\Script\Script;
 
 class Reindex extends Param
 {
-    const VERSION_TYPE = 'version_type';
-    const VERSION_TYPE_INTERNAL = 'internal';
-    const VERSION_TYPE_EXTERNAL = 'external';
-    const OPERATION_TYPE = 'op_type';
-    const OPERATION_TYPE_CREATE = 'create';
-    const CONFLICTS = 'conflicts';
-    const CONFLICTS_PROCEED = 'proceed';
-    const SIZE = 'size';
-    const QUERY = 'query';
-    const SORT = 'sort';
-    const SCRIPT = 'script';
-    const SOURCE = '_source';
-    const REMOTE = 'remote';
-    const SLICE = 'slice';
-    const REFRESH = 'refresh';
-    const WAIT_FOR_COMPLETION = 'wait_for_completion';
-    const WAIT_FOR_COMPLETION_FALSE = 'false';
-    const WAIT_FOR_ACTIVE_SHARDS = 'wait_for_active_shards';
-    const TIMEOUT = 'timeout';
-    const SCROLL = 'scroll';
-    const REQUESTS_PER_SECOND = 'requests_per_second';
+    public const VERSION_TYPE = 'version_type';
+    public const VERSION_TYPE_INTERNAL = 'internal';
+    public const VERSION_TYPE_EXTERNAL = 'external';
+    public const OPERATION_TYPE = 'op_type';
+    public const OPERATION_TYPE_CREATE = 'create';
+    public const CONFLICTS = 'conflicts';
+    public const CONFLICTS_PROCEED = 'proceed';
+    public const SIZE = 'size';
+    public const QUERY = 'query';
+    public const SORT = 'sort';
+    public const SCRIPT = 'script';
+    public const SOURCE = '_source';
+    public const REMOTE = 'remote';
+    public const SLICE = 'slice';
+    public const REFRESH = 'refresh';
+    public const WAIT_FOR_COMPLETION = 'wait_for_completion';
+    public const WAIT_FOR_COMPLETION_FALSE = 'false';
+    public const WAIT_FOR_ACTIVE_SHARDS = 'wait_for_active_shards';
+    public const TIMEOUT = 'timeout';
+    public const SCROLL = 'scroll';
+    public const REQUESTS_PER_SECOND = 'requests_per_second';
 
     /**
      * @var Index

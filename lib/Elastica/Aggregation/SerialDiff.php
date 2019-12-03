@@ -11,7 +11,7 @@ use Elastica\Exception\InvalidException;
  */
 class SerialDiff extends AbstractAggregation
 {
-    const DEFAULT_GAP_POLICY_VALUE = 'insert_zero';
+    public const DEFAULT_GAP_POLICY_VALUE = 'insert_zero';
 
     public function __construct(string $name, ?string $bucketsPath = null)
     {

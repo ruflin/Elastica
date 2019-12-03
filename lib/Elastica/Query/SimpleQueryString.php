@@ -9,8 +9,8 @@ namespace Elastica\Query;
  */
 class SimpleQueryString extends AbstractQuery
 {
-    const OPERATOR_AND = 'and';
-    const OPERATOR_OR = 'or';
+    public const OPERATOR_AND = 'and';
+    public const OPERATOR_OR = 'or';
 
     public function __construct(string $query, array $fields = [])
     {

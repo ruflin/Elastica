@@ -9,7 +9,7 @@ namespace Elastica\Aggregation;
  */
 class DateHistogram extends Histogram
 {
-    const DEFAULT_TIMEZONE_VALUE = 'UTC';
+    public const DEFAULT_TIMEZONE_VALUE = 'UTC';
 
     /**
      * Set time_zone option.

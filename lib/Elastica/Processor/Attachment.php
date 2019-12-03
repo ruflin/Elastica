@@ -11,9 +11,9 @@ namespace Elastica\Processor;
  */
 class Attachment extends AbstractProcessor
 {
-    const DEFAULT_TARGET_FIELD_VALUE = 'attachment';
-    const DEFAULT_INDEXED_CHARS_VALUE = 100000;
-    const DEFAULT_IGNORE_MISSING_VALUE = false;
+    public const DEFAULT_TARGET_FIELD_VALUE = 'attachment';
+    public const DEFAULT_INDEXED_CHARS_VALUE = 100000;
+    public const DEFAULT_IGNORE_MISSING_VALUE = false;
 
     /**
      * Attachment constructor.

@@ -11,7 +11,7 @@ namespace Elastica\Exception;
  */
 class ElasticsearchException extends \Exception implements ExceptionInterface
 {
-    const REMOTE_TRANSPORT_EXCEPTION = 'RemoteTransportException';
+    public const REMOTE_TRANSPORT_EXCEPTION = 'RemoteTransportException';
 
     /**
      * @var string|null Elasticsearch exception name
