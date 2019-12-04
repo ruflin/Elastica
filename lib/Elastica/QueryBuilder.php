@@ -94,7 +94,7 @@ class QueryBuilder
     }
 
     /**
-     * Collapse DSL
+     * Collapse DSL.
      *
      * @return DSL\Collapse
      */

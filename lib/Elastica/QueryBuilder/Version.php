@@ -38,7 +38,7 @@ abstract class Version
     protected $suggesters = [];
 
     /**
-     * supported methods for field collapsing
+     * supported methods for field collapsing.
      *
      * @var array
      */

@@ -99,6 +99,6 @@ class Version700 extends Version
     ];
 
     protected $collapsers = [
-        'inner_hits'
+        'inner_hits',
     ];
 }
