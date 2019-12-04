@@ -11,8 +11,8 @@ namespace Elastica\Processor;
  */
 class Convert extends AbstractProcessor
 {
-    const DEFAULT_TARGET_FIELD_VALUE = 'field';
-    const DEFAULT_IGNORE_MISSING_VALUE = false;
+    public const DEFAULT_TARGET_FIELD_VALUE = 'field';
+    public const DEFAULT_IGNORE_MISSING_VALUE = false;
 
     /**
      * Convert constructor.

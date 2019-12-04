@@ -13,7 +13,7 @@ use Elastica\Script\AbstractScript;
 
 class Bulk
 {
-    const DELIMITER = "\n";
+    public const DELIMITER = "\n";
 
     /**
      * @var Client

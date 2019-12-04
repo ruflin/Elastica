@@ -15,39 +15,39 @@ class Connection extends Param
     /**
      * Default elastic search port.
      */
-    const DEFAULT_PORT = 9200;
+    public const DEFAULT_PORT = 9200;
 
     /**
      * Default host.
      */
-    const DEFAULT_HOST = 'localhost';
+    public const DEFAULT_HOST = 'localhost';
 
     /**
      * Default transport.
      *
      * @var string
      */
-    const DEFAULT_TRANSPORT = 'Http';
+    public const DEFAULT_TRANSPORT = 'Http';
 
     /**
      * Default compression.
      *
      * @var string
      */
-    const DEFAULT_COMPRESSION = false;
+    public const DEFAULT_COMPRESSION = false;
 
     /**
      * Number of seconds after a timeout occurs for every request
      * If using indexing of file large value necessary.
      */
-    const TIMEOUT = 300;
+    public const TIMEOUT = 300;
 
     /**
      * Number of seconds after a connection timeout occurs for every request during the connection phase.
      *
      * @see Connection::setConnectTimeout();
      */
-    const CONNECT_TIMEOUT = 0;
+    public const CONNECT_TIMEOUT = 0;
 
     /**
      * Creates a new connection object. A connection is enabled by default.

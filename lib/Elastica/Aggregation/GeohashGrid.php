@@ -9,8 +9,8 @@ namespace Elastica\Aggregation;
  */
 class GeohashGrid extends AbstractAggregation
 {
-    const DEFAULT_PRECISION_VALUE = 5;
-    const DEFAULT_SIZE_VALUE = 10000;
+    public const DEFAULT_PRECISION_VALUE = 5;
+    public const DEFAULT_SIZE_VALUE = 10000;
 
     /**
      * @param string $name  the name of this aggregation

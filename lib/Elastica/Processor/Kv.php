@@ -11,8 +11,8 @@ namespace Elastica\Processor;
  */
 class Kv extends AbstractProcessor
 {
-    const DEFAULT_TARGET_FIELD_VALUE = null;
-    const DEFAULT_IGNORE_MISSING_VALUE = false;
+    public const DEFAULT_TARGET_FIELD_VALUE = null;
+    public const DEFAULT_IGNORE_MISSING_VALUE = false;
 
     /**
      * Kv constructor.

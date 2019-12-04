@@ -11,13 +11,13 @@ use Elastica\Exception\InvalidException;
  */
 class Request extends Param
 {
-    const HEAD = 'HEAD';
-    const POST = 'POST';
-    const PUT = 'PUT';
-    const GET = 'GET';
-    const DELETE = 'DELETE';
-    const DEFAULT_CONTENT_TYPE = 'application/json';
-    const NDJSON_CONTENT_TYPE = 'application/x-ndjson';
+    public const HEAD = 'HEAD';
+    public const POST = 'POST';
+    public const PUT = 'PUT';
+    public const GET = 'GET';
+    public const DELETE = 'DELETE';
+    public const DEFAULT_CONTENT_TYPE = 'application/json';
+    public const NDJSON_CONTENT_TYPE = 'application/x-ndjson';
 
     /**
      * @var \Elastica\Connection

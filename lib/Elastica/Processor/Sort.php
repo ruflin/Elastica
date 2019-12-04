@@ -11,7 +11,7 @@ namespace Elastica\Processor;
  */
 class Sort extends AbstractProcessor
 {
-    const DEFAULT_ORDER_VALUE = 'asc';
+    public const DEFAULT_ORDER_VALUE = 'asc';
 
     /**
      * Sort constructor.
