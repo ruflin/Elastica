@@ -17,6 +17,7 @@ class VersionTest extends BaseTest
             new DSL\Query(),
             new DSL\Aggregation(),
             new DSL\Suggest(),
+            new DSL\Collapse(),
         ];
 
         $versions = [
@@ -49,6 +50,13 @@ class VersionTest extends BaseTest
             $this->assertTrue(
                 \method_exists($dsl[2], $suggester),
                 'suggester "'.$suggester.'" in '.\get_class($version).' must be defined in '.\get_class($dsl[2])
+            );
+        }
+
+        foreach ($version->getCollapsers() as $collapser) {
+            $this->assertTrue(
+                \method_exists($dsl[3], $collapser),
+                'suggester "'.$collapser.'" in '.\get_class($version).' must be defined in '.\get_class($dsl[3])
             );
         }
     }

@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file based on the
 
 * Launch tests with PHP 7.4
 * Added `nullable_type_declaration_for_default_null_value`, `no_alias_functions` CS rules [#1706](https://github.com/ruflin/Elastica/pull/1706)
+* Added `Collapse` DSL to `QueryBuilder`
 
 ### Deprecated
 

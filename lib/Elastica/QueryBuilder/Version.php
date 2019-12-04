@@ -38,6 +38,13 @@ abstract class Version
     protected $suggesters = [];
 
     /**
+     * supported methods for field collapsing
+     *
+     * @var array
+     */
+    protected $collapsers = [];
+
+    /**
      * returns true if $name is supported, false otherwise.
      */
     public function supports(string $name, string $type): bool
@@ -49,6 +56,8 @@ abstract class Version
                 return \in_array($name, $this->aggregations, true);
             case DSL::TYPE_SUGGEST:
                 return \in_array($name, $this->suggesters, true);
+            case DSL::TYPE_COLLAPSE:
+                return \in_array($name, $this->collapsers, true);
         }
 
         // disables version check in Facade for custom DSL objects
@@ -77,5 +86,13 @@ abstract class Version
     public function getSuggesters(): array
     {
         return $this->suggesters;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getCollapsers(): array
+    {
+        return $this->collapsers;
     }
 }

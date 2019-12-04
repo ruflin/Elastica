@@ -34,6 +34,7 @@ class QueryBuilder
         $this->addDSL(new DSL\Query());
         $this->addDSL(new DSL\Aggregation());
         $this->addDSL(new DSL\Suggest());
+        $this->addDSL(new DSL\Collapse());
     }
 
     /**
@@ -90,5 +91,15 @@ class QueryBuilder
     public function suggest()
     {
         return $this->_facades[DSL::TYPE_SUGGEST];
+    }
+
+    /**
+     * Collapse DSL
+     *
+     * @return DSL\Collapse
+     */
+    public function collapse()
+    {
+        return $this->_facades[DSL::TYPE_COLLAPSE];
     }
 }
