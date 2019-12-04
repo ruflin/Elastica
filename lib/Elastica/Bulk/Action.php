@@ -8,10 +8,10 @@ use Elastica\JSON;
 
 class Action
 {
-    const OP_TYPE_CREATE = 'create';
-    const OP_TYPE_INDEX = 'index';
-    const OP_TYPE_DELETE = 'delete';
-    const OP_TYPE_UPDATE = 'update';
+    public const OP_TYPE_CREATE = 'create';
+    public const OP_TYPE_INDEX = 'index';
+    public const OP_TYPE_DELETE = 'delete';
+    public const OP_TYPE_UPDATE = 'update';
 
     /**
      * @var array

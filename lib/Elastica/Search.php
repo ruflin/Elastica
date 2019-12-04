@@ -16,28 +16,28 @@ class Search
     /*
      * Options
      */
-    const OPTION_SEARCH_TYPE = 'search_type';
-    const OPTION_ROUTING = 'routing';
-    const OPTION_PREFERENCE = 'preference';
-    const OPTION_VERSION = 'version';
-    const OPTION_TIMEOUT = 'timeout';
-    const OPTION_FROM = 'from';
-    const OPTION_SIZE = 'size';
-    const OPTION_SCROLL = 'scroll';
-    const OPTION_SCROLL_ID = 'scroll_id';
-    const OPTION_QUERY_CACHE = 'query_cache';
-    const OPTION_TERMINATE_AFTER = 'terminate_after';
-    const OPTION_SHARD_REQUEST_CACHE = 'request_cache';
-    const OPTION_FILTER_PATH = 'filter_path';
-    const OPTION_TYPED_KEYS = 'typed_keys';
+    public const OPTION_SEARCH_TYPE = 'search_type';
+    public const OPTION_ROUTING = 'routing';
+    public const OPTION_PREFERENCE = 'preference';
+    public const OPTION_VERSION = 'version';
+    public const OPTION_TIMEOUT = 'timeout';
+    public const OPTION_FROM = 'from';
+    public const OPTION_SIZE = 'size';
+    public const OPTION_SCROLL = 'scroll';
+    public const OPTION_SCROLL_ID = 'scroll_id';
+    public const OPTION_QUERY_CACHE = 'query_cache';
+    public const OPTION_TERMINATE_AFTER = 'terminate_after';
+    public const OPTION_SHARD_REQUEST_CACHE = 'request_cache';
+    public const OPTION_FILTER_PATH = 'filter_path';
+    public const OPTION_TYPED_KEYS = 'typed_keys';
 
     /*
      * Search types
      */
-    const OPTION_SEARCH_TYPE_DFS_QUERY_THEN_FETCH = 'dfs_query_then_fetch';
-    const OPTION_SEARCH_TYPE_QUERY_THEN_FETCH = 'query_then_fetch';
-    const OPTION_SEARCH_TYPE_SUGGEST = 'suggest';
-    const OPTION_SEARCH_IGNORE_UNAVAILABLE = 'ignore_unavailable';
+    public const OPTION_SEARCH_TYPE_DFS_QUERY_THEN_FETCH = 'dfs_query_then_fetch';
+    public const OPTION_SEARCH_TYPE_QUERY_THEN_FETCH = 'query_then_fetch';
+    public const OPTION_SEARCH_TYPE_SUGGEST = 'suggest';
+    public const OPTION_SEARCH_IGNORE_UNAVAILABLE = 'ignore_unavailable';
 
     /**
      * @var BuilderInterface

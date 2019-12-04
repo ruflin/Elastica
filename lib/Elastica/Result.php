@@ -50,12 +50,8 @@ class Result
 
     /**
      * Test if a param from the result hit is set.
-     *
-     * @param string $name Param name to test
-     *
-     * @return bool True if the param is set, false otherwise
      */
-    public function hasParam($name)
+    public function hasParam(string $name): bool
     {
         return isset($this->_hit[$name]);
     }
@@ -84,20 +80,16 @@ class Result
 
     /**
      * Returns list of fields.
-     *
-     * @return array Fields list
      */
-    public function getFields()
+    public function getFields(): array
     {
         return $this->getParam('fields');
     }
 
     /**
      * Returns whether result has fields.
-     *
-     * @return bool
      */
-    public function hasFields()
+    public function hasFields(): bool
     {
         return $this->hasParam('fields');
     }
@@ -124,10 +116,8 @@ class Result
 
     /**
      * Returns the raw hit array.
-     *
-     * @return array Hit array
      */
-    public function getHit()
+    public function getHit(): array
     {
         return $this->_hit;
     }
@@ -144,20 +134,16 @@ class Result
 
     /**
      * Returns inner hits.
-     *
-     * @return array Fields list
      */
-    public function getInnerHits()
+    public function getInnerHits(): array
     {
         return $this->getParam('inner_hits');
     }
 
     /**
      * Returns whether result has inner hits.
-     *
-     * @return bool
      */
-    public function hasInnerHits()
+    public function hasInnerHits(): bool
     {
         return $this->hasParam('inner_hits');
     }
@@ -182,40 +168,32 @@ class Result
 
     /**
      * Returns the result source.
-     *
-     * @return array Source data array
      */
-    public function getSource()
+    public function getSource(): array
     {
         return $this->getParam('_source');
     }
 
     /**
      * Returns result data.
-     *
-     * @return array Result data array
      */
-    public function getHighlights()
+    public function getHighlights(): array
     {
         return $this->getParam('highlight');
     }
 
     /**
      * Returns explanation on how its score was computed.
-     *
-     * @return array explanations
      */
-    public function getExplanation()
+    public function getExplanation(): array
     {
         return $this->getParam('_explanation');
     }
 
     /**
      * Returns Document.
-     *
-     * @return Document
      */
-    public function getDocument()
+    public function getDocument(): Document
     {
         $doc = new Document();
         $doc->setData($this->getSource());
@@ -232,10 +210,9 @@ class Result
     /**
      * Sets a parameter on the hit.
      *
-     * @param string $param
-     * @param mixed  $value
+     * @param mixed $value
      */
-    public function setParam($param, $value)
+    public function setParam(string $param, $value)
     {
         $this->_hit[$param] = $value;
     }
@@ -260,10 +237,8 @@ class Result
      * Magic function to support isset() calls.
      *
      * @param string $key Key name
-     *
-     * @return bool
      */
-    public function __isset($key)
+    public function __isset($key): bool
     {
         $source = $this->getData();
 

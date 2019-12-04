@@ -12,8 +12,8 @@ use Elastica\Query\AbstractQuery;
  */
 class Filters extends AbstractAggregation
 {
-    const NAMED_TYPE = 1;
-    const ANONYMOUS_TYPE = 2;
+    public const NAMED_TYPE = 1;
+    public const ANONYMOUS_TYPE = 2;
 
     /**
      * @var int Type of bucket keys - named, or anonymous

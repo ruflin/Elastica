@@ -9,7 +9,7 @@ use Elastica\Query;
 
 class MinTest extends BaseAggregationTest
 {
-    const MIN_PRICE = 1;
+    private const MIN_PRICE = 1;
 
     protected function _getIndexForTest(): Index
     {

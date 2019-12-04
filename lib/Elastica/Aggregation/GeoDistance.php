@@ -11,11 +11,11 @@ use Elastica\Exception\InvalidException;
  */
 class GeoDistance extends AbstractAggregation
 {
-    const DISTANCE_TYPE_ARC = 'arc';
-    const DISTANCE_TYPE_PLANE = 'plane';
+    public const DISTANCE_TYPE_ARC = 'arc';
+    public const DISTANCE_TYPE_PLANE = 'plane';
 
-    const DEFAULT_DISTANCE_TYPE_VALUE = self::DISTANCE_TYPE_ARC;
-    const DEFAULT_UNIT_VALUE = 'm';
+    public const DEFAULT_DISTANCE_TYPE_VALUE = self::DISTANCE_TYPE_ARC;
+    public const DEFAULT_UNIT_VALUE = 'm';
 
     /**
      * @param string       $name   the name if this aggregation

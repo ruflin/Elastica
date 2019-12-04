@@ -18,9 +18,9 @@ use Elastica\Exception\InvalidException;
  */
 abstract class AbstractScript extends AbstractUpdateAction
 {
-    const LANG_MOUSTACHE = 'moustache';
-    const LANG_EXPRESSION = 'expression';
-    const LANG_PAINLESS = 'painless';
+    public const LANG_MOUSTACHE = 'moustache';
+    public const LANG_EXPRESSION = 'expression';
+    public const LANG_PAINLESS = 'painless';
 
     /**
      * @var string|null

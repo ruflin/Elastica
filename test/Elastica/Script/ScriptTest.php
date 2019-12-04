@@ -7,7 +7,7 @@ use Elastica\Test\Base as BaseTest;
 
 class ScriptTest extends BaseTest
 {
-    const SCRIPT = "_score * doc['my_numeric_field'].value";
+    private const SCRIPT = "_score * doc['my_numeric_field'].value";
 
     /**
      * @group unit

@@ -13,12 +13,12 @@ namespace Elastica\Query;
  */
 class GeoShapeProvided extends AbstractGeoShape
 {
-    const TYPE_ENVELOPE = 'envelope';
-    const TYPE_MULTIPOINT = 'multipoint';
-    const TYPE_POINT = 'point';
-    const TYPE_MULTIPOLYGON = 'multipolygon';
-    const TYPE_LINESTRING = 'linestring';
-    const TYPE_POLYGON = 'polygon';
+    public const TYPE_ENVELOPE = 'envelope';
+    public const TYPE_MULTIPOINT = 'multipoint';
+    public const TYPE_POINT = 'point';
+    public const TYPE_MULTIPOLYGON = 'multipolygon';
+    public const TYPE_LINESTRING = 'linestring';
+    public const TYPE_POLYGON = 'polygon';
 
     /**
      * Type of the geo_shape.

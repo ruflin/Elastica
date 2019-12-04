@@ -11,7 +11,7 @@ namespace Elastica\Processor;
  */
 class Split extends AbstractProcessor
 {
-    const DEFAULT_IGNORE_MISSING_VALUE = false;
+    public const DEFAULT_IGNORE_MISSING_VALUE = false;
 
     /**
      * Split constructor.

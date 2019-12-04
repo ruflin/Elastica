@@ -11,10 +11,10 @@ namespace Elastica\Processor;
  */
 class DateIndexName extends AbstractProcessor
 {
-    const DEFAULT_DATE_FORMATS_VALUE = ['ISO8601'];
-    const DEFAULT_INDEX_NAME_FORMAT_VALUE = 'yyyy-MM-dd';
-    const DEFAULT_TIMEZONE_VALUE = 'UTC';
-    const DEFAULT_LOCALE_VALUE = 'ENGLISH';
+    public const DEFAULT_DATE_FORMATS_VALUE = ['ISO8601'];
+    public const DEFAULT_INDEX_NAME_FORMAT_VALUE = 'yyyy-MM-dd';
+    public const DEFAULT_TIMEZONE_VALUE = 'UTC';
+    public const DEFAULT_LOCALE_VALUE = 'ENGLISH';
 
     /**
      * DateIndexName constructor.
