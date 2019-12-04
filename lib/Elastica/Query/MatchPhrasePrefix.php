@@ -12,7 +12,7 @@ namespace Elastica\Query;
  */
 class MatchPhrasePrefix extends MatchPhrase
 {
-    const DEFAULT_MAX_EXPANSIONS = 50;
+    public const DEFAULT_MAX_EXPANSIONS = 50;
 
     /**
      * Set field max expansions.

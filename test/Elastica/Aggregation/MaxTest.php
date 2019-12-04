@@ -10,7 +10,7 @@ use Elastica\Script\Script;
 
 class MaxTest extends BaseAggregationTest
 {
-    const MAX_PRICE = 8;
+    private const MAX_PRICE = 8;
 
     protected function _getIndexForTest(): Index
     {

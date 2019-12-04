@@ -9,9 +9,9 @@ namespace Elastica;
  */
 class Task extends Param
 {
-    const WAIT_FOR_COMPLETION = 'wait_for_completion';
-    const WAIT_FOR_COMPLETION_FALSE = 'false';
-    const WAIT_FOR_COMPLETION_TRUE = 'true';
+    public const WAIT_FOR_COMPLETION = 'wait_for_completion';
+    public const WAIT_FOR_COMPLETION_FALSE = 'false';
+    public const WAIT_FOR_COMPLETION_TRUE = 'true';
 
     /**
      * Task id, e.g. in form of nodeNumber:taskId.

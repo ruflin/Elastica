@@ -11,7 +11,7 @@ namespace Elastica\Processor;
  */
 class Set extends AbstractProcessor
 {
-    const DEFAULT_OVERRIDE_VALUE = true;
+    public const DEFAULT_OVERRIDE_VALUE = true;
 
     /**
      * Set constructor.

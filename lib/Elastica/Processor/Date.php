@@ -11,9 +11,9 @@ namespace Elastica\Processor;
  */
 class Date extends AbstractProcessor
 {
-    const DEFAULT_TARGET_FIELD_VALUE = '@timestamp';
-    const DEFAULT_TIMEZONE_VALUE = 'UTC';
-    const DEFAULT_LOCALE_VALUE = 'ENGLISH';
+    public const DEFAULT_TARGET_FIELD_VALUE = '@timestamp';
+    public const DEFAULT_TIMEZONE_VALUE = 'UTC';
+    public const DEFAULT_LOCALE_VALUE = 'ENGLISH';
 
     /**
      * Date constructor.

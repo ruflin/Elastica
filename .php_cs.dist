@@ -21,6 +21,7 @@ $config = PhpCsFixer\Config::create()
         'native_function_invocation' => true,
         'no_alias_functions' => true,
         'nullable_type_declaration_for_default_null_value' => true,
+        'visibility_required' => ['property', 'method', 'const'],
     ])
 ;
 

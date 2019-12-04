@@ -9,12 +9,12 @@ namespace Elastica\Suggest;
  */
 class Term extends AbstractSuggest
 {
-    const SORT_SCORE = 'score';
-    const SORT_FREQUENCY = 'frequency';
+    public const SORT_SCORE = 'score';
+    public const SORT_FREQUENCY = 'frequency';
 
-    const SUGGEST_MODE_MISSING = 'missing';
-    const SUGGEST_MODE_POPULAR = 'popular';
-    const SUGGEST_MODE_ALWAYS = 'always';
+    public const SUGGEST_MODE_MISSING = 'missing';
+    public const SUGGEST_MODE_POPULAR = 'popular';
+    public const SUGGEST_MODE_ALWAYS = 'always';
 
     /**
      * @return $this

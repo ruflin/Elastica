@@ -11,7 +11,7 @@ namespace Elastica\Query;
  */
 class Boosting extends AbstractQuery
 {
-    const NEGATIVE_BOOST = 0.2;
+    public const NEGATIVE_BOOST = 0.2;
 
     /**
      * Set the positive query for this Boosting Query.

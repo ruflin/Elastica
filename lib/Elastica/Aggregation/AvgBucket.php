@@ -11,8 +11,8 @@ use Elastica\Exception\InvalidException;
  */
 class AvgBucket extends AbstractAggregation
 {
-    const DEFAULT_GAP_POLICY_VALUE = 'skip';
-    const DEFAULT_FORMAT_VALUE = null;
+    public const DEFAULT_GAP_POLICY_VALUE = 'skip';
+    public const DEFAULT_FORMAT_VALUE = null;
 
     public function __construct(string $name, ?string $bucketsPath = null)
     {

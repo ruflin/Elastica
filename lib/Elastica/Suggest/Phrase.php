@@ -11,11 +11,11 @@ use Elastica\Suggest\CandidateGenerator\AbstractCandidateGenerator;
  */
 class Phrase extends AbstractSuggest
 {
-    const DEFAULT_REAL_WORD_ERROR_LIKELIHOOD = 0.95;
-    const DEFAULT_CONFIDENCE = 1.0;
-    const DEFAULT_MAX_ERRORS = 1.0;
-    const DEFAULT_STUPID_BACKOFF_DISCOUNT = 0.4;
-    const DEFAULT_LAPLACE_SMOOTHING_ALPHA = 0.5;
+    public const DEFAULT_REAL_WORD_ERROR_LIKELIHOOD = 0.95;
+    public const DEFAULT_CONFIDENCE = 1.0;
+    public const DEFAULT_MAX_ERRORS = 1.0;
+    public const DEFAULT_STUPID_BACKOFF_DISCOUNT = 0.4;
+    public const DEFAULT_LAPLACE_SMOOTHING_ALPHA = 0.5;
 
     /**
      * @return $this

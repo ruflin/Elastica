@@ -9,7 +9,7 @@ namespace Elastica\Aggregation;
  */
 class Cardinality extends AbstractSimpleAggregation
 {
-    const DEFAULT_PRECISION_THRESHOLD_VALUE = 3000;
+    public const DEFAULT_PRECISION_THRESHOLD_VALUE = 3000;
 
     /**
      * @return $this

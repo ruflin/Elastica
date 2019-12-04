@@ -11,42 +11,42 @@ use Elastica\Script\AbstractScript;
  */
 class FunctionScore extends AbstractQuery
 {
-    const BOOST_MODE_MULTIPLY = 'multiply';
-    const BOOST_MODE_REPLACE = 'replace';
-    const BOOST_MODE_SUM = 'sum';
-    const BOOST_MODE_AVERAGE = 'avg';
-    const BOOST_MODE_MAX = 'max';
-    const BOOST_MODE_MIN = 'min';
+    public const BOOST_MODE_MULTIPLY = 'multiply';
+    public const BOOST_MODE_REPLACE = 'replace';
+    public const BOOST_MODE_SUM = 'sum';
+    public const BOOST_MODE_AVERAGE = 'avg';
+    public const BOOST_MODE_MAX = 'max';
+    public const BOOST_MODE_MIN = 'min';
 
-    const SCORE_MODE_MULTIPLY = 'multiply';
-    const SCORE_MODE_SUM = 'sum';
-    const SCORE_MODE_AVERAGE = 'avg';
-    const SCORE_MODE_FIRST = 'first';
-    const SCORE_MODE_MAX = 'max';
-    const SCORE_MODE_MIN = 'min';
+    public const SCORE_MODE_MULTIPLY = 'multiply';
+    public const SCORE_MODE_SUM = 'sum';
+    public const SCORE_MODE_AVERAGE = 'avg';
+    public const SCORE_MODE_FIRST = 'first';
+    public const SCORE_MODE_MAX = 'max';
+    public const SCORE_MODE_MIN = 'min';
 
-    const DECAY_GAUSS = 'gauss';
-    const DECAY_EXPONENTIAL = 'exp';
-    const DECAY_LINEAR = 'linear';
+    public const DECAY_GAUSS = 'gauss';
+    public const DECAY_EXPONENTIAL = 'exp';
+    public const DECAY_LINEAR = 'linear';
 
-    const FIELD_VALUE_FACTOR_MODIFIER_NONE = 'none';
-    const FIELD_VALUE_FACTOR_MODIFIER_LOG = 'log';
-    const FIELD_VALUE_FACTOR_MODIFIER_LOG1P = 'log1p';
-    const FIELD_VALUE_FACTOR_MODIFIER_LOG2P = 'log2p';
-    const FIELD_VALUE_FACTOR_MODIFIER_LN = 'ln';
-    const FIELD_VALUE_FACTOR_MODIFIER_LN1P = 'ln1p';
-    const FIELD_VALUE_FACTOR_MODIFIER_LN2P = 'ln2p';
-    const FIELD_VALUE_FACTOR_MODIFIER_SQUARE = 'square';
-    const FIELD_VALUE_FACTOR_MODIFIER_SQRT = 'sqrt';
-    const FIELD_VALUE_FACTOR_MODIFIER_RECIPROCAL = 'reciprocal';
+    public const FIELD_VALUE_FACTOR_MODIFIER_NONE = 'none';
+    public const FIELD_VALUE_FACTOR_MODIFIER_LOG = 'log';
+    public const FIELD_VALUE_FACTOR_MODIFIER_LOG1P = 'log1p';
+    public const FIELD_VALUE_FACTOR_MODIFIER_LOG2P = 'log2p';
+    public const FIELD_VALUE_FACTOR_MODIFIER_LN = 'ln';
+    public const FIELD_VALUE_FACTOR_MODIFIER_LN1P = 'ln1p';
+    public const FIELD_VALUE_FACTOR_MODIFIER_LN2P = 'ln2p';
+    public const FIELD_VALUE_FACTOR_MODIFIER_SQUARE = 'square';
+    public const FIELD_VALUE_FACTOR_MODIFIER_SQRT = 'sqrt';
+    public const FIELD_VALUE_FACTOR_MODIFIER_RECIPROCAL = 'reciprocal';
 
-    const MULTI_VALUE_MODE_MIN = 'min';
-    const MULTI_VALUE_MODE_MAX = 'max';
-    const MULTI_VALUE_MODE_AVG = 'avg';
-    const MULTI_VALUE_MODE_SUM = 'sum';
+    public const MULTI_VALUE_MODE_MIN = 'min';
+    public const MULTI_VALUE_MODE_MAX = 'max';
+    public const MULTI_VALUE_MODE_AVG = 'avg';
+    public const MULTI_VALUE_MODE_SUM = 'sum';
 
-    const RANDOM_SCORE_FIELD_ID = '_id';
-    const RANDOM_SCORE_FIELD_SEQ_NO = '_seq_no';
+    public const RANDOM_SCORE_FIELD_ID = '_id';
+    public const RANDOM_SCORE_FIELD_SEQ_NO = '_seq_no';
 
     protected $_functions = [];
 

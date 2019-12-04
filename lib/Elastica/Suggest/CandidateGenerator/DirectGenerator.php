@@ -9,18 +9,18 @@ namespace Elastica\Suggest\CandidateGenerator;
  */
 class DirectGenerator extends AbstractCandidateGenerator
 {
-    const SUGGEST_MODE_MISSING = 'missing';
-    const SUGGEST_MODE_POPULAR = 'popular';
-    const SUGGEST_MODE_ALWAYS = 'always';
+    public const SUGGEST_MODE_MISSING = 'missing';
+    public const SUGGEST_MODE_POPULAR = 'popular';
+    public const SUGGEST_MODE_ALWAYS = 'always';
 
-    const DEFAULT_SIZE = 5;
-    const DEFAULT_SUGGEST_MODE = self::SUGGEST_MODE_MISSING;
-    const DEFAULT_MAX_EDITS = 2;
-    const DEFAULT_PREFIX_LENGTH = 1;
-    const DEFAULT_MIN_WORD_LENGTH = 4;
-    const DEFAULT_MAX_INSPECTIONS = 5;
-    const DEFAULT_MIN_DOC_FREQ = 0.0;
-    const DEFAULT_MAX_TERM_FREQ = 0.01;
+    public const DEFAULT_SIZE = 5;
+    public const DEFAULT_SUGGEST_MODE = self::SUGGEST_MODE_MISSING;
+    public const DEFAULT_MAX_EDITS = 2;
+    public const DEFAULT_PREFIX_LENGTH = 1;
+    public const DEFAULT_MIN_WORD_LENGTH = 4;
+    public const DEFAULT_MAX_INSPECTIONS = 5;
+    public const DEFAULT_MIN_DOC_FREQ = 0.0;
+    public const DEFAULT_MAX_TERM_FREQ = 0.01;
 
     public function __construct(string $field)
     {

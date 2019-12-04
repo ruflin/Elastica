@@ -12,16 +12,16 @@ namespace Elastica\Query;
 abstract class AbstractGeoShape extends AbstractQuery
 {
     /** Return all documents whose geo_shape field intersects the query geometry. (default behavior) */
-    const RELATION_INTERSECT = 'intersects';
+    public const RELATION_INTERSECT = 'intersects';
 
     /** Return all documents whose geo_shape field has nothing in common with the query geometry. */
-    const RELATION_DISJOINT = 'disjoint';
+    public const RELATION_DISJOINT = 'disjoint';
 
     /** Return all documents whose geo_shape field is within the query geometry. */
-    const RELATION_WITHIN = 'within';
+    public const RELATION_WITHIN = 'within';
 
     /** Return all documents whose geo_shape field contains the query geometry. */
-    const RELATION_CONTAINS = 'contains';
+    public const RELATION_CONTAINS = 'contains';
 
     /**
      * Elasticsearch path of the geo_shape field.

@@ -11,8 +11,8 @@ namespace Elastica\Processor;
  */
 class Json extends AbstractProcessor
 {
-    const DEFAULT_TARGET_FIELD_VALUE = 'field';
-    const DEFAULT_ADD_TO_ROOT_VALUE = false;
+    public const DEFAULT_TARGET_FIELD_VALUE = 'field';
+    public const DEFAULT_ADD_TO_ROOT_VALUE = false;
 
     /**
      * Json constructor.
