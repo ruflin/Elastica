@@ -1,7 +1,19 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/6.1.1...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/7.0.0-beta2...master)
+
+### Backward Compatibility Breaks
+
+### Bugfixes
+
+### Added
+
+### Improvements
+
+### Deprecated
+
+## [Unreleased](https://github.com/ruflin/Elastica/compare/7.0.0-beta1...7.0.0-beta2)
 
 ### Backward Compatibility Breaks
 
@@ -27,8 +39,6 @@ All notable changes to this project will be documented in this file based on the
 * Added `nullable_type_declaration_for_default_null_value`, `no_alias_functions` CS rules [#1706](https://github.com/ruflin/Elastica/pull/1706)
 * Configured `visibility_required` CS rule for constants [#1723](https://github.com/ruflin/Elastica/pull/1723)
 * Added `Collapse` DSL to `QueryBuilder` [#1724](https://github.com/ruflin/Elastica/pull/1724)
-
-### Deprecated
 
 
 ## [7.0.0-beta1](https://github.com/ruflin/Elastica/compare/6.1.1...7.0.0-beta1)
