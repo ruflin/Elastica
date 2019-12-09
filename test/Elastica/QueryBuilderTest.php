@@ -3,6 +3,7 @@
 namespace Elastica\Test;
 
 use Elastica\Aggregation\AbstractAggregation;
+use Elastica\Collapse;
 use Elastica\Exception\QueryBuilderException;
 use Elastica\Query\AbstractQuery;
 use Elastica\QueryBuilder;
@@ -44,6 +45,10 @@ class QueryBuilderTest extends Base
         $this->assertInstanceOf(AbstractQuery::class, $qb->query()->match());
         $this->assertInstanceOf(AbstractAggregation::class, $qb->aggregation()->avg('name'));
         $this->assertInstanceOf(AbstractSuggest::class, $qb->suggest()->term('name', 'field'));
+
+        // Collapse is a special case of the above; it doesn't have an abstract base class for individual parts right
+        // now because 'inner_hits' is the only thing that can be set besides field and concurrency.
+        $this->assertInstanceOf(Collapse\InnerHits::class, $qb->collapse()->inner_hits());
     }
 }
 

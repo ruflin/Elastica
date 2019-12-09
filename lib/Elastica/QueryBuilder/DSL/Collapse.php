@@ -2,7 +2,7 @@
 
 namespace Elastica\QueryBuilder\DSL;
 
-use Elastica\Query\InnerHits;
+use Elastica\Collapse\InnerHits;
 use Elastica\QueryBuilder\DSL;
 
 /**

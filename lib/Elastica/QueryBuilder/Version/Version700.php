@@ -97,4 +97,8 @@ class Version700 extends Version
         'completion',
         'context',
     ];
+
+    protected $collapsers = [
+        'inner_hits',
+    ];
 }
