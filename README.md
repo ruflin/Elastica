@@ -1,6 +1,8 @@
 Elastica: elasticsearch PHP Client
 ==================================
 
+*NOTE*: Elastica v5.x is not maintained anymore, as ElasticSearch v5.6.x reached EOL on 2019-03-11.
+
 [![Latest Stable Version](https://poser.pugx.org/ruflin/Elastica/v/stable.png)](https://packagist.org/packages/ruflin/elastica)
 [![Build Status](https://secure.travis-ci.org/ruflin/Elastica.png?branch=master)](http://travis-ci.org/ruflin/Elastica)
 [![codecov.io](http://codecov.io/github/ruflin/Elastica/coverage.svg?branch=master)](http://codecov.io/github/ruflin/Elastica?branch=master)
@@ -28,11 +30,9 @@ Contributions are always welcome. For details on how to contribute, check the [C
 Dependencies
 ------------
 
-| Elastica                                                                                | ElasticSearch | elasticsearch-php | PHP      |
-| --------------------------------------------------------------------------------------- | ------------- | ----------------- | -------- |
-| [5.x](https://github.com/ruflin/Elastica/tree/5.x)                                      | 5.x           | ^5.0              | \>=5.6   |
-| [3.2.3](https://github.com/ruflin/Elastica/tree/3.2.3) (unmaintained)                   | 2.4.0         | no                | \>=5.4   |
-| [2.x](https://github.com/ruflin/Elastica/tree/2.x) (unmaintained)                       | 1.7.2         | no                | \>=5.3.3 |
-
+| Elastica                                                              | ElasticSearch | elasticsearch-php | PHP      |
+| ----------------------------------------------------------------------| ------------- | ----------------- | -------- |
+| [5.x](https://github.com/ruflin/Elastica/tree/5.x) (unmaintained)     | 5.x           | ^5.0              | \>=5.6   |
+| [3.2.3](https://github.com/ruflin/Elastica/tree/3.2.3) (unmaintained) | 2.4.0         | no                | \>=5.4   |
+| [2.x](https://github.com/ruflin/Elastica/tree/2.x) (unmaintained)     | 1.7.2         | no                | \>=5.3.3 |
 ------------
-
