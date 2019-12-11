@@ -743,7 +743,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(2, $stats['_all']['primaries']['docs']['count']);
         $this->assertEquals(0, $stats['_all']['primaries']['docs']['deleted']);
 
-        $index->deleteById(1);
+        $index->deleteById('1');
         $index->refresh();
 
         $stats = $index->getStats()->getData();
