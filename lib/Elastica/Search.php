@@ -40,26 +40,19 @@ class Search
     public const OPTION_SEARCH_IGNORE_UNAVAILABLE = 'ignore_unavailable';
 
     /**
-     * @var BuilderInterface
+     * @var BuilderInterface|null
      */
-    private $_builder;
+    private $builder;
 
     /**
-     * Array of indices.
+     * Array of indices names.
      *
-     * @var array
+     * @var string[]
      */
     protected $_indices = [];
 
     /**
-     * Array of types.
-     *
-     * @var array
-     */
-    protected $_types = [];
-
-    /**
-     * @var \Elastica\Query
+     * @var Query
      */
     protected $_query;
 
@@ -71,7 +64,7 @@ class Search
     /**
      * Client object.
      *
-     * @var \Elastica\Client
+     * @var Client
      */
     protected $_client;
 
@@ -80,8 +73,8 @@ class Search
      */
     public function __construct(Client $client, ?BuilderInterface $builder = null)
     {
-        $this->_builder = $builder ?: new DefaultBuilder();
         $this->_client = $client;
+        $this->builder = $builder ?: new DefaultBuilder();
     }
 
     /**
@@ -90,10 +83,8 @@ class Search
      * @param Index|string $index Index object or string
      *
      * @throws InvalidException
-     *
-     * @return $this
      */
-    public function addIndex($index)
+    public function addIndex($index): self
     {
         if ($index instanceof Index) {
             $index = $index->getName();
@@ -111,9 +102,9 @@ class Search
     /**
      * Add array of indices at once.
      *
-     * @return $this
+     * @param Index[]|string[] $indices
      */
-    public function addIndices(array $indices = [])
+    public function addIndices(array $indices = []): self
     {
         foreach ($indices as $index) {
             $this->addIndex($index);
@@ -124,10 +115,8 @@ class Search
 
     /**
      * @param string|array|Query|Suggest|Query\AbstractQuery $query
-     *
-     * @return $this
      */
-    public function setQuery($query)
+    public function setQuery($query): self
     {
         $this->_query = Query::create($query);
 
@@ -135,24 +124,18 @@ class Search
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
-     *
-     * @return $this
+     * @param mixed $value
      */
-    public function setOption($key, $value)
+    public function setOption(string $key, $value): self
     {
-        $this->_validateOption($key);
+        $this->validateOption($key);
 
         $this->_options[$key] = $value;
 
         return $this;
     }
 
-    /**
-     * @return $this
-     */
-    public function setOptions(array $options)
+    public function setOptions(array $options): self
     {
         $this->clearOptions();
 
@@ -163,10 +146,7 @@ class Search
         return $this;
     }
 
-    /**
-     * @return $this
-     */
-    public function clearOptions()
+    public function clearOptions(): self
     {
         $this->_options = [];
 
@@ -174,38 +154,28 @@ class Search
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
-     *
-     * @return $this
+     * @param mixed $value
      */
-    public function addOption($key, $value)
+    public function addOption(string $key, $value): self
     {
-        $this->_validateOption($key);
+        $this->validateOption($key);
 
         $this->_options[$key][] = $value;
 
         return $this;
     }
 
-    /**
-     * @param string $key
-     *
-     * @return bool
-     */
-    public function hasOption($key)
+    public function hasOption(string $key): bool
     {
         return isset($this->_options[$key]);
     }
 
     /**
-     * @param string $key
-     *
-     * @throws InvalidException
+     * @throws InvalidException if the given key does not exists as an option
      *
      * @return mixed
      */
-    public function getOption($key)
+    public function getOption(string $key)
     {
         if (!$this->hasOption($key)) {
             throw new InvalidException('Option '.$key.' does not exist');
@@ -214,22 +184,15 @@ class Search
         return $this->_options[$key];
     }
 
-    /**
-     * @return array
-     */
-    public function getOptions()
+    public function getOptions(): array
     {
         return $this->_options;
     }
 
     /**
-     * @param string $key
-     *
-     * @throws InvalidException
-     *
-     * @return bool
+     * @throws InvalidException If the given key is not a valid option
      */
-    protected function _validateOption($key)
+    protected function validateOption(string $key): void
     {
         switch ($key) {
             case self::OPTION_SEARCH_TYPE:
@@ -248,7 +211,7 @@ class Search
             case self::OPTION_SHARD_REQUEST_CACHE:
             case self::OPTION_FILTER_PATH:
             case self::OPTION_TYPED_KEYS:
-                return true;
+                return;
         }
 
         throw new InvalidException('Invalid option '.$key);
@@ -256,50 +219,40 @@ class Search
 
     /**
      * Return client object.
-     *
-     * @return \Elastica\Client Client object
      */
-    public function getClient()
+    public function getClient(): Client
     {
         return $this->_client;
     }
 
     /**
-     * Return array of indices.
+     * Return array of indices names.
      *
-     * @return array List of index names
+     * @return string[]
      */
-    public function getIndices()
+    public function getIndices(): array
     {
         return $this->_indices;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasIndices()
+    public function hasIndices(): bool
     {
         return \count($this->_indices) > 0;
     }
 
     /**
      * @param Index|string $index
-     *
-     * @return bool
      */
-    public function hasIndex($index)
+    public function hasIndex($index): bool
     {
         if ($index instanceof Index) {
             $index = $index->getName();
         }
 
-        return \in_array($index, $this->_indices);
+        return \in_array($index, $this->_indices, true);
     }
 
-    /**
-     * @return Query
-     */
-    public function getQuery()
+    public function getQuery(): Query
     {
         if (null === $this->_query) {
             $this->_query = Query::create('');
@@ -310,20 +263,16 @@ class Search
 
     /**
      * Creates new search object.
-     *
-     * @return Search
      */
-    public static function create(SearchableInterface $searchObject)
+    public static function create(SearchableInterface $searchObject): Search
     {
         return $searchObject->createSearch();
     }
 
     /**
      * Combines indices to the search request path.
-     *
-     * @return string Search path
      */
-    public function getPath()
+    public function getPath(): string
     {
         if (isset($this->_options[self::OPTION_SCROLL_ID])) {
             return '_search/scroll';
@@ -335,15 +284,12 @@ class Search
     /**
      * Search in the set indices.
      *
-     * @param mixed     $query
-     * @param int|array $options OPTIONAL Limit or associative array of options (option=>value)
-     * @param string    $method  OPTIONAL Request method (use const's) (default = Request::POST)
+     * @param string|array|Query $query
+     * @param int|array          $options Limit or associative array of options (option=>value)
      *
      * @throws InvalidException
-     *
-     * @return ResultSet
      */
-    public function search($query = '', $options = null, $method = Request::POST)
+    public function search($query = '', $options = null, string $method = Request::POST): ResultSet
     {
         $this->setOptionsAndQuery($options, $query);
 
@@ -360,24 +306,18 @@ class Search
             $data = $query->toArray();
         }
 
-        $response = $this->getClient()->request(
-            $path,
-            $method,
-            $data,
-            $params
-        );
+        $response = $this->getClient()->request($path, $method, $data, $params);
 
-        return $this->_builder->buildResultSet($response, $query);
+        return $this->builder->buildResultSet($response, $query);
     }
 
     /**
-     * @param mixed $query
-     * @param $fullResult (default = false) By default only the total hit count is returned. If set to true, the full ResultSet including aggregations is returned
-     * @param string $method OPTIONAL Request method (use const's) (default = Request::POST)
+     * @param string|array|Query $query
+     * @param bool               $fullResult By default only the total hit count is returned. If set to true, the full ResultSet including aggregations is returned
      *
      * @return int|ResultSet
      */
-    public function count($query = '', $fullResult = false, $method = Request::POST)
+    public function count($query = '', bool $fullResult = false, string $method = Request::POST)
     {
         $this->setOptionsAndQuery(null, $query);
 
@@ -392,7 +332,7 @@ class Search
             $query->toArray(),
             [self::OPTION_SEARCH_TYPE => self::OPTION_SEARCH_TYPE_QUERY_THEN_FETCH]
         );
-        $resultSet = $this->_builder->buildResultSet($response, $query);
+        $resultSet = $this->builder->buildResultSet($response, $query);
 
         return $fullResult ? $resultSet : $resultSet->getTotalHits();
     }
@@ -400,10 +340,8 @@ class Search
     /**
      * @param array|int          $options
      * @param string|array|Query $query
-     *
-     * @return $this
      */
-    public function setOptionsAndQuery($options = null, $query = '')
+    public function setOptionsAndQuery($options = null, $query = ''): self
     {
         if ('' !== $query) {
             $this->setQuery($query);
@@ -426,10 +364,7 @@ class Search
         return $this;
     }
 
-    /**
-     * @return $this
-     */
-    public function setSuggest(Suggest $suggest)
+    public function setSuggest(Suggest $suggest): self
     {
         return $this->setOptionsAndQuery([self::OPTION_SEARCH_TYPE_SUGGEST => 'suggest'], $suggest);
     }
@@ -444,11 +379,8 @@ class Search
         return new Scroll($this, $expiryTime);
     }
 
-    /**
-     * @return BuilderInterface
-     */
-    public function getResultSetBuilder()
+    public function getResultSetBuilder(): BuilderInterface
     {
-        return $this->_builder;
+        return $this->builder;
     }
 }
