@@ -290,12 +290,6 @@ class Index implements SearchableInterface
      * Deletes a document by its unique identifier.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete.html
-     *
-     * @param string $id Document id
-     *
-     * @throws NotFoundException
-     *
-     * @return Response Response object
      */
     public function deleteById(string $id, array $options = []): Response
     {
@@ -307,15 +301,7 @@ class Index implements SearchableInterface
         $endpoint->setID(\trim($id));
         $endpoint->setParams($options);
 
-        $response = $this->requestEndpoint($endpoint);
-
-        $responseData = $response->getData();
-
-        if (isset($responseData['result']) && 'not_found' === $responseData['result']) {
-            throw new NotFoundException('Doc id "'.$id.'" not found and can not be deleted');
-        }
-
-        return $response;
+        return $this->requestEndpoint($endpoint);
     }
 
     /**
