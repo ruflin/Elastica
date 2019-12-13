@@ -34,10 +34,11 @@ class Scroll implements \Iterator
     /**
      * 0: scroll<br>
      * 1: scroll id.
+     * 2: ignore_unavailable.
      *
      * @var array
      */
-    protected $_options = [null, null];
+    protected $_options = [null, null, null];
 
     private $totalPages = 0;
     private $currentPage = 0;
@@ -112,7 +113,7 @@ class Scroll implements \Iterator
     public function rewind(): void
     {
         // reset state
-        $this->_options = [null, null];
+        $this->_options = [null, null, null];
         $this->currentPage = 0;
 
         // initial search
@@ -174,6 +175,18 @@ class Scroll implements \Iterator
         if ($this->_search->hasOption(Search::OPTION_SCROLL_ID)) {
             $this->_options[1] = $this->_search->getOption(Search::OPTION_SCROLL_ID);
         }
+
+        if ($this->_search->hasOption(Search::OPTION_SEARCH_IGNORE_UNAVAILABLE)) {
+            $isNotInitial = (null !== $this->_options[2]);
+            $this->_options[2] = $this->_search->getOption(Search::OPTION_SEARCH_IGNORE_UNAVAILABLE);
+
+            // remove ignore_unavailable from options if not initial search
+            if ($isNotInitial) {
+                $searchOptions = $this->_search->getOptions();
+                unset($searchOptions[Search::OPTION_SEARCH_IGNORE_UNAVAILABLE]);
+                $this->_search->setOptions($searchOptions);
+            }
+        }
     }
 
     /**
@@ -183,5 +196,8 @@ class Scroll implements \Iterator
     {
         $this->_search->setOption(Search::OPTION_SCROLL, $this->_options[0]);
         $this->_search->setOption(Search::OPTION_SCROLL_ID, $this->_options[1]);
+        if (null !== $this->_options[2]) {
+            $this->_search->setOption(Search::OPTION_SEARCH_IGNORE_UNAVAILABLE, $this->_options[2]);
+        }
     }
 }
