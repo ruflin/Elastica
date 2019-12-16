@@ -9,6 +9,7 @@ use Elastica\Aggregation\BucketScript;
 use Elastica\Aggregation\Cardinality;
 use Elastica\Aggregation\DateHistogram;
 use Elastica\Aggregation\DateRange;
+use Elastica\Aggregation\DiversifiedSampler;
 use Elastica\Aggregation\ExtendedStats;
 use Elastica\Aggregation\Filter;
 use Elastica\Aggregation\Filters;
@@ -440,5 +441,15 @@ class Aggregation implements DSL
     public function sampler($name): Sampler
     {
         return new Sampler($name);
+    }
+
+    /**
+     * diversified sampler aggregation.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-diversified-sampler-aggregation.html
+     */
+    public function diversified_sampler(string $name): DiversifiedSampler
+    {
+        return new DiversifiedSampler($name);
     }
 }
