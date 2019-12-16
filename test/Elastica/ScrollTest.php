@@ -100,6 +100,55 @@ class ScrollTest extends Base
     }
 
     /**
+     * Test with ignore_unavailable search option.
+     *
+     * @group functional
+     */
+    public function testScrollWithIgnoreUnavailable()
+    {
+        $search = $this->_prepareSearch();
+        $search->addIndex('unavailable_index');
+        $search->setOption($search::OPTION_SEARCH_IGNORE_UNAVAILABLE, 'true');
+        $scroll = new Scroll($search);
+        $count = 1;
+
+        $this->_assertOpenSearchContexts($search->getClient(), 0);
+
+        /** @var ResultSet $resultSet */
+        foreach ($scroll as $scrollId => $resultSet) {
+            $this->assertNotEmpty($scrollId);
+            $this->_assertOpenSearchContexts($search->getClient(), 1);
+
+            $results = $resultSet->getResults();
+            switch (true) {
+                case 1 === $count:
+                    // hits: 1 - 5
+                    $this->assertEquals(5, $resultSet->count());
+                    $this->assertEquals('1', $results[0]->getId());
+                    $this->assertEquals('5', $results[4]->getId());
+                    break;
+                case 2 === $count:
+                    // hits: 6 - 10
+                    $this->assertEquals(5, $resultSet->count());
+                    $this->assertEquals('6', $results[0]->getId());
+                    $this->assertEquals('10', $results[4]->getId());
+                    break;
+                case 3 === $count:
+                    // hit: 11
+                    $this->assertEquals(1, $resultSet->count());
+                    $this->assertEquals('11', $results[0]->getId());
+                    break;
+                default:
+                    $this->fail('too many iterations');
+            }
+
+            ++$count;
+        }
+
+        $this->_assertOpenSearchContexts($search->getClient(), 0);
+    }
+
+    /**
      * index: 11 docs default
      * query size: 5.
      */
