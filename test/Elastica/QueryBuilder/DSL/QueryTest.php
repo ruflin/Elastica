@@ -42,6 +42,7 @@ class QueryTest extends AbstractDSLTest
         $this->_assertImplemented($queryDSL, 'boosting', Query\Boosting::class, []);
         $this->_assertImplemented($queryDSL, 'common_terms', Query\Common::class, ['field', 'query', 0.001]);
         $this->_assertImplemented($queryDSL, 'dis_max', Query\DisMax::class, []);
+        $this->_assertImplemented($queryDSL, 'distance_feature', Query\DistanceFeature::class, ['field', 'now', '7d']);
         $this->_assertImplemented($queryDSL, 'function_score', Query\FunctionScore::class, []);
         $this->_assertImplemented($queryDSL, 'fuzzy', Query\Fuzzy::class, ['field', 'type']);
         $this->_assertImplemented($queryDSL, 'has_child', Query\HasChild::class, [new Match()]);

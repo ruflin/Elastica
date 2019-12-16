@@ -11,6 +11,7 @@ use Elastica\Query\Boosting;
 use Elastica\Query\Common;
 use Elastica\Query\ConstantScore;
 use Elastica\Query\DisMax;
+use Elastica\Query\DistanceFeature;
 use Elastica\Query\Exists;
 use Elastica\Query\FunctionScore;
 use Elastica\Query\Fuzzy;
@@ -137,6 +138,18 @@ class Query implements DSL
     public function dis_max(): DisMax
     {
         return new DisMax();
+    }
+
+    /**
+     * distance feature query.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-distance-feature-query.html
+     *
+     * @param string|array $origin
+     */
+    public function distance_feature(string $field, $origin, string $pivot): DistanceFeature
+    {
+        return new DistanceFeature($field, $origin, $pivot);
     }
 
     /**

@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file based on the
 
 ### Added
 
+* Added `\Elastica\Query\DistanceFeature` [#1730](https://github.com/ruflin/Elastica/pull/1730)
+
 ### Improvements
 
 ### Deprecated

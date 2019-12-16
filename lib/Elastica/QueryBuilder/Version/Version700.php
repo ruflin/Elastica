@@ -19,6 +19,7 @@ class Version700 extends Version
         'common_terms',
         'constant_score',
         'dis_max',
+        'distance_feature',
         'function_score',
         'fuzzy',
         'geo_bounding_box',
