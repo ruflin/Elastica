@@ -1,54 +1,130 @@
-sudo: required
-dist: trusty
-
-group: edge
-
+language: php
 
 services:
   - docker
 
-branches:
-  only:
-    - master
+sudo: false
 
-env:
-  global:
-    - DOCKER_VERSION=17.09.0
-    - DOCKER_COMPOSE_VERSION=1.17.1
-  matrix:
-    - TARGET="72"
-    - TARGET="73"
-    - TARGET="74"
-    - TARGET="Lint"
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+    - $HOME/.phive
+
+#php:
+#  - 7.2
+#  - 7.3
+#  - 7.4
+
+# branches:
+#   except:
+#     - /^analysis-.*$/
+
+matrix:
+  fast_finish: true
+  include:
+    # Test installation on lowest requirements for PHP 7.2
+    #- php: 7.2
+    #  env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
+    # CS are running on the lowest PHP version
+#    - php: 7.2
+#      env: RUN_CS=true
+
+    # Run ES functional tests only on PHP 7.2
+    - php: 7.2
+      env: RUN_TEST=true START_ES_VERSION=75
+#    - php: 7.2
+#      env: RUN_TEST=true START_ES_VERSION=74
+#    - php: 7.2
+#      env: RUN_TEST=true START_ES_VERSION=73
+#    - php: 7.2
+#      env: RUN_TEST=true START_ES_VERSION=72
+    - php: 7.2
+      env: RUN_TEST=true START_ES_VERSION=71
+
+#    - php: 7.4
+#      env: COVERAGE=true TEST_COMMAND="composer test-ci"
 
 before_install:
-  # check running "docker engine" and "docker-compose" version on travis
+  - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini || true; fi
+
+install:
+  - travis_retry make composer-update
+
+before_script:
+  # vm.max_map_count=262144 is needed by ES to properly spin up the nodes, otherwise the ES bootstrap checks will fail
+  - sudo sysctl -w vm.max_map_count=262144
+  - php --version
   - docker --version
   - docker-compose --version
 
-  # list docker-engine versions, usefull to update the docker engine on travis and trusty
-#  - sudo apt-cache madison docker-engine
-
-  # update docker engine to the desired version
-  - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-ce=${DOCKER_VERSION}~ce-0~ubuntu --allow-downgrades
-
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
-
-before_script:
-  - sudo sysctl -w vm.max_map_count=262144
-
 script:
-  - if [ "$TARGET" != "Lint" ] ; then make tests TARGET=$TARGET ; fi
-  - if [ "$TARGET" == "Lint" ] ; then make check-style ; fi
+  # Fail the build on first error
+  # - set -e
+  - if [[ "$RUN_CS" = "true" ]]; then make run-phpcs; fi
+  - if [[ "$START_ES_VERSION" != "" ]]; then docker-compose --file=docker/elasticsearch$START_ES_VERSION/docker-compose.yml up --detach; fi
+  - if [[ "$RUN_TEST" = "true" ]]; then make install-tools; fi
+  # Waiting for ES to be up and running, and all nodes to be in sync
+  - timeout 2m bash -c 'until curl -XGET http://127.0.0.1:9200; do sleep 5; done'
+  - if [[ "$RUN_TEST" = "true" ]]; then make run-phpunit; fi
 
-after_script:
-  - cat /var/log/elasticsearch/*.log
-  - cat /var/log/nginx/*.log
-  - sudo rm composer.lock && sudo composer require satooshi/php-coveralls dev-master --no-ansi --no-progress --no-interaction
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
-  - vendor/bin/coveralls -v
+#  - if [[ "$START_ES_VERSION" != "" ]]; then docker-compose --file=docker/elasticsearch$START_ES_VERSION/docker-compose.yml logs; fi
+# after_success:
+#   - if [[ $COVERAGE = true ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
+#   - if [[ $COVERAGE = true ]]; then php ocular.phar code-coverage:upload --format=php-clover build/coverage.xml; fi
+#
+#
+#
+# sudo: required
+# dist: trusty
+#
+# group: edge
+#
+# services:
+#   - docker
+#
+# branches:
+#   only:
+#     - master
+#
+# env:
+#   global:
+#     - DOCKER_VERSION=17.09.0
+#     - DOCKER_COMPOSE_VERSION=1.17.1
+#   matrix:
+#     - TARGET="72"
+#     - TARGET="73"
+#     - TARGET="74"
+#     - TARGET="Lint"
+#
+# before_install:
+#   # check running "docker engine" and "docker-compose" version on travis
+#   - docker --version
+#   - docker-compose --version
+#
+#   # list docker-engine versions, usefull to update the docker engine on travis and trusty
+# #  - sudo apt-cache madison docker-engine
+#
+#   # update docker engine to the desired version
+#   - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-ce=${DOCKER_VERSION}~ce-0~ubuntu --allow-downgrades
+#
+#   - sudo rm /usr/local/bin/docker-compose
+#   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+#   - chmod +x docker-compose
+#   - sudo mv docker-compose /usr/local/bin
+#
+# before_script:
+#   - sudo sysctl -w vm.max_map_count=262144 # Needed by ES to properly spin up the nodes, otherwise the bootstrap checks will fail
+#
+# script:
+#   - if [ "$TARGET" != "Lint" ] ; then make tests TARGET=$TARGET ; fi
+#   - if [ "$TARGET" == "Lint" ] ; then make check-style ; fi
+#
+# after_script:
+#   - cat /var/log/elasticsearch/*.log
+#   - cat /var/log/nginx/*.log
+#   - sudo rm composer.lock && sudo composer require satooshi/php-coveralls dev-master --no-ansi --no-progress --no-interaction
+#
+# after_success:
+#   - bash <(curl -s https://codecov.io/bash)
+#   - vendor/bin/coveralls -v
+#
