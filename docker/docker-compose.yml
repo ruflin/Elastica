@@ -2,8 +2,11 @@ version: '3.4'
 
 services:
     es01:
-        image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.4.2
-        container_name: es01
+        image: docker.elastic.co/elasticsearch/elasticsearch-oss:latest
+        command: >
+            /bin/sh -c "./bin/elasticsearch-plugin list | grep -q ingest-attachment
+            || ./bin/elasticsearch-plugin install --batch ingest-attachment;
+            /usr/local/bin/docker-entrypoint.sh"
         environment:
             - node.name=es01
             - cluster.name=es-docker-cluster
@@ -12,6 +15,7 @@ services:
             - bootstrap.memory_lock=true
             - processors=1
             - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+            - path.repo="/usr/share/elasticsearch/data"
         ulimits:
             memlock:
                 soft: -1
@@ -23,8 +27,11 @@ services:
         networks:
             - elastic
     es02:
-        image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.4.2
-        container_name: es02
+        image: docker.elastic.co/elasticsearch/elasticsearch-oss:latest
+        command: >
+            /bin/sh -c "./bin/elasticsearch-plugin list | grep -q ingest-attachment
+            || ./bin/elasticsearch-plugin install --batch ingest-attachment;
+            /usr/local/bin/docker-entrypoint.sh"
         environment:
             - node.name=es02
             - cluster.name=es-docker-cluster
@@ -33,6 +40,7 @@ services:
             - bootstrap.memory_lock=true
             - processors=1
             - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+            - path.repo="/usr/share/elasticsearch/data"
         ulimits:
             memlock:
                 soft: -1
