@@ -42,3 +42,10 @@ fix-phpcs: composer-update install-phpcs
 run-phpunit: composer-update install-phpunit
 	tools/phpunit.phar
 
+tools/phpdocumentor.phar:
+	curl https://gitreleases.dev/gh/phpDocumentor/phpDocumentor/latest/phpDocumentor.phar -o tools/phpdocumentor.phar --silent -L
+	chmod +x tools/phpdocumentor.phar
+
+.PHONY: run-phpdoc
+run-phpdoc: tools/phpdocumentor.phar
+	tools/phpdocumentor.phar
