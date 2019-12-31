@@ -63,7 +63,7 @@ script:
   - if [[ "$START_ES_VERSION" != "" ]]; then docker-compose --file=docker/docker-compose.yml --file=docker/docker-compose.$START_ES_VERSION.yml up --detach; fi
   - if [[ "$RUN_TEST" = "true" ]]; then make install-tools; fi
   # Waiting for ES to be up and running, and all nodes to be in sync
-  - echo "Waiting for ES to be up and running" && sleep 7 & timeout 3m bash -c 'until curl -XGET http://127.0.0.1:9200; do sleep 7; done'
+  - if [[ "$RUN_TEST" = "true" ]]; then echo "Waiting for ES to be up and running"; sleep 7; timeout 3m bash -c 'until curl -XGET http://127.0.0.1:9200; do sleep 7; done'; fi
   - if [[ "$RUN_TEST" = "true" ]]; then make run-phpunit; fi
 
 #  - if [[ "$START_ES_VERSION" != "" ]]; then docker-compose --file=docker/elasticsearch$START_ES_VERSION/docker-compose.yml logs; fi
