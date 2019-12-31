@@ -6,6 +6,7 @@ services:
         command: >
             /bin/sh -c "./bin/elasticsearch-plugin list | grep -q ingest-attachment
             || ./bin/elasticsearch-plugin install --batch ingest-attachment;
+            chown elasticsearch /usr/share/elasticsearch/repository;
             /usr/local/bin/docker-entrypoint.sh"
         environment:
             - node.name=es01
@@ -15,13 +16,14 @@ services:
             - bootstrap.memory_lock=true
             - processors=1
             - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-            - path.repo="/usr/share/elasticsearch/data"
+            - path.repo=/usr/share/elasticsearch/repository
         ulimits:
             memlock:
                 soft: -1
                 hard: -1
         volumes:
             - data01:/usr/share/elasticsearch/data
+            - esrepo:/usr/share/elasticsearch/repository
         ports:
             - 127.0.0.1:9200:9200
         networks:
@@ -31,6 +33,7 @@ services:
         command: >
             /bin/sh -c "./bin/elasticsearch-plugin list | grep -q ingest-attachment
             || ./bin/elasticsearch-plugin install --batch ingest-attachment;
+            chown elasticsearch /usr/share/elasticsearch/repository;
             /usr/local/bin/docker-entrypoint.sh"
         environment:
             - node.name=es02
@@ -40,20 +43,20 @@ services:
             - bootstrap.memory_lock=true
             - processors=1
             - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-            - path.repo="/usr/share/elasticsearch/data"
+            - path.repo=/usr/share/elasticsearch/repository
         ulimits:
             memlock:
                 soft: -1
                 hard: -1
         volumes:
             - data02:/usr/share/elasticsearch/data
+            - esrepo:/usr/share/elasticsearch/repository
         networks:
             - elastic
 volumes:
     data01:
-        driver: local
     data02:
-        driver: local
+    esrepo:
 
 networks:
     elastic:
