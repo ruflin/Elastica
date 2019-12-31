@@ -34,6 +34,10 @@ install-tools: install-phpcs install-phpunit
 run-phpcs: composer-update install-phpcs
 	tools/php-cs-fixer.phar fix --dry-run --allow-risky=yes -v
 
+.PHONY: fix-phpcs
+fix-phpcs: composer-update install-phpcs
+	tools/php-cs-fixer.phar fix --allow-risky=yes -v
+
 .PHONY: run-phpunit
 run-phpunit: composer-update install-phpunit
 	tools/phpunit.phar

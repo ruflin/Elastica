@@ -84,4 +84,11 @@ class ClusterTest extends BaseTest
 =======
 >>>>>>> Fix cluster tests
     }
+
+    public function testGetSettings(): void
+    {
+        $settings = $this->_getClient()->getCluster()->getSettings();
+        $this->assertArrayHasKey('persistent', $settings->get());
+        $this->assertArrayHasKey('transient', $settings->get());
+    }
 }
