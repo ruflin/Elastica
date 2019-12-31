@@ -30,8 +30,8 @@ matrix:
 #      env: RUN_CS=true
 
     # Run ES functional tests only on PHP 7.2
-    - php: 7.2
-      env: RUN_TEST=true START_ES_VERSION=75
+#    - php: 7.2
+#      env: RUN_TEST=true START_ES_VERSION=75
 #    - php: 7.2
 #      env: RUN_TEST=true START_ES_VERSION=74
 #    - php: 7.2
@@ -58,13 +58,11 @@ before_script:
   - docker-compose --version
 
 script:
-  # Fail the build on first error
-  # - set -e
   - if [[ "$RUN_CS" = "true" ]]; then make run-phpcs; fi
   - if [[ "$START_ES_VERSION" != "" ]]; then docker-compose --file=docker/elasticsearch$START_ES_VERSION/docker-compose.yml up --detach; fi
   - if [[ "$RUN_TEST" = "true" ]]; then make install-tools; fi
   # Waiting for ES to be up and running, and all nodes to be in sync
-  - timeout 2m bash -c 'until curl -XGET http://127.0.0.1:9200; do sleep 5; done'
+  - echo "Waiting for ES to be up and running" && timeout 2m bash -c 'until curl -XGET http://127.0.0.1:9200; do sleep 5; done'
   - if [[ "$RUN_TEST" = "true" ]]; then make run-phpunit; fi
 
 #  - if [[ "$START_ES_VERSION" != "" ]]; then docker-compose --file=docker/elasticsearch$START_ES_VERSION/docker-compose.yml logs; fi
