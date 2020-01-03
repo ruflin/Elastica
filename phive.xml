@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phive xmlns="https://phar.io/phive">
-  <phar name="php-cs-fixer" version="^2.16.1" installed="2.16.1" location="./tools/php-cs-fixer.phar" copy="true"/>
+  <phar name="php-cs-fixer" version="^2.16" installed="2.16.1" location="./tools/php-cs-fixer.phar" copy="true"/>
   <phar name="phpunit" version="^6.0" installed="6.5.14" location="./tools/phpunit.phar" copy="true"/>
+  <phar name="php-coveralls" version="^2.2" installed="2.2.0" location="./tools/php-coveralls.phar" copy="true"/>
 </phive>

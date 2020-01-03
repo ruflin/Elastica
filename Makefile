@@ -1,7 +1,11 @@
+# Default version to start ES on Docker, overide with `START_ES_VERSION=75 make start-docker`
+START_ES_VERSION?=72
+
 .PHONY: clean
 clean:
 	rm tools -fr \
-	rm vendor -fr
+	rm vendor -fr \
+	rm build -fr
 
 tools/phive.phar:
 	mkdir tools; \
@@ -42,10 +46,36 @@ fix-phpcs: composer-update install-phpcs
 run-phpunit: composer-update install-phpunit
 	tools/phpunit.phar
 
+.PHONY: run-phpunit-coverage
+run-phpunit-coverage: composer-update install-phpunit
+	EXIT_STATUS=0 ; \
+	tools/phpunit.phar --coverage-clover build/coverage/unit-coverage.xml --group unit || EXIT_STATUS=$$? ; \
+	tools/phpunit.phar --coverage-clover build/coverage/functional-coverage.xml --group functional || EXIT_STATUS=$$? ; \
+	exit $$EXIT_STATUS
+
+.PHONY: run-coveralls
+run-coveralls:
+	tools/php-coveralls.phar -v
+
 tools/phpdocumentor.phar:
 	curl https://gitreleases.dev/gh/phpDocumentor/phpDocumentor/latest/phpDocumentor.phar -o tools/phpdocumentor.phar --silent -L
 	chmod +x tools/phpdocumentor.phar
 
 .PHONY: run-phpdoc
 run-phpdoc: tools/phpdocumentor.phar
-	tools/phpdocumentor.phar
+	tools/phpdocumentor.phar --directory=lib --target=build/docs --template=clean
+
+.PHONY: start-docker
+start-docker:
+	docker-compose --file=docker/docker-compose.yml --file=docker/docker-compose.es${START_ES_VERSION}.yml up
+
+## Additional commands
+
+# Visualise repo, requires `gource`
+.PHONY: gource
+gource:
+	gource --log-format git \
+		--seconds-per-day 0.1 \
+		--title 'Elastica (https://github.com/ruflin/Elastica)' \
+		--user-scale 1 \
+		--max-user-speed 50

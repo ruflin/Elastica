@@ -1,5 +1,7 @@
 version: '3.4'
 
+# The following ES services are not valid, as there is no `:latest` tag on those images. This is done on purpose, to
+#  allow users to override each service's version (see: docker-compose.es75.yml)
 services:
     es01:
         image: docker.elastic.co/elasticsearch/elasticsearch-oss:latest

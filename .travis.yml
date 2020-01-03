@@ -15,21 +15,15 @@ cache:
 #  - 7.3
 #  - 7.4
 
-# branches:
-#   except:
-#     - /^analysis-.*$/
-
 matrix:
   fast_finish: true
   include:
-    # Test installation on lowest requirements for PHP 7.2
-    #- php: 7.2
-    #  env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
-    # CS are running on the lowest PHP version
-    - php: 7.2
-      env: RUN_CS=true RUN_PHPDOC=true
-
-    # Run ES functional tests only on PHP 7.2
+    # Coding-styles are running on the lowest version of PHP
+    # plus: we test the installation on lowest requirements for PHP 7.2
+#    - php: 7.2
+#      env: RUN_CS=true COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
+#
+#    # Run tests only on the lowest version of PHP 7.2, with all versions of ElasticSearch server
 #    - php: 7.2
 #      env: RUN_TEST=true START_ES_VERSION=75
 #    - php: 7.2
@@ -38,14 +32,12 @@ matrix:
 #      env: RUN_TEST=true START_ES_VERSION=73
 #    - php: 7.2
 #      env: RUN_TEST=true START_ES_VERSION=72
+    # Run coverage on lowest version of ElasticSearch, no need to run it for all variations
     - php: 7.2
-      env: RUN_TEST=true START_ES_VERSION=71
-
-#    - php: 7.4
-#      env: COVERAGE=true TEST_COMMAND="composer test-ci"
+      env: RUN_TEST=coverage START_ES_VERSION=71
 
 before_install:
-  - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini || true; fi
+  - if [[ "$RUN_TEST" != "coverage" ]]; then phpenv config-rm xdebug.ini || true; fi
 
 install:
   - travis_retry make composer-update
@@ -59,14 +51,15 @@ before_script:
 
 script:
   - if [[ "$RUN_CS" = "true" ]]; then make run-phpcs; fi
-  - if [[ "$RUN_PHPDOC" = "true" ]]; then make run-phpdoc; fi
-  - if [[ "$START_ES_VERSION" != "" ]]; then docker-compose --file=docker/docker-compose.yml --file=docker/docker-compose.$START_ES_VERSION.yml up --detach; fi
-  - if [[ "$RUN_TEST" = "true" ]]; then make install-tools; fi
+  - if [[ "$START_ES_VERSION" != "" ]]; then docker-compose --file=docker/docker-compose.yml --file=docker/docker-compose.es$START_ES_VERSION.yml up --detach; fi
+  - if [[ "$RUN_TEST" != "" ]]; then make install-tools; fi
   # Waiting for ES to be up and running, and all nodes to be in sync
-  - if [[ "$RUN_TEST" = "true" ]]; then echo "Waiting for ES to be up and running"; sleep 7; timeout 3m bash -c 'until curl -XGET http://127.0.0.1:9200; do sleep 7; done'; fi
+  - if [[ "$RUN_TEST" != "" ]]; then echo "Waiting for ES to be up and running"; sleep 7; timeout 3m bash -c 'until curl -XGET http://127.0.0.1:9200; do sleep 7; done'; fi
   - if [[ "$RUN_TEST" = "true" ]]; then make run-phpunit; fi
+  - if [[ "$RUN_TEST" = "coverage" ]]; then make run-phpunit-coverage; fi
 
-#  - if [[ "$START_ES_VERSION" != "" ]]; then docker-compose --file=docker/elasticsearch$START_ES_VERSION/docker-compose.yml logs; fi
+#  - if [[ "$START_ES_VERSION" != "" ]]; then docker-compose --file=docker/docker-compose.yml --file=docker/docker-compose.es$START_ES_VERSION.yml logs; fi
+
 # after_success:
 #   - if [[ $COVERAGE = true ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
 #   - if [[ $COVERAGE = true ]]; then php ocular.phar code-coverage:upload --format=php-clover build/coverage.xml; fi
@@ -123,7 +116,6 @@ script:
 #   - cat /var/log/nginx/*.log
 #   - sudo rm composer.lock && sudo composer require satooshi/php-coveralls dev-master --no-ansi --no-progress --no-interaction
 #
-# after_success:
-#   - bash <(curl -s https://codecov.io/bash)
-#   - vendor/bin/coveralls -v
-#
+
+after_success:
+  - travis_retry make run-coveralls
