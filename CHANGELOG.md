@@ -11,9 +11,10 @@ All notable changes to this project will be documented in this file based on the
 * Fixed handling of Search::OPTION_SEARCH_IGNORE_UNAVAILABLE inside Scroll object
 
 ### Added
-Added `DiversifiedSampler` aggregation [#1735](https://github.com/ruflin/Elastica/pull/1735)
 
+* Added `DiversifiedSampler` aggregation [#1735](https://github.com/ruflin/Elastica/pull/1735)
 * Added `\Elastica\Query\DistanceFeature` [#1730](https://github.com/ruflin/Elastica/pull/1730)
+* Added support for injecting a callable AWS credential provider to use static, cached, or custom-sourced credentials [#1667](https://github.com/ruflin/Elastica/pull/1667)
 
 ### Improvements
 
