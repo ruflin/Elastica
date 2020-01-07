@@ -18,6 +18,8 @@ All notable changes to this project will be documented in this file based on the
 
 ### Improvements
 
+* Scroll releases previous ResultSet from memory before calling ES for next data batch
+
 ### Deprecated
 
 ## [7.0.0-beta2](https://github.com/ruflin/Elastica/compare/7.0.0-beta1...7.0.0-beta2)
