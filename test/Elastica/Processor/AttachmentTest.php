@@ -8,12 +8,15 @@ use Elastica\Mapping;
 use Elastica\Processor\Attachment;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
+/**
+ * @group functional
+ */
 class AttachmentTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
-    public function testAttachment()
+    public function testAttachment(): void
     {
         $processor = new Attachment('data');
 
@@ -29,7 +32,7 @@ class AttachmentTest extends BasePipelineTest
     /**
      * @group unit
      */
-    public function testAttachmentWithNonDefaultOptions()
+    public function testAttachmentWithNonDefaultOptions(): void
     {
         $processor = new Attachment('data');
         $processor->setIndexedChars(1000);
@@ -50,10 +53,7 @@ class AttachmentTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group functional
-     */
-    public function testAttachmentAddPdf()
+    public function testAttachmentAddPdf(): void
     {
         $attachment = new Attachment('data');
         $pipeline = $this->_createPipeline('my_custom_pipeline_attachment', 'pipeline for Attachment');
@@ -66,7 +66,7 @@ class AttachmentTest extends BasePipelineTest
         $bulk->setIndex($index);
 
         $doc1 = new Document(null);
-        $doc1->addFile('data', BASE_PATH.'/data/test.pdf');
+        $doc1->addFile('data', __DIR__.'/../../data/test.pdf');
         $doc2 = new Document(2, ['data' => '', 'text' => 'test running in basel']);
 
         $bulk->addDocuments([
@@ -92,10 +92,7 @@ class AttachmentTest extends BasePipelineTest
         $this->assertEquals(0, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
-    public function testAttachmentAddPdfFileContent()
+    public function testAttachmentAddPdfFileContent(): void
     {
         $attachment = new Attachment('data');
         $pipeline = $this->_createPipeline('my_custom_pipeline_attachment', 'pipeline for Attachment');
@@ -108,7 +105,7 @@ class AttachmentTest extends BasePipelineTest
         $bulk->setIndex($index);
 
         $doc1 = new Document(null);
-        $doc1->addFile('data', BASE_PATH.'/data/test.pdf');
+        $doc1->addFile('data', __DIR__.'/../../data/test.pdf');
         $doc1->set('text', 'basel world');
 
         $doc2 = new Document(2, ['data' => '', 'text' => 'test running in basel']);
@@ -137,10 +134,7 @@ class AttachmentTest extends BasePipelineTest
         $this->assertEquals(0, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
-    public function testAddWordxFile()
+    public function testAddWordxFile(): void
     {
         $attachment = new Attachment('data');
         $pipeline = $this->_createPipeline('my_custom_pipeline_attachment', 'pipeline for Attachment');
@@ -153,7 +147,7 @@ class AttachmentTest extends BasePipelineTest
         $bulk->setIndex($index);
 
         $doc1 = new Document(null);
-        $doc1->addFile('data', BASE_PATH.'/data/test.docx');
+        $doc1->addFile('data', __DIR__.'/../../data/test.docx');
         $doc1->set('text', 'basel world');
 
         $doc2 = new Document(2, ['data' => '', 'text' => 'test running in basel']);
@@ -180,10 +174,7 @@ class AttachmentTest extends BasePipelineTest
         $this->assertEquals(0, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
-    public function testExcludeFileSource()
+    public function testExcludeFileSource(): void
     {
         $attachment = new Attachment('data');
         $pipeline = $this->_createPipeline('my_custom_pipeline_attachment', 'pipeline for Attachment');
@@ -207,7 +198,7 @@ class AttachmentTest extends BasePipelineTest
         $doc1 = new Document($docId);
         $doc1->set('text', $text);
         $doc1->set('title', $title);
-        $doc1->addFile('data', BASE_PATH.'/data/test.docx');
+        $doc1->addFile('data', __DIR__.'/../../data//test.docx');
 
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);

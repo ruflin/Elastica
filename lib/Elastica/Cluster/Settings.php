@@ -168,14 +168,6 @@ class Settings
         return $this->_client;
     }
 
-    /**
-     * Sends settings request.
-     *
-     * @param array  $data   OPTIONAL Data array
-     * @param string $method OPTIONAL Transfer method (default = \Elastica\Request::GET)
-     *
-     * @return Response Response object
-     */
     public function request(array $data = [], string $method = Request::GET): Response
     {
         $path = '_cluster/settings';

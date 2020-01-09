@@ -16,12 +16,12 @@ use Elastica\Status;
 use Elastica\Test\Base as BaseTest;
 use Elasticsearch\Endpoints\Indices\Analyze;
 
+/**
+ * @group functional
+ */
 class IndexTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
-    public function testMapping()
+    public function testMapping(): void
     {
         $index = $this->_createIndex();
 
@@ -46,10 +46,7 @@ class IndexTest extends BaseTest
         $this->assertEquals($storedMapping['properties']['test']['type'], 'integer');
     }
 
-    /**
-     * @group functional
-     */
-    public function testGetMappingAlias()
+    public function testGetMappingAlias(): void
     {
         $index = $this->_createIndex();
         $indexName = $index->getName();
@@ -75,10 +72,7 @@ class IndexTest extends BaseTest
         $this->assertEquals($mapping1, $mapping2);
     }
 
-    /**
-     * @group functional
-     */
-    public function testAddRemoveAlias()
+    public function testAddRemoveAlias(): void
     {
         $this->expectException(ResponseException::class);
 
@@ -105,10 +99,7 @@ class IndexTest extends BaseTest
         $client->getIndex($aliasName)->search('ruflin');
     }
 
-    /**
-     * @group functional
-     */
-    public function testCount()
+    public function testCount(): void
     {
         $index = $this->_createIndex();
 
@@ -131,10 +122,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(1, $index->count($query));
     }
 
-    /**
-     * @group functional
-     */
-    public function testCountGet()
+    public function testCountGet(): void
     {
         $index = $this->_createIndex();
 
@@ -157,10 +145,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(1, $index->count($query, Request::GET));
     }
 
-    /**
-     * @group functional
-     */
-    public function testDeleteByQueryWithQueryString()
+    public function testDeleteByQueryWithQueryString(): void
     {
         $index = $this->_createIndex();
         $index->addDocuments([
@@ -189,10 +174,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(0, $response->count());
     }
 
-    /**
-     * @group functional
-     */
-    public function testDeleteByQueryWithQuery()
+    public function testDeleteByQueryWithQuery(): void
     {
         $index = $this->_createIndex();
         $index->addDocuments([
@@ -221,10 +203,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(0, $response->count());
     }
 
-    /**
-     * @group functional
-     */
-    public function testDeleteByQueryWithArrayQuery()
+    public function testDeleteByQueryWithArrayQuery(): void
     {
         $index = $this->_createIndex();
         $index->addDocuments([
@@ -253,10 +232,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(0, $response->count());
     }
 
-    /**
-     * @group functional
-     */
-    public function testDeleteByQueryWithQueryAndOptions()
+    public function testDeleteByQueryWithQueryAndOptions(): void
     {
         $index = $this->_createIndex(null, true, 2);
 
@@ -312,10 +288,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(0, $response->count());
     }
 
-    /**
-     * @group functional
-     */
-    public function testUpdateByQueryWithQueryString()
+    public function testUpdateByQueryWithQueryString(): void
     {
         $index = $this->_createIndex();
         $index->addDocuments([
@@ -347,10 +320,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(0, $response->count());
     }
 
-    /**
-     * @group functional
-     */
-    public function testUpdateByQueryAll()
+    public function testUpdateByQueryAll(): void
     {
         $index = $this->_createIndex();
         $index->addDocuments([
@@ -382,10 +352,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(0, $response->count());
     }
 
-    /**
-     * @group functional
-     */
-    public function testDeleteIndexDeleteAlias()
+    public function testDeleteIndexDeleteAlias(): void
     {
         $indexName = 'test';
         $aliasName = 'test-aliase';
@@ -408,10 +375,7 @@ class IndexTest extends BaseTest
         $this->assertFalse($status->aliasExists($aliasName));
     }
 
-    /**
-     * @group functional
-     */
-    public function testAddAliasTwoIndices()
+    public function testAddAliasTwoIndices(): void
     {
         $indexName1 = 'test1';
         $aliasName = 'test-alias';
@@ -434,10 +398,7 @@ class IndexTest extends BaseTest
         $this->assertTrue($index1->hasAlias($aliasName));
     }
 
-    /**
-     * @group functional
-     */
-    public function testReplaceAlias()
+    public function testReplaceAlias(): void
     {
         $indexName1 = 'test1';
         $aliasName = 'test-alias';
@@ -457,10 +418,7 @@ class IndexTest extends BaseTest
         $this->assertTrue($index1->hasAlias($aliasName));
     }
 
-    /**
-     * @group functional
-     */
-    public function testAddDocumentVersion()
+    public function testAddDocumentVersion(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
@@ -478,30 +436,21 @@ class IndexTest extends BaseTest
         $this->assertEquals(2, $data['_version']);
     }
 
-    /**
-     * @group functional
-     */
-    public function testClearCache()
+    public function testClearCache(): void
     {
         $index = $this->_createIndex();
         $response = $index->clearCache();
         $this->assertFalse($response->hasError());
     }
 
-    /**
-     * @group functional
-     */
-    public function testFlush()
+    public function testFlush(): void
     {
         $index = $this->_createIndex();
         $response = $index->flush();
         $this->assertFalse($response->hasError());
     }
 
-    /**
-     * @group functional
-     */
-    public function testExists()
+    public function testExists(): void
     {
         $index = $this->_createIndex();
 
@@ -518,10 +467,8 @@ class IndexTest extends BaseTest
      * Tests if deleting an index that does not exist in Elasticsearch,
      * correctly returns a boolean true from the hasError() method of
      * the \Elastica\Response object
-     *
-     * @group functional
      */
-    public function testDeleteMissingIndexHasError()
+    public function testDeleteMissingIndexHasError(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('index_does_not_exist');
@@ -539,10 +486,8 @@ class IndexTest extends BaseTest
 
     /**
      * Tests to see if the test type mapping exists when calling $index->getMapping().
-     *
-     * @group functional
      */
-    public function testIndexGetMapping()
+    public function testIndexGetMapping(): void
     {
         $index = $this->_createIndex();
         $mappings = new Mapping([
@@ -563,25 +508,17 @@ class IndexTest extends BaseTest
         $this->assertEquals($indexMappings['properties']['test']['type'], 'integer');
     }
 
-    /**
-     * Tests to see if the index is empty when there are no types set.
-     *
-     * @group functional
-     */
-    public function testEmptyIndexGetMapping()
+    public function testEmptyIndexGetMapping(): void
     {
-        $index = $this->_createIndex();
-        $indexMappings = $index->getMapping();
+        $indexMappings = $this->_createIndex()->getMapping();
 
-        $this->assertEmpty($indexMappings['elastica_test']);
+        $this->assertEmpty($indexMappings);
     }
 
     /**
      * Test to see if search Default Limit works.
-     *
-     * @group functional
      */
-    public function testLimitDefaultIndex()
+    public function testLimitDefaultIndex(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('zero');
@@ -612,10 +549,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
-    public function testCreate()
+    public function testCreate(): void
     {
         $client = $this->_getClient();
         $indexName = 'test';
@@ -638,7 +572,7 @@ class IndexTest extends BaseTest
     /**
      * @group unit
      */
-    public function testCreateWithInvalidOption()
+    public function testCreateWithInvalidOption(): void
     {
         $this->expectException(InvalidException::class);
 
@@ -650,10 +584,7 @@ class IndexTest extends BaseTest
         $index->create([], $opts);
     }
 
-    /**
-     * @group functional
-     */
-    public function testCreateSearch()
+    public function testCreateSearch(): void
     {
         $client = $this->_getClient();
         $index = new Index($client, 'test');
@@ -678,10 +609,7 @@ class IndexTest extends BaseTest
         $this->assertTrue($search->hasIndex($index));
     }
 
-    /**
-     * @group functional
-     */
-    public function testSearch()
+    public function testSearch(): void
     {
         $index = $this->_createIndex();
 
@@ -708,10 +636,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(3, $count);
     }
 
-    /**
-     * @group functional
-     */
-    public function testSearchGet()
+    public function testSearchGet(): void
     {
         $index = $this->_createIndex();
         $docs = [];
@@ -726,10 +651,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(1, $count);
     }
 
-    /**
-     * @group functional
-     */
-    public function testForcemerge()
+    public function testForcemerge(): void
     {
         $index = $this->_createIndex('testforcemerge_indextest', false, 3);
 
@@ -756,10 +678,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(0, $stats['_all']['primaries']['docs']['deleted']);
     }
 
-    /**
-     * @group functional
-     */
-    public function testAnalyze()
+    public function testAnalyze(): void
     {
         $index = $this->_createIndex();
         $index->refresh();
@@ -778,10 +697,7 @@ class IndexTest extends BaseTest
         $this->assertEquals($tokens, $returnedTokens);
     }
 
-    /**
-     * @group functional
-     */
-    public function testRequestEndpoint()
+    public function testRequestEndpoint(): void
     {
         $index = $this->_createIndex();
         $index->refresh();
@@ -803,10 +719,7 @@ class IndexTest extends BaseTest
         $this->assertEquals($tokens, $returnedTokens);
     }
 
-    /**
-     * @group functional
-     */
-    public function testAnalyzeExplain()
+    public function testAnalyzeExplain(): void
     {
         $index = $this->_createIndex();
         $index->refresh();
@@ -815,10 +728,7 @@ class IndexTest extends BaseTest
         $this->assertArrayHasKey('custom_analyzer', $data);
     }
 
-    /**
-     * @group functional
-     */
-    public function testGetEmptyAliases()
+    public function testGetEmptyAliases(): void
     {
         $indexName = 'test-getaliases';
 

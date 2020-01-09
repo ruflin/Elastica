@@ -10,7 +10,6 @@ class AggregationMetadataTest extends BaseAggregationTest
     protected function _getIndexForTest()
     {
         $index = $this->_createIndex();
-
         $index->refresh();
 
         return $index;

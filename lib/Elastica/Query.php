@@ -87,11 +87,6 @@ class Query extends Param
         return $this;
     }
 
-    /**
-     * Sets the query.
-     *
-     * @param AbstractQuery $query Query object
-     */
     public function setQuery(AbstractQuery $query): self
     {
         return $this->setParam('query', $query);
@@ -256,11 +251,8 @@ class Query extends Param
 
     /**
      * Adds a Script to the query.
-     *
-     * @param string                          $name
-     * @param \Elastica\Script\AbstractScript $script Script object
      */
-    public function addScriptField($name, AbstractScript $script): self
+    public function addScriptField(string $name, AbstractScript $script): self
     {
         if (isset($this->_params['script_fields'])) {
             $this->_params['script_fields']->addScript($name, $script);

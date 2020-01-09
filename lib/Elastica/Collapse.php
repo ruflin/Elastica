@@ -5,39 +5,28 @@ namespace Elastica;
 use Elastica\Collapse\InnerHits;
 
 /**
- * Class Collapse.
+ * Implementation of field collapse.
  *
- * Implementation of Collapse
- *
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-collapse.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-collapse
  */
 class Collapse extends Param
 {
     /**
      * Set field to collapse.
-     *
-     * @param $fieldName
-     *
-     * @return $this
      */
-    public function setFieldname($fieldName): self
+    public function setFieldname(string $fieldName): self
     {
         return $this->setParam('field', $fieldName);
     }
 
     /**
      * Set inner hits for collapsed field.
-     *
-     * @return $this
      */
     public function setInnerHits(InnerHits $innerHits): self
     {
         return $this->setParam('inner_hits', $innerHits);
     }
 
-    /**
-     * @return Collapse
-     */
     public function addInnerHits(InnerHits $innerHits): self
     {
         $hits = [];
@@ -53,9 +42,6 @@ class Collapse extends Param
         return $this->setParam('inner_hits', $hits);
     }
 
-    /**
-     * @return $this
-     */
     public function setMaxConcurrentGroupSearches(int $groupSearches): self
     {
         return $this->setParam('max_concurrent_group_searches', $groupSearches);
