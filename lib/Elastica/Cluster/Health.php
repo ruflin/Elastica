@@ -24,9 +24,6 @@ class Health
      */
     protected $_data;
 
-    /**
-     * @param Client $client the Elastica client
-     */
     public function __construct(Client $client)
     {
         $this->_client = $client;
@@ -56,8 +53,6 @@ class Health
 
     /**
      * Refreshes the health data for the cluster.
-     *
-     * @return $this
      */
     public function refresh(): self
     {

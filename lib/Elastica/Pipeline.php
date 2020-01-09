@@ -22,27 +22,20 @@ use Elasticsearch\Endpoints\Ingest\Pipeline\Put;
 class Pipeline extends Param
 {
     /**
-     * @var string name of the pipeline
+     * @var string
      */
     protected $id;
 
     /**
-     * Client Object.
-     *
      * @var Client Client object
      */
     protected $_client;
 
     /**
-     * Processors array.
-     *
-     * @var array
+     * @var AbstractProcessor[]
      */
     protected $_processors = [];
 
-    /**
-     * Create a new Pipeline Object.
-     */
     public function __construct(Client $client)
     {
         $this->_client = $client;
@@ -51,11 +44,9 @@ class Pipeline extends Param
     /**
      * Create a Pipeline.
      *
-     * @return Response
-     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/put-pipeline-api.html
      */
-    public function create()
+    public function create(): Response
     {
         if (empty($this->id)) {
             throw new InvalidException('You should set a valid pipeline id');
@@ -79,13 +70,9 @@ class Pipeline extends Param
     /**
      * Get a Pipeline Object.
      *
-     * @param string $id Pipeline name
-     *
-     * @return Response
-     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/get-pipeline-api.html
      */
-    public function getPipeline(string $id)
+    public function getPipeline(string $id): Response
     {
         $endpoint = new Get();
         $endpoint->setID($id);
@@ -96,13 +83,9 @@ class Pipeline extends Param
     /**
      * Delete a Pipeline.
      *
-     * @param string $id Pipeline name
-     *
-     * @return Response
-     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-pipeline-api.html
      */
-    public function deletePipeline(string $id)
+    public function deletePipeline(string $id): Response
     {
         $endpoint = new Delete();
         $endpoint->setID($id);
@@ -122,22 +105,15 @@ class Pipeline extends Param
      * Sets query as raw array. Will overwrite all already set arguments.
      *
      * @param array $processors array
-     *
-     * @return $this
      */
-    public function setRawProcessors(array $processors)
+    public function setRawProcessors(array $processors): self
     {
         $this->_processors = $processors;
 
         return $this;
     }
 
-    /**
-     * Add a processor.
-     *
-     * @return $this
-     */
-    public function addProcessor(AbstractProcessor $processor)
+    public function addProcessor(AbstractProcessor $processor): self
     {
         if (empty($this->_processors)) {
             $this->_processors['processors'] = $processor->toArray();
@@ -149,66 +125,51 @@ class Pipeline extends Param
         return $this;
     }
 
-    /**
-     * Set pipeline id.
-     */
-    public function setId(string $id)
+    public function setId(string $id): self
     {
         $this->id = $id;
+
+        return $this;
     }
 
     /**
-     * Sets the processors.
-     *
-     * @param array $processors array of AbstractProcessor object
-     *
-     * @return $this
+     * @param AbstractProcessor[]
      */
-    public function setProcessors(array $processors)
+    public function setProcessors(array $processors): self
     {
-        return $this->setParam('processors', [$processors]);
+        $this->setParam('processors', [$processors]);
+
+        return $this;
     }
 
-    /**
-     * Set Description.
-     *
-     * @return $this
-     */
-    public function setDescription(string $description)
+    public function setDescription(string $description): self
     {
-        return $this->setParam('description', $description);
+        $this->setParam('description', $description);
+
+        return $this;
     }
 
     /**
      * Converts the params to an array. A default implementation exist to create
      * the an array out of the class name (last part of the class name)
      * and the params.
-     *
-     * @return array Filter array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $this->_params['processors'] = [$this->_processors['processors']];
 
         return $this->getParams();
     }
 
-    /**
-     * Returns index client.
-     *
-     * @return \Elastica\Client Index client object
-     */
-    public function getClient()
+    public function getClient(): Client
     {
         return $this->_client;
     }
 
     /**
      * Makes calls to the elasticsearch server with usage official client Endpoint based on this index.
-     *
-     * @return Response
      */
-    public function requestEndpoint(AbstractEndpoint $endpoint)
+    public function requestEndpoint(AbstractEndpoint $endpoint): Response
     {
         $cloned = clone $endpoint;
 

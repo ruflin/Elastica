@@ -19,14 +19,14 @@ class Cluster
     /**
      * Client.
      *
-     * @var \Elastica\Client Client object
+     * @var Client Client object
      */
     protected $_client;
 
     /**
      * Cluster state response.
      *
-     * @var \Elastica\Response
+     * @var Response
      */
     protected $_response;
 
@@ -39,8 +39,6 @@ class Cluster
 
     /**
      * Creates a cluster object.
-     *
-     * @param \Elastica\Client $client Connection client object
      */
     public function __construct(Client $client)
     {
@@ -51,7 +49,7 @@ class Cluster
     /**
      * Refreshes all cluster information (state).
      */
-    public function refresh()
+    public function refresh(): void
     {
         $this->_response = $this->_client->requestEndpoint(new State());
         $this->_data = $this->getResponse()->getData();
@@ -59,10 +57,8 @@ class Cluster
 
     /**
      * Returns the response object.
-     *
-     * @return \Elastica\Response Response object
      */
-    public function getResponse()
+    public function getResponse(): Response
     {
         return $this->_response;
     }
@@ -70,9 +66,9 @@ class Cluster
     /**
      * Return list of index names.
      *
-     * @return array List of index names
+     * @return string[]
      */
-    public function getIndexNames()
+    public function getIndexNames(): array
     {
         return \array_keys($this->_data['metadata']['indices']);
     }
@@ -80,11 +76,9 @@ class Cluster
     /**
      * Returns the full state of the cluster.
      *
-     * @return array State array
-     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-state.html
      */
-    public function getState()
+    public function getState(): array
     {
         return $this->_data;
     }
@@ -92,9 +86,9 @@ class Cluster
     /**
      * Returns a list of existing node names.
      *
-     * @return array List of node names
+     * @return string[]
      */
-    public function getNodeNames()
+    public function getNodeNames(): array
     {
         $data = $this->getState();
         $nodeNames = [];
@@ -108,9 +102,9 @@ class Cluster
     /**
      * Returns all nodes of the cluster.
      *
-     * @return \Elastica\Node[]
+     * @return Node[]
      */
-    public function getNodes()
+    public function getNodes(): array
     {
         $nodes = [];
         $data = $this->getState();
@@ -122,12 +116,7 @@ class Cluster
         return $nodes;
     }
 
-    /**
-     * Returns the client object.
-     *
-     * @return \Elastica\Client Client object
-     */
-    public function getClient()
+    public function getClient(): Client
     {
         return $this->_client;
     }
@@ -138,8 +127,6 @@ class Cluster
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
      *
      * @param array $args Additional arguments
-     *
-     * @throws \Elastica\Exception\NotImplementedException
      */
     public function getInfo(array $args)
     {
@@ -150,20 +137,16 @@ class Cluster
      * Return Cluster health.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html
-     *
-     * @return \Elastica\Cluster\Health
      */
-    public function getHealth()
+    public function getHealth(): Health
     {
         return new Health($this->getClient());
     }
 
     /**
      * Return Cluster settings.
-     *
-     * @return \Elastica\Cluster\Settings
      */
-    public function getSettings()
+    public function getSettings(): Settings
     {
         return new Settings($this->getClient());
     }

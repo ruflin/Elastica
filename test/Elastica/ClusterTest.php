@@ -3,74 +3,63 @@
 namespace Elastica\Test;
 
 use Elastica\Cluster;
-use Elastica\Cluster\Health;
 use Elastica\Node;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @group functional
+ */
 class ClusterTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
-    public function testGetNodeNames()
+    public function testGetNodeNames(): void
     {
         $client = $this->_getClient();
-        $data = $client->request('/')->getData();
-
         $cluster = new Cluster($client);
 
         $data = $client->request('_nodes')->getData();
         $rawNodes = $data['nodes'];
 
-        $rawNodeNames = [];
-
+        $expectedNodeNames = [];
         foreach ($rawNodes as $rawNode) {
-            $rawNodeNames[] = $rawNode['name'];
+            $expectedNodeNames[] = $rawNode['name'];
         }
 
-        $this->assertEquals(\asort($rawNodeNames), \asort($cluster->getNodeNames()));
+        $nodes = $cluster->getNodeNames();
+        $this->assertSame(\sort($expectedNodeNames), \sort($nodes));
     }
 
-    /**
-     * @group functional
-     */
-    public function testGetNodes()
+    public function testGetNodes(): void
     {
-        $client = $this->_getClient();
-        $cluster = $client->getCluster();
-
+        $cluster = $this->_getClient()->getCluster();
         $nodes = $cluster->getNodes();
 
-        $this->assertContainsOnlyInstancesOf(Node::class, $nodes);
         $this->assertGreaterThan(0, \count($nodes));
+        $this->assertContainsOnlyInstancesOf(Node::class, $nodes);
     }
 
-    /**
-     * @group functional
-     */
-    public function testGetState()
+    public function testGetState(): void
     {
-        $client = $this->_getClient();
-        $cluster = $client->getCluster();
+        $cluster = $this->_getClient()->getCluster();
         $state = $cluster->getState();
-        $this->assertInternalType('array', $state);
+
+        $this->assertArrayHasKey('cluster_name', $state);
+        $this->assertArrayHasKey('cluster_uuid', $state);
+        $this->assertArrayHasKey('state_uuid', $state);
     }
 
-    /**
-     * @group functional
-     */
-    public function testGetIndexNames()
+    public function testGetIndexNames(): void
     {
-        $client = $this->_getClient();
-        $cluster = $client->getCluster();
+        $cluster = $this->_getClient()->getCluster();
 
         $index = $this->_createIndex();
+        $indexName = $index->getName();
+
         $index->delete();
         $cluster->refresh();
 
         // Checks that index does not exist
         $indexNames = $cluster->getIndexNames();
-        $this->assertNotContains($index->getName(), $indexNames);
+        $this->assertNotContains($indexName, $indexNames);
 
         $index = $this->_createIndex();
         $cluster->refresh();
@@ -80,12 +69,16 @@ class ClusterTest extends BaseTest
         $this->assertContains($index->getname(), $indexNames);
     }
 
-    /**
-     * @group functional
-     */
-    public function testGetHealth()
+    public function testGetHealth(): void
     {
-        $client = $this->_getClient();
-        $this->assertInstanceOf(Health::class, $client->getCluster()->getHealth());
+        $health = $this->_getClient()->getCluster()->getHealth();
+        $this->assertSame('green', $health->getStatus());
+    }
+
+    public function testGetSettings(): void
+    {
+        $settings = $this->_getClient()->getCluster()->getSettings();
+        $this->assertArrayHasKey('persistent', $settings->get());
+        $this->assertArrayHasKey('transient', $settings->get());
     }
 }

@@ -22,41 +22,6 @@ class Base extends TestCase
         \error_reporting(\error_reporting() | E_USER_DEPRECATED);
     }
 
-    protected function assertFileDeprecated($file, $deprecationMessage)
-    {
-        $content = \file_get_contents($file);
-        $content = \preg_replace('/^(abstract class|class) ([a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]+)/m', '${1} ${2}'.\uniqid(), $content);
-        $newFile = \tempnam(\sys_get_temp_dir(), 'elastica-test-');
-        \file_put_contents($newFile, $content);
-
-        $errorsCollector = $this->startCollectErrors();
-
-        require $newFile;
-        \unlink($newFile);
-
-        $this->finishCollectErrors();
-        $errorsCollector->assertOnlyOneDeprecatedError($deprecationMessage);
-    }
-
-    /**
-     * @return ErrorsCollector
-     */
-    protected function startCollectErrors()
-    {
-        $errorsCollector = new ErrorsCollector($this);
-
-        \set_error_handler(function () use ($errorsCollector) {
-            $errorsCollector->add(\func_get_args());
-        });
-
-        return $errorsCollector;
-    }
-
-    protected function finishCollectErrors()
-    {
-        \restore_error_handler();
-    }
-
     /**
      * @param array $params Additional configuration params. Host and Port are already set
      */
@@ -104,18 +69,19 @@ class Base extends TestCase
 
     protected function _createIndex(?string $name = null, bool $delete = true, int $shards = 1): Index
     {
-        if (null === $name) {
-            $name = \preg_replace('/[^a-z]/i', '', \strtolower(\get_called_class()).\uniqid());
-        }
+        $name = $name ?: static::buildUniqueId();
 
         $client = $this->_getClient();
-        $index = $client->getIndex('elastica_'.$name);
+        $index = $client->getIndex($name);
 
-        if ('elasticsearch' === \getenv('ES_HOST')) {
-            $index->create(['settings' => ['index' => ['number_of_shards' => $shards, 'number_of_replicas' => 1]]], $delete);
-        }
+        $index->create(['settings' => ['index' => ['number_of_shards' => $shards, 'number_of_replicas' => 1]]], $delete);
 
         return $index;
+    }
+
+    protected static function buildUniqueId(): string
+    {
+        return \preg_replace('/[^a-z]/i', '', \strtolower(static::class).\uniqid());
     }
 
     protected function _createRenamePipeline()

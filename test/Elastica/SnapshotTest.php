@@ -7,107 +7,106 @@ use Elastica\Exception\NotFoundException;
 use Elastica\Index;
 use Elastica\Snapshot;
 
+/**
+ * @group functional
+ */
 class SnapshotTest extends Base
 {
+    private const SNAPSHOT_PATH = '/usr/share/elasticsearch/data/';
+    private const REPOSITORY_NAME = 'repo-name';
+
     /**
      * @var Snapshot
      */
-    protected $_snapshot;
+    protected $snapshot;
 
     /**
      * @var Index
      */
-    protected $_index;
-
-    protected $_snapshotPath = '/usr/share/elasticsearch/data/';
+    protected $index;
 
     /**
      * @var Document[]
      */
-    protected $_docs;
+    protected $docs;
 
     protected function setUp()
     {
         parent::setUp();
-        $this->_snapshot = new Snapshot($this->_getClient());
+        $this->snapshot = new Snapshot($this->_getClient());
 
-        $this->_index = $this->_createIndex();
-        $this->_docs = [
+        $this->index = $this->_createIndex();
+        $this->docs = [
             new Document('1', ['city' => 'San Diego']),
             new Document('2', ['city' => 'San Luis Obispo']),
             new Document('3', ['city' => 'San Francisco']),
         ];
-        $this->_index->addDocuments($this->_docs);
-        $this->_index->refresh();
+        $this->index->addDocuments($this->docs);
+        $this->index->refresh();
     }
 
-    /**
-     * @group functional
-     */
-    public function testRegisterRepository()
+    public function testRegisterRepository(): void
     {
-        $repositoryName = 'testrepo';
-        $location = $this->_snapshotPath.'backup1';
+        $location = $this->registerRepository('backup1');
 
-        $response = $this->_snapshot->registerRepository($repositoryName, 'fs', ['location' => $location]);
-        $this->assertTrue($response->isOk());
-
-        $response = $this->_snapshot->getRepository($repositoryName);
+        $response = $this->snapshot->getRepository(self::REPOSITORY_NAME);
         $this->assertEquals($location, $response['settings']['location']);
 
         // attempt to retrieve a repository which does not exist
         $this->expectException(NotFoundException::class);
-        $this->_snapshot->getRepository('foobar');
+        $this->snapshot->getRepository('foobar');
     }
 
-    /**
-     * @group functional
-     */
-    public function testSnapshotAndRestore()
+    public function testSnapshotAndRestore(): void
     {
-        $repositoryName = 'testrepo';
-        $location = $this->_snapshotPath.'backup2';
-
-        // register the repository
-        $response = $this->_snapshot->registerRepository($repositoryName, 'fs', ['location' => $location]);
-        $this->assertTrue($response->isOk());
+        $this->registerRepository('backup2');
 
         // create a snapshot of our test index
         $snapshotName = 'test_snapshot_1';
-        $response = $this->_snapshot->createSnapshot($repositoryName, $snapshotName, ['indices' => $this->_index->getName()], true);
+        $response = $this->snapshot->createSnapshot(self::REPOSITORY_NAME, $snapshotName, ['indices' => $this->index->getName()], true);
 
         // ensure that the snapshot was created properly
         $this->assertTrue($response->isOk());
         $this->assertArrayHasKey('snapshot', $response->getData());
         $data = $response->getData();
-        $this->assertContains($this->_index->getName(), $data['snapshot']['indices']);
+        $this->assertContains($this->index->getName(), $data['snapshot']['indices']);
         $this->assertCount(1, $data['snapshot']['indices']); // only the specified index should be present
         $this->assertEquals($snapshotName, $data['snapshot']['snapshot']);
 
         // retrieve data regarding the snapshot
-        $response = $this->_snapshot->getSnapshot($repositoryName, $snapshotName);
-        $this->assertContains($this->_index->getName(), $response['indices']);
+        $response = $this->snapshot->getSnapshot(self::REPOSITORY_NAME, $snapshotName);
+        $this->assertContains($this->index->getName(), $response['indices']);
 
         // delete our test index
-        $this->_index->delete();
+        $this->index->delete();
 
         // restore the index from our snapshot
-        $response = $this->_snapshot->restoreSnapshot($repositoryName, $snapshotName, [], true);
+        $response = $this->snapshot->restoreSnapshot(self::REPOSITORY_NAME, $snapshotName, [], true);
         $this->assertTrue($response->isOk());
 
-        $this->_index->refresh();
-        $this->_index->forcemerge();
+        $this->index->refresh();
+        $this->index->forcemerge();
 
         // ensure that the index has been restored
-        $count = $this->_index->count();
-        $this->assertEquals(\count($this->_docs), $count);
+        $count = $this->index->count();
+        $this->assertEquals(\count($this->docs), $count);
 
         // delete the snapshot
-        $response = $this->_snapshot->deleteSnapshot($repositoryName, $snapshotName);
+        $response = $this->snapshot->deleteSnapshot(self::REPOSITORY_NAME, $snapshotName);
         $this->assertTrue($response->isOk());
 
         // ensure that the snapshot has been deleted
         $this->expectException(NotFoundException::class);
-        $this->_snapshot->getSnapshot($repositoryName, $snapshotName);
+        $this->snapshot->getSnapshot(self::REPOSITORY_NAME, $snapshotName);
+    }
+
+    private function registerRepository(string $name): string
+    {
+        $location = self::SNAPSHOT_PATH.'/'.$name;
+
+        $response = $this->snapshot->registerRepository(self::REPOSITORY_NAME, 'fs', ['location' => $location]);
+        $this->assertTrue($response->isOk());
+
+        return $location;
     }
 }
