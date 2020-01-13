@@ -69,6 +69,7 @@ class Scroll implements \Iterator
      */
     public function next()
     {
+        $this->_currentResultSet = null;
         if ($this->currentPage < $this->totalPages) {
             $this->_saveOptions();
 
@@ -81,7 +82,6 @@ class Scroll implements \Iterator
         } else {
             // If there are no pages left, we do not need to query ES.
             $this->clear();
-            $this->_currentResultSet = null;
         }
     }
 
@@ -121,6 +121,7 @@ class Scroll implements \Iterator
 
         $this->_search->setOption(Search::OPTION_SCROLL, $this->expiryTime);
         $this->_search->setOption(Search::OPTION_SCROLL_ID, null);
+        $this->_currentResultSet = null;
         $this->_setScrollId($this->_search->search());
 
         $this->_revertOptions();
