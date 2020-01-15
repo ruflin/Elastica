@@ -108,10 +108,23 @@ class Aggregation implements DSL
 
     /**
      * avg bucket aggregation.
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-avg-bucket-aggregation.html
+     *
+     * @deprecated use Aggregation::avgBucket() instead
+     */
+    public function avg_bucket(string $name, ?string $bucketsPath = null): AvgBucket
+    {
+        @trigger_error(sprintf('Invoking Aggregation::avg_bucket() is deprecated and will be removed. Use Aggregation::avgBucket() instead.'), E_USER_DEPRECATED);
+
+        return $this->avgBucket($name, $bucketsPath);
+    }
+
+    /**
+     * Build an "avg bucket" aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-avg-bucket-aggregation.html
      */
-    public function avg_bucket(string $name, ?string $bucketsPath = null): AvgBucket
+    public function avgBucket(string $name, ?string $bucketsPath = null): AvgBucket
     {
         return new AvgBucket($name, $bucketsPath);
     }
@@ -128,10 +141,23 @@ class Aggregation implements DSL
 
     /**
      * extended stats aggregation.
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-extendedstats-aggregation.html
+     *
+     * @deprecated use Aggregation::extendedStats() instead
+     */
+    public function extended_stats(string $name): ExtendedStats
+    {
+        @trigger_error(sprintf('Invoking Aggregation::extended_stats() is deprecated and will be removed. Use Aggregation::extendedStats() instead.'), E_USER_DEPRECATED);
+
+        return $this->extendedStats($name);
+    }
+
+    /**
+     * extended stats aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-extendedstats-aggregation.html
      */
-    public function extended_stats(string $name): ExtendedStats
+    public function extendedStats(string $name): ExtendedStats
     {
         return new ExtendedStats($name);
     }
@@ -140,8 +166,22 @@ class Aggregation implements DSL
      * value count aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-valuecount-aggregation.html
+     *
+     * @deprecated use Aggregation::valueCount() instead
      */
     public function value_count(string $name, string $field): ValueCount
+    {
+        @trigger_error(sprintf('Invoking Aggregation::value_count() is deprecated and will be removed. Use Aggregation::valueCount() instead.'), E_USER_DEPRECATED);
+
+        return $this->valueCount($name, $field);
+    }
+
+    /**
+     * value count aggregation.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-valuecount-aggregation.html
+     */
+    public function valueCount(string $name, string $field): ValueCount
     {
         return new ValueCount($name, $field);
     }
@@ -182,15 +222,17 @@ class Aggregation implements DSL
     }
 
     /**
-     * geo bounds aggregation.
+     * top hits aggregation.
      *
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-geobounds-aggregation.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html
      *
-     * @param string $name
+     * @deprecated use Aggregation::topHits() instead
      */
-    public function geo_bounds($name)
+    public function top_hits(string $name): TopHits
     {
-        throw new NotImplementedException();
+        @trigger_error(sprintf('Invoking Aggregation::top_hits() is deprecated and will be removed. Use Aggregation::topHits() instead.'), E_USER_DEPRECATED);
+
+        return $this->topHits($name);
     }
 
     /**
@@ -198,7 +240,7 @@ class Aggregation implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html
      */
-    public function top_hits(string $name): TopHits
+    public function topHits(string $name): TopHits
     {
         return new TopHits($name);
     }
