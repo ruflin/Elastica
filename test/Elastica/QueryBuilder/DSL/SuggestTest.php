@@ -28,7 +28,5 @@ class SuggestTest extends AbstractDSLTest
         $this->_assertImplemented($suggestDSL, 'completion', Suggest\Completion::class, ['name', 'field']);
         $this->_assertImplemented($suggestDSL, 'phrase', Suggest\Phrase::class, ['name', 'field']);
         $this->_assertImplemented($suggestDSL, 'term', Suggest\Term::class, ['name', 'field']);
-
-        $this->_assertNotImplemented($suggestDSL, 'context', []);
     }
 }

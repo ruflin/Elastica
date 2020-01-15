@@ -6,12 +6,12 @@ use Elastica\QueryBuilder\DSL;
 use Elastica\QueryBuilder\Version;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @group unit
+ */
 class VersionTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
-    public function testVersions()
+    public function testVersions(): void
     {
         $dsl = [
             new DSL\Query(),
@@ -30,7 +30,7 @@ class VersionTest extends BaseTest
         }
     }
 
-    private function assertVersions(Version $version, array $dsl)
+    private function assertVersions(Version $version, array $dsl): void
     {
         foreach ($version->getQueries() as $query) {
             $this->assertTrue(

@@ -3,7 +3,6 @@
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
-use Elastica\Exception\NotImplementedException;
 use Elastica\Processor\AbstractProcessor;
 use Elasticsearch\Endpoints\AbstractEndpoint;
 use Elasticsearch\Endpoints\Ingest\Pipeline\Delete;
@@ -91,14 +90,6 @@ class Pipeline extends Param
         $endpoint->setID($id);
 
         return $this->requestEndpoint($endpoint);
-    }
-
-    /**
-     * @todo implement simulate API
-     */
-    public function simulate()
-    {
-        throw new NotImplementedException('simulate API on Pipeline not yet implemented.');
     }
 
     /**

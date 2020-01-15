@@ -40,7 +40,7 @@ use Elastica\Query\AbstractQuery;
 use Elastica\QueryBuilder\DSL;
 
 /**
- * elasticsearch aggregation DSL.
+ * Elasticsearch aggregation DSL.
  *
  * @author Manuel Andreo Garcia <andreo.garcia@googlemail.com>
  *
@@ -160,18 +160,6 @@ class Aggregation implements DSL
     }
 
     /**
-     * percentile ranks aggregation.
-     *
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-rank-aggregation.html
-     *
-     * @param string $name
-     */
-    public function percentile_ranks($name)
-    {
-        throw new NotImplementedException();
-    }
-
-    /**
      * cardinality aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html
@@ -283,18 +271,6 @@ class Aggregation implements DSL
     public function reverse_nested(string $name, ?string $path = null): ReverseNested
     {
         return new ReverseNested($name, $path);
-    }
-
-    /**
-     * children aggregation.
-     *
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-children-aggregation.html
-     *
-     * @param string $name
-     */
-    public function children($name)
-    {
-        throw new NotImplementedException();
     }
 
     /**

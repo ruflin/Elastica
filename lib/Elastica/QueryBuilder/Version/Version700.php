@@ -25,7 +25,7 @@ class Version700 extends Version
         'geo_bounding_box',
         'geo_distance',
         'geo_polygon',
-        'geo_shape',
+        // 'geo_shape', // Not Implemented
         'has_child',
         'has_parent',
         'ids',
@@ -67,7 +67,7 @@ class Version700 extends Version
         'extended_stats',
         'value_count',
         'percentiles',
-        'percentile_ranks',
+        // 'percentile_ranks', // Not implemented
         'cardinality',
         'geo_bounds',
         'top_hits',
@@ -78,7 +78,7 @@ class Version700 extends Version
         'missing',
         'nested',
         'reverse_nested',
-        'children',
+        // 'children', //Not implemented
         'terms',
         'significant_terms',
         'range',
@@ -96,7 +96,7 @@ class Version700 extends Version
         'term',
         'phrase',
         'completion',
-        'context',
+        // 'context', // Not implemented
     ];
 
     protected $collapsers = [

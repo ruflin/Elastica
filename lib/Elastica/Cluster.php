@@ -4,7 +4,6 @@ namespace Elastica;
 
 use Elastica\Cluster\Health;
 use Elastica\Cluster\Settings;
-use Elastica\Exception\NotImplementedException;
 use Elasticsearch\Endpoints\Cluster\State;
 
 /**
@@ -119,18 +118,6 @@ class Cluster
     public function getClient(): Client
     {
         return $this->_client;
-    }
-
-    /**
-     * Returns the cluster information (not implemented yet).
-     *
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
-     *
-     * @param array $args Additional arguments
-     */
-    public function getInfo(array $args)
-    {
-        throw new NotImplementedException('not implemented yet');
     }
 
     /**
