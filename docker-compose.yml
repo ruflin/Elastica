@@ -1,0 +1,15 @@
+version: '3.4'
+
+# The following ES services are not valid, as there is no `:latest` tag on those images. This is done on purpose, to
+#  allow users to override each service's version (see: docker-compose.es75.yml)
+services:
+    php:
+        build: docker/php
+        volumes:
+            - ./:/var/www/html
+        networks:
+          - elastic
+
+networks:
+    elastic:
+        driver: bridge

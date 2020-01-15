@@ -58,16 +58,38 @@ run-coveralls:
 	tools/php-coveralls.phar -v
 
 tools/phpdocumentor.phar:
-	curl https://gitreleases.dev/gh/phpDocumentor/phpDocumentor/latest/phpDocumentor.phar -o tools/phpdocumentor.phar --silent -L
+	curl https://gitreleases.dev/gh/phpDocumentor/phpDocumentor/latest/phpDocumentor.phar -o tools/phpdocumentor.phar --silent -L; \
 	chmod +x tools/phpdocumentor.phar
 
 .PHONY: run-phpdoc
 run-phpdoc: tools/phpdocumentor.phar
 	tools/phpdocumentor.phar --directory=lib --target=build/docs --template=clean
 
-.PHONY: start-docker
-start-docker:
-	docker-compose --file=docker/docker-compose.yml --file=docker/docker-compose.es${START_ES_VERSION}.yml up
+##
+## Docker commands
+##
+
+.PHONY: docker-start
+docker-start:
+	sudo sysctl -w vm.max_map_count=262144; \
+	docker-compose --file=docker/docker-compose.yml --file=docker/docker-compose.es.yml --file=docker/docker-compose.es${START_ES_VERSION}.yml up --build
+
+.PHONY: docker-stop
+docker-stop:
+	docker-compose --file=docker/docker-compose.yml --file=docker/docker-compose.es.yml --file=docker/docker-compose.es${START_ES_VERSION}.yml down
+
+.PHONY: docker-run-phpunit
+docker-run-phpunit:
+	docker exec -ti 'elastica_php' env TERM=xterm-256color make run-phpunit
+
+.PHONY: docker-run-phpcs
+docker-run-phpcs:
+	docker exec -ti 'elastica_php' env TERM=xterm-256color make run-phpcs
+
+.PHONY: docker-fix-phpcs
+docker-fix-phpcs:
+	docker exec -ti 'elastica_php' env TERM=xterm-256color make fix-phpcs
+
 
 ## Additional commands
 
