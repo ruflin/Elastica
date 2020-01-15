@@ -2,7 +2,6 @@
 
 namespace Elastica\QueryBuilder\DSL;
 
-use Elastica\Exception\NotImplementedException;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\AbstractSpanQuery;
 use Elastica\Query as BaseQuery;
@@ -204,16 +203,6 @@ class Query implements DSL
     public function geo_polygon(string $key, array $points): GeoPolygon
     {
         return new GeoPolygon($key, $points);
-    }
-
-    /**
-     * geo shape query.
-     *
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-query.html
-     */
-    public function geo_shape()
-    {
-        throw new NotImplementedException();
     }
 
     /**

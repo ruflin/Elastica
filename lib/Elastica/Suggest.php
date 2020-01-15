@@ -48,10 +48,8 @@ class Suggest extends Param
      * @param Suggest|AbstractSuggest $suggestion
      *
      * @throws Exception\NotImplementedException
-     *
-     * @return self
      */
-    public static function create($suggestion)
+    public static function create($suggestion): self
     {
         switch (true) {
             case $suggestion instanceof self:

@@ -2,7 +2,6 @@
 
 namespace Elastica\QueryBuilder\DSL;
 
-use Elastica\Exception\NotImplementedException;
 use Elastica\QueryBuilder\DSL;
 use Elastica\Suggest\Completion;
 use Elastica\Suggest\Phrase;
@@ -53,15 +52,5 @@ class Suggest implements DSL
     public function completion(string $name, string $field): Completion
     {
         return new Completion($name, $field);
-    }
-
-    /**
-     * context suggester.
-     *
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/suggester-context.html
-     */
-    public function context()
-    {
-        throw new NotImplementedException();
     }
 }
