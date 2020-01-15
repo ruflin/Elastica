@@ -535,21 +535,39 @@ class QueryTest extends BaseTest
     }
 
     /**
-     * @group unit
+     * @group functional
      */
-    public function testSetTrackTotalHitsIsInParams()
+    public function testSetTrackTotalHitsIsInParams(): void
     {
         $query = new Query();
-        $param = false;
-        $query->setTrackTotalHits($param);
+        $query->setTrackTotalHits(false);
 
-        $this->assertEquals($param, $query->getParam('track_total_hits'));
+        $this->assertFalse($query->getParam('track_total_hits'));
+    }
+
+    public function provideSetTrackTotalHitsInvalidValue(): iterable
+    {
+        yield 'string' => ['string string'];
+        yield 'null' => [null];
+        yield 'object' => [new \stdClass()];
+        yield 'array' => [[]];
+    }
+
+    /**
+     * @group functional
+     * @dataProvider provideSetTrackTotalHitsInvalidValue
+     */
+    public function testSetTrackTotalHitsInvalidValue($value): void
+    {
+        $this->expectException(InvalidException::class);
+
+        (new Query())->setTrackTotalHits($value);
     }
 
     /**
      * @group functional
      */
-    public function testSetTrackTotalHits()
+    public function testSetTrackTotalHits(): void
     {
         $index = $this->_createIndex();
         $index->setMapping(new Mapping([
