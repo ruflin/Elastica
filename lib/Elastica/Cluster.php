@@ -121,21 +121,6 @@ class Cluster
     }
 
     /**
-<<<<<<< HEAD
-=======
-     * Returns the cluster information (not implemented yet).
-     *
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
-     *
-     * @param array $args Additional arguments
-     */
-    public function getInfo(array $args)
-    {
-        throw new NotImplementedException('not implemented yet');
-    }
-
-    /**
->>>>>>> Fix cluster tests
      * Return Cluster health.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html

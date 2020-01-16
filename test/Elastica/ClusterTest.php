@@ -73,16 +73,6 @@ class ClusterTest extends BaseTest
     {
         $health = $this->_getClient()->getCluster()->getHealth();
         $this->assertSame('green', $health->getStatus());
-<<<<<<< HEAD
-    }
-
-    public function testGetSettings(): void
-    {
-        $settings = $this->_getClient()->getCluster()->getSettings();
-        $this->assertArrayHasKey('persistent', $settings->get());
-        $this->assertArrayHasKey('transient', $settings->get());
-=======
->>>>>>> Fix cluster tests
     }
 
     public function testGetSettings(): void
