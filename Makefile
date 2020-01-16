@@ -18,7 +18,7 @@ tools/phive.phar:
     chmod +x tools/phive.phar;
 
 vendor/autoload.php:
-	composer update --prefer-dist --no-interaction
+	composer install --prefer-dist --no-interaction
 
 tools/phpunit.phar tools/php-cs-fixer.phar: tools/phive.phar
 	tools/phive.phar install --copy --trust-gpg-keys 0xE82B2FB314E9906E,0x4AA394086372C20A

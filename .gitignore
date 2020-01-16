@@ -1,9 +1,6 @@
-.DS_Store
-.idea
-.php_cs
 .php_cs.cache
 
-/vendor
+/build
 /tools
+/vendor
 composer.lock
-
