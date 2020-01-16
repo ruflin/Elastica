@@ -1,27 +1,34 @@
-# Change Log
-All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
+# Changelog
+All notable changes to this project will be documented in this file.
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/7.0.0-beta2...master)
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased](https://github.com/ruflin/Elastica/compare/7.0.0-beta.3...master)
+### Backward Compatibility Breaks
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+
+## [7.0.0-beta.3](https://github.com/ruflin/Elastica/compare/7.0.0-beta2...7.0.0-beta.3)
 * Marked Elastica 5.x as unmaintained
 
-### Backward Compatibility Breaks
-
 ### Bugfixes
-
 * Fix Search::count() not counting all results [#1746](https://github.com/ruflin/Elastica/pull/1746)
 * Fixed handling of Search::OPTION_SEARCH_IGNORE_UNAVAILABLE inside Scroll object
 
 ### Added
-
 * Added `DiversifiedSampler` aggregation [#1735](https://github.com/ruflin/Elastica/pull/1735)
 * Added `\Elastica\Query\DistanceFeature` [#1730](https://github.com/ruflin/Elastica/pull/1730)
 * Added support for injecting a callable AWS credential provider to use static, cached, or custom-sourced credentials [#1667](https://github.com/ruflin/Elastica/pull/1667)
 
 ### Improvements
-
 * Scroll releases previous ResultSet from memory before calling ES for next data batch [#1740](https://github.com/ruflin/Elastica/pull/1740)
 
-### Deprecated
 
 ## [7.0.0-beta2](https://github.com/ruflin/Elastica/compare/7.0.0-beta1...7.0.0-beta2)
 
