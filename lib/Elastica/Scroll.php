@@ -2,6 +2,8 @@
 
 namespace Elastica;
 
+use Elastica\Exception\InvalidException;
+
 /**
  * Scroll Iterator.
  *
@@ -43,9 +45,6 @@ class Scroll implements \Iterator
     private $totalPages = 0;
     private $currentPage = 0;
 
-    /**
-     * Constructor.
-     */
     public function __construct(Search $search, string $expiryTime = '1m')
     {
         $this->_search = $search;
@@ -57,8 +56,12 @@ class Scroll implements \Iterator
      *
      * @see http://php.net/manual/en/iterator.current.php
      */
-    public function current(): ?ResultSet
+    public function current(): ResultSet
     {
+        if (!$this->_currentResultSet) {
+            throw new InvalidException('Could not fetch the current ResultSet from an invalid iterator. Did you forget to call "valid()"?');
+        }
+
         return $this->_currentResultSet;
     }
 
@@ -67,7 +70,7 @@ class Scroll implements \Iterator
      *
      * @see http://php.net/manual/en/iterator.next.php
      */
-    public function next()
+    public function next(): void
     {
         $this->_currentResultSet = null;
         if ($this->currentPage < $this->totalPages) {
