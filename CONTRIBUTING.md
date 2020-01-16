@@ -19,9 +19,29 @@ Make sure you have both `docker` and  [docker-compose](https://docs.docker.com/c
 
 This repository comes with a set of docker-compose.yml templates used for the CI and the local development.
 
-To start the local docker instance run `make docker-start`: the command will pull the required containers for PHP and ES.
-For ES to properly run, the `vm.max_map_count=262144` System configuration is needed by ES to properly spin up the nodes.
+To start a local docker instance run `make docker-start`: the command will pull the required containers for PHP and ES.
+The containers will start and display the logs from ES, terminating the command will stop the containers too.
+Use `make docker-start DOCKER_OPTIONS="--detach"` to start the containers in a detached mode.
+The docker containers can be stopped with `make docker-stop`.
 
+The ES server version started by that command can be configured by passing a `ES_VERSION=` parameter.
+As an example, running `make docker-start ES_VERSION=75` will use the latest `7.5.x` release.
+If you specify an ES version, use the same version when stopping the containers: `make docker-stop ES_VERSION=75`.
+
+For a list of supported Elasticsearch containers look in the `docker/` folder for the `docker-compose.es*.yml` files.
+
+### Local Docker configuration
+For ES to properly run, the `vm.max_map_count=262144` system configuration is needed by ES to properly spin up the nodes.
+for further information.
+To update such configuration:
+ - For Linux: `sudo sysctl -w vm.max_map_count=262144`
+ - For macOS with 'Docker for Mac':
+   - from the command line, run `screen ~/Library/Containers/com.docker.docker/Data/vms/0/tty`
+   - press enter and run `sysctl -w vm.max_map_count=262144`
+
+Further details here: [https://www.elastic.co/guide/en/elasticsearch/reference/master/docker.html#_set_vm_max_map_count_to_at_least_262144]
+
+### Local commands
 Check out the Makefile for other commands that can be used to run tests and other operations:
 * Run your changes / tests in the virtual environment to make sure it is reproducible.
 * Run the tests before creating the pull request using docker-compose locally.
@@ -49,6 +69,9 @@ respects the same coding standards.
 The command `make docker-fix-phpcs` can be used to fix the code automatically.
 
 ### Tests
+Before running the tests inside the docker container, make sure to start them by running `make docker-start`.
+See the "Setup" section above for further details.
+
 Run the command `make docker-run-phpunit` to run the PHP tests on the code inside the docker container.
 
 To run a specific group of PHPUnit tests, use the `PHPUNIT_GROUP` variable on the `maek docker-run-phpunit` command.

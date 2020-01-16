@@ -25,16 +25,16 @@ matrix:
 #
 #    # Run tests only on the lowest version of PHP 7.2, with all versions of ElasticSearch server
 #    - php: 7.2
-#      env: RUN_TEST=true START_ES_VERSION=75
+#      env: RUN_TEST=true ES_VERSION=75
 #    - php: 7.2
-#      env: RUN_TEST=true START_ES_VERSION=74
+#      env: RUN_TEST=true ES_VERSION=74
 #    - php: 7.2
-#      env: RUN_TEST=true START_ES_VERSION=73
+#      env: RUN_TEST=true ES_VERSION=73
 #    - php: 7.2
-#      env: RUN_TEST=true START_ES_VERSION=72
+#      env: RUN_TEST=true ES_VERSION=72
     # Run coverage on lowest version of ElasticSearch, no need to run it for all variations
     - php: 7.2
-      env: RUN_TEST=coverage START_ES_VERSION=71
+      env: RUN_TEST=coverage ES_VERSION=71
 
 before_install:
   - if [[ "$RUN_TEST" != "coverage" ]]; then phpenv config-rm xdebug.ini || true; fi
@@ -51,13 +51,13 @@ before_script:
 
 script:
   - if [[ "$RUN_CS" = "true" ]]; then make run-phpcs; fi
-  - if [[ "$START_ES_VERSION" != "" ]]; then docker-compose --file=docker/docker-compose.es.yml --file=docker/docker-compose.es$START_ES_VERSION.yml up --detach; fi
+  - if [[ "$ES_VERSION" != "" ]]; then docker-compose --file=docker/docker-compose.es.yml --file=docker/docker-compose.es$ES_VERSION.yml up --detach; fi
   - if [[ "$RUN_TEST" != "" ]]; then make install-tools; fi
   # Waiting for ES to be up and running, and all nodes to be in sync
   - if [[ "$RUN_TEST" != "" ]]; then echo "Waiting for ES to be up and running"; sleep 7; timeout 3m bash -c 'until curl -XGET http://127.0.0.1:9200; do sleep 7; done'; fi
   - if [[ "$RUN_TEST" = "true" ]]; then make run-phpunit; fi
   - if [[ "$RUN_TEST" = "coverage" ]]; then make run-phpunit-coverage; fi
-#  - if [[ "$START_ES_VERSION" != "" ]]; then docker-compose --file=docker/docker-compose.yml --file=docker/docker-compose.es$START_ES_VERSION.yml logs; fi
+#  - if [[ "$ES_VERSION" != "" ]]; then docker-compose --file=docker/docker-compose.yml --file=docker/docker-compose.es$ES_VERSION.yml logs; fi
 
 
 after_success:

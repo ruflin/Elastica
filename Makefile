@@ -1,12 +1,9 @@
-# Default version to start ES on Docker, overide with `START_ES_VERSION=75 make start-docker`
-START_ES_VERSION?=72
+# Default version to start ES on Docker, overide with `ES_VERSION=75 make start-docker`
+ES_VERSION?=72
 
 .PHONY: clean
 clean:
-	rm -fr tools
-	rm -fr vendor
-	rm -fr build
-	rm -fr composer.lock .php_cs.cache
+	rm -fr tools vendor build composer.lock .php_cs.cache
 
 tools/phive.phar:
 	mkdir tools; \
@@ -76,12 +73,11 @@ run-phpdoc: tools/phpdocumentor.phar
 
 .PHONY: docker-start
 docker-start:
-	sudo sysctl -w vm.max_map_count=262144; \
-	docker-compose --file=docker/docker-compose.yml --file=docker/docker-compose.es.yml --file=docker/docker-compose.es${START_ES_VERSION}.yml up --build
+	docker-compose --file=docker/docker-compose.yml --file=docker/docker-compose.es.yml --file=docker/docker-compose.es${ES_VERSION}.yml up ${DOCKER_OPTIONS}
 
 .PHONY: docker-stop
 docker-stop:
-	docker-compose --file=docker/docker-compose.yml --file=docker/docker-compose.es.yml --file=docker/docker-compose.es${START_ES_VERSION}.yml down
+	docker-compose --file=docker/docker-compose.yml --file=docker/docker-compose.es.yml --file=docker/docker-compose.es${ES_VERSION}.yml down
 
 .PHONY: docker-run-phpunit
 docker-run-phpunit:
