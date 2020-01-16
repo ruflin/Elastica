@@ -324,6 +324,8 @@ class Search
         // Clone the object as we do not want to modify the original query.
         $query = clone $this->getQuery();
         $query->setSize(0);
+        $query->setTrackTotalHits(true);
+
         $path = $this->getPath();
 
         $response = $this->getClient()->request(

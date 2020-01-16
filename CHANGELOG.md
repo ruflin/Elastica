@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Bugfixes
 
+* Fix Search::count() not counting all results [#1746](https://github.com/ruflin/Elastica/pull/1746)
 * Fixed handling of Search::OPTION_SEARCH_IGNORE_UNAVAILABLE inside Scroll object
 
 ### Added

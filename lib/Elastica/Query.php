@@ -391,12 +391,16 @@ class Query extends Param
     /**
      * Adds a track_total_hits argument.
      *
-     * @param bool|int $trackTotalHits Track total hits parameter (default = true)
+     * @param bool|int $trackTotalHits Track total hits parameter
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-track-total-hits
      */
     public function setTrackTotalHits($trackTotalHits = true): self
     {
+        if (!\is_bool($trackTotalHits) && !\is_int($trackTotalHits)) {
+            throw new InvalidException('TrackTotalHits must be either a boolean, or an integer value');
+        }
+
         return $this->setParam('track_total_hits', $trackTotalHits);
     }
 }
