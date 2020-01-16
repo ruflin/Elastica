@@ -3,9 +3,10 @@ START_ES_VERSION?=72
 
 .PHONY: clean
 clean:
-	rm tools -fr \
-	rm vendor -fr \
-	rm build -fr
+	rm -fr tools
+	rm -fr vendor
+	rm -fr build
+	rm -fr composer.lock .php_cs.cache
 
 tools/phive.phar:
 	mkdir tools; \
@@ -44,7 +45,11 @@ fix-phpcs: composer-update install-phpcs
 
 .PHONY: run-phpunit
 run-phpunit: composer-update install-phpunit
+ifeq ("${PHPUNIT_GROUP}", "")
 	tools/phpunit.phar
+else
+	tools/phpunit.phar --group=${PHPUNIT_GROUP}
+endif
 
 .PHONY: run-phpunit-coverage
 run-phpunit-coverage: composer-update install-phpunit
@@ -80,7 +85,7 @@ docker-stop:
 
 .PHONY: docker-run-phpunit
 docker-run-phpunit:
-	docker exec -ti 'elastica_php' env TERM=xterm-256color make run-phpunit
+	docker exec -ti 'elastica_php' env TERM=xterm-256color make run-phpunit PHPUNIT_GROUP=${PHPUNIT_GROUP}
 
 .PHONY: docker-run-phpcs
 docker-run-phpcs:

@@ -51,6 +51,9 @@ The command `make docker-fix-phpcs` can be used to fix the code automatically.
 ### Tests
 Run the command `make docker-run-phpunit` to run the PHP tests on the code inside the docker container.
 
+To run a specific group of PHPUnit tests, use the `PHPUNIT_GROUP` variable on the `maek docker-run-phpunit` command.
+Use `make docker-run-phpunit PHPUNIT_GROUP=unit` to only run tests belonging to the `unit` group.
+
 If you want to run just a specific test or a one specific file, you should run the `tools/phpunit.phar` from inside
 the docker container:
     1. enter the docker container `docker exec -ti 'elastica_php' sh`
