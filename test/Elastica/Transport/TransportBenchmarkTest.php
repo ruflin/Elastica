@@ -11,32 +11,30 @@ use Elastica\Query\Term;
 use Elastica\Request;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @group benchmark
+ */
 class TransportBenchmarkTest extends BaseTest
 {
+    protected $_max = 1000;
+    protected $_maxData = 20;
+    protected static $_results = [];
+
     protected function setUp()
     {
         parent::setUp();
-        $this->markTestIncomplete('Benchmarks currently skipped with es2.0. Has to be reworked');
+        $this->markTestSkipped('Benchmarks currently skipped: it has to be reworked');
     }
-
-    protected $_max = 1000;
-
-    protected $_maxData = 20;
-
-    protected static $_results = [];
 
     public static function tearDownAfterClass()
     {
         self::printResults();
     }
 
-    /**
-     * @return Index
-     */
-    protected function getIndex(array $config)
+    protected function getIndex(array $config): Index
     {
         $client = $this->_getClient($config);
-        $index = $client->getIndex('benchmark'.\uniqid());
+        $index = $client->getIndex('benchmark'.self::buildUniqueId());
         $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
 
         return $index;
@@ -44,9 +42,8 @@ class TransportBenchmarkTest extends BaseTest
 
     /**
      * @dataProvider providerTransport
-     * @group benchmark
      */
-    public function testAddDocument(array $config, $transport)
+    public function testAddDocument(array $config, string $transport): void
     {
         $this->_checkTransport($config, $transport);
         $index = $this->getIndex($config);
@@ -69,9 +66,8 @@ class TransportBenchmarkTest extends BaseTest
     /**
      * @depends testAddDocument
      * @dataProvider providerTransport
-     * @group benchmark
      */
-    public function testRandomRead(array $config, $transport)
+    public function testRandomRead(array $config, $transport): void
     {
         $this->_checkTransport($config, $transport);
         $index = $this->getIndex($config);
@@ -93,9 +89,8 @@ class TransportBenchmarkTest extends BaseTest
     /**
      * @depends testAddDocument
      * @dataProvider providerTransport
-     * @group benchmark
      */
-    public function testBulk(array $config, $transport)
+    public function testBulk(array $config, $transport): void
     {
         $this->_checkTransport($config, $transport);
         $index = $this->getIndex($config);
@@ -117,9 +112,8 @@ class TransportBenchmarkTest extends BaseTest
 
     /**
      * @dataProvider providerTransport
-     * @group benchmark
      */
-    public function testGetMapping(array $config, $transport)
+    public function testGetMapping(array $config, string $transport): void
     {
         $this->_checkTransport($config, $transport);
 
@@ -157,53 +151,40 @@ class TransportBenchmarkTest extends BaseTest
         self::logResults('get mapping', $transport, $times);
     }
 
-    public function providerTransport()
+    public function providerTransport(): iterable
     {
-        return [
-            [
-                [
-                    'transport' => 'Http',
-                    'host' => $this->_getHost(),
-                    'port' => $this->_getPort(),
-                    'persistent' => false,
-                ],
-                'Http:NotPersistent',
+        yield [[
+                'transport' => 'Http',
+                'host' => $this->_getHost(),
+                'port' => $this->_getPort(),
+                'persistent' => false,
             ],
-            [
-                [
-                    'transport' => 'Http',
-                    'host' => $this->_getHost(),
-                    'port' => $this->_getPort(),
-                    'persistent' => true,
-                ],
-                'Http:Persistent',
-            ],
+            'Http:NotPersistent',
         ];
+        yield [[
+            'transport' => 'Http',
+            'host' => $this->_getHost(),
+            'port' => $this->_getPort(),
+            'persistent' => true,
+            ],
+            'Http:Persistent',
+       ];
     }
 
-    /**
-     * @param string $test
-     *
-     * @return array
-     */
-    protected function getData($test)
+    protected function getData(string $test): array
     {
         $data = [
             'test' => $test,
             'name' => [],
         ];
         for ($i = 0; $i < $this->_maxData; ++$i) {
-            $data['name'][] = \uniqid();
+            $data['name'][] = self::buildUniqueId();
         }
 
         return $data;
     }
 
-    /**
-     * @param $name
-     * @param $transport
-     */
-    protected static function logResults($name, $transport, array $times)
+    protected static function logResults(string $name, string $transport, array $times): void
     {
         self::$_results[$name][$transport] = [
             'count' => \count($times),
@@ -213,8 +194,12 @@ class TransportBenchmarkTest extends BaseTest
         ];
     }
 
-    protected static function printResults()
+    protected static function printResults(): void
     {
+        if (!\count(self::$_results)) {
+            return;
+        }
+
         echo \sprintf(
             "\n%-12s | %-20s | %-12s | %-12s | %-12s | %-12s\n\n",
             'NAME',
@@ -222,8 +207,7 @@ class TransportBenchmarkTest extends BaseTest
             'COUNT',
             'MAX',
             'MIN',
-            'MEAN',
-            '%'
+            'MEAN'
         );
         foreach (self::$_results as $name => $values) {
             $means = [];
@@ -234,7 +218,7 @@ class TransportBenchmarkTest extends BaseTest
             foreach ($values as $transport => $times) {
                 $perc = 0;
 
-                if (0 != $minMean) {
+                if (0 !== $minMean) {
                     $perc = (($times['mean'] - $minMean) / $minMean) * 100;
                 }
 
@@ -253,7 +237,7 @@ class TransportBenchmarkTest extends BaseTest
         }
     }
 
-    protected function _checkTransport(array $config, $transport)
+    protected function _checkTransport(array $config, $transport): void
     {
         $this->_checkConnection($config['host'], $config['port']);
     }
