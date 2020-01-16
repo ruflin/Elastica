@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Backward Compatibility Breaks
 ### Added
 ### Changed
+- Scroll is now throwing an exception when calling `current()` on an invalid iteration: always call `valid()` before 
+    accessing the current item, as documented in PHP's Iterator documentation [#1749](https://github.com/ruflin/Elastica/pull/1749)
+
 ### Deprecated
 ### Removed
 ### Fixed
