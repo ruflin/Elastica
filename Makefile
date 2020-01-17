@@ -1,5 +1,5 @@
-# Default version to start ES on Docker, overide with `ES_VERSION=75 make start-docker`
-ES_VERSION?=72
+# Default version to start ES on Docker, overide with `ES_VERSION=75 make start-docker` for ES 7.5
+ES_VERSION?=73
 
 .PHONY: clean
 clean:
@@ -15,6 +15,7 @@ tools/phive.phar:
     chmod +x tools/phive.phar;
 
 vendor/autoload.php:
+	composer global require --no-progress --no-scripts --no-plugins symfony/flex
 	composer install --prefer-dist --no-interaction
 
 tools/phpunit.phar tools/php-cs-fixer.phar: tools/phive.phar
