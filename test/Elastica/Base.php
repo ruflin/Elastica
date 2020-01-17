@@ -57,14 +57,14 @@ class Base extends TestCase
     {
         $proxyHost = \getenv('PROXY_HOST') ?: Connection::DEFAULT_HOST;
 
-        return 'http://'.$proxyHost.':12345';
+        return 'http://'.$proxyHost.':8000';
     }
 
     protected function _getProxyUrl403(): string
     {
         $proxyHost = \getenv('PROXY_HOST') ?: Connection::DEFAULT_HOST;
 
-        return 'http://'.$proxyHost.':12346';
+        return 'http://'.$proxyHost.':8001';
     }
 
     protected function _createIndex(?string $name = null, bool $delete = true, int $shards = 1): Index

@@ -69,11 +69,19 @@ run-phpdoc: tools/phpdocumentor.phar
 
 .PHONY: docker-start
 docker-start:
-	docker-compose --file=docker/docker-compose.yml --file=docker/docker-compose.es.yml --file=docker/docker-compose.es${ES_VERSION}.yml up ${DOCKER_OPTIONS}
+	docker-compose --file=docker/docker-compose.yml \
+		--file=docker/docker-compose.proxy.yml \
+		--file=docker/docker-compose.es.yml \
+		--file=docker/docker-compose.es${ES_VERSION}.yml \
+		up ${DOCKER_OPTIONS}
 
 .PHONY: docker-stop
 docker-stop:
-	docker-compose --file=docker/docker-compose.yml --file=docker/docker-compose.es.yml --file=docker/docker-compose.es${ES_VERSION}.yml down
+	docker-compose --file=docker/docker-compose.yml \
+		--file=docker/docker-compose.proxy.yml \
+		--file=docker/docker-compose.es.yml \
+		--file=docker/docker-compose.es${ES_VERSION}.yml \
+	    down
 
 .PHONY: docker-run-phpunit
 docker-run-phpunit:
@@ -87,6 +95,9 @@ docker-run-phpcs:
 docker-fix-phpcs:
 	docker exec -ti 'elastica_php' env TERM=xterm-256color make fix-phpcs
 
+.PHONY: docker-shell
+docker-shell:
+	docker exec -ti 'elastica_php' sh
 
 ## Additional commands
 
