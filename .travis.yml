@@ -41,7 +41,7 @@ before_install:
   - if [[ "$RUN_TEST" != "coverage" ]]; then phpenv config-rm xdebug.ini || true; fi
 
 install:
-  - travis_retry make composer-update
+  - travis_retry make composer-install
 
 before_script:
   # vm.max_map_count=262144 is needed by ES to properly spin up the nodes, otherwise the ES bootstrap checks will fail

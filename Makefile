@@ -27,26 +27,26 @@ install-phpcs: tools/php-cs-fixer.phar
 .PHONY: install-phpunit
 install-phpunit: tools/phpunit.phar
 
-.PHONY: composer-update
-composer-update: vendor/autoload.php
+.PHONY: composer-install
+composer-install: vendor/autoload.php
 
 .PHONY: install-tools
 install-tools: install-phpcs install-phpunit
 
 .PHONY: run-phpcs
-run-phpcs: composer-update install-phpcs
+run-phpcs: composer-install install-phpcs
 	tools/php-cs-fixer.phar fix --dry-run --allow-risky=yes -v
 
 .PHONY: fix-phpcs
-fix-phpcs: composer-update install-phpcs
+fix-phpcs: composer-install install-phpcs
 	tools/php-cs-fixer.phar fix --allow-risky=yes -v
 
 .PHONY: run-phpunit
-run-phpunit: composer-update install-phpunit
+run-phpunit: composer-install install-phpunit
 	tools/phpunit.phar ${PHPUNIT_OPTIONS}
 
 .PHONY: run-phpunit-coverage
-run-phpunit-coverage: composer-update install-phpunit
+run-phpunit-coverage: composer-install install-phpunit
 	EXIT_STATUS=0 ; \
 	tools/phpunit.phar --coverage-clover build/coverage/unit-coverage.xml --group unit || EXIT_STATUS=$$? ; \
 	tools/phpunit.phar --coverage-clover build/coverage/functional-coverage.xml --group functional || EXIT_STATUS=$$? ; \
