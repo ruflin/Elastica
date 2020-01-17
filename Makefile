@@ -42,11 +42,7 @@ fix-phpcs: composer-update install-phpcs
 
 .PHONY: run-phpunit
 run-phpunit: composer-update install-phpunit
-ifeq ("${PHPUNIT_GROUP}", "")
-	tools/phpunit.phar
-else
-	tools/phpunit.phar --group=${PHPUNIT_GROUP}
-endif
+	tools/phpunit.phar ${PHPUNIT_OPTIONS}
 
 .PHONY: run-phpunit-coverage
 run-phpunit-coverage: composer-update install-phpunit
@@ -81,7 +77,7 @@ docker-stop:
 
 .PHONY: docker-run-phpunit
 docker-run-phpunit:
-	docker exec -ti 'elastica_php' env TERM=xterm-256color make run-phpunit PHPUNIT_GROUP=${PHPUNIT_GROUP}
+	docker exec -ti 'elastica_php' env TERM=xterm-256color make run-phpunit PHPUNIT_OPTIONS=${PHPUNIT_OPTIONS}
 
 .PHONY: docker-run-phpcs
 docker-run-phpcs:

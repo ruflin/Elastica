@@ -74,13 +74,13 @@ See the "Setup" section above for further details.
 
 Run the command `make docker-run-phpunit` to run the PHP tests on the code inside the docker container.
 
-To run a specific group of PHPUnit tests, use the `PHPUNIT_GROUP` variable on the `maek docker-run-phpunit` command.
-Use `make docker-run-phpunit PHPUNIT_GROUP=unit` to only run tests belonging to the `unit` group.
+Options can be passed to `phpunit` when running in the docker container: use the `PHPUNIT_OPTIONS` to pass additional
+arguments to the invocation of the tool.
 
-If you want to run just a specific test or a one specific file, you should run the `tools/phpunit.phar` from inside
-the docker container:
-    1. enter the docker container `docker exec -ti 'elastica_php' sh`
-    2. run a specific test: `tools/phpunit.phar --filter=DocumentTest` to run only tests matching `DocumentTest`
+Examples:
+ - run a specific group of tests: `make docker-run-phpunit PHPUNIT_OPTIONS="--group=unit"`
+ - filter the test to run: `make docker-run-phpunit PHPUNIT_OPTIONS="--filter=ClientTest"`
+ - run tests for a specific test-class: `make docker-run-phpunit PHPUNIT_OPTIONS="test/Elastica/ClientTest.php"`
 
 ## Coding
 
