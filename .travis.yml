@@ -9,6 +9,7 @@ cache:
   directories:
     - $HOME/.composer/cache
     - $HOME/.phive
+    - $HOME/.gnupg
 
 php:
   - 7.2
