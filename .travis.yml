@@ -10,28 +10,28 @@ cache:
     - $HOME/.composer/cache/files
     - $HOME/.phive
 
-#php:
-#  - 7.2
-#  - 7.3
-#  - 7.4
+php:
+  - 7.2
+  - 7.3
+  - 7.4
 
 matrix:
   fast_finish: true
   include:
     # Coding-styles are running on the lowest version of PHP
     # plus: we test the installation on lowest requirements for PHP 7.2
-#    - php: 7.2
-#      env: RUN_CS=true COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
-#
-#    # Run tests only on the lowest version of PHP 7.2, with all versions of ElasticSearch server
-#    - php: 7.2
-#      env: RUN_TEST=true ES_VERSION=75
-#    - php: 7.2
-#      env: RUN_TEST=true ES_VERSION=74
-#    - php: 7.2
-#      env: RUN_TEST=true ES_VERSION=73
-#    - php: 7.2
-#      env: RUN_TEST=true ES_VERSION=72
+    - php: 7.2
+      env: RUN_CS=true COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
+
+    # Run tests only on the lowest version of PHP 7.2, with all versions of ElasticSearch server
+    - php: 7.2
+      env: RUN_TEST=true ES_VERSION=75
+    - php: 7.2
+      env: RUN_TEST=true ES_VERSION=74
+    - php: 7.2
+      env: RUN_TEST=true ES_VERSION=73
+    - php: 7.2
+      env: RUN_TEST=true ES_VERSION=72
     # Run coverage on lowest version of ElasticSearch, no need to run it for all variations
     - php: 7.2
       env: RUN_TEST=coverage ES_VERSION=71
