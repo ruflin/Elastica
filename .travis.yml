@@ -11,38 +11,30 @@ cache:
     - $HOME/.phive
     - $HOME/.gnupg
 
-php:
-  - 7.2
-  - 7.3
-  - 7.4
-
 matrix:
   fast_finish: true
   include:
-    # Coding-styles are running on the lowest version of PHP
-    # plus: we test the installation on lowest requirements for PHP 7.2
-    - php: 7.2
-      env: RUN_CS=true COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
-
-    # Run tests only on the lowest version of PHP 7.2, with all versions of ElasticSearch server
-    # Disabling ES >= 7.4, as it breaks the forceMerge test, see: https://github.com/ruflin/Elastica/pull/1686
-    # - php: 7.2
-    #   env: RUN_TEST=true ES_VERSION=75
-    # - php: 7.2
-    #   env: RUN_TEST=true ES_VERSION=74
-    - php: 7.2
-      env: RUN_TEST=true ES_VERSION=73
+    - php: 7.3
+      env: RUN_TEST=true  ES_VERSION=73
+    - php: 7.4
+      env: RUN_TEST=true  ES_VERSION=73
+    # Testing the library with different ES versions
     - php: 7.2
       env: RUN_TEST=true ES_VERSION=72
-    # Run coverage on lowest version of ElasticSearch, no need to run it for all variations
     - php: 7.2
-      env: RUN_TEST=coverage ES_VERSION=71
+      env: RUN_TEST=true ES_VERSION=71
+    # Running code-coverage on the lowest requirements for PHP 7.2
+    - php: 7.2
+      env: RUN_TEST=coverage COMPOSER_FLAGS="--prefer-stable --prefer-lowest" ES_VERSION=73
+    # Run coding-style checks on the lowest version of PHP
+    - php: 7.2
+      env: RUN_CS=true
 
 before_install:
   - if [[ "$RUN_TEST" != "coverage" ]]; then phpenv config-rm xdebug.ini || true; fi
 
 install:
-  - travis_retry make composer-install
+  - travis_retry make composer-update # This will make sure all the dependencies are installed with the correct COMPOSER_FLAGS
 
 before_script:
   # vm.max_map_count=262144 is needed by ES to properly spin up the nodes, otherwise the ES bootstrap checks will fail
@@ -59,9 +51,6 @@ script:
   - if [[ "$RUN_TEST" != "" ]]; then echo "Waiting for ES to be up and running"; sleep 7; timeout 3m bash -c 'until curl -XGET http://127.0.0.1:9200; do sleep 7; done'; fi
   - if [[ "$RUN_TEST" = "true" ]]; then make run-phpunit; fi
   - if [[ "$RUN_TEST" = "coverage" ]]; then make run-phpunit-coverage; fi
-#  - if [[ "$ES_VERSION" != "" ]]; then docker-compose --file=docker/docker-compose.yml --file=docker/docker-compose.es$ES_VERSION.yml logs; fi
 
 after_success:
   - if [[ "$RUN_TEST" = "coverage" ]]; then travis_retry make run-coveralls; fi
-#   - if [[ $COVERAGE = true ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
-#   - if [[ $COVERAGE = true ]]; then php ocular.phar code-coverage:upload --format=php-clover build/coverage.xml; fi

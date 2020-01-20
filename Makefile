@@ -15,8 +15,9 @@ tools/phive.phar:
     chmod +x tools/phive.phar;
 
 vendor/autoload.php:
+	# Installing Symfony Flex: parallel download of dependency libs
 	composer global require --no-progress --no-scripts --no-plugins symfony/flex
-	composer install --prefer-dist --no-interaction
+	composer install --prefer-dist --no-interaction ${COMPOSER_FLAGS}
 
 tools/phpunit.phar tools/php-cs-fixer.phar: tools/phive.phar
 	tools/phive.phar install --copy --trust-gpg-keys 0xE82B2FB314E9906E,0x4AA394086372C20A
@@ -29,6 +30,10 @@ install-phpunit: tools/phpunit.phar
 
 .PHONY: composer-install
 composer-install: vendor/autoload.php
+
+.PHONY: composer-update
+composer-update:
+	composer update --prefer-dist --no-interaction ${COMPOSER_FLAGS}
 
 .PHONY: install-tools
 install-tools: install-phpcs install-phpunit
