@@ -47,13 +47,14 @@ class NullTransportTest extends BaseTest
         // Validate most of the expected fields in the response data.  Consumers of the response
         // object have a reasonable expectation of finding "hits", "took", etc
         $responseData = $response->getData();
-        $this->assertContains('took', $responseData);
+
+        $this->assertArrayHasKey('took', $responseData);
         $this->assertEquals(0, $responseData['took']);
         $this->assertContains('_shards', $responseData);
-        $this->assertContains('hits', $responseData);
-        $this->assertContains('total', $responseData['hits']);
+        $this->assertArrayHasKey('hits', $responseData);
+        $this->assertArrayHasKey('total', $responseData['hits']);
         $this->assertEquals(0, $responseData['hits']['total']['value']);
-        $this->assertContains('params', $responseData);
+        $this->assertArrayHasKey('params', $responseData);
 
         $took = $response->getEngineTime();
         $this->assertEquals(0, $took);
@@ -62,11 +63,11 @@ class NullTransportTest extends BaseTest
         $this->assertEmpty($errorString);
 
         $shards = $response->getShardsStatistics();
-        $this->assertContains('total', $shards);
+        $this->assertArrayHasKey('total', $shards);
         $this->assertEquals(0, $shards['total']);
-        $this->assertContains('successful', $shards);
+        $this->assertArrayHasKey('successful', $shards);
         $this->assertEquals(0, $shards['successful']);
-        $this->assertContains('failed', $shards);
+        $this->assertArrayHasKey('failed', $shards);
         $this->assertEquals(0, $shards['failed']);
     }
 
