@@ -29,6 +29,7 @@ class Reindex extends Param
     public const TIMEOUT = 'timeout';
     public const SCROLL = 'scroll';
     public const REQUESTS_PER_SECOND = 'requests_per_second';
+    public const PIPELINE = 'pipeline';
 
     /**
      * @var Index
@@ -96,6 +97,12 @@ class Reindex extends Param
             'index' => $index->getName(),
         ], $this->_resolveDestOptions($params));
 
+        // Resolves the pipeline name
+        $pipeline = $destBody[self::PIPELINE] ?? null;
+        if ($pipeline instanceof Pipeline) {
+            $destBody[self::PIPELINE] = $pipeline->getId();
+        }
+
         return $destBody;
     }
 
@@ -115,6 +122,7 @@ class Reindex extends Param
         return \array_intersect_key($params, [
             self::VERSION_TYPE => null,
             self::OPERATION_TYPE => null,
+            self::PIPELINE => null,
         ]);
     }
 
@@ -182,6 +190,18 @@ class Reindex extends Param
     public function setScript(Script $script)
     {
         $this->setParam(self::SCRIPT, $script);
+    }
+
+    public function setPipeline(Pipeline $pipeline): void
+    {
+        $this->setParam(self::PIPELINE, $pipeline);
+    }
+
+    public function setRefresh($value): void
+    {
+        \is_bool($value) && $value = $value ? 'true' : 'false';
+
+        $this->setParam(self::REFRESH, $value);
     }
 
     public function getTaskId()
