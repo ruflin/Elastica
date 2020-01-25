@@ -30,6 +30,8 @@ class Reindex extends Param
     public const SCROLL = 'scroll';
     public const REQUESTS_PER_SECOND = 'requests_per_second';
     public const PIPELINE = 'pipeline';
+    public const SLICES = 'slices';
+    public const SLICES_AUTO = 'auto';
 
     /**
      * @var Index
@@ -190,6 +192,11 @@ class Reindex extends Param
     public function setScript(Script $script)
     {
         $this->setParam(self::SCRIPT, $script);
+    }
+
+    public function setQuery(AbstractQuery $query): void
+    {
+        $this->setParam(self::QUERY, $query);
     }
 
     public function setPipeline(Pipeline $pipeline): void
