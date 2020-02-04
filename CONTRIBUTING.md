@@ -58,7 +58,7 @@ Some of the installed tools are:
 The advantage in using the commands below is that no local tools and libraries have to be installed and it is guaranteed
 that everyone is using the same tools.
 
-The tools required for each command will be installed only when needed byt the command itself.
+The tools required for each command will be installed only when needed by the command itself.
 
 ### Coding standards
 Run the command `make docker-run-phpcs` to run the coding-standard checks on the code inside the docker container.
