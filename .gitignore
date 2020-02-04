@@ -1,6 +1,20 @@
+.DS_Store
+.idea
+*.iml
+.vagrant
+.php_cs
 .php_cs.cache
 
+cache.properties
+atlassian-ide-plugin.xml
+.settings
+
 /build
+/nbproject
 /tools
 /vendor
+
 composer.lock
+composer.phar
+/test/nginx/logs/access.log
+/test/nginx/logs/error.log
