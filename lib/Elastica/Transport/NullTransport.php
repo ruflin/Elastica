@@ -64,7 +64,9 @@ class NullTransport extends AbstractTransport
                 'failed' => 0,
             ],
             'hits' => [
-                'total' => 0,
+                'total' => [
+                    'value' => 0,
+                ],
                 'max_score' => null,
                 'hits' => [],
             ],

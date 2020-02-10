@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Backward Compatibility Breaks
 ### Added
 ### Changed
+- Require elastica-php library >= v7.1.1, fixes an issue on Ingestion/Put() type-hinting
+- Require guzzle >= v6.3 as development library: fixes issues on PHP >= 7.2
+- Require phpunit >= v7.5, fixes deprecations in with PHP 7.3
 - Scroll is now throwing an exception when calling `current()` on an invalid iteration: always call `valid()` before 
     accessing the current item, as documented in PHP's Iterator documentation [#1749](https://github.com/ruflin/Elastica/pull/1749)
 

@@ -1,0 +1,67 @@
+version: '3.4'
+
+# Template docker-compose file: the ES services are not valid, as there is no `:latest` tag on those images.
+#
+# This is done on purpose as the ES version can be chosen when starting docker
+# As an example: see docker-compose.es75.yml
+services:
+    es01:
+        image: docker.elastic.co/elasticsearch/elasticsearch-oss:latest
+        command: >
+            /bin/sh -c "./bin/elasticsearch-plugin list | grep -q ingest-attachment
+            || ./bin/elasticsearch-plugin install --batch ingest-attachment;
+            chown elasticsearch /usr/share/elasticsearch/repository;
+            /usr/local/bin/docker-entrypoint.sh"
+        environment:
+            - node.name=es01
+            - cluster.name=es-docker-cluster
+            - discovery.seed_hosts=es02
+            - cluster.initial_master_nodes=es01,es02
+            - bootstrap.memory_lock=true
+            - processors=1
+            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+            - path.repo=/usr/share/elasticsearch/repository
+        ulimits:
+            memlock:
+                soft: -1
+                hard: -1
+        volumes:
+            - data01:/usr/share/elasticsearch/data
+            - esrepo:/usr/share/elasticsearch/repository
+        ports:
+            - 127.0.0.1:9200:9200
+        networks:
+            - elastic
+    es02:
+        image: docker.elastic.co/elasticsearch/elasticsearch-oss:latest
+        command: >
+            /bin/sh -c "./bin/elasticsearch-plugin list | grep -q ingest-attachment
+            || ./bin/elasticsearch-plugin install --batch ingest-attachment;
+            chown elasticsearch /usr/share/elasticsearch/repository;
+            /usr/local/bin/docker-entrypoint.sh"
+        environment:
+            - node.name=es02
+            - cluster.name=es-docker-cluster
+            - discovery.seed_hosts=es01
+            - cluster.initial_master_nodes=es01,es02
+            - bootstrap.memory_lock=true
+            - processors=1
+            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+            - path.repo=/usr/share/elasticsearch/repository
+        ulimits:
+            memlock:
+                soft: -1
+                hard: -1
+        volumes:
+            - data02:/usr/share/elasticsearch/data
+            - esrepo:/usr/share/elasticsearch/repository
+        networks:
+            - elastic
+volumes:
+    data01:
+    data02:
+    esrepo:
+
+networks:
+    elastic:
+        driver: bridge

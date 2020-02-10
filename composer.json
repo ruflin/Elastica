@@ -14,12 +14,12 @@
     "require": {
         "php": "^7.2",
         "ext-json": "*",
-        "psr/log": "~1.0",
-        "elasticsearch/elasticsearch": "^7.0 !=7.4.0"
+        "psr/log": "^1.0",
+        "elasticsearch/elasticsearch": "^7.1.1 !=7.4.0"
     },
     "require-dev": {
-        "aws/aws-sdk-php": "~3.0",
-        "guzzlehttp/guzzle": "~6.0"
+        "aws/aws-sdk-php": "^3.0",
+        "guzzlehttp/guzzle": "^6.3"
     },
     "suggest": {
         "aws/aws-sdk-php": "Allow using IAM authentication with Amazon ElasticSearch Service",

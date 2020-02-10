@@ -1,0 +1,21 @@
+version: '3.4'
+
+# This is a docker-compose template file for running docker's containers locally.
+# It must be combined with `docker-compose.es.yml` and one of the ES specific templates like `docker-compose.es71.yml`
+# See: docker-start unit in Makefile
+
+services:
+    php:
+        container_name: elastica_php
+        build: php/
+        volumes:
+            - ../:/var/www/html
+        networks:
+            - elastic
+        environment:
+            - ES_HOST=es01
+            - PROXY_HOST=proxy
+
+networks:
+    elastic:
+        driver: bridge

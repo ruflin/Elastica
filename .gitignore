@@ -6,11 +6,14 @@
 .php_cs.cache
 
 cache.properties
-/nbproject
-build
 atlassian-ide-plugin.xml
 .settings
+
+/build
+/nbproject
+/tools
 /vendor
+
 composer.lock
 composer.phar
 /test/nginx/logs/access.log
