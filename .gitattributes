@@ -12,4 +12,4 @@
 /docker-entrypoint.sh export-ignore
 /env export-ignore
 /phpdoc.dist.xml export-ignore
-/test export-ignore
+/tests export-ignore

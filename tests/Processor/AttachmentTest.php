@@ -66,7 +66,7 @@ class AttachmentTest extends BasePipelineTest
         $bulk->setIndex($index);
 
         $doc1 = new Document(null);
-        $doc1->addFile('data', __DIR__.'/../../data/test.pdf');
+        $doc1->addFile('data', __DIR__.'/../data/test.pdf');
         $doc2 = new Document(2, ['data' => '', 'text' => 'test running in basel']);
 
         $bulk->addDocuments([
@@ -105,7 +105,7 @@ class AttachmentTest extends BasePipelineTest
         $bulk->setIndex($index);
 
         $doc1 = new Document(null);
-        $doc1->addFile('data', __DIR__.'/../../data/test.pdf');
+        $doc1->addFile('data', __DIR__.'/../data/test.pdf');
         $doc1->set('text', 'basel world');
 
         $doc2 = new Document(2, ['data' => '', 'text' => 'test running in basel']);
@@ -147,7 +147,7 @@ class AttachmentTest extends BasePipelineTest
         $bulk->setIndex($index);
 
         $doc1 = new Document(null);
-        $doc1->addFile('data', __DIR__.'/../../data/test.docx');
+        $doc1->addFile('data', __DIR__.'/../data/test.docx');
         $doc1->set('text', 'basel world');
 
         $doc2 = new Document(2, ['data' => '', 'text' => 'test running in basel']);
@@ -198,7 +198,7 @@ class AttachmentTest extends BasePipelineTest
         $doc1 = new Document($docId);
         $doc1->set('text', $text);
         $doc1->set('title', $title);
-        $doc1->addFile('data', __DIR__.'/../../data//test.docx');
+        $doc1->addFile('data', __DIR__.'/../data//test.docx');
 
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);
