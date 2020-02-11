@@ -17,29 +17,23 @@ class Suggest extends Param
      */
     public function __construct(?AbstractSuggest $suggestion = null)
     {
-        if (!\is_null($suggestion)) {
+        if (null !== $suggestion) {
             $this->addSuggestion($suggestion);
         }
     }
 
     /**
      * Set the global text for this suggester.
-     *
-     * @param string $text
-     *
-     * @return $this
      */
-    public function setGlobalText($text)
+    public function setGlobalText(string $text): self
     {
         return $this->setParam('text', $text);
     }
 
     /**
      * Add a suggestion to this suggest clause.
-     *
-     * @return $this
      */
-    public function addSuggestion(AbstractSuggest $suggestion)
+    public function addSuggestion(AbstractSuggest $suggestion): self
     {
         return $this->addParam('suggestion', $suggestion);
     }
@@ -63,7 +57,7 @@ class Suggest extends Param
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = parent::toArray();
 
