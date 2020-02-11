@@ -111,12 +111,9 @@ class ClientConfiguration
     }
 
     /**
-     * Returns a specific config key or the whole
-     * config array if not set.
+     * Returns a specific config key or the whole config array if not set.
      *
-     * @param string $key Config key
-     *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException if the given key is not found in the configuration
      *
      * @return mixed Config value
      */
@@ -135,8 +132,6 @@ class ClientConfiguration
 
     /**
      * Returns boolean indicates if configuration has key.
-     *
-     * @param string $key Key to check
      */
     public function has(string $key): bool
     {

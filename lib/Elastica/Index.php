@@ -140,11 +140,9 @@ class Index implements SearchableInterface
      * @param Document[] $docs    Array of Elastica\Document
      * @param array      $options Array of query params to use for query. For possible options check es api
      *
-     * @return ResponseSet
-     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
-    public function updateDocuments(array $docs, array $options = [])
+    public function updateDocuments(array $docs, array $options = []): ResponseSet
     {
         foreach ($docs as $doc) {
             $doc->setIndex($this->getName());
@@ -160,11 +158,9 @@ class Index implements SearchableInterface
      * @param AbstractScript     $script  Script
      * @param array              $options Optional params
      *
-     * @return Response
-     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html
      */
-    public function updateByQuery($query, AbstractScript $script, array $options = [])
+    public function updateByQuery($query, AbstractScript $script, array $options = []): Response
     {
         $endpoint = new UpdateByQuery();
         $q = Query::create($query)->getQuery();
@@ -181,12 +177,8 @@ class Index implements SearchableInterface
 
     /**
      * Adds the given document to the search index.
-     *
-     * @param Document $doc Document with data
-     *
-     * @return Response
      */
-    public function addDocument(Document $doc)
+    public function addDocument(Document $doc): Response
     {
         $endpoint = new IndexEndpoint();
 

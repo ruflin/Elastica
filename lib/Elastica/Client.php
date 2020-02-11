@@ -37,12 +37,12 @@ class Client
     protected $_connectionPool;
 
     /**
-     * @var \Elastica\Request|null
+     * @var Request|null
      */
     protected $_lastRequest;
 
     /**
-     * @var \Elastica\Response|null
+     * @var Response|null
      */
     protected $_lastResponse;
 
@@ -62,7 +62,7 @@ class Client
      * @param array|string  $config   OPTIONAL Additional config or DSN of options
      * @param callback|null $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      */
     public function __construct($config = [], ?callable $callback = null, ?LoggerInterface $logger = null)
     {
@@ -98,7 +98,7 @@ class Client
     /**
      * Inits the client connections.
      */
-    protected function _initConnections()
+    protected function _initConnections(): void
     {
         $connections = [];
 
@@ -133,10 +133,8 @@ class Client
 
     /**
      * Creates a Connection params array from a Client or server config array.
-     *
-     * @return array
      */
-    protected function _prepareConnectionParams(array $config)
+    protected function _prepareConnectionParams(array $config): array
     {
         $params = [];
         $params['config'] = [];
@@ -155,10 +153,8 @@ class Client
      * Sets specific config values (updates and keeps default values).
      *
      * @param array $config Params
-     *
-     * @return $this
      */
-    public function setConfig(array $config)
+    public function setConfig(array $config): self
     {
         foreach ($config as $key => $value) {
             $this->_config->set($key, $value);
@@ -168,16 +164,13 @@ class Client
     }
 
     /**
-     * Returns a specific config key or the whole
-     * config array if not set.
+     * Returns a specific config key or the whole config array if not set.
      *
-     * @param string $key Config key
-     *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException if the given key is not found in the configuration
      *
      * @return array|string Config value
      */
-    public function getConfig($key = '')
+    public function getConfig(string $key = '')
     {
         return $this->_config->get($key);
     }
@@ -185,12 +178,9 @@ class Client
     /**
      * Sets / overwrites a specific config value.
      *
-     * @param string $key   Key to set
-     * @param mixed  $value Value
-     *
-     * @return $this
+     * @param mixed $value Value
      */
-    public function setConfigValue($key, $value)
+    public function setConfigValue(string $key, $value): self
     {
         return $this->setConfig([$key => $value]);
     }
@@ -227,50 +217,29 @@ class Client
 
     /**
      * Adds a HTTP Header.
-     *
-     * @param string $header      The HTTP Header
-     * @param string $headerValue The HTTP Header Value
-     *
-     * @throws \Elastica\Exception\InvalidException If $header or $headerValue is not a string
-     *
-     * @return $this
      */
-    public function addHeader($header, $headerValue)
+    public function addHeader(string $header, string $value): self
     {
-        if (\is_string($header) && \is_string($headerValue)) {
-            if ($this->_config->has('headers')) {
-                $headers = $this->_config->get('headers');
-            } else {
-                $headers = [];
-            }
-            $headers[$header] = $headerValue;
-            $this->_config->set('headers', $headers);
+        if ($this->_config->has('headers')) {
+            $headers = $this->_config->get('headers');
         } else {
-            throw new InvalidException('Header must be a string');
+            $headers = [];
         }
+        $headers[$header] = $value;
+        $this->_config->set('headers', $headers);
 
         return $this;
     }
 
     /**
      * Remove a HTTP Header.
-     *
-     * @param string $header The HTTP Header to remove
-     *
-     * @throws \Elastica\Exception\InvalidException If $header is not a string
-     *
-     * @return $this
      */
-    public function removeHeader($header)
+    public function removeHeader(string $header): self
     {
-        if (\is_string($header)) {
-            if ($this->_config->has('headers')) {
-                $headers = $this->_config->get('headers');
-                unset($headers[$header]);
-                $this->_config->set('headers', $headers);
-            }
-        } else {
-            throw new InvalidException('Header must be a string');
+        if ($this->_config->has('headers')) {
+            $headers = $this->_config->get('headers');
+            unset($headers[$header]);
+            $this->_config->set('headers', $headers);
         }
 
         return $this;
@@ -287,7 +256,7 @@ class Client
      *
      * @param array|\Elastica\Document[] $docs Array of Elastica\Document
      *
-     * @throws \Elastica\Exception\InvalidException If docs is empty
+     * @throws InvalidException If docs is empty
      */
     public function updateDocuments(array $docs, array $requestParams = []): ResponseSet
     {
@@ -316,7 +285,7 @@ class Client
      *
      * @param array|\Elastica\Document[] $docs Array of Elastica\Document
      *
-     * @throws \Elastica\Exception\InvalidException If docs is empty
+     * @throws InvalidException If docs is empty
      */
     public function addDocuments(array $docs, array $requestParams = []): ResponseSet
     {
@@ -409,7 +378,7 @@ class Client
      *
      * @param array|\Elastica\Document[] $docs
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      */
     public function deleteDocuments(array $docs, array $requestParams = []): ResponseSet
     {
@@ -524,7 +493,7 @@ class Client
      * @param string|\Elastica\Index $index   Index name
      * @param string|bool            $routing Optional routing key for all ids
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      */
     public function deleteIds(array $ids, $index, $routing = false): ResponseSet
     {
@@ -568,7 +537,7 @@ class Client
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @throws \Elastica\Exception\ResponseException
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      */
     public function bulk(array $params): ResponseSet
     {
