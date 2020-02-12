@@ -123,6 +123,11 @@ class Pipeline extends Param
         return $this;
     }
 
+    public function getId(): ?string
+    {
+        return $this->id;
+    }
+
     /**
      * @param AbstractProcessor[]
      */

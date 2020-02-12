@@ -5,6 +5,9 @@ namespace Elastica\Test;
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Index;
+use Elastica\Pipeline;
+use Elastica\Processor\Rename;
+use Elastica\Processor\Uppercase;
 use Elastica\Query\Match;
 use Elastica\Reindex;
 use Elastica\Script\Script;
@@ -194,6 +197,58 @@ class ReindexTest extends Base
         } catch (ResponseException $exception) {
             $this->assertContains('reindex.remote.whitelist', $exception->getMessage());
         }
+    }
+
+    /**
+     * @group functional
+     */
+    public function testReindexWithPipeline(): void
+    {
+        $oldIndex = $this->_createIndex('idx1', true, 2);
+        $this->_addDocs($oldIndex, 10);
+
+        $newIndex = $this->_createIndex('idx2', true, 2);
+
+        $pipeline = new Pipeline($newIndex->getClient());
+        $pipeline->setId('my-pipeline');
+        $pipeline->setDescription('For testing purposes"');
+        $pipeline->addProcessor(new Rename('id', 'identifier'));
+        $pipeline->addProcessor(new Uppercase('key'));
+
+        $reindex = new Reindex($oldIndex, $newIndex);
+        $reindex->setPipeline($pipeline);
+
+        $pipeline->create();
+        $reindex->run();
+        $newIndex->refresh();
+
+        $results = $newIndex->search()->getResults();
+        $this->assertEquals(10, $newIndex->count());
+
+        foreach ($results as $result) {
+            $this->assertArrayNotHasKey('id', $result->getData());
+            $this->assertArrayHasKey('identifier', $result->getData());
+            $this->assertSame('VALUE', $result->getData()['key']);
+        }
+    }
+
+    /**
+     * @group functional
+     */
+    public function testReindexWithRefresh(): void
+    {
+        $oldIndex = $this->_createIndex('idx1', true, 2);
+        $this->_addDocs($oldIndex, 10);
+
+        $newIndex = $this->_createIndex('idx2', true, 2);
+
+        $reindex = new Reindex($oldIndex, $newIndex);
+        $reindex->setRefresh(true);
+
+        $reindex->run();
+
+        $newIndex->search()->getResults();
+        $this->assertEquals(10, $newIndex->count());
     }
 
     private function _addDocs(Index $index, int $docs): array

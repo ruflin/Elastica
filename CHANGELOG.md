@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/7.0.0-beta.3...master)
 ### Backward Compatibility Breaks
 ### Added
+* Added `Elastica\Reindex->setPipeline(Elastica\Pipeline $pipeline): void`. The link between the reindex and the pipeline is solved when `run()` is called, and thus the pipeline given doesn't need to be created before calling `setPipeline()` [#1752](https://github.com/ruflin/Elastica/pull/1752)
+* Added `Elastica\Reindex->setRefresh(bool|string $value): void`. It accepts boolean and `REFRESH_*` constants from its class [#1752](https://github.com/ruflin/Elastica/pull/1752)
+* Added `Elastica\Reindex->setQuery(Elastica\Query\AbstractQuery $query): void` [#1752](https://github.com/ruflin/Elastica/pull/1752)
+* Added constants `PIPELINE`, `REFRESH_TRUE`, `REFRESH_FALSE`, `REFRESH_WAIT_FOR`, `SLICES` and `SLICES_AUTO` to `Elastica\Reindex` [#1752](https://github.com/ruflin/Elastica/pull/1752)
+* Added `Elastica\Pipeline->getId(): ?string` [#1752](https://github.com/ruflin/Elastica/pull/1752)
+
 ### Changed
 - Require elastica-php library >= v7.1.1, fixes an issue on Ingestion/Put() type-hinting
 - Require guzzle >= v6.3 as development library: fixes issues on PHP >= 7.2

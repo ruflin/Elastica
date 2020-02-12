@@ -23,12 +23,18 @@ class Reindex extends Param
     public const REMOTE = 'remote';
     public const SLICE = 'slice';
     public const REFRESH = 'refresh';
+    public const REFRESH_TRUE = 'true';
+    public const REFRESH_FALSE = 'false';
+    public const REFRESH_WAIT_FOR = 'wait_for';
     public const WAIT_FOR_COMPLETION = 'wait_for_completion';
     public const WAIT_FOR_COMPLETION_FALSE = 'false';
     public const WAIT_FOR_ACTIVE_SHARDS = 'wait_for_active_shards';
     public const TIMEOUT = 'timeout';
     public const SCROLL = 'scroll';
     public const REQUESTS_PER_SECOND = 'requests_per_second';
+    public const PIPELINE = 'pipeline';
+    public const SLICES = 'slices';
+    public const SLICES_AUTO = 'auto';
 
     /**
      * @var Index
@@ -96,6 +102,12 @@ class Reindex extends Param
             'index' => $index->getName(),
         ], $this->_resolveDestOptions($params));
 
+        // Resolves the pipeline name
+        $pipeline = $destBody[self::PIPELINE] ?? null;
+        if ($pipeline instanceof Pipeline) {
+            $destBody[self::PIPELINE] = $pipeline->getId();
+        }
+
         return $destBody;
     }
 
@@ -115,6 +127,7 @@ class Reindex extends Param
         return \array_intersect_key($params, [
             self::VERSION_TYPE => null,
             self::OPERATION_TYPE => null,
+            self::PIPELINE => null,
         ]);
     }
 
@@ -182,6 +195,26 @@ class Reindex extends Param
     public function setScript(Script $script)
     {
         $this->setParam(self::SCRIPT, $script);
+    }
+
+    public function setQuery(AbstractQuery $query): void
+    {
+        $this->setParam(self::QUERY, $query);
+    }
+
+    public function setPipeline(Pipeline $pipeline): void
+    {
+        $this->setParam(self::PIPELINE, $pipeline);
+    }
+
+    /**
+     * @param bool|string $value
+     */
+    public function setRefresh($value): void
+    {
+        \is_bool($value) && $value = $value ? self::REFRESH_TRUE : self::REFRESH_FALSE;
+
+        $this->setParam(self::REFRESH, $value);
     }
 
     public function getTaskId()
