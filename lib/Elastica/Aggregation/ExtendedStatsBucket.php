@@ -5,8 +5,6 @@ namespace Elastica\Aggregation;
 use Elastica\Exception\InvalidException;
 
 /**
- * Class ExtendedStatsBucket.
- *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-extended-stats-bucket-aggregation.html
  */
 class ExtendedStatsBucket extends AbstractAggregation
@@ -20,41 +18,21 @@ class ExtendedStatsBucket extends AbstractAggregation
         }
     }
 
-    /**
-     * Set the buckets_path for this aggregation.
-     *
-     * @return $this
-     */
     public function setBucketsPath(string $bucketsPath): self
     {
         return $this->setParam('buckets_path', $bucketsPath);
     }
 
-    /**
-     * Set the gap policy for this aggregation.
-     *
-     * @return $this
-     */
     public function setGapPolicy(string $gapPolicy): self
     {
         return $this->setParam('gap_policy', $gapPolicy);
     }
 
-    /**
-     * Set the format for this aggregation.
-     *
-     * @return $this
-     */
     public function setFormat(string $format): self
     {
         return $this->setParam('format', $format);
     }
 
-    /**
-     * Set the number of standard deviations for this aggregation.
-     *
-     * @return $this
-     */
     public function setSigma(int $sigma): self
     {
         return $this->setParam('sigma', $sigma);
