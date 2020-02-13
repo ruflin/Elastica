@@ -11,12 +11,12 @@
 >
   <filter>
     <whitelist>
-      <directory>lib/</directory>
+      <directory>src/</directory>
     </whitelist>
   </filter>
   <testsuites>
     <testsuite name="default">
-      <directory>test/Elastica/</directory>
+      <directory>tests/</directory>
     </testsuite>
   </testsuites>
 </phpunit>
