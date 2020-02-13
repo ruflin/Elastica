@@ -13,7 +13,7 @@ class IdsTest extends BaseTest
     /** @var Index */
     protected $index;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

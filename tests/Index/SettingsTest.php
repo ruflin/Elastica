@@ -24,7 +24,7 @@ class SettingsTest extends BaseTest
         $index->refresh();
         $settings = $index->getSettings();
 
-        $this->assertInternalType('array', $settings->get());
+        $this->assertIsArray($settings->get());
         $this->assertNotNull($settings->get('number_of_replicas'));
         $this->assertNotNull($settings->get('number_of_shards'));
         $this->assertNull($settings->get('kjqwerjlqwer'));
@@ -49,7 +49,7 @@ class SettingsTest extends BaseTest
         $index = $client->getIndex($aliasName);
         $settings = $index->getSettings();
 
-        $this->assertInternalType('array', $settings->get());
+        $this->assertIsArray($settings->get());
         $this->assertNotNull($settings->get('number_of_replicas'));
         $this->assertNotNull($settings->get('number_of_shards'));
         $this->assertNull($settings->get('kjqwerjlqwer'));
@@ -80,8 +80,8 @@ class SettingsTest extends BaseTest
         } catch (ResponseException $e) {
             $error = $e->getResponse()->getFullError();
 
-            $this->assertContains('illegal_argument_exception', $error['type']);
-            $this->assertContains('specify the corresponding concrete indices instead.', $error['reason']);
+            $this->assertSame('illegal_argument_exception', $error['type']);
+            $this->assertStringContainsString('specify the corresponding concrete indices instead.', $error['reason']);
         }
     }
 
@@ -277,8 +277,8 @@ class SettingsTest extends BaseTest
         } catch (ResponseException $e) {
             $error = $e->getResponse()->getFullError();
 
-            $this->assertContains('cluster_block_exception', $error['type']);
-            $this->assertContains('read-only', $error['reason']);
+            $this->assertSame('cluster_block_exception', $error['type']);
+            $this->assertStringContainsString('read-only', $error['reason']);
         }
 
         // Remove read only, add document
@@ -378,7 +378,7 @@ class SettingsTest extends BaseTest
             $this->fail('Should throw exception because of index not found');
         } catch (ResponseException $e) {
             $error = $e->getResponse()->getFullError();
-            $this->assertContains('index_not_found_exception', $error['type']);
+            $this->assertSame('index_not_found_exception', $error['type']);
         }
     }
 

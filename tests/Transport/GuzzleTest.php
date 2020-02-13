@@ -9,7 +9,7 @@ use Elastica\Test\Base as BaseTest;
 
 class GuzzleTest extends BaseTest
 {
-    public static function setUpBeforeClass()
+    public static function setUpbeforeClass(): void
     {
         if (!\class_exists('GuzzleHttp\\Client')) {
             self::markTestSkipped('guzzlehttp/guzzle package should be installed to run guzzle transport tests');
@@ -130,12 +130,12 @@ class GuzzleTest extends BaseTest
         $this->_checkConnection($url['host'], $url['port']);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         \putenv('http_proxy=');
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
         \putenv('http_proxy=');

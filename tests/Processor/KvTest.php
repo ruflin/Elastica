@@ -69,8 +69,8 @@ class KvTest extends BasePipelineTest
         $pipelineGet = $pipeline->getPipeline('my_custom_pipeline');
         $result = $pipelineGet->getData();
 
-        $this->assertContains($result['my_custom_pipeline']['processors'][0]['kv']['field'], 'field1');
-        $this->assertContains($result['my_custom_pipeline']['processors'][0]['kv']['field_split'], '&');
-        $this->assertContains($result['my_custom_pipeline']['processors'][0]['kv']['value_split'], '=');
+        $this->assertSame($result['my_custom_pipeline']['processors'][0]['kv']['field'], 'field1');
+        $this->assertSame($result['my_custom_pipeline']['processors'][0]['kv']['field_split'], '&');
+        $this->assertSame($result['my_custom_pipeline']['processors'][0]['kv']['value_split'], '=');
     }
 }

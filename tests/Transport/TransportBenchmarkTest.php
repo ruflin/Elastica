@@ -20,13 +20,13 @@ class TransportBenchmarkTest extends BaseTest
     protected $_maxData = 20;
     protected static $_results = [];
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->markTestSkipped('Benchmarks currently skipped: it has to be reworked');
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         self::printResults();
     }

@@ -30,7 +30,7 @@ class ResultTest extends BaseTest
         $this->assertEquals($index->getName(), $result->getIndex());
         $this->assertEquals(3, $result->getId());
         $this->assertGreaterThan(0, $result->getScore());
-        $this->assertInternalType('array', $result->getData());
+        $this->assertIsArray($result->getData());
         $this->assertTrue(isset($result->username));
         $this->assertEquals('hans', $result->username);
     }
@@ -70,7 +70,7 @@ class ResultTest extends BaseTest
         $this->assertEquals($indexName, $result->getIndex());
         $this->assertEquals($docId, $result->getId());
         $this->assertGreaterThan(0, $result->getScore());
-        $this->assertInternalType('array', $result->getData());
+        $this->assertIsArray($result->getData());
     }
 
     /**

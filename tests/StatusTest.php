@@ -35,11 +35,11 @@ class StatusTest extends BaseTest
         $status = new Status($index->getClient());
         $names = $status->getIndexNames();
 
-        $this->assertInternalType('array', $names);
+        $this->assertIsArray($names);
         $this->assertContains($index->getName(), $names);
 
         foreach ($names as $name) {
-            $this->assertInternalType('string', $name);
+            $this->assertIsString($name);
         }
     }
 

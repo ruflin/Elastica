@@ -20,7 +20,7 @@ class NullTransportTest extends BaseTest
     /** @var NullTransport NullTransport */
     protected $transport;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->transport = new NullTransport();

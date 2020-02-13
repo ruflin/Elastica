@@ -154,7 +154,7 @@ class Base extends TestCase
         } while (!$allocated);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -163,7 +163,7 @@ class Base extends TestCase
         $this->showDeprecated();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if ($this->_isFunctionalGroup()) {
             $this->_getClient()->getIndex('_all')->delete();

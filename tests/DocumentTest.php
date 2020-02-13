@@ -129,7 +129,7 @@ class DocumentTest extends BaseTest
 
         $options = $document->getOptions(['_index', 'type', '_id', 'op_type']);
 
-        $this->assertInternalType('array', $options);
+        $this->assertIsArray($options);
         $this->assertCount(3, $options);
         $this->assertArrayHasKey('_index', $options);
         $this->assertArrayHasKey('_id', $options);

@@ -72,7 +72,7 @@ class RequestTest extends BaseTest
 
         $data = $request->toArray();
 
-        $this->assertInternalType('array', $data);
+        $this->assertIsArray($data);
         $this->assertArrayHasKey('method', $data);
         $this->assertArrayHasKey('path', $data);
         $this->assertArrayHasKey('query', $data);
@@ -82,7 +82,7 @@ class RequestTest extends BaseTest
         $this->assertEquals($request->getPath(), $data['path']);
         $this->assertEquals($request->getQuery(), $data['query']);
         $this->assertEquals($request->getData(), $data['data']);
-        $this->assertInternalType('array', $data['connection']);
+        $this->assertIsArray($data['connection']);
         $this->assertArrayHasKey('host', $data['connection']);
         $this->assertArrayHasKey('port', $data['connection']);
         $this->assertEquals($request->getConnection()->getHost(), $data['connection']['host']);
@@ -90,9 +90,9 @@ class RequestTest extends BaseTest
 
         $string = $request->toString();
 
-        $this->assertInternalType('string', $string);
+        $this->assertIsString($string);
 
         $string = (string) $request;
-        $this->assertInternalType('string', $string);
+        $this->assertIsString($string);
     }
 }

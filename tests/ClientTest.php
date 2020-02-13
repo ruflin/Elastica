@@ -102,7 +102,7 @@ class ClientTest extends BaseTest
         $this->assertNotEquals(10, $client->getConfigValue('level11', 10));
 
         $this->assertEquals('value3', $client->getConfigValue(['level1', 'level2', 'level3']));
-        $this->assertInternalType('array', $client->getConfigValue(['level1', 'level2']));
+        $this->assertIsArray($client->getConfigValue(['level1', 'level2']));
     }
 
     public function testAddHeader(): void

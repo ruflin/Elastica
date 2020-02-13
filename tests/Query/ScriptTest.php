@@ -18,7 +18,7 @@ class ScriptTest extends BaseTest
         $query = new ScriptQuery($string);
 
         $array = $query->toArray();
-        $this->assertInternalType('array', $array);
+        $this->assertIsArray($array);
 
         $expected = [
             'script' => [

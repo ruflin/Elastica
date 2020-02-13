@@ -17,7 +17,7 @@ class BuilderTest extends BaseTest
      */
     private $builder;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

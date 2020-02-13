@@ -119,6 +119,6 @@ class ResponseTest extends BaseTest
         ]));
         $response->setJsonBigintConversion(true);
 
-        $this->assertInternalType('array', $response->getData());
+        $this->assertIsArray($response->getData());
     }
 }
