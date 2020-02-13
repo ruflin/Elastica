@@ -8,6 +8,7 @@ use Elastica\Aggregation\Max;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
+use Elastica\Exception\InvalidException;
 
 class ExtendedStatsBucketTest extends BaseAggregationTest
 {
@@ -29,7 +30,7 @@ class ExtendedStatsBucketTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testExtendedStatBucketAggregation()
+    public function testExtendedStatBucketAggregation(): void
     {
         $bucketScriptAggregation = new ExtendedStatsBucket('result', 'age_groups>max_weight');
 
@@ -57,7 +58,7 @@ class ExtendedStatsBucketTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testConstructThroughSetters()
+    public function testConstructThroughSetters(): void
     {
         $serialDiffAgg = new ExtendedStatsBucket('bucket_part');
 
@@ -80,9 +81,9 @@ class ExtendedStatsBucketTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testToArrayInvalidBucketsPath()
+    public function testToArrayInvalidBucketsPath(): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         $serialDiffAgg = new ExtendedStatsBucket('bucket_part');
         $serialDiffAgg->toArray();
