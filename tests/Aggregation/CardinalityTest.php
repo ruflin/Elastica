@@ -66,7 +66,7 @@ class CardinalityTest extends BaseAggregationTest
         $agg->setPrecisionThreshold($threshold);
 
         $this->assertNotNull($agg->getParam('precision_threshold'));
-        $this->assertInternalType('int', $agg->getParam('precision_threshold'));
+        $this->assertIsInt($agg->getParam('precision_threshold'));
     }
 
     /**
@@ -81,7 +81,7 @@ class CardinalityTest extends BaseAggregationTest
         $agg->setRehash($rehash);
 
         $this->assertNotNull($agg->getParam('rehash'));
-        $this->assertInternalType('boolean', $agg->getParam('rehash'));
+        $this->assertIsBool($agg->getParam('rehash'));
     }
 
     public function validRehashProvider()

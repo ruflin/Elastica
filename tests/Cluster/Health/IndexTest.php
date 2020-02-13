@@ -13,7 +13,7 @@ class IndexTest extends BaseTest
      */
     protected $_index;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -136,7 +136,7 @@ class IndexTest extends BaseTest
     {
         $shards = $this->_index->getShards();
 
-        $this->assertInternalType('array', $shards);
+        $this->assertIsArray($shards);
         $this->assertCount(3, $shards);
         $this->assertContainsOnlyInstancesOf(Shard::class, $shards);
     }

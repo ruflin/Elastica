@@ -68,10 +68,10 @@ class PipelineTest extends BasePipeline
         $pipeGet = $pipeline->getPipeline('my_custom_pipeline');
         $result = $pipeGet->getData();
 
-        $this->assertContains($result['my_custom_pipeline']['description'], 'pipeline for Set');
-        $this->assertContains($result['my_custom_pipeline']['processors'][0]['set']['field'], 'field4');
-        $this->assertContains($result['my_custom_pipeline']['processors'][0]['set']['value'], '333');
-        $this->assertContains($result['my_custom_pipeline']['processors'][0]['trim']['field'], 'field1');
+        $this->assertSame($result['my_custom_pipeline']['description'], 'pipeline for Set');
+        $this->assertSame($result['my_custom_pipeline']['processors'][0]['set']['field'], 'field4');
+        $this->assertSame($result['my_custom_pipeline']['processors'][0]['set']['value'], '333');
+        $this->assertSame($result['my_custom_pipeline']['processors'][0]['trim']['field'], 'field1');
     }
 
     /**

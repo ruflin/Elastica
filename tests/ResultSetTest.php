@@ -32,7 +32,7 @@ class ResultSetTest extends BaseTest
         $this->assertNotTrue($resultSet->hasTimedOut());
         $this->assertNotTrue($resultSet->hasAggregations());
         $this->assertNotTrue($resultSet->hasSuggests());
-        $this->assertInternalType('array', $resultSet->getResults());
+        $this->assertIsArray($resultSet->getResults());
         $this->assertCount(3, $resultSet);
     }
 
@@ -78,7 +78,7 @@ class ResultSetTest extends BaseTest
 
         $documents = $resultSet->getDocuments();
 
-        $this->assertInternalType('array', $documents);
+        $this->assertIsArray($documents);
         $this->assertCount(3, $documents);
         $this->assertInstanceOf(Document::class, $documents[0]);
         $this->assertInstanceOf(Document::class, $documents[1]);

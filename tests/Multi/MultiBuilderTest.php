@@ -25,7 +25,7 @@ class MultiBuilderTest extends BaseTest
      */
     private $multiBuilder;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

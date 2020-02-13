@@ -124,7 +124,7 @@ class CollapseTest extends BaseTest
         $collapse->addInnerHits($innerHits2);
 
         $this->assertCount(2, $collapse->getParam('inner_hits'));
-        $this->assertInternalType('array', $collapse->getParam('inner_hits'));
+        $this->assertIsArray($collapse->getParam('inner_hits'));
         $this->assertEquals($innerHits1, $collapse->getParam('inner_hits')[0]);
         $this->assertEquals($innerHits2, $collapse->getParam('inner_hits')[1]);
     }
@@ -146,7 +146,7 @@ class CollapseTest extends BaseTest
         $collapse->addInnerHits($innerHits2);
 
         $this->assertCount(2, $collapse->getParam('inner_hits'));
-        $this->assertInternalType('array', $collapse->getParam('inner_hits'));
+        $this->assertIsArray($collapse->getParam('inner_hits'));
         $this->assertEquals($innerHits1, $collapse->getParam('inner_hits')[0]);
         $this->assertEquals($innerHits2, $collapse->getParam('inner_hits')[1]);
     }
@@ -168,7 +168,7 @@ class CollapseTest extends BaseTest
         $collapse->addInnerHits($innerHits2);
 
         $this->assertCount(2, $collapse->getParam('inner_hits'));
-        $this->assertInternalType('array', $collapse->getParam('inner_hits'));
+        $this->assertIsArray($collapse->getParam('inner_hits'));
         $this->assertEquals($innerHits1, $collapse->getParam('inner_hits')[0]);
         $this->assertEquals($innerHits2, $collapse->getParam('inner_hits')[1]);
 

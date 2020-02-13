@@ -239,7 +239,7 @@ class BulkTest extends BaseTest
 
         $actions = $bulk->getActions();
 
-        $this->assertInternalType('array', $actions);
+        $this->assertIsArray($actions);
         $this->assertCount(5, $actions);
 
         $this->assertInstanceOf(Action::class, $actions[0]);
@@ -349,9 +349,9 @@ class BulkTest extends BaseTest
             $bulk->fail('3rd document create should produce error');
         } catch (ResponseException $e) {
             $error = $e->getResponseSet()->getFullError();
-            $this->assertContains('version_conflict_engine_exception', $error['type']);
+            $this->assertSame('version_conflict_engine_exception', $error['type']);
             $failures = $e->getFailures();
-            $this->assertInternalType('array', $failures);
+            $this->assertIsArray($failures);
             $this->assertArrayHasKey(0, $failures);
         }
     }

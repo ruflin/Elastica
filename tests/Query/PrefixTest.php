@@ -20,8 +20,8 @@ class PrefixTest extends BaseTest
 
         $data = $query->toArray();
 
-        $this->assertInternalType('array', $data['prefix']);
-        $this->assertInternalType('array', $data['prefix'][$key]);
+        $this->assertIsArray($data['prefix']);
+        $this->assertIsArray($data['prefix'][$key]);
         $this->assertEquals($data['prefix'][$key]['value'], $value);
         $this->assertEquals($data['prefix'][$key]['boost'], $boost);
     }

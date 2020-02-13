@@ -228,6 +228,7 @@ class MappingTest extends BaseTest
     public function testDynamicTemplate()
     {
         $index = $this->_createIndex();
+        $rawFieldsType = ['raw' => ['type' => 'keyword']];
 
         $mapping = new Mapping();
         $mapping->setParam('dynamic_templates', [
@@ -235,9 +236,7 @@ class MappingTest extends BaseTest
                 'match' => 'multi*',
                 'mapping' => [
                     'type' => '{dynamic_type}',
-                    'fields' => [
-                        'raw' => ['type' => 'keyword'],
-                    ],
+                    'fields' => $rawFieldsType,
                 ],
             ]],
         ]);
@@ -253,20 +252,14 @@ class MappingTest extends BaseTest
         $index->refresh();
 
         $newMapping = $index->getMapping();
-        $this->assertArraySubset(
+        $this->assertArrayHasKey('properties', $newMapping);
+        $this->assertArrayHasKey('multiname', $newMapping['properties']);
+        $this->assertSame(
             [
-                'properties' => [
-                    'multiname' => [
-                        'type' => 'text',
-                        'fields' => [
-                            'raw' => [
-                                'type' => 'keyword',
-                            ],
-                        ],
-                    ],
-                ],
+                'type' => 'text',
+                'fields' => $rawFieldsType,
             ],
-            $newMapping,
+            $newMapping['properties']['multiname'],
             'Mapping of dynamic "multiname" field should have been created with the type "{dynamic_type}" resolved to "text". '.
             'The "multiname.raw" sub-field should be of type "keyword".'
         );

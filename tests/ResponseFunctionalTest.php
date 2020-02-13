@@ -39,8 +39,8 @@ class ResponseFunctionalTest extends BaseTest
         $engineTime = $resultSet->getResponse()->getEngineTime();
         $shardsStats = $resultSet->getResponse()->getShardsStatistics();
 
-        $this->assertInternalType('int', $engineTime);
-        $this->assertInternalType('array', $shardsStats);
+        $this->assertIsInt($engineTime);
+        $this->assertIsArray($shardsStats);
         $this->assertArrayHasKey('total', $shardsStats);
         $this->assertArrayHasKey('successful', $shardsStats);
     }
@@ -82,7 +82,7 @@ class ResponseFunctionalTest extends BaseTest
         } catch (ResponseException $e) {
             $error = $e->getResponse()->getFullError();
             $this->assertEquals('type_missing_exception', $error['type']);
-            $this->assertContains('non-existent-type', $error['reason']);
+            $this->assertStringContainsString('non-existent-type', $error['reason']);
 
             $gotException = true;
         }

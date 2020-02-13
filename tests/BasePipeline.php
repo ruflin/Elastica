@@ -18,7 +18,7 @@ class BasePipeline extends BaseTest
         return $pipeline;
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->_createPipeline()->deletePipeline('*');
         parent::tearDown();

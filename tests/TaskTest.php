@@ -15,7 +15,7 @@ class TaskTest extends Base
         $task = $this->_createTask();
         $data = $task->getData();
 
-        $this->assertInternalType('array', $data);
+        $this->assertIsArray($data);
         $this->assertNotEmpty($data);
     }
 

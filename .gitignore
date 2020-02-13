@@ -3,6 +3,7 @@
 *.iml
 .php_cs
 .php_cs.cache
+.phpunit.result.cache
 
 cache.properties
 atlassian-ide-plugin.xml
