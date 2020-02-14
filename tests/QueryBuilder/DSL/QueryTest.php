@@ -6,12 +6,15 @@ use Elastica\Query;
 use Elastica\Query\Match;
 use Elastica\QueryBuilder\DSL;
 
+/**
+ * @internal
+ */
 class QueryTest extends AbstractDSLTest
 {
     /**
      * @group unit
      */
-    public function testType()
+    public function testType(): void
     {
         $queryDSL = new DSL\Query();
 
@@ -22,7 +25,7 @@ class QueryTest extends AbstractDSLTest
     /**
      * @group unit
      */
-    public function testMatch()
+    public function testMatch(): void
     {
         $queryDSL = new DSL\Query();
 
@@ -34,7 +37,7 @@ class QueryTest extends AbstractDSLTest
     /**
      * @group unit
      */
-    public function testInterface()
+    public function testInterface(): void
     {
         $queryDSL = new DSL\Query();
 

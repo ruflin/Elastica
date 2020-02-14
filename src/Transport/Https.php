@@ -21,7 +21,7 @@ class Https extends Http
      *
      * @param resource $connection Curl connection resource
      */
-    protected function _setupCurl($connection)
+    protected function _setupCurl($connection): void
     {
         parent::_setupCurl($connection);
     }

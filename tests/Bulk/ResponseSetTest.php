@@ -11,13 +11,16 @@ use Elastica\Exception\Bulk\ResponseException;
 use Elastica\Response;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class ResponseSetTest extends BaseTest
 {
     /**
      * @group unit
      * @dataProvider isOkDataProvider
      */
-    public function testIsOk(array $responseData, array $actions, bool $expected)
+    public function testIsOk(array $responseData, array $actions, bool $expected): void
     {
         $responseSet = $this->_createResponseSet($responseData, $actions);
         $this->assertEquals($expected, $responseSet->isOk());
@@ -26,7 +29,7 @@ class ResponseSetTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetError()
+    public function testGetError(): void
     {
         list($responseData, $actions) = $this->_getFixture();
         $responseData['items'][1]['index']['ok'] = false;
@@ -62,7 +65,7 @@ class ResponseSetTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetBulkResponses()
+    public function testGetBulkResponses(): void
     {
         list($responseData, $actions) = $this->_getFixture();
 
@@ -86,7 +89,7 @@ class ResponseSetTest extends BaseTest
     /**
      * @group unit
      */
-    public function testIterator()
+    public function testIterator(): void
     {
         list($responseData, $actions) = $this->_getFixture();
 

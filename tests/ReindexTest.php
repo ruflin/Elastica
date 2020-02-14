@@ -12,12 +12,15 @@ use Elastica\Query\Match;
 use Elastica\Reindex;
 use Elastica\Script\Script;
 
+/**
+ * @internal
+ */
 class ReindexTest extends Base
 {
     /**
      * @group functional
      */
-    public function testReindex()
+    public function testReindex(): void
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);
         $this->_addDocs($oldIndex, 10);
@@ -35,7 +38,7 @@ class ReindexTest extends Base
     /**
      * @group functional
      */
-    public function testReindexOpTypeOptionWithProceedSetOnConflicts()
+    public function testReindexOpTypeOptionWithProceedSetOnConflicts(): void
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);
         $docs1 = $this->_addDocs($oldIndex, 10);
@@ -62,7 +65,7 @@ class ReindexTest extends Base
     /**
      * @group functional
      */
-    public function testReindexOpTypeOptionWithProceedSetOnConflictStop()
+    public function testReindexOpTypeOptionWithProceedSetOnConflictStop(): void
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);
         $docs1 = $this->_addDocs($oldIndex, 10);
@@ -88,7 +91,7 @@ class ReindexTest extends Base
     /**
      * @group functional
      */
-    public function testReindexWithQueryOption()
+    public function testReindexWithQueryOption(): void
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);
         $docs1 = $this->_addDocs($oldIndex, 10);
@@ -113,7 +116,7 @@ class ReindexTest extends Base
     /**
      * @group functional
      */
-    public function testReindexWithSizeOption()
+    public function testReindexWithSizeOption(): void
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);
         $this->_addDocs($oldIndex, 10);
@@ -132,7 +135,7 @@ class ReindexTest extends Base
     /**
      * @group functional
      */
-    public function testReindexWithFalseSetOnWaitForCompletion()
+    public function testReindexWithFalseSetOnWaitForCompletion(): void
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);
         $this->_addDocs($oldIndex, 10);
@@ -155,7 +158,7 @@ class ReindexTest extends Base
     /**
      * @group functional
      */
-    public function testReindexWithScript()
+    public function testReindexWithScript(): void
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);
         $this->_addDocs($oldIndex, 10);
@@ -181,7 +184,7 @@ class ReindexTest extends Base
     /**
      * @group functional
      */
-    public function testReindexWithRemote()
+    public function testReindexWithRemote(): void
     {
         $oldIndex = $this->_createIndex('idx1', true, 1);
         $newIndex = $this->_createIndex('idx2', true, 1);

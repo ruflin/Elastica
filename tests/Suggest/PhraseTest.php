@@ -9,30 +9,15 @@ use Elastica\Suggest\CandidateGenerator\DirectGenerator;
 use Elastica\Suggest\Phrase;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class PhraseTest extends BaseTest
 {
     /**
-     * @return Index
-     */
-    protected function _getIndexForTest()
-    {
-        $index = $this->_createIndex();
-        $index->addDocuments([
-            new Document(1, ['text' => 'Github is pretty cool']),
-            new Document(2, ['text' => 'Elasticsearch is bonsai cool']),
-            new Document(3, ['text' => 'This is a test phrase']),
-            new Document(4, ['text' => 'Another sentence for testing']),
-            new Document(5, ['text' => 'Some more words here']),
-        ]);
-        $index->refresh();
-
-        return $index;
-    }
-
-    /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $suggest = new Suggest();
         $phraseSuggest = new Phrase('suggest1', 'text');
@@ -60,7 +45,7 @@ class PhraseTest extends BaseTest
     /**
      * @group functional
      */
-    public function testPhraseSuggest()
+    public function testPhraseSuggest(): void
     {
         $suggest = new Suggest();
         $phraseSuggest = new Phrase('suggest1', 'text');
@@ -78,5 +63,23 @@ class PhraseTest extends BaseTest
 
         $this->assertEquals('elasticsearch is <suggest>bonsai cool</suggest>', $suggests['suggest1'][0]['options'][0]['highlighted']);
         $this->assertEquals('elasticsearch is bonsai cool', $suggests['suggest1'][0]['options'][0]['text']);
+    }
+
+    /**
+     * @return Index
+     */
+    protected function _getIndexForTest()
+    {
+        $index = $this->_createIndex();
+        $index->addDocuments([
+            new Document(1, ['text' => 'Github is pretty cool']),
+            new Document(2, ['text' => 'Elasticsearch is bonsai cool']),
+            new Document(3, ['text' => 'This is a test phrase']),
+            new Document(4, ['text' => 'Another sentence for testing']),
+            new Document(5, ['text' => 'Some more words here']),
+        ]);
+        $index->refresh();
+
+        return $index;
     }
 }

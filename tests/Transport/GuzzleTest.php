@@ -7,6 +7,9 @@ use Elastica\Query;
 use Elastica\ResultSet\DefaultBuilder;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class GuzzleTest extends BaseTest
 {
     public static function setUpbeforeClass(): void
@@ -16,10 +19,21 @@ class GuzzleTest extends BaseTest
         }
     }
 
+    protected function setUp(): void
+    {
+        \putenv('http_proxy=');
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        \putenv('http_proxy=');
+    }
+
     /**
      * @group functional
      */
-    public function testWithEnvironmentalProxy()
+    public function testWithEnvironmentalProxy(): void
     {
         $this->checkProxy($this->_getProxyUrl());
         \putenv('http_proxy='.$this->_getProxyUrl().'/');
@@ -38,7 +52,7 @@ class GuzzleTest extends BaseTest
     /**
      * @group functional
      */
-    public function testWithEnabledEnvironmentalProxy()
+    public function testWithEnabledEnvironmentalProxy(): void
     {
         $this->checkProxy($this->_getProxyUrl403());
         \putenv('http_proxy='.$this->_getProxyUrl403().'/');
@@ -58,7 +72,7 @@ class GuzzleTest extends BaseTest
     /**
      * @group functional
      */
-    public function testWithProxy()
+    public function testWithProxy(): void
     {
         $this->checkProxy($this->_getProxyUrl());
         $client = $this->_getClient(['transport' => 'Guzzle', 'persistent' => false]);
@@ -71,7 +85,7 @@ class GuzzleTest extends BaseTest
     /**
      * @group functional
      */
-    public function testWithoutProxy()
+    public function testWithoutProxy(): void
     {
         $client = $this->_getClient(['transport' => 'Guzzle', 'persistent' => false]);
         $client->getConnection()->setProxy('');
@@ -83,7 +97,7 @@ class GuzzleTest extends BaseTest
     /**
      * @group functional
      */
-    public function testBodyReuse()
+    public function testBodyReuse(): void
     {
         $client = $this->_getClient(['transport' => 'Guzzle', 'persistent' => false]);
         $index = $client->getIndex('elastica_body_reuse_test');
@@ -115,7 +129,7 @@ class GuzzleTest extends BaseTest
     /**
      * @group unit
      */
-    public function testInvalidConnection()
+    public function testInvalidConnection(): void
     {
         $this->expectException(\Elastica\Exception\Connection\GuzzleException::class);
 
@@ -124,20 +138,9 @@ class GuzzleTest extends BaseTest
         $client->request('_status', 'GET');
     }
 
-    protected function checkProxy($url)
+    protected function checkProxy($url): void
     {
         $url = \parse_url($url);
         $this->_checkConnection($url['host'], $url['port']);
-    }
-
-    protected function setUp(): void
-    {
-        \putenv('http_proxy=');
-    }
-
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-        \putenv('http_proxy=');
     }
 }

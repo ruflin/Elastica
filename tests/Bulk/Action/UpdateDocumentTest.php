@@ -7,12 +7,15 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class UpdateDocumentTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testUpdateDocument()
+    public function testUpdateDocument(): void
     {
         $document = new Document(null, ['foo' => 'bar']);
         $action = new UpdateDocument($document);
@@ -53,7 +56,7 @@ class UpdateDocumentTest extends BaseTest
     /**
      * @group unit
      */
-    public function testUpdateDocumentAsUpsert()
+    public function testUpdateDocumentAsUpsert(): void
     {
         $document = new Document('1', ['foo' => 'bar'], 'index');
         $document->setDocAsUpsert(true);

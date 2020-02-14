@@ -26,7 +26,7 @@ class ChainProcessor implements ProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ResultSet $resultSet)
+    public function process(ResultSet $resultSet): void
     {
         foreach ($this->processors as $processor) {
             $processor->process($resultSet);

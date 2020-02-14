@@ -47,6 +47,14 @@ class Request extends Param
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->toString();
+    }
+
+    /**
      * Sets the request method. Use one of the for consts.
      *
      * @return $this
@@ -194,13 +202,5 @@ class Request extends Param
     public function toString()
     {
         return JSON::stringify($this->toArray());
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->toString();
     }
 }

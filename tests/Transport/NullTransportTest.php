@@ -14,6 +14,8 @@ use Elastica\Transport\NullTransport;
  *
  * @author James Boehmer <james.boehmer@jamesboehmer.com>
  * @author Jan Domanski <jandom@gmail.com>
+ *
+ * @internal
  */
 class NullTransportTest extends BaseTest
 {
@@ -29,7 +31,7 @@ class NullTransportTest extends BaseTest
     /**
      * @group functional
      */
-    public function testEmptyResult()
+    public function testEmptyResult(): void
     {
         // Creates a client with any destination, and verify it returns a response object when executed
         $client = $this->_getClient();
@@ -74,7 +76,7 @@ class NullTransportTest extends BaseTest
     /**
      * @group functional
      */
-    public function testExec()
+    public function testExec(): void
     {
         $request = new Request('/test');
         $params = ['name' => 'ruflin'];
@@ -90,7 +92,7 @@ class NullTransportTest extends BaseTest
     /**
      * @group unit
      */
-    public function testResponse()
+    public function testResponse(): void
     {
         $resposeString = '';
         $response = new Response($resposeString);
@@ -101,7 +103,7 @@ class NullTransportTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGenerateDefaultResponse()
+    public function testGenerateDefaultResponse(): void
     {
         $params = ['blah' => 123];
         $response = $this->transport->generateDefaultResponse($params);

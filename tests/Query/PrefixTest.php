@@ -5,12 +5,15 @@ namespace Elastica\Test\Query;
 use Elastica\Query\Prefix;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class PrefixTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $query = new Prefix();
         $key = 'name';

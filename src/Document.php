@@ -58,7 +58,7 @@ class Document extends AbstractUpdateAction
     /**
      * @param mixed $value
      */
-    public function __set(string $key, $value)
+    public function __set(string $key, $value): void
     {
         $this->set($key, $value);
     }
@@ -68,13 +68,15 @@ class Document extends AbstractUpdateAction
         return $this->has($key) && null !== $this->get($key);
     }
 
-    public function __unset(string $key)
+    public function __unset(string $key): void
     {
         $this->remove($key);
     }
 
     /**
      * Get the value of the given field.
+     *
+     * @param mixed $key
      *
      * @throws InvalidException If the given field does not exist
      *

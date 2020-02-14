@@ -12,7 +12,7 @@ use Elastica\Exception\InvalidException;
 class StrategyFactory
 {
     /**
-     * @param mixed|callable|string|StrategyInterface $strategyName
+     * @param callable|mixed|StrategyInterface|string $strategyName
      *
      * @throws InvalidException
      */

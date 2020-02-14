@@ -125,7 +125,7 @@ class Connection extends Param
     }
 
     /**
-     * @return string|array
+     * @return array|string
      */
     public function getTransport()
     {
@@ -133,7 +133,7 @@ class Connection extends Param
     }
 
     /**
-     * @param string|array $transport
+     * @param array|string $transport
      *
      * @return $this
      */
@@ -321,7 +321,7 @@ class Connection extends Param
     }
 
     /**
-     * @param \Elastica\Connection|array $params Params to create a connection
+     * @param array|\Elastica\Connection $params Params to create a connection
      *
      * @throws Exception\InvalidException
      *

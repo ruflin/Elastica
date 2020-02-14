@@ -6,12 +6,15 @@ use Elastica\Document;
 use Elastica\Query\SpanTerm;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class SpanTermTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $field = 'name';
         $value = 'marek';
@@ -29,7 +32,7 @@ class SpanTermTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSpanTerm()
+    public function testSpanTerm(): void
     {
         $field = 'name';
         $value = 'match';

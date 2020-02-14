@@ -8,12 +8,15 @@ use Elastica\Processor\Rename;
 use Elastica\ResultSet;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
+/**
+ * @internal
+ */
 class RenameTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
-    public function testRename()
+    public function testRename(): void
     {
         $processor = new Rename('foo', 'foobar');
 
@@ -30,7 +33,7 @@ class RenameTest extends BasePipelineTest
     /**
      * @group unit
      */
-    public function testRenameWithNonDefaultOptions()
+    public function testRenameWithNonDefaultOptions(): void
     {
         $processor = new Rename('foo', 'foobar');
         $processor->setIgnoreMissing(true);
@@ -49,7 +52,7 @@ class RenameTest extends BasePipelineTest
     /**
      * @group functional
      */
-    public function testRenameField()
+    public function testRenameField(): void
     {
         $rename = new Rename('package', 'packages');
 

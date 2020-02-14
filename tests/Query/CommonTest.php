@@ -6,12 +6,15 @@ use Elastica\Document;
 use Elastica\Query\Common;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class CommonTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $query = new Common('body', 'test query', .001);
         $query->setLowFrequencyOperator(Common::OPERATOR_AND);
@@ -32,7 +35,7 @@ class CommonTest extends BaseTest
     /**
      * @group functional
      */
-    public function testQuery()
+    public function testQuery(): void
     {
         $index = $this->_createIndex();
 
@@ -64,7 +67,7 @@ class CommonTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetHighFrequencyOperator()
+    public function testSetHighFrequencyOperator(): void
     {
         $value = 'OPERATOR_TEST';
         $query = new Common('body', 'test query', .001);
@@ -76,7 +79,7 @@ class CommonTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetBoost()
+    public function testSetBoost(): void
     {
         $value = .02;
         $query = new Common('body', 'test query', .001);
@@ -88,7 +91,7 @@ class CommonTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetAnalyzer()
+    public function testSetAnalyzer(): void
     {
         $analyzer = 'standard';
         $query = new Common('body', 'test query', .001);

@@ -19,12 +19,15 @@ use Elastica\Search;
 use Elastica\Suggest;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class SearchTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $client = $this->_getClient();
         $search = new Search($client);
@@ -35,7 +38,7 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testAddIndex()
+    public function testAddIndex(): void
     {
         $client = $this->_getClient();
         $search = new Search($client);
@@ -67,7 +70,7 @@ class SearchTest extends BaseTest
     /**
      * @group unit
      */
-    public function testAddIndices()
+    public function testAddIndices(): void
     {
         $client = $this->_getClient();
         $search = new Search($client);
@@ -84,7 +87,7 @@ class SearchTest extends BaseTest
     /**
      * @group unit
      */
-    public function testAddIndexInvalid()
+    public function testAddIndexInvalid(): void
     {
         $this->expectException(InvalidException::class);
 
@@ -97,7 +100,7 @@ class SearchTest extends BaseTest
     /**
      * @group unit
      */
-    public function testAddNumericIndex()
+    public function testAddNumericIndex(): void
     {
         $client = $this->_getClient();
         $search = new Search($client);
@@ -110,7 +113,7 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGetPath()
+    public function testGetPath(): void
     {
         $client = $this->_getClient();
         $search1 = new Search($client);
@@ -133,7 +136,7 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSearchRequest()
+    public function testSearchRequest(): void
     {
         $client = $this->_getClient();
         $search1 = new Search($client);
@@ -154,7 +157,7 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSearchScrollRequest()
+    public function testSearchScrollRequest(): void
     {
         $client = $this->_getClient();
 
@@ -209,7 +212,7 @@ class SearchTest extends BaseTest
      *
      * @group functional
      */
-    public function testLimitDefaultSearch()
+    public function testLimitDefaultSearch(): void
     {
         $client = $this->_getClient();
         $search = new Search($client);
@@ -246,7 +249,7 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testArrayConfigSearch()
+    public function testArrayConfigSearch(): void
     {
         $client = $this->_getClient();
         $search = new Search($client);
@@ -310,7 +313,8 @@ class SearchTest extends BaseTest
         $suggestName = new Suggest((new Suggest\Term('name_suggest', 'username'))->setText('tes'));
         $typedKeysQuery = (new Query())
             ->addAggregation($countIds)
-            ->setSuggest($suggestName);
+            ->setSuggest($suggestName)
+        ;
         $resultSet = $search->search($typedKeysQuery, [Search::OPTION_TYPED_KEYS => true]);
         $this->assertNotEmpty($resultSet->getAggregation('cardinality#count_ids'));
         $this->assertNotEmpty($resultSet->getSuggests(), 'term#name_suggest');
@@ -319,7 +323,8 @@ class SearchTest extends BaseTest
         $mockResponse = new Response(\json_encode(['timed_out' => true]));
         $client = $this->createMock(Client::class);
         $client->method('request')
-            ->will($this->returnValue($mockResponse));
+            ->will($this->returnValue($mockResponse))
+        ;
         $search = new Search($client);
         $script = new Script('Thread.sleep(100); return _score;');
         $query = new FunctionScore();
@@ -331,7 +336,7 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testInvalidConfigSearch()
+    public function testInvalidConfigSearch(): void
     {
         $this->expectException(InvalidException::class);
 
@@ -344,7 +349,7 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSearchWithVersionOption()
+    public function testSearchWithVersionOption(): void
     {
         $index = $this->_createIndex();
         $doc = new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin']);
@@ -368,7 +373,7 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSearchGet()
+    public function testSearchGet(): void
     {
         $client = $this->_getClient();
         $search1 = new Search($client);
@@ -380,7 +385,7 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testCountRequest()
+    public function testCountRequest(): void
     {
         $client = $this->_getClient();
         $search = new Search($client);
@@ -424,7 +429,7 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testCountRequestGet()
+    public function testCountRequestGet(): void
     {
         $client = $this->_getClient();
         $search = new Search($client);
@@ -468,7 +473,7 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testEmptySearch()
+    public function testEmptySearch(): void
     {
         $client = $this->_getClient();
         $search = new Search($client);
@@ -510,7 +515,7 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testCount()
+    public function testCount(): void
     {
         $index = $this->_createIndex();
         $search = new Search($index->getClient());
@@ -533,7 +538,7 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testIgnoreUnavailableOption()
+    public function testIgnoreUnavailableOption(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('elastica_7086b4c2ee585bbb6740ece5ed7ece01');
@@ -560,7 +565,7 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testQuerySizeAfterCount()
+    public function testQuerySizeAfterCount(): void
     {
         $client = $this->_getClient();
         $search = new Search($client);

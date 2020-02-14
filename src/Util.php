@@ -88,9 +88,8 @@ class Util
     {
         $result = $term;
         $result = self::replaceBooleanWords($result);
-        $result = self::escapeTerm($result);
 
-        return $result;
+        return self::escapeTerm($result);
     }
 
     /**
@@ -137,9 +136,8 @@ class Util
     public static function replaceBooleanWords($term)
     {
         $replacementMap = [' AND ' => ' && ', ' OR ' => ' || ', ' NOT ' => ' !'];
-        $result = \strtr($term, $replacementMap);
 
-        return $result;
+        return \strtr($term, $replacementMap);
     }
 
     /**
@@ -188,9 +186,8 @@ class Util
         } else {
             $timestamp = \strtotime($date);
         }
-        $string = \date('Y-m-d\TH:i:s\Z', $timestamp);
 
-        return $string;
+        return \date('Y-m-d\TH:i:s\Z', $timestamp);
     }
 
     /**
@@ -203,16 +200,16 @@ class Util
     public static function convertDateTimeObject(\DateTime $dateTime, bool $includeTimezone = true)
     {
         $formatString = 'Y-m-d\TH:i:s'.(true === $includeTimezone ? 'P' : '\Z');
-        $string = $dateTime->format($formatString);
 
-        return $string;
+        return $dateTime->format($formatString);
     }
 
     /**
      * Tries to guess the name of the param, based on its class
      * Example: \Elastica\Query\MatchAll => match_all.
      *
-     * @param string|object Object or class name
+     * @param object|string Object or class name
+     * @param mixed $class
      *
      * @return string parameter name
      */

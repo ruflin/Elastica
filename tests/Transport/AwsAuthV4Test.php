@@ -7,6 +7,9 @@ use Aws\Credentials\Credentials;
 use Elastica\Exception\Connection\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 
+/**
+ * @internal
+ */
 class AwsAuthV4Test extends GuzzleTest
 {
     public static function setUpbeforeClass(): void
@@ -19,7 +22,7 @@ class AwsAuthV4Test extends GuzzleTest
     /**
      * @group unit
      */
-    public function testSignsWithProvidedCredentialProvider()
+    public function testSignsWithProvidedCredentialProvider(): void
     {
         $config = [
             'persistent' => false,
@@ -57,7 +60,7 @@ class AwsAuthV4Test extends GuzzleTest
     /**
      * @group unit
      */
-    public function testPrefersCredentialProviderToHardCodedCredentials()
+    public function testPrefersCredentialProviderToHardCodedCredentials(): void
     {
         $config = [
             'persistent' => false,
@@ -98,7 +101,7 @@ class AwsAuthV4Test extends GuzzleTest
     /**
      * @group unit
      */
-    public function testSignsWithProvidedCredentials()
+    public function testSignsWithProvidedCredentials(): void
     {
         $config = [
             'persistent' => false,
@@ -133,7 +136,7 @@ class AwsAuthV4Test extends GuzzleTest
         }
     }
 
-    public function testUseHttpAsDefaultProtocol()
+    public function testUseHttpAsDefaultProtocol(): void
     {
         $config = [
             'persistent' => false,
@@ -157,7 +160,7 @@ class AwsAuthV4Test extends GuzzleTest
         }
     }
 
-    public function testSetHttpsIfItIsRequired()
+    public function testSetHttpsIfItIsRequired(): void
     {
         $config = [
             'persistent' => false,
@@ -182,7 +185,7 @@ class AwsAuthV4Test extends GuzzleTest
         }
     }
 
-    public function testSignsWithEnvironmentalCredentials()
+    public function testSignsWithEnvironmentalCredentials(): void
     {
         $config = [
             'persistent' => false,

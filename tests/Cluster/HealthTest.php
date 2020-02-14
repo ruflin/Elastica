@@ -6,6 +6,9 @@ use Elastica\Cluster\Health;
 use Elastica\Cluster\Health\Index;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class HealthTest extends BaseTest
 {
     /**
@@ -46,12 +49,14 @@ class HealthTest extends BaseTest
             ->getMockBuilder(Health::class)
             ->setConstructorArgs([$this->_getClient()])
             ->setMethods(['_retrieveHealthData'])
-            ->getMock();
+            ->getMock()
+        ;
 
         $health
             ->expects($this->any())
             ->method('_retrieveHealthData')
-            ->will($this->returnValue($data));
+            ->will($this->returnValue($data))
+        ;
 
         // need to explicitly refresh because the mocking won't refresh the data in the constructor
         $health->refresh();
@@ -62,7 +67,7 @@ class HealthTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetClusterName()
+    public function testGetClusterName(): void
     {
         $this->assertEquals('test_cluster', $this->_health->getClusterName());
     }
@@ -70,7 +75,7 @@ class HealthTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetStatus()
+    public function testGetStatus(): void
     {
         $this->assertEquals('green', $this->_health->getStatus());
     }
@@ -78,7 +83,7 @@ class HealthTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetTimedOut()
+    public function testGetTimedOut(): void
     {
         $this->assertFalse($this->_health->getTimedOut());
     }
@@ -86,7 +91,7 @@ class HealthTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetNumberOfNodes()
+    public function testGetNumberOfNodes(): void
     {
         $this->assertEquals(10, $this->_health->getNumberOfNodes());
     }
@@ -94,7 +99,7 @@ class HealthTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetNumberOfDataNodes()
+    public function testGetNumberOfDataNodes(): void
     {
         $this->assertEquals(8, $this->_health->getNumberOfDataNodes());
     }
@@ -102,7 +107,7 @@ class HealthTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetActivePrimaryShards()
+    public function testGetActivePrimaryShards(): void
     {
         $this->assertEquals(3, $this->_health->getActivePrimaryShards());
     }
@@ -110,7 +115,7 @@ class HealthTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetActiveShards()
+    public function testGetActiveShards(): void
     {
         $this->assertEquals(4, $this->_health->getActiveShards());
     }
@@ -118,7 +123,7 @@ class HealthTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetRelocatingShards()
+    public function testGetRelocatingShards(): void
     {
         $this->assertEquals(2, $this->_health->getRelocatingShards());
     }
@@ -126,7 +131,7 @@ class HealthTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetInitializingShards()
+    public function testGetInitializingShards(): void
     {
         $this->assertEquals(7, $this->_health->getInitializingShards());
     }
@@ -134,7 +139,7 @@ class HealthTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetUnassignedShards()
+    public function testGetUnassignedShards(): void
     {
         $this->assertEquals(5, $this->_health->getUnassignedShards());
     }
@@ -142,7 +147,7 @@ class HealthTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetDelayedUnassignedShards()
+    public function testGetDelayedUnassignedShards(): void
     {
         $this->assertEquals(4, $this->_health->getDelayedUnassignedShards());
     }
@@ -150,7 +155,7 @@ class HealthTest extends BaseTest
     /**
      * @group unit
      */
-    public function testNumberOfPendingTasks()
+    public function testNumberOfPendingTasks(): void
     {
         $this->assertEquals(1, $this->_health->getNumberOfPendingTasks());
     }
@@ -158,7 +163,7 @@ class HealthTest extends BaseTest
     /**
      * @group unit
      */
-    public function testNumberOfInFlightFetch()
+    public function testNumberOfInFlightFetch(): void
     {
         $this->assertEquals(2, $this->_health->getNumberOfInFlightFetch());
     }
@@ -166,7 +171,7 @@ class HealthTest extends BaseTest
     /**
      * @group unit
      */
-    public function testTaskMaxWaitingInQueueMillis()
+    public function testTaskMaxWaitingInQueueMillis(): void
     {
         $this->assertEquals(634, $this->_health->getTaskMaxWaitingInQueueMillis());
     }
@@ -174,7 +179,7 @@ class HealthTest extends BaseTest
     /**
      * @group unit
      */
-    public function testActiveShardsPercentAsNumber()
+    public function testActiveShardsPercentAsNumber(): void
     {
         $this->assertEquals(50, $this->_health->getActiveShardsPercentAsNumber());
     }
@@ -182,7 +187,7 @@ class HealthTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetIndices()
+    public function testGetIndices(): void
     {
         $indices = $this->_health->getIndices();
 

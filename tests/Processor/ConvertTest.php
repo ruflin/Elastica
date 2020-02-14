@@ -8,12 +8,15 @@ use Elastica\Processor\Convert;
 use Elastica\ResultSet;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
+/**
+ * @internal
+ */
 class ConvertTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
-    public function testConvert()
+    public function testConvert(): void
     {
         $processor = new Convert('foo', 'integer');
 
@@ -30,7 +33,7 @@ class ConvertTest extends BasePipelineTest
     /**
      * @group unit
      */
-    public function testConvertWithNonDefaultOptions()
+    public function testConvertWithNonDefaultOptions(): void
     {
         $processor = new Convert('foo', 'integer');
         $processor->setIgnoreMissing(true);
@@ -62,7 +65,7 @@ class ConvertTest extends BasePipelineTest
     /**
      * @group functional
      */
-    public function testConvertField()
+    public function testConvertField(): void
     {
         $append = new Convert('foo', 'float');
 

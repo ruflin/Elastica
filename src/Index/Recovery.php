@@ -78,18 +78,6 @@ class Recovery
     }
 
     /**
-     * @return mixed
-     */
-    protected function getRecoveryData()
-    {
-        $endpoint = new RecoveryEndpoint();
-
-        $this->_response = $this->getIndex()->requestEndpoint($endpoint);
-
-        return $this->getResponse()->getData();
-    }
-
-    /**
      * Retrieve the Recovery data.
      *
      * @return $this
@@ -99,5 +87,17 @@ class Recovery
         $this->_data = $this->getRecoveryData();
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getRecoveryData()
+    {
+        $endpoint = new RecoveryEndpoint();
+
+        $this->_response = $this->getIndex()->requestEndpoint($endpoint);
+
+        return $this->getResponse()->getData();
     }
 }

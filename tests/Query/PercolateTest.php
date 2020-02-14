@@ -7,6 +7,9 @@ use Elastica\Mapping;
 use Elastica\Query\Percolate;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class PercolateTest extends BaseTest
 {
     /**
@@ -17,7 +20,7 @@ class PercolateTest extends BaseTest
     /**
      * @group functional
      */
-    public function testPercolateQueryOnNewDocument()
+    public function testPercolateQueryOnNewDocument(): void
     {
         $this->_prepareIndexForPercolate();
         //Register a query in the percolator:
@@ -28,7 +31,8 @@ class PercolateTest extends BaseTest
         //Match a document to the registered percolator queries:
         $percolateQuery = new Percolate();
         $percolateQuery->setField('query')
-            ->setDocument($doc->getData());
+            ->setDocument($doc->getData())
+        ;
         $resultSet = $this->index->search($percolateQuery);
 
         $this->assertEquals(1, $resultSet->count());
@@ -46,7 +50,8 @@ class PercolateTest extends BaseTest
         $doc2 = new Document(4, ['message' => 'Just a simple text for test']);
         $percolateQuery = new Percolate();
         $percolateQuery->setField('query')
-            ->setDocument($doc2->getData());
+            ->setDocument($doc2->getData())
+        ;
         $resultSet = $this->index->search($percolateQuery);
 
         $this->assertEquals(0, $resultSet->count());
@@ -55,7 +60,7 @@ class PercolateTest extends BaseTest
     /**
      * @group functional
      */
-    public function testPercolateQueryOnExistingDocument()
+    public function testPercolateQueryOnExistingDocument(): void
     {
         $this->_prepareIndexForPercolate();
         //Register a query in the percolator:
@@ -68,7 +73,8 @@ class PercolateTest extends BaseTest
         $percolateQuery = new Percolate();
         $percolateQuery->setField('query')
             ->setDocumentIndex($this->index->getName())
-            ->setDocumentId($doc->getId());
+            ->setDocumentId($doc->getId())
+        ;
         $resultSet = $this->index->search($percolateQuery);
 
         $this->assertEquals(1, $resultSet->count());
@@ -85,26 +91,17 @@ class PercolateTest extends BaseTest
         $percolateQuery = new Percolate();
         $percolateQuery->setField('query')
             ->setDocumentIndex($this->index->getName())
-            ->setDocumentId($doc2->getId());
+            ->setDocumentId($doc2->getId())
+        ;
         $resultSet = $this->index->search($percolateQuery);
 
         $this->assertEquals(0, $resultSet->count());
     }
 
-    private function _prepareIndexForPercolate()
-    {
-        $this->index = $this->_createIndex();
-        $this->index->getSettings()->setNumberOfReplicas(0);
-        //The doctype mapping is the mapping used to preprocess the document
-        // defined in the percolator query before it gets indexed into a temporary index.
-        //The queries mapping is the mapping used for indexing the query documents.
-        $this->index->setMapping(new Mapping(['message' => ['type' => 'text'], 'query' => ['type' => 'percolator']]));
-    }
-
     /**
      * @group unit
      */
-    public function testSetField()
+    public function testSetField(): void
     {
         $field = 'field1';
         $query = new Percolate();
@@ -118,7 +115,7 @@ class PercolateTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetDocument()
+    public function testSetDocument(): void
     {
         $query = new Percolate();
         $doc = new Document(1, ['message' => 'A new bonsai tree in the office']);
@@ -132,7 +129,7 @@ class PercolateTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetDocumentIndex()
+    public function testSetDocumentIndex(): void
     {
         $index = $this->_createIndex('indexone');
         $query = new Percolate();
@@ -146,7 +143,7 @@ class PercolateTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetDocumentId()
+    public function testSetDocumentId(): void
     {
         $id = 3;
         $query = new Percolate();
@@ -160,7 +157,7 @@ class PercolateTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetDocumentRouting()
+    public function testSetDocumentRouting(): void
     {
         $routing = 'testRout';
         $query = new Percolate();
@@ -174,7 +171,7 @@ class PercolateTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetDocumentPreference()
+    public function testSetDocumentPreference(): void
     {
         $preference = ['pref1' => 'test', 'pref2' => 'test2'];
         $query = new Percolate();
@@ -188,7 +185,7 @@ class PercolateTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetDocumentVersion()
+    public function testSetDocumentVersion(): void
     {
         $version = 10;
         $query = new Percolate();
@@ -197,5 +194,15 @@ class PercolateTest extends BaseTest
         $data = $query->toArray();
 
         $this->assertEquals($data['percolate']['version'], $version);
+    }
+
+    private function _prepareIndexForPercolate(): void
+    {
+        $this->index = $this->_createIndex();
+        $this->index->getSettings()->setNumberOfReplicas(0);
+        //The doctype mapping is the mapping used to preprocess the document
+        // defined in the percolator query before it gets indexed into a temporary index.
+        //The queries mapping is the mapping used for indexing the query documents.
+        $this->index->setMapping(new Mapping(['message' => ['type' => 'text'], 'query' => ['type' => 'percolator']]));
     }
 }

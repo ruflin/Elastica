@@ -5,12 +5,15 @@ namespace Elastica\Test;
 use Elastica\Document;
 use Elastica\Task;
 
+/**
+ * @internal
+ */
 class TaskTest extends Base
 {
     /**
      * @group functional
      */
-    public function testGetData()
+    public function testGetData(): void
     {
         $task = $this->_createTask();
         $data = $task->getData();
@@ -22,7 +25,7 @@ class TaskTest extends Base
     /**
      * @group functional
      */
-    public function testGetId()
+    public function testGetId(): void
     {
         $task = $this->_createTask();
         $data = $task->getData();
@@ -34,7 +37,7 @@ class TaskTest extends Base
     /**
      * @group functional
      */
-    public function testIsComplete()
+    public function testIsComplete(): void
     {
         $task = $this->_createTask();
 
@@ -52,7 +55,7 @@ class TaskTest extends Base
     /**
      * @group functional
      */
-    public function testRefreshWithOptionsContainingOnWaitForResponseTrue()
+    public function testRefreshWithOptionsContainingOnWaitForResponseTrue(): void
     {
         $task = $this->_createTask();
         $task->refresh([Task::WAIT_FOR_COMPLETION => Task::WAIT_FOR_COMPLETION_TRUE]);
@@ -62,7 +65,7 @@ class TaskTest extends Base
     /**
      * @group unit
      */
-    public function testCancelThrowsExceptionWithEmptyTaskId()
+    public function testCancelThrowsExceptionWithEmptyTaskId(): void
     {
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('No task id given');
@@ -74,7 +77,7 @@ class TaskTest extends Base
     /**
      * @group functional
      */
-    public function testCancelDoesntCancelCompletedTasks()
+    public function testCancelDoesntCancelCompletedTasks(): void
     {
         $task = $this->_createTask();
         $task->refresh([Task::WAIT_FOR_COMPLETION => Task::WAIT_FOR_COMPLETION_TRUE]);

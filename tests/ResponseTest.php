@@ -7,6 +7,8 @@ use Elastica\Test\Base as BaseTest;
 
 /**
  * @group unit
+ *
+ * @internal
  */
 class ResponseTest extends BaseTest
 {

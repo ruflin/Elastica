@@ -8,33 +8,15 @@ use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class CardinalityTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest(): Index
-    {
-        $index = $this->_createIndex();
-
-        $mapping = new Mapping([
-            'color' => ['type' => 'keyword'],
-        ]);
-        $index->setMapping($mapping);
-
-        $index->addDocuments([
-            new Document(1, ['color' => 'blue']),
-            new Document(2, ['color' => 'blue']),
-            new Document(3, ['color' => 'red']),
-            new Document(4, ['color' => 'green']),
-        ]);
-
-        $index->refresh();
-
-        return $index;
-    }
-
     /**
      * @group functional
      */
-    public function testCardinalityAggregation()
+    public function testCardinalityAggregation(): void
     {
         $agg = new Cardinality('cardinality');
         $agg->setField('color');
@@ -60,7 +42,7 @@ class CardinalityTest extends BaseAggregationTest
      * @dataProvider validPrecisionThresholdProvider
      * @group unit
      */
-    public function testPrecisionThreshold(int $threshold)
+    public function testPrecisionThreshold(int $threshold): void
     {
         $agg = new Cardinality('threshold');
         $agg->setPrecisionThreshold($threshold);
@@ -75,7 +57,7 @@ class CardinalityTest extends BaseAggregationTest
      *
      * @param bool $rehash
      */
-    public function testRehash($rehash)
+    public function testRehash($rehash): void
     {
         $agg = new Cardinality('rehash');
         $agg->setRehash($rehash);
@@ -90,5 +72,26 @@ class CardinalityTest extends BaseAggregationTest
             'true' => [true],
             'false' => [false],
         ];
+    }
+
+    protected function _getIndexForTest(): Index
+    {
+        $index = $this->_createIndex();
+
+        $mapping = new Mapping([
+            'color' => ['type' => 'keyword'],
+        ]);
+        $index->setMapping($mapping);
+
+        $index->addDocuments([
+            new Document(1, ['color' => 'blue']),
+            new Document(2, ['color' => 'blue']),
+            new Document(3, ['color' => 'red']),
+            new Document(4, ['color' => 'green']),
+        ]);
+
+        $index->refresh();
+
+        return $index;
     }
 }

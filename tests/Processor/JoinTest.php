@@ -8,12 +8,15 @@ use Elastica\Processor\Join;
 use Elastica\ResultSet;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
+/**
+ * @internal
+ */
 class JoinTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
-    public function testJoin()
+    public function testJoin(): void
     {
         $processor = new Join('joined_array_field', '-');
 
@@ -30,7 +33,7 @@ class JoinTest extends BasePipelineTest
     /**
      * @group functional
      */
-    public function testJoinField()
+    public function testJoinField(): void
     {
         $join = new Join('name', '-');
 

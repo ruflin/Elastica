@@ -31,19 +31,6 @@ class Health
     }
 
     /**
-     * Retrieves the health data from the cluster.
-     */
-    protected function _retrieveHealthData(): array
-    {
-        $endpoint = new \Elasticsearch\Endpoints\Cluster\Health();
-        $endpoint->setParams(['level' => 'shards']);
-
-        $response = $this->_client->requestEndpoint($endpoint);
-
-        return $response->getData();
-    }
-
-    /**
      * Gets the health data.
      */
     public function getData(): array
@@ -184,5 +171,18 @@ class Health
         }
 
         return $indices;
+    }
+
+    /**
+     * Retrieves the health data from the cluster.
+     */
+    protected function _retrieveHealthData(): array
+    {
+        $endpoint = new \Elasticsearch\Endpoints\Cluster\Health();
+        $endpoint->setParams(['level' => 'shards']);
+
+        $response = $this->_client->requestEndpoint($endpoint);
+
+        return $response->getData();
     }
 }

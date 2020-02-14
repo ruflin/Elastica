@@ -26,7 +26,7 @@ class MoreLikeThis extends AbstractQuery
     /**
      * Set the "like" value.
      *
-     * @param string|self $like
+     * @param self|string $like
      *
      * @return $this
      */
@@ -169,8 +169,8 @@ class MoreLikeThis extends AbstractQuery
         } elseif (!empty($array['more_like_this']['like']['_source'])) {
             $doc = $array['more_like_this']['like'];
             $doc['doc'] = $array['more_like_this']['like']['_source'];
-            unset($doc['_id']);
-            unset($doc['_source']);
+            unset($doc['_id'], $doc['_source']);
+
             $array['more_like_this']['like'] = $doc;
         }
 

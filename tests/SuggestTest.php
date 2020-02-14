@@ -8,6 +8,9 @@ use Elastica\Suggest;
 use Elastica\Suggest\Term;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class SuggestTest extends BaseTest
 {
     /**
@@ -15,7 +18,7 @@ class SuggestTest extends BaseTest
      *
      * @group functional
      */
-    public function testCreateSelf()
+    public function testCreateSelf(): void
     {
         $suggest = new Suggest();
 
@@ -29,7 +32,7 @@ class SuggestTest extends BaseTest
      *
      * @group functional
      */
-    public function testCreateWithSuggest()
+    public function testCreateWithSuggest(): void
     {
         $suggest1 = new Term('suggest1', '_all');
 
@@ -43,7 +46,7 @@ class SuggestTest extends BaseTest
      *
      * @group functional
      */
-    public function testCreateWithNonSuggest()
+    public function testCreateWithNonSuggest(): void
     {
         try {
             Suggest::create(new BoolQuery());

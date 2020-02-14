@@ -13,13 +13,15 @@ use Elastica\Test\Base as BaseTest;
  * IndexTemplate class tests.
  *
  * @author Dmitry Balabka <dmitry.balabka@intexsys.lv>
+ *
+ * @internal
  */
 class IndexTemplateTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testInstantiate()
+    public function testInstantiate(): void
     {
         $name = 'index_template1';
         $client = $this->_getClient();
@@ -32,7 +34,7 @@ class IndexTemplateTest extends BaseTest
     /**
      * @group unit
      */
-    public function testIncorrectInstantiate()
+    public function testIncorrectInstantiate(): void
     {
         $this->expectException(\Elastica\Exception\InvalidException::class);
 
@@ -43,16 +45,17 @@ class IndexTemplateTest extends BaseTest
     /**
      * @group unit
      */
-    public function testDelete()
+    public function testDelete(): void
     {
         $name = 'index_template1';
         $response = new Response('');
-        /** @var \PHPUnit_Framework_MockObject_MockObject|Client $clientMock */
+        /** @var Client|\PHPUnit_Framework_MockObject_MockObject $clientMock */
         $clientMock = $this->createMock(Client::class);
         $clientMock->expects($this->once())
             ->method('request')
             ->with('_template/'.$name, Request::DELETE, [], [])
-            ->willReturn($response);
+            ->willReturn($response)
+        ;
         $indexTemplate = new IndexTemplate($clientMock, $name);
         $this->assertSame($response, $indexTemplate->delete());
     }
@@ -60,17 +63,18 @@ class IndexTemplateTest extends BaseTest
     /**
      * @group unit
      */
-    public function testCreate()
+    public function testCreate(): void
     {
         $args = [1];
         $response = new Response('');
         $name = 'index_template1';
-        /** @var \PHPUnit_Framework_MockObject_MockObject|Client $clientMock */
+        /** @var Client|\PHPUnit_Framework_MockObject_MockObject $clientMock */
         $clientMock = $this->createMock(Client::class);
         $clientMock->expects($this->once())
             ->method('request')
             ->with('_template/'.$name, Request::PUT, $args, [])
-            ->willReturn($response);
+            ->willReturn($response)
+        ;
         $indexTemplate = new IndexTemplate($clientMock, $name);
         $this->assertSame($response, $indexTemplate->create($args));
     }
@@ -78,16 +82,17 @@ class IndexTemplateTest extends BaseTest
     /**
      * @group unit
      */
-    public function testExists()
+    public function testExists(): void
     {
         $name = 'index_template1';
         $response = new Response('', 200);
-        /** @var \PHPUnit_Framework_MockObject_MockObject|Client $clientMock */
+        /** @var Client|\PHPUnit_Framework_MockObject_MockObject $clientMock */
         $clientMock = $this->createMock(Client::class);
         $clientMock->expects($this->once())
             ->method('request')
             ->with('_template/'.$name, Request::HEAD, [], [])
-            ->willReturn($response);
+            ->willReturn($response)
+        ;
         $indexTemplate = new IndexTemplate($clientMock, $name);
         $this->assertTrue($indexTemplate->exists());
     }
@@ -95,7 +100,7 @@ class IndexTemplateTest extends BaseTest
     /**
      * @group functional
      */
-    public function testCreateTemplate()
+    public function testCreateTemplate(): void
     {
         $template = [
             'index_patterns' => 'te*',
@@ -114,7 +119,7 @@ class IndexTemplateTest extends BaseTest
     /**
      * @group functional
      */
-    public function testCreateAlreadyExistsTemplateException()
+    public function testCreateAlreadyExistsTemplateException(): void
     {
         $template = [
             'index_patterns' => 'te*',

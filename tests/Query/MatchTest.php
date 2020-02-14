@@ -6,12 +6,15 @@ use Elastica\Document;
 use Elastica\Query\Match;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class MatchTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $field = 'test';
         $testQuery = 'Nicolas Ruflin';
@@ -59,7 +62,7 @@ class MatchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testMatch()
+    public function testMatch(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
@@ -89,7 +92,7 @@ class MatchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testMatchSetFieldBoost()
+    public function testMatchSetFieldBoost(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
@@ -120,7 +123,7 @@ class MatchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testMatchSetFieldBoostWithString()
+    public function testMatchSetFieldBoostWithString(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
@@ -151,7 +154,7 @@ class MatchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testMatchZeroTerm()
+    public function testMatchZeroTerm(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
@@ -176,7 +179,7 @@ class MatchTest extends BaseTest
     /**
      * @group unit
      */
-    public function testMatchFuzzinessType()
+    public function testMatchFuzzinessType(): void
     {
         $field = 'test';
         $query = new Match();
@@ -197,7 +200,7 @@ class MatchTest extends BaseTest
     /**
      * @group unit
      */
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $match = new Match(null, 'values');
         $this->assertEquals(['match' => []], $match->toArray());

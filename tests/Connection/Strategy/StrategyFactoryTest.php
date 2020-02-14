@@ -11,15 +11,17 @@ use Elastica\Test\Base;
  * Description of StrategyFactoryTest.
  *
  * @author chabior
+ *
+ * @internal
  */
 class StrategyFactoryTest extends Base
 {
     /**
      * @group unit
      */
-    public function testCreateCallbackStrategy()
+    public function testCreateCallbackStrategy(): void
     {
-        $callback = function ($connections) {
+        $callback = function ($connections): void {
         };
 
         $strategy = StrategyFactory::create($callback);
@@ -30,7 +32,7 @@ class StrategyFactoryTest extends Base
     /**
      * @group unit
      */
-    public function testCreateByName()
+    public function testCreateByName(): void
     {
         $strategyName = 'Simple';
 
@@ -42,7 +44,7 @@ class StrategyFactoryTest extends Base
     /**
      * @group unit
      */
-    public function testCreateByClass()
+    public function testCreateByClass(): void
     {
         $strategy = new EmptyStrategy();
 
@@ -52,7 +54,7 @@ class StrategyFactoryTest extends Base
     /**
      * @group unit
      */
-    public function testCreateByClassName()
+    public function testCreateByClassName(): void
     {
         $strategy = StrategyFactory::create(EmptyStrategy::class);
 
@@ -62,7 +64,7 @@ class StrategyFactoryTest extends Base
     /**
      * @group unit
      */
-    public function testFailCreate()
+    public function testFailCreate(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -74,7 +76,7 @@ class StrategyFactoryTest extends Base
     /**
      * @group unit
      */
-    public function testNoCollisionWithGlobalNamespace()
+    public function testNoCollisionWithGlobalNamespace(): void
     {
         // create collision
         if (!\class_exists('Simple')) {

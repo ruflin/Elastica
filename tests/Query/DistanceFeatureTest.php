@@ -5,12 +5,15 @@ namespace Elastica\Test\Query;
 use Elastica\Query\DistanceFeature;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class DistanceFeatureTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testToArrayDate()
+    public function testToArrayDate(): void
     {
         $query = new DistanceFeature('field_date', 'now', '7d');
 
@@ -28,7 +31,7 @@ class DistanceFeatureTest extends BaseTest
     /**
      * @group unit
      */
-    public function testToArrayGeoPoint()
+    public function testToArrayGeoPoint(): void
     {
         $query = new DistanceFeature('field_geo_point', [-71.3, 41.15], '1000m');
 
@@ -46,7 +49,7 @@ class DistanceFeatureTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetBoost()
+    public function testSetBoost(): void
     {
         $query = new DistanceFeature('field_date', 'now', '7d');
         $query->setBoost($value = 2.0);

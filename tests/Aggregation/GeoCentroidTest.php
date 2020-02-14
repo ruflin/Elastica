@@ -8,8 +8,25 @@ use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class GeoCentroidTest extends BaseAggregationTest
 {
+    /**
+     * @group functional
+     */
+    public function testGeohashGridAggregation(): void
+    {
+        $agg = new GeoCentroid('centroid', 'location');
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('centroid');
+
+        $this->assertEquals(3, $results['count']);
+    }
+
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
@@ -26,19 +43,5 @@ class GeoCentroidTest extends BaseAggregationTest
         $index->refresh();
 
         return $index;
-    }
-
-    /**
-     * @group functional
-     */
-    public function testGeohashGridAggregation()
-    {
-        $agg = new GeoCentroid('centroid', 'location');
-
-        $query = new Query();
-        $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('centroid');
-
-        $this->assertEquals(3, $results['count']);
     }
 }

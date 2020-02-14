@@ -8,12 +8,15 @@ use Elastica\JSON;
 use Elastica\Query;
 use Elastica\ResultSet\DefaultBuilder;
 
+/**
+ * @internal
+ */
 class PartialShardFailureExceptionTest extends AbstractExceptionTest
 {
     /**
      * @group functional
      */
-    public function testPartialFailure()
+    public function testPartialFailure(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('elastica_partial_failure');
@@ -23,9 +26,11 @@ class PartialShardFailureExceptionTest extends AbstractExceptionTest
                     'index' => [
                         'number_of_shards' => 5,
                         'number_of_replicas' => 0,
-                        ],
                     ],
-           ], true);
+                ],
+            ],
+            true
+        );
 
         $index->addDocument(new Document('', ['name' => 'ruflin']));
         $index->addDocument(new Document('', ['name' => 'bobrik']));

@@ -8,12 +8,15 @@ use Elastica\Query\MatchAll;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class HasParentTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $q = new MatchAll();
 
@@ -34,7 +37,7 @@ class HasParentTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetScope()
+    public function testSetScope(): void
     {
         $q = new MatchAll();
 
@@ -59,7 +62,7 @@ class HasParentTest extends BaseTest
     /**
      * @group functional
      */
-    public function testHasParent()
+    public function testHasParent(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('testhasparentjoin');

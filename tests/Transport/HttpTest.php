@@ -7,12 +7,21 @@ use Elastica\Query;
 use Elastica\ResultSet\DefaultBuilder;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class HttpTest extends BaseTest
 {
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        \putenv('http_proxy=');
+    }
+
     /**
      * @group functional
      */
-    public function testCurlNobodyOptionIsResetAfterHeadRequest()
+    public function testCurlNobodyOptionIsResetAfterHeadRequest(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('curl_test');
@@ -40,7 +49,7 @@ class HttpTest extends BaseTest
     /**
      * @group functional
      */
-    public function testUnicodeData()
+    public function testUnicodeData(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('curl_test');
@@ -73,7 +82,7 @@ class HttpTest extends BaseTest
     /**
      * @group functional
      */
-    public function testWithEnvironmentalProxy()
+    public function testWithEnvironmentalProxy(): void
     {
         $this->checkProxy($this->_getProxyUrl());
         \putenv('http_proxy='.$this->_getProxyUrl().'/');
@@ -92,7 +101,7 @@ class HttpTest extends BaseTest
     /**
      * @group functional
      */
-    public function testWithEnabledEnvironmentalProxy()
+    public function testWithEnabledEnvironmentalProxy(): void
     {
         $this->checkProxy($this->_getProxyUrl403());
         \putenv('http_proxy='.$this->_getProxyUrl403().'/');
@@ -109,7 +118,7 @@ class HttpTest extends BaseTest
     /**
      * @group functional
      */
-    public function testWithProxy()
+    public function testWithProxy(): void
     {
         $this->checkProxy($this->_getProxyUrl());
         $client = $this->_getClient();
@@ -122,7 +131,7 @@ class HttpTest extends BaseTest
     /**
      * @group functional
      */
-    public function testWithoutProxy()
+    public function testWithoutProxy(): void
     {
         $client = $this->_getClient();
         $client->getConnection()->setProxy('');
@@ -134,7 +143,7 @@ class HttpTest extends BaseTest
     /**
      * @group functional
      */
-    public function testBodyReuse()
+    public function testBodyReuse(): void
     {
         $client = $this->_getClient();
 
@@ -167,7 +176,7 @@ class HttpTest extends BaseTest
     /**
      * @group functional
      */
-    public function testRequestSuccessWithHttpCompressionEnabled()
+    public function testRequestSuccessWithHttpCompressionEnabled(): void
     {
         $client = $this->_getClient(['transport' => ['type' => 'Http', 'compression' => true, 'curl' => [CURLINFO_HEADER_OUT => true]]]);
 
@@ -183,7 +192,7 @@ class HttpTest extends BaseTest
     /**
      * @group functional
      */
-    public function testRequestSuccessWithHttpCompressionDisabled()
+    public function testRequestSuccessWithHttpCompressionDisabled(): void
     {
         $client = $this->_getClient(['transport' => ['type' => 'Http', 'compression' => false, 'curl' => [CURLINFO_HEADER_OUT => true]]]);
 
@@ -196,15 +205,9 @@ class HttpTest extends BaseTest
         $this->assertArrayHasKey('acknowledged', $createIndexResponse->getData());
     }
 
-    protected function checkProxy($url)
+    protected function checkProxy($url): void
     {
         $url = \parse_url($url);
         $this->_checkConnection($url['host'], $url['port']);
-    }
-
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-        \putenv('http_proxy=');
     }
 }

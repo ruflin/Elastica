@@ -7,12 +7,15 @@ use Elastica\Exception\ResponseException;
 use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class QueryStringTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testSearchMultipleFields()
+    public function testSearchMultipleFields(): void
     {
         $str = \md5(\rand());
         $query = new QueryString($str);
@@ -44,7 +47,7 @@ class QueryStringTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSearch()
+    public function testSearch(): void
     {
         $index = $this->_createIndex();
         $index->getSettings()->setNumberOfReplicas(0);
@@ -64,7 +67,7 @@ class QueryStringTest extends BaseTest
      *
      * @group functional
      */
-    public function testSearchFields()
+    public function testSearchFields(): void
     {
         $index = $this->_createIndex();
 
@@ -85,7 +88,7 @@ class QueryStringTest extends BaseTest
      *
      * @group functional
      */
-    public function testSearchFieldsValidationException()
+    public function testSearchFieldsValidationException(): void
     {
         $index = $this->_createIndex();
 
@@ -116,7 +119,7 @@ class QueryStringTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetDefaultOperator()
+    public function testSetDefaultOperator(): void
     {
         $operator = 'AND';
         $query = new QueryString('test');
@@ -130,7 +133,7 @@ class QueryStringTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetDefaultField()
+    public function testSetDefaultField(): void
     {
         $default = 'field1';
         $query = new QueryString('test');
@@ -144,7 +147,7 @@ class QueryStringTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetAnalyzer()
+    public function testSetAnalyzer(): void
     {
         $value = 'test';
         $query = new QueryString('test');
@@ -156,7 +159,7 @@ class QueryStringTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetAllowLeadingWildcard()
+    public function testSetAllowLeadingWildcard(): void
     {
         $value = true;
         $query = new QueryString('test');
@@ -168,7 +171,7 @@ class QueryStringTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetEnablePositionIncrements()
+    public function testSetEnablePositionIncrements(): void
     {
         $value = true;
         $query = new QueryString('test');
@@ -180,7 +183,7 @@ class QueryStringTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetFuzzyPrefixLength()
+    public function testSetFuzzyPrefixLength(): void
     {
         $value = 1;
         $query = new QueryString('test');
@@ -192,7 +195,7 @@ class QueryStringTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetFuzzyMinSim()
+    public function testSetFuzzyMinSim(): void
     {
         $value = 0.1;
         $query = new QueryString('test');
@@ -204,7 +207,7 @@ class QueryStringTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetAnalyzeWildcard()
+    public function testSetAnalyzeWildcard(): void
     {
         $value = true;
         $query = new QueryString('test');
@@ -216,7 +219,7 @@ class QueryStringTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetTieBreaker()
+    public function testSetTieBreaker(): void
     {
         $value = 0.2;
         $query = new QueryString('test');
@@ -228,7 +231,7 @@ class QueryStringTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetRewrite()
+    public function testSetRewrite(): void
     {
         $rewrite = 'scoring_boolean';
         $query = new QueryString('test');
@@ -242,7 +245,7 @@ class QueryStringTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetTimezone()
+    public function testSetTimezone(): void
     {
         $timezone = 'Europe/Paris';
         $text = 'date:[2012 TO 2014]';
@@ -264,7 +267,7 @@ class QueryStringTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetPhraseSlop()
+    public function testSetPhraseSlop(): void
     {
         $phraseSlop = 9;
 
@@ -278,7 +281,7 @@ class QueryStringTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetBoost()
+    public function testSetBoost(): void
     {
         $index = $this->_createIndex();
         $query = new QueryString('test');

@@ -8,12 +8,15 @@ use Elastica\Result;
 use Elastica\ResultSet;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class ResultSetTest extends BaseTest
 {
     /**
      * @group functional
      */
-    public function testGetters()
+    public function testGetters(): void
     {
         $index = $this->_createIndex();
         $index->addDocuments([
@@ -39,7 +42,7 @@ class ResultSetTest extends BaseTest
     /**
      * @group functional
      */
-    public function testArrayAccess()
+    public function testArrayAccess(): void
     {
         $index = $this->_createIndex();
         $index->addDocuments([
@@ -62,7 +65,7 @@ class ResultSetTest extends BaseTest
     /**
      * @group functional
      */
-    public function testDocumentsAccess()
+    public function testDocumentsAccess(): void
     {
         $index = $this->_createIndex();
         $index->addDocuments([
@@ -90,7 +93,7 @@ class ResultSetTest extends BaseTest
     /**
      * @group functional
      */
-    public function testInvalidOffsetCreation()
+    public function testInvalidOffsetCreation(): void
     {
         $this->expectException(InvalidException::class);
 

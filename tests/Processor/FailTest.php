@@ -8,12 +8,15 @@ use Elastica\Processor\Fail;
 use Elastica\Processor\Json;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
+/**
+ * @internal
+ */
 class FailTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
-    public function testFail()
+    public function testFail(): void
     {
         $processor = new Fail('This is a custom fail message for processor');
 
@@ -29,7 +32,7 @@ class FailTest extends BasePipelineTest
     /**
      * @group functional
      */
-    public function testFailField()
+    public function testFailField(): void
     {
         $fail = new Fail('custom error fail message');
         $json = new Json('name');

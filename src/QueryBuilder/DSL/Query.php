@@ -144,7 +144,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-distance-feature-query.html
      *
-     * @param string|array $origin
+     * @param array|string $origin
      */
     public function distance_feature(string $field, $origin, string $pivot): DistanceFeature
     {
@@ -210,7 +210,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html
      *
-     * @param string|BaseQuery|AbstractQuery $query
+     * @param AbstractQuery|BaseQuery|string $query
      * @param string                         $type  Parent document type
      */
     public function has_child($query, ?string $type = null): HasChild
@@ -223,7 +223,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-parent-query.html
      *
-     * @param string|BaseQuery|AbstractQuery $query
+     * @param AbstractQuery|BaseQuery|string $query
      * @param string                         $type  Parent document type
      */
     public function has_parent($query, string $type): HasParent
@@ -265,6 +265,8 @@ class Query implements DSL
      * match phrase query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase.html
+     *
+     * @param mixed|null $values
      */
     public function match_phrase(?string $field = null, $values = null): MatchPhrase
     {
@@ -275,6 +277,8 @@ class Query implements DSL
      * match phrase prefix query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase-prefix.html
+     *
+     * @param mixed|null $values
      */
     public function match_phrase_prefix(?string $field = null, $values = null): MatchPhrasePrefix
     {

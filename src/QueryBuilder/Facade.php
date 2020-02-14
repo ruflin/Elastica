@@ -8,7 +8,7 @@ use Elastica\Exception\QueryBuilderException;
  * Facade for a specific DSL object.
  *
  * @author Manuel Andreo Garcia <andreo.garcia@googlemail.com>
- **/
+ */
 class Facade
 {
     /**

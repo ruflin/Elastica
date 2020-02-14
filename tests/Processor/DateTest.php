@@ -8,12 +8,15 @@ use Elastica\Processor\Date;
 use Elastica\ResultSet;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
+/**
+ * @internal
+ */
 class DateTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
-    public function testDate()
+    public function testDate(): void
     {
         $processor = new Date('initial_date', ['dd/MM/yyyy hh:mm:ss']);
 
@@ -41,7 +44,7 @@ class DateTest extends BasePipelineTest
     /**
      * @group unit
      */
-    public function testDateWithNonDefaultOptions()
+    public function testDateWithNonDefaultOptions(): void
     {
         $processor = new Date('initial_date', ['dd/MM/yyyy hh:mm:ss', 'ISO8601', 'UNIX', 'UNIX_MS']);
         $processor->setTargetField('timestamp');
@@ -64,7 +67,7 @@ class DateTest extends BasePipelineTest
     /**
      * @group functional
      */
-    public function testDateField()
+    public function testDateField(): void
     {
         $date = new Date('date_field', ['yyyy dd MM hh:mm:ss']);
         $date->setTargetField('date_parsed');

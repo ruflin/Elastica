@@ -7,8 +7,25 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class ValueCountTest extends BaseAggregationTest
 {
+    /**
+     * @group functional
+     */
+    public function testValueCountAggregation(): void
+    {
+        $agg = new ValueCount('count', 'price');
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('count');
+
+        $this->assertEquals(5, $results['value']);
+    }
+
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
@@ -24,19 +41,5 @@ class ValueCountTest extends BaseAggregationTest
         $index->refresh();
 
         return $index;
-    }
-
-    /**
-     * @group functional
-     */
-    public function testValueCountAggregation()
-    {
-        $agg = new ValueCount('count', 'price');
-
-        $query = new Query();
-        $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('count');
-
-        $this->assertEquals(5, $results['value']);
     }
 }

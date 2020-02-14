@@ -15,7 +15,7 @@ class Append extends AbstractProcessor
      * Append constructor.
      *
      * @param string       $field field name
-     * @param string|array $value field values to append
+     * @param array|string $value field values to append
      */
     public function __construct(string $field, $value)
     {
@@ -36,7 +36,7 @@ class Append extends AbstractProcessor
     /**
      * Set field value.
      *
-     * @param string|array $value
+     * @param array|string $value
      *
      * @return $this
      */

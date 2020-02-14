@@ -7,12 +7,15 @@ use Elastica\Exception\InvalidException;
 use Elastica\Query\Fuzzy;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class FuzzyTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testAddField()
+    public function testAddField(): void
     {
         $fuzzy = new Fuzzy();
         $fuzzy->setField('user', 'Nicolas');
@@ -28,7 +31,7 @@ class FuzzyTest extends BaseTest
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $fuzzy = new Fuzzy();
 
@@ -71,7 +74,7 @@ class FuzzyTest extends BaseTest
     /**
      * @group unit
      */
-    public function testNeedSetFieldBeforeOption()
+    public function testNeedSetFieldBeforeOption(): void
     {
         $fuzzy = new Fuzzy();
         $this->expectException(InvalidException::class);
@@ -82,7 +85,7 @@ class FuzzyTest extends BaseTest
     /**
      * @group functional
      */
-    public function testQuery()
+    public function testQuery(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
@@ -110,7 +113,7 @@ class FuzzyTest extends BaseTest
     /**
      * @group unit
      */
-    public function testResetSingleField()
+    public function testResetSingleField(): void
     {
         $fuzzy = new Fuzzy();
         $fuzzy->setField('name', 'value');
@@ -128,7 +131,7 @@ class FuzzyTest extends BaseTest
     /**
      * @group unit
      */
-    public function testOnlySetSingleField()
+    public function testOnlySetSingleField(): void
     {
         $fuzzy = new Fuzzy();
         $fuzzy->setField('name', 'value');

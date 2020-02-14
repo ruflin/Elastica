@@ -10,12 +10,12 @@ use Elastica\Script\AbstractScript;
 abstract class AbstractDocument extends Action
 {
     /**
-     * @var Document|AbstractScript
+     * @var AbstractScript|Document
      */
     protected $_data;
 
     /**
-     * @param Document|AbstractScript $document
+     * @param AbstractScript|Document $document
      */
     public function __construct($document)
     {
@@ -102,21 +102,19 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @return Document|AbstractScript
+     * @return AbstractScript|Document
      */
     public function getData()
     {
         return $this->_data;
     }
 
-    abstract protected function _getMetadata(AbstractUpdateAction $source): array;
-
     /**
      * Creates a bulk action for a document or a script.
      *
      * The action can be index, update, create or delete based on the $opType param (by default index).
      *
-     * @param Document|AbstractScript $data
+     * @param AbstractScript|Document $data
      * @param string                  $opType
      *
      * @return static
@@ -162,4 +160,6 @@ abstract class AbstractDocument extends Action
 
         return $action;
     }
+
+    abstract protected function _getMetadata(AbstractUpdateAction $source): array;
 }

@@ -9,12 +9,15 @@ use Elastica\Test\Base as BaseTest;
 use Elastica\Transport\AbstractTransport;
 use Elastica\Transport\Http;
 
+/**
+ * @internal
+ */
 class ConnectionTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testEmptyConstructor()
+    public function testEmptyConstructor(): void
     {
         $connection = new Connection();
         $this->assertEquals(Connection::DEFAULT_HOST, $connection->getHost());
@@ -30,7 +33,7 @@ class ConnectionTest extends BaseTest
     /**
      * @group unit
      */
-    public function testEnabledDisable()
+    public function testEnabledDisable(): void
     {
         $connection = new Connection();
         $this->assertTrue($connection->isEnabled());
@@ -43,7 +46,7 @@ class ConnectionTest extends BaseTest
     /**
      * @group unit
      */
-    public function testInvalidConnection()
+    public function testInvalidConnection(): void
     {
         $this->expectException(\Elastica\Exception\ConnectionException::class);
 
@@ -59,7 +62,7 @@ class ConnectionTest extends BaseTest
     /**
      * @group unit
      */
-    public function testCreate()
+    public function testCreate(): void
     {
         $connection = Connection::create();
         $this->assertInstanceOf(Connection::class, $connection);
@@ -76,7 +79,7 @@ class ConnectionTest extends BaseTest
     /**
      * @group unit
      */
-    public function testCreateInvalid()
+    public function testCreateInvalid(): void
     {
         $this->expectException(\Elastica\Exception\InvalidException::class);
 
@@ -86,7 +89,7 @@ class ConnectionTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetConfig()
+    public function testGetConfig(): void
     {
         $url = 'test';
         $connection = new Connection(['config' => ['url' => $url]]);
@@ -97,7 +100,7 @@ class ConnectionTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetConfigWithArrayUsedForTransport()
+    public function testGetConfigWithArrayUsedForTransport(): void
     {
         $connection = new Connection(['transport' => ['type' => 'Http']]);
         $this->assertInstanceOf(Http::class, $connection->getTransportObject());
@@ -106,7 +109,7 @@ class ConnectionTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetInvalidConfigWithArrayUsedForTransport()
+    public function testGetInvalidConfigWithArrayUsedForTransport(): void
     {
         $this->expectException(\Elastica\Exception\InvalidException::class);
         $this->expectExceptionMessage('Invalid transport');
@@ -118,7 +121,7 @@ class ConnectionTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetConfigInvalidValue()
+    public function testGetConfigInvalidValue(): void
     {
         $this->expectException(\Elastica\Exception\InvalidException::class);
 
@@ -129,7 +132,7 @@ class ConnectionTest extends BaseTest
     /**
      * @group unit
      */
-    public function testCompression()
+    public function testCompression(): void
     {
         $connection = new Connection();
 
@@ -141,7 +144,7 @@ class ConnectionTest extends BaseTest
     /**
      * @group unit
      */
-    public function testCompressionDefaultWithClient()
+    public function testCompressionDefaultWithClient(): void
     {
         $client = new Client();
         $connection = $client->getConnection();
@@ -151,7 +154,7 @@ class ConnectionTest extends BaseTest
     /**
      * @group unit
      */
-    public function testCompressionEnabledWithClient()
+    public function testCompressionEnabledWithClient(): void
     {
         $client = new Client(['connections' => [['compression' => true]]]);
         $connection = $client->getConnection();
@@ -162,7 +165,7 @@ class ConnectionTest extends BaseTest
     /**
      * @group unit
      */
-    public function testUsernameFromClient()
+    public function testUsernameFromClient(): void
     {
         $username = 'foo';
         $client = new Client(['username' => $username]);
@@ -173,7 +176,7 @@ class ConnectionTest extends BaseTest
     /**
      * @group unit
      */
-    public function testPasswordFromClient()
+    public function testPasswordFromClient(): void
     {
         $password = 'bar';
         $client = new Client(['password' => $password]);

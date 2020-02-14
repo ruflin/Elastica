@@ -144,6 +144,16 @@ abstract class AbstractGeoDistance extends AbstractQuery
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function toArray(): array
+    {
+        $this->setParam($this->_key, $this->_getLocationData());
+
+        return parent::toArray();
+    }
+
+    /**
      * @throws InvalidException
      *
      * @return array|string
@@ -171,15 +181,5 @@ abstract class AbstractGeoDistance extends AbstractQuery
         }
 
         return $location;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toArray(): array
-    {
-        $this->setParam($this->_key, $this->_getLocationData());
-
-        return parent::toArray();
     }
 }

@@ -8,12 +8,15 @@ use Elastica\Processor\Sort;
 use Elastica\ResultSet;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
+/**
+ * @internal
+ */
 class SortTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
-    public function testSort()
+    public function testSort(): void
     {
         $processor = new Sort('field_to_sort');
 
@@ -29,7 +32,7 @@ class SortTest extends BasePipelineTest
     /**
      * @group unit
      */
-    public function testSortWithNonDefaultOptions()
+    public function testSortWithNonDefaultOptions(): void
     {
         $processor = new Sort('field_to_sort');
         $processor->setOrder('desc');
@@ -47,7 +50,7 @@ class SortTest extends BasePipelineTest
     /**
      * @group functional
      */
-    public function testSortField()
+    public function testSortField(): void
     {
         $sort = new Sort('name');
 

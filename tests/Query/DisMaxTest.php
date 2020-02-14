@@ -8,12 +8,15 @@ use Elastica\Query\Ids;
 use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class DisMaxTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $query = new DisMax();
 
@@ -53,7 +56,7 @@ class DisMaxTest extends BaseTest
     /**
      * @group functional
      */
-    public function testQuery()
+    public function testQuery(): void
     {
         $index = $this->_createIndex();
 
@@ -85,7 +88,7 @@ class DisMaxTest extends BaseTest
     /**
      * @group functional
      */
-    public function testQueryArray()
+    public function testQueryArray(): void
     {
         $index = $this->_createIndex();
 
@@ -99,8 +102,8 @@ class DisMaxTest extends BaseTest
         $index->refresh();
 
         $queryString1 = ['query_string' => [
-              'query' => 'Bade*',
-            ],
+            'query' => 'Bade*',
+        ],
         ];
 
         $queryString2 = ['query_string' => [

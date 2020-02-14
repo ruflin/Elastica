@@ -7,8 +7,26 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class SumTest extends BaseAggregationTest
 {
+    /**
+     * @group functional
+     */
+    public function testSumAggregation(): void
+    {
+        $agg = new Sum('sum');
+        $agg->setField('price');
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('sum');
+
+        $this->assertEquals(5 + 8 + 1 + 3, $results['value']);
+    }
+
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
@@ -23,20 +41,5 @@ class SumTest extends BaseAggregationTest
         $index->refresh();
 
         return $index;
-    }
-
-    /**
-     * @group functional
-     */
-    public function testSumAggregation()
-    {
-        $agg = new Sum('sum');
-        $agg->setField('price');
-
-        $query = new Query();
-        $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('sum');
-
-        $this->assertEquals(5 + 8 + 1 + 3, $results['value']);
     }
 }

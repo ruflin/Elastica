@@ -8,12 +8,15 @@ use Elastica\Processor\Remove;
 use Elastica\ResultSet;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
+/**
+ * @internal
+ */
 class RemoveTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
-    public function testRemove()
+    public function testRemove(): void
     {
         $processor = new Remove('foo');
 
@@ -29,7 +32,7 @@ class RemoveTest extends BasePipelineTest
     /**
      * @group unit
      */
-    public function testRemoveArray()
+    public function testRemoveArray(): void
     {
         $processor = new Remove(['foo', 'bar']);
 
@@ -45,7 +48,7 @@ class RemoveTest extends BasePipelineTest
     /**
      * @group functional
      */
-    public function testRemoveField()
+    public function testRemoveField(): void
     {
         $remove = new Remove(['es_version', 'package']);
 

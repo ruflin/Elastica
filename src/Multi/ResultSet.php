@@ -88,7 +88,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     /**
      * {@inheritdoc}
      */
-    public function next()
+    public function next(): void
     {
         ++$this->_position;
     }
@@ -112,7 +112,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     /**
      * {@inheritdoc}
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->_position = 0;
     }
@@ -144,7 +144,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     /**
      * {@inheritdoc}
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (null === $offset) {
             $this->_resultSets[] = $value;
@@ -156,7 +156,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     /**
      * {@inheritdoc}
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->_resultSets[$offset]);
     }

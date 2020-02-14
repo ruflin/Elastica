@@ -9,12 +9,15 @@ use Elastica\Query\Ids;
 use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class BoolQueryTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $query = new BoolQuery();
 
@@ -65,7 +68,7 @@ class BoolQueryTest extends BaseTest
      *
      * @group unit
      */
-    public function testToArrayStructure()
+    public function testToArrayStructure(): void
     {
         $boolQuery = new BoolQuery();
 
@@ -84,7 +87,7 @@ class BoolQueryTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSearch()
+    public function testSearch(): void
     {
         $client = $this->_getClient();
         $index = new Index($client, 'test');
@@ -137,7 +140,7 @@ class BoolQueryTest extends BaseTest
     /**
      * @group functional
      */
-    public function testEmptyBoolQuery()
+    public function testEmptyBoolQuery(): void
     {
         $index = $this->_createIndex();
 

@@ -7,13 +7,19 @@ use Elastica\Request;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Util;
 
+/**
+ * @internal
+ */
 class UtilTest extends BaseTest
 {
     /**
      * @group unit
      * @dataProvider getIsDateMathEscapedPairs
+     *
+     * @param mixed $requestUri
+     * @param mixed $expectedIsEscaped
      */
-    public function testIsDateMathEscaped($requestUri, $expectedIsEscaped)
+    public function testIsDateMathEscaped($requestUri, $expectedIsEscaped): void
     {
         $this->assertEquals($expectedIsEscaped, Util::isDateMathEscaped($requestUri));
     }
@@ -34,8 +40,11 @@ class UtilTest extends BaseTest
     /**
      * @group unit
      * @dataProvider getEscapeDateMathPairs
+     *
+     * @param mixed $requestUri
+     * @param mixed $expectedEscapedRequestUri
      */
-    public function testEscapeDateMath($requestUri, $expectedEscapedRequestUri)
+    public function testEscapeDateMath($requestUri, $expectedEscapedRequestUri): void
     {
         $this->assertEquals($expectedEscapedRequestUri, Util::escapeDateMath($requestUri));
     }
@@ -65,8 +74,11 @@ class UtilTest extends BaseTest
     /**
      * @group unit
      * @dataProvider getEscapeTermPairs
+     *
+     * @param mixed $unescaped
+     * @param mixed $escaped
      */
-    public function testEscapeTerm($unescaped, $escaped)
+    public function testEscapeTerm($unescaped, $escaped): void
     {
         $this->assertEquals($escaped, Util::escapeTerm($unescaped));
     }
@@ -86,8 +98,11 @@ class UtilTest extends BaseTest
     /**
      * @group unit
      * @dataProvider getReplaceBooleanWordsPairs
+     *
+     * @param mixed $before
+     * @param mixed $after
      */
-    public function testReplaceBooleanWords($before, $after)
+    public function testReplaceBooleanWords($before, $after): void
     {
         $this->assertEquals($after, Util::replaceBooleanWords($before));
     }
@@ -107,7 +122,7 @@ class UtilTest extends BaseTest
     /**
      * @group unit
      */
-    public function testEscapeTermSpecialCharacters()
+    public function testEscapeTermSpecialCharacters(): void
     {
         $before = '\\+-&&||!(){}[]^"~*?:/<>';
         $after = '\\\\\\+\\-\\&&\\||\\!\\(\\)\\{\\}\\[\\]\\^\\"\\~\\*\\?\\:\\/';
@@ -118,7 +133,7 @@ class UtilTest extends BaseTest
     /**
      * @group unit
      */
-    public function testToCamelCase()
+    public function testToCamelCase(): void
     {
         $string = 'hello_world';
         $this->assertEquals('HelloWorld', Util::toCamelCase($string));
@@ -130,7 +145,7 @@ class UtilTest extends BaseTest
     /**
      * @group unit
      */
-    public function testToSnakeCase()
+    public function testToSnakeCase(): void
     {
         $string = 'HelloWorld';
         $this->assertEquals('hello_world', Util::toSnakeCase($string));
@@ -142,7 +157,7 @@ class UtilTest extends BaseTest
     /**
      * @group unit
      */
-    public function testConvertRequestToCurlCommand()
+    public function testConvertRequestToCurlCommand(): void
     {
         $path = 'test';
         $method = Request::POST;
@@ -164,7 +179,7 @@ class UtilTest extends BaseTest
     /**
      * @group unit
      */
-    public function testConvertDateTimeObjectWithTimezone()
+    public function testConvertDateTimeObjectWithTimezone(): void
     {
         $dateTimeObject = new \DateTime();
         $timestamp = $dateTimeObject->getTimestamp();
@@ -179,7 +194,7 @@ class UtilTest extends BaseTest
     /**
      * @group unit
      */
-    public function testConvertDateTimeObjectWithoutTimezone()
+    public function testConvertDateTimeObjectWithoutTimezone(): void
     {
         $dateTimeObject = new \DateTime();
         $timestamp = $dateTimeObject->getTimestamp();

@@ -22,6 +22,8 @@ use Psr\Log\LoggerInterface;
 
 /**
  * @group functional
+ *
+ * @internal
  */
 class ClientFunctionalTest extends BaseTest
 {
@@ -63,17 +65,20 @@ class ClientFunctionalTest extends BaseTest
         $index->create([], true);
 
         // Adds 1 document to the index
-        $doc1 = new Document(1,
+        $doc1 = new Document(
+            1,
             ['username' => 'hans', 'test' => ['2', '3', '5']]
         );
         $index->addDocument($doc1);
 
         // Adds a list of documents with _bulk upload to the index
         $docs = [];
-        $docs[] = new Document(2,
+        $docs[] = new Document(
+            2,
             ['username' => 'john', 'test' => ['1', '3', '6']]
         );
-        $docs[] = new Document(3,
+        $docs[] = new Document(
+            3,
             ['username' => 'rolf', 'test' => ['2', '3', '7']]
         );
         $index->addDocuments($docs);
@@ -95,17 +100,20 @@ class ClientFunctionalTest extends BaseTest
         $index->create([], true);
 
         // Adds 1 document to the index
-        $doc1 = new Document(1,
+        $doc1 = new Document(
+            1,
             ['username' => 'hans', 'test' => ['2', '3', '5']]
         );
         $index->addDocument($doc1);
 
         // Adds a list of documents with _bulk upload to the index
         $docs = [];
-        $docs[] = new Document(2,
+        $docs[] = new Document(
+            2,
             ['username' => 'john', 'test' => ['1', '3', '6']]
         );
-        $docs[] = new Document(3,
+        $docs[] = new Document(
+            3,
             ['username' => 'rolf', 'test' => ['2', '3', '7']]
         );
         $index->addDocuments($docs);
@@ -376,7 +384,7 @@ class ClientFunctionalTest extends BaseTest
         $count = 0;
 
         // Callback function which verifies that disabled connection objects are returned
-        $callback = function (Connection $connection, \Exception $exception, Client $client) use (&$count) {
+        $callback = function (Connection $connection, \Exception $exception, Client $client) use (&$count): void {
             $this->assertInstanceOf(Connection::class, $connection);
             $this->assertInstanceOf(ConnectionException::class, $exception);
             $this->assertInstanceOf(Client::class, $client);
@@ -853,7 +861,8 @@ class ClientFunctionalTest extends BaseTest
                     $this->arrayHasKey('response'),
                     $this->arrayHasKey('responseStatus')
                 )
-            );
+            )
+        ;
 
         $client->request('_stats', Request::GET);
     }
@@ -878,7 +887,8 @@ class ClientFunctionalTest extends BaseTest
                     $this->arrayHasKey('retry'),
                     $this->logicalNot($this->arrayHasKey('response'))
                 )
-            );
+            )
+        ;
 
         $client->request('_stats', Request::GET);
     }
@@ -949,6 +959,9 @@ class ClientFunctionalTest extends BaseTest
 
     /**
      * @dataProvider endpointQueryRequestDataProvider
+     *
+     * @param mixed $query
+     * @param mixed $totalHits
      */
     public function testEndpointQueryRequest($query, $totalHits): void
     {

@@ -9,6 +9,9 @@ use Elastica\Query;
 use Elastica\Query\MultiMatch;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class MultiMatchTest extends BaseTest
 {
     private $index;
@@ -24,7 +27,7 @@ class MultiMatchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testMinimumShouldMatch()
+    public function testMinimumShouldMatch(): void
     {
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery('Tristan Maindron');
@@ -38,7 +41,7 @@ class MultiMatchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testAndOperator()
+    public function testAndOperator(): void
     {
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery('Monique Maindron');
@@ -52,7 +55,7 @@ class MultiMatchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testType()
+    public function testType(): void
     {
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery('Trist');
@@ -66,7 +69,7 @@ class MultiMatchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testFuzzy()
+    public function testFuzzy(): void
     {
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery('Tritsan'); // Misspell on purpose
@@ -96,7 +99,7 @@ class MultiMatchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testFuzzyWithOptions1()
+    public function testFuzzyWithOptions1(): void
     {
         // Here Elasticsearch will not accept mispells
         // on the first 6 letters.
@@ -113,7 +116,7 @@ class MultiMatchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testFuzzyWithOptions2()
+    public function testFuzzyWithOptions2(): void
     {
         // Here with a 'M' search we should hit 'Moraes' first
         // and then stop because MaxExpansion = 1.
@@ -132,7 +135,7 @@ class MultiMatchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testZeroTerm()
+    public function testZeroTerm(): void
     {
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery('not'); // This is a stopword.
@@ -152,7 +155,7 @@ class MultiMatchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testBaseMultiMatch()
+    public function testBaseMultiMatch(): void
     {
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery('Rodolfo');

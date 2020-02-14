@@ -5,6 +5,9 @@ namespace Elastica\Test;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class ScriptTest extends BaseTest
 {
     private const SCRIPT = "_score * doc['my_numeric_field'].value";
@@ -12,7 +15,7 @@ class ScriptTest extends BaseTest
     /**
      * @group unit
      */
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $script = new Script(self::SCRIPT);
 
@@ -55,7 +58,7 @@ class ScriptTest extends BaseTest
     /**
      * @group unit
      */
-    public function testCreateString()
+    public function testCreateString(): void
     {
         $script = Script::create(self::SCRIPT);
 
@@ -72,7 +75,7 @@ class ScriptTest extends BaseTest
     /**
      * @group unit
      */
-    public function testCreateScript()
+    public function testCreateScript(): void
     {
         $data = new Script(self::SCRIPT);
 
@@ -85,7 +88,7 @@ class ScriptTest extends BaseTest
     /**
      * @group unit
      */
-    public function testCreateArray()
+    public function testCreateArray(): void
     {
         $params = [
             'param1' => 'one',
@@ -112,8 +115,10 @@ class ScriptTest extends BaseTest
     /**
      * @group unit
      * @dataProvider dataProviderCreateInvalid
+     *
+     * @param mixed $data
      */
-    public function testCreateInvalid($data)
+    public function testCreateInvalid($data): void
     {
         $this->expectException(\Elastica\Exception\InvalidException::class);
 
@@ -141,7 +146,7 @@ class ScriptTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetLang()
+    public function testSetLang(): void
     {
         $script = new Script(self::SCRIPT, [], Script::LANG_PAINLESS);
 
@@ -152,7 +157,7 @@ class ScriptTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetScript()
+    public function testSetScript(): void
     {
         $script = new Script(self::SCRIPT);
 

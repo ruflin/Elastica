@@ -81,7 +81,7 @@ class AbstractUpdateAction extends Param
     /**
      * Returns document version.
      *
-     * @return string|int Document version
+     * @return int|string Document version
      */
     public function getVersion()
     {
@@ -112,7 +112,7 @@ class AbstractUpdateAction extends Param
     /**
      * Returns document version type.
      *
-     * @return string|int Document version type
+     * @return int|string Document version type
      */
     public function getVersionType()
     {
@@ -356,7 +356,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param Document|array $data
+     * @param array|Document $data
      *
      * @return $this
      */

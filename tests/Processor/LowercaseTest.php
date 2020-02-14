@@ -8,12 +8,15 @@ use Elastica\Processor\Lowercase;
 use Elastica\ResultSet;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
+/**
+ * @internal
+ */
 class LowercaseTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
-    public function testLowercase()
+    public function testLowercase(): void
     {
         $processor = new Lowercase('foo');
 
@@ -29,7 +32,7 @@ class LowercaseTest extends BasePipelineTest
     /**
      * @group functional
      */
-    public function testLowercaseField()
+    public function testLowercaseField(): void
     {
         $lcase = new Lowercase('name');
 

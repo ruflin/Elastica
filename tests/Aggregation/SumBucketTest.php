@@ -9,27 +9,15 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class SumBucketTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest(): Index
-    {
-        $index = $this->_createIndex();
-
-        $index->addDocuments([
-            Document::create(['page' => 1, 'likes' => 180]),
-            Document::create(['page' => 1, 'likes' => 156]),
-            Document::create(['page' => 2, 'likes' => 155]),
-        ]);
-
-        $index->refresh();
-
-        return $index;
-    }
-
     /**
      * @group functional
      */
-    public function testSumBucketAggregation()
+    public function testSumBucketAggregation(): void
     {
         $query = Query::create([])
             ->addAggregation(
@@ -44,7 +32,8 @@ class SumBucketTest extends BaseAggregationTest
             ->addAggregation(
                 (new SumBucket('sum_likes_by_page'))
                     ->setBucketsPath('pages>sum_likes')
-            );
+            )
+        ;
 
         $results = $this->_getIndexForTest()->search($query)->getAggregations();
 
@@ -56,14 +45,15 @@ class SumBucketTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testConstructThroughSetters()
+    public function testConstructThroughSetters(): void
     {
         $serialDiffAgg = new SumBucket('sum_bucket');
 
         $serialDiffAgg
             ->setBucketsPath('pages>sum_likes_by_page')
             ->setFormat('test_format')
-            ->setGapPolicy(10);
+            ->setGapPolicy(10)
+        ;
 
         $expected = [
             'sum_bucket' => [
@@ -79,11 +69,26 @@ class SumBucketTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testToArrayInvalidBucketsPath()
+    public function testToArrayInvalidBucketsPath(): void
     {
         $this->expectException(\Elastica\Exception\InvalidException::class);
 
         $serialDiffAgg = new SumBucket('sum_bucket');
         $serialDiffAgg->toArray();
+    }
+
+    protected function _getIndexForTest(): Index
+    {
+        $index = $this->_createIndex();
+
+        $index->addDocuments([
+            Document::create(['page' => 1, 'likes' => 180]),
+            Document::create(['page' => 1, 'likes' => 156]),
+            Document::create(['page' => 2, 'likes' => 155]),
+        ]);
+
+        $index->refresh();
+
+        return $index;
     }
 }

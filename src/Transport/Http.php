@@ -72,7 +72,7 @@ class Http extends AbstractTransport
         if (!empty($query)) {
             $baseUri .= '?'.\http_build_query(
                 $this->sanityzeQueryStringBool($query)
-                );
+            );
         }
 
         \curl_setopt($conn, CURLOPT_URL, $baseUri);
@@ -93,19 +93,19 @@ class Http extends AbstractTransport
         $proxy = $connection->getProxy();
 
         // See: https://github.com/facebook/hhvm/issues/4875
-        if (\is_null($proxy) && \defined('HHVM_VERSION')) {
+        if (null === $proxy && \defined('HHVM_VERSION')) {
             $proxy = \getenv('http_proxy') ?: null;
         }
 
-        if (!\is_null($proxy)) {
+        if (null !== $proxy) {
             \curl_setopt($conn, CURLOPT_PROXY, $proxy);
         }
 
         $username = $connection->getUsername();
         $password = $connection->getPassword();
-        if (!\is_null($username) && !\is_null($password)) {
+        if (null !== $username && null !== $password) {
             \curl_setopt($conn, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
-            \curl_setopt($conn, CURLOPT_USERPWD, "$username:$password");
+            \curl_setopt($conn, CURLOPT_USERPWD, "{$username}:{$password}");
         }
 
         $this->_setupCurl($conn);
@@ -198,7 +198,7 @@ class Http extends AbstractTransport
      *
      * @param resource $curlConnection Curl connection
      */
-    protected function _setupCurl($curlConnection)
+    protected function _setupCurl($curlConnection): void
     {
         if ($this->getConnection()->hasConfig('curl')) {
             foreach ($this->getConnection()->getConfig('curl') as $key => $param) {

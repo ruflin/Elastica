@@ -10,8 +10,70 @@ use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class SerialDiffTest extends BaseAggregationTest
 {
+    /**
+     * @group functional
+     */
+    public function testSerialDiffAggregation(): void
+    {
+        $dateHistogramAggregation = new DateHistogram('measurements', 'measured_at', 'hour');
+
+        $dateHistogramAggregation
+            ->addAggregation((new Max('max_value'))->setField('value'))
+            ->addAggregation(new SerialDiff('result', 'max_value'))
+        ;
+
+        $query = Query::create([])->addAggregation($dateHistogramAggregation);
+
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('measurements');
+
+        $this->assertEquals(false, isset($results['buckets'][0]['result']['value']));
+        $this->assertEquals(166, $results['buckets'][1]['result']['value']);
+        $this->assertEquals(84, $results['buckets'][2]['result']['value']);
+        $this->assertEquals(121, $results['buckets'][3]['result']['value']);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testConstructThroughSetters(): void
+    {
+        $serialDiffAgg = new SerialDiff('difference');
+
+        $serialDiffAgg
+            ->setBucketsPath('nested_agg')
+            ->setFormat('test_format')
+            ->setGapPolicy(10)
+            ->setLag(5)
+        ;
+
+        $expected = [
+            'serial_diff' => [
+                'buckets_path' => 'nested_agg',
+                'format' => 'test_format',
+                'gap_policy' => 10,
+                'lag' => 5,
+            ],
+        ];
+
+        $this->assertEquals($expected, $serialDiffAgg->toArray());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testToArrayInvalidBucketsPath(): void
+    {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
+        $serialDiffAgg = new SerialDiff('difference');
+        $serialDiffAgg->toArray();
+    }
+
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
@@ -31,62 +93,5 @@ class SerialDiffTest extends BaseAggregationTest
         $index->refresh();
 
         return $index;
-    }
-
-    /**
-     * @group functional
-     */
-    public function testSerialDiffAggregation()
-    {
-        $dateHistogramAggregation = new DateHistogram('measurements', 'measured_at', 'hour');
-
-        $dateHistogramAggregation
-            ->addAggregation((new Max('max_value'))->setField('value'))
-            ->addAggregation(new SerialDiff('result', 'max_value'));
-
-        $query = Query::create([])->addAggregation($dateHistogramAggregation);
-
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('measurements');
-
-        $this->assertEquals(false, isset($results['buckets'][0]['result']['value']));
-        $this->assertEquals(166, $results['buckets'][1]['result']['value']);
-        $this->assertEquals(84, $results['buckets'][2]['result']['value']);
-        $this->assertEquals(121, $results['buckets'][3]['result']['value']);
-    }
-
-    /**
-     * @group unit
-     */
-    public function testConstructThroughSetters()
-    {
-        $serialDiffAgg = new SerialDiff('difference');
-
-        $serialDiffAgg
-            ->setBucketsPath('nested_agg')
-            ->setFormat('test_format')
-            ->setGapPolicy(10)
-            ->setLag(5);
-
-        $expected = [
-            'serial_diff' => [
-                'buckets_path' => 'nested_agg',
-                'format' => 'test_format',
-                'gap_policy' => 10,
-                'lag' => 5,
-            ],
-        ];
-
-        $this->assertEquals($expected, $serialDiffAgg->toArray());
-    }
-
-    /**
-     * @group unit
-     */
-    public function testToArrayInvalidBucketsPath()
-    {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
-
-        $serialDiffAgg = new SerialDiff('difference');
-        $serialDiffAgg->toArray();
     }
 }

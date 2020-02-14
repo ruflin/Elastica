@@ -9,34 +9,15 @@ use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\Terms;
 
+/**
+ * @internal
+ */
 class SignificantTermsTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest(): Index
-    {
-        $index = $this->_createIndex();
-        $colors = ['blue', 'blue', 'red', 'red', 'green', 'yellow', 'white', 'cyan', 'magenta'];
-        $temperatures = [1500, 1500, 1500, 1500, 2500, 3500, 4500, 5500, 6500, 7500, 7500, 8500, 9500];
-
-        $mapping = new Mapping([
-            'color' => ['type' => 'keyword'],
-            'temperature' => ['type' => 'keyword'],
-        ]);
-        $index->setMapping($mapping);
-
-        $docs = [];
-        for ($i = 0; $i < 250; ++$i) {
-            $docs[] = new Document($i, ['color' => $colors[$i % \count($colors)], 'temperature' => $temperatures[$i % \count($temperatures)]]);
-        }
-        $index->addDocuments($docs);
-        $index->refresh();
-
-        return $index;
-    }
-
     /**
      * @group functional
      */
-    public function testSignificantTermsAggregation()
+    public function testSignificantTermsAggregation(): void
     {
         $agg = new SignificantTerms('significantTerms');
         $agg->setField('temperature');
@@ -58,7 +39,7 @@ class SignificantTermsTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testSignificantTermsAggregationWithBackgroundFilter()
+    public function testSignificantTermsAggregationWithBackgroundFilter(): void
     {
         $agg = new SignificantTerms('significantTerms');
         $agg->setField('temperature');
@@ -82,7 +63,7 @@ class SignificantTermsTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testSignificantTermsAggregationWithBackgroundFilterWithLegacyFilter()
+    public function testSignificantTermsAggregationWithBackgroundFilterWithLegacyFilter(): void
     {
         $agg = new SignificantTerms('significantTerms');
         $agg->setField('temperature');
@@ -101,5 +82,27 @@ class SignificantTermsTest extends BaseAggregationTest
         $this->assertEquals(15, $results['buckets'][0]['doc_count']);
         $this->assertEquals(12, $results['buckets'][0]['bg_count']);
         $this->assertEquals('4500', $results['buckets'][0]['key']);
+    }
+
+    protected function _getIndexForTest(): Index
+    {
+        $index = $this->_createIndex();
+        $colors = ['blue', 'blue', 'red', 'red', 'green', 'yellow', 'white', 'cyan', 'magenta'];
+        $temperatures = [1500, 1500, 1500, 1500, 2500, 3500, 4500, 5500, 6500, 7500, 7500, 8500, 9500];
+
+        $mapping = new Mapping([
+            'color' => ['type' => 'keyword'],
+            'temperature' => ['type' => 'keyword'],
+        ]);
+        $index->setMapping($mapping);
+
+        $docs = [];
+        for ($i = 0; $i < 250; ++$i) {
+            $docs[] = new Document($i, ['color' => $colors[$i % \count($colors)], 'temperature' => $temperatures[$i % \count($temperatures)]]);
+        }
+        $index->addDocuments($docs);
+        $index->refresh();
+
+        return $index;
     }
 }

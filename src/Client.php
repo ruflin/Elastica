@@ -96,60 +96,6 @@ class Client
     }
 
     /**
-     * Inits the client connections.
-     */
-    protected function _initConnections(): void
-    {
-        $connections = [];
-
-        foreach ($this->getConfig('connections') as $connection) {
-            $connections[] = Connection::create($this->_prepareConnectionParams($connection));
-        }
-
-        if ($this->_config->has('servers')) {
-            $servers = $this->_config->get('servers');
-            foreach ($servers as $server) {
-                $connections[] = Connection::create($this->_prepareConnectionParams($server));
-            }
-        }
-
-        // If no connections set, create default connection
-        if (empty($connections)) {
-            $connections[] = Connection::create($this->_prepareConnectionParams($this->getConfig()));
-        }
-
-        if (!$this->_config->has('connectionStrategy')) {
-            if (true === $this->getConfig('roundRobin')) {
-                $this->setConfigValue('connectionStrategy', 'RoundRobin');
-            } else {
-                $this->setConfigValue('connectionStrategy', 'Simple');
-            }
-        }
-
-        $strategy = Connection\Strategy\StrategyFactory::create($this->getConfig('connectionStrategy'));
-
-        $this->_connectionPool = new Connection\ConnectionPool($connections, $strategy, $this->_callback);
-    }
-
-    /**
-     * Creates a Connection params array from a Client or server config array.
-     */
-    protected function _prepareConnectionParams(array $config): array
-    {
-        $params = [];
-        $params['config'] = [];
-        foreach ($config as $key => $value) {
-            if (\in_array($key, ['bigintConversion', 'curl', 'headers', 'url'])) {
-                $params['config'][$key] = $value;
-            } else {
-                $params[$key] = $value;
-            }
-        }
-
-        return $params;
-    }
-
-    /**
      * Sets specific config values (updates and keeps default values).
      *
      * @param array $config Params
@@ -308,7 +254,7 @@ class Client
      * Update document, using update script. Requires elasticsearch >= 0.19.0.
      *
      * @param int|string                                               $id      document id
-     * @param array|\Elastica\Script\AbstractScript|\Elastica\Document $data    raw data for request body
+     * @param array|\Elastica\Document|\Elastica\Script\AbstractScript $data    raw data for request body
      * @param string                                                   $index   index to update
      * @param array                                                    $options array of query params to use for query. For possible options check es api
      *
@@ -490,8 +436,8 @@ class Client
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @param array                  $ids     Document ids
-     * @param string|\Elastica\Index $index   Index name
-     * @param string|bool            $routing Optional routing key for all ids
+     * @param \Elastica\Index|string $index   Index name
+     * @param bool|string            $routing Optional routing key for all ids
      *
      * @throws InvalidException
      */
@@ -563,7 +509,7 @@ class Client
      * @param array        $query       OPTIONAL Query params
      * @param string       $contentType Content-Type sent with this request
      *
-     * @throws Exception\ConnectionException|Exception\ClientException
+     * @throws Exception\ClientException|Exception\ConnectionException
      */
     public function request(string $path, string $method = Request::GET, $data = [], array $query = [], string $contentType = Request::DEFAULT_CONTENT_TYPE): Response
     {
@@ -656,5 +602,59 @@ class Client
         $this->_logger = $logger;
 
         return $this;
+    }
+
+    /**
+     * Inits the client connections.
+     */
+    protected function _initConnections(): void
+    {
+        $connections = [];
+
+        foreach ($this->getConfig('connections') as $connection) {
+            $connections[] = Connection::create($this->_prepareConnectionParams($connection));
+        }
+
+        if ($this->_config->has('servers')) {
+            $servers = $this->_config->get('servers');
+            foreach ($servers as $server) {
+                $connections[] = Connection::create($this->_prepareConnectionParams($server));
+            }
+        }
+
+        // If no connections set, create default connection
+        if (empty($connections)) {
+            $connections[] = Connection::create($this->_prepareConnectionParams($this->getConfig()));
+        }
+
+        if (!$this->_config->has('connectionStrategy')) {
+            if (true === $this->getConfig('roundRobin')) {
+                $this->setConfigValue('connectionStrategy', 'RoundRobin');
+            } else {
+                $this->setConfigValue('connectionStrategy', 'Simple');
+            }
+        }
+
+        $strategy = Connection\Strategy\StrategyFactory::create($this->getConfig('connectionStrategy'));
+
+        $this->_connectionPool = new Connection\ConnectionPool($connections, $strategy, $this->_callback);
+    }
+
+    /**
+     * Creates a Connection params array from a Client or server config array.
+     */
+    protected function _prepareConnectionParams(array $config): array
+    {
+        $params = [];
+        $params['config'] = [];
+        foreach ($config as $key => $value) {
+            if (\in_array($key, ['bigintConversion', 'curl', 'headers', 'url'])) {
+                $params['config'][$key] = $value;
+            } else {
+                $params[$key] = $value;
+            }
+        }
+
+        return $params;
     }
 }

@@ -7,8 +7,29 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class AvgTest extends BaseAggregationTest
 {
+    /**
+     * @group functional
+     */
+    public function testAvgAggregation(): void
+    {
+        $agg = new Avg('avg');
+        $agg->setField('price');
+
+        $query = new Query();
+        $query->addAggregation($agg);
+
+        $resultSet = $this->_getIndexForTest()->search($query);
+        $results = $resultSet->getAggregations();
+
+        $this->assertTrue($resultSet->hasAggregations());
+        $this->assertEquals((5 + 8 + 1 + 3) / 4.0, $results['avg']['value']);
+    }
+
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
@@ -23,23 +44,5 @@ class AvgTest extends BaseAggregationTest
         $index->refresh();
 
         return $index;
-    }
-
-    /**
-     * @group functional
-     */
-    public function testAvgAggregation()
-    {
-        $agg = new Avg('avg');
-        $agg->setField('price');
-
-        $query = new Query();
-        $query->addAggregation($agg);
-
-        $resultSet = $this->_getIndexForTest()->search($query);
-        $results = $resultSet->getAggregations();
-
-        $this->assertTrue($resultSet->hasAggregations());
-        $this->assertEquals((5 + 8 + 1 + 3) / 4.0, $results['avg']['value']);
     }
 }

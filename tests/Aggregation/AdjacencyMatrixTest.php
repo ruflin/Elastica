@@ -10,26 +10,15 @@ use Elastica\Query;
 use Elastica\Query\Term;
 use Elastica\Query\Terms;
 
+/**
+ * @internal
+ */
 class AdjacencyMatrixTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest(): Index
-    {
-        $index = $this->_createIndex();
-        $index->addDocuments([
-            new Document(1, ['accounts' => ['hillary', 'sidney']]),
-            new Document(2, ['accounts' => ['hillary', 'donald']]),
-            new Document(3, ['accounts' => ['vladimir', 'donald']]),
-        ]);
-
-        $index->refresh();
-
-        return $index;
-    }
-
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $expected = [
             'adjacency_matrix' => [
@@ -70,7 +59,7 @@ class AdjacencyMatrixTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testToArraySeparator()
+    public function testToArraySeparator(): void
     {
         $expected = [
             'adjacency_matrix' => [
@@ -95,7 +84,7 @@ class AdjacencyMatrixTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testAdjacencyMatrixAggregation()
+    public function testAdjacencyMatrixAggregation(): void
     {
         $agg = new AdjacencyMatrix('interactions');
         $agg->addFilter(new Terms('accounts', ['hillary', 'sidney']), 'grpA');
@@ -133,5 +122,19 @@ class AdjacencyMatrixTest extends BaseAggregationTest
         ];
 
         $this->assertEquals($expected, $results['buckets']);
+    }
+
+    protected function _getIndexForTest(): Index
+    {
+        $index = $this->_createIndex();
+        $index->addDocuments([
+            new Document(1, ['accounts' => ['hillary', 'sidney']]),
+            new Document(2, ['accounts' => ['hillary', 'donald']]),
+            new Document(3, ['accounts' => ['vladimir', 'donald']]),
+        ]);
+
+        $index->refresh();
+
+        return $index;
     }
 }

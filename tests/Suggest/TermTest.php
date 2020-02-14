@@ -8,31 +8,15 @@ use Elastica\Suggest;
 use Elastica\Suggest\Term;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class TermTest extends BaseTest
 {
     /**
-     * @return Index
-     */
-    protected function _getIndexForTest()
-    {
-        $index = $this->_createIndex();
-        $index->addDocuments([
-            new Document(1, ['id' => 1, 'text' => 'GitHub']),
-            new Document(2, ['id' => 1, 'text' => 'Elastic']),
-            new Document(3, ['id' => 1, 'text' => 'Search']),
-            new Document(4, ['id' => 1, 'text' => 'Food']),
-            new Document(5, ['id' => 1, 'text' => 'Flood']),
-            new Document(6, ['id' => 1, 'text' => 'Folks']),
-        ]);
-        $index->refresh();
-
-        return $index;
-    }
-
-    /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $suggest = new Suggest();
 
@@ -70,7 +54,7 @@ class TermTest extends BaseTest
     /**
      * @group unit
      */
-    public function testDistanceAlgorithm()
+    public function testDistanceAlgorithm(): void
     {
         $suggest = new Suggest();
 
@@ -110,7 +94,7 @@ class TermTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSuggestResults()
+    public function testSuggestResults(): void
     {
         $suggest = new Suggest();
         $suggest1 = new Term('suggest1', 'text');
@@ -136,7 +120,7 @@ class TermTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSuggestNoResults()
+    public function testSuggestNoResults(): void
     {
         $termSuggest = new Term('suggest1', 'text');
         $termSuggest->setText('Foobar')->setSize(4);
@@ -149,5 +133,24 @@ class TermTest extends BaseTest
         // Assert that no suggestions were returned
         $suggests = $result->getSuggests();
         $this->assertCount(0, $suggests['suggest1'][0]['options']);
+    }
+
+    /**
+     * @return Index
+     */
+    protected function _getIndexForTest()
+    {
+        $index = $this->_createIndex();
+        $index->addDocuments([
+            new Document(1, ['id' => 1, 'text' => 'GitHub']),
+            new Document(2, ['id' => 1, 'text' => 'Elastic']),
+            new Document(3, ['id' => 1, 'text' => 'Search']),
+            new Document(4, ['id' => 1, 'text' => 'Food']),
+            new Document(5, ['id' => 1, 'text' => 'Flood']),
+            new Document(6, ['id' => 1, 'text' => 'Folks']),
+        ]);
+        $index->refresh();
+
+        return $index;
     }
 }

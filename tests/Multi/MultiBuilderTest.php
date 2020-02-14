@@ -12,6 +12,8 @@ use Elastica\Test\Base as BaseTest;
 
 /**
  * @group unit
+ *
+ * @internal
  */
 class MultiBuilderTest extends BaseTest
 {
@@ -33,10 +35,11 @@ class MultiBuilderTest extends BaseTest
         $this->multiBuilder = new MultiBuilder();
     }
 
-    public function testBuildEmptyMultiResultSet()
+    public function testBuildEmptyMultiResultSet(): void
     {
         $this->builder->expects($this->never())
-            ->method('buildResultSet');
+            ->method('buildResultSet')
+        ;
 
         $response = new Response([]);
         $searches = [];
@@ -46,7 +49,7 @@ class MultiBuilderTest extends BaseTest
         $this->assertInstanceOf(MultiResultSet::class, $result);
     }
 
-    public function testBuildMultiResultSet()
+    public function testBuildMultiResultSet(): void
     {
         $response = new Response([
             'responses' => [
@@ -67,7 +70,8 @@ class MultiBuilderTest extends BaseTest
                 [$this->isInstanceOf(Response::class), $s1->getQuery()],
                 [$this->isInstanceOf(Response::class), $s2->getQuery()]
             )
-            ->willReturnOnConsecutiveCalls($resultSet1, $resultSet2);
+            ->willReturnOnConsecutiveCalls($resultSet1, $resultSet2)
+        ;
 
         $result = $this->multiBuilder->buildMultiResultSet($response, $searches);
 

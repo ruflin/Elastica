@@ -60,25 +60,6 @@ class BoolQuery extends AbstractQuery
     }
 
     /**
-     * Adds a query to the current object.
-     *
-     * @param string              $type Query type
-     * @param AbstractQuery|array $args Query
-     *
-     * @throws InvalidException If not valid query
-     *
-     * @return $this
-     */
-    protected function _addQuery(string $type, $args): self
-    {
-        if (!\is_array($args) && !($args instanceof AbstractQuery)) {
-            throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Query\AbstractQuery');
-        }
-
-        return $this->addParam($type, $args);
-    }
-
-    /**
      * Sets boost value of this query.
      *
      * @param float $boost Boost value
@@ -112,5 +93,24 @@ class BoolQuery extends AbstractQuery
         }
 
         return parent::toArray();
+    }
+
+    /**
+     * Adds a query to the current object.
+     *
+     * @param string              $type Query type
+     * @param AbstractQuery|array $args Query
+     *
+     * @throws InvalidException If not valid query
+     *
+     * @return $this
+     */
+    protected function _addQuery(string $type, $args): self
+    {
+        if (!\is_array($args) && !($args instanceof AbstractQuery)) {
+            throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Query\AbstractQuery');
+        }
+
+        return $this->addParam($type, $args);
     }
 }

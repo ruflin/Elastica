@@ -8,12 +8,15 @@ use Elastica\Processor\Json;
 use Elastica\ResultSet;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
+/**
+ * @internal
+ */
 class JsonTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
-    public function testJson()
+    public function testJson(): void
     {
         $processor = new Json('string_source');
 
@@ -29,7 +32,7 @@ class JsonTest extends BasePipelineTest
     /**
      * @group unit
      */
-    public function testJsonWithNonDefaultOptions()
+    public function testJsonWithNonDefaultOptions(): void
     {
         $processor = new Json('string_source');
         $processor->setTargetField('json_target');
@@ -49,7 +52,7 @@ class JsonTest extends BasePipelineTest
     /**
      * @group functional
      */
-    public function testJsonField()
+    public function testJsonField(): void
     {
         $json = new Json('name');
         $json->setTargetField('realname');

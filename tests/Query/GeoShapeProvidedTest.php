@@ -9,12 +9,15 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\GeoShapeProvided;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class GeoShapeProvidedTest extends BaseTest
 {
     /**
      * @group functional
      */
-    public function testSearch()
+    public function testSearch(): void
     {
         $index = $this->_createIndex();
         $mapping = new Mapping([
@@ -58,7 +61,7 @@ class GeoShapeProvidedTest extends BaseTest
     /**
      * @group unit
      */
-    public function testConstructEnvelope()
+    public function testConstructEnvelope(): void
     {
         $envelope = [
             [25.0, 75.0],
@@ -84,7 +87,7 @@ class GeoShapeProvidedTest extends BaseTest
     /**
      * @group unit
      */
-    public function testConstructPolygon()
+    public function testConstructPolygon(): void
     {
         $polygon = [[102.0, 2.0], [103.0, 2.0], [103.0, 3.0], [103.0, 3.0], [102.0, 2.0]];
         $gsp = new GeoShapeProvided('location', $polygon, GeoShapeProvided::TYPE_POLYGON);
@@ -107,7 +110,7 @@ class GeoShapeProvidedTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetRelation()
+    public function testSetRelation(): void
     {
         $gsp = new GeoShapeProvided('location', [[25.0, 75.0], [75.0, 25.0]]);
 

@@ -7,18 +7,23 @@ use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Util;
 
+/**
+ * @internal
+ */
 class EscapeStringTest extends BaseTest
 {
     /**
      * @group functional
      */
-    public function testSearch()
+    public function testSearch(): void
     {
         $index = $this->_createIndex();
         $index->getSettings()->setNumberOfReplicas(0);
 
-        $doc = new Document(1, [
-            'email' => 'test@test.com', 'username' => 'test 7/6 123', 'test' => ['2', '3', '5'], ]
+        $doc = new Document(
+            1,
+            [
+                'email' => 'test@test.com', 'username' => 'test 7/6 123', 'test' => ['2', '3', '5'], ]
         );
         $index->addDocument($doc);
 

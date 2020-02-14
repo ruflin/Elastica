@@ -8,12 +8,15 @@ use Elastica\Query\Term;
 use Elastica\Rescore\Query as QueryRescore;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class RescoreTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $query = new Query();
         $mainQuery = new Match();
@@ -53,7 +56,7 @@ class RescoreTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetSize()
+    public function testSetSize(): void
     {
         $query = new Query();
         $mainQuery = new Match();
@@ -95,7 +98,7 @@ class RescoreTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetWeights()
+    public function testSetWeights(): void
     {
         $query = new Query();
         $mainQuery = new Match();
@@ -141,7 +144,7 @@ class RescoreTest extends BaseTest
     /**
      * @group functional
      */
-    public function testMultipleQueries()
+    public function testMultipleQueries(): void
     {
         $query = new Query();
         $mainQuery = new Match();
@@ -213,7 +216,7 @@ class RescoreTest extends BaseTest
     /**
      * @group functional
      */
-    public function testQuery()
+    public function testQuery(): void
     {
         $query = new Query();
         $mainQuery = new Match();

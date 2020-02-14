@@ -8,12 +8,15 @@ use Elastica\Query;
 use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class MappingTest extends BaseTest
 {
     /**
      * @group functional
      */
-    public function testMappingStoreFields()
+    public function testMappingStoreFields(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
@@ -30,7 +33,8 @@ class MappingTest extends BaseTest
         $index->setMapping($mapping);
 
         $firstname = 'Nicolas';
-        $doc = new Document(1,
+        $doc = new Document(
+            1,
             [
                 'firstname' => $firstname,
                 'lastname' => 'Ruflin',
@@ -63,7 +67,7 @@ class MappingTest extends BaseTest
     /**
      * @group functional
      */
-    public function testNestedMapping()
+    public function testNestedMapping(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
@@ -103,7 +107,7 @@ class MappingTest extends BaseTest
     /**
      * @group functional
      */
-    public function testJoinMapping()
+    public function testJoinMapping(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('testjoinparentid');
@@ -122,15 +126,15 @@ class MappingTest extends BaseTest
 
         $expected = [
             'properties' => [
-                  'firstname' => ['type' => 'text', 'store' => true],
-                  'lastname' => ['type' => 'text'],
-                  'my_join_field' => [
-                      'type' => 'join',
-                      'relations' => [
-                          'question' => 'answer',
-                      ],
-                  ],
-              ],
+                'firstname' => ['type' => 'text', 'store' => true],
+                'lastname' => ['type' => 'text'],
+                'my_join_field' => [
+                    'type' => 'join',
+                    'relations' => [
+                        'question' => 'answer',
+                    ],
+                ],
+            ],
         ];
 
         $this->assertEquals($expected, $mapping->toArray());
@@ -182,7 +186,7 @@ class MappingTest extends BaseTest
     /**
      * @group functional
      */
-    public function testMappingExample()
+    public function testMappingExample(): void
     {
         $index = $this->_createIndex();
 
@@ -198,7 +202,9 @@ class MappingTest extends BaseTest
 
         $index->setMapping($mapping);
 
-        $doc = new Document(1, [
+        $doc = new Document(
+            1,
+            [
                 'note' => [
                     [
                         'titulo' => 'nota1',
@@ -225,7 +231,7 @@ class MappingTest extends BaseTest
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/dynamic-templates.html
      */
-    public function testDynamicTemplate()
+    public function testDynamicTemplate(): void
     {
         $index = $this->_createIndex();
         $rawFieldsType = ['raw' => ['type' => 'keyword']];
@@ -270,7 +276,7 @@ class MappingTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetMeta()
+    public function testSetMeta(): void
     {
         $index = $this->_createIndex();
         $mapping = new Mapping([
@@ -290,7 +296,7 @@ class MappingTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGetters()
+    public function testGetters(): void
     {
         $properties = [
             'firstname' => ['type' => 'text', 'store' => true],

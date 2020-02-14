@@ -8,6 +8,8 @@ use Elastica\Test\Base as BaseTest;
 
 /**
  * @group unit
+ *
+ * @internal
  */
 class VersionTest extends BaseTest
 {

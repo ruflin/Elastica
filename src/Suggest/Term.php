@@ -103,7 +103,7 @@ class Term extends AbstractSuggest
     /**
      * Set the minimum number of documents in which a suggestion should appear.
      *
-     * @param int|float $min Defaults to 0. If the value is greater than 1, it must be a whole number.
+     * @param float|int $min Defaults to 0. If the value is greater than 1, it must be a whole number.
      *
      * @return $this
      */

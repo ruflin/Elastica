@@ -5,12 +5,15 @@ namespace Elastica\Test\Query;
 use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class TermTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $query = new Term();
         $key = 'name';
@@ -29,7 +32,7 @@ class TermTest extends BaseTest
     /**
      * @group unit
      */
-    public function testDiacriticsValueToArray()
+    public function testDiacriticsValueToArray(): void
     {
         $query = new Term();
         $key = 'name';

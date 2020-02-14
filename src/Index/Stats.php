@@ -100,7 +100,7 @@ class Stats
     /**
      * Reloads all status data of this object.
      */
-    public function refresh()
+    public function refresh(): void
     {
         $this->_response = $this->getIndex()->requestEndpoint(new \Elasticsearch\Endpoints\Indices\Stats());
         $this->_data = $this->getResponse()->getData();

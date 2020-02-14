@@ -9,27 +9,15 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class StatsBucketTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest(): Index
-    {
-        $index = $this->_createIndex();
-
-        $index->addDocuments([
-            Document::create(['weight' => 60, 'height' => 180, 'age' => 25]),
-            Document::create(['weight' => 70, 'height' => 156, 'age' => 32]),
-            Document::create(['weight' => 50, 'height' => 155, 'age' => 45]),
-        ]);
-
-        $index->refresh();
-
-        return $index;
-    }
-
     /**
      * @group functional
      */
-    public function testStatBucketAggregation()
+    public function testStatBucketAggregation(): void
     {
         $bucketScriptAggregation = new StatsBucket('result', 'age_groups>max_weight');
 
@@ -39,7 +27,8 @@ class StatsBucketTest extends BaseAggregationTest
 
         $query = Query::create([])
             ->addAggregation($histogramAggregation)
-            ->addAggregation($bucketScriptAggregation);
+            ->addAggregation($bucketScriptAggregation)
+        ;
 
         $results = $this->_getIndexForTest()->search($query)->getAggregation('result');
 
@@ -53,14 +42,15 @@ class StatsBucketTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testConstructThroughSetters()
+    public function testConstructThroughSetters(): void
     {
         $serialDiffAgg = new StatsBucket('bucket_part');
 
         $serialDiffAgg
             ->setBucketsPath('age_groups>max_weight')
             ->setFormat('test_format')
-            ->setGapPolicy(10);
+            ->setGapPolicy(10)
+        ;
 
         $expected = [
             'stats_bucket' => [
@@ -76,11 +66,26 @@ class StatsBucketTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testToArrayInvalidBucketsPath()
+    public function testToArrayInvalidBucketsPath(): void
     {
         $this->expectException(\Elastica\Exception\InvalidException::class);
 
         $serialDiffAgg = new StatsBucket('bucket_part');
         $serialDiffAgg->toArray();
+    }
+
+    protected function _getIndexForTest(): Index
+    {
+        $index = $this->_createIndex();
+
+        $index->addDocuments([
+            Document::create(['weight' => 60, 'height' => 180, 'age' => 25]),
+            Document::create(['weight' => 70, 'height' => 156, 'age' => 32]),
+            Document::create(['weight' => 50, 'height' => 155, 'age' => 45]),
+        ]);
+
+        $index->refresh();
+
+        return $index;
     }
 }

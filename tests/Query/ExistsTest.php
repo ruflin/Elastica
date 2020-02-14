@@ -5,12 +5,15 @@ namespace Elastica\Test\Query;
 use Elastica\Query\Exists;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class ExistsTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $field = 'test';
         $query = new Exists($field);
@@ -22,7 +25,7 @@ class ExistsTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetField()
+    public function testSetField(): void
     {
         $field = 'test';
         $query = new Exists($field);

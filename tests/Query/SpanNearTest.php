@@ -8,12 +8,15 @@ use Elastica\Query\SpanTerm;
 use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class SpanNearTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testConstructWrongTypeInvalid()
+    public function testConstructWrongTypeInvalid(): void
     {
         $this->expectException(\Elastica\Exception\InvalidException::class);
 
@@ -25,7 +28,7 @@ class SpanNearTest extends BaseTest
     /**
      * @group unit
      */
-    public function testConstructValid()
+    public function testConstructValid(): void
     {
         $field = 'name';
         $spanTermQuery1 = new SpanTerm([$field => ['value' => 'marek', 'boost' => 1.5]]);
@@ -61,7 +64,7 @@ class SpanNearTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSpanNearTerm()
+    public function testSpanNearTerm(): void
     {
         $field = 'lorem';
         $value = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse odio lacus, aliquam nec nulla quis, aliquam eleifend eros.';

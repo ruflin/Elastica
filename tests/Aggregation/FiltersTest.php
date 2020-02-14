@@ -9,28 +9,15 @@ use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\Term;
 
+/**
+ * @internal
+ */
 class FiltersTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest(): Index
-    {
-        $index = $this->_createIndex('filter');
-
-        $index->addDocuments([
-            new Document(1, ['price' => 5, 'color' => 'blue']),
-            new Document(2, ['price' => 8, 'color' => 'blue']),
-            new Document(3, ['price' => 1, 'color' => 'red']),
-            new Document(4, ['price' => 3, 'color' => 'green']),
-        ]);
-
-        $index->refresh();
-
-        return $index;
-    }
-
     /**
      * @group unit
      */
-    public function testToArrayUsingNamedFilters()
+    public function testToArrayUsingNamedFilters(): void
     {
         $expected = [
             'filters' => [
@@ -71,7 +58,7 @@ class FiltersTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testMixNamedAndAnonymousFilters()
+    public function testMixNamedAndAnonymousFilters(): void
     {
         $this->expectException(\Elastica\Exception\InvalidException::class);
         $this->expectExceptionMessage('Mix named and anonymous keys are not allowed');
@@ -84,7 +71,7 @@ class FiltersTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testMixAnonymousAndNamedFilters()
+    public function testMixAnonymousAndNamedFilters(): void
     {
         $this->expectException(\Elastica\Exception\InvalidException::class);
         $this->expectExceptionMessage('Mix named and anonymous keys are not allowed');
@@ -98,7 +85,7 @@ class FiltersTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testToArrayUsingAnonymousFilters()
+    public function testToArrayUsingAnonymousFilters(): void
     {
         $expected = [
             'filters' => [
@@ -131,7 +118,7 @@ class FiltersTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testToArrayUsingOtherBucket()
+    public function testToArrayUsingOtherBucket(): void
     {
         $expected = [
             'filters' => [
@@ -158,7 +145,7 @@ class FiltersTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testFilterAggregation()
+    public function testFilterAggregation(): void
     {
         $agg = new Filters('by_color');
         $agg->addFilter(new Term(['color' => 'blue']), 'blue');
@@ -186,7 +173,7 @@ class FiltersTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testSetOtherBucket()
+    public function testSetOtherBucket(): void
     {
         $agg = new Filters('by_color');
         $agg->addFilter(new Term(['color' => 'red']), 'red');
@@ -214,7 +201,7 @@ class FiltersTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testSetOtherBucketKey()
+    public function testSetOtherBucketKey(): void
     {
         $agg = new Filters('by_color');
         $agg->addFilter(new Term(['color' => 'red']), 'red');
@@ -238,5 +225,21 @@ class FiltersTest extends BaseAggregationTest
 
         $this->assertEquals(1, $resultsForRed['avg_price']['value']);
         $this->assertEquals((5 + 8 + 3) / 3, $resultsForOtherBucket['avg_price']['value']);
+    }
+
+    protected function _getIndexForTest(): Index
+    {
+        $index = $this->_createIndex('filter');
+
+        $index->addDocuments([
+            new Document(1, ['price' => 5, 'color' => 'blue']),
+            new Document(2, ['price' => 8, 'color' => 'blue']),
+            new Document(3, ['price' => 1, 'color' => 'red']),
+            new Document(4, ['price' => 3, 'color' => 'green']),
+        ]);
+
+        $index->refresh();
+
+        return $index;
     }
 }

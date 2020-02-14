@@ -7,12 +7,15 @@ use Elastica\Query;
 use Elastica\Query\MatchPhrase;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class HighlightTest extends BaseTest
 {
     /**
      * @group functional
      */
-    public function testHightlightSearch()
+    public function testHightlightSearch(): void
     {
         $index = $this->_createIndex();
 

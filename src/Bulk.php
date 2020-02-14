@@ -45,8 +45,13 @@ class Bulk
         $this->_client = $client;
     }
 
+    public function __toString(): string
+    {
+        return $this->toString();
+    }
+
     /**
-     * @param string|Index $index
+     * @param Index|string $index
      *
      * @return $this
      */
@@ -153,6 +158,7 @@ class Bulk
 
     /**
      * @param Document[] $scripts
+     * @param mixed|null $opType
      *
      * @return $this
      */
@@ -166,7 +172,7 @@ class Bulk
     }
 
     /**
-     * @param \Elastica\Script\AbstractScript|\Elastica\Document|array $data
+     * @param array|\Elastica\Document|\Elastica\Script\AbstractScript $data
      *
      * @return $this
      */
@@ -252,11 +258,6 @@ class Bulk
     public function setShardTimeout(string $time): self
     {
         return $this->setRequestParam('timeout', $time);
-    }
-
-    public function __toString(): string
-    {
-        return $this->toString();
     }
 
     public function toString(): string

@@ -17,12 +17,15 @@ use Elastica\Script\ScriptFields;
 use Elastica\Suggest;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class QueryTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testRawQuery()
+    public function testRawQuery(): void
     {
         $textQuery = new Term(['title' => 'test']);
 
@@ -37,7 +40,7 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSuggestShouldNotRemoveOtherParameters()
+    public function testSuggestShouldNotRemoveOtherParameters(): void
     {
         $query1 = new Query();
         $query2 = new Query();
@@ -57,7 +60,7 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetSuggestMustReturnQueryInstance()
+    public function testSetSuggestMustReturnQueryInstance(): void
     {
         $query = new Query();
         $suggest = new Suggest();
@@ -67,7 +70,7 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testArrayQuery()
+    public function testArrayQuery(): void
     {
         $query = [
             'query' => [
@@ -88,7 +91,7 @@ class QueryTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetSort()
+    public function testSetSort(): void
     {
         $index = $this->_createIndex();
         $index->setMapping(new Mapping([
@@ -135,7 +138,7 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testAddSort()
+    public function testAddSort(): void
     {
         $query = new Query();
         $sortParam = ['firstname' => ['order' => 'asc']];
@@ -147,7 +150,7 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetTrackScores()
+    public function testSetTrackScores(): void
     {
         $query = new Query();
         $param = false;
@@ -159,7 +162,7 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetRawQuery()
+    public function testSetRawQuery(): void
     {
         $query = new Query();
 
@@ -172,7 +175,7 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetStoredFields()
+    public function testSetStoredFields(): void
     {
         $query = new Query();
 
@@ -190,7 +193,7 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetQuery()
+    public function testGetQuery(): void
     {
         $query = new Query();
 
@@ -211,7 +214,7 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetQueryToArrayCast()
+    public function testSetQueryToArrayCast(): void
     {
         $query = new Query();
         $termQuery = new Term();
@@ -229,7 +232,7 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testNotCloneInnerObjects()
+    public function testNotCloneInnerObjects(): void
     {
         $query = new Query();
         $termQuery = new Term();
@@ -246,7 +249,7 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetQueryToArrayChangeQuery()
+    public function testSetQueryToArrayChangeQuery(): void
     {
         $query = new Query();
         $termQuery = new Term();
@@ -264,7 +267,7 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetScriptFieldsToArrayCast()
+    public function testSetScriptFieldsToArrayCast(): void
     {
         $query = new Query();
         $scriptFields = new ScriptFields();
@@ -283,7 +286,7 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testAddScriptFieldsToArrayCast()
+    public function testAddScriptFieldsToArrayCast(): void
     {
         $query = new Query();
         $scriptField = new Script('script');
@@ -301,7 +304,7 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testAddScriptFieldToExistingScriptFields()
+    public function testAddScriptFieldToExistingScriptFields(): void
     {
         $script1 = new Script('s1');
         $script2 = new Script('s2');
@@ -326,7 +329,7 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testAddAggregationToArrayCast()
+    public function testAddAggregationToArrayCast(): void
     {
         $query = new Query();
         $aggregation = new TermsAggregation('text');
@@ -345,7 +348,7 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetSuggestToArrayCast()
+    public function testSetSuggestToArrayCast(): void
     {
         $query = new Query();
         $suggest = new Suggest();
@@ -364,7 +367,7 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetRescoreToArrayCast()
+    public function testSetRescoreToArrayCast(): void
     {
         $query = new Query();
         $rescore = new RescoreQuery();
@@ -383,7 +386,7 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetPostFilterToArrayCast()
+    public function testSetPostFilterToArrayCast(): void
     {
         $query = new Query();
         $postFilter = new Terms();
@@ -401,12 +404,13 @@ class QueryTest extends BaseTest
     /**
      * @group functional
      */
-    public function testNoSource()
+    public function testNoSource(): void
     {
         $index = $this->_createIndex();
 
         // Adds 1 document to the index
-        $doc1 = new Document(1,
+        $doc1 = new Document(
+            1,
             ['username' => 'ruflin', 'test' => ['2', '3', '5']]
         );
         $index->addDocument($doc1);
@@ -439,7 +443,7 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetCollapseToArrayCast()
+    public function testSetCollapseToArrayCast(): void
     {
         $query = new Query();
         $collapse = new Collapse();
@@ -458,7 +462,7 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testCollapseArrayStructure()
+    public function testCollapseArrayStructure(): void
     {
         $query = new Query();
         $collapse = new Collapse();
@@ -494,7 +498,7 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testCollapseSecondLevelArrayStructure()
+    public function testCollapseSecondLevelArrayStructure(): void
     {
         $query = new Query();
         $collapse = new Collapse();
@@ -507,7 +511,7 @@ class QueryTest extends BaseTest
                     ->setSort(['date' => 'asc'])
                     ->setCollapse(
                         (new Collapse())
-                        ->setFieldname('date')
+                            ->setFieldname('date')
                     )
             )
             ->setMaxConcurrentGroupSearches(4)
@@ -556,6 +560,8 @@ class QueryTest extends BaseTest
     /**
      * @group functional
      * @dataProvider provideSetTrackTotalHitsInvalidValue
+     *
+     * @param mixed $value
      */
     public function testSetTrackTotalHitsInvalidValue($value): void
     {

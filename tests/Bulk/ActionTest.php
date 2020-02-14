@@ -6,12 +6,15 @@ use Elastica\Bulk\Action;
 use Elastica\Index;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class ActionTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testAction()
+    public function testAction(): void
     {
         $action = new Action();
         $this->assertEquals('index', $action->getOpType());

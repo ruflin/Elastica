@@ -14,6 +14,11 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     public const REMOTE_TRANSPORT_EXCEPTION = 'RemoteTransportException';
 
     /**
+     * @var array Error array
+     */
+    protected $_error = [];
+
+    /**
      * @var string|null Elasticsearch exception name
      */
     private $_exception;
@@ -22,11 +27,6 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
      * @var bool Whether exception was local to server node or remote
      */
     private $_isRemote = false;
-
-    /**
-     * @var array Error array
-     */
-    protected $_error = [];
 
     /**
      * Constructs elasticsearch exception.
@@ -41,11 +41,37 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     }
 
     /**
+     * Returns elasticsearch exception name.
+     *
+     * @return string|null
+     */
+    public function getExceptionName()
+    {
+        return $this->_exception;
+    }
+
+    /**
+     * Returns whether exception was local to server node or remote.
+     */
+    public function isRemoteTransportException(): bool
+    {
+        return $this->_isRemote;
+    }
+
+    /**
+     * @return array Error array
+     */
+    public function getError(): array
+    {
+        return $this->_error;
+    }
+
+    /**
      * Parse error message from elasticsearch.
      *
      * @param string $error Error message
      */
-    protected function _parseError(string $error)
+    protected function _parseError(string $error): void
     {
         $errors = \explode(']; nested: ', $error);
 
@@ -73,31 +99,5 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
         }
 
         return null;
-    }
-
-    /**
-     * Returns elasticsearch exception name.
-     *
-     * @return string|null
-     */
-    public function getExceptionName()
-    {
-        return $this->_exception;
-    }
-
-    /**
-     * Returns whether exception was local to server node or remote.
-     */
-    public function isRemoteTransportException(): bool
-    {
-        return $this->_isRemote;
-    }
-
-    /**
-     * @return array Error array
-     */
-    public function getError(): array
-    {
-        return $this->_error;
     }
 }

@@ -12,6 +12,8 @@ use Elastica\Test\Base as BaseTest;
 
 /**
  * @group unit
+ *
+ * @internal
  */
 class ProcessingBuilderTest extends BaseTest
 {
@@ -26,7 +28,7 @@ class ProcessingBuilderTest extends BaseTest
     private $innerBuilder;
 
     /**
-     * @var ProcessorInterface|PHPUnit_Framework_MockObject_MockObject
+     * @var PHPUnit_Framework_MockObject_MockObject|ProcessorInterface
      */
     private $processor;
 
@@ -40,7 +42,7 @@ class ProcessingBuilderTest extends BaseTest
         $this->builder = new ProcessingBuilder($this->innerBuilder, $this->processor);
     }
 
-    public function testProcessors()
+    public function testProcessors(): void
     {
         $response = new Response('');
         $query = new Query();
@@ -49,10 +51,12 @@ class ProcessingBuilderTest extends BaseTest
         $this->innerBuilder->expects($this->once())
             ->method('buildResultSet')
             ->with($response, $query)
-            ->willReturn($resultSet);
+            ->willReturn($resultSet)
+        ;
         $this->processor->expects($this->once())
             ->method('process')
-            ->with($resultSet);
+            ->with($resultSet)
+        ;
 
         $this->builder->buildResultSet($response, $query);
     }

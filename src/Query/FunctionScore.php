@@ -64,7 +64,7 @@ class FunctionScore extends AbstractQuery
      * Add a function to the function_score query.
      *
      * @param string                     $functionType   valid values are DECAY_* constants and script_score
-     * @param array|float|AbstractScript $functionParams the body of the function. See documentation for proper syntax.
+     * @param AbstractScript|array|float $functionParams the body of the function. See documentation for proper syntax.
      * @param AbstractQuery              $filter         filter to apply to the function
      * @param float                      $weight         function weight
      *

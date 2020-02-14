@@ -64,7 +64,7 @@ class Task extends Param
      */
     public function getData(): array
     {
-        if (\is_null($this->_data)) {
+        if (null === $this->_data) {
             $this->refresh();
         }
 
@@ -78,7 +78,7 @@ class Task extends Param
      */
     public function getResponse(): Response
     {
-        if (\is_null($this->_response)) {
+        if (null === $this->_response) {
             $this->refresh();
         }
 
@@ -90,7 +90,7 @@ class Task extends Param
      *
      * @param array $options Options for endpoint
      */
-    public function refresh(array $options = [])
+    public function refresh(array $options = []): void
     {
         $endpoint = new \Elasticsearch\Endpoints\Tasks\Get();
         $endpoint->setTaskId($this->_id);

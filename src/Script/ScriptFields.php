@@ -15,7 +15,7 @@ use Elastica\Param;
 class ScriptFields extends Param
 {
     /**
-     * @param Script[]|array $scripts OPTIONAL
+     * @param array|Script[] $scripts OPTIONAL
      */
     public function __construct(array $scripts = [])
     {
@@ -42,7 +42,7 @@ class ScriptFields extends Param
     }
 
     /**
-     * @param Script[]|array $scripts Associative array of string => Elastica\Script\Script
+     * @param array|Script[] $scripts Associative array of string => Elastica\Script\Script
      *
      * @return $this
      */

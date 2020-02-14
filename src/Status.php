@@ -53,7 +53,7 @@ class Status
      */
     public function getData()
     {
-        if (\is_null($this->_data)) {
+        if (null === $this->_data) {
             $this->refresh();
         }
 
@@ -135,7 +135,7 @@ class Status
      */
     public function getResponse()
     {
-        if (\is_null($this->_response)) {
+        if (null === $this->_response) {
             $this->refresh();
         }
 
@@ -157,7 +157,7 @@ class Status
     /**
      * Refresh status object.
      */
-    public function refresh()
+    public function refresh(): void
     {
         $this->_response = $this->_client->requestEndpoint(new Stats());
         $this->_data = $this->getResponse()->getData();

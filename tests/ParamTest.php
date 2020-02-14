@@ -6,12 +6,15 @@ use Elastica\Param;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Util;
 
+/**
+ * @internal
+ */
 class ParamTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testToArrayEmpty()
+    public function testToArrayEmpty(): void
     {
         $param = new Param();
         $this->assertInstanceOf(Param::class, $param);
@@ -21,7 +24,7 @@ class ParamTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetParams()
+    public function testSetParams(): void
     {
         $param = new Param();
         $params = ['hello' => 'word', 'nicolas' => 'ruflin'];
@@ -34,7 +37,7 @@ class ParamTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetGetParam()
+    public function testSetGetParam(): void
     {
         $param = new Param();
 
@@ -51,7 +54,7 @@ class ParamTest extends BaseTest
     /**
      * @group unit
      */
-    public function testAddParam()
+    public function testAddParam(): void
     {
         $param = new Param();
 
@@ -67,7 +70,7 @@ class ParamTest extends BaseTest
     /**
      * @group unit
      */
-    public function testAddParam2()
+    public function testAddParam2(): void
     {
         $param = new Param();
 
@@ -85,7 +88,7 @@ class ParamTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetParamInvalid()
+    public function testGetParamInvalid(): void
     {
         $this->expectException(\Elastica\Exception\InvalidException::class);
 
@@ -97,7 +100,7 @@ class ParamTest extends BaseTest
     /**
      * @group unit
      */
-    public function testHasParam()
+    public function testHasParam(): void
     {
         $param = new Param();
 

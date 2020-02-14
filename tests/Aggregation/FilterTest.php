@@ -10,28 +10,15 @@ use Elastica\Query;
 use Elastica\Query\Range;
 use Elastica\Query\Term;
 
+/**
+ * @internal
+ */
 class FilterTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest(): Index
-    {
-        $index = $this->_createIndex();
-
-        $index->addDocuments([
-            new Document(1, ['price' => 5, 'color' => 'blue']),
-            new Document(2, ['price' => 8, 'color' => 'blue']),
-            new Document(3, ['price' => 1, 'color' => 'red']),
-            new Document(4, ['price' => 3, 'color' => 'green']),
-        ]);
-
-        $index->refresh();
-
-        return $index;
-    }
-
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $expected = [
             'filter' => ['range' => ['stock' => ['gt' => 0]]],
@@ -52,7 +39,7 @@ class FilterTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testFilterAggregation()
+    public function testFilterAggregation(): void
     {
         $agg = new Filter('filter');
         $agg->setFilter(new Term(['color' => 'blue']));
@@ -72,7 +59,7 @@ class FilterTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testFilterNoSubAggregation()
+    public function testFilterNoSubAggregation(): void
     {
         $agg = new Avg('price');
         $agg->setField('price');
@@ -89,7 +76,7 @@ class FilterTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $agg = new Filter('foo', new Term(['color' => 'blue']));
 
@@ -107,9 +94,25 @@ class FilterTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testConstructWithoutFilter()
+    public function testConstructWithoutFilter(): void
     {
         $agg = new Filter('foo');
         $this->assertEquals('foo', $agg->getName());
+    }
+
+    protected function _getIndexForTest(): Index
+    {
+        $index = $this->_createIndex();
+
+        $index->addDocuments([
+            new Document(1, ['price' => 5, 'color' => 'blue']),
+            new Document(2, ['price' => 8, 'color' => 'blue']),
+            new Document(3, ['price' => 1, 'color' => 'red']),
+            new Document(4, ['price' => 3, 'color' => 'green']),
+        ]);
+
+        $index->refresh();
+
+        return $index;
     }
 }

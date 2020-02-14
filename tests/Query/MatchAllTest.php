@@ -7,12 +7,15 @@ use Elastica\Query\MatchAll;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class MatchAllTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $query = new MatchAll();
 
@@ -24,7 +27,7 @@ class MatchAllTest extends BaseTest
     /**
      * @group functional
      */
-    public function testMatchAllIndicesTypes()
+    public function testMatchAllIndicesTypes(): void
     {
         $index1 = $this->_createIndex();
 

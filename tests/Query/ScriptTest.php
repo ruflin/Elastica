@@ -6,12 +6,15 @@ use Elastica\Query\Script as ScriptQuery;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class ScriptTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $string = '_score * 2.0';
 
@@ -33,7 +36,7 @@ class ScriptTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetScript()
+    public function testSetScript(): void
     {
         $string = '_score * 2.0';
         $params = [

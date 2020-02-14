@@ -107,7 +107,7 @@ abstract class AbstractTransport extends Param
             } else {
                 $transport = \ucfirst($transport);
             }
-            $classNames = ["Elastica\\Transport\\$transport", $transport];
+            $classNames = ["Elastica\\Transport\\{$transport}", $transport];
             foreach ($classNames as $className) {
                 if (\class_exists($className)) {
                     $transport = new $className();

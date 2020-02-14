@@ -9,30 +9,15 @@ use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class DateRangeTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest(): Index
-    {
-        $index = $this->_createIndex();
-        $index->setMapping(new Mapping([
-            'created' => ['type' => 'date', 'format' => 'epoch_millis'],
-        ]));
-
-        $index->addDocuments([
-            new Document(1, ['created' => 1390962135000]),
-            new Document(2, ['created' => 1390965735000]),
-            new Document(3, ['created' => 1390954935000]),
-        ]);
-
-        $index->refresh();
-
-        return $index;
-    }
-
     /**
      * @group functional
      */
-    public function testDateRangeAggregation()
+    public function testDateRangeAggregation(): void
     {
         $agg = new DateRange('date');
         $agg->setField('created');
@@ -54,7 +39,7 @@ class DateRangeTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testDateRangeSetFormat()
+    public function testDateRangeSetFormat(): void
     {
         $agg = new DateRange('date');
         $agg->setField('created');
@@ -71,7 +56,7 @@ class DateRangeTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testDateRangeSetFormatAccordingToFormatTargetField()
+    public function testDateRangeSetFormatAccordingToFormatTargetField(): void
     {
         $agg = new DateRange('date');
         $agg->setField('created');
@@ -90,5 +75,23 @@ class DateRangeTest extends BaseAggregationTest
             $this->assertSame('search_phase_execution_exception', $error['type']);
             $this->assertStringStartsWith('failed to parse date field', $error['root_cause'][0]['reason']);
         }
+    }
+
+    protected function _getIndexForTest(): Index
+    {
+        $index = $this->_createIndex();
+        $index->setMapping(new Mapping([
+            'created' => ['type' => 'date', 'format' => 'epoch_millis'],
+        ]));
+
+        $index->addDocuments([
+            new Document(1, ['created' => 1390962135000]),
+            new Document(2, ['created' => 1390965735000]),
+            new Document(3, ['created' => 1390954935000]),
+        ]);
+
+        $index->refresh();
+
+        return $index;
     }
 }

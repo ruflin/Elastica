@@ -7,12 +7,15 @@ use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class DocumentTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testAddFile()
+    public function testAddFile(): void
     {
         $fileName = '/dev/null';
         if (!\file_exists($fileName)) {
@@ -26,7 +29,7 @@ class DocumentTest extends BaseTest
     /**
      * @group unit
      */
-    public function testAddGeoPoint()
+    public function testAddGeoPoint(): void
     {
         $doc = new Document();
         $returnValue = $doc->addGeoPoint('point', 38.89859, -77.035971);
@@ -36,7 +39,7 @@ class DocumentTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetData()
+    public function testSetData(): void
     {
         $doc = new Document();
         $returnValue = $doc->setData(['data']);
@@ -46,7 +49,7 @@ class DocumentTest extends BaseTest
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $id = '17';
         $data = ['hello' => 'world'];
@@ -65,7 +68,7 @@ class DocumentTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetIndex()
+    public function testSetIndex(): void
     {
         $document = new Document();
         $document->setIndex('index2');
@@ -81,7 +84,7 @@ class DocumentTest extends BaseTest
     /**
      * @group unit
      */
-    public function testHasId()
+    public function testHasId(): void
     {
         $document = new Document();
         $this->assertFalse($document->hasId());
@@ -96,7 +99,7 @@ class DocumentTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetSetHasRefresh()
+    public function testGetSetHasRefresh(): void
     {
         $document = new Document();
         $this->assertFalse($document->hasRefresh());
@@ -120,7 +123,7 @@ class DocumentTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetOptions()
+    public function testGetOptions(): void
     {
         $document = new Document();
         $document->setIndex('index');
@@ -146,7 +149,7 @@ class DocumentTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetSetHasRemove()
+    public function testGetSetHasRemove(): void
     {
         $document = new Document(1, ['field1' => 'value1', 'field2' => 'value2', 'field3' => 'value3', 'field4' => null]);
 
@@ -200,7 +203,7 @@ class DocumentTest extends BaseTest
     /**
      * @group unit
      */
-    public function testDataPropertiesOverloading()
+    public function testDataPropertiesOverloading(): void
     {
         $document = new Document(1, ['field1' => 'value1', 'field2' => 'value2', 'field3' => 'value3', 'field4' => null]);
 
@@ -252,7 +255,7 @@ class DocumentTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSerializedData()
+    public function testSerializedData(): void
     {
         $data = '{"user":"rolf"}';
         $document = new Document(1, $data);
@@ -284,7 +287,7 @@ class DocumentTest extends BaseTest
     /**
      * @group unit
      */
-    public function testUpsert()
+    public function testUpsert(): void
     {
         $document = new Document();
 
@@ -302,7 +305,7 @@ class DocumentTest extends BaseTest
     /**
      * @group unit
      */
-    public function testDocAsUpsert()
+    public function testDocAsUpsert(): void
     {
         $document = new Document();
 

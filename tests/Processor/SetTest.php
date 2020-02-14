@@ -8,12 +8,15 @@ use Elastica\Processor\Set;
 use Elastica\ResultSet;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
+/**
+ * @internal
+ */
 class SetTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
-    public function testSet()
+    public function testSet(): void
     {
         $processor = new Set('field1', 582.1);
 
@@ -30,7 +33,7 @@ class SetTest extends BasePipelineTest
     /**
      * @group unit
      */
-    public function testSetWithNonDefaultOptions()
+    public function testSetWithNonDefaultOptions(): void
     {
         $processor = new Set('field1', 582.1);
         $processor->setOverride(false);
@@ -49,7 +52,7 @@ class SetTest extends BasePipelineTest
     /**
      * @group functional
      */
-    public function testSetField()
+    public function testSetField(): void
     {
         $set = new Set('package', 'Elastica');
 

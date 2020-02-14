@@ -7,8 +7,29 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class HistogramTest extends BaseAggregationTest
 {
+    /**
+     * @group functional
+     */
+    public function testHistogramAggregation(): void
+    {
+        $agg = new Histogram('hist', 'price', 10);
+        $agg->setMinimumDocumentCount(0); // should return empty buckets
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('hist');
+
+        $buckets = $results['buckets'];
+        $this->assertCount(5, $buckets);
+        $this->assertEquals(30, $buckets[3]['key']);
+        $this->assertEquals(2, $buckets[3]['doc_count']);
+    }
+
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
@@ -27,23 +48,5 @@ class HistogramTest extends BaseAggregationTest
         $index->refresh();
 
         return $index;
-    }
-
-    /**
-     * @group functional
-     */
-    public function testHistogramAggregation()
-    {
-        $agg = new Histogram('hist', 'price', 10);
-        $agg->setMinimumDocumentCount(0); // should return empty buckets
-
-        $query = new Query();
-        $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('hist');
-
-        $buckets = $results['buckets'];
-        $this->assertCount(5, $buckets);
-        $this->assertEquals(30, $buckets[3]['key']);
-        $this->assertEquals(2, $buckets[3]['doc_count']);
     }
 }

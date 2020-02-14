@@ -7,12 +7,15 @@ use Elastica\Mapping;
 use Elastica\Result;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class ResultTest extends BaseTest
 {
     /**
      * @group functional
      */
-    public function testGetters()
+    public function testGetters(): void
     {
         // Creates a new index 'xodoa'
         $index = $this->_createIndex();
@@ -38,7 +41,7 @@ class ResultTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGetIdNoSource()
+    public function testGetIdNoSource(): void
     {
         // Creates a new index 'xodoa'
         $indexName = 'xodoa';
@@ -76,7 +79,7 @@ class ResultTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGetTotalTimeReturnsExpectedResults()
+    public function testGetTotalTimeReturnsExpectedResults(): void
     {
         $index = $this->_createIndex();
 
@@ -95,13 +98,13 @@ class ResultTest extends BaseTest
             'integer',
             \gettype($resultSet->getTotalTime()),
             'Total Time should be an integer'
-         );
+        );
     }
 
     /**
      * @group unit
      */
-    public function testHasFields()
+    public function testHasFields(): void
     {
         $data = ['value set'];
 

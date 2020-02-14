@@ -8,6 +8,8 @@ use Elastica\Test\Base as BaseTest;
 
 /**
  * @group functional
+ *
+ * @internal
  */
 class ClusterTest extends BaseTest
 {

@@ -54,7 +54,7 @@ class QueryBuilder
     /**
      * Adds a new DSL object.
      */
-    public function addDSL(DSL $dsl)
+    public function addDSL(DSL $dsl): void
     {
         $this->_facades[$dsl->getType()] = new Facade($dsl, $this->_version);
     }
