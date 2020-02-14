@@ -10,44 +10,17 @@ use Elastica\Query\Term;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class FunctionScoreTest extends BaseTest
 {
     protected $locationOrigin = '32.804654, -117.242594';
 
-    protected function _getIndexForTest()
-    {
-        $index = $this->_createIndex();
-        $index->setMapping(new Mapping([
-            'name' => ['type' => 'text', 'index' => 'false'],
-            'location' => ['type' => 'geo_point'],
-            'price' => ['type' => 'float'],
-            'popularity' => ['type' => 'integer'],
-        ]));
-
-        $index->addDocuments([
-            new Document(1, [
-                'name' => "Mr. Frostie's",
-                'location' => [['lat' => 32.799605, 'lon' => -117.243027], ['lat' => 32.792744, 'lon' => -117.2387341]],
-                'price' => 4.5,
-                'popularity' => null,
-            ]),
-            new Document(2, [
-                'name' => "Miller's Field",
-                'location' => ['lat' => 32.795964, 'lon' => -117.255028],
-                'price' => 9.5,
-                'popularity' => 1,
-            ]),
-        ]);
-
-        $index->refresh();
-
-        return $index;
-    }
-
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $priceOrigin = 0;
         $locationScale = '2mi';
@@ -86,7 +59,7 @@ class FunctionScoreTest extends BaseTest
     /**
      * @group unit
      */
-    public function testDecayWeight()
+    public function testDecayWeight(): void
     {
         $priceOrigin = 0;
         $locationScale = '2mi';
@@ -149,7 +122,7 @@ class FunctionScoreTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGauss()
+    public function testGauss(): void
     {
         $query = new FunctionScore();
         $query->addDecayFunction(FunctionScore::DECAY_GAUSS, 'location', $this->locationOrigin, '4mi');
@@ -165,7 +138,7 @@ class FunctionScoreTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGaussMultiValue()
+    public function testGaussMultiValue(): void
     {
         $query = new FunctionScore();
         $query->addDecayFunction(
@@ -190,7 +163,7 @@ class FunctionScoreTest extends BaseTest
     /**
      * @group unit
      */
-    public function testAddWeightFunction()
+    public function testAddWeightFunction(): void
     {
         $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
@@ -206,7 +179,7 @@ class FunctionScoreTest extends BaseTest
     /**
      * @group unit
      */
-    public function testLegacyFilterAddWeightFunction()
+    public function testLegacyFilterAddWeightFunction(): void
     {
         $query = new FunctionScore();
         $filter = new Term(['price' => 4.5]);
@@ -222,7 +195,7 @@ class FunctionScoreTest extends BaseTest
     /**
      * @group functional
      */
-    public function testWeight()
+    public function testWeight(): void
     {
         $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
@@ -256,7 +229,7 @@ class FunctionScoreTest extends BaseTest
     /**
      * @group functional
      */
-    public function testWeightWithLegacyFilter()
+    public function testWeightWithLegacyFilter(): void
     {
         $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
@@ -290,7 +263,7 @@ class FunctionScoreTest extends BaseTest
     /**
      * @group functional
      */
-    public function testRandomScore()
+    public function testRandomScore(): void
     {
         $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
@@ -328,7 +301,7 @@ class FunctionScoreTest extends BaseTest
     /**
      * @group functional
      */
-    public function testRandomScoreWithLegacyFilter()
+    public function testRandomScoreWithLegacyFilter(): void
     {
         $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
@@ -366,7 +339,7 @@ class FunctionScoreTest extends BaseTest
     /**
      * @group unit
      */
-    public function testRandomScoreWeight()
+    public function testRandomScoreWeight(): void
     {
         $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
@@ -397,7 +370,7 @@ class FunctionScoreTest extends BaseTest
     /**
      * @group unit
      */
-    public function testRandomScoreWeightWithLegacyFilter()
+    public function testRandomScoreWeightWithLegacyFilter(): void
     {
         $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
@@ -428,7 +401,7 @@ class FunctionScoreTest extends BaseTest
     /**
      * @group functional
      */
-    public function testRandomScoreWithoutSeed()
+    public function testRandomScoreWithoutSeed(): void
     {
         $query = new FunctionScore();
         $query->setRandomScore();
@@ -441,7 +414,7 @@ class FunctionScoreTest extends BaseTest
     /**
      * @group functional
      */
-    public function testRandomScoreWithoutField()
+    public function testRandomScoreWithoutField(): void
     {
         $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
@@ -478,7 +451,7 @@ class FunctionScoreTest extends BaseTest
     /**
      * @group functional
      */
-    public function testScriptScore()
+    public function testScriptScore(): void
     {
         $scriptString = "_score * doc['price'].value";
         $script = new Script($scriptString, null, Script::LANG_PAINLESS);
@@ -512,7 +485,7 @@ class FunctionScoreTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetMinScore()
+    public function testSetMinScore(): void
     {
         $this->_checkVersion('1.5');
 
@@ -549,7 +522,7 @@ class FunctionScoreTest extends BaseTest
     /**
      * @group functional
      */
-    public function testFieldValueFactor()
+    public function testFieldValueFactor(): void
     {
         $this->_checkVersion('1.6');
 
@@ -578,5 +551,35 @@ class FunctionScoreTest extends BaseTest
 
         $this->assertCount(2, $results);
         $this->assertEquals(2, $results[0]->getId());
+    }
+
+    protected function _getIndexForTest()
+    {
+        $index = $this->_createIndex();
+        $index->setMapping(new Mapping([
+            'name' => ['type' => 'text', 'index' => 'false'],
+            'location' => ['type' => 'geo_point'],
+            'price' => ['type' => 'float'],
+            'popularity' => ['type' => 'integer'],
+        ]));
+
+        $index->addDocuments([
+            new Document(1, [
+                'name' => "Mr. Frostie's",
+                'location' => [['lat' => 32.799605, 'lon' => -117.243027], ['lat' => 32.792744, 'lon' => -117.2387341]],
+                'price' => 4.5,
+                'popularity' => null,
+            ]),
+            new Document(2, [
+                'name' => "Miller's Field",
+                'location' => ['lat' => 32.795964, 'lon' => -117.255028],
+                'price' => 9.5,
+                'popularity' => 1,
+            ]),
+        ]);
+
+        $index->refresh();
+
+        return $index;
     }
 }

@@ -4,6 +4,9 @@ namespace Elastica\Test\Exception\Connection;
 
 use Elastica\Test\Exception\AbstractExceptionTest;
 
+/**
+ * @internal
+ */
 class GuzzleExceptionTest extends AbstractExceptionTest
 {
     public static function setUpbeforeClass(): void

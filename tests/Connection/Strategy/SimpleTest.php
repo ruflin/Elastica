@@ -13,6 +13,8 @@ use Elastica\Test\Base;
  * Description of SimplyTest.
  *
  * @author chabior
+ *
+ * @internal
  */
 class SimpleTest extends Base
 {
@@ -24,7 +26,7 @@ class SimpleTest extends Base
     /**
      * @group functional
      */
-    public function testConnection()
+    public function testConnection(): void
     {
         $client = $this->_getClient();
         $response = $client->request('_aliases');
@@ -37,7 +39,7 @@ class SimpleTest extends Base
     /**
      * @group functional
      */
-    public function testFailConnection()
+    public function testFailConnection(): void
     {
         $this->expectException(\Elastica\Exception\ConnectionException::class);
 
@@ -52,7 +54,7 @@ class SimpleTest extends Base
     /**
      * @group functional
      */
-    public function testWithOneFailConnection()
+    public function testWithOneFailConnection(): void
     {
         $connections = [
             new Connection(['host' => '255.255.255.0', 'timeout' => $this->_timeout]),
@@ -60,7 +62,7 @@ class SimpleTest extends Base
         ];
 
         $count = 0;
-        $callback = function ($connection, $exception, $client) use (&$count) {
+        $callback = function ($connection, $exception, $client) use (&$count): void {
             ++$count;
         };
 
@@ -80,7 +82,7 @@ class SimpleTest extends Base
     /**
      * @group functional
      */
-    public function testWithNoValidConnection()
+    public function testWithNoValidConnection(): void
     {
         $connections = [
             new Connection(['host' => '255.255.255.0', 'timeout' => $this->_timeout]),
@@ -89,7 +91,7 @@ class SimpleTest extends Base
         ];
 
         $count = 0;
-        $client = $this->_getClient([], function () use (&$count) {
+        $client = $this->_getClient([], function () use (&$count): void {
             ++$count;
         });
 
@@ -103,14 +105,14 @@ class SimpleTest extends Base
         }
     }
 
-    protected function _checkStrategy(Client $client)
+    protected function _checkStrategy(Client $client): void
     {
         $strategy = $client->getConnectionStrategy();
 
         $this->assertInstanceOf(Simple::class, $strategy);
     }
 
-    protected function _checkResponse(Response $response)
+    protected function _checkResponse(Response $response): void
     {
         $this->assertTrue($response->isOk());
     }

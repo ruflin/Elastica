@@ -9,12 +9,15 @@ use Elastica\Query\AbstractQuery;
 use Elastica\QueryBuilder;
 use Elastica\Suggest\AbstractSuggest;
 
+/**
+ * @internal
+ */
 class QueryBuilderTest extends Base
 {
     /**
      * @group unit
      */
-    public function testCustomDSL()
+    public function testCustomDSL(): void
     {
         $qb = new QueryBuilder();
 
@@ -37,7 +40,7 @@ class QueryBuilderTest extends Base
     /**
      * @group unit
      */
-    public function testFacade()
+    public function testFacade(): void
     {
         $qb = new QueryBuilder();
 

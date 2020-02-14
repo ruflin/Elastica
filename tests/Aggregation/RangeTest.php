@@ -7,30 +7,15 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class RangeTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest(): Index
-    {
-        $index = $this->_createIndex();
-
-        $index->addDocuments([
-            new Document(1, ['price' => 5]),
-            new Document(2, ['price' => 8]),
-            new Document(3, ['price' => 1]),
-            new Document(4, ['price' => 3]),
-            new Document(5, ['price' => 1.5]),
-            new Document(6, ['price' => 2]),
-        ]);
-
-        $index->refresh();
-
-        return $index;
-    }
-
     /**
      * @group functional
      */
-    public function testRangeAggregation()
+    public function testRangeAggregation(): void
     {
         $agg = new Range('range');
         $agg->setField('price');
@@ -46,7 +31,7 @@ class RangeTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testRangeAggregationWithKey()
+    public function testRangeAggregationWithKey(): void
     {
         $agg = new Range('range');
         $agg->setField('price');
@@ -76,5 +61,23 @@ class RangeTest extends BaseAggregationTest
         ];
 
         $this->assertEquals($expected, $agg->toArray());
+    }
+
+    protected function _getIndexForTest(): Index
+    {
+        $index = $this->_createIndex();
+
+        $index->addDocuments([
+            new Document(1, ['price' => 5]),
+            new Document(2, ['price' => 8]),
+            new Document(3, ['price' => 1]),
+            new Document(4, ['price' => 3]),
+            new Document(5, ['price' => 1.5]),
+            new Document(6, ['price' => 2]),
+        ]);
+
+        $index->refresh();
+
+        return $index;
     }
 }

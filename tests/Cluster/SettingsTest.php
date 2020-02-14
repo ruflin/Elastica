@@ -7,12 +7,15 @@ use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class SettingsTest extends BaseTest
 {
     /**
      * @group functional
      */
-    public function testSetTransient()
+    public function testSetTransient(): void
     {
         $index = $this->_createIndex();
 
@@ -34,7 +37,7 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetPersistent()
+    public function testSetPersistent(): void
     {
         $index = $this->_createIndex();
 
@@ -56,7 +59,7 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetReadOnly()
+    public function testSetReadOnly(): void
     {
         // Create two indices to check that the complete cluster is read only
         $settings = new Settings($this->_getClient());

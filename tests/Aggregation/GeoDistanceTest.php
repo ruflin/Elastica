@@ -8,8 +8,27 @@ use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class GeoDistanceTest extends BaseAggregationTest
 {
+    /**
+     * @group functional
+     */
+    public function testGeoDistanceAggregation(): void
+    {
+        $agg = new GeoDistance('geo', 'location', ['lat' => 32.804654, 'lon' => -117.242594]);
+        $agg->addRange(null, 100);
+        $agg->setUnit('mi');
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('geo');
+
+        $this->assertEquals(2, $results['buckets'][0]['doc_count']);
+    }
+
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
@@ -26,21 +45,5 @@ class GeoDistanceTest extends BaseAggregationTest
         $index->refresh();
 
         return $index;
-    }
-
-    /**
-     * @group functional
-     */
-    public function testGeoDistanceAggregation()
-    {
-        $agg = new GeoDistance('geo', 'location', ['lat' => 32.804654, 'lon' => -117.242594]);
-        $agg->addRange(null, 100);
-        $agg->setUnit('mi');
-
-        $query = new Query();
-        $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('geo');
-
-        $this->assertEquals(2, $results['buckets'][0]['doc_count']);
     }
 }

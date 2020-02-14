@@ -29,7 +29,7 @@ class Percolate extends AbstractQuery
     /**
      * The source of the document being percolated.
      *
-     * @param Document|array $document
+     * @param array|Document $document
      *
      * @return $this
      */

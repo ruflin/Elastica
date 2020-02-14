@@ -8,12 +8,15 @@ use Elastica\Processor\Split;
 use Elastica\ResultSet;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
+/**
+ * @internal
+ */
 class SplitTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
-    public function testSplit()
+    public function testSplit(): void
     {
         $processor = new Split('joined_array_field', '-');
 
@@ -30,7 +33,7 @@ class SplitTest extends BasePipelineTest
     /**
      * @group unit
      */
-    public function testSplitWithNonDefaultOptions()
+    public function testSplitWithNonDefaultOptions(): void
     {
         $processor = new Split('joined_array_field', '-');
         $processor->setIgnoreMissing(true);
@@ -49,7 +52,7 @@ class SplitTest extends BasePipelineTest
     /**
      * @group functional
      */
-    public function testSplitField()
+    public function testSplitField(): void
     {
         $split = new Split('name', '&');
 

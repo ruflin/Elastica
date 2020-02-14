@@ -8,12 +8,15 @@ use Elastica\Processor\Append;
 use Elastica\ResultSet;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
+/**
+ * @internal
+ */
 class AppendTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
-    public function testAppendSingleValue()
+    public function testAppendSingleValue(): void
     {
         $processor = new Append('field1', 'item2');
 
@@ -30,7 +33,7 @@ class AppendTest extends BasePipelineTest
     /**
      * @group unit
      */
-    public function testAppendArray()
+    public function testAppendArray(): void
     {
         $processor = new Append('field1', ['item2', 'item3', 'item4']);
 
@@ -47,7 +50,7 @@ class AppendTest extends BasePipelineTest
     /**
      * @group functional
      */
-    public function testAppend()
+    public function testAppend(): void
     {
         $append = new Append('foo', ['item2', 'item3', 'item4']);
 

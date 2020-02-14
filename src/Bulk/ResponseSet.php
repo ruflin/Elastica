@@ -94,7 +94,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     /**
      * {@inheritdoc}
      */
-    public function next()
+    public function next(): void
     {
         ++$this->_position;
     }
@@ -118,7 +118,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     /**
      * {@inheritdoc}
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->_position = 0;
     }

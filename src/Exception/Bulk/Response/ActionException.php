@@ -50,6 +50,6 @@ class ActionException extends BulkException
             $path .= '/'.$data['_id'];
         }
 
-        return "$opType: $path caused $error";
+        return "{$opType}: {$path} caused {$error}";
     }
 }

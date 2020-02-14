@@ -29,6 +29,34 @@ class Result
     }
 
     /**
+     * Magic function to directly access keys inside the result.
+     *
+     * Returns null if key does not exist
+     *
+     * @param string $key Key name
+     *
+     * @return mixed Key value
+     */
+    public function __get($key)
+    {
+        $source = $this->getData();
+
+        return $source[$key] ?? null;
+    }
+
+    /**
+     * Magic function to support isset() calls.
+     *
+     * @param string $key Key name
+     */
+    public function __isset($key): bool
+    {
+        $source = $this->getData();
+
+        return \array_key_exists($key, $source) && null !== $source[$key];
+    }
+
+    /**
      * Returns a param from the result hit array.
      *
      * This function can be used to retrieve all data for which a specific
@@ -125,7 +153,7 @@ class Result
     /**
      * Returns the version information from the hit.
      *
-     * @return string|int Document version
+     * @return int|string Document version
      */
     public function getVersion()
     {
@@ -198,10 +226,8 @@ class Result
         $doc = new Document();
         $doc->setData($this->getSource());
         $hit = $this->getHit();
-        unset($hit['_source']);
-        unset($hit['_explanation']);
-        unset($hit['highlight']);
-        unset($hit['_score']);
+        unset($hit['_source'], $hit['_explanation'], $hit['highlight'], $hit['_score']);
+
         $doc->setParams($hit);
 
         return $doc;
@@ -212,36 +238,8 @@ class Result
      *
      * @param mixed $value
      */
-    public function setParam(string $param, $value)
+    public function setParam(string $param, $value): void
     {
         $this->_hit[$param] = $value;
-    }
-
-    /**
-     * Magic function to directly access keys inside the result.
-     *
-     * Returns null if key does not exist
-     *
-     * @param string $key Key name
-     *
-     * @return mixed Key value
-     */
-    public function __get($key)
-    {
-        $source = $this->getData();
-
-        return $source[$key] ?? null;
-    }
-
-    /**
-     * Magic function to support isset() calls.
-     *
-     * @param string $key Key name
-     */
-    public function __isset($key): bool
-    {
-        $source = $this->getData();
-
-        return \array_key_exists($key, $source) && null !== $source[$key];
     }
 }

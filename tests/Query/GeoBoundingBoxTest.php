@@ -5,12 +5,15 @@ namespace Elastica\Test\Query;
 use Elastica\Query\GeoBoundingBox;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class GeoBoundingBoxTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testAddCoordinates()
+    public function testAddCoordinates(): void
     {
         $key = 'pin.location';
         $coords = ['40.73, -74.1', '40.01, -71.12'];
@@ -27,7 +30,7 @@ class GeoBoundingBoxTest extends BaseTest
     /**
      * @group unit
      */
-    public function testAddCoordinatesInvalidException()
+    public function testAddCoordinatesInvalidException(): void
     {
         $this->expectException(\Elastica\Exception\InvalidException::class);
 
@@ -37,7 +40,7 @@ class GeoBoundingBoxTest extends BaseTest
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $key = 'pin.location';
         $coords = ['40.73, -74.1', '40.01, -71.12'];

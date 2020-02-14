@@ -8,8 +8,25 @@ use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class MissingTest extends BaseAggregationTest
 {
+    /**
+     * @group functional
+     */
+    public function testMissingAggregation(): void
+    {
+        $agg = new Missing('missing', 'color');
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('missing');
+
+        $this->assertEquals(1, $results['doc_count']);
+    }
+
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
@@ -29,19 +46,5 @@ class MissingTest extends BaseAggregationTest
         $index->refresh();
 
         return $index;
-    }
-
-    /**
-     * @group functional
-     */
-    public function testMissingAggregation()
-    {
-        $agg = new Missing('missing', 'color');
-
-        $query = new Query();
-        $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('missing');
-
-        $this->assertEquals(1, $results['doc_count']);
     }
 }

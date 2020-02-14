@@ -22,7 +22,7 @@ class DistanceFeature extends AbstractQuery
     }
 
     /**
-     * @param string|array $origin
+     * @param array|string $origin
      */
     public function setOrigin($origin): self
     {

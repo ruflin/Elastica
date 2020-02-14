@@ -9,43 +9,15 @@ use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class DiversifiedSamplerTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest(): Index
-    {
-        $index = $this->_createIndex(null, true, 2);
-
-        $mapping = new Mapping([
-            'price' => ['type' => 'integer'],
-            'color' => ['type' => 'keyword'],
-        ]);
-        $index->setMapping($mapping);
-
-        $routing1 = 'first_routing';
-        $routing2 = 'second_routing';
-
-        $index->addDocuments([
-            (new Document(1, ['price' => 5, 'color' => 'blue']))->setRouting($routing1),
-            (new Document(2, ['price' => 8, 'color' => 'blue']))->setRouting($routing1),
-            (new Document(3, ['price' => 1, 'color' => 'blue']))->setRouting($routing1),
-            (new Document(4, ['price' => 3, 'color' => 'red']))->setRouting($routing1),
-            (new Document(5, ['price' => 1.5, 'color' => 'red']))->setRouting($routing1),
-            (new Document(6, ['price' => 2, 'color' => 'green']))->setRouting($routing1),
-            (new Document(7, ['price' => 5, 'color' => 'blue']))->setRouting($routing2),
-            (new Document(8, ['price' => 8, 'color' => 'blue']))->setRouting($routing2),
-            (new Document(9, ['price' => 1, 'color' => 'red']))->setRouting($routing2),
-            (new Document(10, ['price' => 3, 'color' => 'red']))->setRouting($routing2),
-        ]);
-
-        $index->refresh();
-
-        return $index;
-    }
-
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $expected = [
             'diversified_sampler' => [
@@ -82,7 +54,7 @@ class DiversifiedSamplerTest extends BaseAggregationTest
      * @dataProvider shardSizeAndMaxDocPerValueProvider
      * @group functional
      */
-    public function testSamplerAggregation(int $shardSize, int $maxDocPerValue, int $docCount)
+    public function testSamplerAggregation(int $shardSize, int $maxDocPerValue, int $docCount): void
     {
         $agg = new DiversifiedSampler('price_diversified_sampler');
         $agg->setField('color');
@@ -116,5 +88,36 @@ class DiversifiedSamplerTest extends BaseAggregationTest
             [5, 2, 9],
             [6, 2, 9],
         ];
+    }
+
+    protected function _getIndexForTest(): Index
+    {
+        $index = $this->_createIndex(null, true, 2);
+
+        $mapping = new Mapping([
+            'price' => ['type' => 'integer'],
+            'color' => ['type' => 'keyword'],
+        ]);
+        $index->setMapping($mapping);
+
+        $routing1 = 'first_routing';
+        $routing2 = 'second_routing';
+
+        $index->addDocuments([
+            (new Document(1, ['price' => 5, 'color' => 'blue']))->setRouting($routing1),
+            (new Document(2, ['price' => 8, 'color' => 'blue']))->setRouting($routing1),
+            (new Document(3, ['price' => 1, 'color' => 'blue']))->setRouting($routing1),
+            (new Document(4, ['price' => 3, 'color' => 'red']))->setRouting($routing1),
+            (new Document(5, ['price' => 1.5, 'color' => 'red']))->setRouting($routing1),
+            (new Document(6, ['price' => 2, 'color' => 'green']))->setRouting($routing1),
+            (new Document(7, ['price' => 5, 'color' => 'blue']))->setRouting($routing2),
+            (new Document(8, ['price' => 8, 'color' => 'blue']))->setRouting($routing2),
+            (new Document(9, ['price' => 1, 'color' => 'red']))->setRouting($routing2),
+            (new Document(10, ['price' => 3, 'color' => 'red']))->setRouting($routing2),
+        ]);
+
+        $index->refresh();
+
+        return $index;
     }
 }

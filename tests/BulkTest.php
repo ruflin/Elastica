@@ -16,12 +16,15 @@ use Elastica\Exception\NotFoundException;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class BulkTest extends BaseTest
 {
     /**
      * @group functional
      */
-    public function testSend()
+    public function testSend(): void
     {
         $index = $this->_createIndex();
         $indexName = $index->getName();
@@ -135,7 +138,7 @@ class BulkTest extends BaseTest
     /**
      * @group functional
      */
-    public function testUnicodeBulkSend()
+    public function testUnicodeBulkSend(): void
     {
         $index = $this->_createIndex();
         $client = $index->getClient();
@@ -164,7 +167,7 @@ class BulkTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetIndex()
+    public function testSetIndex(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('index');
@@ -191,7 +194,7 @@ class BulkTest extends BaseTest
     /**
      * @group unit
      */
-    public function testAddActions()
+    public function testAddActions(): void
     {
         $client = $this->_getClient();
         $bulk = new Bulk($client);
@@ -221,7 +224,7 @@ class BulkTest extends BaseTest
     /**
      * @group unit
      */
-    public function testAddRawData()
+    public function testAddRawData(): void
     {
         $bulk = new Bulk($this->_getClient());
 
@@ -273,8 +276,11 @@ class BulkTest extends BaseTest
     /**
      * @group unit
      * @dataProvider invalidRawDataProvider
+     *
+     * @param mixed $rawData
+     * @param mixed $failMessage
      */
-    public function testInvalidRawData($rawData, $failMessage)
+    public function testInvalidRawData($rawData, $failMessage): void
     {
         $this->expectException(\Elastica\Exception\InvalidException::class);
 
@@ -328,7 +334,7 @@ class BulkTest extends BaseTest
     /**
      * @group functional
      */
-    public function testErrorRequest()
+    public function testErrorRequest(): void
     {
         $index = $this->_createIndex();
         $client = $index->getClient();
@@ -359,7 +365,7 @@ class BulkTest extends BaseTest
     /**
      * @group functional
      */
-    public function testRawDocumentDataRequest()
+    public function testRawDocumentDataRequest(): void
     {
         $index = $this->_createIndex();
         $client = $index->getClient();
@@ -401,7 +407,7 @@ class BulkTest extends BaseTest
     /**
      * @group functional
      */
-    public function testUpdate()
+    public function testUpdate(): void
     {
         $index = $this->_createIndex();
         $client = $index->getClient();
@@ -535,7 +541,7 @@ class BulkTest extends BaseTest
     /**
      * @group functional
      */
-    public function testUpsert()
+    public function testUpsert(): void
     {
         $index = $this->_createIndex();
         $client = $index->getClient();
@@ -583,7 +589,7 @@ class BulkTest extends BaseTest
     /**
      * @group unit
      */
-    public function testGetPath()
+    public function testGetPath(): void
     {
         $client = $this->_getClient();
         $bulk = new Bulk($client);
@@ -599,7 +605,7 @@ class BulkTest extends BaseTest
     /**
      * @group functional
      */
-    public function testRetry()
+    public function testRetry(): void
     {
         $index = $this->_createIndex();
         $client = $index->getClient();
@@ -631,7 +637,7 @@ class BulkTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetShardTimeout()
+    public function testSetShardTimeout(): void
     {
         $bulk = new Bulk($this->_getClient());
         $this->assertInstanceOf(Bulk::class, $bulk->setShardTimeout(10));
@@ -640,7 +646,7 @@ class BulkTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetRequestParam()
+    public function testSetRequestParam(): void
     {
         $bulk = new Bulk($this->_getClient());
         $this->assertInstanceOf(Bulk::class, $bulk->setRequestParam('key', 'value'));
@@ -649,7 +655,7 @@ class BulkTest extends BaseTest
     /**
      * @group benchmark
      */
-    public function testMemoryUsage()
+    public function testMemoryUsage(): void
     {
         $index = $this->_createIndex();
 
@@ -682,7 +688,7 @@ class BulkTest extends BaseTest
     /**
      * @group unit
      */
-    public function testHasIndex()
+    public function testHasIndex(): void
     {
         $client = $this->_getClient();
         $bulk = new Bulk($client);

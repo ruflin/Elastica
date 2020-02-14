@@ -8,30 +8,15 @@ use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class DateHistogramTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest(): Index
-    {
-        $index = $this->_createIndex();
-        $index->setMapping(new Mapping([
-            'created' => ['type' => 'date'],
-        ]));
-
-        $index->addDocuments([
-            new Document(1, ['created' => '2014-01-29T00:20:00']),
-            new Document(2, ['created' => '2014-01-29T02:20:00']),
-            new Document(3, ['created' => '2014-01-29T03:20:00']),
-        ]);
-
-        $index->refresh();
-
-        return $index;
-    }
-
     /**
      * @group functional
      */
-    public function testDateHistogramAggregation()
+    public function testDateHistogramAggregation(): void
     {
         $agg = new DateHistogram('hist', 'created', '1h');
 
@@ -57,7 +42,7 @@ class DateHistogramTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testSetOffset()
+    public function testSetOffset(): void
     {
         $agg = new DateHistogram('hist', 'created', '1h');
 
@@ -79,7 +64,7 @@ class DateHistogramTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testSetOffsetWorks()
+    public function testSetOffsetWorks(): void
     {
         $this->_checkVersion('1.5');
 
@@ -96,7 +81,7 @@ class DateHistogramTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testSetTimezone()
+    public function testSetTimezone(): void
     {
         $agg = new DateHistogram('hist', 'created', '1h');
 
@@ -113,5 +98,23 @@ class DateHistogramTest extends BaseAggregationTest
         $this->assertEquals($expected, $agg->toArray());
 
         $this->assertInstanceOf(DateHistogram::class, $agg->setTimezone('-02:30'));
+    }
+
+    protected function _getIndexForTest(): Index
+    {
+        $index = $this->_createIndex();
+        $index->setMapping(new Mapping([
+            'created' => ['type' => 'date'],
+        ]));
+
+        $index->addDocuments([
+            new Document(1, ['created' => '2014-01-29T00:20:00']),
+            new Document(2, ['created' => '2014-01-29T02:20:00']),
+            new Document(3, ['created' => '2014-01-29T03:20:00']),
+        ]);
+
+        $index->refresh();
+
+        return $index;
     }
 }

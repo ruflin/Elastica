@@ -5,12 +5,15 @@ namespace Elastica\Test\Aggregation;
 use Elastica\Aggregation\Avg;
 use Elastica\Aggregation\GlobalAggregation;
 
+/**
+ * @internal
+ */
 class GlobalAggregationTest extends BaseAggregationTest
 {
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $expected = [
             'global' => new \stdClass(),

@@ -7,12 +7,15 @@ use Elastica\Response;
 use Elastica\Status;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class StatusTest extends BaseTest
 {
     /**
      * @group functional
      */
-    public function testGetResponse()
+    public function testGetResponse(): void
     {
         $index = $this->_createIndex();
         $status = new Status($index->getClient());
@@ -22,7 +25,7 @@ class StatusTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGetIndexNames()
+    public function testGetIndexNames(): void
     {
         $indexName = 'test';
         $client = $this->_getClient();
@@ -46,7 +49,7 @@ class StatusTest extends BaseTest
     /**
      * @group functional
      */
-    public function testIndexExists()
+    public function testIndexExists(): void
     {
         $indexName = 'elastica_test';
         $aliasName = 'elastica_test-alias';
@@ -72,7 +75,7 @@ class StatusTest extends BaseTest
     /**
      * @group functional
      */
-    public function testAliasExists()
+    public function testAliasExists(): void
     {
         $aliasName = 'elastica_test-alias';
 
@@ -95,6 +98,8 @@ class StatusTest extends BaseTest
         $this->assertEquals([$indexName], \array_map(
             function ($index) {
                 return $index->getName();
-            }, $indicesWithAlias));
+            },
+            $indicesWithAlias
+        ));
     }
 }

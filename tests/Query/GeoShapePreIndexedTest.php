@@ -9,12 +9,15 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\GeoShapePreIndexed;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class GeoShapePreIndexedTest extends BaseTest
 {
     /**
      * @group functional
      */
-    public function testSearch()
+    public function testSearch(): void
     {
         $index = $this->_createIndex();
         $indexName = $index->getName();
@@ -40,7 +43,10 @@ class GeoShapePreIndexedTest extends BaseTest
         $index->refresh();
 
         $gsp = new GeoShapePreIndexed(
-            'location', '2', $indexName, 'location'
+            'location',
+            '2',
+            $indexName,
+            'location'
         );
 
         $query = new BoolQuery();
@@ -55,10 +61,13 @@ class GeoShapePreIndexedTest extends BaseTest
     /**
      * @group unit
      */
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $gsp = new GeoShapePreIndexed(
-            'search_field', '1', 'index', 'indexed_field'
+            'search_field',
+            '1',
+            'index',
+            'indexed_field'
         );
 
         $expected = [
@@ -80,7 +89,7 @@ class GeoShapePreIndexedTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetRelation()
+    public function testSetRelation(): void
     {
         $gsp = new GeoShapePreIndexed('location', '1', 'indexName', 'location');
 

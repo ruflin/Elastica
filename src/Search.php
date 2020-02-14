@@ -40,11 +40,6 @@ class Search
     public const OPTION_SEARCH_IGNORE_UNAVAILABLE = 'ignore_unavailable';
 
     /**
-     * @var BuilderInterface|null
-     */
-    private $builder;
-
-    /**
      * Array of indices names.
      *
      * @var string[]
@@ -67,6 +62,11 @@ class Search
      * @var Client
      */
     protected $_client;
+
+    /**
+     * @var BuilderInterface|null
+     */
+    private $builder;
 
     /**
      * Constructs search object.
@@ -114,7 +114,7 @@ class Search
     }
 
     /**
-     * @param string|array|Query|Suggest|Query\AbstractQuery $query
+     * @param array|Query|Query\AbstractQuery|string|Suggest $query
      */
     public function setQuery($query): self
     {
@@ -190,34 +190,6 @@ class Search
     }
 
     /**
-     * @throws InvalidException If the given key is not a valid option
-     */
-    protected function validateOption(string $key): void
-    {
-        switch ($key) {
-            case self::OPTION_SEARCH_TYPE:
-            case self::OPTION_ROUTING:
-            case self::OPTION_PREFERENCE:
-            case self::OPTION_VERSION:
-            case self::OPTION_TIMEOUT:
-            case self::OPTION_FROM:
-            case self::OPTION_SIZE:
-            case self::OPTION_SCROLL:
-            case self::OPTION_SCROLL_ID:
-            case self::OPTION_SEARCH_TYPE_SUGGEST:
-            case self::OPTION_SEARCH_IGNORE_UNAVAILABLE:
-            case self::OPTION_QUERY_CACHE:
-            case self::OPTION_TERMINATE_AFTER:
-            case self::OPTION_SHARD_REQUEST_CACHE:
-            case self::OPTION_FILTER_PATH:
-            case self::OPTION_TYPED_KEYS:
-                return;
-        }
-
-        throw new InvalidException('Invalid option '.$key);
-    }
-
-    /**
      * Return client object.
      */
     public function getClient(): Client
@@ -284,8 +256,8 @@ class Search
     /**
      * Search in the set indices.
      *
-     * @param string|array|Query $query
-     * @param int|array          $options Limit or associative array of options (option=>value)
+     * @param array|Query|string $query
+     * @param array|int          $options Limit or associative array of options (option=>value)
      *
      * @throws InvalidException
      */
@@ -312,7 +284,7 @@ class Search
     }
 
     /**
-     * @param string|array|Query $query
+     * @param array|Query|string $query
      * @param bool               $fullResult By default only the total hit count is returned. If set to true, the full ResultSet including aggregations is returned
      *
      * @return int|ResultSet
@@ -341,7 +313,7 @@ class Search
 
     /**
      * @param array|int          $options
-     * @param string|array|Query $query
+     * @param array|Query|string $query
      */
     public function setOptionsAndQuery($options = null, $query = ''): self
     {
@@ -384,5 +356,33 @@ class Search
     public function getResultSetBuilder(): BuilderInterface
     {
         return $this->builder;
+    }
+
+    /**
+     * @throws InvalidException If the given key is not a valid option
+     */
+    protected function validateOption(string $key): void
+    {
+        switch ($key) {
+            case self::OPTION_SEARCH_TYPE:
+            case self::OPTION_ROUTING:
+            case self::OPTION_PREFERENCE:
+            case self::OPTION_VERSION:
+            case self::OPTION_TIMEOUT:
+            case self::OPTION_FROM:
+            case self::OPTION_SIZE:
+            case self::OPTION_SCROLL:
+            case self::OPTION_SCROLL_ID:
+            case self::OPTION_SEARCH_TYPE_SUGGEST:
+            case self::OPTION_SEARCH_IGNORE_UNAVAILABLE:
+            case self::OPTION_QUERY_CACHE:
+            case self::OPTION_TERMINATE_AFTER:
+            case self::OPTION_SHARD_REQUEST_CACHE:
+            case self::OPTION_FILTER_PATH:
+            case self::OPTION_TYPED_KEYS:
+                return;
+        }
+
+        throw new InvalidException('Invalid option '.$key);
     }
 }

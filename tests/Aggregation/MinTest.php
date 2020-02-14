@@ -7,9 +7,27 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class MinTest extends BaseAggregationTest
 {
     private const MIN_PRICE = 1;
+
+    /**
+     * @group functional
+     */
+    public function testMinAggregation(): void
+    {
+        $agg = new Min('min_price');
+        $agg->setField('price');
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('min_price');
+
+        $this->assertEquals(self::MIN_PRICE, $results['value']);
+    }
 
     protected function _getIndexForTest(): Index
     {
@@ -25,20 +43,5 @@ class MinTest extends BaseAggregationTest
         $index->refresh();
 
         return $index;
-    }
-
-    /**
-     * @group functional
-     */
-    public function testMinAggregation()
-    {
-        $agg = new Min('min_price');
-        $agg->setField('price');
-
-        $query = new Query();
-        $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('min_price');
-
-        $this->assertEquals(self::MIN_PRICE, $results['value']);
     }
 }

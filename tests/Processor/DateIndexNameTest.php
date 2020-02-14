@@ -5,12 +5,15 @@ namespace Elastica\Test\Processor;
 use Elastica\Processor\DateIndexName;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
+/**
+ * @internal
+ */
 class DateIndexNameTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
-    public function testDateIndexName()
+    public function testDateIndexName(): void
     {
         $processor = new DateIndexName('date1', 'M');
 
@@ -27,7 +30,7 @@ class DateIndexNameTest extends BasePipelineTest
     /**
      * @group unit
      */
-    public function testDateIndexNameWithNonDefaultOptions()
+    public function testDateIndexNameWithNonDefaultOptions(): void
     {
         $processor = new DateIndexName('date1', 'M');
         $processor->setTimezone('Europe/Rome');

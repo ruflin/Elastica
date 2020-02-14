@@ -5,20 +5,15 @@ namespace Elastica\Test\Aggregation;
 use Elastica\Aggregation\Cardinality;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class AggregationMetadataTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest()
-    {
-        $index = $this->_createIndex();
-        $index->refresh();
-
-        return $index;
-    }
-
     /**
      * @group functional
      */
-    public function testAggregationSimpleMetadata()
+    public function testAggregationSimpleMetadata(): void
     {
         $aggName = 'mock';
         $metadata = ['color' => 'blue'];
@@ -37,7 +32,7 @@ class AggregationMetadataTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testAggregationComplexMetadata()
+    public function testAggregationComplexMetadata(): void
     {
         $aggName = 'mock';
         $metadata = [
@@ -58,5 +53,13 @@ class AggregationMetadataTest extends BaseAggregationTest
         $results = $this->_getIndexForTest()->search($query)->getAggregation($aggName);
 
         $this->assertEquals($metadata, $results['meta']);
+    }
+
+    protected function _getIndexForTest()
+    {
+        $index = $this->_createIndex();
+        $index->refresh();
+
+        return $index;
     }
 }

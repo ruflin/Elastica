@@ -7,12 +7,15 @@ use Elastica\QueryBuilder\DSL\Query;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class ParentIdTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $query = new ParentId('join', '1');
         $expectedArray = [
@@ -29,7 +32,7 @@ class ParentIdTest extends BaseTest
     /**
      * @group functional
      */
-    public function testParentId()
+    public function testParentId(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('testparentid');
@@ -120,7 +123,7 @@ class ParentIdTest extends BaseTest
     /**
      * @group unit
      */
-    public function testQueryBuilderParentId()
+    public function testQueryBuilderParentId(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('testparentid');

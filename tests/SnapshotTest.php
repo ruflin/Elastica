@@ -9,6 +9,8 @@ use Elastica\Snapshot;
 
 /**
  * @group functional
+ *
+ * @internal
  */
 class SnapshotTest extends Base
 {

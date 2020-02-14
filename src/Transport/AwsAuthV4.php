@@ -72,7 +72,7 @@ class AwsAuthV4 extends Guzzle
         return CredentialProvider::defaultProvider();
     }
 
-    private function initializePortAndScheme()
+    private function initializePortAndScheme(): void
     {
         $connection = $this->getConnection();
         if (true === $this->isSslRequired($connection)) {

@@ -8,32 +8,15 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class SamplerTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest(): Index
-    {
-        $index = $this->_createIndex(null, true, 2);
-
-        $routing1 = 'first_routing';
-        $routing2 = 'second_routing';
-
-        $index->addDocuments([
-            (new Document(1, ['price' => 5]))->setRouting($routing1),
-            (new Document(2, ['price' => 8]))->setRouting($routing1),
-            (new Document(3, ['price' => 1]))->setRouting($routing1),
-            (new Document(4, ['price' => 3]))->setRouting($routing2),
-            (new Document(5, ['price' => 1.5]))->setRouting($routing2),
-        ]);
-
-        $index->refresh();
-
-        return $index;
-    }
-
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $expected = [
             'sampler' => [
@@ -63,7 +46,7 @@ class SamplerTest extends BaseAggregationTest
      * @dataProvider shardSizeProvider
      * @group functional
      */
-    public function testSamplerAggregation(int $shardSize, int $docCount)
+    public function testSamplerAggregation(int $shardSize, int $docCount): void
     {
         $agg = new Sampler('price_sampler');
         $agg->setShardSize($shardSize);
@@ -87,5 +70,25 @@ class SamplerTest extends BaseAggregationTest
             [2, 4],
             [3, 5],
         ];
+    }
+
+    protected function _getIndexForTest(): Index
+    {
+        $index = $this->_createIndex(null, true, 2);
+
+        $routing1 = 'first_routing';
+        $routing2 = 'second_routing';
+
+        $index->addDocuments([
+            (new Document(1, ['price' => 5]))->setRouting($routing1),
+            (new Document(2, ['price' => 8]))->setRouting($routing1),
+            (new Document(3, ['price' => 1]))->setRouting($routing1),
+            (new Document(4, ['price' => 3]))->setRouting($routing2),
+            (new Document(5, ['price' => 1.5]))->setRouting($routing2),
+        ]);
+
+        $index->refresh();
+
+        return $index;
     }
 }

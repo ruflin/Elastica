@@ -10,12 +10,15 @@ use Elastica\Query\SpanMulti;
 use Elastica\Query\Wildcard;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class SpanMultiTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testConstructValid()
+    public function testConstructValid(): void
     {
         $field = 'name';
         $value = 'marek';
@@ -56,7 +59,7 @@ class SpanMultiTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSpanMulti()
+    public function testSpanMulti(): void
     {
         $field = 'lorem';
         $text1 = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';

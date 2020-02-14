@@ -7,12 +7,15 @@ use Elastica\Node\Info;
 use Elastica\Node\Stats;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class NodeTest extends BaseTest
 {
     /**
      * @group functional
      */
-    public function testCreateNode()
+    public function testCreateNode(): void
     {
         $client = $this->_getClient();
         $names = $client->getCluster()->getNodeNames();
@@ -25,7 +28,7 @@ class NodeTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGetInfo()
+    public function testGetInfo(): void
     {
         $client = $this->_getClient();
         $names = $client->getCluster()->getNodeNames();
@@ -41,7 +44,7 @@ class NodeTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGetStats()
+    public function testGetStats(): void
     {
         $client = $this->_getClient();
         $names = $client->getCluster()->getNodeNames();
@@ -57,7 +60,7 @@ class NodeTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGetName()
+    public function testGetName(): void
     {
         $client = $this->_getClient();
 
@@ -76,7 +79,7 @@ class NodeTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGetId()
+    public function testGetId(): void
     {
         $node = new Node('Elastica', $this->_getClient());
     }

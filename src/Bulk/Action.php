@@ -106,7 +106,7 @@ class Action
     }
 
     /**
-     * @param string|Index $index
+     * @param Index|string $index
      *
      * @return $this
      */
@@ -131,7 +131,7 @@ class Action
     }
 
     /**
-     * @param string|int $routing
+     * @param int|string $routing
      *
      * @return $this
      */

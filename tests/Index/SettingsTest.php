@@ -9,12 +9,15 @@ use Elastica\Index\Settings as IndexSettings;
 use Elastica\Response;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class SettingsTest extends BaseTest
 {
     /**
      * @group functional
      */
-    public function testGet()
+    public function testGet(): void
     {
         $indexName = 'elasticatest';
 
@@ -35,7 +38,7 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGetWithAlias()
+    public function testGetWithAlias(): void
     {
         $indexName = 'elasticatest';
         $aliasName = 'elasticatest_alias';
@@ -61,7 +64,7 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testDeleteAliasWithException()
+    public function testDeleteAliasWithException(): void
     {
         $indexName = 'deletetestaliasexception';
         $aliasName = 'deletetestaliasexception_alias';
@@ -88,7 +91,7 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetGetNumberOfReplicas()
+    public function testSetGetNumberOfReplicas(): void
     {
         $index = $this->_createIndex();
         $index->create([], true);
@@ -112,7 +115,7 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGetNumberOfReplicas()
+    public function testGetNumberOfReplicas(): void
     {
         $index = $this->_createIndex();
         $index->create([], true);
@@ -129,7 +132,7 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGetNumberOfShards()
+    public function testGetNumberOfShards(): void
     {
         $index = $this->_createIndex();
         $index->create([], true);
@@ -146,7 +149,7 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGetDefaultNumberOfShards()
+    public function testGetDefaultNumberOfShards(): void
     {
         $index = $this->_createIndex();
         $index->create([], true);
@@ -164,7 +167,7 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetRefreshInterval()
+    public function testSetRefreshInterval(): void
     {
         $index = $this->_createIndex();
         $index->create([], true);
@@ -185,7 +188,7 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGetRefreshInterval()
+    public function testGetRefreshInterval(): void
     {
         $index = $this->_createIndex();
         $index->create([], true);
@@ -206,7 +209,7 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetMergePolicy()
+    public function testSetMergePolicy(): void
     {
         $index = $this->_createIndex();
         $index->create([], true);
@@ -227,7 +230,7 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetMaxMergeAtOnce()
+    public function testSetMaxMergeAtOnce(): void
     {
         $index = $this->_createIndex();
         $index->create([], true);
@@ -251,7 +254,7 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetReadOnly()
+    public function testSetReadOnly(): void
     {
         $index = $this->_createIndex();
         //wait for the shards to be allocated
@@ -296,7 +299,7 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGetSetBlocksRead()
+    public function testGetSetBlocksRead(): void
     {
         $index = $this->_createIndex();
         $index->refresh();
@@ -319,7 +322,7 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGetSetBlocksWrite()
+    public function testGetSetBlocksWrite(): void
     {
         $index = $this->_createIndex();
         $index->refresh();
@@ -342,7 +345,7 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGetSetBlocksMetadata()
+    public function testGetSetBlocksMetadata(): void
     {
         $index = $this->_createIndex();
         $index->refresh();
@@ -367,7 +370,7 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testNotFoundIndex()
+    public function testNotFoundIndex(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('not_found_index');
@@ -385,7 +388,7 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetMultiple()
+    public function testSetMultiple(): void
     {
         $index = $this->_createIndex();
         $index->create([], true);

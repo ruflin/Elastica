@@ -52,9 +52,7 @@ class IndexTemplate
      */
     public function delete()
     {
-        $response = $this->request(Request::DELETE);
-
-        return $response;
+        return $this->request(Request::DELETE);
     }
 
     /**

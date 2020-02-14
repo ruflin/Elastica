@@ -14,7 +14,7 @@ class HasParent extends AbstractQuery
     /**
      * Construct HasChild Query.
      *
-     * @param string|BaseQuery|AbstractQuery $query
+     * @param AbstractQuery|BaseQuery|string $query
      * @param string                         $type  Parent document type
      */
     public function __construct($query, string $type)
@@ -26,7 +26,7 @@ class HasParent extends AbstractQuery
     /**
      * Sets query object.
      *
-     * @param string|BaseQuery|AbstractQuery $query
+     * @param AbstractQuery|BaseQuery|string $query
      *
      * @return $this
      */

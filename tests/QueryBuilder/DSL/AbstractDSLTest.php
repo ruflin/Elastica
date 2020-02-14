@@ -8,7 +8,7 @@ use Elastica\Test\Base as BaseTest;
 
 abstract class AbstractDSLTest extends BaseTest
 {
-    protected function _assertImplemented(DSL $dsl, string $methodName, string $className, array $arguments)
+    protected function _assertImplemented(DSL $dsl, string $methodName, string $className, array $arguments): void
     {
         // Check method existence
         $this->assertTrue(\method_exists($dsl, $methodName));
@@ -28,7 +28,7 @@ abstract class AbstractDSLTest extends BaseTest
         }
     }
 
-    protected function _assertNotImplemented(DSL $dsl, string $methodName, array $arguments)
+    protected function _assertNotImplemented(DSL $dsl, string $methodName, array $arguments): void
     {
         try {
             \call_user_func([$dsl, $methodName], $arguments);
@@ -42,7 +42,7 @@ abstract class AbstractDSLTest extends BaseTest
      * @param \ReflectionParameter[] $left
      * @param \ReflectionParameter[] $right
      */
-    protected function _assertParametersEquals(array $left, array $right)
+    protected function _assertParametersEquals(array $left, array $right): void
     {
         $countLeft = \count($left);
         $this->assertCount($countLeft, $right, 'Parameters count mismatch');

@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added `Elastica\Pipeline->getId(): ?string` [#1752](https://github.com/ruflin/Elastica/pull/1752)
 
 ### Changed
+- Updated PHP coding standards to adhere to PSR-12 [#1760](https://github.com/ruflin/Elastica/pull/1760)
 - Updated to PHPUnit v8.5 [#1759](https://github.com/ruflin/Elastica/pull/1759)
 - Refactored code structure: use `src/` and `tests/` folders [#1755](https://github.com/ruflin/Elastica/pull/1755)
 - Require elastica-php library >= v7.1.1, fixes an issue on Ingestion/Put() type-hinting

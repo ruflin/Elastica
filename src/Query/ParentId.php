@@ -23,17 +23,17 @@ class ParentId extends AbstractQuery
         $this->setIgnoreUnmapped($ignoreUnmapped);
     }
 
-    private function setRelationshipType(string $type)
+    private function setRelationshipType(string $type): void
     {
         $this->setParam('type', $type);
     }
 
-    private function setId(string $id)
+    private function setId(string $id): void
     {
         $this->setParam('id', $id);
     }
 
-    private function setIgnoreUnmapped(bool $ignoreUnmapped = false)
+    private function setIgnoreUnmapped(bool $ignoreUnmapped = false): void
     {
         $this->setParam('ignore_unmapped', $ignoreUnmapped);
     }

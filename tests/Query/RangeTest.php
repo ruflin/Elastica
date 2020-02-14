@@ -6,12 +6,15 @@ use Elastica\Document;
 use Elastica\Query\Range;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class RangeTest extends BaseTest
 {
     /**
      * @group functional
      */
-    public function testQuery()
+    public function testQuery(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
@@ -41,7 +44,7 @@ class RangeTest extends BaseTest
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $range = new Range();
 
@@ -60,7 +63,7 @@ class RangeTest extends BaseTest
     /**
      * @group unit
      */
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $ranges = ['from' => 20, 'to' => 40];
         $range = new Range(

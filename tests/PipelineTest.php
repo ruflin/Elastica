@@ -10,12 +10,15 @@ use Elastica\Processor\Rename;
 use Elastica\Processor\Set;
 use Elastica\Processor\Trim;
 
+/**
+ * @internal
+ */
 class PipelineTest extends BasePipeline
 {
     /**
      * @group unit
      */
-    public function testProcessor()
+    public function testProcessor(): void
     {
         $trim = new Trim('field1');
         $rename = new Rename('foo', 'target.field');
@@ -50,7 +53,7 @@ class PipelineTest extends BasePipeline
     /**
      * @group functional
      */
-    public function testPipelineCreate()
+    public function testPipelineCreate(): void
     {
         $set = new Set('field4', 333);
         $trim = new Trim('field1');
@@ -77,7 +80,7 @@ class PipelineTest extends BasePipeline
     /**
      * @group functional
      */
-    public function testPipelineonIndex()
+    public function testPipelineonIndex(): void
     {
         $set = new Set('foo', 333);
 
@@ -119,7 +122,7 @@ class PipelineTest extends BasePipeline
     /**
      * @group functional
      */
-    public function testDeletePipeline()
+    public function testDeletePipeline(): void
     {
         $pipeline = $this->_createPipeline();
         try {

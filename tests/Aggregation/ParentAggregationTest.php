@@ -7,8 +7,85 @@ use Elastica\Aggregation\Terms;
 use Elastica\Mapping;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class ParentAggregationTest extends BaseAggregationTest
 {
+    /**
+     * @group functional
+     */
+    public function testParentAggregation(): void
+    {
+        $agg = new ParentAggregation('question');
+        $agg->setType('answer');
+
+        $tags = new Terms('tags');
+        $tags->setField('tags');
+
+        $agg->addAggregation($tags);
+
+        $query = new Query();
+        $query->addAggregation($agg);
+
+        $index = $this->_getIndexForTest();
+        $aggregations = $index->search($query)->getAggregations();
+
+        // check parent aggregation exists
+        $this->assertArrayHasKey('question', $aggregations);
+
+        $parentAggregations = $aggregations['question'];
+
+        // check tags aggregation exists inside parent aggregation
+        $this->assertArrayHasKey('tags', $parentAggregations);
+    }
+
+    /**
+     * @group functional
+     */
+    public function testParentAggregationCount(): void
+    {
+        $topNames = new Terms('top-names');
+        $topNames->setField('owner')
+            ->setSize(10)
+        ;
+
+        $toQuestions = new ParentAggregation('to-questions');
+        $toQuestions->setType('answer');
+
+        $topTags = new Terms('top-tags');
+        $topTags->setField('tags')
+            ->setSize(10)
+        ;
+
+        $toQuestions->addAggregation($topTags);
+        $topNames->addAggregation($toQuestions);
+
+        $query = new Query();
+        $query->addAggregation($topNames);
+
+        $index = $this->_getIndexForTest();
+        $aggregations = $index->search($query)->getAggregations();
+
+        $topNamesAggregation = $aggregations['top-names'];
+        $this->assertCount(2, $topNamesAggregation['buckets']);
+        $this->assertEquals(2, $topNamesAggregation['buckets'][0]['to-questions']['doc_count']);
+        $this->assertEquals(1, $topNamesAggregation['buckets'][1]['to-questions']['doc_count']);
+
+        $samTags = [
+            ['key' => 'file-transfer', 'doc_count' => 2],
+            ['key' => 'windows-server-2008', 'doc_count' => 2],
+            ['key' => 'windows-server-2003', 'doc_count' => 1],
+        ];
+        $this->assertEquals($samTags, $topNamesAggregation['buckets'][0]['to-questions']['top-tags']['buckets']);
+
+        $samTags = [
+            ['key' => 'file-transfer', 'doc_count' => 1],
+            ['key' => 'windows-server-2008', 'doc_count' => 1],
+        ];
+        $this->assertEquals($samTags, $topNamesAggregation['buckets'][1]['to-questions']['top-tags']['buckets']);
+    }
+
     protected function _getIndexForTest()
     {
         $client = $this->_getClient();
@@ -87,77 +164,5 @@ class ParentAggregationTest extends BaseAggregationTest
         $index->refresh();
 
         return $index;
-    }
-
-    /**
-     * @group functional
-     */
-    public function testParentAggregation()
-    {
-        $agg = new ParentAggregation('question');
-        $agg->setType('answer');
-
-        $tags = new Terms('tags');
-        $tags->setField('tags');
-
-        $agg->addAggregation($tags);
-
-        $query = new Query();
-        $query->addAggregation($agg);
-
-        $index = $this->_getIndexForTest();
-        $aggregations = $index->search($query)->getAggregations();
-
-        // check parent aggregation exists
-        $this->assertArrayHasKey('question', $aggregations);
-
-        $parentAggregations = $aggregations['question'];
-
-        // check tags aggregation exists inside parent aggregation
-        $this->assertArrayHasKey('tags', $parentAggregations);
-    }
-
-    /**
-     * @group functional
-     */
-    public function testParentAggregationCount()
-    {
-        $topNames = new Terms('top-names');
-        $topNames->setField('owner')
-                 ->setSize(10);
-
-        $toQuestions = new ParentAggregation('to-questions');
-        $toQuestions->setType('answer');
-
-        $topTags = new Terms('top-tags');
-        $topTags->setField('tags')
-                ->setSize(10);
-
-        $toQuestions->addAggregation($topTags);
-        $topNames->addAggregation($toQuestions);
-
-        $query = new Query();
-        $query->addAggregation($topNames);
-
-        $index = $this->_getIndexForTest();
-        $aggregations = $index->search($query)->getAggregations();
-
-        $topNamesAggregation = $aggregations['top-names'];
-        $this->assertCount(2, $topNamesAggregation['buckets']);
-        $this->assertEquals(2, $topNamesAggregation['buckets'][0]['to-questions']['doc_count']);
-        $this->assertEquals(1, $topNamesAggregation['buckets'][1]['to-questions']['doc_count']);
-
-        $samTags = [
-            ['key' => 'file-transfer', 'doc_count' => 2],
-            ['key' => 'windows-server-2008', 'doc_count' => 2],
-            ['key' => 'windows-server-2003', 'doc_count' => 1],
-        ];
-        $this->assertEquals($samTags, $topNamesAggregation['buckets'][0]['to-questions']['top-tags']['buckets']);
-
-        $samTags = [
-            ['key' => 'file-transfer', 'doc_count' => 1],
-            ['key' => 'windows-server-2008', 'doc_count' => 1],
-        ];
-        $this->assertEquals($samTags, $topNamesAggregation['buckets'][1]['to-questions']['top-tags']['buckets']);
     }
 }

@@ -5,12 +5,15 @@ namespace Elastica\Test\QueryBuilder\DSL;
 use Elastica\Collapse;
 use Elastica\QueryBuilder\DSL;
 
+/**
+ * @internal
+ */
 class CollapseTest extends AbstractDSLTest
 {
     /**
      * @group unit
      */
-    public function testType()
+    public function testType(): void
     {
         $collapseDSL = new DSL\Collapse();
 
@@ -21,7 +24,7 @@ class CollapseTest extends AbstractDSLTest
     /**
      * @group unit
      */
-    public function testInterface()
+    public function testInterface(): void
     {
         $collapseDSL = new DSL\Collapse();
 

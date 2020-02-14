@@ -7,12 +7,15 @@ use Elastica\Mapping;
 use Elastica\Query\Wildcard;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class WildcardTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testConstructEmpty()
+    public function testConstructEmpty(): void
     {
         $wildcard = new Wildcard();
         $this->assertEmpty($wildcard->getParams());
@@ -21,7 +24,7 @@ class WildcardTest extends BaseTest
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $key = 'name';
         $value = 'Ru*lin';
@@ -44,7 +47,7 @@ class WildcardTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSearchWithAnalyzer()
+    public function testSearchWithAnalyzer(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');

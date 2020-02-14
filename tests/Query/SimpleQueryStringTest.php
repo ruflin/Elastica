@@ -6,12 +6,15 @@ use Elastica\Document;
 use Elastica\Query\SimpleQueryString;
 use Elastica\Test\Base;
 
+/**
+ * @internal
+ */
 class SimpleQueryStringTest extends Base
 {
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $string = 'this is a test';
         $fields = ['field1', 'field2'];
@@ -34,7 +37,7 @@ class SimpleQueryStringTest extends Base
     /**
      * @group functional
      */
-    public function testQuery()
+    public function testQuery(): void
     {
         $index = $this->_createIndex();
         $docs = [
@@ -62,7 +65,7 @@ class SimpleQueryStringTest extends Base
     /**
      * @group unit
      */
-    public function testSetMinimumShouldMatch()
+    public function testSetMinimumShouldMatch(): void
     {
         $expected = [
             'simple_query_string' => [
@@ -81,7 +84,7 @@ class SimpleQueryStringTest extends Base
     /**
      * @group functional
      */
-    public function testSetMinimumShouldMatchWorks()
+    public function testSetMinimumShouldMatchWorks(): void
     {
         $this->_checkVersion('1.5');
 

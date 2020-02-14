@@ -9,16 +9,18 @@ use PHPUnit\Framework\TestCase;
  * JSONTest.
  *
  * @author Oleg Andreyev <oleg.andreyev@intexsys.lv>
+ *
+ * @internal
  */
 class JSONTest extends TestCase
 {
-    public function testStringifyMustNotThrowExceptionOnValid()
+    public function testStringifyMustNotThrowExceptionOnValid(): void
     {
         JSON::stringify([]);
         $this->assertTrue(true);
     }
 
-    public function testStringifyMustThrowExceptionNanOrInf()
+    public function testStringifyMustThrowExceptionNanOrInf(): void
     {
         $this->expectException(\Elastica\Exception\JSONParseException::class);
         $this->expectExceptionMessage('Inf and NaN cannot be JSON encoded');
@@ -28,7 +30,7 @@ class JSONTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function testStringifyMustThrowExceptionMaximumDepth()
+    public function testStringifyMustThrowExceptionMaximumDepth(): void
     {
         $this->expectException(\Elastica\Exception\JSONParseException::class);
         $this->expectExceptionMessage('Maximum stack depth exceeded');

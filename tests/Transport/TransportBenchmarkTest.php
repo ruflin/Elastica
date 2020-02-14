@@ -13,6 +13,8 @@ use Elastica\Test\Base as BaseTest;
 
 /**
  * @group benchmark
+ *
+ * @internal
  */
 class TransportBenchmarkTest extends BaseTest
 {
@@ -20,24 +22,15 @@ class TransportBenchmarkTest extends BaseTest
     protected $_maxData = 20;
     protected static $_results = [];
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->markTestSkipped('Benchmarks currently skipped: it has to be reworked');
-    }
-
     public static function tearDownAfterClass(): void
     {
         self::printResults();
     }
 
-    protected function getIndex(array $config): Index
+    protected function setUp(): void
     {
-        $client = $this->_getClient($config);
-        $index = $client->getIndex('benchmark'.self::buildUniqueId());
-        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
-
-        return $index;
+        parent::setUp();
+        $this->markTestSkipped('Benchmarks currently skipped: it has to be reworked');
     }
 
     /**
@@ -66,6 +59,8 @@ class TransportBenchmarkTest extends BaseTest
     /**
      * @depends testAddDocument
      * @dataProvider providerTransport
+     *
+     * @param mixed $transport
      */
     public function testRandomRead(array $config, $transport): void
     {
@@ -89,6 +84,8 @@ class TransportBenchmarkTest extends BaseTest
     /**
      * @depends testAddDocument
      * @dataProvider providerTransport
+     *
+     * @param mixed $transport
      */
     public function testBulk(array $config, $transport): void
     {
@@ -154,11 +151,11 @@ class TransportBenchmarkTest extends BaseTest
     public function providerTransport(): iterable
     {
         yield [[
-                'transport' => 'Http',
-                'host' => $this->_getHost(),
-                'port' => $this->_getPort(),
-                'persistent' => false,
-            ],
+            'transport' => 'Http',
+            'host' => $this->_getHost(),
+            'port' => $this->_getPort(),
+            'persistent' => false,
+        ],
             'Http:NotPersistent',
         ];
         yield [[
@@ -166,9 +163,18 @@ class TransportBenchmarkTest extends BaseTest
             'host' => $this->_getHost(),
             'port' => $this->_getPort(),
             'persistent' => true,
-            ],
+        ],
             'Http:Persistent',
-       ];
+        ];
+    }
+
+    protected function getIndex(array $config): Index
+    {
+        $client = $this->_getClient($config);
+        $index = $client->getIndex('benchmark'.self::buildUniqueId());
+        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
+
+        return $index;
     }
 
     protected function getData(string $test): array

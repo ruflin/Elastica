@@ -15,9 +15,8 @@ class DefaultBuilder implements BuilderInterface
     public function buildResultSet(Response $response, Query $query): ResultSet
     {
         $results = $this->buildResults($response);
-        $resultSet = new ResultSet($response, $query, $results);
 
-        return $resultSet;
+        return new ResultSet($response, $query, $results);
     }
 
     /**

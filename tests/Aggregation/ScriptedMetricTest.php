@@ -8,8 +8,32 @@ use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class ScriptedMetricTest extends BaseAggregationTest
 {
+    /**
+     * @group functional
+     */
+    public function testScriptedMetricAggregation(): void
+    {
+        $agg = new ScriptedMetric(
+            'scripted',
+            'state.durations = []',
+            'state.durations.add(doc.end.value - doc.start.value)',
+            'return state.durations',
+            'return states'
+        );
+
+        $query = new Query();
+        $query->setSize(0);
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('scripted');
+
+        $this->assertEquals([100, 50, 150], $results['value'][0]);
+    }
+
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
@@ -28,26 +52,5 @@ class ScriptedMetricTest extends BaseAggregationTest
         $index->refresh();
 
         return $index;
-    }
-
-    /**
-     * @group functional
-     */
-    public function testScriptedMetricAggregation()
-    {
-        $agg = new ScriptedMetric(
-            'scripted',
-            'state.durations = []',
-            'state.durations.add(doc.end.value - doc.start.value)',
-            'return state.durations',
-            'return states'
-        );
-
-        $query = new Query();
-        $query->setSize(0);
-        $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('scripted');
-
-        $this->assertEquals([100, 50, 150], $results['value'][0]);
     }
 }

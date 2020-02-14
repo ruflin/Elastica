@@ -16,7 +16,7 @@ class Query extends AbstractRescore
     /**
      * Constructor.
      *
-     * @param string|\Elastica\Query\AbstractQuery $query
+     * @param \Elastica\Query\AbstractQuery|string $query
      */
     public function __construct($query = null)
     {
@@ -50,7 +50,7 @@ class Query extends AbstractRescore
     /**
      * Sets rescoreQuery object.
      *
-     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $rescoreQuery
+     * @param \Elastica\Query|\Elastica\Query\AbstractQuery|string $rescoreQuery
      *
      * @return $this
      */

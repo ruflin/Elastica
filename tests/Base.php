@@ -10,14 +10,36 @@ use PHPUnit\Framework\TestCase;
 use PHPUnit\Util\Test as TestUtil;
 use Psr\Log\LoggerInterface;
 
+/**
+ * @internal
+ */
 class Base extends TestCase
 {
-    protected static function hideDeprecated()
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $hasGroup = $this->_isUnitGroup() || $this->_isFunctionalGroup() || $this->_isBenchmarkGroup();
+        $this->assertTrue($hasGroup, 'Every test must have one of "unit", "functional", "benchmark" group');
+        $this->showDeprecated();
+    }
+
+    protected function tearDown(): void
+    {
+        if ($this->_isFunctionalGroup()) {
+            $this->_getClient()->getIndex('_all')->delete();
+            $this->_getClient()->getIndex('_all')->clearCache();
+        }
+
+        parent::tearDown();
+    }
+
+    protected static function hideDeprecated(): void
     {
         \error_reporting(\error_reporting() & ~E_USER_DEPRECATED);
     }
 
-    protected static function showDeprecated()
+    protected static function showDeprecated(): void
     {
         \error_reporting(\error_reporting() | E_USER_DEPRECATED);
     }
@@ -84,7 +106,7 @@ class Base extends TestCase
         return \preg_replace('/[^a-z]/i', '', \strtolower(static::class).\uniqid());
     }
 
-    protected function _createRenamePipeline()
+    protected function _createRenamePipeline(): void
     {
         $client = $this->_getClient();
 
@@ -105,7 +127,7 @@ class Base extends TestCase
         $client->requestEndpoint($endpoint);
     }
 
-    protected function _checkPlugin($plugin)
+    protected function _checkPlugin($plugin): void
     {
         $nodes = $this->_getClient()->getCluster()->getNodes();
         if (!$nodes[0]->getInfo()->hasPlugin($plugin)) {
@@ -120,7 +142,7 @@ class Base extends TestCase
         return \substr($data['version']['number'], 0, 1);
     }
 
-    protected function _checkVersion($version)
+    protected function _checkVersion($version): void
     {
         $data = $this->_getClient()->request('/')->getData();
         $installedVersion = $data['version']['number'];
@@ -130,7 +152,7 @@ class Base extends TestCase
         }
     }
 
-    protected function _checkConnection($host, $port)
+    protected function _checkConnection($host, $port): void
     {
         $fp = @\pfsockopen($host, $port);
 
@@ -139,7 +161,7 @@ class Base extends TestCase
         }
     }
 
-    protected function _waitForAllocation(Index $index)
+    protected function _waitForAllocation(Index $index): void
     {
         do {
             $state = $index->getClient()->getCluster()->getState();
@@ -152,25 +174,6 @@ class Base extends TestCase
                 }
             }
         } while (!$allocated);
-    }
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $hasGroup = $this->_isUnitGroup() || $this->_isFunctionalGroup() || $this->_isBenchmarkGroup();
-        $this->assertTrue($hasGroup, 'Every test must have one of "unit", "functional", "benchmark" group');
-        $this->showDeprecated();
-    }
-
-    protected function tearDown(): void
-    {
-        if ($this->_isFunctionalGroup()) {
-            $this->_getClient()->getIndex('_all')->delete();
-            $this->_getClient()->getIndex('_all')->clearCache();
-        }
-
-        parent::tearDown();
     }
 
     protected function _isUnitGroup()

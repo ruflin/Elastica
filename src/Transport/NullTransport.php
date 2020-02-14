@@ -22,7 +22,7 @@ class NullTransport extends AbstractTransport
      *
      * @var Response Response
      */
-    protected $_response = null;
+    protected $_response;
 
     /**
      * Set response object the transport returns.

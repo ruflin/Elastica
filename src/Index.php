@@ -154,7 +154,7 @@ class Index implements SearchableInterface
     /**
      * Update entries in the db based on a query.
      *
-     * @param Query|string|array $query   Query object or array
+     * @param array|Query|string $query   Query object or array
      * @param AbstractScript     $script  Script
      * @param array              $options Optional params
      *
@@ -299,7 +299,7 @@ class Index implements SearchableInterface
     /**
      * Deletes documents matching the given query.
      *
-     * @param Query|AbstractQuery|string|array $query   Query object or array
+     * @param AbstractQuery|array|Query|string $query   Query object or array
      * @param array                            $options Optional params
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
@@ -372,7 +372,7 @@ class Index implements SearchableInterface
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html
      *
      * @param array      $args    Additional arguments to pass to the Create endpoint
-     * @param bool|array $options OPTIONAL
+     * @param array|bool $options OPTIONAL
      *                            bool=> Deletes index first if already exists (default = false).
      *                            array => Associative array of options (option=>value)
      *
@@ -423,8 +423,8 @@ class Index implements SearchableInterface
     }
 
     /**
-     * @param string|array|Query $query
-     * @param int|array          $options
+     * @param array|Query|string $query
+     * @param array|int          $options
      * @param BuilderInterface   $builder
      */
     public function createSearch($query = '', $options = null, ?BuilderInterface $builder = null): Search
@@ -439,8 +439,8 @@ class Index implements SearchableInterface
     /**
      * Searches in this index.
      *
-     * @param string|array|Query $query   Array with all query data inside or a Elastica\Query object
-     * @param int|array          $options Limit or associative array of options (option=>value)
+     * @param array|Query|string $query   Array with all query data inside or a Elastica\Query object
+     * @param array|int          $options Limit or associative array of options (option=>value)
      * @param string             $method  Request method, see Request's constants
      *
      * @see \Elastica\SearchableInterface::search
@@ -455,7 +455,7 @@ class Index implements SearchableInterface
     /**
      * Counts results of query.
      *
-     * @param string|array|Query $query  Array with all query data inside or a Elastica\Query object
+     * @param array|Query|string $query  Array with all query data inside or a Elastica\Query object
      * @param string             $method Request method, see Request's constants
      *
      * @see \Elastica\SearchableInterface::count
@@ -668,7 +668,7 @@ class Index implements SearchableInterface
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
      *
-     * @param Document|AbstractScript $data    Document or Script with update data
+     * @param AbstractScript|Document $data    Document or Script with update data
      * @param array                   $options array of query params to use for query
      */
     public function updateDocument($data, array $options = []): Response

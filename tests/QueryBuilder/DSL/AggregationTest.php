@@ -6,12 +6,15 @@ use Elastica\Aggregation;
 use Elastica\Query\Exists;
 use Elastica\QueryBuilder\DSL;
 
+/**
+ * @internal
+ */
 class AggregationTest extends AbstractDSLTest
 {
     /**
      * @group unit
      */
-    public function testType()
+    public function testType(): void
     {
         $aggregationDSL = new DSL\Aggregation();
 
@@ -22,7 +25,7 @@ class AggregationTest extends AbstractDSLTest
     /**
      * @group unit
      */
-    public function testInterface()
+    public function testInterface(): void
     {
         $aggregationDSL = new DSL\Aggregation();
 

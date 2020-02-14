@@ -13,37 +13,15 @@ use Elastica\ResultSet;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class SearchTest extends BaseTest
 {
-    protected function _createIndex(?string $name = null, bool $delete = true, int $shards = 1): Index
-    {
-        $client = $this->_getClient();
-
-        $index = $client->getIndex('zero');
-        $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
-
-        $docs = [];
-        $docs[] = new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
-        $docs[] = new Document(2, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
-        $docs[] = new Document(3, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
-        $docs[] = new Document(4, ['id' => 1, 'email' => 'test@test.com', 'username' => 'kate']);
-        $docs[] = new Document(5, ['id' => 1, 'email' => 'test@test.com', 'username' => 'kate']);
-        $docs[] = new Document(6, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
-        $docs[] = new Document(7, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
-        $docs[] = new Document(8, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
-        $docs[] = new Document(9, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
-        $docs[] = new Document(10, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
-        $docs[] = new Document(11, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
-        $index->addDocuments($docs);
-        $index->refresh();
-
-        return $index;
-    }
-
     /**
      * @group unit
      */
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $client = $this->_getClient();
         $multiSearch = new MultiSearch($client);
@@ -54,7 +32,7 @@ class SearchTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetSearches()
+    public function testSetSearches(): void
     {
         $client = $this->_getClient();
         $multiSearch = new MultiSearch($client);
@@ -86,7 +64,7 @@ class SearchTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetSearchesByKeys()
+    public function testSetSearchesByKeys(): void
     {
         $client = $this->_getClient();
         $multiSearch = new MultiSearch($client);
@@ -118,7 +96,7 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSearch()
+    public function testSearch(): void
     {
         $index = $this->_createIndex();
         $client = $index->getClient();
@@ -208,7 +186,7 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSearchWithKeys()
+    public function testSearchWithKeys(): void
     {
         $index = $this->_createIndex();
         $client = $index->getClient();
@@ -300,7 +278,7 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSearchWithError()
+    public function testSearchWithError(): void
     {
         $index = $this->_createIndex();
         $client = $index->getClient();
@@ -345,7 +323,7 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSearchWithErrorWithKeys()
+    public function testSearchWithErrorWithKeys(): void
     {
         $index = $this->_createIndex();
         $client = $index->getClient();
@@ -390,7 +368,7 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGlobalSearchTypeSearch()
+    public function testGlobalSearchTypeSearch(): void
     {
         $index = $this->_createIndex();
         $client = $index->getClient();
@@ -473,7 +451,7 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGlobalSearchTypeSearchWithKeys()
+    public function testGlobalSearchTypeSearchWithKeys(): void
     {
         $index = $this->_createIndex();
         $client = $index->getClient();
@@ -557,7 +535,7 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSearchWithSearchOptions()
+    public function testSearchWithSearchOptions(): void
     {
         $index = $this->_createIndex();
         $client = $index->getClient();
@@ -592,5 +570,30 @@ class SearchTest extends BaseTest
         $resultSets = $multiResultSet->getResultSets();
         $this->assertEquals(1, $resultSets[0]->getTotalHits());
         $this->assertEquals(6, $resultSets[1]->getTotalHits());
+    }
+
+    protected function _createIndex(?string $name = null, bool $delete = true, int $shards = 1): Index
+    {
+        $client = $this->_getClient();
+
+        $index = $client->getIndex('zero');
+        $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
+
+        $docs = [];
+        $docs[] = new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
+        $docs[] = new Document(2, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
+        $docs[] = new Document(3, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
+        $docs[] = new Document(4, ['id' => 1, 'email' => 'test@test.com', 'username' => 'kate']);
+        $docs[] = new Document(5, ['id' => 1, 'email' => 'test@test.com', 'username' => 'kate']);
+        $docs[] = new Document(6, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
+        $docs[] = new Document(7, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
+        $docs[] = new Document(8, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
+        $docs[] = new Document(9, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
+        $docs[] = new Document(10, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
+        $docs[] = new Document(11, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
+        $index->addDocuments($docs);
+        $index->refresh();
+
+        return $index;
     }
 }

@@ -8,27 +8,15 @@ use Elastica\Query\Match;
 use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class PostFilterTest extends BaseTest
 {
-    protected function _getTestIndex()
-    {
-        $index = $this->_createIndex();
-        $docs = [
-            new Document(1, ['color' => 'green', 'make' => 'ford']),
-            new Document(2, ['color' => 'blue', 'make' => 'volvo']),
-            new Document(3, ['color' => 'red', 'make' => 'ford']),
-            new Document(4, ['color' => 'green', 'make' => 'renault']),
-        ];
-        $index->addDocuments($docs);
-        $index->refresh();
-
-        return $index;
-    }
-
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $query = new Query();
 
@@ -44,7 +32,7 @@ class PostFilterTest extends BaseTest
     /**
      * @group functional
      */
-    public function testQuery()
+    public function testQuery(): void
     {
         $query = new Query();
 
@@ -59,5 +47,20 @@ class PostFilterTest extends BaseTest
         $query->setPostFilter($filter);
 
         $this->assertEquals(1, $this->_getTestIndex()->count($query));
+    }
+
+    protected function _getTestIndex()
+    {
+        $index = $this->_createIndex();
+        $docs = [
+            new Document(1, ['color' => 'green', 'make' => 'ford']),
+            new Document(2, ['color' => 'blue', 'make' => 'volvo']),
+            new Document(3, ['color' => 'red', 'make' => 'ford']),
+            new Document(4, ['color' => 'green', 'make' => 'renault']),
+        ];
+        $index->addDocuments($docs);
+        $index->refresh();
+
+        return $index;
     }
 }

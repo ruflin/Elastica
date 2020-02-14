@@ -7,12 +7,15 @@ use Elastica\Query\MatchNone;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class MatchNoneTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $query = new MatchNone();
 
@@ -24,7 +27,7 @@ class MatchNoneTest extends BaseTest
     /**
      * @group functional
      */
-    public function testMatchNone()
+    public function testMatchNone(): void
     {
         $index = $this->_createIndex();
         $client = $index->getClient();

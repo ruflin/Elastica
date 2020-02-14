@@ -8,6 +8,9 @@ use Elastica\Query\Ids;
 use Elastica\Query\Type;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class IdsTest extends BaseTest
 {
     /** @var Index */
@@ -29,7 +32,7 @@ class IdsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetIdsSearchSingle()
+    public function testSetIdsSearchSingle(): void
     {
         $query = new Ids();
         $query->setIds('1');
@@ -42,7 +45,7 @@ class IdsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetIdsSearchArray()
+    public function testSetIdsSearchArray(): void
     {
         $query = new Ids();
         $query->setIds(['1', '2']);
@@ -55,7 +58,7 @@ class IdsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testAddIdsSearchSingle()
+    public function testAddIdsSearchSingle(): void
     {
         $query = new Ids();
         $query->addId('3');
@@ -68,7 +71,7 @@ class IdsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testComboIdsSearchArray()
+    public function testComboIdsSearchArray(): void
     {
         $query = new Ids();
 
@@ -83,7 +86,7 @@ class IdsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetTypeSingleSearchSingle()
+    public function testSetTypeSingleSearchSingle(): void
     {
         $query = new Ids();
         $query->setIds('1');
@@ -95,7 +98,7 @@ class IdsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetTypeSingleSearchArray()
+    public function testSetTypeSingleSearchArray(): void
     {
         $query = new Ids();
         $query->setIds(['1', '2']);
@@ -108,7 +111,7 @@ class IdsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetTypeSingleSearchSingleDocInOtherType()
+    public function testSetTypeSingleSearchSingleDocInOtherType(): void
     {
         $query = new Ids();
 
@@ -124,7 +127,7 @@ class IdsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetTypeSingleSearchArrayDocInOtherType()
+    public function testSetTypeSingleSearchArrayDocInOtherType(): void
     {
         $query = new Ids();
 

@@ -176,7 +176,7 @@ class Aggregation implements DSL
      *
      * @param string $name
      */
-    public function geo_bounds($name)
+    public function geo_bounds($name): void
     {
         throw new NotImplementedException();
     }
@@ -358,7 +358,7 @@ class Aggregation implements DSL
      *
      * @param string       $name   the name if this aggregation
      * @param string       $field  the field on which to perform this aggregation
-     * @param string|array $origin the point from which distances will be calculated
+     * @param array|string $origin the point from which distances will be calculated
      */
     public function geo_distance(string $name, string $field, $origin): GeoDistance
     {

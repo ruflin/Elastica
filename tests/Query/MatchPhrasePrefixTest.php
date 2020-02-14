@@ -6,12 +6,15 @@ use Elastica\Document;
 use Elastica\Query\MatchPhrasePrefix;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class MatchPhrasePrefixTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $field = 'test';
         $testQuery = 'Nicolas Ruflin';
@@ -42,7 +45,7 @@ class MatchPhrasePrefixTest extends BaseTest
     /**
      * @group functional
      */
-    public function testMatchPhrasePrefix()
+    public function testMatchPhrasePrefix(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');

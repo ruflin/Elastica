@@ -10,13 +10,15 @@ use Elastica\Test\Base;
  * Description of CallbackStrategyTest.
  *
  * @author chabior
+ *
+ * @internal
  */
 class CallbackStrategyTest extends Base
 {
     /**
      * @group unit
      */
-    public function testInvoke()
+    public function testInvoke(): void
     {
         $count = 0;
 
@@ -36,7 +38,7 @@ class CallbackStrategyTest extends Base
     /**
      * @group functional
      */
-    public function testConnection()
+    public function testConnection(): void
     {
         $count = 0;
 

@@ -71,7 +71,8 @@ class BucketScript extends AbstractAggregation
     {
         if (!$this->hasParam('buckets_path')) {
             throw new InvalidException('Buckets path is required');
-        } elseif (!$this->hasParam('script')) {
+        }
+        if (!$this->hasParam('script')) {
             throw new InvalidException('Script parameter is required');
         }
 

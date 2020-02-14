@@ -8,12 +8,15 @@ use Elastica\Processor\DotExpander;
 use Elastica\ResultSet;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
+/**
+ * @internal
+ */
 class DotExpanderTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
-    public function testDotExpander()
+    public function testDotExpander(): void
     {
         $processor = new DotExpander('foo.bar');
 
@@ -29,7 +32,7 @@ class DotExpanderTest extends BasePipelineTest
     /**
      * @group functional
      */
-    public function testDotExpanderField()
+    public function testDotExpanderField(): void
     {
         $dotExpander = new DotExpander('foo.bar');
 

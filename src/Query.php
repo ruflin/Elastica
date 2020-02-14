@@ -30,7 +30,7 @@ class Query extends Param
     /**
      * Creates a query object.
      *
-     * @param array|AbstractQuery $query Query object (default = null)
+     * @param AbstractQuery|array $query Query object (default = null)
      */
     public function __construct($query = null)
     {
@@ -95,8 +95,8 @@ class Query extends Param
     /**
      * Gets the query object.
      *
-     * @return array|AbstractQuery
-     **/
+     * @return AbstractQuery|array
+     */
     public function getQuery()
     {
         return $this->getParam('query');
@@ -361,7 +361,7 @@ class Query extends Param
     /**
      * Sets a post_filter to the current query.
      *
-     * @param array|AbstractQuery $filter
+     * @param AbstractQuery|array $filter
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-post-filter
      */

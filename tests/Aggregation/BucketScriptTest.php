@@ -10,27 +10,15 @@ use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class BucketScriptTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest(): Index
-    {
-        $index = $this->_createIndex();
-
-        $index->addDocuments([
-            Document::create(['weight' => 60, 'height' => 180, 'age' => 25]),
-            Document::create(['weight' => 65, 'height' => 156, 'age' => 32]),
-            Document::create(['weight' => 50, 'height' => 155, 'age' => 45]),
-        ]);
-
-        $index->refresh();
-
-        return $index;
-    }
-
     /**
      * @group functional
      */
-    public function testBucketScriptAggregation()
+    public function testBucketScriptAggregation(): void
     {
         $bucketScriptAggregation = new BucketScript(
             'result',
@@ -46,7 +34,8 @@ class BucketScriptTest extends BaseAggregationTest
         $histogramAggregation
             ->addAggregation((new Max('max_weight'))->setField('weight'))
             ->addAggregation((new Max('max_height'))->setField('height'))
-            ->addAggregation($bucketScriptAggregation);
+            ->addAggregation($bucketScriptAggregation)
+        ;
 
         $query = Query::create([])->addAggregation($histogramAggregation);
 
@@ -60,7 +49,7 @@ class BucketScriptTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testConstructThroughSetters()
+    public function testConstructThroughSetters(): void
     {
         $serialDiffAgg = new BucketScript('bucket_scripted');
 
@@ -72,7 +61,8 @@ class BucketScriptTest extends BaseAggregationTest
                 'z' => 'agg_min',
             ])
             ->setFormat('test_format')
-            ->setGapPolicy(10);
+            ->setGapPolicy(10)
+        ;
 
         $expected = [
             'bucket_script' => [
@@ -93,7 +83,7 @@ class BucketScriptTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testToArrayInvalidBucketsPath()
+    public function testToArrayInvalidBucketsPath(): void
     {
         $this->expectException(InvalidException::class);
 
@@ -104,11 +94,26 @@ class BucketScriptTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testToArrayInvalidScript()
+    public function testToArrayInvalidScript(): void
     {
         $this->expectException(InvalidException::class);
 
         $serialDiffAgg = new BucketScript('bucket_scripted', ['path' => 'agg']);
         $serialDiffAgg->toArray();
+    }
+
+    protected function _getIndexForTest(): Index
+    {
+        $index = $this->_createIndex();
+
+        $index->addDocuments([
+            Document::create(['weight' => 60, 'height' => 180, 'age' => 25]),
+            Document::create(['weight' => 65, 'height' => 156, 'age' => 32]),
+            Document::create(['weight' => 50, 'height' => 155, 'age' => 45]),
+        ]);
+
+        $index->refresh();
+
+        return $index;
     }
 }

@@ -10,6 +10,8 @@ use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @group functional
+ *
+ * @internal
  */
 class AttachmentTest extends BasePipelineTest
 {

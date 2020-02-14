@@ -18,6 +18,8 @@ use Elasticsearch\Endpoints\Indices\Analyze;
 
 /**
  * @group functional
+ *
+ * @internal
  */
 class IndexTest extends BaseTest
 {

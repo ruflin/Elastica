@@ -7,12 +7,15 @@ use Elastica\Exception\InvalidException;
 use Elastica\Query\Terms;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class TermsTest extends BaseTest
 {
     /**
      * @group functional
      */
-    public function testFilteredSearch()
+    public function testFilteredSearch(): void
     {
         $index = $this->_createIndex();
 
@@ -40,7 +43,7 @@ class TermsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testFilteredSearchWithLookup()
+    public function testFilteredSearchWithLookup(): void
     {
         $index = $this->_createIndex();
 
@@ -97,8 +100,10 @@ class TermsTest extends BaseTest
     /**
      * @group unit
      * @dataProvider provideMinimumArguments
+     *
+     * @param mixed $minimum
      */
-    public function testSetMinimum($minimum)
+    public function testSetMinimum($minimum): void
     {
         $key = 'name';
         $terms = ['nicolas', 'ruflin'];
@@ -113,13 +118,13 @@ class TermsTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetTermsLookup()
+    public function testSetTermsLookup(): void
     {
         $key = 'name';
         $terms = [
             'index' => 'index_name',
             'type' => 'type_name',
-             'id' => '1',
+            'id' => '1',
             'path' => 'terms',
         ];
 
@@ -132,7 +137,7 @@ class TermsTest extends BaseTest
     /**
      * @group unit
      */
-    public function testInvalidParams()
+    public function testInvalidParams(): void
     {
         $this->expectException(InvalidException::class);
 

@@ -9,11 +9,6 @@ namespace Elastica\Aggregation;
  */
 class ParentAggregation extends AbstractAggregation
 {
-    protected function _getBaseName()
-    {
-        return 'parent';
-    }
-
     /**
      * Set the child type for this aggregation.
      *
@@ -24,5 +19,10 @@ class ParentAggregation extends AbstractAggregation
     public function setType($type): self
     {
         return $this->setParam('type', $type);
+    }
+
+    protected function _getBaseName()
+    {
+        return 'parent';
     }
 }

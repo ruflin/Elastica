@@ -9,12 +9,15 @@ use Elastica\Query\GeoPolygon;
 use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class GeoPolygonTest extends BaseTest
 {
     /**
      * @group functional
      */
-    public function testGeoPoint()
+    public function testGeoPoint(): void
     {
         $index = $this->_createIndex();
 
@@ -22,7 +25,8 @@ class GeoPolygonTest extends BaseTest
         $index->setMapping(new Mapping(['location' => ['type' => 'geo_point']]));
 
         // Add doc 1
-        $doc1 = new Document(1,
+        $doc1 = new Document(
+            1,
             [
                 'name' => 'ruflin',
             ]
@@ -32,7 +36,8 @@ class GeoPolygonTest extends BaseTest
         $index->addDocument($doc1);
 
         // Add doc 2
-        $doc2 = new Document(2,
+        $doc2 = new Document(
+            2,
             [
                 'name' => 'ruflin',
             ]

@@ -8,12 +8,15 @@ use Elastica\Processor\Uppercase;
 use Elastica\ResultSet;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
+/**
+ * @internal
+ */
 class UppercaseTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
-    public function testUppercase()
+    public function testUppercase(): void
     {
         $processor = new Uppercase('foo');
 
@@ -29,7 +32,7 @@ class UppercaseTest extends BasePipelineTest
     /**
      * @group functional
      */
-    public function testUppercaseField()
+    public function testUppercaseField(): void
     {
         $ucase = new Uppercase('name');
 

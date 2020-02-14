@@ -8,34 +8,15 @@ use Elastica\Aggregation\Max;
 use Elastica\Document;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class BucketSelectorTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest()
-    {
-        $index = $this->_createIndex();
-
-        $index->addDocuments([
-            new Document(1, ['date' => '2018-12-01', 'value' => 1]),
-            new Document(2, ['date' => '2018-12-02', 'value' => 2]),
-            new Document(3, ['date' => '2018-12-03', 'value' => 5]),
-            new Document(4, ['date' => '2018-12-04', 'value' => 4]),
-            new Document(5, ['date' => '2018-12-05', 'value' => 6]),
-            new Document(6, ['date' => '2018-12-06', 'value' => 9]),
-            new Document(7, ['date' => '2018-12-07', 'value' => 11]),
-            new Document(8, ['date' => '2018-12-08', 'value' => 4]),
-            new Document(9, ['date' => '2018-12-09', 'value' => 7]),
-            new Document(10, ['date' => '2018-12-10', 'value' => 4]),
-        ]);
-
-        $index->refresh();
-
-        return $index;
-    }
-
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $expected = [
             'max' => [
@@ -63,7 +44,7 @@ class BucketSelectorTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testMaxAggregation()
+    public function testMaxAggregation(): void
     {
         $index = $this->_getIndexForTest();
 
@@ -87,5 +68,27 @@ class BucketSelectorTest extends BaseAggregationTest
         $this->assertEquals(9, $dateHistogramAggResult[1]['max_agg']['value']);
         $this->assertEquals(11, $dateHistogramAggResult[2]['max_agg']['value']);
         $this->assertEquals(7, $dateHistogramAggResult[3]['max_agg']['value']);
+    }
+
+    protected function _getIndexForTest()
+    {
+        $index = $this->_createIndex();
+
+        $index->addDocuments([
+            new Document(1, ['date' => '2018-12-01', 'value' => 1]),
+            new Document(2, ['date' => '2018-12-02', 'value' => 2]),
+            new Document(3, ['date' => '2018-12-03', 'value' => 5]),
+            new Document(4, ['date' => '2018-12-04', 'value' => 4]),
+            new Document(5, ['date' => '2018-12-05', 'value' => 6]),
+            new Document(6, ['date' => '2018-12-06', 'value' => 9]),
+            new Document(7, ['date' => '2018-12-07', 'value' => 11]),
+            new Document(8, ['date' => '2018-12-08', 'value' => 4]),
+            new Document(9, ['date' => '2018-12-09', 'value' => 7]),
+            new Document(10, ['date' => '2018-12-10', 'value' => 4]),
+        ]);
+
+        $index->refresh();
+
+        return $index;
     }
 }

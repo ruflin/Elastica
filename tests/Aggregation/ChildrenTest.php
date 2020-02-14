@@ -8,8 +8,69 @@ use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class ChildrenTest extends BaseAggregationTest
 {
+    /**
+     * @group functional
+     */
+    public function testChildrenAggregation(): void
+    {
+        $agg = new Children('answer');
+        $agg->setType('answer');
+
+        $names = new Terms('name');
+        $names->setField('name');
+
+        $agg->addAggregation($names);
+
+        $query = new Query();
+        $query->addAggregation($agg);
+
+        $index = $this->_getIndexForTest();
+        $aggregations = $index->search($query)->getAggregations();
+
+        // check children aggregation exists
+        $this->assertArrayHasKey('answer', $aggregations);
+
+        $childrenAggregations = $aggregations['answer'];
+
+        // check names aggregation exists inside children aggregation
+        $this->assertArrayHasKey('name', $childrenAggregations);
+    }
+
+    /**
+     * @group functional
+     */
+    public function testChildrenAggregationCount(): void
+    {
+        $agg = new Children('answer');
+        $agg->setType('answer');
+
+        $names = new Terms('name');
+        $names->setField('name');
+
+        $agg->addAggregation($names);
+
+        $query = new Query();
+        $query->addAggregation($agg);
+
+        $index = $this->_getIndexForTest();
+        $aggregations = $index->search($query)->getAggregations();
+
+        $childrenAggregations = $aggregations['answer'];
+        $this->assertCount(2, $childrenAggregations['name']['buckets']);
+
+        // check names aggregation works inside children aggregation
+        $names = [
+            ['key' => 'fede', 'doc_count' => 2],
+            ['key' => 'rico', 'doc_count' => 1],
+        ];
+        $this->assertEquals($names, $childrenAggregations['name']['buckets']);
+    }
+
     protected function _getIndexForTest(): Index
     {
         $client = $this->_getClient();
@@ -77,63 +138,5 @@ class ChildrenTest extends BaseAggregationTest
         $index->refresh();
 
         return $index;
-    }
-
-    /**
-     * @group functional
-     */
-    public function testChildrenAggregation()
-    {
-        $agg = new Children('answer');
-        $agg->setType('answer');
-
-        $names = new Terms('name');
-        $names->setField('name');
-
-        $agg->addAggregation($names);
-
-        $query = new Query();
-        $query->addAggregation($agg);
-
-        $index = $this->_getIndexForTest();
-        $aggregations = $index->search($query)->getAggregations();
-
-        // check children aggregation exists
-        $this->assertArrayHasKey('answer', $aggregations);
-
-        $childrenAggregations = $aggregations['answer'];
-
-        // check names aggregation exists inside children aggregation
-        $this->assertArrayHasKey('name', $childrenAggregations);
-    }
-
-    /**
-     * @group functional
-     */
-    public function testChildrenAggregationCount()
-    {
-        $agg = new Children('answer');
-        $agg->setType('answer');
-
-        $names = new Terms('name');
-        $names->setField('name');
-
-        $agg->addAggregation($names);
-
-        $query = new Query();
-        $query->addAggregation($agg);
-
-        $index = $this->_getIndexForTest();
-        $aggregations = $index->search($query)->getAggregations();
-
-        $childrenAggregations = $aggregations['answer'];
-        $this->assertCount(2, $childrenAggregations['name']['buckets']);
-
-        // check names aggregation works inside children aggregation
-        $names = [
-            ['key' => 'fede', 'doc_count' => 2],
-            ['key' => 'rico', 'doc_count' => 1],
-        ];
-        $this->assertEquals($names, $childrenAggregations['name']['buckets']);
     }
 }

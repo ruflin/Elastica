@@ -7,13 +7,15 @@ use Elastica\Test\Base as BaseTest;
 
 /**
  * Tests the example code.
+ *
+ * @internal
  */
 class ExampleTest extends BaseTest
 {
     /**
      * @group functional
      */
-    public function testBasicGettingStarted()
+    public function testBasicGettingStarted(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('ruflin');
@@ -28,7 +30,7 @@ class ExampleTest extends BaseTest
     /**
      * @group functional
      */
-    public function testExample()
+    public function testExample(): void
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index
         $client = $this->_getClient();

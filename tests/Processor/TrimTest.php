@@ -8,12 +8,15 @@ use Elastica\Processor\Trim;
 use Elastica\ResultSet;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
+/**
+ * @internal
+ */
 class TrimTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
-    public function testTrim()
+    public function testTrim(): void
     {
         $processor = new Trim('foo');
 
@@ -29,7 +32,7 @@ class TrimTest extends BasePipelineTest
     /**
      * @group functional
      */
-    public function testTrimField()
+    public function testTrimField(): void
     {
         $trim = new Trim('name');
 

@@ -7,12 +7,15 @@ use Elastica\Request;
 use Elastica\Response;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class RequestTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $path = 'test';
         $method = Request::POST;
@@ -30,7 +33,7 @@ class RequestTest extends BaseTest
     /**
      * @group unit
      */
-    public function testInvalidConnection()
+    public function testInvalidConnection(): void
     {
         $this->expectException(\Elastica\Exception\InvalidException::class);
 
@@ -41,7 +44,7 @@ class RequestTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSend()
+    public function testSend(): void
     {
         $connection = new Connection();
         $connection->setHost($this->_getHost());
@@ -57,7 +60,7 @@ class RequestTest extends BaseTest
     /**
      * @group unit
      */
-    public function testToString()
+    public function testToString(): void
     {
         $path = 'test';
         $method = Request::POST;

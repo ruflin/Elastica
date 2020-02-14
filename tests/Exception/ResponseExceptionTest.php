@@ -6,12 +6,15 @@ use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Mapping;
 
+/**
+ * @internal
+ */
 class ResponseExceptionTest extends AbstractExceptionTest
 {
     /**
      * @group functional
      */
-    public function testCreateExistingIndex()
+    public function testCreateExistingIndex(): void
     {
         $this->_createIndex('woo', true);
 
@@ -30,7 +33,7 @@ class ResponseExceptionTest extends AbstractExceptionTest
     /**
      * @group functional
      */
-    public function testBadType()
+    public function testBadType(): void
     {
         $index = $this->_createIndex();
 
@@ -55,7 +58,7 @@ class ResponseExceptionTest extends AbstractExceptionTest
     /**
      * @group functional
      */
-    public function testWhatever()
+    public function testWhatever(): void
     {
         $index = $this->_createIndex();
         $index->delete();

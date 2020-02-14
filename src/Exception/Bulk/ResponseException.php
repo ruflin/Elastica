@@ -34,17 +34,6 @@ class ResponseException extends BulkException
         parent::__construct($message);
     }
 
-    protected function _init(ResponseSet $responseSet)
-    {
-        $this->_responseSet = $responseSet;
-
-        foreach ($responseSet->getBulkResponses() as $bulkResponse) {
-            if ($bulkResponse->hasError()) {
-                $this->_actionExceptions[] = new ActionException($bulkResponse);
-            }
-        }
-    }
-
     /**
      * Returns bulk response set object.
      */
@@ -85,5 +74,16 @@ class ResponseException extends BulkException
         }
 
         return $message;
+    }
+
+    protected function _init(ResponseSet $responseSet): void
+    {
+        $this->_responseSet = $responseSet;
+
+        foreach ($responseSet->getBulkResponses() as $bulkResponse) {
+            if ($bulkResponse->hasError()) {
+                $this->_actionExceptions[] = new ActionException($bulkResponse);
+            }
+        }
     }
 }

@@ -73,6 +73,68 @@ class Reindex extends Param
         return $this->_lastResponse;
     }
 
+    public function setWaitForCompletion($value): void
+    {
+        \is_bool($value) && $value = $value ? 'true' : 'false';
+
+        $this->setParam(self::WAIT_FOR_COMPLETION, $value);
+    }
+
+    public function setWaitForActiveShards($value): void
+    {
+        $this->setParam(self::WAIT_FOR_ACTIVE_SHARDS, $value);
+    }
+
+    public function setTimeout($value): void
+    {
+        $this->setParam(self::TIMEOUT, $value);
+    }
+
+    public function setScroll($value): void
+    {
+        $this->setParam(self::SCROLL, $value);
+    }
+
+    public function setRequestsPerSecond($value): void
+    {
+        $this->setParam(self::REQUESTS_PER_SECOND, $value);
+    }
+
+    public function setScript(Script $script): void
+    {
+        $this->setParam(self::SCRIPT, $script);
+    }
+
+    public function setQuery(AbstractQuery $query): void
+    {
+        $this->setParam(self::QUERY, $query);
+    }
+
+    public function setPipeline(Pipeline $pipeline): void
+    {
+        $this->setParam(self::PIPELINE, $pipeline);
+    }
+
+    /**
+     * @param bool|string $value
+     */
+    public function setRefresh($value): void
+    {
+        \is_bool($value) && $value = $value ? self::REFRESH_TRUE : self::REFRESH_FALSE;
+
+        $this->setParam(self::REFRESH, $value);
+    }
+
+    public function getTaskId()
+    {
+        $taskId = null;
+        if ($this->_lastResponse instanceof Response) {
+            $taskId = $this->_lastResponse->getData()['task'] ? $this->_lastResponse->getData()['task'] : null;
+        }
+
+        return $taskId;
+    }
+
     protected function _getBody(Index $oldIndex, Index $newIndex, array $params): array
     {
         $body = \array_merge([
@@ -80,9 +142,7 @@ class Reindex extends Param
             'dest' => $this->_getDestPartBody($newIndex, $params),
         ], $this->_resolveBodyOptions($params));
 
-        $body = $this->_setBodyScript($body);
-
-        return $body;
+        return $this->_setBodyScript($body);
     }
 
     protected function _getSourcePartBody(Index $index, array $params): array
@@ -91,9 +151,7 @@ class Reindex extends Param
             'index' => $index->getName(),
         ], $this->_resolveSourceOptions($params));
 
-        $sourceBody = $this->_setSourceQuery($sourceBody);
-
-        return $sourceBody;
+        return $this->_setSourceQuery($sourceBody);
     }
 
     protected function _getDestPartBody(Index $index, array $params): array
@@ -163,67 +221,5 @@ class Reindex extends Param
         }
 
         return $body;
-    }
-
-    public function setWaitForCompletion($value)
-    {
-        \is_bool($value) && $value = $value ? 'true' : 'false';
-
-        $this->setParam(self::WAIT_FOR_COMPLETION, $value);
-    }
-
-    public function setWaitForActiveShards($value)
-    {
-        $this->setParam(self::WAIT_FOR_ACTIVE_SHARDS, $value);
-    }
-
-    public function setTimeout($value)
-    {
-        $this->setParam(self::TIMEOUT, $value);
-    }
-
-    public function setScroll($value)
-    {
-        $this->setParam(self::SCROLL, $value);
-    }
-
-    public function setRequestsPerSecond($value)
-    {
-        $this->setParam(self::REQUESTS_PER_SECOND, $value);
-    }
-
-    public function setScript(Script $script)
-    {
-        $this->setParam(self::SCRIPT, $script);
-    }
-
-    public function setQuery(AbstractQuery $query): void
-    {
-        $this->setParam(self::QUERY, $query);
-    }
-
-    public function setPipeline(Pipeline $pipeline): void
-    {
-        $this->setParam(self::PIPELINE, $pipeline);
-    }
-
-    /**
-     * @param bool|string $value
-     */
-    public function setRefresh($value): void
-    {
-        \is_bool($value) && $value = $value ? self::REFRESH_TRUE : self::REFRESH_FALSE;
-
-        $this->setParam(self::REFRESH, $value);
-    }
-
-    public function getTaskId()
-    {
-        $taskId = null;
-        if ($this->_lastResponse instanceof Response) {
-            $taskId = $this->_lastResponse->getData()['task'] ? $this->_lastResponse->getData()['task'] : null;
-        }
-
-        return $taskId;
     }
 }

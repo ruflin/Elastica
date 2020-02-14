@@ -8,12 +8,15 @@ use Elastica\Query\SpanTerm;
 use Elastica\Query\SpanWithin;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class SpanWithinTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $field = 'name';
         $spanTermQuery1 = new SpanTerm([$field => 'nicolas']);
@@ -60,7 +63,7 @@ class SpanWithinTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSpanWithin()
+    public function testSpanWithin(): void
     {
         $field = 'lorem';
         $value = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse odio lacus, aliquam nec nulla quis, aliquam eleifend eros.';

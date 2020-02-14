@@ -5,8 +5,17 @@ namespace Elastica\Test;
 use Elastica\Pipeline;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class BasePipeline extends BaseTest
 {
+    protected function tearDown(): void
+    {
+        $this->_createPipeline()->deletePipeline('*');
+        parent::tearDown();
+    }
+
     protected function _createPipeline(?string $id = null, string $description = ''): Pipeline
     {
         $id = $id ?: static::buildUniqueId();
@@ -16,11 +25,5 @@ class BasePipeline extends BaseTest
         $pipeline->setDescription($description);
 
         return $pipeline;
-    }
-
-    protected function tearDown(): void
-    {
-        $this->_createPipeline()->deletePipeline('*');
-        parent::tearDown();
     }
 }

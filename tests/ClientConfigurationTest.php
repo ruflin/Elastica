@@ -7,10 +7,12 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @group unit
+ *
+ * @internal
  */
 class ClientConfigurationTest extends TestCase
 {
-    public function testInvalidDsn()
+    public function testInvalidDsn(): void
     {
         $this->expectException(\Elastica\Exception\InvalidException::class);
         $this->expectExceptionMessage("DSN 'test:0' is invalid.");
@@ -18,7 +20,7 @@ class ClientConfigurationTest extends TestCase
         ClientConfiguration::fromDsn('test:0');
     }
 
-    public function testFromSimpleDsn()
+    public function testFromSimpleDsn(): void
     {
         $configuration = ClientConfiguration::fromDsn('192.168.1.1:9201');
 
@@ -42,7 +44,7 @@ class ClientConfigurationTest extends TestCase
         $this->assertEquals($expected, $configuration->getAll());
     }
 
-    public function testFromDsnWithParameters()
+    public function testFromDsnWithParameters(): void
     {
         $configuration = ClientConfiguration::fromDsn('https://user:p4ss@foo.com:9201/my-path?proxy=https://proxy.com&persistent=false&timeout=45&roundRobin=true&retryOnConflict=2&bigintConversion=true&extra=abc');
         $expected = [
@@ -66,7 +68,7 @@ class ClientConfigurationTest extends TestCase
         $this->assertEquals($expected, $configuration->getAll());
     }
 
-    public function testFromEmptyArray()
+    public function testFromEmptyArray(): void
     {
         $configuration = ClientConfiguration::fromArray([]);
 
@@ -90,7 +92,7 @@ class ClientConfigurationTest extends TestCase
         $this->assertEquals($expected, $configuration->getAll());
     }
 
-    public function testFromArray()
+    public function testFromArray(): void
     {
         $configuration = ClientConfiguration::fromArray([
             'username' => 'Jdoe',
@@ -118,14 +120,14 @@ class ClientConfigurationTest extends TestCase
         $this->assertEquals($expected, $configuration->getAll());
     }
 
-    public function testHas()
+    public function testHas(): void
     {
         $configuration = new ClientConfiguration();
         $this->assertTrue($configuration->has('host'));
         $this->assertFalse($configuration->has('inexistantKey'));
     }
 
-    public function testGet()
+    public function testGet(): void
     {
         $configuration = new ClientConfiguration();
         $this->assertTrue($configuration->get('persistent'));
@@ -153,7 +155,7 @@ class ClientConfigurationTest extends TestCase
         $configuration->get('invalidKey');
     }
 
-    public function testAdd()
+    public function testAdd(): void
     {
         $keyName = 'myKey';
 

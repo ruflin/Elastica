@@ -10,63 +10,15 @@ use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class ReverseNestedTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest(): Index
-    {
-        $index = $this->_createIndex();
-        $mapping = new Mapping();
-        $mapping->setProperties([
-            'comments' => [
-                'type' => 'nested',
-                'properties' => [
-                    'name' => ['type' => 'keyword'],
-                    'body' => ['type' => 'text'],
-                ],
-            ],
-            'tags' => ['type' => 'keyword'],
-        ]);
-
-        $index->setMapping($mapping);
-
-        $index->addDocuments([
-            new Document(1, [
-                'comments' => [
-                    [
-                        'name' => 'bob',
-                        'body' => 'this is bobs comment',
-                    ],
-                    [
-                        'name' => 'john',
-                        'body' => 'this is johns comment',
-                    ],
-                ],
-                'tags' => ['foo', 'bar'],
-            ]),
-            new Document(2, [
-                 'comments' => [
-                    [
-                        'name' => 'bob',
-                        'body' => 'this is another comment from bob',
-                    ],
-                    [
-                        'name' => 'susan',
-                        'body' => 'this is susans comment',
-                    ],
-                ],
-                'tags' => ['foo', 'baz'],
-            ]),
-        ]);
-
-        $index->refresh();
-
-        return $index;
-    }
-
     /**
      * @group unit
      */
-    public function testPathNotSetIfNull()
+    public function testPathNotSetIfNull(): void
     {
         $agg = new ReverseNested('nested');
         $this->assertFalse($agg->hasParam('path'));
@@ -75,7 +27,7 @@ class ReverseNestedTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testPathSetIfNotNull()
+    public function testPathSetIfNotNull(): void
     {
         $agg = new ReverseNested('nested', 'some_field');
         $this->assertEquals('some_field', $agg->getParam('path'));
@@ -84,7 +36,7 @@ class ReverseNestedTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testReverseNestedAggregation()
+    public function testReverseNestedAggregation(): void
     {
         $agg = new Nested('comments', 'comments');
         $names = new Terms('name');
@@ -133,5 +85,56 @@ class ReverseNestedTest extends BaseAggregationTest
             ['key' => 'foo', 'doc_count' => 1],
         ];
         $this->assertEquals($tags, $nameResults['buckets'][2]['main']['tags']['buckets']);
+    }
+
+    protected function _getIndexForTest(): Index
+    {
+        $index = $this->_createIndex();
+        $mapping = new Mapping();
+        $mapping->setProperties([
+            'comments' => [
+                'type' => 'nested',
+                'properties' => [
+                    'name' => ['type' => 'keyword'],
+                    'body' => ['type' => 'text'],
+                ],
+            ],
+            'tags' => ['type' => 'keyword'],
+        ]);
+
+        $index->setMapping($mapping);
+
+        $index->addDocuments([
+            new Document(1, [
+                'comments' => [
+                    [
+                        'name' => 'bob',
+                        'body' => 'this is bobs comment',
+                    ],
+                    [
+                        'name' => 'john',
+                        'body' => 'this is johns comment',
+                    ],
+                ],
+                'tags' => ['foo', 'bar'],
+            ]),
+            new Document(2, [
+                'comments' => [
+                    [
+                        'name' => 'bob',
+                        'body' => 'this is another comment from bob',
+                    ],
+                    [
+                        'name' => 'susan',
+                        'body' => 'this is susans comment',
+                    ],
+                ],
+                'tags' => ['foo', 'baz'],
+            ]),
+        ]);
+
+        $index->refresh();
+
+        return $index;
     }
 }

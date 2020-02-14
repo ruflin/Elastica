@@ -11,10 +11,12 @@ use Elastica\Test\Base as BaseTest;
 
 /**
  * @group unit
+ *
+ * @internal
  */
 class ChainProcessorTest extends BaseTest
 {
-    public function testProcessor()
+    public function testProcessor(): void
     {
         $processor = new ChainProcessor([
             $processor1 = $this->createMock(ProcessorInterface::class),
@@ -24,10 +26,12 @@ class ChainProcessorTest extends BaseTest
 
         $processor1->expects($this->once())
             ->method('process')
-            ->with($resultSet);
+            ->with($resultSet)
+        ;
         $processor2->expects($this->once())
             ->method('process')
-            ->with($resultSet);
+            ->with($resultSet)
+        ;
 
         $processor->process($resultSet);
     }

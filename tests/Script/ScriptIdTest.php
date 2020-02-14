@@ -5,6 +5,9 @@ namespace Elastica\Test;
 use Elastica\Script\ScriptId;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class ScriptIdTest extends BaseTest
 {
     private const SCRIPT_ID = 'my_script';
@@ -12,7 +15,7 @@ class ScriptIdTest extends BaseTest
     /**
      * @group unit
      */
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $script = new ScriptId(self::SCRIPT_ID);
 
@@ -55,7 +58,7 @@ class ScriptIdTest extends BaseTest
     /**
      * @group unit
      */
-    public function testCreateString()
+    public function testCreateString(): void
     {
         $script = ScriptId::create(self::SCRIPT_ID);
 
@@ -72,7 +75,7 @@ class ScriptIdTest extends BaseTest
     /**
      * @group unit
      */
-    public function testCreateScript()
+    public function testCreateScript(): void
     {
         $data = new ScriptId(self::SCRIPT_ID);
 
@@ -85,7 +88,7 @@ class ScriptIdTest extends BaseTest
     /**
      * @group unit
      */
-    public function testCreateArray()
+    public function testCreateArray(): void
     {
         $params = [
             'param1' => 'one',
@@ -112,8 +115,10 @@ class ScriptIdTest extends BaseTest
     /**
      * @group unit
      * @dataProvider dataProviderCreateInvalid
+     *
+     * @param mixed $data
      */
-    public function testCreateInvalid($data)
+    public function testCreateInvalid($data): void
     {
         $this->expectException(\Elastica\Exception\InvalidException::class);
 
@@ -141,7 +146,7 @@ class ScriptIdTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetLang()
+    public function testSetLang(): void
     {
         $script = new ScriptId(self::SCRIPT_ID, [], ScriptId::LANG_PAINLESS);
 
@@ -152,7 +157,7 @@ class ScriptIdTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetScriptId()
+    public function testSetScriptId(): void
     {
         $script = new ScriptId(self::SCRIPT_ID);
 

@@ -86,7 +86,7 @@ class ConnectionPool
         return $this->_strategy->getConnection($this->getConnections());
     }
 
-    public function onFail(Connection $connection, Exception $e, Client $client)
+    public function onFail(Connection $connection, Exception $e, Client $client): void
     {
         $connection->setEnabled(false);
 

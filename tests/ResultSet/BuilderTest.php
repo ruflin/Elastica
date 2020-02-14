@@ -9,6 +9,8 @@ use Elastica\Test\Base as BaseTest;
 
 /**
  * @group unit
+ *
+ * @internal
  */
 class BuilderTest extends BaseTest
 {
@@ -24,7 +26,7 @@ class BuilderTest extends BaseTest
         $this->builder = new DefaultBuilder();
     }
 
-    public function testEmptyResponse()
+    public function testEmptyResponse(): void
     {
         $response = new Response('');
         $query = new Query();
@@ -36,7 +38,7 @@ class BuilderTest extends BaseTest
         $this->assertCount(0, $resultSet->getResults());
     }
 
-    public function testResponse()
+    public function testResponse(): void
     {
         $response = new Response([
             'hits' => [

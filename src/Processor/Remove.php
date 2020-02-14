@@ -14,7 +14,7 @@ class Remove extends AbstractProcessor
     /**
      * Remove constructor.
      *
-     * @param string|array $field
+     * @param array|string $field
      */
     public function __construct($field)
     {
@@ -24,7 +24,7 @@ class Remove extends AbstractProcessor
     /**
      * Set field.
      *
-     * @param string|array $field
+     * @param array|string $field
      *
      * @return $this
      */

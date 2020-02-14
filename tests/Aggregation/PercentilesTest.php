@@ -6,12 +6,15 @@ use Elastica\Aggregation\Percentiles;
 use Elastica\Document;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class PercentilesTest extends BaseAggregationTest
 {
     /**
      * @group functional
      */
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $aggr = new Percentiles('price_percentile');
         $this->assertEquals('price_percentile', $aggr->getName());
@@ -23,7 +26,7 @@ class PercentilesTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testSetField()
+    public function testSetField(): void
     {
         $aggr = new Percentiles('price_percentile');
         $aggr->setField('price');
@@ -35,7 +38,7 @@ class PercentilesTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testCompression()
+    public function testCompression(): void
     {
         $expected = [
             'percentiles' => [
@@ -57,7 +60,7 @@ class PercentilesTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testHdr()
+    public function testHdr(): void
     {
         $expected = [
             'percentiles' => [
@@ -79,7 +82,7 @@ class PercentilesTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testSetPercents()
+    public function testSetPercents(): void
     {
         $percents = [1, 2, 3];
         $aggr = new Percentiles('price_percentile');
@@ -91,7 +94,7 @@ class PercentilesTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testAddPercent()
+    public function testAddPercent(): void
     {
         $percents = [1, 2, 3];
         $aggr = new Percentiles('price_percentile');
@@ -106,7 +109,7 @@ class PercentilesTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testSetScript()
+    public function testSetScript(): void
     {
         $script = 'doc["load_time"].value / 20';
         $aggr = new Percentiles('price_percentile');
@@ -118,7 +121,7 @@ class PercentilesTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testActualWork()
+    public function testActualWork(): void
     {
         // prepare
         $index = $this->_createIndex();
@@ -158,7 +161,7 @@ class PercentilesTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testKeyed()
+    public function testKeyed(): void
     {
         $expected = [
             'values' => [
@@ -226,7 +229,7 @@ class PercentilesTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testMissing()
+    public function testMissing(): void
     {
         $expected = [
             'percentiles' => [

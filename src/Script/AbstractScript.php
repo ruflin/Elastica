@@ -28,9 +28,28 @@ abstract class AbstractScript extends AbstractUpdateAction
     private $_lang;
 
     /**
+     * @param string|null $lang       Script language, see constants
+     * @param string|null $documentId Document ID the script action should be performed on (only relevant in update context)
+     */
+    public function __construct(?array $params = null, ?string $lang = null, ?string $documentId = null)
+    {
+        if ($params) {
+            $this->setParams($params);
+        }
+
+        if (null !== $lang) {
+            $this->setLang($lang);
+        }
+
+        if (null !== $documentId) {
+            $this->setId($documentId);
+        }
+    }
+
+    /**
      * Factory to create a script object from data structure (reverse toArray).
      *
-     * @param string|array|AbstractScript $data
+     * @param AbstractScript|array|string $data
      *
      * @throws InvalidException
      *
@@ -54,6 +73,41 @@ abstract class AbstractScript extends AbstractUpdateAction
 
         throw new InvalidException('Failed to create script. Invalid data passed.');
     }
+
+    public function setLang(string $lang): self
+    {
+        $this->_lang = $lang;
+
+        return $this;
+    }
+
+    public function getLang(): ?string
+    {
+        return $this->_lang;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toArray(): array
+    {
+        $array = $this->getScriptTypeArray();
+
+        if (!empty($this->_params)) {
+            $array['params'] = $this->_convertArrayable($this->_params);
+        }
+
+        if (null !== $this->_lang) {
+            $array['lang'] = $this->_lang;
+        }
+
+        return ['script' => $array];
+    }
+
+    /**
+     * Returns an array with the script type as key and the script content as value.
+     */
+    abstract protected function getScriptTypeArray(): array;
 
     private static function _createFromArray(array $data)
     {
@@ -81,59 +135,5 @@ abstract class AbstractScript extends AbstractUpdateAction
         }
 
         throw new InvalidException('Failed to create script. Invalid data passed.');
-    }
-
-    /**
-     * @param string|null $lang       Script language, see constants
-     * @param string|null $documentId Document ID the script action should be performed on (only relevant in update context)
-     */
-    public function __construct(?array $params = null, ?string $lang = null, ?string $documentId = null)
-    {
-        if ($params) {
-            $this->setParams($params);
-        }
-
-        if (null !== $lang) {
-            $this->setLang($lang);
-        }
-
-        if (null !== $documentId) {
-            $this->setId($documentId);
-        }
-    }
-
-    public function setLang(string $lang): self
-    {
-        $this->_lang = $lang;
-
-        return $this;
-    }
-
-    public function getLang(): ?string
-    {
-        return $this->_lang;
-    }
-
-    /**
-     * Returns an array with the script type as key and the script content as value.
-     */
-    abstract protected function getScriptTypeArray(): array;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toArray(): array
-    {
-        $array = $this->getScriptTypeArray();
-
-        if (!empty($this->_params)) {
-            $array['params'] = $this->_convertArrayable($this->_params);
-        }
-
-        if (null !== $this->_lang) {
-            $array['lang'] = $this->_lang;
-        }
-
-        return ['script' => $array];
     }
 }

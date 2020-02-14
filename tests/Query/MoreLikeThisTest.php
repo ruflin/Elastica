@@ -11,12 +11,15 @@ use Elastica\Query\MoreLikeThis;
 use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class MoreLikeThisTest extends BaseTest
 {
     /**
      * @group functional
      */
-    public function testSearch()
+    public function testSearch(): void
     {
         $client = $this->_getClient();
         $index = new Index($client, 'test');
@@ -58,7 +61,7 @@ class MoreLikeThisTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSearchByDocument()
+    public function testSearchByDocument(): void
     {
         $client = $this->_getClient(['persistent' => false]);
         $index = $client->getIndex('elastica_test');
@@ -115,7 +118,7 @@ class MoreLikeThisTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetFields()
+    public function testSetFields(): void
     {
         $query = new MoreLikeThis();
 
@@ -129,7 +132,7 @@ class MoreLikeThisTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetLike()
+    public function testSetLike(): void
     {
         $query = new MoreLikeThis();
         $query->setLike(' hello world');
@@ -141,7 +144,7 @@ class MoreLikeThisTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetBoost()
+    public function testSetBoost(): void
     {
         $query = new MoreLikeThis();
 
@@ -154,7 +157,7 @@ class MoreLikeThisTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetMaxQueryTerms()
+    public function testSetMaxQueryTerms(): void
     {
         $query = new MoreLikeThis();
 
@@ -167,7 +170,7 @@ class MoreLikeThisTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetMinimumShouldMatch()
+    public function testSetMinimumShouldMatch(): void
     {
         $query = new MoreLikeThis();
 
@@ -180,7 +183,7 @@ class MoreLikeThisTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetMinDocFrequency()
+    public function testSetMinDocFrequency(): void
     {
         $query = new MoreLikeThis();
 
@@ -193,7 +196,7 @@ class MoreLikeThisTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetMaxDocFrequency()
+    public function testSetMaxDocFrequency(): void
     {
         $query = new MoreLikeThis();
 
@@ -206,7 +209,7 @@ class MoreLikeThisTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetMinWordLength()
+    public function testSetMinWordLength(): void
     {
         $query = new MoreLikeThis();
 
@@ -219,7 +222,7 @@ class MoreLikeThisTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetMaxWordLength()
+    public function testSetMaxWordLength(): void
     {
         $query = new MoreLikeThis();
 
@@ -232,7 +235,7 @@ class MoreLikeThisTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetBoostTerms()
+    public function testSetBoostTerms(): void
     {
         $query = new MoreLikeThis();
 
@@ -245,7 +248,7 @@ class MoreLikeThisTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetAnalyzer()
+    public function testSetAnalyzer(): void
     {
         $query = new MoreLikeThis();
 
@@ -258,7 +261,7 @@ class MoreLikeThisTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetStopWords()
+    public function testSetStopWords(): void
     {
         $query = new MoreLikeThis();
 
@@ -271,7 +274,7 @@ class MoreLikeThisTest extends BaseTest
     /**
      * @group unit
      */
-    public function testToArrayForId()
+    public function testToArrayForId(): void
     {
         $query = new MoreLikeThis();
         $query->setLike(new Document('1', [], 'index'));
@@ -293,7 +296,7 @@ class MoreLikeThisTest extends BaseTest
     /**
      * @group unit
      */
-    public function testToArrayForSource()
+    public function testToArrayForSource(): void
     {
         $query = new MoreLikeThis();
         $query->setLike(new Document('', ['Foo' => 'Bar'], 'index'));

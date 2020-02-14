@@ -8,6 +8,9 @@ use Elastica\ResultSet;
 use Elastica\Scroll;
 use Elastica\Search;
 
+/**
+ * @internal
+ */
 class ScrollTest extends Base
 {
     /**
@@ -15,7 +18,7 @@ class ScrollTest extends Base
      *
      * @group functional
      */
-    public function testForeach()
+    public function testForeach(): void
     {
         $search = $this->_prepareSearch();
         $scroll = new Scroll($search);
@@ -62,7 +65,7 @@ class ScrollTest extends Base
      *
      * @group functional
      */
-    public function testSearchRevert()
+    public function testSearchRevert(): void
     {
         $search = $this->_prepareSearch();
 
@@ -84,7 +87,7 @@ class ScrollTest extends Base
      *
      * @group functional
      */
-    public function testEmptyScroll()
+    public function testEmptyScroll(): void
     {
         $search = $this->_prepareSearch(0);
         $scroll = new Scroll($search);
@@ -104,7 +107,7 @@ class ScrollTest extends Base
      *
      * @group functional
      */
-    public function testScrollWithIgnoreUnavailable()
+    public function testScrollWithIgnoreUnavailable(): void
     {
         $search = $this->_prepareSearch();
         $search->addIndex('unavailable_index');
@@ -176,7 +179,7 @@ class ScrollTest extends Base
     /**
      * Tests the number of open search contexts on ES.
      */
-    private function _assertOpenSearchContexts(Client $client, int $count)
+    private function _assertOpenSearchContexts(Client $client, int $count): void
     {
         $stats = $client->getStatus()->getData();
         $this->assertSame($count, $stats['_all']['total']['search']['open_contexts'], 'Open search contexts should match');

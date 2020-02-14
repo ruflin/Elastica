@@ -14,16 +14,6 @@ use Elastica\Param;
 abstract class AbstractRescore extends Param
 {
     /**
-     * Overridden to return rescore as name.
-     *
-     * @return string name
-     */
-    protected function _getBaseName(): string
-    {
-        return 'rescore';
-    }
-
-    /**
      * Sets window_size.
      *
      * @return $this
@@ -31,5 +21,15 @@ abstract class AbstractRescore extends Param
     public function setWindowSize(int $size): AbstractRescore
     {
         return $this->setParam('window_size', $size);
+    }
+
+    /**
+     * Overridden to return rescore as name.
+     *
+     * @return string name
+     */
+    protected function _getBaseName(): string
+    {
+        return 'rescore';
     }
 }

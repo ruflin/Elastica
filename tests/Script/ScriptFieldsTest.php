@@ -8,12 +8,15 @@ use Elastica\Script\Script;
 use Elastica\Script\ScriptFields;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class ScriptFieldsTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testNewScriptFields()
+    public function testNewScriptFields(): void
     {
         $script = new Script('1 + 2');
 
@@ -39,7 +42,7 @@ class ScriptFieldsTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetScriptFields()
+    public function testSetScriptFields(): void
     {
         $query = new Query();
         $script = new Script('1 + 2');
@@ -59,7 +62,7 @@ class ScriptFieldsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testQuery()
+    public function testQuery(): void
     {
         $index = $this->_createIndex();
 
@@ -84,7 +87,7 @@ class ScriptFieldsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testScriptFieldWithJoin()
+    public function testScriptFieldWithJoin(): void
     {
         $client = $this->_getClient();
         $index = $client->getIndex('testscriptfieldwithjoin');

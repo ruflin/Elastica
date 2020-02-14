@@ -10,6 +10,9 @@ use Elastica\Test\Base as BaseTest;
 use Elastica\Transport\AbstractTransport;
 use Elastica\Transport\Http;
 
+/**
+ * @internal
+ */
 class AbstractTransportTest extends BaseTest
 {
     /**
@@ -50,8 +53,10 @@ class AbstractTransportTest extends BaseTest
     /**
      * @group unit
      * @dataProvider getValidDefinitions
+     *
+     * @param mixed $transport
      */
-    public function testCanCreateTransportInstances($transport)
+    public function testCanCreateTransportInstances($transport): void
     {
         $connection = new Connection();
         $params = [];
@@ -71,8 +76,10 @@ class AbstractTransportTest extends BaseTest
     /**
      * @group unit
      * @dataProvider getInvalidDefinitions
+     *
+     * @param mixed $transport
      */
-    public function testThrowsExecptionOnInvalidTransportDefinition($transport)
+    public function testThrowsExecptionOnInvalidTransportDefinition($transport): void
     {
         $this->expectException(\Elastica\Exception\InvalidException::class);
         $this->expectExceptionMessage('Invalid transport');
@@ -83,7 +90,7 @@ class AbstractTransportTest extends BaseTest
     /**
      * @group unit
      */
-    public function testCanInjectParamsWhenUsingArray()
+    public function testCanInjectParamsWhenUsingArray(): void
     {
         $connection = new Connection();
         $params = [
@@ -109,8 +116,10 @@ class AbstractTransportTest extends BaseTest
      *
      * @group functional
      * @dataProvider getTransport
+     *
+     * @param mixed $transport
      */
-    public function testBooleanStringValues($transport)
+    public function testBooleanStringValues($transport): void
     {
         $client = $this->_getClient($transport);
         $index = $client->getIndex('elastica_testbooleanstringvalues');

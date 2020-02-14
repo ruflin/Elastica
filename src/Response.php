@@ -59,7 +59,7 @@ class Response
     /**
      * Construct.
      *
-     * @param string|array $responseString Response string (json)
+     * @param array|string $responseString Response string (json)
      * @param int          $responseStatus http status code
      */
     public function __construct($responseString, $responseStatus = null)
@@ -349,7 +349,7 @@ class Response
      *
      * @param bool $jsonBigintConversion
      */
-    public function setJsonBigintConversion($jsonBigintConversion)
+    public function setJsonBigintConversion($jsonBigintConversion): void
     {
         $this->_jsonBigintConversion = $jsonBigintConversion;
     }

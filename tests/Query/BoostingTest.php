@@ -6,12 +6,15 @@ use Elastica\Query\Boosting;
 use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class BoostingTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $keyword = 'vital';
         $negativeKeyword = 'Mercury';
@@ -36,7 +39,7 @@ class BoostingTest extends BaseTest
     /**
      * @group unit
      */
-    public function testNegativeBoost()
+    public function testNegativeBoost(): void
     {
         $keyword = 'vital';
         $negativeKeyword = 'mercury';

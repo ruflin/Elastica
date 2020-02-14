@@ -17,7 +17,7 @@ class Script extends AbstractQuery
     /**
      * Construct script query.
      *
-     * @param array|string|AbstractScript $script Script
+     * @param AbstractScript|array|string $script Script
      */
     public function __construct($script = null)
     {
@@ -29,7 +29,7 @@ class Script extends AbstractQuery
     /**
      * Sets script object.
      *
-     * @param BaseScript|string|array $script
+     * @param array|BaseScript|string $script
      *
      * @return $this
      */

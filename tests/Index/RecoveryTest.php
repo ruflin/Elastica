@@ -5,12 +5,15 @@ namespace Elastica\Test\Index;
 use Elastica\Index\Recovery;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class RecoveryTest extends BaseTest
 {
     /**
      * @group functional
      */
-    public function testGetSettings()
+    public function testGetSettings(): void
     {
         $indexName = 'test';
 

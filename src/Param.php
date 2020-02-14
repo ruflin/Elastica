@@ -46,55 +46,6 @@ class Param implements ArrayableInterface, \Countable
     }
 
     /**
-     * Cast objects to arrays.
-     *
-     * @return array
-     */
-    protected function _convertArrayable(array $array)
-    {
-        $arr = [];
-
-        foreach ($array as $key => $value) {
-            if ($value instanceof ArrayableInterface) {
-                $arr[$value instanceof NameableInterface ? $value->getName() : $key] = $value->toArray();
-            } elseif (\is_array($value)) {
-                $arr[$key] = $this->_convertArrayable($value);
-            } else {
-                $arr[$key] = $value;
-            }
-        }
-
-        return $arr;
-    }
-
-    /**
-     * Param's name
-     * Picks the last part of the class name and makes it snake_case
-     * You can override this method if you want to change the name.
-     *
-     * @return string name
-     */
-    protected function _getBaseName()
-    {
-        return Util::getParamName($this);
-    }
-
-    /**
-     * Sets params not inside params array.
-     *
-     * @param string $key
-     * @param mixed  $value
-     *
-     * @return $this
-     */
-    protected function _setRawParam($key, $value)
-    {
-        $this->_rawParams[$key] = $value;
-
-        return $this;
-    }
-
-    /**
      * Sets (overwrites) the value at the given key.
      *
      * @param string $key   Key to set
@@ -188,5 +139,54 @@ class Param implements ArrayableInterface, \Countable
     public function count()
     {
         return \count($this->_params);
+    }
+
+    /**
+     * Cast objects to arrays.
+     *
+     * @return array
+     */
+    protected function _convertArrayable(array $array)
+    {
+        $arr = [];
+
+        foreach ($array as $key => $value) {
+            if ($value instanceof ArrayableInterface) {
+                $arr[$value instanceof NameableInterface ? $value->getName() : $key] = $value->toArray();
+            } elseif (\is_array($value)) {
+                $arr[$key] = $this->_convertArrayable($value);
+            } else {
+                $arr[$key] = $value;
+            }
+        }
+
+        return $arr;
+    }
+
+    /**
+     * Param's name
+     * Picks the last part of the class name and makes it snake_case
+     * You can override this method if you want to change the name.
+     *
+     * @return string name
+     */
+    protected function _getBaseName()
+    {
+        return Util::getParamName($this);
+    }
+
+    /**
+     * Sets params not inside params array.
+     *
+     * @param string $key
+     * @param mixed  $value
+     *
+     * @return $this
+     */
+    protected function _setRawParam($key, $value)
+    {
+        $this->_rawParams[$key] = $value;
+
+        return $this;
     }
 }

@@ -23,7 +23,7 @@ class ErrorsCollector
         $this->testCase = $testCase;
     }
 
-    public function add($error)
+    public function add($error): void
     {
         $this->errors[] = $error;
     }
@@ -33,14 +33,14 @@ class ErrorsCollector
         return \count($this->errors);
     }
 
-    public function assertOnlyOneDeprecatedError($deprecationMessage)
+    public function assertOnlyOneDeprecatedError($deprecationMessage): void
     {
         $this->testCase->assertSame(1, $this->getCount());
         $this->testCase->assertSame(1, $this->getDeprecatedCount());
         $this->testCase->assertSame($deprecationMessage, $this->getMessage(0));
     }
 
-    public function assertOnlyDeprecatedErrors(array $deprecationMessages)
+    public function assertOnlyDeprecatedErrors(array $deprecationMessages): void
     {
         $this->testCase->assertSame(\count($deprecationMessages), $this->getCount());
         $this->testCase->assertSame(\count($deprecationMessages), $this->getDeprecatedCount());

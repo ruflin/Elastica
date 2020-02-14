@@ -69,11 +69,11 @@ class Guzzle extends AbstractTransport
         $proxy = $connection->getProxy();
 
         // See: https://github.com/facebook/hhvm/issues/4875
-        if (\is_null($proxy) && \defined('HHVM_VERSION')) {
+        if (null === $proxy && \defined('HHVM_VERSION')) {
             $proxy = \getenv('http_proxy') ?: null;
         }
 
-        if (!\is_null($proxy)) {
+        if (null !== $proxy) {
             $options['proxy'] = $proxy;
         }
 
@@ -137,7 +137,8 @@ class Guzzle extends AbstractTransport
             }
 
             $req = $req->withBody(
-                Psr7\stream_for(\is_array($data)
+                Psr7\stream_for(
+                    \is_array($data)
                     ? JSON::stringify($data, JSON_UNESCAPED_UNICODE)
                     : $data
                 )
@@ -202,7 +203,7 @@ class Guzzle extends AbstractTransport
         if (!empty($query)) {
             $action .= '?'.\http_build_query(
                 $this->sanityzeQueryStringBool($query)
-                );
+            );
         }
 
         return $action;

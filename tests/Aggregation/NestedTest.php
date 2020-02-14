@@ -9,8 +9,29 @@ use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
 
+/**
+ * @internal
+ */
 class NestedTest extends BaseAggregationTest
 {
+    /**
+     * @group functional
+     */
+    public function testNestedAggregation(): void
+    {
+        $agg = new Nested('resellers', 'resellers');
+        $min = new Min('min_price');
+        $min->setField('resellers.price');
+        $agg->addAggregation($min);
+
+        $query = new Query();
+        $query->addAggregation($agg);
+
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('resellers');
+
+        $this->assertEquals(4.98, $results['min_price']['value']);
+    }
+
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
@@ -43,23 +64,5 @@ class NestedTest extends BaseAggregationTest
         $index->refresh();
 
         return $index;
-    }
-
-    /**
-     * @group functional
-     */
-    public function testNestedAggregation()
-    {
-        $agg = new Nested('resellers', 'resellers');
-        $min = new Min('min_price');
-        $min->setField('resellers.price');
-        $agg->addAggregation($min);
-
-        $query = new Query();
-        $query->addAggregation($agg);
-
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('resellers');
-
-        $this->assertEquals(4.98, $results['min_price']['value']);
     }
 }

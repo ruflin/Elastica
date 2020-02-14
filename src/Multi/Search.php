@@ -17,6 +17,20 @@ use Elastica\Search as BaseSearch;
 class Search
 {
     /**
+     * @var Client
+     */
+    protected $_client;
+
+    /**
+     * @var array
+     */
+    protected $_options = [];
+
+    /**
+     * @var BaseSearch[]
+     */
+    protected $_searches = [];
+    /**
      * @const string[] valid header options
      */
     private static $HEADER_OPTIONS = [
@@ -31,21 +45,6 @@ class Search
      * @var MultiBuilderInterface
      */
     private $_builder;
-
-    /**
-     * @var Client
-     */
-    protected $_client;
-
-    /**
-     * @var array
-     */
-    protected $_options = [];
-
-    /**
-     * @var BaseSearch[]
-     */
-    protected $_searches = [];
 
     /**
      * Constructs search object.
@@ -139,7 +138,7 @@ class Search
             Request::POST,
             $data,
             $this->_options,
-        Request::NDJSON_CONTENT_TYPE
+            Request::NDJSON_CONTENT_TYPE
         );
 
         return $this->_builder->buildMultiResultSet($response, $this->getSearches());

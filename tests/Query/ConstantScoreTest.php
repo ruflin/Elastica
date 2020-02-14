@@ -6,12 +6,15 @@ use Elastica\Query\ConstantScore;
 use Elastica\Query\Ids;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @internal
+ */
 class ConstantScoreTest extends BaseTest
 {
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $query = new ConstantScore();
 
@@ -34,7 +37,7 @@ class ConstantScoreTest extends BaseTest
     /**
      * @group unit
      */
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $filter = new Ids();
         $filter->setIds([1]);
@@ -53,7 +56,7 @@ class ConstantScoreTest extends BaseTest
     /**
      * @group unit
      */
-    public function testConstructEmpty()
+    public function testConstructEmpty(): void
     {
         $query = new ConstantScore();
         $expectedArray = ['constant_score' => []];
