@@ -246,7 +246,7 @@ class ReindexTest extends Base
         $newIndex = $this->_createIndex('idx2', true, 2);
 
         $reindex = new Reindex($oldIndex, $newIndex);
-        $reindex->setRefresh(true);
+        $reindex->setRefresh(Reindex::REFRESH_TRUE);
 
         $reindex->run();
 

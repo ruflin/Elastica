@@ -115,13 +115,8 @@ class Reindex extends Param
         $this->setParam(self::PIPELINE, $pipeline);
     }
 
-    /**
-     * @param bool|string $value
-     */
-    public function setRefresh($value): void
+    public function setRefresh(string $value): void
     {
-        \is_bool($value) && $value = $value ? self::REFRESH_TRUE : self::REFRESH_FALSE;
-
         $this->setParam(self::REFRESH, $value);
     }
 
