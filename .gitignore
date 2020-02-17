@@ -1,9 +1,9 @@
 .DS_Store
 .idea
 *.iml
-.vagrant
 .php_cs
 .php_cs.cache
+.phpunit.result.cache
 
 cache.properties
 atlassian-ide-plugin.xml
@@ -16,5 +16,3 @@ atlassian-ide-plugin.xml
 
 composer.lock
 composer.phar
-/test/nginx/logs/access.log
-/test/nginx/logs/error.log

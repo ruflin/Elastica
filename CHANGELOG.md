@@ -6,12 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/7.0.0-beta.3...master)
 ### Backward Compatibility Breaks
+* If you're **NOT** using composer to manage your libraries: the root directory of the library's source code moved from `lib/Elastica/` to `src/`.
+
 ### Added
+* Added `Elastica\Reindex->setPipeline(Elastica\Pipeline $pipeline): void`. The link between the reindex and the pipeline is solved when `run()` is called, and thus the pipeline given doesn't need to be created before calling `setPipeline()` [#1752](https://github.com/ruflin/Elastica/pull/1752)
+* Added `Elastica\Reindex->setRefresh(string $value): void`. It accepts `REFRESH_*` constants from its class [#1752](https://github.com/ruflin/Elastica/pull/1752) and [#1758](https://github.com/ruflin/Elastica/pull/1758)
+* Added `Elastica\Reindex->setQuery(Elastica\Query\AbstractQuery $query): void` [#1752](https://github.com/ruflin/Elastica/pull/1752)
+* Added constants `PIPELINE`, `REFRESH_TRUE`, `REFRESH_FALSE`, `REFRESH_WAIT_FOR`, `SLICES` and `SLICES_AUTO` to `Elastica\Reindex` [#1752](https://github.com/ruflin/Elastica/pull/1752)
+* Added `Elastica\Pipeline->getId(): ?string` [#1752](https://github.com/ruflin/Elastica/pull/1752)
+
 ### Changed
+- Updated PHP coding standards to adhere to PSR-12 [#1760](https://github.com/ruflin/Elastica/pull/1760)
+- Updated to PHPUnit v8.5 [#1759](https://github.com/ruflin/Elastica/pull/1759)
+- Refactored code structure: use `src/` and `tests/` folders [#1755](https://github.com/ruflin/Elastica/pull/1755)
 - Require elastica-php library >= v7.1.1, fixes an issue on Ingestion/Put() type-hinting
 - Require guzzle >= v6.3 as development library: fixes issues on PHP >= 7.2
 - Require phpunit >= v7.5, fixes deprecations in with PHP 7.3
-- Scroll is now throwing an exception when calling `current()` on an invalid iteration: always call `valid()` before 
+- Scroll is now throwing an exception when calling `current()` on an invalid iteration: always call `valid()` before
     accessing the current item, as documented in PHP's Iterator documentation [#1749](https://github.com/ruflin/Elastica/pull/1749)
 
 ### Deprecated

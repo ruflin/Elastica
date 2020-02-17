@@ -8,6 +8,6 @@
         <target>./build/api</target>
     </transformer>
     <files>
-        <directory>./lib</directory>
+        <directory>./src</directory>
     </files>
 </docblox>

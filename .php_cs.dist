@@ -1,26 +1,31 @@
 <?php
 
 $finder = PhpCsFixer\Finder::create()
-    ->exclude(['vendor', 'var'])
-    ->in([__DIR__])
+    ->in(['src/', 'tests/'])
 ;
 
 return PhpCsFixer\Config::create()
     ->setFinder($finder)
     ->setRules([
+        '@PHP71Migration' => true,
+        '@PhpCsFixer' => true,
+        '@PHPUnit75Migration:risky' => true,
         '@PSR2' => true,
         '@Symfony' => true,
-        'single_blank_line_before_namespace' => false,
-        'ordered_imports' => true,
         'array_syntax' => ['syntax' => 'short'],
-        'phpdoc_order' => true,
-        'ternary_to_null_coalescing' => true,
-        'no_useless_else' => true,
-        '@PHPUnit60Migration:risky' => true,
-        'php_unit_dedicate_assert' => ['target' => 'newest'],
+        'is_null' => true,
+        'method_argument_space' => ['on_multiline' => 'ensure_fully_multiline'],
         'native_function_invocation' => true,
         'no_alias_functions' => true,
+        'no_useless_else' => true,
         'nullable_type_declaration_for_default_null_value' => true,
+        'ordered_imports' => true,
+        'php_unit_dedicate_assert' => ['target' => 'newest'],
+        'php_unit_test_class_requires_covers' => false,
+        'phpdoc_order' => true,
+        'phpdoc_types_order' => ['null_adjustment' => 'always_last'],
+        'ternary_to_null_coalescing' => true,
         'visibility_required' => ['property', 'method', 'const'],
+        'void_return' => true,
     ])
 ;
