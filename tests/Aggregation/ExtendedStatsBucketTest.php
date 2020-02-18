@@ -79,7 +79,7 @@ class ExtendedStatsBucketTest extends BaseAggregationTest
         $serialDiffAgg->toArray();
     }
 
-    protected function _getIndexForTest(): Index
+    private function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
 
