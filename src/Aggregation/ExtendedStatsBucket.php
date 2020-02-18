@@ -5,7 +5,7 @@ namespace Elastica\Aggregation;
 use Elastica\Exception\InvalidException;
 
 /**
- * Implements a Extended Stats Bucket Aggregation
+ * Implements a Extended Stats Bucket Aggregation.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-extended-stats-bucket-aggregation.html
  */
