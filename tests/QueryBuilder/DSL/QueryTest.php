@@ -65,7 +65,7 @@ class QueryTest extends AbstractDSLTest
         $this->_assertImplemented($queryDSL, 'simple_query_string', Query\SimpleQueryString::class, ['query']);
         $this->_assertImplemented($queryDSL, 'term', Query\Term::class, []);
         $this->_assertImplemented($queryDSL, 'terms', Query\Terms::class, ['field', []]);
-        $this->_assertImplemented($queryDSL, 'wildcard', Query\Wildcard::class, []);
+        $this->_assertImplemented($queryDSL, 'wildcard', Query\Wildcard::class, ['field', '']);
         $this->_assertImplemented(
             $queryDSL,
             'geo_distance',
