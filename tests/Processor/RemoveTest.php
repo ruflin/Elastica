@@ -6,12 +6,11 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\Remove;
 use Elastica\ResultSet;
-use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class RemoveTest extends BasePipelineTest
+class RemoveTest extends BaseProcessorTestCase
 {
     /**
      * @group unit
@@ -78,5 +77,12 @@ class RemoveTest extends BasePipelineTest
             $this->assertArrayNotHasKey('package', $value);
             $this->assertArrayNotHasKey('es_version', $value);
         }
+    }
+
+    public function validProcessorProvider(): array
+    {
+        return [
+            [new Remove('field')],
+        ];
     }
 }

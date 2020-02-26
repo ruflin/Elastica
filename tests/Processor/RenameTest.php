@@ -6,12 +6,11 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\Rename;
 use Elastica\ResultSet;
-use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class RenameTest extends BasePipelineTest
+class RenameTest extends BaseProcessorTestCase
 {
     /**
      * @group unit
@@ -78,5 +77,12 @@ class RenameTest extends BasePipelineTest
 
         $results = $result->getResults();
         $this->assertArrayHasKey('packages', ($results[0]->getHit())['_source']);
+    }
+
+    public function validProcessorProvider(): array
+    {
+        return [
+            [new Rename('field', 'target_field')],
+        ];
     }
 }

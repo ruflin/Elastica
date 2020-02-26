@@ -6,12 +6,11 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\Convert;
 use Elastica\ResultSet;
-use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class ConvertTest extends BasePipelineTest
+class ConvertTest extends BaseProcessorTestCase
 {
     /**
      * @group unit
@@ -98,5 +97,12 @@ class ConvertTest extends BasePipelineTest
 
         $this->assertSame(5.290, ($results[0]->getHit())['_source']['foo']);
         $this->assertSame(6.908, ($results[1]->getHit())['_source']['foo']);
+    }
+
+    public function validProcessorProvider(): array
+    {
+        return [
+            [new Convert('field', 'type')],
+        ];
     }
 }

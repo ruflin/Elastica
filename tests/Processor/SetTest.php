@@ -6,12 +6,11 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\Set;
 use Elastica\ResultSet;
-use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class SetTest extends BasePipelineTest
+class SetTest extends BaseProcessorTestCase
 {
     /**
      * @group unit
@@ -81,5 +80,12 @@ class SetTest extends BasePipelineTest
             $value = $rx->getData();
             $this->assertSame('Elastica', $value['package']);
         }
+    }
+
+    public function validProcessorProvider(): array
+    {
+        return [
+            [new Set('field', 'value')],
+        ];
     }
 }

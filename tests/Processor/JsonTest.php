@@ -6,12 +6,11 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\Json;
 use Elastica\ResultSet;
-use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class JsonTest extends BasePipelineTest
+class JsonTest extends BaseProcessorTestCase
 {
     /**
      * @group unit
@@ -83,5 +82,12 @@ class JsonTest extends BasePipelineTest
             $value = $rx->getData();
             $this->assertEquals($resultExpected, $value['realname']);
         }
+    }
+
+    public function validProcessorProvider(): array
+    {
+        return [
+            [new Json('field')],
+        ];
     }
 }

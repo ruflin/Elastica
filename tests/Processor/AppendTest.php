@@ -6,12 +6,11 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\Append;
 use Elastica\ResultSet;
-use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class AppendTest extends BasePipelineTest
+class AppendTest extends BaseProcessorTestCase
 {
     /**
      * @group unit
@@ -83,5 +82,12 @@ class AppendTest extends BasePipelineTest
             $this->assertEquals('item3', $value['foo'][2]);
             $this->assertEquals('item4', $value['foo'][3]);
         }
+    }
+
+    public function validProcessorProvider(): array
+    {
+        return [
+            [new Append('field', 'value')],
+        ];
     }
 }

@@ -3,12 +3,11 @@
 namespace Elastica\Test\Processor;
 
 use Elastica\Processor\DateIndexName;
-use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class DateIndexNameTest extends BasePipelineTest
+class DateIndexNameTest extends BaseProcessorTestCase
 {
     /**
      * @group unit
@@ -50,5 +49,12 @@ class DateIndexNameTest extends BasePipelineTest
         ];
 
         $this->assertEquals($expected, $processor->toArray());
+    }
+
+    public function validProcessorProvider(): array
+    {
+        return [
+            [new DateIndexName('field', 'd')],
+        ];
     }
 }

@@ -6,12 +6,11 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\Uppercase;
 use Elastica\ResultSet;
-use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class UppercaseTest extends BasePipelineTest
+class UppercaseTest extends BaseProcessorTestCase
 {
     /**
      * @group unit
@@ -60,5 +59,12 @@ class UppercaseTest extends BasePipelineTest
         $results = $result->getResults();
         $this->assertSame('RUFLIN', ($results[0]->getHit())['_source']['name']);
         $this->assertSame('NICOLAS', ($results[1]->getHit())['_source']['name']);
+    }
+
+    public function validProcessorProvider(): array
+    {
+        return [
+            [new Uppercase('field')],
+        ];
     }
 }

@@ -6,12 +6,11 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\Fail;
 use Elastica\Processor\Json;
-use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class FailTest extends BasePipelineTest
+class FailTest extends BaseProcessorTestCase
 {
     /**
      * @group unit
@@ -58,5 +57,12 @@ class FailTest extends BasePipelineTest
         } catch (\Exception $e) {
             $this->assertStringContainsString('custom error fail message', $e->getMessage());
         }
+    }
+
+    public function validProcessorProvider(): array
+    {
+        return [
+            [new Fail('message')],
+        ];
     }
 }
