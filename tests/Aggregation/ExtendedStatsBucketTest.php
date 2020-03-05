@@ -6,7 +6,6 @@ use Elastica\Aggregation\ExtendedStatsBucket;
 use Elastica\Aggregation\Histogram;
 use Elastica\Aggregation\Max;
 use Elastica\Document;
-use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Query;
 
