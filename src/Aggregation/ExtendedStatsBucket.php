@@ -39,16 +39,4 @@ class ExtendedStatsBucket extends AbstractAggregation
     {
         return $this->setParam('sigma', $sigma);
     }
-
-    /**
-     * @throws InvalidException If buckets path or script is not set
-     */
-    public function toArray(): array
-    {
-        if (!$this->hasParam('buckets_path')) {
-            throw new InvalidException('Buckets path is required');
-        }
-
-        return parent::toArray();
-    }
 }
