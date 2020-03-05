@@ -47,9 +47,9 @@ class ExtendedStatsBucketTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testConstructThroughSetters(): void
+    public function testOverrideBucketsPathThroughSetters(): void
     {
-        $serialDiffAgg = new ExtendedStatsBucket('bucket_part');
+        $serialDiffAgg = new ExtendedStatsBucket('bucket_part', 'foobar');
 
         $serialDiffAgg
             ->setBucketsPath('age_groups>max_weight')
@@ -66,17 +66,6 @@ class ExtendedStatsBucketTest extends BaseAggregationTest
         ];
 
         $this->assertEquals($expected, $serialDiffAgg->toArray());
-    }
-
-    /**
-     * @group unit
-     */
-    public function testToArrayInvalidBucketsPath(): void
-    {
-        $this->expectException(InvalidException::class);
-
-        $serialDiffAgg = new ExtendedStatsBucket('bucket_part');
-        $serialDiffAgg->toArray();
     }
 
     private function _getIndexForTest(): Index
