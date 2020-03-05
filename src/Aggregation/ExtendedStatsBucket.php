@@ -14,10 +14,7 @@ class ExtendedStatsBucket extends AbstractAggregation
     public function __construct(string $name, string $bucketsPath)
     {
         parent::__construct($name);
-
-        if (null !== $bucketsPath) {
-            $this->setBucketsPath($bucketsPath);
-        }
+        $this->setBucketsPath($bucketsPath);
     }
 
     public function setBucketsPath(string $bucketsPath): self
