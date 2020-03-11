@@ -9,9 +9,39 @@ use Elastica\Test\Base as BaseTest;
 
 /**
  * @internal
+ * @group unit
  */
 class TermsTest extends BaseTest
 {
+    public function testSetTermsLookup(): void
+    {
+        $terms = [
+            'index' => 'index_name',
+            'id' => '1',
+            'path' => 'terms',
+        ];
+
+        $query = Terms::buildTermsLookup('name', 'index_name', '1', 'terms');
+
+        $data = $query->toArray();
+        $this->assertEquals($terms, $data['terms']['name']);
+    }
+
+    public function testInvalidParams(): void
+    {
+        $query = new Terms('field', ['aaa', 'bbb']);
+        $query->setTermsLookup('index', '1', 'path');
+
+        $this->expectException(InvalidException::class);
+        $query->toArray();
+    }
+
+    public function testEmptyField(): void
+    {
+        $this->expectException(InvalidException::class);
+        new Terms('');
+    }
+
     /**
      * @group functional
      */
@@ -25,11 +55,9 @@ class TermsTest extends BaseTest
             new Document(3, ['name' => 'ruflin']),
         ]);
 
-        $query = new Terms();
-        $query->setTerms('name', ['nicolas', 'hello']);
+        $query = new Terms('name', ['nicolas', 'hello']);
 
         $index->refresh();
-
         $resultSet = $index->search($query);
 
         $this->assertEquals(2, $resultSet->count());
@@ -58,91 +86,12 @@ class TermsTest extends BaseTest
             new Document(3, ['name' => 'ruflin']),
         ]);
 
-        $query = new Terms();
-
-        $query->setTermsLookup('name', [
-            'index' => $lookupIndex->getName(),
-            'id' => '1',
-            'path' => 'terms',
-        ]);
+        $query = Terms::buildTermsLookup('name', $lookupIndex->getName(), '1', 'terms');
         $index->refresh();
         $lookupIndex->refresh();
 
         $resultSet = $index->search($query);
 
         $this->assertEquals(2, $resultSet->count());
-    }
-
-    public function provideMinimumArguments()
-    {
-        return [
-            [
-                3,
-            ],
-            [
-                -2,
-            ],
-            [
-                '75%',
-            ],
-            [
-                '-25%',
-            ],
-            [
-                '3<90%',
-            ],
-            [
-                '2<-25% 9<-3',
-            ],
-        ];
-    }
-
-    /**
-     * @group unit
-     * @dataProvider provideMinimumArguments
-     *
-     * @param mixed $minimum
-     */
-    public function testSetMinimum($minimum): void
-    {
-        $key = 'name';
-        $terms = ['nicolas', 'ruflin'];
-
-        $query = new Terms($key, $terms);
-        $query->setMinimumMatch($minimum);
-
-        $data = $query->toArray();
-        $this->assertEquals($minimum, $data['terms']['minimum_match']);
-    }
-
-    /**
-     * @group unit
-     */
-    public function testSetTermsLookup(): void
-    {
-        $key = 'name';
-        $terms = [
-            'index' => 'index_name',
-            'type' => 'type_name',
-            'id' => '1',
-            'path' => 'terms',
-        ];
-
-        $query = new Terms();
-        $query->setTermsLookup($key, $terms);
-        $data = $query->toArray();
-        $this->assertEquals($terms, $data['terms'][$key]);
-    }
-
-    /**
-     * @group unit
-     */
-    public function testInvalidParams(): void
-    {
-        $this->expectException(InvalidException::class);
-
-        $query = new Terms();
-
-        $query->toArray();
     }
 }

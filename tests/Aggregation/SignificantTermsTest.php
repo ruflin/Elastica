@@ -23,8 +23,7 @@ class SignificantTermsTest extends BaseAggregationTest
         $agg->setField('temperature');
         $agg->setSize(1);
 
-        $termsQuery = new Terms();
-        $termsQuery->setTerms('color', ['blue', 'red', 'green', 'yellow', 'white']);
+        $termsQuery = new Terms('color', ['blue', 'red', 'green', 'yellow', 'white']);
 
         $query = new Query($termsQuery);
         $query->addAggregation($agg);
@@ -44,12 +43,10 @@ class SignificantTermsTest extends BaseAggregationTest
         $agg = new SignificantTerms('significantTerms');
         $agg->setField('temperature');
         $agg->setSize(1);
-        $termsFilter = new Terms();
-        $termsFilter->setTerms('color', ['blue', 'red', 'green', 'yellow']);
+        $termsFilter = new Terms('color', ['blue', 'red', 'green', 'yellow']);
         $agg->setBackgroundFilter($termsFilter);
 
-        $termsQuery = new Terms();
-        $termsQuery->setTerms('color', ['blue', 'red', 'green', 'yellow', 'white']);
+        $termsQuery = new Terms('color', ['blue', 'red', 'green', 'yellow', 'white']);
 
         $query = new Query($termsQuery);
         $query->addAggregation($agg);
@@ -68,12 +65,10 @@ class SignificantTermsTest extends BaseAggregationTest
         $agg = new SignificantTerms('significantTerms');
         $agg->setField('temperature');
         $agg->setSize(1);
-        $termsFilter = new Terms();
-        $termsFilter->setTerms('color', ['blue', 'red', 'green', 'yellow']);
+        $termsFilter = new Terms('color', ['blue', 'red', 'green', 'yellow']);
         $agg->setBackgroundFilter($termsFilter);
 
-        $termsQuery = new Terms();
-        $termsQuery->setTerms('color', ['blue', 'red', 'green', 'yellow', 'white']);
+        $termsQuery = new Terms('color', ['blue', 'red', 'green', 'yellow', 'white']);
 
         $query = new Query($termsQuery);
         $query->addAggregation($agg);
