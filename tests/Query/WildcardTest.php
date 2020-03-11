@@ -15,10 +15,15 @@ class WildcardTest extends BaseTest
     /**
      * @group unit
      */
-    public function testConstructEmpty(): void
+    public function testConstruct(): void
     {
-        $wildcard = new Wildcard();
-        $this->assertEmpty($wildcard->getParams());
+        $wildcard = new Wildcard('name', 'aaa*');
+
+        $data = $wildcard->getParam('name');
+        $this->assertIsArray($data);
+
+        $this->assertSame('aaa*', $data['value']);
+        $this->assertSame(1.0, $data['boost']);
     }
 
     /**
@@ -26,17 +31,15 @@ class WildcardTest extends BaseTest
      */
     public function testToArray(): void
     {
-        $key = 'name';
-        $value = 'Ru*lin';
-        $boost = 2.0;
-
-        $wildcard = new Wildcard($key, $value, $boost);
+        $wildcard = new Wildcard('name', 'value*', 2.0);
+        $wildcard->setRewrite(Wildcard::REWRITE_SCORING_BOOLEAN);
 
         $expectedArray = [
             'wildcard' => [
-                $key => [
-                    'value' => $value,
-                    'boost' => $boost,
+                'name' => [
+                    'value' => 'value*',
+                    'boost' => 2.0,
+                    'rewrite' => 'scoring_boolean',
                 ],
             ],
         ];
@@ -83,26 +86,22 @@ class WildcardTest extends BaseTest
 
         $index->refresh();
 
-        $query = new Wildcard();
-        $query->setValue('name', 'ba*');
+        $query = new Wildcard('name', 'ba*');
         $resultSet = $index->search($query);
 
         $this->assertEquals(3, $resultSet->count());
 
-        $query = new Wildcard();
-        $query->setValue('name', 'baden*');
+        $query = new Wildcard('name', 'baden*');
         $resultSet = $index->search($query);
 
         $this->assertEquals(2, $resultSet->count());
 
-        $query = new Wildcard();
-        $query->setValue('name', 'baden b*');
+        $query = new Wildcard('name', 'baden b*');
         $resultSet = $index->search($query);
 
         $this->assertEquals(1, $resultSet->count());
 
-        $query = new Wildcard();
-        $query->setValue('name', 'baden bas*');
+        $query = new Wildcard('name', 'baden bas*');
         $resultSet = $index->search($query);
 
         $this->assertEquals(0, $resultSet->count());

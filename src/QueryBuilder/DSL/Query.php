@@ -475,14 +475,10 @@ class Query implements DSL
      * wildcard query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html
-     *
-     * @param string      $key   OPTIONAL Wildcard key
-     * @param string|null $value OPTIONAL Wildcard value
-     * @param float       $boost OPTIONAL Boost value (default = 1)
      */
-    public function wildcard(string $key = '', ?string $value = null, float $boost = 1.0): Wildcard
+    public function wildcard(string $field, string $value, float $boost = 1.0): Wildcard
     {
-        return new Wildcard($key, $value, $boost);
+        return new Wildcard($field, $value, $boost);
     }
 
     /**

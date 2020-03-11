@@ -12,26 +12,59 @@ namespace Elastica\Query;
 class Wildcard extends AbstractQuery
 {
     /**
-     * Construct wildcard query.
-     *
-     * @param string $key   OPTIONAL Wildcard key
-     * @param string $value OPTIONAL Wildcard value
-     * @param float  $boost OPTIONAL Boost value (default = 1)
+     * Rewrite methods: @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-term-rewrite.html.
      */
-    public function __construct(string $key = '', ?string $value = null, float $boost = 1.0)
+    public const REWRITE_CONSTANT_SCORE = 'constant_score';
+    public const REWRITE_CONSTANT_SCORE_BOOLEAN = 'constant_score_boolean';
+    public const REWRITE_SCORING_BOOLEAN = 'scoring_boolean';
+
+    /**
+     * @var string
+     */
+    private $field;
+
+    public function __construct(string $field, string $value, float $boost = 1.0)
     {
-        if (!empty($key)) {
-            $this->setValue($key, $value, $boost);
-        }
+        $this->field = $field;
+
+        $this->setParam($field, [
+            'value' => $value,
+            'boost' => $boost,
+        ]);
+    }
+
+    public function getField(): string
+    {
+        return $this->field;
+    }
+
+    public function setValue(string $value): self
+    {
+        $data = $this->getParam($this->field);
+        $this->setParam($this->field, \array_merge($data, ['value' => $value]));
+
+        return $this;
+    }
+
+    public function setBoost(float $boost): self
+    {
+        $data = $this->getParam($this->field);
+        $this->setParam($this->field, \array_merge($data, ['boost' => $boost]));
+
+        return $this;
     }
 
     /**
-     * Sets the query expression for a key with its boost value.
+     * Set the method used to rewrite the query.
+     * Use one of the Wildcard::REWRITE_* constants, or provide your own.
      *
-     * @return $this
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-term-rewrite.html
      */
-    public function setValue(string $key, string $value, float $boost = 1.0): self
+    public function setRewrite(string $rewriteMode): self
     {
-        return $this->setParam($key, ['value' => $value, 'boost' => $boost]);
+        $data = $this->getParam($this->field);
+        $this->setParam($this->field, \array_merge($data, ['rewrite' => $rewriteMode]));
+
+        return $this;
     }
 }
