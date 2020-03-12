@@ -466,9 +466,9 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html
      */
-    public function terms(string $key = '', array $terms = []): Terms
+    public function terms(string $field, array $terms = []): Terms
     {
-        return new Terms($key, $terms);
+        return new Terms($field, $terms);
     }
 
     /**

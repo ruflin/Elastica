@@ -9,11 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * If you're **NOT** using composer to manage your libraries: the root directory of the library's source code moved from `lib/Elastica/` to `src/`.
 * The `Wildcard::setValue()` changed its signature: use it to set the value of the wildcard query only.
 * The `Wildcard` Query's constructor now requires the `name` and `value` properties.
+* The `Terms` Query's constructor now requires the `field` and `terms` properties.
 
 ### Added
 * Added `AbstractTermsAggregation::setIncludeAsExactMatch()` [#1766](https://github.com/ruflin/Elastica/pull/1766) 
 * Added `AbstractTermsAggregation::setExcludeAsExactMatch()` [#1766](https://github.com/ruflin/Elastica/pull/1766)
 * Added `AbstractTermsAggregation::setIncludeWithPartitions()` [#1766](https://github.com/ruflin/Elastica/pull/1766)
+* Added `Elastica\Query\Terms::buildTermsLookup()` helper to build a terms-lookup query [#1765](https://github.com/ruflin/Elastica/pull/1765)
 * Added `Elastica\Reindex->setPipeline(Elastica\Pipeline $pipeline): void`. The link between the reindex and the pipeline is solved when `run()` is called, and thus the pipeline given doesn't need to be created before calling `setPipeline()` [#1752](https://github.com/ruflin/Elastica/pull/1752)
 * Added `Elastica\Reindex->setRefresh(string $value): void`. It accepts `REFRESH_*` constants from its class [#1752](https://github.com/ruflin/Elastica/pull/1752) and [#1758](https://github.com/ruflin/Elastica/pull/1758)
 * Added `Elastica\Reindex->setQuery(Elastica\Query\AbstractQuery $query): void` [#1752](https://github.com/ruflin/Elastica/pull/1752)
@@ -22,6 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added `Elastica\Aggregation\ExtendedStatsBucket` aggregation [#1756](https://github.com/ruflin/Elastica/pull/1756)
 
 ### Changed
+- Changed `Terms::setTerms()` signature: it now accepts a list of strings only [#1765](https://github.com/ruflin/Elastica/pull/1765)
+- Changed `Terms::setTermsLookup()` signature: `index`, `path` and `id` are now required arguments [#1765](https://github.com/ruflin/Elastica/pull/1765)
 - Changed `Wildcard::setValue()` and constructor's signature: added more specific `Wildcard::setBoost()` and `Wildcard::setRewrite` methods 
 - Updated PHP coding standards to adhere to PSR-12 [#1760](https://github.com/ruflin/Elastica/pull/1760)
 - Updated to PHPUnit v8.5 [#1759](https://github.com/ruflin/Elastica/pull/1759)
@@ -36,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - Removed unsupported `flags` from `AbstractTermsAggregation::setInclude()` [#1766](https://github.com/ruflin/Elastica/pull/1766) 
 - Removed unsupported `flags` from `AbstractTermsAggregation::setExclude()` [#1766](https://github.com/ruflin/Elastica/pull/1766) 
+- `Terms::setMinimumMatch()` has been removed as not supported by ES 7.x
 ### Fixed
 ### Security
 

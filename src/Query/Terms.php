@@ -15,86 +15,74 @@ use Elastica\Exception\InvalidException;
 class Terms extends AbstractQuery
 {
     /**
-     * Terms.
-     *
-     * @var array Terms
+     * @var string
      */
-    protected $_terms;
+    private $field;
 
     /**
-     * Terms key.
-     *
-     * @var string Terms key
+     * @var string[]
      */
-    protected $_key;
+    private $terms;
 
     /**
-     * Construct terms query.
-     *
-     * @param string $key   Terms key
-     * @param array  $terms Terms list
+     * @var string[]|null
      */
-    public function __construct(string $key = '', array $terms = [])
+    private $lookup;
+
+    /**
+     * @param string[] $terms Terms list, leave empty if building a terms-lookup query
+     */
+    public function __construct(string $field, array $terms = [])
     {
-        $this->setTerms($key, $terms);
+        if (empty($field)) {
+            throw new InvalidException('Terms field name has to be set');
+        }
+
+        $this->field = $field;
+        $this->terms = $terms;
     }
 
     /**
-     * Sets key and terms for the query.
-     *
-     * @param string $key   terms key
-     * @param array  $terms terms for the query
-     *
-     * @return $this
+     * Commodity function to build a Terms query, preconfigured for terms lookup.
      */
-    public function setTerms(string $key, array $terms): self
+    public static function buildTermsLookup(string $field, string $index, string $id, string $path): self
     {
-        $this->_key = $key;
-        $this->_terms = \array_values($terms);
+        $t = new self($field);
 
-        return $this;
+        return $t->setTermsLookup($index, $id, $path);
     }
 
     /**
-     * Sets key and terms lookup for the query.
+     * Sets terms for the query.
      *
-     * @param string $key         terms key
-     * @param array  $termsLookup terms lookup for the query
-     *
-     * @return $this
+     * @param string[]
      */
-    public function setTermsLookup(string $key, array $termsLookup): self
+    public function setTerms(array $terms): self
     {
-        $this->_key = $key;
-        $this->_terms = $termsLookup;
+        $this->terms = $terms;
 
         return $this;
     }
 
     /**
      * Adds a single term to the list.
-     *
-     * @param string $term Term
-     *
-     * @return $this
      */
     public function addTerm(string $term): self
     {
-        $this->_terms[] = $term;
+        $this->terms[] = $term;
 
         return $this;
     }
 
-    /**
-     * Sets the minimum matching values.
-     *
-     * @param int|string $minimum Minimum value
-     *
-     * @return $this
-     */
-    public function setMinimumMatch($minimum): self
+    public function setTermsLookup(string $index, string $id, string $path): self
     {
-        return $this->setParam('minimum_match', $minimum);
+        $this->lookup = [
+            'index' => $index,
+            'id' => $id,
+            'path' => $path,
+        ];
+
+        return $this;
     }
 
     /**
@@ -102,10 +90,15 @@ class Terms extends AbstractQuery
      */
     public function toArray(): array
     {
-        if (empty($this->_key)) {
-            throw new InvalidException('Terms key has to be set');
+        if (null !== $this->lookup && \count($this->terms)) {
+            throw new InvalidException('Unable to build Terms query: only one of terms or lookup properties should be set');
         }
-        $this->setParam($this->_key, $this->_terms);
+
+        if (null !== $this->lookup) {
+            $this->setParam($this->field, $this->lookup);
+        } else {
+            $this->setParam($this->field, $this->terms);
+        }
 
         return parent::toArray();
     }

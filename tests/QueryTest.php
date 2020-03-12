@@ -389,11 +389,10 @@ class QueryTest extends BaseTest
     public function testSetPostFilterToArrayCast(): void
     {
         $query = new Query();
-        $postFilter = new Terms();
-        $postFilter->setTerms('key', ['term']);
+        $postFilter = new Terms('key', ['term']);
         $query->setPostFilter($postFilter);
 
-        $postFilter->setTerms('another key', ['another term']);
+        $postFilter->addTerm('another term');
 
         $anotherQuery = new Query();
         $anotherQuery->setPostFilter($postFilter);
