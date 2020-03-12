@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * The `Wildcard` Query's constructor now requires the `name` and `value` properties.
 
 ### Added
+* Added `AbstractTermsAggregation::setIncludeAsExactMatch()` [#1766](https://github.com/ruflin/Elastica/pull/1766) 
+* Added `AbstractTermsAggregation::setExcludeAsExactMatch()` [#1766](https://github.com/ruflin/Elastica/pull/1766)
+* Added `AbstractTermsAggregation::setIncludeWithPartitions()` [#1766](https://github.com/ruflin/Elastica/pull/1766)
 * Added `Elastica\Reindex->setPipeline(Elastica\Pipeline $pipeline): void`. The link between the reindex and the pipeline is solved when `run()` is called, and thus the pipeline given doesn't need to be created before calling `setPipeline()` [#1752](https://github.com/ruflin/Elastica/pull/1752)
 * Added `Elastica\Reindex->setRefresh(string $value): void`. It accepts `REFRESH_*` constants from its class [#1752](https://github.com/ruflin/Elastica/pull/1752) and [#1758](https://github.com/ruflin/Elastica/pull/1758)
 * Added `Elastica\Reindex->setQuery(Elastica\Query\AbstractQuery $query): void` [#1752](https://github.com/ruflin/Elastica/pull/1752)
@@ -31,6 +34,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Deprecated
 ### Removed
+- Removed unsupported `flags` from `AbstractTermsAggregation::setInclude()` [#1766](https://github.com/ruflin/Elastica/pull/1766) 
+- Removed unsupported `flags` from `AbstractTermsAggregation::setExclude()` [#1766](https://github.com/ruflin/Elastica/pull/1766) 
 ### Fixed
 ### Security
 

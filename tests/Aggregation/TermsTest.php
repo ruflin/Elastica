@@ -9,13 +9,70 @@ use Elastica\Mapping;
 use Elastica\Query;
 
 /**
+ * @group functional
+ *
  * @internal
  */
 class TermsTest extends BaseAggregationTest
 {
     /**
-     * @group functional
+     * @group unit
      */
+    public function testIncludePattern(): void
+    {
+        $agg = new Terms('terms');
+        $agg->setInclude('pattern*');
+
+        $this->assertSame($agg->getParam('include'), 'pattern*');
+    }
+
+    /**
+     * @group unit
+     */
+    public function testIncludeExactMatch(): void
+    {
+        $agg = new Terms('terms');
+        $agg->setIncludeAsExactMatch(['first', 'second']);
+
+        $this->assertSame($agg->getParam('include'), ['first', 'second']);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testIncludeWithPartitions(): void
+    {
+        $agg = new Terms('terms');
+        $agg->setIncludeWithPartitions(1, 23);
+
+        $this->assertSame($agg->getParam('include'), [
+            'partition' => 1,
+            'num_partitions' => 23,
+        ]);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testExcludePattern(): void
+    {
+        $agg = new Terms('terms');
+        $agg->setExclude('pattern*');
+
+        $this->assertSame($agg->getParam('exclude'), 'pattern*');
+    }
+
+    /**
+     * @group unit
+     */
+    public function testExcludeExactMatch(): void
+    {
+        $agg = new Terms('terms');
+        $agg->setExcludeAsExactMatch(['first', 'second']);
+
+        $this->assertSame($agg->getParam('exclude'), ['first', 'second']);
+    }
+
     public function testTermsAggregation(): void
     {
         $agg = new Terms('terms');
@@ -23,15 +80,12 @@ class TermsTest extends BaseAggregationTest
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('terms');
+        $results = $this->getIndex()->search($query)->getAggregation('terms');
 
         $this->assertEquals(2, $results['buckets'][0]['doc_count']);
         $this->assertEquals('blue', $results['buckets'][0]['key']);
     }
 
-    /**
-     * @group functional
-     */
     public function testTermsSetOrder(): void
     {
         $agg = new Terms('terms');
@@ -40,14 +94,11 @@ class TermsTest extends BaseAggregationTest
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('terms');
+        $results = $this->getIndex()->search($query)->getAggregation('terms');
 
         $this->assertEquals('blue', $results['buckets'][2]['key']);
     }
 
-    /**
-     * @group functional
-     */
     public function testTermsSetOrders(): void
     {
         $agg = new Terms('terms');
@@ -59,14 +110,14 @@ class TermsTest extends BaseAggregationTest
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('terms');
+        $results = $this->getIndex()->search($query)->getAggregation('terms');
 
         $this->assertSame('green', $results['buckets'][0]['key']);
         $this->assertSame('red', $results['buckets'][1]['key']);
         $this->assertSame('blue', $results['buckets'][2]['key']);
     }
 
-    protected function _getIndexForTest(): Index
+    private function getIndex(): Index
     {
         $index = $this->_createIndex();
 

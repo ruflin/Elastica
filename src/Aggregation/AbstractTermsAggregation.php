@@ -7,10 +7,11 @@ namespace Elastica\Aggregation;
  */
 abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
 {
+    public const EXECUTION_HINT_MAP = 'map';
+    public const EXECUTION_HINT_GLOBAL_ORDINALS = 'global_ordinals';
+
     /**
      * Set the minimum number of documents in which a term must appear in order to be returned in a bucket.
-     *
-     * @return $this
      */
     public function setMinimumDocumentCount(int $count): self
     {
@@ -20,20 +21,37 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
     /**
      * Filter documents to include based on a regular expression.
      *
-     * @param string $pattern a regular expression
-     * @param string $flags   Java Pattern flags
+     * @See https://www.elastic.co/guide/en/elasticsearch/reference/current/regexp-syntax.html for syntax
      *
-     * @return $this
+     * @param string $pattern a regular expression, following the Regexp syntax
      */
-    public function setInclude(string $pattern, ?string $flags = null): self
+    public function setInclude(string $pattern): self
     {
-        if (null === $flags) {
-            return $this->setParam('include', $pattern);
-        }
+        return $this->setParam('include', $pattern);
+    }
 
+    /**
+     * Filter documents to include based on a list of exact values.
+     *
+     * @param string[] $values
+     *
+     * @See https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html#_filtering_values_with_exact_values_2
+     */
+    public function setIncludeAsExactMatch(array $values): self
+    {
+        return $this->setParam('include', $values);
+    }
+
+    /**
+     * Set the aggregation filter to use partitions.
+     *
+     * @See https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html#_filtering_values_with_partitions
+     */
+    public function setIncludeWithPartitions(int $partition, int $numPartitions): self
+    {
         return $this->setParam('include', [
-            'pattern' => $pattern,
-            'flags' => $flags,
+            'partition' => $partition,
+            'num_partitions' => $numPartitions,
         ]);
     }
 
@@ -41,28 +59,26 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
      * Filter documents to exclude based on a regular expression.
      *
      * @param string $pattern a regular expression
-     * @param string $flags   Java Pattern flags
-     *
-     * @return $this
      */
-    public function setExclude(string $pattern, ?string $flags = null): self
+    public function setExclude(string $pattern): self
     {
-        if (null === $flags) {
-            return $this->setParam('exclude', $pattern);
-        }
+        return $this->setParam('exclude', $pattern);
+    }
 
-        return $this->setParam('exclude', [
-            'pattern' => $pattern,
-            'flags' => $flags,
-        ]);
+    /**
+     * Filter documents to exclude based on a list of exact values.
+     *
+     * @param string[] $values
+     *
+     * @See https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html#_filtering_values_with_exact_values_2
+     */
+    public function setExcludeAsExactMatch(array $values): self
+    {
+        return $this->setParam('exclude', $values);
     }
 
     /**
      * Sets the amount of terms to be returned.
-     *
-     * @param int $size the amount of terms to be returned
-     *
-     * @return $this
      */
     public function setSize(int $size): self
     {
@@ -71,10 +87,6 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
 
     /**
      * Sets how many terms the coordinating node will request from each shard.
-     *
-     * @param int $shardSize the amount of terms to be returned
-     *
-     * @return $this
      */
     public function setShardSize(int $shardSize): self
     {
@@ -85,9 +97,9 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
      * Instruct Elasticsearch to use direct field data or ordinals of the field values to execute this aggregation.
      * The execution hint will be ignored if it is not applicable.
      *
-     * @param string $hint map or ordinals
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html#search-aggregations-bucket-terms-aggregation-execution-hint
      *
-     * @return $this
+     * @param string $hint Execution hint, use one of self::EXECUTION_HINT_MAP or self::EXECUTION_HINT_GLOBAL_ORDINALS
      */
     public function setExecutionHint(string $hint): self
     {
