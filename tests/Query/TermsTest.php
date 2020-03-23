@@ -21,7 +21,8 @@ class TermsTest extends BaseTest
             'path' => 'terms',
         ];
 
-        $query = Terms::buildTermsLookup('name', 'index_name', '1', 'terms');
+        $query = new Terms('name');
+        $query->setTermsLookup('index_name', '1', 'terms');
 
         $data = $query->toArray();
         $this->assertEquals($terms, $data['terms']['name']);
@@ -86,7 +87,8 @@ class TermsTest extends BaseTest
             new Document(3, ['name' => 'ruflin']),
         ]);
 
-        $query = Terms::buildTermsLookup('name', $lookupIndex->getName(), '1', 'terms');
+        $query = new Terms('name');
+        $query->setTermsLookup($lookupIndex->getName(), '1', 'terms');
         $index->refresh();
         $lookupIndex->refresh();
 

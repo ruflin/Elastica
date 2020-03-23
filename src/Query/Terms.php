@@ -43,16 +43,6 @@ class Terms extends AbstractQuery
     }
 
     /**
-     * Commodity function to build a Terms query, preconfigured for terms lookup.
-     */
-    public static function buildTermsLookup(string $field, string $index, string $id, string $path): self
-    {
-        $t = new self($field);
-
-        return $t->setTermsLookup($index, $id, $path);
-    }
-
-    /**
      * Sets terms for the query.
      *
      * @param string[]
