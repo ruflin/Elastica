@@ -4,7 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/7.0.0-beta.3...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/7.0.0-beta.4...master)
+### Backward Compatibility Breaks
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+
+## [7.0.0-beta.4](https://github.com/ruflin/Elastica/compare/7.0.0-beta3...7.0.0-beta.4)
 ### Backward Compatibility Breaks
 * If you're **NOT** using composer to manage your libraries: the root directory of the library's source code moved from `lib/Elastica/` to `src/`.
 * The `Wildcard::setValue()` changed its signature: use it to set the value of the wildcard query only.
@@ -23,25 +33,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added `Elastica\Aggregation\ExtendedStatsBucket` aggregation [#1756](https://github.com/ruflin/Elastica/pull/1756)
 
 ### Changed
-- Changed `Terms::setTerms()` signature: it now accepts a list of strings only [#1765](https://github.com/ruflin/Elastica/pull/1765)
-- Changed `Terms::setTermsLookup()` signature: `index`, `path` and `id` are now required arguments [#1765](https://github.com/ruflin/Elastica/pull/1765)
-- Changed `Wildcard::setValue()` and constructor's signature: added more specific `Wildcard::setBoost()` and `Wildcard::setRewrite` methods 
-- Updated PHP coding standards to adhere to PSR-12 [#1760](https://github.com/ruflin/Elastica/pull/1760)
-- Updated to PHPUnit v8.5 [#1759](https://github.com/ruflin/Elastica/pull/1759)
-- Refactored code structure: use `src/` and `tests/` folders [#1755](https://github.com/ruflin/Elastica/pull/1755)
-- Require elastica-php library >= v7.1.1, fixes an issue on Ingestion/Put() type-hinting
-- Require guzzle >= v6.3 as development library: fixes issues on PHP >= 7.2
-- Require phpunit >= v7.5, fixes deprecations in with PHP 7.3
-- Scroll is now throwing an exception when calling `current()` on an invalid iteration: always call `valid()` before
+* Changed `Terms::setTerms()` signature: it now accepts a list of strings only [#1765](https://github.com/ruflin/Elastica/pull/1765)
+* Changed `Terms::setTermsLookup()` signature: `index`, `path` and `id` are now required arguments [#1765](https://github.com/ruflin/Elastica/pull/1765)
+* Changed `Wildcard::setValue()` and constructor's signature: added more specific `Wildcard::setBoost()` and `Wildcard::setRewrite` methods
+* Updated PHP coding standards to adhere to PSR-12 [#1760](https://github.com/ruflin/Elastica/pull/1760)
+* Updated to PHPUnit v8.5 [#1759](https://github.com/ruflin/Elastica/pull/1759)
+* Refactored code structure: use `src/` and `tests/` folders [#1755](https://github.com/ruflin/Elastica/pull/1755)
+* Require elastica-php library >= v7.1.1, fixes an issue on Ingestion/Put() type-hinting
+* Require guzzle >= v6.3 as development library: fixes issues on PHP >= 7.2
+* Require phpunit >= v7.5, fixes deprecations in with PHP 7.3
+* Scroll is now throwing an exception when calling `current()` on an invalid iteration: always call `valid()` before
     accessing the current item, as documented in PHP's Iterator documentation [#1749](https://github.com/ruflin/Elastica/pull/1749)
 
-### Deprecated
 ### Removed
-- Removed unsupported `flags` from `AbstractTermsAggregation::setInclude()` [#1766](https://github.com/ruflin/Elastica/pull/1766) 
-- Removed unsupported `flags` from `AbstractTermsAggregation::setExclude()` [#1766](https://github.com/ruflin/Elastica/pull/1766) 
-- `Terms::setMinimumMatch()` has been removed as not supported by ES 7.x
-### Fixed
-### Security
+* Removed unsupported `flags` from `AbstractTermsAggregation::setInclude()` [#1766](https://github.com/ruflin/Elastica/pull/1766)
+* Removed unsupported `flags` from `AbstractTermsAggregation::setExclude()` [#1766](https://github.com/ruflin/Elastica/pull/1766)
+* `Terms::setMinimumMatch()` has been removed as not supported by ES 7.x
 
 
 ## [7.0.0-beta.3](https://github.com/ruflin/Elastica/compare/7.0.0-beta2...7.0.0-beta.3)
