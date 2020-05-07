@@ -22,7 +22,10 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
      */
     public function __construct(BaseResponse $response, array $bulkResponses)
     {
-        parent::__construct($response->getData());
+        parent::__construct($response->getData(), $response->getStatus());
+
+        $this->setQueryTime($response->getQueryTime());
+        $this->setTransferInfo($response->getTransferInfo());
 
         $this->_bulkResponses = $bulkResponses;
     }
