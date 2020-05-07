@@ -15,6 +15,8 @@ All notable changes to this project will be documented in this file based on the
 
 ### Improvements
 
+* Added missing Response information to Bulk/ResponseSet [#1775](https://github.com/ruflin/Elastica/pull/1775)
+
 ### Deprecated
 
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/6.1.0...6.1.1)

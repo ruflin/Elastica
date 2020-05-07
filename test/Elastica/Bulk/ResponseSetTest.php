@@ -15,6 +15,23 @@ class ResponseSetTest extends BaseTest
 {
     /**
      * @group unit
+     */
+    public function testConstructor()
+    {
+        list($responseData, $actions) = $this->_getFixture();
+
+        $responseSet = $this->_createResponseSet($responseData, $actions);
+
+        $this->assertEquals(200, $responseSet->getStatus());
+        $this->assertEquals(12.3, $responseSet->getQueryTime());
+        $this->assertEquals([
+            'url' => 'http://127.0.0.1:9200/_bulk',
+            'http_code' => 200,
+        ], $responseSet->getTransferInfo());
+    }
+
+    /**
+     * @group unit
      * @dataProvider isOkDataProvider
      */
     public function testIsOk($responseData, $actions, $expected)
@@ -128,10 +145,18 @@ class ResponseSetTest extends BaseTest
     {
         $client = $this->createMock(Client::class);
 
+        $response = new Response($responseData, 200);
+        $response->setQueryTime(12.3);
+        $response->setTransferInfo([
+            'url' => 'http://127.0.0.1:9200/_bulk',
+            'http_code' => 200,
+        ]);
+
         $client->expects($this->once())
             ->method('request')
             ->withAnyParameters()
-            ->will($this->returnValue(new Response($responseData)));
+            ->willReturn($response)
+        ;
 
         $bulk = new Bulk($client);
         $bulk->addActions($actions);
