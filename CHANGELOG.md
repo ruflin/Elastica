@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added `Elastica\Aggregation\WeightedAvg` aggregation [#1770](https://github.com/ruflin/Elastica/pull/1770)
 
 ### Changed
+* Added missing Response information to Bulk/ResponseSet [#1776](https://github.com/ruflin/Elastica/pull/1776)
+
 ### Deprecated
 ### Removed
 ### Fixed
