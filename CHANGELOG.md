@@ -7,15 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/7.0.0-beta.4...master)
 ### Backward Compatibility Breaks
 ### Added
-* Added `Elastica\Aggregation\WeightedAvg` aggregation [#1770](https://github.com/ruflin/Elastica/pull/1770)
 
 ### Changed
-* Added missing Response information to Bulk/ResponseSet [#1776](https://github.com/ruflin/Elastica/pull/1776)
 
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+
+## [Unreleased](https://github.com/ruflin/Elastica/compare/7.0.0-beta.4...7.0.0)
+### Added
+* Added `Elastica\Aggregation\WeightedAvg` aggregation [#1770](https://github.com/ruflin/Elastica/pull/1770)
+
+### Changed
+* Added missing Response information to Bulk/ResponseSet [#1776](https://github.com/ruflin/Elastica/pull/1776)
 
 
 ## [7.0.0-beta.4](https://github.com/ruflin/Elastica/compare/7.0.0-beta3...7.0.0-beta.4)
