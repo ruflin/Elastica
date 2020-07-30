@@ -36,7 +36,7 @@ class Http extends AbstractTransport
      * Makes calls to the elasticsearch server.
      *
      * All calls that are made to the server are done through this function
-     *
+     * @param Request $request
      * @param array $params Host, Port, ...
      *
      * @throws ConnectionException
@@ -104,7 +104,7 @@ class Http extends AbstractTransport
         $username = $connection->getUsername();
         $password = $connection->getPassword();
         if (null !== $username && null !== $password) {
-            \curl_setopt($conn, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+            \curl_setopt($conn, CURLOPT_HTTPAUTH, $this->_getAuthType());
             \curl_setopt($conn, CURLOPT_USERPWD, "{$username}:{$password}");
         }
 
@@ -221,5 +221,23 @@ class Http extends AbstractTransport
         }
 
         return self::$_curlConnection;
+    }
+
+    protected function _getAuthType()
+    {
+        switch ($this->_connection->getAuthType()) {
+            case "digest":
+                return CURLAUTH_DIGEST;
+                break;
+            case "gssnegotiate":
+                return CURLAUTH_GSSNEGOTIATE;
+                break;
+            case "ntlm":
+                return CURLAUTH_NTLM;
+                break;
+            case "basic":
+            default:
+                return CURLAUTH_BASIC;
+        }
     }
 }

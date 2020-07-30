@@ -28,12 +28,13 @@ class ClientConfiguration
         'transport' => null,
         'persistent' => true,
         'timeout' => null,
-        'connections' => [], // host, port, path, transport, compression, persistent, timeout, username, password, config -> (curl, headers, url)
+        'connections' => [], // host, port, path, transport, compression, persistent, timeout, username, password, auth_type, config -> (curl, headers, url)
         'roundRobin' => false,
         'retryOnConflict' => 0,
         'bigintConversion' => false,
         'username' => null,
         'password' => null,
+        'auth_type' => null //basic, digest, gssnegotiate, ntlm
     ];
 
     /**
