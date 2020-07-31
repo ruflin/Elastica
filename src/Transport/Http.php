@@ -236,8 +236,10 @@ class Http extends AbstractTransport
                 return CURLAUTH_NTLM;
                 break;
             case "basic":
-            default:
                 return CURLAUTH_BASIC;
+                break;
+            default:
+                return CURLAUTH_ANY;
         }
     }
 }
