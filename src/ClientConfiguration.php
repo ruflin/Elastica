@@ -83,6 +83,11 @@ class ClientConfiguration
             $clientConfiguration->set('password', \urldecode($parsedDsn['pass']));
         }
 
+        if (isset($parsedDsn['pass']) && isset($parsedDsn['user'])) {
+            $clientConfiguration->set('auth_type', 'basic');
+        }
+
+
         if (isset($parsedDsn['port'])) {
             $clientConfiguration->set('port', $parsedDsn['port']);
         }

@@ -39,6 +39,7 @@ class ClientConfigurationTest extends TestCase
             'bigintConversion' => false,
             'username' => null,
             'password' => null,
+            'auth_type' => null,
         ];
 
         $this->assertEquals($expected, $configuration->getAll());
@@ -62,6 +63,7 @@ class ClientConfigurationTest extends TestCase
             'bigintConversion' => true,
             'username' => 'user',
             'password' => 'p4ss',
+            'auth_type' => 'basic',
             'extra' => 'abc',
         ];
 
@@ -87,6 +89,7 @@ class ClientConfigurationTest extends TestCase
             'bigintConversion' => false,
             'username' => null,
             'password' => null,
+            'auth_type' => null
         ];
 
         $this->assertEquals($expected, $configuration->getAll());
@@ -114,6 +117,7 @@ class ClientConfigurationTest extends TestCase
             'bigintConversion' => false,
             'username' => 'Jdoe',
             'password' => null,
+            'auth_type' => null,
             'extra' => 'abc',
         ];
 
@@ -147,6 +151,7 @@ class ClientConfigurationTest extends TestCase
             'bigintConversion' => false,
             'username' => null,
             'password' => null,
+            'auth_type' => null,
         ];
 
         $this->assertEquals($expected, $configuration->get(''));
