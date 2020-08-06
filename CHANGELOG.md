@@ -7,13 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/7.0.0...master)
 ### Backward Compatibility Breaks
 ### Added
-Ability to specify the type of authentication manually by the `auth_type` parameter (in the client class config) was added (allowed values are `basic, digest, gssnegotiate, ntlm`)
+* Ability to specify the type of authentication manually by the `auth_type` parameter (in the client class config) was added (allowed values are `basic, digest, gssnegotiate, ntlm`)
 ### Changed
 
 ### Deprecated
 ### Removed
 ### Fixed
-fixed issue [1789](https://github.com/ruflin/Elastica/issues/1789)
+* fixed issue [1789](https://github.com/ruflin/Elastica/issues/1789)
 ### Security
 
 
@@ -33,7 +33,7 @@ fixed issue [1789](https://github.com/ruflin/Elastica/issues/1789)
 * The `Terms` Query's constructor now requires the `field` and `terms` properties.
 
 ### Added
-* Added `AbstractTermsAggregation::setIncludeAsExactMatch()` [#1766](https://github.com/ruflin/Elastica/pull/1766) 
+* Added `AbstractTermsAggregation::setIncludeAsExactMatch()` [#1766](https://github.com/ruflin/Elastica/pull/1766)
 * Added `AbstractTermsAggregation::setExcludeAsExactMatch()` [#1766](https://github.com/ruflin/Elastica/pull/1766)
 * Added `AbstractTermsAggregation::setIncludeWithPartitions()` [#1766](https://github.com/ruflin/Elastica/pull/1766)
 * Added `Elastica\Reindex->setPipeline(Elastica\Pipeline $pipeline): void`. The link between the reindex and the pipeline is solved when `run()` is called, and thus the pipeline given doesn't need to be created before calling `setPipeline()` [#1752](https://github.com/ruflin/Elastica/pull/1752)
