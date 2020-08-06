@@ -34,7 +34,7 @@ class ClientConfiguration
         'bigintConversion' => false,
         'username' => null,
         'password' => null,
-        'auth_type' => null //basic, digest, gssnegotiate, ntlm
+        'auth_type' => null, //basic, digest, gssnegotiate, ntlm
     ];
 
     /**
@@ -83,10 +83,9 @@ class ClientConfiguration
             $clientConfiguration->set('password', \urldecode($parsedDsn['pass']));
         }
 
-        if (isset($parsedDsn['pass']) && isset($parsedDsn['user'])) {
+        if (isset($parsedDsn['pass'], $parsedDsn['user'])) {
             $clientConfiguration->set('auth_type', 'basic');
         }
-
 
         if (isset($parsedDsn['port'])) {
             $clientConfiguration->set('port', $parsedDsn['port']);

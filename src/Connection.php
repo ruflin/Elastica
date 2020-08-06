@@ -361,6 +361,6 @@ class Connection extends Param
      */
     public function getAuthType()
     {
-        return $this->hasParam('auth_type') ? strtolower($this->getParam('auth_type')) : null;
+        return $this->hasParam('auth_type') ? \strtolower($this->getParam('auth_type')) : null;
     }
 }

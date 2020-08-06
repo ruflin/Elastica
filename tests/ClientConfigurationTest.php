@@ -89,7 +89,7 @@ class ClientConfigurationTest extends TestCase
             'bigintConversion' => false,
             'username' => null,
             'password' => null,
-            'auth_type' => null
+            'auth_type' => null,
         ];
 
         $this->assertEquals($expected, $configuration->getAll());
