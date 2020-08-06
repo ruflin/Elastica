@@ -252,21 +252,29 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param bool $refresh
+     * @param bool|string $refresh
      *
      * @return $this
      */
     public function setRefresh($refresh = true)
     {
-        return $this->setParam('refresh', (bool) $refresh ? 'true' : 'false');
+        \is_bool($refresh) && $refresh = $refresh
+            ? Reindex::REFRESH_TRUE
+            : Reindex::REFRESH_FALSE;
+
+        return $this->setParam(Reindex::REFRESH, $refresh);
     }
 
     /**
-     * @return bool
+     * @return bool|string
      */
     public function getRefresh()
     {
-        return 'true' === $this->getParam('refresh');
+        $refresh = $this->getParam('refresh');
+
+        return \in_array($refresh, [Reindex::REFRESH_TRUE, Reindex::REFRESH_FALSE])
+            ? $refresh === Reindex::REFRESH_TRUE
+            : $refresh;
     }
 
     /**

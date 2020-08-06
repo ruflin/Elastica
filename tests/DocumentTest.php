@@ -5,6 +5,7 @@ namespace Elastica\Test;
 use Elastica\Document;
 use Elastica\Exception\InvalidException;
 use Elastica\Index;
+use Elastica\Reindex;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -118,6 +119,10 @@ class DocumentTest extends BaseTest
         $document->setRefresh(true);
         $this->assertTrue($document->hasRefresh());
         $this->assertTrue($document->getRefresh());
+
+        $document->setRefresh(Reindex::REFRESH_WAIT_FOR);
+        $this->assertTrue($document->hasRefresh());
+        $this->assertEquals(Reindex::REFRESH_WAIT_FOR, $document->getRefresh());
     }
 
     /**
