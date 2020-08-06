@@ -355,4 +355,12 @@ class Connection extends Param
     {
         return $this->hasParam('password') ? $this->getParam('password') : null;
     }
+
+    /**
+     * @return string AuthType
+     */
+    public function getAuthType()
+    {
+        return $this->hasParam('auth_type') ? \strtolower($this->getParam('auth_type')) : null;
+    }
 }

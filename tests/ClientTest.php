@@ -40,6 +40,7 @@ class ClientTest extends BaseTest
             'bigintConversion' => false,
             'username' => 'user',
             'password' => 'p4ss',
+            'auth_type' => 'basic',
             'connectionStrategy' => 'Simple',
         ];
 
