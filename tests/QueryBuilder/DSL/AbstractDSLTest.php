@@ -72,16 +72,14 @@ abstract class AbstractDSLTest extends BaseTest
      */
     protected function _getHintName(\ReflectionParameter $param)
     {
-        if ($param->isCallable()) {
-            return 'callable';
+        if (null === $type = $param->getType()) {
+            return null;
         }
 
-        if ($param->isArray()) {
-            return 'array';
-        }
-
-        if ($class = $param->getClass()) {
-            return $class->getName();
+        if (\in_array($type->getName(), ['array', 'callable'], true)
+            || !$param->getType()->isBuiltin()
+        ) {
+            return $type->getName();
         }
 
         return null;
