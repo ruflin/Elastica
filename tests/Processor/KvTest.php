@@ -67,7 +67,8 @@ class KvTest extends BasePipelineTest
 
         $result = $pipeline->create();
 
-        $this->assertContains('acknowledged', $result->getData());
+        $this->assertArrayHasKey('acknowledged', $result->getData());
+        $this->assertTrue($result->getData()['acknowledged']);
 
         $pipelineGet = $pipeline->getPipeline('my_custom_pipeline');
         $result = $pipelineGet->getData();

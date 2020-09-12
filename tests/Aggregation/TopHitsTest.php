@@ -324,7 +324,11 @@ class TopHitsTest extends BaseAggregationTest
 
         foreach ($aggrResult['hits']['hits'] as $doc) {
             $this->assertArrayHasKey('highlight', $doc);
-            $this->assertRegExp('#<em>linux</em>#', $doc['highlight']['title'][0]);
+            if (\method_exists($this, 'assertMatchesRegularExpression')) {
+                $this->assertMatchesRegularExpression('#<em>linux</em>#', $doc['highlight']['title'][0]);
+            } else {
+                $this->assertRegExp('#<em>linux</em>#', $doc['highlight']['title'][0]);
+            }
         }
     }
 

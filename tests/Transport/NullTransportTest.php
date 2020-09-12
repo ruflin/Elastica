@@ -52,7 +52,7 @@ class NullTransportTest extends BaseTest
 
         $this->assertArrayHasKey('took', $responseData);
         $this->assertEquals(0, $responseData['took']);
-        $this->assertContains('_shards', $responseData);
+        $this->assertArrayHasKey('_shards', $responseData);
         $this->assertArrayHasKey('hits', $responseData);
         $this->assertArrayHasKey('total', $responseData['hits']);
         $this->assertEquals(0, $responseData['hits']['total']['value']);
@@ -110,7 +110,7 @@ class NullTransportTest extends BaseTest
         $this->assertEquals([], $response->getTransferInfo());
 
         $responseData = $response->getData();
-        $this->assertContains('params', $responseData);
+        $this->assertArrayHasKey('params', $responseData);
         $this->assertEquals($params, $responseData['params']);
     }
 }
