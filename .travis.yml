@@ -19,15 +19,15 @@ matrix:
     - php: 7.4
       env: RUN_TEST=true  ES_VERSION=73
     # Testing the library with different ES versions
-    - php: 7.2
+    - php: 7.3
       env: RUN_TEST=true ES_VERSION=72
-    - php: 7.2
+    - php: 7.3
       env: RUN_TEST=true ES_VERSION=71
     # Running code-coverage on the lowest requirements for PHP 7.2
-    - php: 7.2
+    - php: 7.3
       env: RUN_TEST=coverage COMPOSER_FLAGS="--prefer-stable --prefer-lowest" ES_VERSION=73
     # Run coding-style checks on the lowest version of PHP
-    - php: 7.2
+    - php: 7.3
       env: RUN_CS=true
 
 before_install:
