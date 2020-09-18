@@ -277,7 +277,7 @@ class Client
 
             $docOptions = $data->getOptions(
                 [
-                    'version',
+//                    'version',
                     'version_type',
                     'routing',
                     'percolate',
