@@ -9,7 +9,7 @@ use Elastica\Test\Base as BaseTest;
 /**
  * @internal
  */
-class MatchTest extends BaseTest
+class MatchQueryTest extends BaseTest
 {
     /**
      * @group unit
