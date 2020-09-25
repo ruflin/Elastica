@@ -3,7 +3,7 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Query\Match;
+use Elastica\Query\MatchQuery;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -27,7 +27,7 @@ class MatchTest extends BaseTest
         $prefixLength = 3;
         $maxExpansions = 12;
 
-        $query = new Match();
+        $query = new MatchQuery();
         $query->setFieldQuery($field, $testQuery);
         $this->hideDeprecated();
         $this->showDeprecated();
@@ -80,7 +80,7 @@ class MatchTest extends BaseTest
         $field = 'name';
         $operator = 'or';
 
-        $query = new Match();
+        $query = new MatchQuery();
         $query->setFieldQuery($field, 'Basel New');
         $query->setFieldOperator($field, $operator);
 
@@ -110,7 +110,7 @@ class MatchTest extends BaseTest
         $field = 'name';
         $operator = 'or';
 
-        $query = new Match();
+        $query = new MatchQuery();
         $query->setFieldQuery($field, 'Basel New');
         $query->setFieldOperator($field, $operator);
         $query->setFieldBoost($field, 1.2);
@@ -141,7 +141,7 @@ class MatchTest extends BaseTest
         $field = 'name';
         $operator = 'or';
 
-        $query = new Match();
+        $query = new MatchQuery();
         $query->setFieldQuery($field, 'Basel New');
         $query->setFieldOperator($field, $operator);
         $query->setFieldBoost($field, '1.2');
@@ -167,9 +167,9 @@ class MatchTest extends BaseTest
 
         $index->refresh();
 
-        $query = new Match();
+        $query = new MatchQuery();
         $query->setFieldQuery('name', '');
-        $query->setFieldZeroTermsQuery('name', Match::ZERO_TERM_ALL);
+        $query->setFieldZeroTermsQuery('name', MatchQuery::ZERO_TERM_ALL);
 
         $resultSet = $index->search($query);
 
@@ -182,7 +182,7 @@ class MatchTest extends BaseTest
     public function testMatchFuzzinessType(): void
     {
         $field = 'test';
-        $query = new Match();
+        $query = new MatchQuery();
 
         $fuzziness = 'AUTO';
         $query->setFieldFuzziness($field, $fuzziness);
@@ -202,14 +202,14 @@ class MatchTest extends BaseTest
      */
     public function testConstruct(): void
     {
-        $match = new Match(null, 'values');
+        $match = new MatchQuery(null, 'values');
         $this->assertEquals(['match' => []], $match->toArray());
 
-        $match = new Match('field', null);
+        $match = new MatchQuery('field', null);
         $this->assertEquals(['match' => []], $match->toArray());
 
-        $match1 = new Match('field', 'values');
-        $match2 = new Match();
+        $match1 = new MatchQuery('field', 'values');
+        $match2 = new MatchQuery();
         $match2->setField('field', 'values');
         $this->assertEquals($match1->toArray(), $match2->toArray());
     }

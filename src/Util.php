@@ -221,7 +221,7 @@ class Util
 
         $parts = \explode('\\', $class);
         $last = \array_pop($parts);
-        $last = \preg_replace('/Query$/', '', $last); // for BoolQuery
+        $last = \preg_replace('/Query$/', '', $last); // for BoolQuery and MatchQuery
 
         return self::toSnakeCase($last);
     }

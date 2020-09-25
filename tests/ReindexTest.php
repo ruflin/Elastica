@@ -8,7 +8,7 @@ use Elastica\Index;
 use Elastica\Pipeline;
 use Elastica\Processor\Rename;
 use Elastica\Processor\Uppercase;
-use Elastica\Query\Match;
+use Elastica\Query\MatchQuery;
 use Elastica\Reindex;
 use Elastica\Script\Script;
 
@@ -98,7 +98,7 @@ class ReindexTest extends Base
 
         $newIndex = $this->_createIndex('idx2', true, 2);
 
-        $query = new Match('id', 8);
+        $query = new MatchQuery('id', 8);
 
         $reindex = new Reindex($oldIndex, $newIndex, [
             Reindex::QUERY => $query,

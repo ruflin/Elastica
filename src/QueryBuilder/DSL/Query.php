@@ -20,11 +20,11 @@ use Elastica\Query\GeoPolygon;
 use Elastica\Query\HasChild;
 use Elastica\Query\HasParent;
 use Elastica\Query\Ids;
-use Elastica\Query\Match;
 use Elastica\Query\MatchAll;
 use Elastica\Query\MatchNone;
 use Elastica\Query\MatchPhrase;
 use Elastica\Query\MatchPhrasePrefix;
+use Elastica\Query\MatchQuery;
 use Elastica\Query\MoreLikeThis;
 use Elastica\Query\MultiMatch;
 use Elastica\Query\Nested;
@@ -72,9 +72,9 @@ class Query implements DSL
      *
      * @param mixed $values
      */
-    public function match(?string $field = null, $values = null): Match
+    public function match(?string $field = null, $values = null): MatchQuery
     {
-        return new Match($field, $values);
+        return new MatchQuery($field, $values);
     }
 
     /**
