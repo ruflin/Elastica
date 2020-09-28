@@ -3,7 +3,7 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Query;
-use Elastica\Query\Match;
+use Elastica\Query\MatchQuery;
 use Elastica\Query\Term;
 use Elastica\Rescore\Query as QueryRescore;
 use Elastica\Test\Base as BaseTest;
@@ -19,7 +19,7 @@ class RescoreTest extends BaseTest
     public function testToArray(): void
     {
         $query = new Query();
-        $mainQuery = new Match();
+        $mainQuery = new MatchQuery();
         $mainQuery = $mainQuery->setFieldQuery('test1', 'foo');
         $secQuery = new Term();
         $secQuery = $secQuery->setTerm('test2', 'bar', 2);
@@ -59,7 +59,7 @@ class RescoreTest extends BaseTest
     public function testSetSize(): void
     {
         $query = new Query();
-        $mainQuery = new Match();
+        $mainQuery = new MatchQuery();
         $mainQuery = $mainQuery->setFieldQuery('test1', 'foo');
         $secQuery = new Term();
         $secQuery = $secQuery->setTerm('test2', 'bar', 2);
@@ -101,7 +101,7 @@ class RescoreTest extends BaseTest
     public function testSetWeights(): void
     {
         $query = new Query();
-        $mainQuery = new Match();
+        $mainQuery = new MatchQuery();
         $mainQuery = $mainQuery->setFieldQuery('test1', 'foo');
         $secQuery = new Term();
         $secQuery = $secQuery->setTerm('test2', 'bar', 2);
@@ -147,7 +147,7 @@ class RescoreTest extends BaseTest
     public function testMultipleQueries(): void
     {
         $query = new Query();
-        $mainQuery = new Match();
+        $mainQuery = new MatchQuery();
         $mainQuery = $mainQuery->setFieldQuery('test1', 'foo');
 
         $secQuery1 = new Term();
@@ -219,7 +219,7 @@ class RescoreTest extends BaseTest
     public function testQuery(): void
     {
         $query = new Query();
-        $mainQuery = new Match();
+        $mainQuery = new MatchQuery();
         $mainQuery = $mainQuery->setFieldQuery('test1', 'foo');
         $secQuery = new Term();
         $secQuery = $secQuery->setTerm('test2', 'bar', 2);
