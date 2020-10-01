@@ -92,6 +92,7 @@ class Version700 extends Version
         'bucket_script',
         'serial_diff',
         'weighted_avg',
+        'composite',
     ];
 
     protected $suggesters = [

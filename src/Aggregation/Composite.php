@@ -5,7 +5,6 @@ namespace Elastica\Aggregation;
 class Composite extends AbstractAggregation
 {
     /**
-     * @param int $size
      * @return $this
      */
     public function setSize(int $size): self
@@ -14,7 +13,6 @@ class Composite extends AbstractAggregation
     }
 
     /**
-     * @param AbstractAggregation $aggregation
      * @return $this
      */
     public function addSource(AbstractAggregation $aggregation): self
@@ -23,7 +21,6 @@ class Composite extends AbstractAggregation
     }
 
     /**
-     * @param array|null $checkpoint
      * @return $this
      */
     public function addAfter(?array $checkpoint): self
