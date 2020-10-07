@@ -323,6 +323,9 @@ class Bulk
                         if (!$data->hasId() && isset($bulkResponseData['_id'])) {
                             $data->setId($bulkResponseData['_id']);
                         }
+                        if (isset($responseData['_version'])) {
+                            $data->setVersion($responseData['_version']);
+                        }
                         if (isset($responseData['_seq_no'])) {
                             $data->setSequenceNumber($responseData['_seq_no']);
                         }

@@ -59,7 +59,7 @@ class AbstractUpdateAction extends Param
      *
      * @return string Index name
      */
-    public function getIndex()
+    public function getIndex(): string
     {
         return $this->getParam('_index');
     }
@@ -73,31 +73,31 @@ class AbstractUpdateAction extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/optimistic-concurrency-control.html
      */
-    public function setSequenceNumber($number)
+    public function setSequenceNumber(int $number): self
     {
-        return $this->setParam('if_seq_no', $number);
+        return $this->setParam('_seq_no', $number);
     }
 
     /**
      * Returns document version.
      *
-     * @return int|string Document version
+     * @return int Document version
      */
-    public function getSequenceNumber()
+    public function getSequenceNumber(): int
     {
-        return $this->getParam('if_seq_no');
+        return $this->getParam('_seq_no');
     }
 
     /**
      * @return bool
      */
-    public function hasSequenceNumber()
+    public function hasSequenceNumber(): bool
     {
-        return $this->hasParam('if_seq_no');
+        return $this->hasParam('_seq_no');
     }
 
     /**
-     * Sets the prmary term of a document for use with optimistic concurrency control.
+     * Sets the primary term of a document for use with optimistic concurrency control.
      *
      * @param int $term Primary Term
      *
@@ -105,31 +105,30 @@ class AbstractUpdateAction extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/optimistic-concurrency-control.html
      */
-    public function setPrimaryTerm($term)
+    public function setPrimaryTerm(int $term): self
     {
-        return $this->setParam('if_primary_term', $term);
+        return $this->setParam('_primary_term', $term);
     }
 
     /**
      * Returns document version.
      *
-     * @return int|string Document version
+     * @return int Document version
      */
-    public function getPrimaryTerm()
+    public function getPrimaryTerm(): int
     {
-        return $this->getParam('if_primary_term');
+        return $this->getParam('_primary_term');
     }
 
     /**
      * @return bool
      */
-    public function hasPrimaryTerm()
+    public function hasPrimaryTerm(): bool
     {
-        return $this->hasParam('if_primary_term');
+        return $this->hasParam('_primary_term');
     }
 
     /**
-     * @deprecated
      * Sets the version of a document for use with optimistic concurrency control.
      *
      * @param int $version Document version
@@ -138,67 +137,27 @@ class AbstractUpdateAction extends Param
      *
      * @see https://www.elastic.co/blog/versioning
      */
-    public function setVersion($version)
+    public function setVersion(int $version): self
     {
-        \trigger_error('Elastica\AbstractUpdateAction::setVersion is deprecated. Use Elastica\AbstractUpdateAction::setSequenceNumber and Elastica\AbstractUpdateAction::setPrimaryTerm instead.', E_USER_DEPRECATED);
-
-        return $this;
+        return $this->setParam('_version', $version);
     }
 
     /**
-     * @deprecated
      * Returns document version.
      *
-     * @return int|string Document version
+     * @return int Document version
      */
-    public function getVersion()
+    public function getVersion(): int
     {
         return $this->getParam('version');
     }
 
     /**
-     * @deprecated
      * @return bool
      */
-    public function hasVersion()
+    public function hasVersion(): bool
     {
         return $this->hasParam('version');
-    }
-
-    /**
-     * @deprecated
-     * Sets the version_type of a document
-     * Default in ES is internal, but you can set to external to use custom versioning.
-     *
-     * @param string $versionType Document version type
-     *
-     * @return $this
-     */
-    public function setVersionType($versionType)
-    {
-        \trigger_error('Elastica\AbstractUpdateAction::setVersionType is deprecated. Use Elastica\AbstractUpdateAction::setSequenceNumber and Elastica\AbstractUpdateAction::setPrimaryTerm instead.', E_USER_DEPRECATED);
-
-        return $this;
-    }
-
-    /**
-     * @deprecated
-     * Returns document version type.
-     *
-     * @return int|string Document version type
-     */
-    public function getVersionType()
-    {
-        return $this->getParam('version_type');
-    }
-
-    /**
-     * @deprecated
-     * @return bool
-     */
-    public function hasVersionType()
-    {
-        return $this->hasParam('version_type');
     }
 
     /**
@@ -208,7 +167,7 @@ class AbstractUpdateAction extends Param
      *
      * @return $this
      */
-    public function setOpType($opType)
+    public function setOpType(string $opType): self
     {
         return $this->setParam('op_type', $opType);
     }
@@ -218,7 +177,7 @@ class AbstractUpdateAction extends Param
      *
      * @return string
      */
-    public function getOpType()
+    public function getOpType(): string
     {
         return $this->getParam('op_type');
     }
@@ -226,7 +185,7 @@ class AbstractUpdateAction extends Param
     /**
      * @return bool
      */
-    public function hasOpType()
+    public function hasOpType(): bool
     {
         return $this->hasParam('op_type');
     }
@@ -238,7 +197,7 @@ class AbstractUpdateAction extends Param
      *
      * @return $this
      */
-    public function setRouting($value)
+    public function setRouting(string $value): self
     {
         return $this->setParam('routing', $value);
     }
@@ -248,7 +207,7 @@ class AbstractUpdateAction extends Param
      *
      * @return string
      */
-    public function getRouting()
+    public function getRouting(): string
     {
         return $this->getParam('_routing');
     }
@@ -256,7 +215,7 @@ class AbstractUpdateAction extends Param
     /**
      * @return bool
      */
-    public function hasRouting()
+    public function hasRouting(): bool
     {
         return $this->hasParam('_routing');
     }
@@ -266,7 +225,7 @@ class AbstractUpdateAction extends Param
      *
      * @return $this
      */
-    public function setFields($fields)
+    public function setFields($fields): self
     {
         if (\is_array($fields)) {
             $fields = \implode(',', $fields);
@@ -278,7 +237,7 @@ class AbstractUpdateAction extends Param
     /**
      * @return $this
      */
-    public function setFieldsSource()
+    public function setFieldsSource(): self
     {
         return $this->setFields('_source');
     }
@@ -286,7 +245,7 @@ class AbstractUpdateAction extends Param
     /**
      * @return string
      */
-    public function getFields()
+    public function getFields(): string
     {
         return $this->getParam('fields');
     }
@@ -294,7 +253,7 @@ class AbstractUpdateAction extends Param
     /**
      * @return bool
      */
-    public function hasFields()
+    public function hasFields(): bool
     {
         return $this->hasParam('fields');
     }
@@ -304,7 +263,7 @@ class AbstractUpdateAction extends Param
      *
      * @return $this
      */
-    public function setRetryOnConflict($num)
+    public function setRetryOnConflict(int $num): self
     {
         return $this->setParam('retry_on_conflict', (int) $num);
     }
@@ -312,7 +271,7 @@ class AbstractUpdateAction extends Param
     /**
      * @return int
      */
-    public function getRetryOnConflict()
+    public function getRetryOnConflict(): int
     {
         return $this->getParam('retry_on_conflict');
     }
@@ -320,7 +279,7 @@ class AbstractUpdateAction extends Param
     /**
      * @return bool
      */
-    public function hasRetryOnConflict()
+    public function hasRetryOnConflict(): bool
     {
         return $this->hasParam('_retry_on_conflict');
     }
@@ -354,7 +313,7 @@ class AbstractUpdateAction extends Param
     /**
      * @return bool
      */
-    public function hasRefresh()
+    public function hasRefresh(): bool
     {
         return $this->hasParam('refresh');
     }
@@ -364,15 +323,15 @@ class AbstractUpdateAction extends Param
      *
      * @return $this
      */
-    public function setTimeout($timeout)
+    public function setTimeout(string $timeout): self
     {
         return $this->setParam('timeout', $timeout);
     }
 
     /**
-     * @return bool
+     * @return string
      */
-    public function getTimeout()
+    public function getTimeout(): string
     {
         return $this->getParam('timeout');
     }
@@ -380,7 +339,7 @@ class AbstractUpdateAction extends Param
     /**
      * @return bool
      */
-    public function hasTimeout()
+    public function hasTimeout(): bool
     {
         return $this->hasParam('timeout');
     }
@@ -390,7 +349,7 @@ class AbstractUpdateAction extends Param
      *
      * @return $this
      */
-    public function setConsistency($timeout)
+    public function setConsistency(string $timeout): self
     {
         return $this->setParam('consistency', $timeout);
     }
@@ -398,7 +357,7 @@ class AbstractUpdateAction extends Param
     /**
      * @return string
      */
-    public function getConsistency()
+    public function getConsistency(): string
     {
         return $this->getParam('consistency');
     }
@@ -406,7 +365,7 @@ class AbstractUpdateAction extends Param
     /**
      * @return bool
      */
-    public function hasConsistency()
+    public function hasConsistency(): bool
     {
         return $this->hasParam('consistency');
     }
@@ -416,7 +375,7 @@ class AbstractUpdateAction extends Param
      *
      * @return $this
      */
-    public function setReplication($timeout)
+    public function setReplication(string $timeout): self
     {
         return $this->setParam('replication', $timeout);
     }
@@ -424,7 +383,7 @@ class AbstractUpdateAction extends Param
     /**
      * @return string
      */
-    public function getReplication()
+    public function getReplication(): string
     {
         return $this->getParam('replication');
     }
@@ -432,7 +391,7 @@ class AbstractUpdateAction extends Param
     /**
      * @return bool
      */
-    public function hasReplication()
+    public function hasReplication(): bool
     {
         return $this->hasParam('replication');
     }
@@ -442,7 +401,7 @@ class AbstractUpdateAction extends Param
      *
      * @return $this
      */
-    public function setUpsert($data)
+    public function setUpsert($data): self
     {
         $document = Document::create($data);
         $this->_upsert = $document;
@@ -453,7 +412,7 @@ class AbstractUpdateAction extends Param
     /**
      * @return Document
      */
-    public function getUpsert()
+    public function getUpsert(): Document
     {
         return $this->_upsert;
     }
@@ -461,7 +420,7 @@ class AbstractUpdateAction extends Param
     /**
      * @return bool
      */
-    public function hasUpsert()
+    public function hasUpsert(): bool
     {
         return null !== $this->_upsert;
     }
@@ -471,7 +430,7 @@ class AbstractUpdateAction extends Param
      *
      * @return array
      */
-    public function getOptions(array $fields = [])
+    public function getOptions(array $fields = []): array
     {
         if (!empty($fields)) {
             return \array_filter(\array_intersect_key($this->getParams(), \array_flip($fields)));
