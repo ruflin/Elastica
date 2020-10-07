@@ -67,8 +67,6 @@ class AbstractUpdateAction extends Param
     /**
      * Sets the version parameters of a document for use with optimistic concurrency control.
      *
-     * @param array $responseData
-     *
      * @return $this
      */
     public function setVersionParams(array $responseData): self
@@ -112,9 +110,6 @@ class AbstractUpdateAction extends Param
         return $this->getParam('if_seq_no');
     }
 
-    /**
-     * @return bool
-     */
     public function hasSequenceNumber(): bool
     {
         return $this->hasParam('if_seq_no');
@@ -144,9 +139,6 @@ class AbstractUpdateAction extends Param
         return $this->getParam('if_primary_term');
     }
 
-    /**
-     * @return bool
-     */
     public function hasPrimaryTerm(): bool
     {
         return $this->hasParam('if_primary_term');
@@ -176,9 +168,6 @@ class AbstractUpdateAction extends Param
         return $this->getParam('_version');
     }
 
-    /**
-     * @return bool
-     */
     public function hasVersion(): bool
     {
         return $this->hasParam('_version');
@@ -198,17 +187,12 @@ class AbstractUpdateAction extends Param
 
     /**
      * Get operation type.
-     *
-     * @return string
      */
     public function getOpType(): string
     {
         return $this->getParam('op_type');
     }
 
-    /**
-     * @return bool
-     */
     public function hasOpType(): bool
     {
         return $this->hasParam('op_type');
@@ -228,17 +212,12 @@ class AbstractUpdateAction extends Param
 
     /**
      * Get routing parameter.
-     *
-     * @return string
      */
     public function getRouting(): string
     {
         return $this->getParam('_routing');
     }
 
-    /**
-     * @return bool
-     */
     public function hasRouting(): bool
     {
         return $this->hasParam('_routing');
@@ -266,25 +245,17 @@ class AbstractUpdateAction extends Param
         return $this->setFields('_source');
     }
 
-    /**
-     * @return string
-     */
     public function getFields(): string
     {
         return $this->getParam('fields');
     }
 
-    /**
-     * @return bool
-     */
     public function hasFields(): bool
     {
         return $this->hasParam('fields');
     }
 
     /**
-     * @param int $num
-     *
      * @return $this
      */
     public function setRetryOnConflict(int $num): self
@@ -292,17 +263,11 @@ class AbstractUpdateAction extends Param
         return $this->setParam('retry_on_conflict', (int) $num);
     }
 
-    /**
-     * @return int
-     */
     public function getRetryOnConflict(): int
     {
         return $this->getParam('retry_on_conflict');
     }
 
-    /**
-     * @return bool
-     */
     public function hasRetryOnConflict(): bool
     {
         return $this->hasParam('_retry_on_conflict');
@@ -334,17 +299,12 @@ class AbstractUpdateAction extends Param
             : $refresh;
     }
 
-    /**
-     * @return bool
-     */
     public function hasRefresh(): bool
     {
         return $this->hasParam('refresh');
     }
 
     /**
-     * @param string $timeout
-     *
      * @return $this
      */
     public function setTimeout(string $timeout): self
@@ -352,25 +312,17 @@ class AbstractUpdateAction extends Param
         return $this->setParam('timeout', $timeout);
     }
 
-    /**
-     * @return string
-     */
     public function getTimeout(): string
     {
         return $this->getParam('timeout');
     }
 
-    /**
-     * @return bool
-     */
     public function hasTimeout(): bool
     {
         return $this->hasParam('timeout');
     }
 
     /**
-     * @param string $timeout
-     *
      * @return $this
      */
     public function setConsistency(string $timeout): self
@@ -378,25 +330,17 @@ class AbstractUpdateAction extends Param
         return $this->setParam('consistency', $timeout);
     }
 
-    /**
-     * @return string
-     */
     public function getConsistency(): string
     {
         return $this->getParam('consistency');
     }
 
-    /**
-     * @return bool
-     */
     public function hasConsistency(): bool
     {
         return $this->hasParam('consistency');
     }
 
     /**
-     * @param string $timeout
-     *
      * @return $this
      */
     public function setReplication(string $timeout): self
@@ -404,17 +348,11 @@ class AbstractUpdateAction extends Param
         return $this->setParam('replication', $timeout);
     }
 
-    /**
-     * @return string
-     */
     public function getReplication(): string
     {
         return $this->getParam('replication');
     }
 
-    /**
-     * @return bool
-     */
     public function hasReplication(): bool
     {
         return $this->hasParam('replication');
@@ -433,17 +371,11 @@ class AbstractUpdateAction extends Param
         return $this;
     }
 
-    /**
-     * @return Document
-     */
     public function getUpsert(): Document
     {
         return $this->_upsert;
     }
 
-    /**
-     * @return bool
-     */
     public function hasUpsert(): bool
     {
         return null !== $this->_upsert;
@@ -451,8 +383,6 @@ class AbstractUpdateAction extends Param
 
     /**
      * @param array $fields if empty array all options will be returned
-     *
-     * @return array
      */
     public function getOptions(array $fields = []): array
     {
