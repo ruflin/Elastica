@@ -215,8 +215,11 @@ class Index implements SearchableInterface
             if (isset($data['_id']) && !$doc->hasId()) {
                 $doc->setId($data['_id']);
             }
-            if (isset($data['_version'])) {
-                $doc->setVersion($data['_version']);
+            if (isset($responseData['_seq_no'])) {
+                $doc->setSequenceNumber($responseData['_seq_no']);
+            }
+            if (isset($responseData['_primary_term'])) {
+                $doc->setPrimaryTerm($responseData['_primary_term']);
             }
         }
 
