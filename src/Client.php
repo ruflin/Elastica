@@ -277,15 +277,15 @@ class Client
 
             $docOptions = $data->getOptions(
                 [
-                    'if_seq_no',
-                    'if_primary_term',
-                    'routing',
-                    'percolate',
-                    'parent',
-                    'retry_on_conflict',
                     'consistency',
-                    'replication',
+                    'if_primary_term',
+                    'if_seq_no',
+                    'parent',
+                    'percolate',
                     'refresh',
+                    'replication',
+                    'retry_on_conflict',
+                    'routing',
                     'timeout',
                 ]
             );

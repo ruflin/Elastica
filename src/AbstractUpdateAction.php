@@ -75,7 +75,7 @@ class AbstractUpdateAction extends Param
      */
     public function setSequenceNumber(int $number): self
     {
-        return $this->setParam('_seq_no', $number);
+        return $this->setParam('if_seq_no', $number);
     }
 
     /**
@@ -85,7 +85,7 @@ class AbstractUpdateAction extends Param
      */
     public function getSequenceNumber(): int
     {
-        return $this->getParam('_seq_no');
+        return $this->getParam('if_seq_no');
     }
 
     /**
@@ -93,7 +93,7 @@ class AbstractUpdateAction extends Param
      */
     public function hasSequenceNumber(): bool
     {
-        return $this->hasParam('_seq_no');
+        return $this->hasParam('if_seq_no');
     }
 
     /**
@@ -107,7 +107,7 @@ class AbstractUpdateAction extends Param
      */
     public function setPrimaryTerm(int $term): self
     {
-        return $this->setParam('_primary_term', $term);
+        return $this->setParam('if_primary_term', $term);
     }
 
     /**
@@ -117,7 +117,7 @@ class AbstractUpdateAction extends Param
      */
     public function getPrimaryTerm(): int
     {
-        return $this->getParam('_primary_term');
+        return $this->getParam('if_primary_term');
     }
 
     /**
@@ -125,11 +125,11 @@ class AbstractUpdateAction extends Param
      */
     public function hasPrimaryTerm(): bool
     {
-        return $this->hasParam('_primary_term');
+        return $this->hasParam('if_primary_term');
     }
 
     /**
-     * Sets the version of a document for use with optimistic concurrency control.
+     * Sets the version of a document.
      *
      * @param int $version Document version
      *
@@ -149,7 +149,7 @@ class AbstractUpdateAction extends Param
      */
     public function getVersion(): int
     {
-        return $this->getParam('version');
+        return $this->getParam('_version');
     }
 
     /**
@@ -157,7 +157,7 @@ class AbstractUpdateAction extends Param
      */
     public function hasVersion(): bool
     {
-        return $this->hasParam('version');
+        return $this->hasParam('_version');
     }
 
     /**
