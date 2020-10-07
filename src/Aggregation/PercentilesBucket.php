@@ -39,7 +39,7 @@ class PercentilesBucket extends AbstractAggregation
     /**
      * Set the buckets_path for this aggregation.
      */
-    public function setBucketsPath(string $bucketsPath): PercentilesBucket
+    public function setBucketsPath(string $bucketsPath): self
     {
         return $this->setParam('buckets_path', $bucketsPath);
     }
@@ -47,7 +47,7 @@ class PercentilesBucket extends AbstractAggregation
     /**
      * Set the gap policy for this aggregation.
      */
-    public function setGapPolicy(string $gapPolicy): PercentilesBucket
+    public function setGapPolicy(string $gapPolicy): self
     {
         return $this->setParam('gap_policy', $gapPolicy);
     }
@@ -55,7 +55,7 @@ class PercentilesBucket extends AbstractAggregation
     /**
      * Set the format for this aggregation.
      */
-    public function setFormat(string $format): PercentilesBucket
+    public function setFormat(string $format): self
     {
         return $this->setParam('format', $format);
     }
@@ -65,7 +65,7 @@ class PercentilesBucket extends AbstractAggregation
      *
      * @param float[] $percents
      */
-    public function setPercents(array $percents): PercentilesBucket
+    public function setPercents(array $percents): self
     {
         return $this->setParam('percents', $percents);
     }
@@ -73,7 +73,7 @@ class PercentilesBucket extends AbstractAggregation
     /**
      * Set keyed flag to return the range as an hash instead of an array of key-value pairs.
      */
-    public function setKeyed(bool $keyed): PercentilesBucket
+    public function setKeyed(bool $keyed): self
     {
         return $this->setParam('keyed', $keyed);
     }
