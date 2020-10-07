@@ -215,15 +215,7 @@ class Index implements SearchableInterface
             if (isset($data['_id']) && !$doc->hasId()) {
                 $doc->setId($data['_id']);
             }
-            if (isset($data['_version'])) {
-                $doc->setVersion($data['_version']);
-            }
-            if (isset($data['_seq_no'])) {
-                $doc->setSequenceNumber($data['_seq_no']);
-            }
-            if (isset($data['_primary_term'])) {
-                $doc->setPrimaryTerm($data['_primary_term']);
-            }
+            $doc->setVersionParams($data);
         }
 
         return $response;
@@ -279,15 +271,7 @@ class Index implements SearchableInterface
         }
 
         $doc = new Document($id, $data, $this->getName());
-        if (isset($data['_version'])) {
-            $doc->setVersion($data['_version']);
-        }
-        if (isset($data['_seq_no'])) {
-            $doc->setSequenceNumber($data['_seq_no']);
-        }
-        if (isset($data['_primary_term'])) {
-            $doc->setPrimaryTerm($data['_primary_term']);
-        }
+        $doc->setVersionParams($data);
 
         return $doc;
     }

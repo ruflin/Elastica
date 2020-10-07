@@ -310,13 +310,7 @@ class Client
             && $data instanceof Document
             && ($data->isAutoPopulate() || $this->getConfigValue(['document', 'autoPopulate'], false))
         ) {
-            $responseData = $response->getData();
-            if (isset($responseData['_seq_no'])) {
-                $data->setSequenceNumber($responseData['_seq_no']);
-            }
-            if (isset($responseData['_primary_term'])) {
-                $data->setPrimaryTerm($responseData['_primary_term']);
-            }
+            $data->setVersionParams($response->getData());
         }
 
         return $response;

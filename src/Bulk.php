@@ -323,15 +323,7 @@ class Bulk
                         if (!$data->hasId() && isset($bulkResponseData['_id'])) {
                             $data->setId($bulkResponseData['_id']);
                         }
-                        if (isset($bulkResponseData['_version'])) {
-                            $data->setVersion($bulkResponseData['_version']);
-                        }
-                        if (isset($bulkResponseData['_seq_no'])) {
-                            $data->setSequenceNumber($bulkResponseData['_seq_no']);
-                        }
-                        if (isset($bulkResponseData['_primary_term'])) {
-                            $data->setPrimaryTerm($bulkResponseData['_primary_term']);
-                        }
+                        $data->setVersionParams($bulkResponseData);
                     }
                 }
 
