@@ -65,6 +65,30 @@ class AbstractUpdateAction extends Param
     }
 
     /**
+     * Sets the version parameters of a document for use with optimistic concurrency control.
+     *
+     * @param array $responseData
+     *
+     * @return $this
+     */
+    public function setVersionParams(array $responseData): self
+    {
+        if (isset($responseData['_version'])) {
+            $this->setVersion($responseData['_version']);
+        }
+
+        if (isset($data['_seq_no'])) {
+            $this->setSequenceNumber($responseData['_seq_no']);
+        }
+
+        if (isset($data['_primary_term'])) {
+            $this->setPrimaryTerm($responseData['_primary_term']);
+        }
+
+        return $this;
+    }
+
+    /**
      * Sets the sequence number of a document for use with optimistic concurrency control.
      *
      * @param int $number Sequence Number
@@ -437,27 +461,5 @@ class AbstractUpdateAction extends Param
         }
 
         return \array_filter($this->getParams());
-    }
-
-    /**
-     * @param array $responseData
-     *
-     * @return $this
-     */
-    public function setVersionParams(array $responseData) :self
-    {
-        if (isset($responseData['_version'])) {
-            $this->setVersion($responseData['_version']);
-        }
-
-        if (isset($data['_seq_no'])) {
-            $this->setSequenceNumber($responseData['_seq_no']);
-        }
-
-        if (isset($data['_primary_term'])) {
-            $this->setPrimaryTerm($responseData['_primary_term']);
-        }
-
-        return $this;
     }
 }
