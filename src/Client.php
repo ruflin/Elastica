@@ -279,7 +279,6 @@ class Client
                 [
                     'if_seq_no',
                     'if_primary_term',
-                    'version_type',
                     'routing',
                     'percolate',
                     'parent',
@@ -312,8 +311,11 @@ class Client
             && ($data->isAutoPopulate() || $this->getConfigValue(['document', 'autoPopulate'], false))
         ) {
             $responseData = $response->getData();
-            if (isset($responseData['_version'])) {
-                $data->setVersion($responseData['_version']);
+            if (isset($responseData['_seq_no'])) {
+                $data->setSequenceNumber($responseData['_seq_no']);
+            }
+            if (isset($responseData['_primary_term'])) {
+                $data->setPrimaryTerm($responseData['_primary_term']);
             }
         }
 

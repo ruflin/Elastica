@@ -65,6 +65,71 @@ class AbstractUpdateAction extends Param
     }
 
     /**
+     * Sets the sequence number of a document for use with optimistic concurrency control.
+     *
+     * @param int $number Sequence Number
+     *
+     * @return $this
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/optimistic-concurrency-control.html
+     */
+    public function setSequenceNumber($number)
+    {
+        return $this->setParam('if_seq_no', $number);
+    }
+
+    /**
+     * Returns document version.
+     *
+     * @return int|string Document version
+     */
+    public function getSequenceNumber()
+    {
+        return $this->getParam('if_seq_no');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasSequenceNumber()
+    {
+        return $this->hasParam('if_seq_no');
+    }
+
+    /**
+     * Sets the prmary term of a document for use with optimistic concurrency control.
+     *
+     * @param int $term Primary Term
+     *
+     * @return $this
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/optimistic-concurrency-control.html
+     */
+    public function setPrimaryTerm($term)
+    {
+        return $this->setParam('if_primary_term', $term);
+    }
+
+    /**
+     * Returns document version.
+     *
+     * @return int|string Document version
+     */
+    public function getPrimaryTerm()
+    {
+        return $this->getParam('if_primary_term');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasPrimaryTerm()
+    {
+        return $this->hasParam('if_primary_term');
+    }
+
+    /**
+     * @deprecated
      * Sets the version of a document for use with optimistic concurrency control.
      *
      * @param int $version Document version
@@ -75,10 +140,13 @@ class AbstractUpdateAction extends Param
      */
     public function setVersion($version)
     {
-        return $this->setParam('version', (int) $version);
+        \trigger_error('Elastica\AbstractUpdateAction\setVersion is deprecated. Elastica\AbstractUpdateAction\setSequenceNumber and Elastica\AbstractUpdateAction\setPrimaryTerm instead.', E_USER_DEPRECATED);
+
+        return $this;
     }
 
     /**
+     * @deprecated
      * Returns document version.
      *
      * @return int|string Document version
@@ -89,6 +157,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
+     * @deprecated
      * @return bool
      */
     public function hasVersion()
@@ -97,6 +166,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
+     * @deprecated
      * Sets the version_type of a document
      * Default in ES is internal, but you can set to external to use custom versioning.
      *
@@ -106,10 +176,13 @@ class AbstractUpdateAction extends Param
      */
     public function setVersionType($versionType)
     {
-        return $this->setParam('version_type', $versionType);
+        \trigger_error('Elastica\AbstractUpdateAction\setVersionType is deprecated. Elastica\AbstractUpdateAction\setSequenceNumber and Elastica\AbstractUpdateAction\setPrimaryTerm instead.', E_USER_DEPRECATED);
+
+        return $this;
     }
 
     /**
+     * @deprecated
      * Returns document version type.
      *
      * @return int|string Document version type
@@ -120,6 +193,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
+     * @deprecated
      * @return bool
      */
     public function hasVersionType()
