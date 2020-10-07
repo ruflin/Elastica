@@ -275,10 +275,7 @@ class Index implements SearchableInterface
             $data = [];
         }
 
-        $document = new Document($id, $data, $this->getName());
-        $document->setVersion($result['_version']);
-
-        return $document;
+        return new Document($id, $data, $this->getName());
     }
 
     /**
