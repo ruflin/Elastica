@@ -140,7 +140,7 @@ class AbstractUpdateAction extends Param
      */
     public function setVersion($version)
     {
-        \trigger_error('Elastica\AbstractUpdateAction\setVersion is deprecated. Elastica\AbstractUpdateAction\setSequenceNumber and Elastica\AbstractUpdateAction\setPrimaryTerm instead.', E_USER_DEPRECATED);
+        \trigger_error('Elastica\AbstractUpdateAction::setVersion is deprecated. Use Elastica\AbstractUpdateAction::setSequenceNumber and Elastica\AbstractUpdateAction::setPrimaryTerm instead.', E_USER_DEPRECATED);
 
         return $this;
     }
@@ -176,7 +176,7 @@ class AbstractUpdateAction extends Param
      */
     public function setVersionType($versionType)
     {
-        \trigger_error('Elastica\AbstractUpdateAction\setVersionType is deprecated. Elastica\AbstractUpdateAction\setSequenceNumber and Elastica\AbstractUpdateAction\setPrimaryTerm instead.', E_USER_DEPRECATED);
+        \trigger_error('Elastica\AbstractUpdateAction::setVersionType is deprecated. Use Elastica\AbstractUpdateAction::setSequenceNumber and Elastica\AbstractUpdateAction::setPrimaryTerm instead.', E_USER_DEPRECATED);
 
         return $this;
     }
