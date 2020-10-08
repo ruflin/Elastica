@@ -59,7 +59,7 @@ class AbstractUpdateAction extends Param
      *
      * @return string Index name
      */
-    public function getIndex(): string
+    public function getIndex()
     {
         return $this->getParam('_index');
     }
@@ -153,24 +153,27 @@ class AbstractUpdateAction extends Param
      *
      * @see https://www.elastic.co/blog/versioning
      */
-    public function setVersion(int $version): self
+    public function setVersion($version)
     {
-        return $this->setParam('_version', $version);
+        return $this->setParam('version', (int) $version);
     }
 
     /**
      * Returns document version.
      *
-     * @return int Document version
+     * @return int|string Document version
      */
-    public function getVersion(): int
+    public function getVersion()
     {
-        return $this->getParam('_version');
+        return $this->getParam('version');
     }
 
-    public function hasVersion(): bool
+    /**
+     * @return bool
+     */
+    public function hasVersion()
     {
-        return $this->hasParam('_version');
+        return $this->hasParam('version');
     }
 
     /**
@@ -180,20 +183,25 @@ class AbstractUpdateAction extends Param
      *
      * @return $this
      */
-    public function setOpType(string $opType): self
+    public function setOpType($opType)
     {
         return $this->setParam('op_type', $opType);
     }
 
     /**
      * Get operation type.
+     *
+     * @return string
      */
-    public function getOpType(): string
+    public function getOpType()
     {
         return $this->getParam('op_type');
     }
 
-    public function hasOpType(): bool
+    /**
+     * @return bool
+     */
+    public function hasOpType()
     {
         return $this->hasParam('op_type');
     }
@@ -205,20 +213,25 @@ class AbstractUpdateAction extends Param
      *
      * @return $this
      */
-    public function setRouting(string $value): self
+    public function setRouting($value)
     {
         return $this->setParam('routing', $value);
     }
 
     /**
      * Get routing parameter.
+     *
+     * @return string
      */
-    public function getRouting(): string
+    public function getRouting()
     {
         return $this->getParam('_routing');
     }
 
-    public function hasRouting(): bool
+    /**
+     * @return bool
+     */
+    public function hasRouting()
     {
         return $this->hasParam('_routing');
     }
@@ -228,7 +241,7 @@ class AbstractUpdateAction extends Param
      *
      * @return $this
      */
-    public function setFields($fields): self
+    public function setFields($fields)
     {
         if (\is_array($fields)) {
             $fields = \implode(',', $fields);
@@ -240,35 +253,49 @@ class AbstractUpdateAction extends Param
     /**
      * @return $this
      */
-    public function setFieldsSource(): self
+    public function setFieldsSource()
     {
         return $this->setFields('_source');
     }
 
-    public function getFields(): string
+    /**
+     * @return string
+     */
+    public function getFields()
     {
         return $this->getParam('fields');
     }
 
-    public function hasFields(): bool
+    /**
+     * @return bool
+     */
+    public function hasFields()
     {
         return $this->hasParam('fields');
     }
 
     /**
+     * @param int $num
+     *
      * @return $this
      */
-    public function setRetryOnConflict(int $num): self
+    public function setRetryOnConflict($num)
     {
         return $this->setParam('retry_on_conflict', (int) $num);
     }
 
-    public function getRetryOnConflict(): int
+    /**
+     * @return int
+     */
+    public function getRetryOnConflict()
     {
         return $this->getParam('retry_on_conflict');
     }
 
-    public function hasRetryOnConflict(): bool
+    /**
+     * @return bool
+     */
+    public function hasRetryOnConflict()
     {
         return $this->hasParam('_retry_on_conflict');
     }
@@ -299,61 +326,88 @@ class AbstractUpdateAction extends Param
             : $refresh;
     }
 
-    public function hasRefresh(): bool
+    /**
+     * @return bool
+     */
+    public function hasRefresh()
     {
         return $this->hasParam('refresh');
     }
 
     /**
+     * @param string $timeout
+     *
      * @return $this
      */
-    public function setTimeout(string $timeout): self
+    public function setTimeout($timeout)
     {
         return $this->setParam('timeout', $timeout);
     }
 
-    public function getTimeout(): string
+    /**
+     * @return bool
+     */
+    public function getTimeout()
     {
         return $this->getParam('timeout');
     }
 
-    public function hasTimeout(): bool
+    /**
+     * @return bool
+     */
+    public function hasTimeout()
     {
         return $this->hasParam('timeout');
     }
 
     /**
+     * @param string $timeout
+     *
      * @return $this
      */
-    public function setConsistency(string $timeout): self
+    public function setConsistency($timeout)
     {
         return $this->setParam('consistency', $timeout);
     }
 
-    public function getConsistency(): string
+    /**
+     * @return string
+     */
+    public function getConsistency()
     {
         return $this->getParam('consistency');
     }
 
-    public function hasConsistency(): bool
+    /**
+     * @return bool
+     */
+    public function hasConsistency()
     {
         return $this->hasParam('consistency');
     }
 
     /**
+     * @param string $timeout
+     *
      * @return $this
      */
-    public function setReplication(string $timeout): self
+    public function setReplication($timeout)
     {
         return $this->setParam('replication', $timeout);
     }
 
-    public function getReplication(): string
+    /**
+     * @return string
+     */
+    public function getReplication()
     {
         return $this->getParam('replication');
     }
 
-    public function hasReplication(): bool
+    /**
+     * @return bool
+     */
+    public function hasReplication()
     {
         return $this->hasParam('replication');
     }
@@ -363,7 +417,7 @@ class AbstractUpdateAction extends Param
      *
      * @return $this
      */
-    public function setUpsert($data): self
+    public function setUpsert($data)
     {
         $document = Document::create($data);
         $this->_upsert = $document;
@@ -371,20 +425,28 @@ class AbstractUpdateAction extends Param
         return $this;
     }
 
-    public function getUpsert(): Document
+    /**
+     * @return Document
+     */
+    public function getUpsert()
     {
         return $this->_upsert;
     }
 
-    public function hasUpsert(): bool
+    /**
+     * @return bool
+     */
+    public function hasUpsert()
     {
         return null !== $this->_upsert;
     }
 
     /**
      * @param array $fields if empty array all options will be returned
+     *
+     * @return array
      */
-    public function getOptions(array $fields = []): array
+    public function getOptions(array $fields = [])
     {
         if (!empty($fields)) {
             return \array_filter(\array_intersect_key($this->getParams(), \array_flip($fields)));

@@ -278,8 +278,6 @@ class Client
             $docOptions = $data->getOptions(
                 [
                     'consistency',
-                    'if_primary_term',
-                    'if_seq_no',
                     'parent',
                     'percolate',
                     'refresh',
