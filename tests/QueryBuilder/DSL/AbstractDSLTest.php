@@ -77,7 +77,7 @@ abstract class AbstractDSLTest extends BaseTest
         }
 
         if (\in_array($type->getName(), ['array', 'callable'], true)
-            || !$param->getType()->isBuiltin()
+            || !$type->isBuiltin()
         ) {
             return $type->getName();
         }
