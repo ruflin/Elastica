@@ -77,11 +77,12 @@ class ClientConfigurationTest extends TestCase
 
         $this->assertEquals($expected, $configuration->getAll());
     }
+
     public function testFromDsnWithPool(): void
     {
         $configuration = ClientConfiguration::fromDsn('pool(http://nicolas@127.0.0.1 http://127.0.0.2/bar?timeout=4)?extra=abc&username=tobias');
         $expected = [
-             'host' => null,
+            'host' => null,
             'port' => null,
             'path' => null,
             'url' => null,
@@ -90,8 +91,8 @@ class ClientConfigurationTest extends TestCase
             'persistent' => true,
             'timeout' => null,
             'connections' => [
-                ['host'=>'127.0.0.1', 'transport'=>'http', 'username'=>'nicolas'],
-                ['host'=>'127.0.0.2', 'path'=>'/bar', 'transport'=>'http', 'timeout'=>4],
+                ['host' => '127.0.0.1', 'transport' => 'http', 'username' => 'nicolas'],
+                ['host' => '127.0.0.2', 'path' => '/bar', 'transport' => 'http', 'timeout' => 4],
             ],
             'roundRobin' => false,
             'retryOnConflict' => 0,

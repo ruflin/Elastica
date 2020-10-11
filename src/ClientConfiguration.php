@@ -62,7 +62,7 @@ class ClientConfiguration
      * Create configuration from Dsn string. Example of valid DSN strings:
      * - http://localhost
      * - http://foo:bar@localhost:1234?timeout=4&persistant=false
-     * - pool(http://127.0.0.1 http://127.0.0.2/bar?timeout=4)
+     * - pool(http://127.0.0.1 http://127.0.0.2/bar?timeout=4).
      *
      * @return ClientConfiguration
      */
@@ -71,14 +71,14 @@ class ClientConfiguration
         try {
             $func = DsnParser::parseFunc($dsnString);
         } catch (DsnException $e) {
-            throw new InvalidException(sprintf('DSN "%s" is invalid.', $dsnString), 0, $e);
+            throw new InvalidException(\sprintf('DSN "%s" is invalid.', $dsnString), 0, $e);
         }
 
-        if ($func->getName() == 'dsn') {
+        if ('dsn' == $func->getName()) {
             /** @var Url $dsn */
             $dsn = $func->first();
             $clientConfiguration = self::fromArray(self::parseDsn($dsn));
-        } elseif ($func->getName() == 'pool') {
+        } elseif ('pool' == $func->getName()) {
             $connections = [];
             $clientConfiguration = new static();
             foreach ($func->getArguments() as $arg) {
@@ -95,56 +95,13 @@ class ClientConfiguration
             } elseif ('true' === $optionValue) {
                 $optionValue = true;
             } elseif (\is_numeric($optionValue)) {
-                $optionValue = (int)$optionValue;
+                $optionValue = (int) $optionValue;
             }
 
             $clientConfiguration->set($optionName, $optionValue);
         }
 
         return $clientConfiguration;
-    }
-
-    private static function parseDsn(Url $dsn): array
-    {
-        $data = ['host' => $dsn->getHost(),];
-
-        if (null !== $dsn->getScheme()) {
-            $data['transport'] = $dsn->getScheme();
-        }
-
-        if (null !== $dsn->getUser()) {
-            $data['username'] = $dsn->getUser();
-        }
-
-        if (null !== $dsn->getPassword()) {
-            $data['password'] = $dsn->getPassword();
-        }
-
-        if (null !== $dsn->getUser() && null !== $dsn->getPassword()) {
-            $data['auth_type'] = 'basic';
-        }
-
-        if (null !== $dsn->getPort()) {
-            $data['port'] = $dsn->getPort();
-        }
-
-        if (null !== $dsn->getPath()) {
-            $data['path'] = $dsn->getPath();
-        }
-
-        foreach ($dsn->getParameters() as $optionName => $optionValue) {
-            if ('false' === $optionValue) {
-                $optionValue = false;
-            } elseif ('true' === $optionValue) {
-                $optionValue = true;
-            } elseif (\is_numeric($optionValue)) {
-                $optionValue = (int) $optionValue;
-            }
-
-            $data[$optionName] = $optionValue;
-        }
-
-        return $data;
     }
 
     /**
@@ -209,5 +166,48 @@ class ClientConfiguration
                 $this->configuration[$key] = [$this->configuration[$key], $value];
             }
         }
+    }
+
+    private static function parseDsn(Url $dsn): array
+    {
+        $data = ['host' => $dsn->getHost()];
+
+        if (null !== $dsn->getScheme()) {
+            $data['transport'] = $dsn->getScheme();
+        }
+
+        if (null !== $dsn->getUser()) {
+            $data['username'] = $dsn->getUser();
+        }
+
+        if (null !== $dsn->getPassword()) {
+            $data['password'] = $dsn->getPassword();
+        }
+
+        if (null !== $dsn->getUser() && null !== $dsn->getPassword()) {
+            $data['auth_type'] = 'basic';
+        }
+
+        if (null !== $dsn->getPort()) {
+            $data['port'] = $dsn->getPort();
+        }
+
+        if (null !== $dsn->getPath()) {
+            $data['path'] = $dsn->getPath();
+        }
+
+        foreach ($dsn->getParameters() as $optionName => $optionValue) {
+            if ('false' === $optionValue) {
+                $optionValue = false;
+            } elseif ('true' === $optionValue) {
+                $optionValue = true;
+            } elseif (\is_numeric($optionValue)) {
+                $optionValue = (int) $optionValue;
+            }
+
+            $data[$optionName] = $optionValue;
+        }
+
+        return $data;
     }
 }
