@@ -3,6 +3,10 @@
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
+use Nyholm\Dsn\Configuration\Url;
+use Nyholm\Dsn\DsnParser;
+use Nyholm\Dsn\Exception\ExceptionInterface as DsnException;
+use Nyholm\Dsn\Exception\FunctionNotSupportedException;
 
 /**
  * Elastica client configuration.
@@ -55,52 +59,80 @@ class ClientConfiguration
     }
 
     /**
-     * Create configuration from Dsn string.
+     * Create configuration from Dsn string. Example of valid DSN strings:
+     * - http://localhost
+     * - http://foo:bar@localhost:1234?timeout=4&persistant=false
+     * - pool(http://127.0.0.1 http://127.0.0.2/bar?timeout=4)
      *
      * @return ClientConfiguration
      */
-    public static function fromDsn(string $dsn): self
+    public static function fromDsn(string $dsnString): self
     {
-        if (false === $parsedDsn = \parse_url($dsn)) {
-            throw new InvalidException(\sprintf("DSN '%s' is invalid.", $dsn));
+        try {
+            $func = DsnParser::parseFunc($dsnString);
+        } catch (DsnException $e) {
+            throw new InvalidException(sprintf('DSN "%s" is invalid.', $dsnString), 0, $e);
         }
 
-        $clientConfiguration = new static();
-
-        if (isset($parsedDsn['scheme'])) {
-            $clientConfiguration->set('transport', $parsedDsn['scheme']);
+        if ($func->getName() == 'dsn') {
+            /** @var Url $dsn */
+            $dsn = $func->first();
+            $clientConfiguration = self::fromArray(self::parseDsn($dsn));
+        } elseif ($func->getName() == 'pool') {
+            $connections = [];
+            $clientConfiguration = new static();
+            foreach ($func->getArguments() as $arg) {
+                $connections[] = self::parseDsn($arg);
+            }
+            $clientConfiguration->set('connections', $connections);
+        } else {
+            throw new FunctionNotSupportedException($dsnString, $func->getName());
         }
 
-        if (isset($parsedDsn['host'])) {
-            $clientConfiguration->set('host', $parsedDsn['host']);
+        foreach ($func->getParameters() as $optionName => $optionValue) {
+            if ('false' === $optionValue) {
+                $optionValue = false;
+            } elseif ('true' === $optionValue) {
+                $optionValue = true;
+            } elseif (\is_numeric($optionValue)) {
+                $optionValue = (int)$optionValue;
+            }
+
+            $clientConfiguration->set($optionName, $optionValue);
         }
 
-        if (isset($parsedDsn['user'])) {
-            $clientConfiguration->set('username', \urldecode($parsedDsn['user']));
+        return $clientConfiguration;
+    }
+
+    private static function parseDsn(Url $dsn): array
+    {
+        $data = ['host' => $dsn->getHost(),];
+
+        if (null !== $dsn->getScheme()) {
+            $data['transport'] = $dsn->getScheme();
         }
 
-        if (isset($parsedDsn['pass'])) {
-            $clientConfiguration->set('password', \urldecode($parsedDsn['pass']));
+        if (null !== $dsn->getUser()) {
+            $data['username'] = $dsn->getUser();
         }
 
-        if (isset($parsedDsn['pass'], $parsedDsn['user'])) {
-            $clientConfiguration->set('auth_type', 'basic');
+        if (null !== $dsn->getPassword()) {
+            $data['password'] = $dsn->getPassword();
         }
 
-        if (isset($parsedDsn['port'])) {
-            $clientConfiguration->set('port', $parsedDsn['port']);
+        if (null !== $dsn->getUser() && null !== $dsn->getPassword()) {
+            $data['auth_type'] = 'basic';
         }
 
-        if (isset($parsedDsn['path'])) {
-            $clientConfiguration->set('path', $parsedDsn['path']);
+        if (null !== $dsn->getPort()) {
+            $data['port'] = $dsn->getPort();
         }
 
-        $options = [];
-        if (isset($parsedDsn['query'])) {
-            \parse_str($parsedDsn['query'], $options);
+        if (null !== $dsn->getPath()) {
+            $data['path'] = $dsn->getPath();
         }
 
-        foreach ($options as $optionName => $optionValue) {
+        foreach ($dsn->getParameters() as $optionName => $optionValue) {
             if ('false' === $optionValue) {
                 $optionValue = false;
             } elseif ('true' === $optionValue) {
@@ -109,10 +141,10 @@ class ClientConfiguration
                 $optionValue = (int) $optionValue;
             }
 
-            $clientConfiguration->set($optionName, $optionValue);
+            $data[$optionName] = $optionValue;
         }
 
-        return $clientConfiguration;
+        return $data;
     }
 
     /**

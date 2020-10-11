@@ -15,7 +15,8 @@
         "php": "^7.2 || ^8.0",
         "ext-json": "*",
         "psr/log": "^1.0",
-        "elasticsearch/elasticsearch": "^7.1.1 !=7.4.0"
+        "elasticsearch/elasticsearch": "^7.1.1 !=7.4.0",
+        "nyholm/dsn": "2.0.0-beta1"
     },
     "require-dev": {
         "aws/aws-sdk-php": "^3.155",
