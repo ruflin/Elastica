@@ -225,7 +225,7 @@ class AbstractUpdateAction extends Param
      */
     public function getRouting()
     {
-        return $this->getParam('_routing');
+        return $this->getParam('routing');
     }
 
     /**
@@ -233,7 +233,7 @@ class AbstractUpdateAction extends Param
      */
     public function hasRouting()
     {
-        return $this->hasParam('_routing');
+        return $this->hasParam('routing');
     }
 
     /**
@@ -297,7 +297,7 @@ class AbstractUpdateAction extends Param
      */
     public function hasRetryOnConflict()
     {
-        return $this->hasParam('_retry_on_conflict');
+        return $this->hasParam('retry_on_conflict');
     }
 
     /**

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 * Ability to specify the type of authentication manually by the `auth_type` parameter (in the client class config) was added (allowed values are `basic, digest, gssnegotiate, ntlm`)
 * Added `if_seq_no` / `if_primary_term` to replace `version` for [optimistic concurrency control](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/optimistic-concurrency-control.html)
+* Added `Elastica\Aggregation\PercentilesBucket` aggregation [#1806](https://github.com/ruflin/Elastica/pull/1806)
 ### Changed
 * Allow `string` such as `wait_for` to be passed to `AbstractUpdateAction::setRefresh` [#1791](https://github.com/ruflin/Elastica/pull/1791)
 * Changed the return type of `AbstractUpdateAction::getRefresh` to `boolean|string` [#1791](https://github.com/ruflin/Elastica/pull/1791)
@@ -18,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 ### Fixed
 * fixed issue [1789](https://github.com/ruflin/Elastica/issues/1789)
+* Replaced `_routing` and `_retry_on_conflict` by `routing` and `retry_on_conflict` in `AbstractUpdateAction` [#1807](https://github.com/ruflin/Elastica/issues/1807)
 ### Security
 
 
