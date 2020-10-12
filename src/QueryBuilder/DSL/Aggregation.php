@@ -23,6 +23,7 @@ use Elastica\Aggregation\Min;
 use Elastica\Aggregation\Missing;
 use Elastica\Aggregation\Nested;
 use Elastica\Aggregation\Percentiles;
+use Elastica\Aggregation\PercentilesBucket;
 use Elastica\Aggregation\Range;
 use Elastica\Aggregation\ReverseNested;
 use Elastica\Aggregation\Sampler;
@@ -157,6 +158,19 @@ class Aggregation implements DSL
     public function percentiles(string $name, ?string $field = null): Percentiles
     {
         return new Percentiles($name, $field);
+    }
+
+    /**
+     * percentiles_bucket aggregation.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-percentiles-bucket-aggregation.html
+     *
+     * @param string $name        the name of this aggregation
+     * @param string $bucketsPath the field on which to perform this aggregation
+     */
+    public function percentiles_bucket(string $name, ?string $bucketsPath = null): PercentilesBucket
+    {
+        return new PercentilesBucket($name, $bucketsPath);
     }
 
     /**

@@ -67,6 +67,7 @@ class Version700 extends Version
         'extended_stats',
         'value_count',
         'percentiles',
+        'percentiles_bucket',
         // 'percentile_ranks', // Not implemented
         'cardinality',
         'geo_bounds',
