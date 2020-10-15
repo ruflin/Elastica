@@ -215,9 +215,7 @@ class Index implements SearchableInterface
             if (isset($data['_id']) && !$doc->hasId()) {
                 $doc->setId($data['_id']);
             }
-            if (isset($data['_version'])) {
-                $doc->setVersion($data['_version']);
-            }
+            $doc->setVersionParams($data);
         }
 
         return $response;
@@ -272,10 +270,10 @@ class Index implements SearchableInterface
             $data = [];
         }
 
-        $document = new Document($id, $data, $this->getName());
-        $document->setVersion($result['_version']);
+        $doc = new Document($id, $data, $this->getName());
+        $doc->setVersionParams($data);
 
-        return $document;
+        return $doc;
     }
 
     /**

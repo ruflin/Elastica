@@ -65,7 +65,87 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Sets the version of a document for use with optimistic concurrency control.
+     * Sets the version parameters of a document for use with optimistic concurrency control.
+     *
+     * @return $this
+     */
+    public function setVersionParams(array $responseData): self
+    {
+        if (isset($responseData['_version'])) {
+            $this->setVersion($responseData['_version']);
+        }
+
+        if (isset($data['_seq_no'])) {
+            $this->setSequenceNumber($responseData['_seq_no']);
+        }
+
+        if (isset($data['_primary_term'])) {
+            $this->setPrimaryTerm($responseData['_primary_term']);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Sets the sequence number of a document for use with optimistic concurrency control.
+     *
+     * @param int $number Sequence Number
+     *
+     * @return $this
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/optimistic-concurrency-control.html
+     */
+    public function setSequenceNumber(int $number): self
+    {
+        return $this->setParam('if_seq_no', $number);
+    }
+
+    /**
+     * Returns document version.
+     *
+     * @return int Document version
+     */
+    public function getSequenceNumber(): int
+    {
+        return $this->getParam('if_seq_no');
+    }
+
+    public function hasSequenceNumber(): bool
+    {
+        return $this->hasParam('if_seq_no');
+    }
+
+    /**
+     * Sets the primary term of a document for use with optimistic concurrency control.
+     *
+     * @param int $term Primary Term
+     *
+     * @return $this
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.8/optimistic-concurrency-control.html
+     */
+    public function setPrimaryTerm(int $term): self
+    {
+        return $this->setParam('if_primary_term', $term);
+    }
+
+    /**
+     * Returns document version.
+     *
+     * @return int Document version
+     */
+    public function getPrimaryTerm(): int
+    {
+        return $this->getParam('if_primary_term');
+    }
+
+    public function hasPrimaryTerm(): bool
+    {
+        return $this->hasParam('if_primary_term');
+    }
+
+    /**
+     * Sets the version of a document.
      *
      * @param int $version Document version
      *
@@ -94,37 +174,6 @@ class AbstractUpdateAction extends Param
     public function hasVersion()
     {
         return $this->hasParam('version');
-    }
-
-    /**
-     * Sets the version_type of a document
-     * Default in ES is internal, but you can set to external to use custom versioning.
-     *
-     * @param string $versionType Document version type
-     *
-     * @return $this
-     */
-    public function setVersionType($versionType)
-    {
-        return $this->setParam('version_type', $versionType);
-    }
-
-    /**
-     * Returns document version type.
-     *
-     * @return int|string Document version type
-     */
-    public function getVersionType()
-    {
-        return $this->getParam('version_type');
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasVersionType()
-    {
-        return $this->hasParam('version_type');
     }
 
     /**

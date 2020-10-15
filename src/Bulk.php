@@ -323,9 +323,7 @@ class Bulk
                         if (!$data->hasId() && isset($bulkResponseData['_id'])) {
                             $data->setId($bulkResponseData['_id']);
                         }
-                        if (isset($bulkResponseData['_version'])) {
-                            $data->setVersion($bulkResponseData['_version']);
-                        }
+                        $data->setVersionParams($bulkResponseData);
                     }
                 }
 

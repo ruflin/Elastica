@@ -277,15 +277,13 @@ class Client
 
             $docOptions = $data->getOptions(
                 [
-                    'version',
-                    'version_type',
-                    'routing',
-                    'percolate',
-                    'parent',
-                    'retry_on_conflict',
                     'consistency',
-                    'replication',
+                    'parent',
+                    'percolate',
                     'refresh',
+                    'replication',
+                    'retry_on_conflict',
+                    'routing',
                     'timeout',
                 ]
             );
@@ -310,10 +308,7 @@ class Client
             && $data instanceof Document
             && ($data->isAutoPopulate() || $this->getConfigValue(['document', 'autoPopulate'], false))
         ) {
-            $responseData = $response->getData();
-            if (isset($responseData['_version'])) {
-                $data->setVersion($responseData['_version']);
-            }
+            $data->setVersionParams($response->getData());
         }
 
         return $response;
