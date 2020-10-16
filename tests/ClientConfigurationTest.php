@@ -15,9 +15,9 @@ class ClientConfigurationTest extends TestCase
     public function testInvalidDsn(): void
     {
         $this->expectException(\Elastica\Exception\InvalidException::class);
-        $this->expectExceptionMessage('DSN "test:0" is invalid.');
+        $this->expectExceptionMessage('DSN "test:foo" is invalid.');
 
-        ClientConfiguration::fromDsn('test:0');
+        ClientConfiguration::fromDsn('test:foo');
     }
 
     public function testInvalidDsnPortOnly(): void
