@@ -19,14 +19,11 @@ vendor/autoload.php:
 	composer global require --no-progress --no-scripts --no-plugins symfony/flex
 	composer install --prefer-dist --no-interaction ${COMPOSER_FLAGS}
 
-tools/phpunit.phar tools/php-cs-fixer.phar: tools/phive.phar
+tools/php-cs-fixer.phar: tools/phive.phar
 	tools/phive.phar install --copy --trust-gpg-keys 0xE82B2FB314E9906E,0x4AA394086372C20A
 
 .PHONY: install-phpcs
 install-phpcs: tools/php-cs-fixer.phar
-
-.PHONY: install-phpunit
-install-phpunit: tools/phpunit.phar
 
 .PHONY: composer-install
 composer-install: vendor/autoload.php
@@ -36,7 +33,7 @@ composer-update:
 	composer update --prefer-dist --no-interaction ${COMPOSER_FLAGS}
 
 .PHONY: install-tools
-install-tools: install-phpcs install-phpunit
+install-tools: install-phpcs
 
 .PHONY: run-phpcs
 run-phpcs: composer-install install-phpcs
@@ -47,14 +44,14 @@ fix-phpcs: composer-install install-phpcs
 	tools/php-cs-fixer.phar fix --allow-risky=yes -v
 
 .PHONY: run-phpunit
-run-phpunit: composer-install install-phpunit
-	tools/phpunit.phar ${PHPUNIT_OPTIONS}
+run-phpunit: composer-install
+	vendor/bin/phpunit ${PHPUNIT_OPTIONS}
 
 .PHONY: run-phpunit-coverage
-run-phpunit-coverage: composer-install install-phpunit
+run-phpunit-coverage: composer-install
 	EXIT_STATUS=0 ; \
-	tools/phpunit.phar --coverage-clover build/coverage/unit-coverage.xml --group unit || EXIT_STATUS=$$? ; \
-	tools/phpunit.phar --coverage-clover build/coverage/functional-coverage.xml --group functional || EXIT_STATUS=$$? ; \
+	vendor/bin/phpunit --coverage-clover build/coverage/unit-coverage.xml --group unit || EXIT_STATUS=$$? ; \
+	vendor/bin/phpunit --coverage-clover build/coverage/functional-coverage.xml --group functional || EXIT_STATUS=$$? ; \
 	exit $$EXIT_STATUS
 
 .PHONY: run-coveralls

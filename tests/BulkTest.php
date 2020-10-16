@@ -682,7 +682,7 @@ class BulkTest extends BaseTest
 
         $endMemory = \memory_get_usage();
 
-        $this->assertLessThan(1.3, $endMemory / $startMemory);
+        $this->assertLessThan(1.31, $endMemory / $startMemory);
     }
 
     /**

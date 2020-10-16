@@ -49,10 +49,9 @@ Check out the Makefile for other commands that can be used to run tests and othe
 ### PHP Tools
 Elastica uses [phive](https://phar.io/) to manage PHP tools and their installation.
 Those tools are available under the `tools/` directory and are installed when need by a command (see below).
- 
+
 Some of the installed tools are:
-  - `php-cs-fixer.phar`: PHP Coding styles 
-  - `phpunit.phar`: PHP unit testing
+  - `php-cs-fixer.phar`: PHP Coding styles
 
 ## Commands
 The advantage in using the commands below is that no local tools and libraries have to be installed and it is guaranteed
