@@ -3,7 +3,7 @@
 namespace Elastica\Processor;
 
 /**
- * Elastica Attachment Processor.
+ * Elastica Foreach Processor.
  *
  * @author Federico Panini <fpanini@gmail.com>
  * @author Thibaut Simon-Fine <tsimonfine@gmail.com>
