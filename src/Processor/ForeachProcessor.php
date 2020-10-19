@@ -34,7 +34,7 @@ class ForeachProcessor extends AbstractProcessor
 
     /**
      * Set processor.
-     * 
+     *
      * @param AbstractProcessor
      *
      * @return $this
@@ -46,7 +46,7 @@ class ForeachProcessor extends AbstractProcessor
 
     /**
      * Set raw processor.
-     * Example : ['remove' => ['field' => 'user_agent']]
+     * Example : ['remove' => ['field' => 'user_agent']].
      *
      * @return $this
      */
@@ -59,7 +59,7 @@ class ForeachProcessor extends AbstractProcessor
      * Set ignore_missing. Default value false.
      *
      * If true and field does not exist or is null, the processor quietly exits without modifying the document
-     * 
+     *
      * @return $this
      */
     public function setIgnoreMissing(bool $ignoreMissing): self
