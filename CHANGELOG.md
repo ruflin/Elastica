@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Allow `string` such as `wait_for` to be passed to `AbstractUpdateAction::setRefresh` [#1791](https://github.com/ruflin/Elastica/pull/1791)
 * Changed the return type of `AbstractUpdateAction::getRefresh` to `boolean|string` [#1791](https://github.com/ruflin/Elastica/pull/1791)
 * Reviewed options handling in `Elastica\Index::create()` [#1822](https://github.com/ruflin/Elastica/pull/1822)
+* Replaced deprecated `exceptions` request option by `http_errors` request option in Guzzle transport [#1817](https://github.com/ruflin/Elastica/pull/1817)
 ### Deprecated
 * Deprecated Match query class and introduced MatchQuery instead for PHP 8.0 compatibility reason [#1799](https://github.com/ruflin/Elastica/pull/1799)
 * Deprecated `version`/`version_type` options [(deprecated in `6.7.0`)](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/docs-update.html) and added `if_seq_no` / `if_primary_term` that replaced it
