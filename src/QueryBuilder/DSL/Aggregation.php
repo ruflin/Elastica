@@ -423,13 +423,12 @@ class Aggregation implements DSL
         return new AdjacencyMatrix($name);
     }
 
-    /** sampler aggregation.
+    /**
+     * sampler aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-sampler-aggregation.html
-     *
-     * @param string $name
      */
-    public function sampler($name): Sampler
+    public function sampler(string $name): Sampler
     {
         return new Sampler($name);
     }
