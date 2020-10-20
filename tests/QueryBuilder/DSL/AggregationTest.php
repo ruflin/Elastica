@@ -63,5 +63,6 @@ class AggregationTest extends AbstractDSLTest
         $this->_assertImplemented($aggregationDSL, 'adjacency_matrix', Aggregation\AdjacencyMatrix::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'sampler', Aggregation\Sampler::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'diversified_sampler', Aggregation\DiversifiedSampler::class, ['name']);
+        $this->_assertImplemented($aggregationDSL, 'weighted_avg', Aggregation\WeightedAvg::class, ['name']);
     }
 }

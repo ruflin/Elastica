@@ -91,6 +91,7 @@ class Version700 extends Version
         'geohash_grid',
         'bucket_script',
         'serial_diff',
+        'weighted_avg',
     ];
 
     protected $suggesters = [

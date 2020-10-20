@@ -36,6 +36,7 @@ use Elastica\Aggregation\SumBucket;
 use Elastica\Aggregation\Terms;
 use Elastica\Aggregation\TopHits;
 use Elastica\Aggregation\ValueCount;
+use Elastica\Aggregation\WeightedAvg;
 use Elastica\Exception\NotImplementedException;
 use Elastica\Query\AbstractQuery;
 use Elastica\QueryBuilder\DSL;
@@ -441,5 +442,15 @@ class Aggregation implements DSL
     public function diversified_sampler(string $name): DiversifiedSampler
     {
         return new DiversifiedSampler($name);
+    }
+
+    /**
+     * weighted avg aggregation.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-weight-avg-aggregation.html
+     */
+    public function weighted_avg(string $name): WeightedAvg
+    {
+        return new WeightedAvg($name);
     }
 }
