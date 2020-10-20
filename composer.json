@@ -20,7 +20,7 @@
     },
     "require-dev": {
         "aws/aws-sdk-php": "^3.155",
-        "guzzlehttp/guzzle": "^6.3",
+        "guzzlehttp/guzzle": "^6.3 || ^7.2",
         "phpunit/phpunit": "^8.5.8 || ^9.4"
     },
     "suggest": {
