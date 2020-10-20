@@ -19,11 +19,8 @@ class ForeachProcessorTest extends BasePipelineTest
      */
     public function testForeachProcessorDefault(): void
     {
-        $processor = new ForeachProcessor();
-        $processor->setField('field1');
-
         $subprocessor = new Uppercase('field2');
-        $processor->setProcessor($subprocessor);
+        $processor = new ForeachProcessor('field1', $subprocessor);
 
         $expected = [
             'foreach' => [
@@ -44,15 +41,12 @@ class ForeachProcessorTest extends BasePipelineTest
      */
     public function testForeachRawProcessorDefault(): void
     {
-        $processor = new ForeachProcessor();
-        $processor->setField('field1');
-
         $subprocessor = [
             'uppercase' => [
                 'field' => 'field2',
             ],
         ];
-        $processor->setRawProcessor($subprocessor);
+        $processor = new ForeachProcessor('field1', $subprocessor);
 
         $expected = [
             'foreach' => [
@@ -73,11 +67,8 @@ class ForeachProcessorTest extends BasePipelineTest
      */
     public function testForeachProcessorIgnoreMissing(): void
     {
-        $processor = new ForeachProcessor();
-        $processor->setField('field1');
-
         $subprocessor = new Uppercase('field2');
-        $processor->setProcessor($subprocessor);
+        $processor = new ForeachProcessor('field1', $subprocessor);
         $processor->setIgnoreMissing(true);
 
         $expected = [
@@ -100,11 +91,8 @@ class ForeachProcessorTest extends BasePipelineTest
      */
     public function testForeachProcessor(): void
     {
-        $foreach = new ForeachProcessor();
-        $foreach->setField('values');
-
         $subprocessor = new Uppercase('_ingest._value');
-        $foreach->setProcessor($subprocessor);
+        $foreach = new ForeachProcessor('values', $subprocessor);
 
         $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for Foreach');
         $pipeline->addProcessor($foreach)->create();

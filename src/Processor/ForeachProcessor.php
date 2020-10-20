@@ -16,6 +16,22 @@ class ForeachProcessor extends AbstractProcessor
     protected const PROCESSOR_NAME = 'foreach';
 
     /**
+     * @param AbstractProcessor|array $processor
+     */
+    public function __construct(string $field, $processor)
+    {
+        $this->setField($field);
+
+        if ($processor instanceof AbstractProcessor) {
+            $this->setProcessor($processor);
+        } elseif (\is_array($processor)) {
+            $this->setRawProcessor($processor);
+        } else {
+            throw new \TypeError('Expected Elastica\Processor\AbstractProcessor or array');
+        }
+    }
+
+    /**
      * Set field.
      *
      * @return $this
@@ -32,7 +48,7 @@ class ForeachProcessor extends AbstractProcessor
      *
      * @return $this
      */
-    public function setProcessor(AbstractProcessor $processor): self
+    public function setProcessor(?AbstractProcessor $processor): self
     {
         return $this->setParam('processor', $processor);
     }
