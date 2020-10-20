@@ -15,9 +15,11 @@ matrix:
   fast_finish: true
   include:
     - php: 7.3
-      env: RUN_TEST=true  ES_VERSION=73
+      env: RUN_TEST=true ES_VERSION=73
     - php: 7.4
-      env: RUN_TEST=true  ES_VERSION=73
+      env: RUN_TEST=true ES_VERSION=73
+    - php: nightly
+      env: RUN_TEST=true ES_VERSION=73 COMPOSER_FLAGS="--ignore-platform-reqs"
     # Testing the library with different ES versions
     - php: 7.2
       env: RUN_TEST=true ES_VERSION=72
