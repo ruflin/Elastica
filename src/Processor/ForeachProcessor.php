@@ -13,14 +13,7 @@ namespace Elastica\Processor;
 class ForeachProcessor extends AbstractProcessor
 {
     public const DEFAULT_IGNORE_MISSING_VALUE = false;
-
-    /**
-     * Foreach constructor.
-     */
-    public function __construct(string $field)
-    {
-        $this->setField($field);
-    }
+    protected const PROCESSOR_NAME = 'foreach';
 
     /**
      * Set field.
@@ -41,7 +34,7 @@ class ForeachProcessor extends AbstractProcessor
      */
     public function setProcessor(AbstractProcessor $processor): self
     {
-        return $this->setParam('processor', [$processor]);
+        return $this->setParam('processor', $processor);
     }
 
     /**
@@ -65,5 +58,17 @@ class ForeachProcessor extends AbstractProcessor
     public function setIgnoreMissing(bool $ignoreMissing): self
     {
         return $this->setParam('ignore_missing', $ignoreMissing);
+    }
+
+    /**
+     * Param's name
+     * Picks the last part of the class name and makes it snake_case
+     * You can override this method if you want to change the name.
+     *
+     * @return string name
+     */
+    protected function _getBaseName()
+    {
+        return self::PROCESSOR_NAME;
     }
 }
