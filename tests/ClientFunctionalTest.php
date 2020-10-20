@@ -937,6 +937,7 @@ class ClientFunctionalTest extends BaseTest
     public function testEndpointParamsRequest(): void
     {
         $index = $this->_createIndex();
+        $this->_waitForAllocation($index);
         $client = $index->getClient();
         $doc = new Document(null, ['foo' => 'bar']);
         $doc->setRouting('first_routing');
@@ -952,7 +953,7 @@ class ClientFunctionalTest extends BaseTest
         $this->assertArrayHasKey('index_total', $response->getData()['indices'][$index->getName()]['total']['indexing']);
 
         $this->assertSame(
-            1,
+            2,
             $response->getData()['indices'][$index->getName()]['total']['indexing']['index_total']
         );
     }

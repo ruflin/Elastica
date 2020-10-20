@@ -168,9 +168,11 @@ class Base extends TestCase
             $indexState = $state['routing_table']['indices'][$index->getName()];
 
             $allocated = true;
-            foreach ($indexState['shards'] as $shard) {
-                if ('STARTED' !== $shard[0]['state']) {
-                    $allocated = false;
+            foreach ($indexState['shards'] as $shards) {
+                foreach ($shards as $shard) {
+                    if ('STARTED' !== $shard['state']) {
+                        $allocated = false;
+                    }
                 }
             }
         } while (!$allocated);
