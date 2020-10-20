@@ -330,7 +330,11 @@ class InnerHitsTest extends BaseTest
             $innerHitsResult = $row->getInnerHits();
             foreach ($innerHitsResult['users']['hits']['hits'] as $doc) {
                 $this->assertArrayHasKey('highlight', $doc);
-                $this->assertRegExp('#<em>Simon</em>#', $doc['highlight']['users.name'][0]);
+                if (\method_exists($this, 'assertMatchesRegularExpression')) {
+                    $this->assertMatchesRegularExpression('#<em>Simon</em>#', $doc['highlight']['users.name'][0]);
+                } else {
+                    $this->assertRegExp('#<em>Simon</em>#', $doc['highlight']['users.name'][0]);
+                }
             }
         }
     }

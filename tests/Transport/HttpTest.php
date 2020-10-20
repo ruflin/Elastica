@@ -185,7 +185,11 @@ class HttpTest extends BaseTest
         $createIndexResponse = $index->create([], true);
 
         $createIndexResponseTransferInfo = $createIndexResponse->getTransferInfo();
-        $this->assertRegExp('/Accept-Encoding:\ (gzip|deflate)/', $createIndexResponseTransferInfo['request_header']);
+        if (\method_exists($this, 'assertMatchesRegularExpression')) {
+            $this->assertMatchesRegularExpression('/Accept-Encoding:\ (gzip|deflate)/', $createIndexResponseTransferInfo['request_header']);
+        } else {
+            $this->assertRegExp('/Accept-Encoding:\ (gzip|deflate)/', $createIndexResponseTransferInfo['request_header']);
+        }
         $this->assertArrayHasKey('acknowledged', $createIndexResponse->getData());
     }
 
@@ -201,7 +205,11 @@ class HttpTest extends BaseTest
         $createIndexResponse = $index->create([], true);
 
         $createIndexResponseTransferInfo = $createIndexResponse->getTransferInfo();
-        $this->assertRegExp('/Accept-Encoding:\ (gzip|deflate)/', $createIndexResponseTransferInfo['request_header']);
+        if (\method_exists($this, 'assertMatchesRegularExpression')) {
+            $this->assertMatchesRegularExpression('/Accept-Encoding:\ (gzip|deflate)/', $createIndexResponseTransferInfo['request_header']);
+        } else {
+            $this->assertRegExp('/Accept-Encoding:\ (gzip|deflate)/', $createIndexResponseTransferInfo['request_header']);
+        }
         $this->assertArrayHasKey('acknowledged', $createIndexResponse->getData());
     }
 
