@@ -381,26 +381,31 @@ class Index implements SearchableInterface
      */
     public function create(array $args = [], $options = null): Response
     {
-        if (\is_bool($options) && $options) {
+        $options = $options ?? [];
+
+        if (\is_bool($options)) {
+            $options = ['recreate' => $options];
+        } elseif (!\is_array($options)) {
+            throw new \TypeError(\sprintf('Argument 2 passed to %s::create() must be of type array|bool|null, %s given.', self::class, \is_object($options) ? \get_class($options) : \gettype($options)));
+        }
+
+        $invalidOptions = \array_diff(\array_keys($options), $allowedOptions = [
+            'recreate',
+        ]);
+
+        if (1 === $invalidOptionCount = \count($invalidOptions)) {
+            throw new InvalidException(\sprintf('"%s" is not a valid option. Allowed options are "%s".', \implode('", "', $invalidOptions), \implode('", "', $allowedOptions)));
+        }
+
+        if ($invalidOptionCount > 1) {
+            throw new InvalidException(\sprintf('"%s" are not valid options. Allowed options are "%s".', \implode('", "', $invalidOptions), \implode('", "', $allowedOptions)));
+        }
+
+        if ($options['recreate'] ?? false) {
             try {
                 $this->delete();
             } catch (ResponseException $e) {
                 // Table can't be deleted, because doesn't exist
-            }
-        } elseif (\is_array($options)) {
-            foreach ($options as $key => $value) {
-                switch ($key) {
-                    case 'recreate':
-                        try {
-                            $this->delete();
-                        } catch (ResponseException $e) {
-                            // Table can't be deleted, because doesn't exist
-                        }
-                        break;
-                    default:
-                        throw new InvalidException('Invalid option '.$key);
-                        break;
-                }
             }
         }
 
