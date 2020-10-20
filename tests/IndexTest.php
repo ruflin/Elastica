@@ -577,6 +577,7 @@ class IndexTest extends BaseTest
     public function testCreateWithInvalidOption(): void
     {
         $this->expectException(InvalidException::class);
+        $this->expectExceptionMessage('"testing_invalid_option" is not a valid option. Allowed options are "recreate".');
 
         $client = $this->_getClient();
         $indexName = 'test';
