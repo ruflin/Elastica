@@ -15,7 +15,15 @@ class ClientConfigurationTest extends TestCase
     public function testInvalidDsn(): void
     {
         $this->expectException(\Elastica\Exception\InvalidException::class);
-        $this->expectExceptionMessage("DSN ':0' is invalid.");
+        $this->expectExceptionMessage('DSN "test foo" is invalid.');
+
+        ClientConfiguration::fromDsn('test foo');
+    }
+
+    public function testInvalidDsnPortOnly(): void
+    {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectExceptionMessage('DSN ":0" is invalid.');
 
         ClientConfiguration::fromDsn(':0');
     }
@@ -50,7 +58,7 @@ class ClientConfigurationTest extends TestCase
         $configuration = ClientConfiguration::fromDsn('https://user:p4ss@foo.com:9201/my-path?proxy=https://proxy.com&persistent=false&timeout=45&roundRobin=true&retryOnConflict=2&bigintConversion=true&extra=abc');
         $expected = [
             'host' => 'foo.com',
-            'port' => '9201',
+            'port' => 9201,
             'path' => '/my-path',
             'url' => null,
             'proxy' => 'https://proxy.com',
@@ -64,6 +72,34 @@ class ClientConfigurationTest extends TestCase
             'username' => 'user',
             'password' => 'p4ss',
             'auth_type' => 'basic',
+            'extra' => 'abc',
+        ];
+
+        $this->assertEquals($expected, $configuration->getAll());
+    }
+
+    public function testFromDsnWithPool(): void
+    {
+        $configuration = ClientConfiguration::fromDsn('pool(http://nicolas@127.0.0.1 http://127.0.0.2/bar?timeout=4)?extra=abc&username=tobias');
+        $expected = [
+            'host' => null,
+            'port' => null,
+            'path' => null,
+            'url' => null,
+            'proxy' => null,
+            'transport' => null,
+            'persistent' => true,
+            'timeout' => null,
+            'connections' => [
+                ['host' => '127.0.0.1', 'transport' => 'http', 'username' => 'nicolas'],
+                ['host' => '127.0.0.2', 'path' => '/bar', 'transport' => 'http', 'timeout' => 4],
+            ],
+            'roundRobin' => false,
+            'retryOnConflict' => 0,
+            'bigintConversion' => false,
+            'username' => 'tobias',
+            'password' => null,
+            'auth_type' => null,
             'extra' => 'abc',
         ];
 

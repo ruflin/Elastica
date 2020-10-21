@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added `Elastica\Aggregation\PercentilesBucket` aggregation [#1806](https://github.com/ruflin/Elastica/pull/1806)
 * Added `weighted_avg` to aggregations DSL [#1814](https://github.com/ruflin/Elastica/pull/1814)
 * Supported PHP 8.0 [#1794](https://github.com/ruflin/Elastica/pull/1794)
+* Added support for defining a connection pool with DSN. Example: `pool(http://127.0.0.1 http://127.0.0.2/bar?timeout=4)` [#1808](https://github.com/ruflin/Elastica/pull/1808)
 ### Changed
 * Allow `string` such as `wait_for` to be passed to `AbstractUpdateAction::setRefresh` [#1791](https://github.com/ruflin/Elastica/pull/1791)
 * Changed the return type of `AbstractUpdateAction::getRefresh` to `boolean|string` [#1791](https://github.com/ruflin/Elastica/pull/1791)
