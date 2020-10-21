@@ -383,11 +383,11 @@ class Index implements SearchableInterface
     {
         if (null === $options) {
             if (\func_num_args() >= 2) {
-                @\trigger_error(\sprintf('Passing null as 2nd argument to "%s()" is deprecated since Elastica 7.0.1, avoid passing this argument or pass an array instead.', __METHOD__), \E_USER_DEPRECATED);
+                trigger_deprecation('ruflin/elastica', '7.1.0', 'Passing null as 2nd argument to "%s()" is deprecated, avoid passing this argument or pass an array instead. It will be removed in 8.0.', __METHOD__);
             }
             $options = [];
         } elseif (\is_bool($options)) {
-            @\trigger_error(\sprintf('Passing a bool as 2nd argument to "%s()" is deprecated since Elastica 7.0.1, pass an array with the key "recreate" instead.', __METHOD__), \E_USER_DEPRECATED);
+            trigger_deprecation('ruflin/elastica', '7.1.0', 'Passing a bool as 2nd argument to "%s()" is deprecated, pass an array with the key "recreate" instead. It will be removed in 8.0.', __METHOD__);
             $options = ['recreate' => $options];
         } elseif (!\is_array($options)) {
             throw new \TypeError(\sprintf('Argument 2 passed to "%s()" must be of type array|bool|null, %s given.', __METHOD__, \is_object($options) ? \get_class($options) : \gettype($options)));
