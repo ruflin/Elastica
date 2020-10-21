@@ -27,7 +27,8 @@ class ForeachProcessor extends AbstractProcessor
         } elseif (\is_array($processor)) {
             $this->setRawProcessor($processor);
         } else {
-            throw new \TypeError('Expected Elastica\Processor\AbstractProcessor or array');
+            throw new \TypeError(\sprintf('Argument 2 passed to %s::__construct() must be of type %s|array, %s given.', self::class, AbstractProcessor::class, \is_object($processor) ? \get_class($processor) : \gettype($processor)));
+
         }
     }
 
@@ -48,7 +49,7 @@ class ForeachProcessor extends AbstractProcessor
      *
      * @return $this
      */
-    public function setProcessor(?AbstractProcessor $processor): self
+    public function setProcessor(AbstractProcessor $processor): self
     {
         return $this->setParam('processor', $processor);
     }
