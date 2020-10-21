@@ -90,14 +90,7 @@ class Http extends AbstractTransport
             \curl_setopt($conn, CURLOPT_CONNECTTIMEOUT, $connectTimeout);
         }
 
-        $proxy = $connection->getProxy();
-
-        // See: https://github.com/facebook/hhvm/issues/4875
-        if (null === $proxy && \defined('HHVM_VERSION')) {
-            $proxy = \getenv('http_proxy') ?: null;
-        }
-
-        if (null !== $proxy) {
+        if (null !== $proxy = $connection->getProxy()) {
             \curl_setopt($conn, CURLOPT_PROXY, $proxy);
         }
 
