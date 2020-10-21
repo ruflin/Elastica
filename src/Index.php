@@ -405,7 +405,7 @@ class Index implements SearchableInterface
             try {
                 $this->delete();
             } catch (ResponseException $e) {
-                // Table can't be deleted, because doesn't exist
+                // Index can't be deleted, because it doesn't exist
             }
         }
 
