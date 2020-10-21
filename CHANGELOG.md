@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Removed HHVM proxy detection [#1818](https://github.com/ruflin/Elastica/pull/1818)
 ### Fixed
 * fixed issue [1789](https://github.com/ruflin/Elastica/issues/1789)
+* Fixed type-hint for `Elastica\QueryBuilder\DSL\Aggregation::sampler()` not consistent with the underlying constructor call [#1815](https://github.com/ruflin/Elastica/pull/1815)
 * Replaced `_routing` and `_retry_on_conflict` by `routing` and `retry_on_conflict` in `AbstractUpdateAction` [#1807](https://github.com/ruflin/Elastica/issues/1807)
 ### Security
 
