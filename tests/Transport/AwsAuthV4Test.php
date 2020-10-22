@@ -150,12 +150,12 @@ class AwsAuthV4Test extends GuzzleTest
 
         try {
             $client->request('_status', 'GET');
-
-            $this->assertEquals(80, $client->getLastRequest()->toArray()['port']);
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
             if ($guzzleException instanceof RequestException) {
                 $request = $guzzleException->getRequest();
+
+                $this->assertSame('http', $request->getUri()->getScheme());
             }
         }
     }
@@ -180,7 +180,7 @@ class AwsAuthV4Test extends GuzzleTest
             if ($guzzleException instanceof RequestException) {
                 $request = $guzzleException->getRequest();
 
-                $this->assertEquals('https', $request->getUri()->getScheme());
+                $this->assertSame('https', $request->getUri()->getScheme());
             }
         }
     }
