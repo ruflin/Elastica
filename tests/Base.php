@@ -96,7 +96,9 @@ class Base extends TestCase
         $client = $this->_getClient();
         $index = $client->getIndex($name);
 
-        $index->create(['settings' => ['index' => ['number_of_shards' => $shards, 'number_of_replicas' => 1]]], $delete);
+        $index->create(['settings' => ['index' => ['number_of_shards' => $shards, 'number_of_replicas' => 1]]], [
+            'recreate' => $delete,
+        ]);
 
         return $index;
     }
