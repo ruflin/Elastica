@@ -7,6 +7,7 @@ use Elastica\Aggregation\Avg;
 use Elastica\Aggregation\AvgBucket;
 use Elastica\Aggregation\BucketScript;
 use Elastica\Aggregation\Cardinality;
+use Elastica\Aggregation\Composite;
 use Elastica\Aggregation\DateHistogram;
 use Elastica\Aggregation\DateRange;
 use Elastica\Aggregation\DiversifiedSampler;
@@ -451,5 +452,15 @@ class Aggregation implements DSL
     public function weighted_avg(string $name): WeightedAvg
     {
         return new WeightedAvg($name);
+    }
+
+    /**
+     * composite aggregation.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-composite-aggregation.html
+     */
+    public function composite(string $name): Composite
+    {
+        return new Composite($name);
     }
 }
