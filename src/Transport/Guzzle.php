@@ -60,7 +60,7 @@ class Guzzle extends AbstractTransport
             'headers' => [
                 'Content-Type' => $request->getContentType(),
             ],
-            'exceptions' => false, // 4xx and 5xx is expected and NOT an exceptions in this context
+            'http_errors' => false, // 4xx and 5xx is expected and NOT an exceptions in this context
         ];
         if ($connection->getTimeout()) {
             $options['timeout'] = $connection->getTimeout();
