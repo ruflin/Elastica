@@ -5,7 +5,7 @@ namespace Elastica\Test\Transport;
 use Aws\Credentials\CredentialProvider;
 use Aws\Credentials\Credentials;
 use Elastica\Exception\Connection\GuzzleException;
-use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\TransferException;
 
 /**
  * @internal
@@ -39,7 +39,7 @@ class AwsAuthV4Test extends GuzzleTest
             $client->request('_status', 'GET');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
-            if ($guzzleException instanceof RequestException) {
+            if ($guzzleException instanceof TransferException) {
                 $request = $guzzleException->getRequest();
                 $expected = 'AWS4-HMAC-SHA256 Credential=foo/'
                     .\date('Ymd').'/us-east-1/es/aws4_request, ';
@@ -80,7 +80,7 @@ class AwsAuthV4Test extends GuzzleTest
             $client->request('_status', 'GET');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
-            if ($guzzleException instanceof RequestException) {
+            if ($guzzleException instanceof TransferException) {
                 $request = $guzzleException->getRequest();
                 $expected = 'AWS4-HMAC-SHA256 Credential=foo/'
                     .\date('Ymd').'/us-east-1/es/aws4_request, ';
@@ -118,7 +118,7 @@ class AwsAuthV4Test extends GuzzleTest
             $client->request('_status', 'GET');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
-            if ($guzzleException instanceof RequestException) {
+            if ($guzzleException instanceof TransferException) {
                 $request = $guzzleException->getRequest();
                 $expected = 'AWS4-HMAC-SHA256 Credential=foo/'
                     .\date('Ymd').'/us-east-1/es/aws4_request, ';
@@ -152,7 +152,7 @@ class AwsAuthV4Test extends GuzzleTest
             $client->request('_status', 'GET');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
-            if ($guzzleException instanceof RequestException) {
+            if ($guzzleException instanceof TransferException) {
                 $request = $guzzleException->getRequest();
 
                 $this->assertSame('http', $request->getUri()->getScheme());
@@ -177,7 +177,7 @@ class AwsAuthV4Test extends GuzzleTest
             $client->request('_status', 'GET');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
-            if ($guzzleException instanceof RequestException) {
+            if ($guzzleException instanceof TransferException) {
                 $request = $guzzleException->getRequest();
 
                 $this->assertSame('https', $request->getUri()->getScheme());
@@ -201,7 +201,7 @@ class AwsAuthV4Test extends GuzzleTest
             $client->request('_status', 'GET');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
-            if ($guzzleException instanceof RequestException) {
+            if ($guzzleException instanceof TransferException) {
                 $request = $guzzleException->getRequest();
                 $expected = 'AWS4-HMAC-SHA256 Credential=foo/'
                     .\date('Ymd').'/us-east-1/es/aws4_request, ';
