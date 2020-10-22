@@ -14,6 +14,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Uri;
+use GuzzleHttp\RequestOptions;
 
 /**
  * Elastica Guzzle Transport object.
@@ -57,17 +58,18 @@ class Guzzle extends AbstractTransport
 
         $options = [
             'base_uri' => $this->_getBaseUrl($connection),
-            'headers' => [
+            RequestOptions::HEADERS => [
                 'Content-Type' => $request->getContentType(),
             ],
-            'http_errors' => false, // 4xx and 5xx is expected and NOT an exceptions in this context
+            RequestOptions::HTTP_ERRORS => false, // 4xx and 5xx is expected and NOT an exceptions in this context
         ];
+
         if ($connection->getTimeout()) {
-            $options['timeout'] = $connection->getTimeout();
+            $options[RequestOptions::TIMEOUT] = $connection->getTimeout();
         }
 
         if (null !== $proxy = $connection->getProxy()) {
-            $options['proxy'] = $proxy;
+            $options[RequestOptions::PROXY] = $proxy;
         }
 
         $req = $this->_createPsr7Request($request, $connection);
