@@ -381,12 +381,16 @@ class Index implements SearchableInterface
      */
     public function create(array $args = [], $options = null): Response
     {
-        $options = $options ?? [];
-
-        if (\is_bool($options)) {
+        if (null === $options) {
+            if (\func_num_args() >= 2) {
+                @\trigger_error(\sprintf('Passing null as 2nd argument to "%s()" is deprecated since Elastica 7.0.1, avoid passing this argument or pass an array instead.', __METHOD__), \E_USER_DEPRECATED);
+            }
+            $options = [];
+        } elseif (\is_bool($options)) {
+            @\trigger_error(\sprintf('Passing a bool as 2nd argument to "%s()" is deprecated since Elastica 7.0.1, pass an array with the key "recreate" instead.', __METHOD__), \E_USER_DEPRECATED);
             $options = ['recreate' => $options];
         } elseif (!\is_array($options)) {
-            throw new \TypeError(\sprintf('Argument 2 passed to %s::create() must be of type array|bool|null, %s given.', self::class, \is_object($options) ? \get_class($options) : \gettype($options)));
+            throw new \TypeError(\sprintf('Argument 2 passed to "%s()" must be of type array|bool|null, %s given.', __METHOD__, \is_object($options) ? \get_class($options) : \gettype($options)));
         }
 
         $invalidOptions = \array_diff(\array_keys($options), $allowedOptions = [
