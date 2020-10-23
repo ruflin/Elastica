@@ -9,4 +9,8 @@ namespace Elastica\Aggregation;
  */
 class GlobalAggregation extends AbstractAggregation
 {
+    protected function _getBaseName()
+    {
+        return 'global';
+    }
 }
