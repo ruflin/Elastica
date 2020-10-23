@@ -227,9 +227,19 @@ class Aggregation implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-global-aggregation.html
      */
-    public function global_agg(string $name): GlobalAggregation
+    public function global(string $name): GlobalAggregation
     {
         return new GlobalAggregation($name);
+    }
+
+    /**
+     * @deprecated since Elastica 7.0.1, use the "global()" method instead.
+     */
+    public function global_agg(string $name): GlobalAggregation
+    {
+        @\trigger_error(\sprintf('The "%s()" method is deprecated since Elastica 7.0.1, use global() instead.', __METHOD__), E_USER_DEPRECATED);
+
+        return $this->global($name);
     }
 
     /**

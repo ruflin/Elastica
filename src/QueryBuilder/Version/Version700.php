@@ -73,7 +73,8 @@ class Version700 extends Version
         'geo_bounds',
         'top_hits',
         'scripted_metric',
-        'global_agg', // original: global
+        'global',
+        'global_agg', // Deprecated
         'filter',
         'filters',
         'missing',
