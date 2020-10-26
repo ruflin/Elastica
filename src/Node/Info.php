@@ -95,7 +95,7 @@ class Info
     {
         // Returns string in format: inet[/192.168.1.115:9201]
         $data = $this->get('http_address');
-        $data = \substr($data, 6, \strlen($data) - 7);
+        $data = \substr($data, 6, -1);
         $data = \explode(':', $data);
 
         return $data[1];
@@ -110,7 +110,7 @@ class Info
     {
         // Returns string in format: inet[/192.168.1.115:9201]
         $data = $this->get('http_address');
-        $data = \substr($data, 6, \strlen($data) - 7);
+        $data = \substr($data, 6, -1);
         $data = \explode(':', $data);
 
         return $data[0];
