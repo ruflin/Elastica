@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Replaced deprecated `exceptions` request option by `http_errors` request option in Guzzle transport [#1817](https://github.com/ruflin/Elastica/pull/1817)
 * Updated `php-cs-fixer` to `2.16.4` [#1830](https://github.com/ruflin/Elastica/pull/1830)
 * Used `GuzzleHttp\RequestOptions` constants for configuring request options [#1820](https://github.com/ruflin/Elastica/pull/1820)
+* Used new ingest pipeline endpoints classes [#1834](https://github.com/ruflin/Elastica/pull/1834)
 ### Deprecated
 * Deprecated `Elastica\QueryBuilder\DSL\Aggregation::global_agg()`, use `global()` instead [#1826](https://github.com/ruflin/Elastica/pull/1826)
 * Deprecated Match query class and introduced MatchQuery instead for PHP 8.0 compatibility reason [#1799](https://github.com/ruflin/Elastica/pull/1799)
