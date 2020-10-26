@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 * Deprecated Match query class and introduced MatchQuery instead for PHP 8.0 compatibility reason [#1799](https://github.com/ruflin/Elastica/pull/1799)
 * Deprecated `version`/`version_type` options [(deprecated in `6.7.0`)](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/docs-update.html) and added `if_seq_no` / `if_primary_term` that replaced it
+* Deprecated passing `bool` or `null` as 2nd argument to `Elastica\Index::create()` [#1828](https://github.com/ruflin/Elastica/pull/1828)
 ### Removed
 * Removed HHVM proxy detection [#1818](https://github.com/ruflin/Elastica/pull/1818)
 ### Fixed
