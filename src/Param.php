@@ -172,7 +172,7 @@ class Param implements ArrayableInterface, \Countable
      */
     protected function _getBaseName()
     {
-        return Util::getParamName($this);
+        return Util::toSnakeCase((new \ReflectionClass($this))->getShortName());
     }
 
     /**
