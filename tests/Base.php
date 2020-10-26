@@ -6,6 +6,7 @@ use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Index;
 use Elasticsearch\Endpoints\Ingest\Pipeline\Put;
+use Elasticsearch\Endpoints\Ingest\PutPipeline;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Util\Test as TestUtil;
 use Psr\Log\LoggerInterface;
@@ -112,7 +113,8 @@ class Base extends TestCase
     {
         $client = $this->_getClient();
 
-        $endpoint = new Put();
+        // TODO: Use only PutPipeline when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(PutPipeline::class) ? new PutPipeline() : new Put();
         $endpoint->setID('renaming');
         $endpoint->setBody([
             'description' => 'Rename field',
