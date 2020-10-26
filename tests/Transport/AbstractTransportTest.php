@@ -24,10 +24,10 @@ class AbstractTransportTest extends BaseTest
     {
         return [
             [
-                ['transport' => 'Http', 'curl' => [CURLINFO_HEADER_OUT => true]],
+                ['transport' => 'Http', 'curl' => [\CURLINFO_HEADER_OUT => true]],
             ],
             [
-                ['transport' => 'Guzzle', 'curl' => [CURLINFO_HEADER_OUT => true]],
+                ['transport' => 'Guzzle', 'curl' => [\CURLINFO_HEADER_OUT => true]],
             ],
         ];
     }

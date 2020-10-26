@@ -178,7 +178,7 @@ class HttpTest extends BaseTest
      */
     public function testRequestSuccessWithHttpCompressionEnabled(): void
     {
-        $client = $this->_getClient(['transport' => ['type' => 'Http', 'compression' => true, 'curl' => [CURLINFO_HEADER_OUT => true]]]);
+        $client = $this->_getClient(['transport' => ['type' => 'Http', 'compression' => true, 'curl' => [\CURLINFO_HEADER_OUT => true]]]);
 
         $index = $client->getIndex('elastica_request_with_body_and_http_compression_enabled');
 
@@ -198,7 +198,7 @@ class HttpTest extends BaseTest
      */
     public function testRequestSuccessWithHttpCompressionDisabled(): void
     {
-        $client = $this->_getClient(['transport' => ['type' => 'Http', 'compression' => false, 'curl' => [CURLINFO_HEADER_OUT => true]]]);
+        $client = $this->_getClient(['transport' => ['type' => 'Http', 'compression' => false, 'curl' => [\CURLINFO_HEADER_OUT => true]]]);
 
         $index = $client->getIndex('elastica_request_with_body_and_http_compression_disabled');
 

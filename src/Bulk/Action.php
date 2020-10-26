@@ -154,7 +154,7 @@ class Action
 
     public function toString(): string
     {
-        $string = JSON::stringify($this->getActionMetadata(), JSON_FORCE_OBJECT).Bulk::DELIMITER;
+        $string = JSON::stringify($this->getActionMetadata(), \JSON_FORCE_OBJECT).Bulk::DELIMITER;
         if ($this->hasSource()) {
             $source = $this->getSource();
             if (\is_string($source)) {
@@ -167,7 +167,7 @@ class Action
                 }
                 $string .= '{"doc": '.$source['doc'].$docAsUpsert.'}';
             } else {
-                $string .= JSON::stringify($source, JSON_UNESCAPED_UNICODE);
+                $string .= JSON::stringify($source, \JSON_UNESCAPED_UNICODE);
             }
             $string .= Bulk::DELIMITER;
         }

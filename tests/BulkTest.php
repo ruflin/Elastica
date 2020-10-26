@@ -90,8 +90,8 @@ class BulkTest extends BaseTest
 {"name":"The Thing"}
 ';
 
-        $expected = \str_replace(PHP_EOL, "\n", $expected);
-        $this->assertEquals($expected, (string) \str_replace(PHP_EOL, "\n", (string) $bulk));
+        $expected = \str_replace(\PHP_EOL, "\n", $expected);
+        $this->assertEquals($expected, (string) \str_replace(\PHP_EOL, "\n", (string) $bulk));
 
         $response = $bulk->send();
 
@@ -387,7 +387,7 @@ class BulkTest extends BaseTest
 {"index":{}}
 {"name":"The Human Torch"}
 ';
-        $expectedJson = \str_replace(PHP_EOL, "\n", $expectedJson);
+        $expectedJson = \str_replace(\PHP_EOL, "\n", $expectedJson);
         $this->assertEquals($expectedJson, $bulk->toString());
 
         $response = $bulk->send();

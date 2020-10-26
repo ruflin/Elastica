@@ -55,7 +55,7 @@ class ErrorsCollector
         $count = 0;
 
         foreach ($this->errors as $error) {
-            if (E_USER_DEPRECATED === $error[0]) {
+            if (\E_USER_DEPRECATED === $error[0]) {
                 ++$count;
             }
         }
