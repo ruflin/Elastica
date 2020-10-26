@@ -170,7 +170,7 @@ class ConnectionTest extends BaseTest
         $username = 'foo';
         $client = new Client(['username' => $username]);
 
-        $this->assertEquals($username, $client->getConnection()->getUsername('username'));
+        $this->assertEquals($username, $client->getConnection()->getUsername());
     }
 
     /**
@@ -181,6 +181,6 @@ class ConnectionTest extends BaseTest
         $password = 'bar';
         $client = new Client(['password' => $password]);
 
-        $this->assertEquals($password, $client->getConnection()->getPassword('password'));
+        $this->assertEquals($password, $client->getConnection()->getPassword());
     }
 }
