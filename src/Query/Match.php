@@ -2,7 +2,7 @@
 
 namespace Elastica\Query;
 
-\trigger_error('Elastica\Query\Match is deprecated. Use Elastica\Query\MatchQuery instead. From PHP 8 match is reserved word and this class will be removed in further Elastica releases', \E_USER_DEPRECATED);
+trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s" class is deprecated, use "%s" instead. "match" is a reserved keyword starting from PHP 8.0. It will be removed in 8.0.', Match::class, MatchQuery::class);
 
 /**
  * Match query.

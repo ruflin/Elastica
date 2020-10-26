@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Supported PHP 8.0 [#1794](https://github.com/ruflin/Elastica/pull/1794)
 * Added support for defining a connection pool with DSN. Example: `pool(http://127.0.0.1 http://127.0.0.2/bar?timeout=4)` [#1808](https://github.com/ruflin/Elastica/pull/1808)
 * Added `Elastica\Aggregation\Composite` aggregation [#1804](https://github.com/ruflin/Elastica/pull/1804)
+* Added `symfony/deprecation-contracts` package to handle deprecations [#1823](https://github.com/ruflin/Elastica/pull/1823)
 ### Changed
 * Allow `string` such as `wait_for` to be passed to `AbstractUpdateAction::setRefresh` [#1791](https://github.com/ruflin/Elastica/pull/1791)
 * Changed the return type of `AbstractUpdateAction::getRefresh` to `boolean|string` [#1791](https://github.com/ruflin/Elastica/pull/1791)

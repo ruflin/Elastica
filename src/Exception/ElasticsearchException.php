@@ -2,7 +2,7 @@
 
 namespace Elastica\Exception;
 
-\trigger_error('Elastica\Exception\ElasticsearchException is deprecated. Use Elastica\Exception\ResponseException::getResponse::getFullError instead.', E_USER_DEPRECATED);
+trigger_deprecation('ruflin/elastica', '5.2.0', 'The "%s" class is deprecated, use "Elastica\Exception\ResponseException::getResponse()::getFullError()" instead. It will be removed in 8.0.', ElasticsearchException::class);
 
 /**
  * Elasticsearch exception.
