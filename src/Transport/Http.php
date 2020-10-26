@@ -108,9 +108,8 @@ class Http extends AbstractTransport
         $headers = [];
 
         if (!empty($headersConfig)) {
-            $headers = [];
             foreach ($headersConfig as $header => $headerValue) {
-                \array_push($headers, $header.': '.$headerValue);
+                $headers[] = $header.': '.$headerValue;
             }
         }
 
@@ -132,13 +131,13 @@ class Http extends AbstractTransport
                 $content = \str_replace('\/', '/', $content);
             }
 
-            \array_push($headers, \sprintf('Content-Type: %s', $request->getContentType()));
+            $headers[] = 'Content-Type: '.$request->getContentType();
             if ($connection->hasCompression()) {
                 // Compress the body of the request ...
                 \curl_setopt($conn, CURLOPT_POSTFIELDS, \gzencode($content));
 
                 // ... and tell ES that it is compressed
-                \array_push($headers, 'Content-Encoding: gzip');
+                $headers[] = 'Content-Encoding: gzip';
             } else {
                 \curl_setopt($conn, CURLOPT_POSTFIELDS, $content);
             }
