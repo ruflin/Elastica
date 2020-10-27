@@ -28,6 +28,7 @@ use Elasticsearch\Endpoints\Indices\Exists;
 use Elasticsearch\Endpoints\Indices\Flush;
 use Elasticsearch\Endpoints\Indices\ForceMerge;
 use Elasticsearch\Endpoints\Indices\GetAlias;
+use Elasticsearch\Endpoints\Indices\GetMapping;
 use Elasticsearch\Endpoints\Indices\Mapping\Get as MappingGet;
 use Elasticsearch\Endpoints\Indices\Open;
 use Elasticsearch\Endpoints\Indices\Refresh;
@@ -108,7 +109,10 @@ class Index implements SearchableInterface
      */
     public function getMapping(): array
     {
-        $response = $this->requestEndpoint(new MappingGet());
+        // TODO: Use only GetMapping when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(GetMapping::class) ? new GetMapping() : new MappingGet();
+
+        $response = $this->requestEndpoint($endpoint);
         $data = $response->getData();
 
         // Get first entry as if index is an Alias, the name of the mapping is the real name and not alias name
