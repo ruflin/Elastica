@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Used new cache endpoints classes [#1840](https://github.com/ruflin/Elastica/pull/1840)
 * Used new ingest pipeline endpoints classes [#1834](https://github.com/ruflin/Elastica/pull/1834)
 * Used new mapping endpoints classes [#1845](https://github.com/ruflin/Elastica/pull/1845)
+* Used new settings endpoints classes [#1852](https://github.com/ruflin/Elastica/pull/1852)
 ### Deprecated
 * Deprecated `Elastica\Aggregation\Range::setKeyedResponse()`, use `setKeyed()` instead [#1848](https://github.com/ruflin/Elastica/pull/1848)
 * Deprecated `Elastica\Exception\ResponseException::getElasticsearchException()`, use `getResponse()::getFullError()` instead [#1829](https://github.com/ruflin/Elastica/pull/1829)
