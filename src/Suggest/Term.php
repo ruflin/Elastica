@@ -51,7 +51,7 @@ class Term extends AbstractSuggest
      */
     public function setLowercaseTerms(bool $lowercase = true): Term
     {
-        return $this->setParam('lowercase_terms', (bool) $lowercase);
+        return $this->setParam('lowercase_terms', $lowercase);
     }
 
     /**
