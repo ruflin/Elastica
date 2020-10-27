@@ -5,7 +5,6 @@ namespace Elastica\Test\Query;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query\Ids;
-use Elastica\Query\Type;
 use Elastica\Test\Base as BaseTest;
 
 /**
