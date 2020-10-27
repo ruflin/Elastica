@@ -32,7 +32,7 @@ class TopHits extends AbstractAggregation
      */
     public function setSize(int $size): self
     {
-        return $this->setParam('size', (int) $size);
+        return $this->setParam('size', $size);
     }
 
     /**
@@ -42,7 +42,7 @@ class TopHits extends AbstractAggregation
      */
     public function setFrom(int $from): self
     {
-        return $this->setParam('from', (int) $from);
+        return $this->setParam('from', $from);
     }
 
     /**
