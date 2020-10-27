@@ -37,12 +37,12 @@ class Base extends TestCase
 
     protected static function hideDeprecated(): void
     {
-        \error_reporting(\error_reporting() & ~E_USER_DEPRECATED);
+        \error_reporting(\error_reporting() & ~\E_USER_DEPRECATED);
     }
 
     protected static function showDeprecated(): void
     {
-        \error_reporting(\error_reporting() | E_USER_DEPRECATED);
+        \error_reporting(\error_reporting() | \E_USER_DEPRECATED);
     }
 
     /**

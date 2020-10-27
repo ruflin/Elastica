@@ -25,7 +25,7 @@ class JSONTest extends TestCase
         $this->expectException(\Elastica\Exception\JSONParseException::class);
         $this->expectExceptionMessage('Inf and NaN cannot be JSON encoded');
 
-        $arr = [NAN, INF];
+        $arr = [\NAN, \INF];
         JSON::stringify($arr);
         $this->assertTrue(true);
     }

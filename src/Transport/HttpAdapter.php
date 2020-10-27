@@ -104,7 +104,7 @@ class HttpAdapter extends AbstractTransport
             }
 
             if (\is_array($data)) {
-                $body = JSON::stringify($data, JSON_UNESCAPED_UNICODE);
+                $body = JSON::stringify($data, \JSON_UNESCAPED_UNICODE);
             } else {
                 $body = $data;
             }

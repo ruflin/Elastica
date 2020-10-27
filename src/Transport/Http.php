@@ -75,30 +75,30 @@ class Http extends AbstractTransport
             );
         }
 
-        \curl_setopt($conn, CURLOPT_URL, $baseUri);
-        \curl_setopt($conn, CURLOPT_TIMEOUT, $connection->getTimeout());
-        \curl_setopt($conn, CURLOPT_FORBID_REUSE, 0);
+        \curl_setopt($conn, \CURLOPT_URL, $baseUri);
+        \curl_setopt($conn, \CURLOPT_TIMEOUT, $connection->getTimeout());
+        \curl_setopt($conn, \CURLOPT_FORBID_REUSE, 0);
 
         // Tell ES that we support the compressed responses
         // An "Accept-Encoding" header containing all supported encoding types is sent
         // curl will decode the response automatically if the response is encoded
-        \curl_setopt($conn, CURLOPT_ENCODING, '');
+        \curl_setopt($conn, \CURLOPT_ENCODING, '');
 
         /* @see Connection::setConnectTimeout() */
         $connectTimeout = $connection->getConnectTimeout();
         if ($connectTimeout > 0) {
-            \curl_setopt($conn, CURLOPT_CONNECTTIMEOUT, $connectTimeout);
+            \curl_setopt($conn, \CURLOPT_CONNECTTIMEOUT, $connectTimeout);
         }
 
         if (null !== $proxy = $connection->getProxy()) {
-            \curl_setopt($conn, CURLOPT_PROXY, $proxy);
+            \curl_setopt($conn, \CURLOPT_PROXY, $proxy);
         }
 
         $username = $connection->getUsername();
         $password = $connection->getPassword();
         if (null !== $username && null !== $password) {
-            \curl_setopt($conn, CURLOPT_HTTPAUTH, $this->_getAuthType());
-            \curl_setopt($conn, CURLOPT_USERPWD, "{$username}:{$password}");
+            \curl_setopt($conn, \CURLOPT_HTTPAUTH, $this->_getAuthType());
+            \curl_setopt($conn, \CURLOPT_USERPWD, "{$username}:{$password}");
         }
 
         $this->_setupCurl($conn);
@@ -124,7 +124,7 @@ class Http extends AbstractTransport
             }
 
             if (\is_array($data)) {
-                $content = JSON::stringify($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                $content = JSON::stringify($data, \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES);
             } else {
                 $content = $data;
 
@@ -135,22 +135,22 @@ class Http extends AbstractTransport
             \array_push($headers, \sprintf('Content-Type: %s', $request->getContentType()));
             if ($connection->hasCompression()) {
                 // Compress the body of the request ...
-                \curl_setopt($conn, CURLOPT_POSTFIELDS, \gzencode($content));
+                \curl_setopt($conn, \CURLOPT_POSTFIELDS, \gzencode($content));
 
                 // ... and tell ES that it is compressed
                 \array_push($headers, 'Content-Encoding: gzip');
             } else {
-                \curl_setopt($conn, CURLOPT_POSTFIELDS, $content);
+                \curl_setopt($conn, \CURLOPT_POSTFIELDS, $content);
             }
         } else {
-            \curl_setopt($conn, CURLOPT_POSTFIELDS, '');
+            \curl_setopt($conn, \CURLOPT_POSTFIELDS, '');
         }
 
-        \curl_setopt($conn, CURLOPT_HTTPHEADER, $headers);
+        \curl_setopt($conn, \CURLOPT_HTTPHEADER, $headers);
 
-        \curl_setopt($conn, CURLOPT_NOBODY, 'HEAD' == $httpMethod);
+        \curl_setopt($conn, \CURLOPT_NOBODY, 'HEAD' == $httpMethod);
 
-        \curl_setopt($conn, CURLOPT_CUSTOMREQUEST, $httpMethod);
+        \curl_setopt($conn, \CURLOPT_CUSTOMREQUEST, $httpMethod);
 
         $start = \microtime(true);
 
@@ -164,7 +164,7 @@ class Http extends AbstractTransport
         // Checks if error exists
         $errorNumber = \curl_errno($conn);
 
-        $response = new Response($responseString, \curl_getinfo($conn, CURLINFO_HTTP_CODE));
+        $response = new Response($responseString, \curl_getinfo($conn, \CURLINFO_HTTP_CODE));
         $response->setQueryTime($end - $start);
         $response->setTransferInfo(\curl_getinfo($conn));
         if ($connection->hasConfig('bigintConversion')) {
@@ -220,19 +220,19 @@ class Http extends AbstractTransport
     {
         switch ($this->_connection->getAuthType()) {
             case 'digest':
-                return CURLAUTH_DIGEST;
+                return \CURLAUTH_DIGEST;
                 break;
             case 'gssnegotiate':
-                return CURLAUTH_GSSNEGOTIATE;
+                return \CURLAUTH_GSSNEGOTIATE;
                 break;
             case 'ntlm':
-                return CURLAUTH_NTLM;
+                return \CURLAUTH_NTLM;
                 break;
             case 'basic':
-                return CURLAUTH_BASIC;
+                return \CURLAUTH_BASIC;
                 break;
             default:
-                return CURLAUTH_ANY;
+                return \CURLAUTH_ANY;
         }
     }
 }
