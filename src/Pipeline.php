@@ -5,9 +5,12 @@ namespace Elastica;
 use Elastica\Exception\InvalidException;
 use Elastica\Processor\AbstractProcessor;
 use Elasticsearch\Endpoints\AbstractEndpoint;
+use Elasticsearch\Endpoints\Ingest\DeletePipeline;
+use Elasticsearch\Endpoints\Ingest\GetPipeline;
 use Elasticsearch\Endpoints\Ingest\Pipeline\Delete;
 use Elasticsearch\Endpoints\Ingest\Pipeline\Get;
 use Elasticsearch\Endpoints\Ingest\Pipeline\Put;
+use Elasticsearch\Endpoints\Ingest\PutPipeline;
 
 /**
  * Elastica Pipeline object.
@@ -59,7 +62,8 @@ class Pipeline extends Param
             throw new InvalidException('You should set a valid processor of type Elastica\Processor\AbstractProcessor.');
         }
 
-        $endpoint = new Put();
+        // TODO: Use only PutPipeline when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(PutPipeline::class) ? new PutPipeline() : new Put();
         $endpoint->setID($this->id);
         $endpoint->setBody($this->toArray());
 
@@ -73,7 +77,8 @@ class Pipeline extends Param
      */
     public function getPipeline(string $id): Response
     {
-        $endpoint = new Get();
+        // TODO: Use only GetPipeline when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(GetPipeline::class) ? new GetPipeline() : new Get();
         $endpoint->setID($id);
 
         return $this->requestEndpoint($endpoint);
@@ -86,7 +91,8 @@ class Pipeline extends Param
      */
     public function deletePipeline(string $id): Response
     {
-        $endpoint = new Delete();
+        // TODO: Use only DeletePipeline when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(DeletePipeline::class) ? new DeletePipeline() : new Delete();
         $endpoint->setID($id);
 
         return $this->requestEndpoint($endpoint);
