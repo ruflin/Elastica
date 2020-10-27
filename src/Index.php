@@ -20,6 +20,7 @@ use Elasticsearch\Endpoints\Indices\Alias;
 use Elasticsearch\Endpoints\Indices\Aliases\Update;
 use Elasticsearch\Endpoints\Indices\Analyze;
 use Elasticsearch\Endpoints\Indices\Cache\Clear;
+use Elasticsearch\Endpoints\Indices\ClearCache;
 use Elasticsearch\Endpoints\Indices\Close;
 use Elasticsearch\Endpoints\Indices\Create;
 use Elasticsearch\Endpoints\Indices\Delete;
@@ -594,8 +595,11 @@ class Index implements SearchableInterface
      */
     public function clearCache(): Response
     {
+        // TODO: Use only ClearCache when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(ClearCache::class) ? new ClearCache() : new Clear();
+
         // TODO: add additional cache clean arguments
-        return $this->requestEndpoint(new Clear());
+        return $this->requestEndpoint($endpoint);
     }
 
     /**
