@@ -547,7 +547,7 @@ class Client
         return $this->request(
             \ltrim($endpoint->getURI(), '/'),
             $endpoint->getMethod(),
-            null === $endpoint->getBody() ? [] : $endpoint->getBody(),
+            $endpoint->getBody() ?? [],
             $endpoint->getParams()
         );
     }

@@ -102,11 +102,7 @@ abstract class AbstractTransport extends Param
                 'nulltransport' => 'NullTransport',
             ];
 
-            if (isset($specialTransports[\strtolower($transport)])) {
-                $transport = $specialTransports[\strtolower($transport)];
-            } else {
-                $transport = \ucfirst($transport);
-            }
+            $transport = $specialTransports[\strtolower($transport)] ?? \ucfirst($transport);
             $classNames = ["Elastica\\Transport\\{$transport}", $transport];
             foreach ($classNames as $className) {
                 if (\class_exists($className)) {

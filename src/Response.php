@@ -89,10 +89,7 @@ class Response
             return $error;
         }
 
-        $rootError = $error;
-        if (isset($error['root_cause'][0])) {
-            $rootError = $error['root_cause'][0];
-        }
+        $rootError = $error['root_cause'][0] ?? $error;
 
         $message = $rootError['reason'];
         if (isset($rootError['index'])) {
@@ -117,9 +114,7 @@ class Response
     {
         $response = $this->getData();
 
-        if (isset($response['error'])) {
-            return $response['error'];
-        }
+        return $response['error'] ?? null;
     }
 
     /**
