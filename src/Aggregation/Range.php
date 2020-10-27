@@ -57,10 +57,12 @@ class Range extends AbstractSimpleAggregation
 
     /**
      * @return $this
+     *
+     * @deprecated singe version 7.1.0, use the "setKeyed()" method instead.
      */
     public function setKeyedResponse(bool $keyed = true): self
     {
-        trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s()" method is deprecated, use setKeyed() instead. It will be removed in 8.0.', __METHOD__);
+        trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s()" method is deprecated, use "setKeyed()" instead. It will be removed in 8.0.', __METHOD__);
 
         return $this->setKeyed($keyed);
     }
