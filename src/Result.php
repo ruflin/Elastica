@@ -69,11 +69,7 @@ class Result
      */
     public function getParam($name)
     {
-        if (isset($this->_hit[$name])) {
-            return $this->_hit[$name];
-        }
-
-        return [];
+        return $this->_hit[$name] ?? [];
     }
 
     /**
