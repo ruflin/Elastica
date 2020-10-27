@@ -23,13 +23,16 @@ use Elasticsearch\Endpoints\Indices\Cache\Clear;
 use Elasticsearch\Endpoints\Indices\Close;
 use Elasticsearch\Endpoints\Indices\Create;
 use Elasticsearch\Endpoints\Indices\Delete;
+use Elasticsearch\Endpoints\Indices\DeleteAlias;
 use Elasticsearch\Endpoints\Indices\Exists;
 use Elasticsearch\Endpoints\Indices\Flush;
 use Elasticsearch\Endpoints\Indices\ForceMerge;
+use Elasticsearch\Endpoints\Indices\GetAlias;
 use Elasticsearch\Endpoints\Indices\Mapping\Get as MappingGet;
 use Elasticsearch\Endpoints\Indices\Open;
 use Elasticsearch\Endpoints\Indices\Refresh;
 use Elasticsearch\Endpoints\Indices\Settings\Put;
+use Elasticsearch\Endpoints\Indices\UpdateAliases;
 use Elasticsearch\Endpoints\UpdateByQuery;
 
 /**
@@ -530,7 +533,8 @@ class Index implements SearchableInterface
 
         $data['actions'][] = ['add' => ['index' => $this->getName(), 'alias' => $name]];
 
-        $endpoint = new Update();
+        // TODO: Use only UpdateAliases when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(UpdateAliases::class) ? new UpdateAliases() : new Update();
         $endpoint->setBody($data);
 
         return $this->getClient()->requestEndpoint($endpoint);
@@ -543,7 +547,8 @@ class Index implements SearchableInterface
      */
     public function removeAlias(string $name): Response
     {
-        $endpoint = new Alias\Delete();
+        // TODO: Use only DeleteAlias when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(DeleteAlias::class) ? new DeleteAlias() : new Alias\Delete();
         $endpoint->setName($name);
 
         return $this->requestEndpoint($endpoint);
@@ -556,7 +561,8 @@ class Index implements SearchableInterface
      */
     public function getAliases(): array
     {
-        $endpoint = new Alias\Get();
+        // TODO: Use only GetAlias when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(GetAlias::class) ? new GetAlias() : new Alias\Get();
         $endpoint->setName('*');
 
         $responseData = $this->requestEndpoint($endpoint)->getData();
