@@ -233,11 +233,11 @@ class Aggregation implements DSL
     }
 
     /**
-     * @deprecated since Elastica 7.0.1, use the "global()" method instead.
+     * @deprecated since version 7.1.0, use the "global()" method instead.
      */
     public function global_agg(string $name): GlobalAggregation
     {
-        trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s()" method is deprecated, use global() instead. It will be removed in 8.0.', __METHOD__);
+        trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s()" method is deprecated, use "global()"  instead. It will be removed in 8.0.', __METHOD__);
 
         return $this->global($name);
     }
