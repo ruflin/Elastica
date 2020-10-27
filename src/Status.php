@@ -4,6 +4,7 @@ namespace Elastica;
 
 use Elastica\Exception\ResponseException;
 use Elasticsearch\Endpoints\Indices\Alias\Get;
+use Elasticsearch\Endpoints\Indices\GetAlias;
 use Elasticsearch\Endpoints\Indices\Stats;
 
 /**
@@ -105,7 +106,8 @@ class Status
      */
     public function getIndicesWithAlias($alias)
     {
-        $endpoint = new Get();
+        // TODO: Use only GetAlias when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(GetAlias::class) ? new GetAlias() : new Get();
         $endpoint->setName($alias);
 
         $response = null;
