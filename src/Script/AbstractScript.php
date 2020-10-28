@@ -66,7 +66,7 @@ abstract class AbstractScript extends AbstractUpdateAction
         }
 
         if (\is_string($data)) {
-            $class = self::class === \get_called_class() ? Script::class : \get_called_class();
+            $class = self::class === static::class ? Script::class : static::class;
 
             return new $class($data);
         }
