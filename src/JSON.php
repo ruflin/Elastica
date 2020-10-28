@@ -32,7 +32,7 @@ class JSON
         }
 
         // run decode
-        $array = \call_user_func_array('json_decode', $args);
+        $array = \json_decode(...$args);
 
         // turn errors into exceptions for easier catching
         if ($error = self::getJsonLastErrorMsg()) {
@@ -64,7 +64,7 @@ class JSON
         isset($args[1]) ? $args[1] |= \JSON_PRESERVE_ZERO_FRACTION : $args[1] = \JSON_PRESERVE_ZERO_FRACTION;
 
         // run encode and output
-        $string = \call_user_func_array('json_encode', $args);
+        $string = \json_encode(...$args);
 
         // turn errors into exceptions for easier catching
         if ($error = self::getJsonLastErrorMsg()) {
