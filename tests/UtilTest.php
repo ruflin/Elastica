@@ -147,11 +147,9 @@ class UtilTest extends BaseTest
      */
     public function testToSnakeCase(): void
     {
-        $string = 'HelloWorld';
-        $this->assertEquals('hello_world', Util::toSnakeCase($string));
-
-        $string = 'HowAreYouToday';
-        $this->assertEquals('how_are_you_today', Util::toSnakeCase($string));
+        $this->assertSame('foo_bar', Util::toSnakeCase('fooBar'));
+        $this->assertSame('hello_world', Util::toSnakeCase('HelloWorld'));
+        $this->assertSame('how_are_you_today', Util::toSnakeCase('HowAreYouToday'));
     }
 
     /**
