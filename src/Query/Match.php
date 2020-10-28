@@ -11,7 +11,7 @@ trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s" class is deprecated, u
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
- * @deprecated Use MatchQuery instead. From PHP 8 match is reserved word and this class will be removed in further Elastica releases
+ * @deprecated since version 7.1.0, use the MatchQuery class instead.
  */
 class Match extends MatchQuery
 {

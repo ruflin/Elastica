@@ -8,6 +8,8 @@ trigger_deprecation('ruflin/elastica', '5.2.0', 'The "%s" class is deprecated, u
  * Elasticsearch exception.
  *
  * @author Ian Babrou <ibobrik@gmail.com>
+ *
+ * @deprecated since version 5.2.0
  */
 class ElasticsearchException extends \Exception implements ExceptionInterface
 {
