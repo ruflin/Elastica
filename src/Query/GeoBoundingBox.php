@@ -34,7 +34,7 @@ class GeoBoundingBox extends AbstractQuery
      */
     public function addCoordinates(string $key, array $coordinates): self
     {
-        if (!isset($coordinates[0]) || !isset($coordinates[1])) {
+        if (!isset($coordinates[0], $coordinates[1])) {
             throw new InvalidException('expected $coordinates to be an array with two elements');
         }
 
