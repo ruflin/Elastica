@@ -220,16 +220,12 @@ class Http extends AbstractTransport
         switch ($this->_connection->getAuthType()) {
             case 'digest':
                 return \CURLAUTH_DIGEST;
-                break;
             case 'gssnegotiate':
                 return \CURLAUTH_GSSNEGOTIATE;
-                break;
             case 'ntlm':
                 return \CURLAUTH_NTLM;
-                break;
             case 'basic':
                 return \CURLAUTH_BASIC;
-                break;
             default:
                 return \CURLAUTH_ANY;
         }
