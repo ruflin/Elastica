@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Used new cache endpoints classes [#1840](https://github.com/ruflin/Elastica/pull/1840)
 * Used new ingest pipeline endpoints classes [#1834](https://github.com/ruflin/Elastica/pull/1834)
 ### Deprecated
+* Deprecated `Elastica\Aggregation\Range::setKeyedResponse()`, use `setKeyed()` instead [#1848](https://github.com/ruflin/Elastica/pull/1848)
 * Deprecated `Elastica\Exception\ResponseException::getElasticsearchException()`, use `getResponse()::getFullError()` instead [#1829](https://github.com/ruflin/Elastica/pull/1829)
 * Deprecated `Elastica\QueryBuilder\DSL\Aggregation::global_agg()`, use `global()` instead [#1826](https://github.com/ruflin/Elastica/pull/1826)
 * Deprecated Match query class and introduced MatchQuery instead for PHP 8.0 compatibility reason [#1799](https://github.com/ruflin/Elastica/pull/1799)
