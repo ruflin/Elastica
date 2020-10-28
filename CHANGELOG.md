@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Deprecated `Elastica\Aggregation\Range::setKeyedResponse()`, use `setKeyed()` instead [#1848](https://github.com/ruflin/Elastica/pull/1848)
 * Deprecated `Elastica\Exception\ResponseException::getElasticsearchException()`, use `getResponse()::getFullError()` instead [#1829](https://github.com/ruflin/Elastica/pull/1829)
 * Deprecated `Elastica\QueryBuilder\DSL\Aggregation::global_agg()`, use `global()` instead [#1826](https://github.com/ruflin/Elastica/pull/1826)
+* Deprecated `Elastica\Util::getParamName()` [#1832](https://github.com/ruflin/Elastica/pull/1832)
 * Deprecated Match query class and introduced MatchQuery instead for PHP 8.0 compatibility reason [#1799](https://github.com/ruflin/Elastica/pull/1799)
 * Deprecated `version`/`version_type` options [(deprecated in `6.7.0`)](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/docs-update.html) and added `if_seq_no` / `if_primary_term` that replaced it
 * Deprecated passing `bool` or `null` as 2nd argument to `Elastica\Index::create()` [#1828](https://github.com/ruflin/Elastica/pull/1828)

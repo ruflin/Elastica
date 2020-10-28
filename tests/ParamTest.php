@@ -4,7 +4,6 @@ namespace Elastica\Test;
 
 use Elastica\Param;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Util;
 
 /**
  * @internal
@@ -18,7 +17,7 @@ class ParamTest extends BaseTest
     {
         $param = new Param();
         $this->assertInstanceOf(Param::class, $param);
-        $this->assertEquals([$this->_getFilterName($param) => []], $param->toArray());
+        $this->assertEquals(['param' => []], $param->toArray());
     }
 
     /**
@@ -31,7 +30,7 @@ class ParamTest extends BaseTest
         $param->setParams($params);
 
         $this->assertInstanceOf(Param::class, $param);
-        $this->assertEquals([$this->_getFilterName($param) => $params], $param->toArray());
+        $this->assertEquals(['param' => $params], $param->toArray());
     }
 
     /**
@@ -111,10 +110,5 @@ class ParamTest extends BaseTest
 
         $param->setParam($key, $value);
         $this->assertTrue($param->hasParam($key));
-    }
-
-    protected function _getFilterName($filter)
-    {
-        return Util::getParamName($filter);
     }
 }
