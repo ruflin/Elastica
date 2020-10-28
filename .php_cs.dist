@@ -14,6 +14,7 @@ return PhpCsFixer\Config::create()
         '@Symfony' => true,
         'array_syntax' => ['syntax' => 'short'],
         'is_null' => true,
+        'list_syntax' => ['syntax' => 'short'],
         'method_argument_space' => ['on_multiline' => 'ensure_fully_multiline'],
         'native_constant_invocation' => true,
         'native_function_invocation' => true,
