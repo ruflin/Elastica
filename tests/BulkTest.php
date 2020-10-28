@@ -352,7 +352,7 @@ class BulkTest extends BaseTest
 
         try {
             $bulk->send();
-            $bulk->fail('3rd document create should produce error');
+            $this->fail('3rd document create should produce error');
         } catch (ResponseException $e) {
             $error = $e->getResponseSet()->getFullError();
             $this->assertSame('version_conflict_engine_exception', $error['type']);
