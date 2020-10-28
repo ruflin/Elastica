@@ -32,6 +32,7 @@ use Elasticsearch\Endpoints\Indices\GetAlias;
 use Elasticsearch\Endpoints\Indices\GetMapping;
 use Elasticsearch\Endpoints\Indices\Mapping\Get as MappingGet;
 use Elasticsearch\Endpoints\Indices\Open;
+use Elasticsearch\Endpoints\Indices\PutSettings;
 use Elasticsearch\Endpoints\Indices\Refresh;
 use Elasticsearch\Endpoints\Indices\Settings\Put;
 use Elasticsearch\Endpoints\Indices\UpdateAliases;
@@ -628,7 +629,8 @@ class Index implements SearchableInterface
      */
     public function setSettings(array $data): Response
     {
-        $endpoint = new Put();
+        // TODO: Use only PutSettings when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(PutSettings::class) ? new PutSettings() : new Put();
         $endpoint->setBody($data);
 
         return $this->requestEndpoint($endpoint);
