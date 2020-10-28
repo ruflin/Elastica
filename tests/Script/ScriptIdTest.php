@@ -1,6 +1,6 @@
 <?php
 
-namespace Elastica\Test;
+namespace Elastica\Test\Script;
 
 use Elastica\Script\ScriptId;
 use Elastica\Test\Base as BaseTest;
