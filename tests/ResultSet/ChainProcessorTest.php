@@ -1,6 +1,6 @@
 <?php
 
-namespace Elastica\Test\Transformer;
+namespace Elastica\Test\ResultSet;
 
 use Elastica\Query;
 use Elastica\Response;

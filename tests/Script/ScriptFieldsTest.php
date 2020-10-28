@@ -1,6 +1,6 @@
 <?php
 
-namespace Elastica\Test;
+namespace Elastica\Test\Script;
 
 use Elastica\Mapping;
 use Elastica\Query;

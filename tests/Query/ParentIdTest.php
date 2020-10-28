@@ -1,8 +1,9 @@
 <?php
 
-namespace Elastica\Query;
+namespace Elastica\Test\Query;
 
 use Elastica\Mapping;
+use Elastica\Query\ParentId;
 use Elastica\QueryBuilder\DSL\Query;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
