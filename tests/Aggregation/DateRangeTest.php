@@ -15,6 +15,26 @@ use Elastica\Query;
 class DateRangeTest extends BaseAggregationTest
 {
     /**
+     * @group unit
+     */
+    public function testSetTimezone(): void
+    {
+        $agg = (new DateRange('name'))
+            ->setField('date')
+            ->setTimezone('CET')
+        ;
+
+        $expected = [
+            'date_range' => [
+                'field' => 'date',
+                'time_zone' => 'CET',
+            ],
+        ];
+
+        $this->assertEquals($expected, $agg->toArray());
+    }
+
+    /**
      * @group functional
      */
     public function testDateRangeAggregation(): void

@@ -20,4 +20,12 @@ class DateRange extends Range
     {
         return $this->setParam('format', $format);
     }
+
+    /**
+     * Set time zone.
+     */
+    public function setTimezone(string $timezone): self
+    {
+        return $this->setParam('time_zone', $timezone);
+    }
 }
