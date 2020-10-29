@@ -21,7 +21,7 @@ class ResponseSetTest extends BaseTest
      */
     public function testConstructor(): void
     {
-        list($responseData, $actions) = $this->_getFixture();
+        [$responseData, $actions] = $this->_getFixture();
 
         $responseSet = $this->_createResponseSet($responseData, $actions);
 
@@ -48,7 +48,7 @@ class ResponseSetTest extends BaseTest
      */
     public function testGetError(): void
     {
-        list($responseData, $actions) = $this->_getFixture();
+        [$responseData, $actions] = $this->_getFixture();
         $responseData['items'][1]['index']['ok'] = false;
         $responseData['items'][1]['index']['error'] = 'SomeExceptionMessage';
         $responseData['items'][2]['index']['ok'] = false;
@@ -84,7 +84,7 @@ class ResponseSetTest extends BaseTest
      */
     public function testGetBulkResponses(): void
     {
-        list($responseData, $actions) = $this->_getFixture();
+        [$responseData, $actions] = $this->_getFixture();
 
         $responseSet = $this->_createResponseSet($responseData, $actions);
 
@@ -108,7 +108,7 @@ class ResponseSetTest extends BaseTest
      */
     public function testIterator(): void
     {
-        list($responseData, $actions) = $this->_getFixture();
+        [$responseData, $actions] = $this->_getFixture();
 
         $responseSet = $this->_createResponseSet($responseData, $actions);
 
@@ -135,7 +135,7 @@ class ResponseSetTest extends BaseTest
 
     public function isOkDataProvider(): \Generator
     {
-        list($responseData, $actions) = $this->_getFixture();
+        [$responseData, $actions] = $this->_getFixture();
 
         yield [$responseData, $actions, true];
         $responseData['items'][2]['index']['ok'] = false;
