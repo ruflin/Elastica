@@ -6,14 +6,13 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Mapping;
 use Elastica\Processor\Attachment;
-use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @group functional
  *
  * @internal
  */
-class AttachmentTest extends BasePipelineTest
+class AttachmentTest extends BaseProcessorTestCase
 {
     /**
      * @group unit
@@ -216,5 +215,12 @@ class AttachmentTest extends BasePipelineTest
         $this->assertEquals($data['title'], $title);
         $this->assertEquals($data['text'], $text);
         $this->assertArrayNotHasKey('file', $data);
+    }
+
+    public function validProcessorProvider(): array
+    {
+        return [
+            [new Attachment('field')],
+        ];
     }
 }

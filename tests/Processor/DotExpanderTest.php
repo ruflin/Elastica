@@ -6,12 +6,11 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\DotExpander;
 use Elastica\ResultSet;
-use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class DotExpanderTest extends BasePipelineTest
+class DotExpanderTest extends BaseProcessorTestCase
 {
     /**
      * @group unit
@@ -65,5 +64,12 @@ class DotExpanderTest extends BasePipelineTest
         ];
         $results = $result->getResults();
         $this->assertEquals($expect, ($results[0]->getHit())['_source']);
+    }
+
+    public function validProcessorProvider(): array
+    {
+        return [
+            [new DotExpander('field')],
+        ];
     }
 }

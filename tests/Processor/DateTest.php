@@ -6,12 +6,11 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\Date;
 use Elastica\ResultSet;
-use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class DateTest extends BasePipelineTest
+class DateTest extends BaseProcessorTestCase
 {
     /**
      * @group unit
@@ -99,5 +98,12 @@ class DateTest extends BasePipelineTest
         $results = $result->getResults();
 
         $this->assertEquals('2010-06-12T00:00:00.000+02:00', ($results[0]->getHit())['_source']['date_parsed']);
+    }
+
+    public function validProcessorProvider(): array
+    {
+        return [
+            [new Date('field', ['dd/MM/yyyy hh:mm:ss'])],
+        ];
     }
 }

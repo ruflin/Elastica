@@ -6,12 +6,11 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\Join;
 use Elastica\ResultSet;
-use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class JoinTest extends BasePipelineTest
+class JoinTest extends BaseProcessorTestCase
 {
     /**
      * @group unit
@@ -57,5 +56,12 @@ class JoinTest extends BasePipelineTest
 
         $results = $result->getResults();
         $this->assertSame('abc-def-ghij', ($results[0]->getHit())['_source']['name']);
+    }
+
+    public function validProcessorProvider(): array
+    {
+        return [
+            [new Join('field', 'separator')],
+        ];
     }
 }

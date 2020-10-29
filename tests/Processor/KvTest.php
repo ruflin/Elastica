@@ -3,12 +3,11 @@
 namespace Elastica\Test\Processor;
 
 use Elastica\Processor\Kv;
-use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class KvTest extends BasePipelineTest
+class KvTest extends BaseProcessorTestCase
 {
     /**
      * @group unit
@@ -76,5 +75,12 @@ class KvTest extends BasePipelineTest
         $this->assertSame($result['my_custom_pipeline']['processors'][0]['kv']['field'], 'field1');
         $this->assertSame($result['my_custom_pipeline']['processors'][0]['kv']['field_split'], '&');
         $this->assertSame($result['my_custom_pipeline']['processors'][0]['kv']['value_split'], '=');
+    }
+
+    public function validProcessorProvider(): array
+    {
+        return [
+            [new Kv('field', 'field_split', 'value_split')],
+        ];
     }
 }

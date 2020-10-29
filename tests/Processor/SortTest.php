@@ -6,12 +6,11 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\Sort;
 use Elastica\ResultSet;
-use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class SortTest extends BasePipelineTest
+class SortTest extends BaseProcessorTestCase
 {
     /**
      * @group unit
@@ -74,5 +73,12 @@ class SortTest extends BasePipelineTest
 
         $results = $result->getResults();
         $this->assertSame([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], ($results[0]->getHit())['_source']['name']);
+    }
+
+    public function validProcessorProvider(): array
+    {
+        return [
+            [new Sort('field')],
+        ];
     }
 }

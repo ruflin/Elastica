@@ -6,12 +6,11 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\Split;
 use Elastica\ResultSet;
-use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class SplitTest extends BasePipelineTest
+class SplitTest extends BaseProcessorTestCase
 {
     /**
      * @group unit
@@ -78,5 +77,12 @@ class SplitTest extends BasePipelineTest
 
         $results = $result->getResults();
         $this->assertSame(['nicolas', 'ruflin'], ($results[0]->getHit())['_source']['name']);
+    }
+
+    public function validProcessorProvider(): array
+    {
+        return [
+            [new Split('field', 'separator')],
+        ];
     }
 }
