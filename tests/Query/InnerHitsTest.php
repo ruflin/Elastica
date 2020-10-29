@@ -159,8 +159,8 @@ class InnerHitsTest extends BaseTest
 
         $innerHitsResults = $firstResult->getInnerHits();
 
-        $this->assertEquals($firstResult->getId(), 4);
-        $this->assertEquals($innerHitsResults['users']['hits']['hits'][0]['_source']['name'], 'Newton');
+        $this->assertEquals(4, $firstResult->getId());
+        $this->assertEquals('Newton', $innerHitsResults['users']['hits']['hits'][0]['_source']['name']);
     }
 
     /**
@@ -183,7 +183,7 @@ class InnerHitsTest extends BaseTest
             $responsesId[] = $response['_id'];
         }
 
-        $this->assertEquals($firstResult->getId(), 1);
+        $this->assertEquals(1, $firstResult->getId());
         $this->assertEquals([6, 7], $responsesId);
     }
 
@@ -224,7 +224,7 @@ class InnerHitsTest extends BaseTest
 
         $responses = $innerHits['answers']['hits']['hits'];
 
-        $this->assertEquals(\count($responses), 1);
+        $this->assertCount(1, $responses);
         $this->assertEquals(7, $responses[0]['_id']);
     }
 
@@ -249,7 +249,7 @@ class InnerHitsTest extends BaseTest
             $responsesId[] = $response['_id'];
         }
 
-        $this->assertEquals($firstResult->getId(), 1);
+        $this->assertEquals(1, $firstResult->getId());
         $this->assertEquals([7, 6], $responsesId);
     }
 

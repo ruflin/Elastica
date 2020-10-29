@@ -113,7 +113,7 @@ class ParentIdTest extends BaseTest
 
         $result = $results->current();
         $data = $result->getData();
-        $this->assertEquals($data['text'], 'this is an answer, the 1st');
+        $this->assertEquals('this is an answer, the 1st', $data['text']);
 
         $parentQuery = new ParentId('answer', '2', true);
         $search = new Search($index->getClient());
@@ -192,7 +192,7 @@ class ParentIdTest extends BaseTest
 
         $result = $results->current();
         $data = $result->getData();
-        $this->assertEquals($data['text'], 'this is an answer, the 1st');
+        $this->assertEquals('this is an answer, the 1st', $data['text']);
 
         $parentId = $queryDSL->parent_id('answer', 2, true);
         $search = new Search($index->getClient());

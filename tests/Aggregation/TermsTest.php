@@ -23,7 +23,7 @@ class TermsTest extends BaseAggregationTest
         $agg = new Terms('terms');
         $agg->setInclude('pattern*');
 
-        $this->assertSame($agg->getParam('include'), 'pattern*');
+        $this->assertSame('pattern*', $agg->getParam('include'));
     }
 
     /**
@@ -34,7 +34,7 @@ class TermsTest extends BaseAggregationTest
         $agg = new Terms('terms');
         $agg->setIncludeAsExactMatch(['first', 'second']);
 
-        $this->assertSame($agg->getParam('include'), ['first', 'second']);
+        $this->assertSame(['first', 'second'], $agg->getParam('include'));
     }
 
     /**
@@ -45,10 +45,10 @@ class TermsTest extends BaseAggregationTest
         $agg = new Terms('terms');
         $agg->setIncludeWithPartitions(1, 23);
 
-        $this->assertSame($agg->getParam('include'), [
+        $this->assertSame([
             'partition' => 1,
             'num_partitions' => 23,
-        ]);
+        ], $agg->getParam('include'));
     }
 
     /**
@@ -59,7 +59,7 @@ class TermsTest extends BaseAggregationTest
         $agg = new Terms('terms');
         $agg->setExclude('pattern*');
 
-        $this->assertSame($agg->getParam('exclude'), 'pattern*');
+        $this->assertSame('pattern*', $agg->getParam('exclude'));
     }
 
     /**
@@ -70,7 +70,7 @@ class TermsTest extends BaseAggregationTest
         $agg = new Terms('terms');
         $agg->setExcludeAsExactMatch(['first', 'second']);
 
-        $this->assertSame($agg->getParam('exclude'), ['first', 'second']);
+        $this->assertSame(['first', 'second'], $agg->getParam('exclude'));
     }
 
     public function testTermsAggregation(): void

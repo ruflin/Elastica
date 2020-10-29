@@ -99,7 +99,7 @@ class MappingTest extends BaseTest
 
         $index->refresh();
         $resultSet = $index->search('ruflin');
-        $this->assertEquals($resultSet->count(), 1);
+        $this->assertEquals(1, $resultSet->count());
 
         $index->delete();
     }

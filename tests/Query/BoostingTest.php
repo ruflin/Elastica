@@ -55,9 +55,9 @@ class BoostingTest extends BaseTest
         $query->setParam('boost', 42.0);
 
         $queryToCheck = $query->toArray();
-        $this->assertEquals($queryToCheck['boosting']['boost'], 42.0);
-        $this->assertEquals($queryToCheck['boosting']['positive']['term']['name']['boost'], 5.0);
-        $this->assertEquals($queryToCheck['boosting']['negative']['term']['name']['boost'], 8.0);
-        $this->assertEquals($queryToCheck['boosting']['negative_boost'], 23.0);
+        $this->assertEquals(42.0, $queryToCheck['boosting']['boost']);
+        $this->assertEquals(5.0, $queryToCheck['boosting']['positive']['term']['name']['boost']);
+        $this->assertEquals(8.0, $queryToCheck['boosting']['negative']['term']['name']['boost']);
+        $this->assertEquals(23.0, $queryToCheck['boosting']['negative_boost']);
     }
 }
