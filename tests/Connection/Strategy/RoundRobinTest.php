@@ -31,7 +31,6 @@ class RoundRobinTest extends Base
         $config = ['connectionStrategy' => 'RoundRobin'];
         $client = $this->_getClient($config);
         $response = $client->request('_aliases');
-        /* @var $response Response */
 
         $this->_checkResponse($response);
 
@@ -83,7 +82,6 @@ class RoundRobinTest extends Base
         $client->setConnections($connections);
 
         $response = $client->request('_aliases');
-        /* @var $response Response */
 
         $this->_checkResponse($response);
 

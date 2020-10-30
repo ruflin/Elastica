@@ -70,7 +70,6 @@ class SimpleTest extends Base
         $client->setConnections($connections);
 
         $response = $client->request('_aliases');
-        /* @var $response Response */
 
         $this->_checkResponse($response);
 

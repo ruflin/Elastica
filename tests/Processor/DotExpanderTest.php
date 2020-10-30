@@ -5,7 +5,6 @@ namespace Elastica\Test\Processor;
 use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\DotExpander;
-use Elastica\ResultSet;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
@@ -53,7 +52,6 @@ class DotExpanderTest extends BasePipelineTest
         $bulk->send();
         $index->refresh();
 
-        /** @var ResultSet $result */
         $result = $index->search('*');
 
         $this->assertCount(1, $result->getResults());
