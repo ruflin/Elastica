@@ -41,11 +41,11 @@ class IndexTest extends BaseTest
 
         $storedMapping = $index->getMapping();
 
-        $this->assertEquals($storedMapping['properties']['id']['type'], 'integer');
-        $this->assertEquals($storedMapping['properties']['id']['store'], true);
-        $this->assertEquals($storedMapping['properties']['email']['type'], 'text');
-        $this->assertEquals($storedMapping['properties']['username']['type'], 'text');
-        $this->assertEquals($storedMapping['properties']['test']['type'], 'integer');
+        $this->assertEquals('integer', $storedMapping['properties']['id']['type']);
+        $this->assertEquals(true, $storedMapping['properties']['id']['store']);
+        $this->assertEquals('text', $storedMapping['properties']['email']['type']);
+        $this->assertEquals('text', $storedMapping['properties']['username']['type']);
+        $this->assertEquals('integer', $storedMapping['properties']['test']['type']);
     }
 
     public function testGetMappingAlias(): void
@@ -503,11 +503,11 @@ class IndexTest extends BaseTest
         $index->refresh();
         $indexMappings = $index->getMapping();
 
-        $this->assertEquals($indexMappings['properties']['id']['type'], 'integer');
-        $this->assertEquals($indexMappings['properties']['id']['store'], true);
-        $this->assertEquals($indexMappings['properties']['email']['type'], 'text');
-        $this->assertEquals($indexMappings['properties']['username']['type'], 'text');
-        $this->assertEquals($indexMappings['properties']['test']['type'], 'integer');
+        $this->assertEquals('integer', $indexMappings['properties']['id']['type']);
+        $this->assertEquals(true, $indexMappings['properties']['id']['store']);
+        $this->assertEquals('text', $indexMappings['properties']['email']['type']);
+        $this->assertEquals('text', $indexMappings['properties']['username']['type']);
+        $this->assertEquals('integer', $indexMappings['properties']['test']['type']);
     }
 
     public function testEmptyIndexGetMapping(): void
