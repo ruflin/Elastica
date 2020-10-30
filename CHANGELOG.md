@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added `list_syntax` CS rule [#1854](https://github.com/ruflin/Elastica/pull/1854)
 * Added `native_constant_invocation` CS rule [#1833](https://github.com/ruflin/Elastica/pull/1833)
 * Added `Elastica\Aggregation\DateRange::setTimezone()` [#1847](https://github.com/ruflin/Elastica/pull/1847)
+* Added endpoint options support to `Elastica\Index::create()` [#1859](https://github.com/ruflin/Elastica/pull/1859)
 ### Changed
 * Allow `string` such as `wait_for` to be passed to `AbstractUpdateAction::setRefresh` [#1791](https://github.com/ruflin/Elastica/pull/1791)
 * Changed the return type of `AbstractUpdateAction::getRefresh` to `boolean|string` [#1791](https://github.com/ruflin/Elastica/pull/1791)
