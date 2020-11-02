@@ -16,7 +16,7 @@ class GlobalAggregationTest extends BaseAggregationTest
     public function testToArray(): void
     {
         $expected = [
-            'global' => [],
+            'global' => new \ArrayObject(),
             'aggs' => [
                 'avg_price' => ['avg' => ['field' => 'price']],
             ],
@@ -27,5 +27,9 @@ class GlobalAggregationTest extends BaseAggregationTest
         $avg->setField('price');
         $agg->addAggregation($avg);
         $this->assertEquals($expected, $agg->toArray());
+        $this->assertSame(
+            '{"global":{},"aggs":{"avg_price":{"avg":{"field":"price"}}}}',
+            \json_encode($agg->toArray())
+        );
     }
 }
