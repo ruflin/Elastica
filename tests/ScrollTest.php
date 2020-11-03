@@ -4,7 +4,6 @@ namespace Elastica\Test;
 
 use Elastica\Client;
 use Elastica\Document;
-use Elastica\ResultSet;
 use Elastica\Scroll;
 use Elastica\Search;
 
@@ -26,7 +25,6 @@ class ScrollTest extends Base
 
         $this->_assertOpenSearchContexts($search->getClient(), 0);
 
-        /** @var ResultSet $resultSet */
         foreach ($scroll as $scrollId => $resultSet) {
             $this->assertNotEmpty($scrollId);
             $this->_assertOpenSearchContexts($search->getClient(), 1);
@@ -117,7 +115,6 @@ class ScrollTest extends Base
 
         $this->_assertOpenSearchContexts($search->getClient(), 0);
 
-        /** @var ResultSet $resultSet */
         foreach ($scroll as $scrollId => $resultSet) {
             $this->assertNotEmpty($scrollId);
             $this->_assertOpenSearchContexts($search->getClient(), 1);

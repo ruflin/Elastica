@@ -5,7 +5,6 @@ namespace Elastica\Test\Processor;
 use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\Trim;
-use Elastica\ResultSet;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
@@ -52,7 +51,6 @@ class TrimTest extends BasePipelineTest
         $bulk->send();
         $index->refresh();
 
-        /** @var ResultSet $result */
         $result = $index->search('*');
 
         $this->assertCount(2, $result->getResults());
