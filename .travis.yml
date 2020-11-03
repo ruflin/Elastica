@@ -1,9 +1,11 @@
 language: php
 
+arch: amd64
+os: linux
+dist: xenial
+
 services:
   - docker
-
-sudo: false
 
 cache:
   directories:
@@ -11,7 +13,7 @@ cache:
     - $HOME/.phive
     - $HOME/.gnupg
 
-matrix:
+jobs:
   fast_finish: true
   include:
     - php: 7.3
