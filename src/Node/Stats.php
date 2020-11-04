@@ -4,6 +4,7 @@ namespace Elastica\Node;
 
 use Elastica\Node as BaseNode;
 use Elastica\Response;
+use Elasticsearch\Endpoints\Nodes\Stats as NodesStats;
 
 /**
  * Elastica cluster node object.
@@ -106,7 +107,8 @@ class Stats
      */
     public function refresh(): Response
     {
-        $endpoint = new \Elasticsearch\Endpoints\Cluster\Nodes\Stats();
+        // TODO: Use only NodesStats when dropping support for elasticsearch/elasticsearch 7.x
+        $endpoint = \class_exists(NodesStats::class) ? new NodesStats() : new \Elasticsearch\Endpoints\Cluster\Nodes\Stats();
         $endpoint->setNodeID($this->getNode()->getName());
 
         $this->_response = $this->getNode()->getClient()->requestEndpoint($endpoint);
