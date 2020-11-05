@@ -23,7 +23,7 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
     /**
      * Filter documents to include based on a regular expression.
      *
-     * @See https://www.elastic.co/guide/en/elasticsearch/reference/current/regexp-syntax.html for syntax
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/regexp-syntax.html for syntax
      *
      * @param string $pattern a regular expression, following the Regexp syntax
      *
@@ -37,7 +37,7 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
     /**
      * Filter documents to include based on a list of exact values.
      *
-     * @See https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html#_filtering_values_with_exact_values_2
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html#_filtering_values_with_exact_values_2
      *
      * @param string[] $values
      *
@@ -51,7 +51,7 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
     /**
      * Set the aggregation filter to use partitions.
      *
-     * @See https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html#_filtering_values_with_partitions
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html#_filtering_values_with_partitions
      *
      * @return $this
      */
@@ -78,7 +78,7 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
     /**
      * Filter documents to exclude based on a list of exact values.
      *
-     * @See https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html#_filtering_values_with_exact_values_2
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html#_filtering_values_with_exact_values_2
      *
      * @param string[] $values
      *
