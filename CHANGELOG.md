@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added `weighted_avg` to aggregations DSL [#1814](https://github.com/ruflin/Elastica/pull/1814)
 * Supported `guzzlehttp/guzzle` 7.x [#1816](https://github.com/ruflin/Elastica/pull/1816)
 * Supported PHP 8.0 [#1794](https://github.com/ruflin/Elastica/pull/1794)
+* Supported BC break on `elasticsearch/elasticsearch` version `7.4.0` [#1864](https://github.com/ruflin/Elastica/pull/1864)
 * Added support for defining a connection pool with DSN. Example: `pool(http://127.0.0.1 http://127.0.0.2/bar?timeout=4)` [#1808](https://github.com/ruflin/Elastica/pull/1808)
 * Added `Elastica\Aggregation\Composite` aggregation [#1804](https://github.com/ruflin/Elastica/pull/1804)
 * Added `symfony/deprecation-contracts` package to handle deprecations [#1823](https://github.com/ruflin/Elastica/pull/1823)
