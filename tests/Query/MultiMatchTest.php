@@ -3,7 +3,6 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\MultiMatch;
@@ -14,9 +13,6 @@ use Elastica\Test\Base as BaseTest;
  */
 class MultiMatchTest extends BaseTest
 {
-    private $index;
-    private $multiMatch;
-
     private static $data = [
         ['id' => 1, 'name' => 'Rodolfo', 'last_name' => 'Moraes',   'full_name' => 'Rodolfo Moraes'],
         ['id' => 2, 'name' => 'Tristan', 'last_name' => 'Maindron', 'full_name' => 'Tristan Maindron'],
@@ -188,22 +184,27 @@ class MultiMatchTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('test');
 
-        $index->create([
-            'settings' => [
-                'analysis' => [
-                    'analyzer' => [
-                        'noStops' => [
-                            'type' => 'standard',
-                            'stopwords' => '_none_',
-                        ],
-                        'stops' => [
-                            'type' => 'standard',
-                            'stopwords' => ['not'],
+        $index->create(
+            [
+                'settings' => [
+                    'analysis' => [
+                        'analyzer' => [
+                            'noStops' => [
+                                'type' => 'standard',
+                                'stopwords' => '_none_',
+                            ],
+                            'stops' => [
+                                'type' => 'standard',
+                                'stopwords' => ['not'],
+                            ],
                         ],
                     ],
                 ],
             ],
-        ], true);
+            [
+                'recreate' => true,
+            ]
+        );
 
         $mapping = new Mapping([
             'name' => ['type' => 'text', 'analyzer' => 'noStops'],

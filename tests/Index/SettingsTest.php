@@ -23,7 +23,9 @@ class SettingsTest extends BaseTest
 
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
         $index->refresh();
         $settings = $index->getSettings();
 
@@ -45,7 +47,9 @@ class SettingsTest extends BaseTest
 
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
         $index->refresh();
 
         $index->addAlias($aliasName);
@@ -70,7 +74,9 @@ class SettingsTest extends BaseTest
         $aliasName = 'deletetestaliasexception_alias';
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
         $index->refresh();
 
         $index->addAlias($aliasName);
@@ -94,7 +100,9 @@ class SettingsTest extends BaseTest
     public function testSetGetNumberOfReplicas(): void
     {
         $index = $this->_createIndex();
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
         $settings = $index->getSettings();
 
         // Check for zero replicas
@@ -118,7 +126,9 @@ class SettingsTest extends BaseTest
     public function testGetNumberOfReplicas(): void
     {
         $index = $this->_createIndex();
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         $settings = $index->getSettings();
 
@@ -135,7 +145,9 @@ class SettingsTest extends BaseTest
     public function testGetNumberOfShards(): void
     {
         $index = $this->_createIndex();
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         $settings = $index->getSettings();
 
@@ -152,7 +164,9 @@ class SettingsTest extends BaseTest
     public function testGetDefaultNumberOfShards(): void
     {
         $index = $this->_createIndex();
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
         $index->refresh();
 
         $settings = $index->getSettings();
@@ -170,7 +184,9 @@ class SettingsTest extends BaseTest
     public function testSetRefreshInterval(): void
     {
         $index = $this->_createIndex();
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         $settings = $index->getSettings();
 
@@ -191,7 +207,9 @@ class SettingsTest extends BaseTest
     public function testGetRefreshInterval(): void
     {
         $index = $this->_createIndex();
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         $settings = $index->getSettings();
 
@@ -212,7 +230,9 @@ class SettingsTest extends BaseTest
     public function testSetMergePolicy(): void
     {
         $index = $this->_createIndex();
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
         //wait for the shards to be allocated
         $this->_waitForAllocation($index);
 
@@ -233,7 +253,9 @@ class SettingsTest extends BaseTest
     public function testSetMaxMergeAtOnce(): void
     {
         $index = $this->_createIndex();
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         //wait for the shards to be allocated
         $this->_waitForAllocation($index);
@@ -391,7 +413,9 @@ class SettingsTest extends BaseTest
     public function testSetMultiple(): void
     {
         $index = $this->_createIndex();
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         $settings = $index->getSettings();
 

@@ -62,7 +62,9 @@ class ClientFunctionalTest extends BaseTest
         // Creates a new index 'xodoa' and a type 'user' inside this index
         $client = $this->_getClient(['connections' => [['host' => $this->_getHost(), 'port' => 9200]]]);
         $index = $client->getIndex('elastica_test1');
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         // Adds 1 document to the index
         $doc1 = new Document(
@@ -97,7 +99,9 @@ class ClientFunctionalTest extends BaseTest
             ['host' => $this->_getHost(), 'port' => 9200],
         ]]);
         $index = $client->getIndex('elastica_test1');
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         // Adds 1 document to the index
         $doc1 = new Document(
@@ -242,7 +246,9 @@ class ClientFunctionalTest extends BaseTest
         $index = $this->_createIndex();
 
         // Create the index, deleting it first if it already exists
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         // Adds 1 document to the index
         $doc = new Document(null, $data);
@@ -301,7 +307,9 @@ class ClientFunctionalTest extends BaseTest
         $index = $this->_createIndex();
 
         // Create the index, deleting it first if it already exists
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         // Adds 1 document to the index
         $doc = new Document(null, $data);
@@ -807,7 +815,9 @@ class ClientFunctionalTest extends BaseTest
         $client = $this->_getClient();
 
         $index = $client->getIndex('test');
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
         $index->addDocument(new Document(1, ['username' => 'ruflin']));
         $index->refresh();
 
@@ -832,7 +842,9 @@ class ClientFunctionalTest extends BaseTest
         $client = $this->_getClient();
 
         $index = $client->getIndex('test');
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
         $index->addDocument(new Document(1, ['username' => 'ruflin']));
         $index->refresh();
 
@@ -969,7 +981,9 @@ class ClientFunctionalTest extends BaseTest
         $client = $this->_getClient();
 
         $index = $client->getIndex('test');
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
         $index->addDocument(new Document(1, ['username' => 'ruflin']));
         $index->refresh();
 
