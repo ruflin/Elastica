@@ -76,7 +76,7 @@ class Http extends AbstractTransport
         }
 
         \curl_setopt($conn, \CURLOPT_URL, $baseUri);
-        \curl_setopt($conn, \CURLOPT_TIMEOUT, $connection->getTimeout());
+        \curl_setopt($conn, \CURLOPT_TIMEOUT_MS, $connection->getTimeout() * 1000);
         \curl_setopt($conn, \CURLOPT_FORBID_REUSE, 0);
 
         // Tell ES that we support the compressed responses
@@ -85,9 +85,12 @@ class Http extends AbstractTransport
         \curl_setopt($conn, \CURLOPT_ENCODING, '');
 
         /* @see Connection::setConnectTimeout() */
-        $connectTimeout = $connection->getConnectTimeout();
-        if ($connectTimeout > 0) {
-            \curl_setopt($conn, \CURLOPT_CONNECTTIMEOUT, $connectTimeout);
+        $connectTimeoutMs = $connection->getConnectTimeout() * 1000;
+
+        // Let's only apply this value if the number of ms is greater than or equal to "1".
+        // In case "0" is passed as an argument, the value is reset to its default (300 s)
+        if ($connectTimeoutMs > 1) {
+            \curl_setopt($conn, \CURLOPT_CONNECTTIMEOUT_MS, $connectTimeoutMs);
         }
 
         if (null !== $proxy = $connection->getProxy()) {
