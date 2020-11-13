@@ -21,7 +21,9 @@ class MappingTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('test');
 
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         $mapping = new Mapping([
             'firstname' => ['type' => 'text', 'store' => true],
@@ -72,7 +74,9 @@ class MappingTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('test');
 
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         $mapping = new Mapping([
             'user' => [
@@ -111,7 +115,9 @@ class MappingTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('testjoinparentid');
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         $mapping = new Mapping([
             'firstname' => ['type' => 'text', 'store' => true],

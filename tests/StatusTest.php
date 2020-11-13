@@ -30,7 +30,9 @@ class StatusTest extends BaseTest
         $indexName = 'test';
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
         $index = $this->_createIndex();
         $index->refresh();
         $index->forcemerge();

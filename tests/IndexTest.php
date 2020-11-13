@@ -82,10 +82,21 @@ class IndexTest extends BaseTest
 
         $indexName1 = 'test1';
         $aliasName = 'test-alias';
-        $typeName = 'test';
 
         $index = $client->getIndex($indexName1);
-        $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
+        $index->create(
+            [
+                'settings' => [
+                    'index' => [
+                        'number_of_shards' => 1,
+                        'number_of_replicas' => 0,
+                    ],
+                ],
+            ],
+            [
+                'recreate' => true,
+            ]
+        );
         $index->addDocument(new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin']));
         $index->refresh();
 
@@ -362,7 +373,9 @@ class IndexTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
 
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
         $index->addAlias($aliasName);
 
         $status = new Status($client);
@@ -385,7 +398,9 @@ class IndexTest extends BaseTest
         $client = $this->_getClient();
         $index1 = $client->getIndex($indexName1);
 
-        $index1->create([], true);
+        $index1->create([], [
+            'recreate' => true,
+        ]);
         $this->_waitForAllocation($index1);
         $index1->addAlias($aliasName);
 
@@ -408,7 +423,9 @@ class IndexTest extends BaseTest
         $client = $this->_getClient();
         $index1 = $client->getIndex($indexName1);
 
-        $index1->create([], true);
+        $index1->create([], [
+            'recreate' => true,
+        ]);
         $index1->addAlias($aliasName);
 
         $index1->refresh();
@@ -424,7 +441,9 @@ class IndexTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         $doc1 = new Document(1);
         $doc1->set('title', 'Hello world');
@@ -558,7 +577,9 @@ class IndexTest extends BaseTest
 
         //Testing recreate (backward compatibility)
         $index = $client->getIndex($indexName);
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
         $this->_waitForAllocation($index);
         $status = new Status($client);
         $this->assertTrue($status->indexExists($indexName));
@@ -738,7 +759,9 @@ class IndexTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
 
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
         $this->_waitForAllocation($index);
         $index->refresh();
         $index->forcemerge();

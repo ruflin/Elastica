@@ -25,7 +25,9 @@ class HttpTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('curl_test');
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
         $this->_waitForAllocation($index);
 
         // Force HEAD request to set CURLOPT_NOBODY = true
@@ -53,7 +55,9 @@ class HttpTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('curl_test');
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
         $this->_waitForAllocation($index);
 
         // Force HEAD request to set CURLOPT_NOBODY = true
@@ -148,7 +152,9 @@ class HttpTest extends BaseTest
         $client = $this->_getClient();
 
         $index = $client->getIndex('elastica_body_reuse_test');
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
         $this->_waitForAllocation($index);
 
         $index->addDocument(new Document(1, ['test' => 'test']));
@@ -182,7 +188,9 @@ class HttpTest extends BaseTest
 
         $index = $client->getIndex('elastica_request_with_body_and_http_compression_enabled');
 
-        $createIndexResponse = $index->create([], true);
+        $createIndexResponse = $index->create([], [
+            'recreate' => true,
+        ]);
 
         $createIndexResponseTransferInfo = $createIndexResponse->getTransferInfo();
         if (\method_exists($this, 'assertMatchesRegularExpression')) {
@@ -202,7 +210,9 @@ class HttpTest extends BaseTest
 
         $index = $client->getIndex('elastica_request_with_body_and_http_compression_disabled');
 
-        $createIndexResponse = $index->create([], true);
+        $createIndexResponse = $index->create([], [
+            'recreate' => true,
+        ]);
 
         $createIndexResponseTransferInfo = $createIndexResponse->getTransferInfo();
         if (\method_exists($this, 'assertMatchesRegularExpression')) {

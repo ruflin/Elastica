@@ -69,7 +69,7 @@ class WildcardTest extends BaseTest
             ],
         ];
 
-        $index->create($indexParams, true);
+        $index->create($indexParams, ['recreate' => true]);
 
         $mapping = new Mapping([
             'name' => ['type' => 'text', 'analyzer' => 'lw'],

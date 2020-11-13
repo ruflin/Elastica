@@ -91,7 +91,9 @@ class ScriptFieldsTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('testscriptfieldwithjoin');
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         $mapping = new Mapping([
             'text' => ['type' => 'keyword'],

@@ -46,7 +46,9 @@ class MatchPhraseTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         $index->addDocuments([
             new Document(1, ['name' => 'Basel-Stadt']),
