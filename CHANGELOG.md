@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Used new mapping endpoints classes [#1845](https://github.com/ruflin/Elastica/pull/1845)
 * Used new nodes endpoints classes [#1863](https://github.com/ruflin/Elastica/pull/1863)
 * Used new settings endpoints classes [#1852](https://github.com/ruflin/Elastica/pull/1852)
+* Allow float values for connection timeout and connection connect-timeout, providing ms precision for those. Previous precision was second. [#1868](https://github.com/ruflin/Elastica/pull/1868)
 ### Deprecated
 * Deprecated `Elastica\Aggregation\Range::setKeyedResponse()`, use `setKeyed()` instead [#1848](https://github.com/ruflin/Elastica/pull/1848)
 * Deprecated `Elastica\Exception\ResponseException::getElasticsearchException()`, use `getResponse()::getFullError()` instead [#1829](https://github.com/ruflin/Elastica/pull/1829)
