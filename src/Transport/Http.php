@@ -89,7 +89,7 @@ class Http extends AbstractTransport
 
         // Let's only apply this value if the number of ms is greater than or equal to "1".
         // In case "0" is passed as an argument, the value is reset to its default (300 s)
-        if ($connectTimeoutMs > 1) {
+        if ($connectTimeoutMs >= 1) {
             \curl_setopt($conn, \CURLOPT_CONNECTTIMEOUT_MS, $connectTimeoutMs);
         }
 
