@@ -15,6 +15,7 @@ use Elastica\Script\Script;
 use Elastica\Status;
 use Elastica\Test\Base as BaseTest;
 use Elasticsearch\Endpoints\Indices\Analyze;
+use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 
 /**
  * @group functional
@@ -23,6 +24,8 @@ use Elasticsearch\Endpoints\Indices\Analyze;
  */
 class IndexTest extends BaseTest
 {
+    use ExpectDeprecationTrait;
+
     public function testMapping(): void
     {
         $index = $this->_createIndex();
@@ -570,12 +573,20 @@ class IndexTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testCreate(): void
     {
         $client = $this->_getClient();
         $indexName = 'test';
 
-        //Testing recreate (backward compatibility)
+        $index = $client->getIndex($indexName);
+        $index->create([]);
+        $this->_waitForAllocation($index);
+        $status = new Status($client);
+        $this->assertTrue($status->indexExists($indexName));
+
         $index = $client->getIndex($indexName);
         $index->create([], [
             'recreate' => true,
@@ -583,10 +594,26 @@ class IndexTest extends BaseTest
         $this->_waitForAllocation($index);
         $status = new Status($client);
         $this->assertTrue($status->indexExists($indexName));
+    }
 
-        //Testing create index with array options
-        $opts = ['recreate' => true];
-        $index->create([], $opts);
+    /**
+     * @group functional
+     * @group legacy
+     */
+    public function testLegacyCreate(): void
+    {
+        $client = $this->_getClient();
+        $indexName = 'test';
+        $index = $client->getIndex($indexName);
+
+        $this->expectDeprecation('Since ruflin/elastica 7.1.0: Passing null as 2nd argument to "Elastica\Index::create()" is deprecated, avoid passing this argument or pass an array instead. It will be removed in 8.0.');
+        $index->create([], null);
+        $this->_waitForAllocation($index);
+        $status = new Status($client);
+        $this->assertTrue($status->indexExists($indexName));
+
+        $this->expectDeprecation('Since ruflin/elastica 7.1.0: Passing a bool as 2nd argument to "Elastica\Index::create()" is deprecated, pass an array with the key "recreate" instead. It will be removed in 8.0.');
+        $index->create([], true);
         $this->_waitForAllocation($index);
         $status = new Status($client);
         $this->assertTrue($status->indexExists($indexName));
