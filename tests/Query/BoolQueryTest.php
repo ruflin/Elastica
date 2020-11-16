@@ -91,7 +91,9 @@ class BoolQueryTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = new Index($client, 'test');
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         $doc = new Document(1, ['id' => 1, 'email' => 'hans@test.com', 'username' => 'hans', 'test' => ['2', '4', '5']]);
         $index->addDocument($doc);

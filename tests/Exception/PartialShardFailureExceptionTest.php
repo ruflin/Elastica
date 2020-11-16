@@ -29,7 +29,9 @@ class PartialShardFailureExceptionTest extends AbstractExceptionTest
                     ],
                 ],
             ],
-            true
+            [
+                'recreate' => true,
+            ]
         );
 
         $index->addDocument(new Document('', ['name' => 'ruflin']));

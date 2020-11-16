@@ -66,7 +66,9 @@ class HasParentTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('testhasparentjoin');
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
         $mapping = new Mapping([
             'text' => ['type' => 'keyword'],
             'name' => ['type' => 'keyword'],

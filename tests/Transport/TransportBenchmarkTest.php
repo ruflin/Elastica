@@ -40,7 +40,9 @@ class TransportBenchmarkTest extends BaseTest
     {
         $this->_checkTransport($config, $transport);
         $index = $this->getIndex($config);
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         $times = [];
         for ($i = 0; $i < $this->_max; ++$i) {
@@ -116,7 +118,9 @@ class TransportBenchmarkTest extends BaseTest
 
         $client = $this->_getClient($config);
         $index = $client->getIndex('benchmark');
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         // Define mapping
         $mapping = new Mapping();

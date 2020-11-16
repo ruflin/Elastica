@@ -48,7 +48,9 @@ class ResultTest extends BaseTest
 
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         $mapping = new Mapping();
         $mapping->disableSource();

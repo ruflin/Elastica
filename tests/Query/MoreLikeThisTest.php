@@ -23,7 +23,9 @@ class MoreLikeThisTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = new Index($client, 'test');
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
         $index->getSettings()->setNumberOfReplicas(0);
 
         $mapping = new Mapping([
@@ -65,7 +67,19 @@ class MoreLikeThisTest extends BaseTest
     {
         $client = $this->_getClient(['persistent' => false]);
         $index = $client->getIndex('elastica_test');
-        $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
+        $index->create(
+            [
+                'settings' => [
+                    'index' => [
+                        'number_of_shards' => 1,
+                        'number_of_replicas' => 0,
+                    ],
+                ],
+            ],
+            [
+                'recreate' => true,
+            ]
+        );
 
         $index->addDocuments([
             new Document(1, ['visible' => true, 'name' => 'bruce wayne batman']),

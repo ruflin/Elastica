@@ -101,7 +101,9 @@ class GuzzleTest extends BaseTest
     {
         $client = $this->_getClient(['transport' => 'Guzzle', 'persistent' => false]);
         $index = $client->getIndex('elastica_body_reuse_test');
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
         $this->_waitForAllocation($index);
 
         $index->addDocument(new Document(1, ['test' => 'test']));

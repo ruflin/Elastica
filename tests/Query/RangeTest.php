@@ -18,7 +18,9 @@ class RangeTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         $index->addDocuments([
             new Document(1, ['age' => 16, 'height' => 140]),

@@ -37,7 +37,9 @@ class ParentIdTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('testparentid');
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         $mapping = new Mapping([
             'firstname' => ['type' => 'text', 'store' => true],
@@ -128,7 +130,9 @@ class ParentIdTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('testparentid');
-        $index->create([], true);
+        $index->create([], [
+            'recreate' => true,
+        ]);
 
         $mapping = new Mapping([
             'firstname' => ['type' => 'text', 'store' => true],

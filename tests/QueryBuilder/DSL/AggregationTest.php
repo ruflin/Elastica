@@ -5,12 +5,15 @@ namespace Elastica\Test\QueryBuilder\DSL;
 use Elastica\Aggregation;
 use Elastica\Query\Exists;
 use Elastica\QueryBuilder\DSL;
+use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 
 /**
  * @internal
  */
 class AggregationTest extends AbstractDSLTest
 {
+    use ExpectDeprecationTrait;
+
     /**
      * @group unit
      */
@@ -39,7 +42,6 @@ class AggregationTest extends AbstractDSLTest
         $this->_assertImplemented($aggregationDSL, 'geo_distance', Aggregation\GeoDistance::class, ['name', 'field', 'origin']);
         $this->_assertImplemented($aggregationDSL, 'geohash_grid', Aggregation\GeohashGrid::class, ['name', 'field']);
         $this->_assertImplemented($aggregationDSL, 'global', Aggregation\GlobalAggregation::class, ['name']);
-        $this->_assertImplemented($aggregationDSL, 'global_agg', Aggregation\GlobalAggregation::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'histogram', Aggregation\Histogram::class, ['name', 'field', 1]);
         $this->_assertImplemented($aggregationDSL, 'ipv4_range', Aggregation\IpRange::class, ['name', 'field']);
         $this->_assertImplemented($aggregationDSL, 'max', Aggregation\Max::class, ['name']);
@@ -65,5 +67,17 @@ class AggregationTest extends AbstractDSLTest
         $this->_assertImplemented($aggregationDSL, 'sampler', Aggregation\Sampler::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'diversified_sampler', Aggregation\DiversifiedSampler::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'weighted_avg', Aggregation\WeightedAvg::class, ['name']);
+    }
+
+    /**
+     * @group unit
+     * @group legacy
+     */
+    public function testLegacyInterface(): void
+    {
+        $aggregationDSL = new DSL\Aggregation();
+
+        $this->expectDeprecation('Since ruflin/elastica 7.1.0: The "Elastica\QueryBuilder\DSL\Aggregation::global_agg()" method is deprecated, use "global()" instead. It will be removed in 8.0.');
+        $this->_assertImplemented($aggregationDSL, 'global_agg', Aggregation\GlobalAggregation::class, ['name']);
     }
 }
