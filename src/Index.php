@@ -402,9 +402,10 @@ class Index implements SearchableInterface
             throw new \TypeError(\sprintf('Argument 2 passed to "%s()" must be of type array|bool|null, %s given.', __METHOD__, \is_object($options) ? \get_class($options) : \gettype($options)));
         }
 
-        $invalidOptions = \array_diff(\array_keys($options), $allowedOptions = [
+        $endpoint = new Create();
+        $invalidOptions = \array_diff(\array_keys($options), $allowedOptions = \array_merge($endpoint->getParamWhitelist(), [
             'recreate',
-        ]);
+        ]));
 
         if (1 === $invalidOptionCount = \count($invalidOptions)) {
             throw new InvalidException(\sprintf('"%s" is not a valid option. Allowed options are "%s".', \implode('", "', $invalidOptions), \implode('", "', $allowedOptions)));
@@ -422,7 +423,9 @@ class Index implements SearchableInterface
             }
         }
 
-        $endpoint = new Create();
+        unset($options['recreate']);
+
+        $endpoint->setParams($options);
         $endpoint->setBody($args);
 
         return $this->requestEndpoint($endpoint);
