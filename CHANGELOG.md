@@ -4,19 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/7.0.0...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/7.1.0...master)
 ### Backward Compatibility Breaks
-* Allow the Terms query to accept arrays of strings, ints and floats [#1872](https://github.com/ruflin/Elastica/pull/1872)
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [7.1.0](https://github.com/ruflin/Elastica/compare/7.0.0...7.1.0)
+### Backward Compatibility Breaks
 * Added a default value to `Elastica\Aggregation\Range::setKeyed()` and `Elastica\Aggregation\PercentilesBucket::setKeyed()` [#1876](https://github.com/ruflin/Elastica/pull/1876)
 * Removed type-hint to `Elastica\Aggregation\Percentiles::setMissing()` argument [#1875](https://github.com/ruflin/Elastica/pull/1875)
+* Allowed the Terms query to accept an array of bool, float, int and/or string [#1872](https://github.com/ruflin/Elastica/pull/1872)
 ### Added
-* Ability to specify the type of authentication manually by the `auth_type` parameter (in the client class config) was added (allowed values are `basic, digest, gssnegotiate, ntlm`)
-* Added `if_seq_no` / `if_primary_term` to replace `version` for [optimistic concurrency control](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/optimistic-concurrency-control.html)
+* Added `auth_type` parameter in the client class config to specify the type of authentication (allowed values are `basic, digest, gssnegotiate, ntlm`) [#1790](https://github.com/ruflin/Elastica/pull/1790)
+* Added `if_seq_no` / `if_primary_term` to replace `version` for [optimistic concurrency control](https://www.elastic.co/guide/en/elasticsearch/reference/7.x/optimistic-concurrency-control.html) [#1803](https://github.com/ruflin/Elastica/pull/1803)
 * Added `Elastica\Aggregation\PercentilesBucket` aggregation [#1806](https://github.com/ruflin/Elastica/pull/1806)
 * Added `weighted_avg` to aggregations DSL [#1814](https://github.com/ruflin/Elastica/pull/1814)
-* Supported `guzzlehttp/guzzle` 7.x [#1816](https://github.com/ruflin/Elastica/pull/1816)
-* Supported PHP 8.0 [#1794](https://github.com/ruflin/Elastica/pull/1794)
-* Supported BC break on `elasticsearch/elasticsearch` version `7.4.0` [#1864](https://github.com/ruflin/Elastica/pull/1864)
 * Added support for defining a connection pool with DSN. Example: `pool(http://127.0.0.1 http://127.0.0.2/bar?timeout=4)` [#1808](https://github.com/ruflin/Elastica/pull/1808)
 * Added `Elastica\Aggregation\Composite` aggregation [#1804](https://github.com/ruflin/Elastica/pull/1804)
 * Added `symfony/deprecation-contracts` package to handle deprecations [#1823](https://github.com/ruflin/Elastica/pull/1823)
@@ -31,12 +37,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added `Elastica\Aggregation\IpRange::setKeyed()` [#1876](https://github.com/ruflin/Elastica/pull/1876)
 * Added `Elastica\Aggregation\GeotileGridAggregation` [#1880](https://github.com/ruflin/Elastica/pull/1880)
 * Added `Elastica\Aggregation\Avg::setMissing()`, `Elastica\Aggregation\Cardinality::setMissing()`, `Elastica\Aggregation\DateRange::setMissing()`, `Elastica\Aggregation\DateHistogram::setMissing()`, `Elastica\Aggregation\ExtendedStats::setMissing()`, `Elastica\Aggregation\Histogram::setMissing()`, `Elastica\Aggregation\Max::setMissing()`, `Elastica\Aggregation\Min::setMissing()`, `Elastica\Aggregation\Stats::setMissing()`, `Elastica\Aggregation\Sum::setMissing()`, `Elastica\Aggregation\Terms::setMissing()` [#1876](https://github.com/ruflin/Elastica/pull/1876)
-
+* Supported `guzzlehttp/guzzle` 7.x [#1816](https://github.com/ruflin/Elastica/pull/1816)
+* Supported PHP 8.0 [#1794](https://github.com/ruflin/Elastica/pull/1794)
+* Supported BC break on `elasticsearch/elasticsearch` version `7.4.0` [#1864](https://github.com/ruflin/Elastica/pull/1864)
 ### Changed
-* Allow `string` such as `wait_for` to be passed to `AbstractUpdateAction::setRefresh` [#1791](https://github.com/ruflin/Elastica/pull/1791)
+* Allowed `string` such as `wait_for` to be passed to `AbstractUpdateAction::setRefresh` [#1791](https://github.com/ruflin/Elastica/pull/1791)
+* Allowed float values for connection timeout and connection connect-timeout, providing ms precision for those. Previous precision was second. [#1868](https://github.com/ruflin/Elastica/pull/1868)
 * Changed the return type of `AbstractUpdateAction::getRefresh` to `boolean|string` [#1791](https://github.com/ruflin/Elastica/pull/1791)
 * Reviewed options handling in `Elastica\Index::create()` [#1822](https://github.com/ruflin/Elastica/pull/1822)
 * Replaced deprecated `exceptions` request option by `http_errors` request option in Guzzle transport [#1817](https://github.com/ruflin/Elastica/pull/1817)
+* Run coding styles check on github action [#1878](https://github.com/ruflin/Elastica/pull/1878)
+* Run unit tests on github action [#1882](https://github.com/ruflin/Elastica/pull/1882)
+* Run functional tests on github action [#1885](https://github.com/ruflin/Elastica/pull/1885)
 * Updated `php-cs-fixer` to `2.16.4` [#1830](https://github.com/ruflin/Elastica/pull/1830)
 * Updated `php-cs-fixer` to `2.16.7` [#1881](https://github.com/ruflin/Elastica/pull/1881)
 * Updated `php-cs-fixer` to `2.17.3` [#1895](https://github.com/ruflin/Elastica/pull/1895)
@@ -47,10 +59,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Used new mapping endpoints classes [#1845](https://github.com/ruflin/Elastica/pull/1845)
 * Used new nodes endpoints classes [#1863](https://github.com/ruflin/Elastica/pull/1863)
 * Used new settings endpoints classes [#1852](https://github.com/ruflin/Elastica/pull/1852)
-* Allow float values for connection timeout and connection connect-timeout, providing ms precision for those. Previous precision was second. [#1868](https://github.com/ruflin/Elastica/pull/1868)
-* Run coding styles check on github action [#1878](https://github.com/ruflin/Elastica/pull/1878)
-* Run unit tests on github action [#1882](https://github.com/ruflin/Elastica/pull/1882)
-* Run functional tests on github action [#1885](https://github.com/ruflin/Elastica/pull/1885)
 ### Deprecated
 * Deprecated `Elastica\Aggregation\Range::setKeyedResponse()`, use `setKeyed()` instead [#1848](https://github.com/ruflin/Elastica/pull/1848)
 * Deprecated `Elastica\Exception\ResponseException::getElasticsearchException()`, use `getResponse()::getFullError()` instead [#1829](https://github.com/ruflin/Elastica/pull/1829)
@@ -63,12 +71,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 * Removed HHVM proxy detection [#1818](https://github.com/ruflin/Elastica/pull/1818)
 ### Fixed
-* fixed issue [1789](https://github.com/ruflin/Elastica/issues/1789)
+* Fixed issue [1789](https://github.com/ruflin/Elastica/issues/1789)
 * Fixed type-hint for `Elastica\QueryBuilder\DSL\Aggregation::sampler()` not consistent with the underlying constructor call [#1815](https://github.com/ruflin/Elastica/pull/1815)
-* Replaced `_routing` and `_retry_on_conflict` by `routing` and `retry_on_conflict` in `AbstractUpdateAction` [#1807](https://github.com/ruflin/Elastica/issues/1807)
 * Fixed `Elastica\Util::toSnakeCase()` with first letter being lower cased [#1831](https://github.com/ruflin/Elastica/pull/1831)
 * Fixed handling precision as string in `Elastica\Aggregation\GeohashGrid::setPrecision()` [#1884](https://github.com/ruflin/Elastica/pull/1884)
 * Fixed calling `Elastica\Aggregation\Composite::addAfter()` with the `null` value [1877](https://github.com/ruflin/Elastica/pull/1877)
+* Replaced `_routing` and `_retry_on_conflict` by `routing` and `retry_on_conflict` in `AbstractUpdateAction` [#1807](https://github.com/ruflin/Elastica/issues/1807)
 ### Security
 
 
