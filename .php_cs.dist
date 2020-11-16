@@ -26,6 +26,7 @@ return PhpCsFixer\Config::create()
         'php_unit_test_class_requires_covers' => false,
         'phpdoc_order' => true,
         'phpdoc_types_order' => ['null_adjustment' => 'always_last'],
+        'static_lambda' => true,
         'ternary_to_null_coalescing' => true,
         'visibility_required' => ['property', 'method', 'const'],
         'void_return' => true,
