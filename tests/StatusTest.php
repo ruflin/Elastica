@@ -96,7 +96,7 @@ class StatusTest extends BaseTest
 
         $indicesWithAlias = $status->getIndicesWithAlias($aliasName);
         $this->assertEquals([$indexName], \array_map(
-            function ($index) {
+            static function ($index) {
                 return $index->getName();
             },
             $indicesWithAlias

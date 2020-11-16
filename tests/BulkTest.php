@@ -550,7 +550,7 @@ class BulkTest extends BaseTest
         $doc2 = new Document(2, ['name' => 'Beckenbauer'], $index);
         $doc3 = new Document(3, ['name' => 'Baggio'], $index);
         $doc4 = new Document(4, ['name' => 'Cruyff'], $index);
-        $documents = \array_map(function ($d) {
+        $documents = \array_map(static function ($d) {
             $d->setDocAsUpsert(true);
 
             return $d;

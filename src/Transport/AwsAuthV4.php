@@ -43,7 +43,7 @@ class AwsAuthV4 extends Guzzle
         $signer = new SignatureV4('es', $region);
         $credProvider = $this->getCredentialProvider();
 
-        return Middleware::mapRequest(function (RequestInterface $req) use (
+        return Middleware::mapRequest(static function (RequestInterface $req) use (
             $signer,
             $credProvider
         ) {
