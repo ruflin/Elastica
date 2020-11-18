@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/7.0.0...master)
 ### Backward Compatibility Breaks
+* Allow the Terms query to accept arrays of strings, ints and floats [#1872](https://github.com/ruflin/Elastica/pull/1872)
 ### Added
 * Ability to specify the type of authentication manually by the `auth_type` parameter (in the client class config) was added (allowed values are `basic, digest, gssnegotiate, ntlm`)
 * Added `if_seq_no` / `if_primary_term` to replace `version` for [optimistic concurrency control](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/optimistic-concurrency-control.html)

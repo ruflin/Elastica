@@ -20,7 +20,7 @@ class Terms extends AbstractQuery
     private $field;
 
     /**
-     * @var string[]
+     * @var float[]|int[]|string[]
      */
     private $terms;
 
@@ -30,7 +30,7 @@ class Terms extends AbstractQuery
     private $lookup;
 
     /**
-     * @param string[] $terms Terms list, leave empty if building a terms-lookup query
+     * @param float[]|int[]|string[] $terms Terms list, leave empty if building a terms-lookup query
      */
     public function __construct(string $field, array $terms = [])
     {
@@ -45,7 +45,7 @@ class Terms extends AbstractQuery
     /**
      * Sets terms for the query.
      *
-     * @param string[]
+     * @param float[]|int[]|string[]
      */
     public function setTerms(array $terms): self
     {
@@ -56,8 +56,10 @@ class Terms extends AbstractQuery
 
     /**
      * Adds a single term to the list.
+     *
+     * @param float|int|string $term
      */
-    public function addTerm(string $term): self
+    public function addTerm($term): self
     {
         $this->terms[] = $term;
 
