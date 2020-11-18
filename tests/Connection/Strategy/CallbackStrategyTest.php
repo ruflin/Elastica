@@ -22,7 +22,7 @@ class CallbackStrategyTest extends Base
     {
         $count = 0;
 
-        $callback = function ($connections) use (&$count): Connection {
+        $callback = static function ($connections) use (&$count): Connection {
             ++$count;
 
             return \current($connections);
@@ -42,7 +42,7 @@ class CallbackStrategyTest extends Base
     {
         $count = 0;
 
-        $config = ['connectionStrategy' => function ($connections) use (&$count): Connection {
+        $config = ['connectionStrategy' => static function ($connections) use (&$count): Connection {
             ++$count;
 
             return \current($connections);

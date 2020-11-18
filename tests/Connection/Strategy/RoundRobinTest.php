@@ -74,7 +74,7 @@ class RoundRobinTest extends Base
         ];
 
         $count = 0;
-        $callback = function ($connection, $exception, $client) use (&$count): void {
+        $callback = static function ($connection, $exception, $client) use (&$count): void {
             ++$count;
         };
 
@@ -102,7 +102,7 @@ class RoundRobinTest extends Base
         ];
 
         $count = 0;
-        $client = $this->_getClient(['roundRobin' => true], function () use (&$count): void {
+        $client = $this->_getClient(['roundRobin' => true], static function () use (&$count): void {
             ++$count;
         });
 

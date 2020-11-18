@@ -21,7 +21,7 @@ class StrategyFactoryTest extends Base
      */
     public function testCreateCallbackStrategy(): void
     {
-        $callback = function ($connections): void {
+        $callback = static function ($connections): void {
         };
 
         $strategy = StrategyFactory::create($callback);

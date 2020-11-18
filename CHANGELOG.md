@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added `symfony/deprecation-contracts` package to handle deprecations [#1823](https://github.com/ruflin/Elastica/pull/1823)
 * Added `list_syntax` CS rule [#1854](https://github.com/ruflin/Elastica/pull/1854)
 * Added `native_constant_invocation` CS rule [#1833](https://github.com/ruflin/Elastica/pull/1833)
+* Added `static_lambda` CS rule [#1870](https://github.com/ruflin/Elastica/pull/1870)
 * Added `Elastica\Aggregation\DateRange::setTimezone()` [#1847](https://github.com/ruflin/Elastica/pull/1847)
 * Added endpoint options support to `Elastica\Index::create()` [#1859](https://github.com/ruflin/Elastica/pull/1859)
 ### Changed
