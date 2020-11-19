@@ -61,6 +61,10 @@ class Terms extends AbstractQuery
      */
     public function addTerm($term): self
     {
+        if (!\is_string($term) && !\is_int($term) && !\is_float($term)) {
+            throw new \TypeError(\sprintf('Argument 1 passed to "%s()" must be of type float|int|string, %s given.', __METHOD__, \is_object($term) ? \get_class($term) : \gettype($term)));
+        }
+
         $this->terms[] = $term;
 
         return $this;
