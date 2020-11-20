@@ -96,4 +96,92 @@ class TermsTest extends BaseTest
 
         $this->assertEquals(2, $resultSet->count());
     }
+
+    /**
+     * @group functional
+     */
+    public function testVariousDataTypesViaConstructor(): void
+    {
+        $index = $this->_createIndex();
+
+        $index->addDocuments([
+            new Document(1, ['some_numeric_field' => 9876]),
+        ]);
+        $index->refresh();
+
+        // string
+        $query = new Terms('some_numeric_field', ['9876']);
+        $resultSet = $index->search($query);
+        $this->assertEquals(1, $resultSet->count());
+
+        // int
+        $query = new Terms('some_numeric_field', [9876]);
+        $resultSet = $index->search($query);
+        $this->assertEquals(1, $resultSet->count());
+
+        // float
+        $query = new Terms('some_numeric_field', [9876.0]);
+        $resultSet = $index->search($query);
+        $this->assertEquals(1, $resultSet->count());
+    }
+
+    /**
+     * @group functional
+     */
+    public function testVariousMixedDataTypesViaConstructor(): void
+    {
+        $index = $this->_createIndex();
+
+        $index->addDocuments([
+            new Document(1, ['some_numeric_field' => 9876]),
+            new Document(2, ['some_numeric_field' => 5678]),
+            new Document(3, ['some_numeric_field' => 1234]),
+            new Document(4, ['some_numeric_field' => 8899]),
+        ]);
+        $index->refresh();
+
+        $query = new Terms('some_numeric_field', ['9876', 1234, 5678.0]);
+        $resultSet = $index->search($query);
+        $this->assertEquals(3, $resultSet->count());
+    }
+
+    /**
+     * @group functional
+     */
+    public function testVariousDataTypesViaAddTerm(): void
+    {
+        $index = $this->_createIndex();
+
+        $index->addDocuments([
+            new Document(1, ['some_numeric_field' => 9876]),
+        ]);
+        $index->refresh();
+
+        // string
+        $query = new Terms('some_numeric_field');
+        $query->addTerm('9876');
+        $resultSet = $index->search($query);
+        $this->assertEquals(1, $resultSet->count());
+
+        // int
+        $query = new Terms('some_numeric_field');
+        $query->addTerm(9876);
+        $resultSet = $index->search($query);
+        $this->assertEquals(1, $resultSet->count());
+
+        // float
+        $query = new Terms('some_numeric_field');
+        $query->addTerm(9876.0);
+        $resultSet = $index->search($query);
+        $this->assertEquals(1, $resultSet->count());
+    }
+
+    public function testAddTermTypeError(): void
+    {
+        $this->expectException(\TypeError::class);
+        $this->expectExceptionMessage('Argument 1 passed to "Elastica\Query\Terms::addTerm()" must be of type float|int|string, stdClass given.');
+
+        $query = new Terms('some_numeric_field');
+        $query->addTerm(new \stdClass());
+    }
 }

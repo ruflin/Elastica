@@ -20,7 +20,7 @@ class Terms extends AbstractQuery
     private $field;
 
     /**
-     * @var string[]
+     * @var array<float|int|string>
      */
     private $terms;
 
@@ -30,7 +30,7 @@ class Terms extends AbstractQuery
     private $lookup;
 
     /**
-     * @param string[] $terms Terms list, leave empty if building a terms-lookup query
+     * @param array<float|int|string> $terms Terms list, leave empty if building a terms-lookup query
      */
     public function __construct(string $field, array $terms = [])
     {
@@ -45,7 +45,7 @@ class Terms extends AbstractQuery
     /**
      * Sets terms for the query.
      *
-     * @param string[]
+     * @param array<float|int|string>
      */
     public function setTerms(array $terms): self
     {
@@ -56,9 +56,15 @@ class Terms extends AbstractQuery
 
     /**
      * Adds a single term to the list.
+     *
+     * @param float|int|string $term
      */
-    public function addTerm(string $term): self
+    public function addTerm($term): self
     {
+        if (!\is_string($term) && !\is_int($term) && !\is_float($term)) {
+            throw new \TypeError(\sprintf('Argument 1 passed to "%s()" must be of type float|int|string, %s given.', __METHOD__, \is_object($term) ? \get_class($term) : \gettype($term)));
+        }
+
         $this->terms[] = $term;
 
         return $this;
