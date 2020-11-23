@@ -11,6 +11,8 @@ use Elastica\Exception\InvalidException;
  */
 class PercentilesBucket extends AbstractAggregation
 {
+    use KeyedTrait;
+
     /**
      * @param string      $name        the name of this aggregation
      * @param string|null $bucketsPath the field on which to perform this aggregation
@@ -68,13 +70,5 @@ class PercentilesBucket extends AbstractAggregation
     public function setPercents(array $percents): self
     {
         return $this->setParam('percents', $percents);
-    }
-
-    /**
-     * Set keyed flag to return the range as an hash instead of an array of key-value pairs.
-     */
-    public function setKeyed(bool $keyed): self
-    {
-        return $this->setParam('keyed', $keyed);
     }
 }

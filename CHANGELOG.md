@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/7.0.0...master)
 ### Backward Compatibility Breaks
 * Allow the Terms query to accept arrays of strings, ints and floats [#1872](https://github.com/ruflin/Elastica/pull/1872)
+* Added a default value to `Elastica\Aggregation\Range::setKeyed()` and `Elastica\Aggregation\PercentilesBucket::setKeyed()` [#1876](https://github.com/ruflin/Elastica/pull/1876)
 ### Added
 * Ability to specify the type of authentication manually by the `auth_type` parameter (in the client class config) was added (allowed values are `basic, digest, gssnegotiate, ntlm`)
 * Added `if_seq_no` / `if_primary_term` to replace `version` for [optimistic concurrency control](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/optimistic-concurrency-control.html)
@@ -23,6 +24,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added `static_lambda` CS rule [#1870](https://github.com/ruflin/Elastica/pull/1870)
 * Added `Elastica\Aggregation\DateRange::setTimezone()` [#1847](https://github.com/ruflin/Elastica/pull/1847)
 * Added endpoint options support to `Elastica\Index::create()` [#1859](https://github.com/ruflin/Elastica/pull/1859)
+* Added `Elastica\Aggregation\DateHistogram::setKeyed()` [#1876](https://github.com/ruflin/Elastica/pull/1876)
+* Added `Elastica\Aggregation\GeoDistance::setKeyed()` [#1876](https://github.com/ruflin/Elastica/pull/1876)
+* Added `Elastica\Aggregation\Histogram::setKeyed()` [#1876](https://github.com/ruflin/Elastica/pull/1876)
+* Added `Elastica\Aggregation\IpRange::setKeyed()` [#1876](https://github.com/ruflin/Elastica/pull/1876)
 ### Changed
 * Allow `string` such as `wait_for` to be passed to `AbstractUpdateAction::setRefresh` [#1791](https://github.com/ruflin/Elastica/pull/1791)
 * Changed the return type of `AbstractUpdateAction::getRefresh` to `boolean|string` [#1791](https://github.com/ruflin/Elastica/pull/1791)

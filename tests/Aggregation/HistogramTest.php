@@ -30,6 +30,29 @@ class HistogramTest extends BaseAggregationTest
         $this->assertEquals(2, $buckets[3]['doc_count']);
     }
 
+    /**
+     * @group functional
+     */
+    public function testHistogramKeyedAggregation(): void
+    {
+        $agg = new Histogram('hist', 'price', 10);
+        $agg->setMinimumDocumentCount(0); // should return empty buckets
+        $agg->setKeyed();
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('hist');
+
+        $expected = [
+            '0.0',
+            '10.0',
+            '20.0',
+            '30.0',
+            '40.0',
+        ];
+        $this->assertSame($expected, \array_keys($results['buckets']));
+    }
+
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();

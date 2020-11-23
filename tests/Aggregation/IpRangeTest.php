@@ -40,6 +40,31 @@ class IpRangeTest extends BaseAggregationTest
         }
     }
 
+    /**
+     * @group functional
+     */
+    public function testIpRangeKeyedAggregation(): void
+    {
+        $agg = new IpRange('ip', 'address');
+        $agg->addRange('192.168.1.101');
+        $agg->addRange(null, '192.168.1.200');
+        $agg->setKeyed();
+
+        $cidrRange = '192.168.1.0/24';
+        $agg->addMaskRange($cidrRange);
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('ip');
+
+        $expected = [
+            '*-192.168.1.200',
+            '192.168.1.0/24',
+            '192.168.1.101-*',
+        ];
+        $this->assertSame($expected, \array_keys($results['buckets']));
+    }
+
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();

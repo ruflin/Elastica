@@ -9,6 +9,8 @@ namespace Elastica\Aggregation;
  */
 class Percentiles extends AbstractSimpleAggregation
 {
+    use KeyedTrait;
+
     /**
      * @param string $name  the name of this aggregation
      * @param string $field the field on which to perform this aggregation
@@ -44,18 +46,6 @@ class Percentiles extends AbstractSimpleAggregation
         $compression = [$key => $value];
 
         return $this->setParam('hdr', $compression);
-    }
-
-    /**
-     * the keyed flag is set to true which associates a unique string
-     * key with each bucket and returns the ranges as a hash
-     * rather than an array.
-     *
-     * @return $this
-     */
-    public function setKeyed(bool $keyed = true): self
-    {
-        return $this->setParam('keyed', $keyed);
     }
 
     /**

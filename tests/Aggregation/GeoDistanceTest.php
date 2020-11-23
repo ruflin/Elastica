@@ -29,6 +29,26 @@ class GeoDistanceTest extends BaseAggregationTest
         $this->assertEquals(2, $results['buckets'][0]['doc_count']);
     }
 
+    /**
+     * @group functional
+     */
+    public function testGeoDistanceKeyedAggregation(): void
+    {
+        $agg = new GeoDistance('geo', 'location', ['lat' => 32.804654, 'lon' => -117.242594]);
+        $agg->addRange(null, 100);
+        $agg->setKeyed();
+        $agg->setUnit('mi');
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('geo');
+
+        $expected = [
+            '*-100.0',
+        ];
+        $this->assertSame($expected, \array_keys($results['buckets']));
+    }
+
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();

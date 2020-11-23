@@ -11,6 +11,8 @@ use Elastica\Exception\InvalidException;
  */
 class GeoDistance extends AbstractAggregation
 {
+    use KeyedTrait;
+
     public const DISTANCE_TYPE_ARC = 'arc';
     public const DISTANCE_TYPE_PLANE = 'plane';
 

@@ -11,6 +11,8 @@ use Elastica\Exception\InvalidException;
  */
 class Range extends AbstractSimpleAggregation
 {
+    use KeyedTrait;
+
     /**
      * Add a range to this aggregation.
      *
@@ -43,16 +45,6 @@ class Range extends AbstractSimpleAggregation
         }
 
         return $this->addParam('ranges', $range);
-    }
-
-    /**
-     * If set to true, a unique string key will be associated with each bucket, and ranges will be returned as an associative array.
-     *
-     * @return $this
-     */
-    public function setKeyed(bool $keyed): self
-    {
-        return $this->setParam('keyed', $keyed);
     }
 
     /**
