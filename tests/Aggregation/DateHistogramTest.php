@@ -42,6 +42,33 @@ class DateHistogramTest extends BaseAggregationTest
     /**
      * @group functional
      */
+    public function testDateHistogramAggregationWithMissing(): void
+    {
+        $agg = new DateHistogram('hist', 'created', '1h');
+        $agg->setMissing('2014-01-29T04:20:00');
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('hist');
+
+        $docCount = 0;
+        $nonDocCount = 0;
+        foreach ($results['buckets'] as $bucket) {
+            if (1 == $bucket['doc_count']) {
+                ++$docCount;
+            } else {
+                ++$nonDocCount;
+            }
+        }
+        // 3 Documents that were added
+        $this->assertEquals(4, $docCount);
+        // 1 document that was generated in between for the missing hour
+        $this->assertEquals(1, $nonDocCount);
+    }
+
+    /**
+     * @group functional
+     */
     public function testDateHistogramKeyedAggregation(): void
     {
         $agg = new DateHistogram('hist', 'created', '1h');
@@ -132,6 +159,7 @@ class DateHistogramTest extends BaseAggregationTest
             new Document(1, ['created' => '2014-01-29T00:20:00']),
             new Document(2, ['created' => '2014-01-29T02:20:00']),
             new Document(3, ['created' => '2014-01-29T03:20:00']),
+            new Document(4, ['anything' => 'anything']),
         ]);
 
         $index->refresh();

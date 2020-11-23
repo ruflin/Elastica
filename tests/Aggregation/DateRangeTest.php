@@ -59,6 +59,29 @@ class DateRangeTest extends BaseAggregationTest
     /**
      * @group functional
      */
+    public function testDateRangeAggregationWithMissing(): void
+    {
+        $agg = new DateRange('date');
+        $agg->setField('created');
+        $agg->addRange(1390958535000)->addRange(null, 1390958535000);
+        $agg->setMissing(1390958534000);
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('date');
+
+        foreach ($results['buckets'] as $bucket) {
+            if (\array_key_exists('to', $bucket)) {
+                $this->assertEquals(2, $bucket['doc_count']);
+            } elseif (\array_key_exists('from', $bucket)) {
+                $this->assertEquals(2, $bucket['doc_count']);
+            }
+        }
+    }
+
+    /**
+     * @group functional
+     */
     public function testDateRangeKeyedAggregation(): void
     {
         $agg = new DateRange('date');
@@ -129,6 +152,7 @@ class DateRangeTest extends BaseAggregationTest
             new Document(1, ['created' => 1390962135000]),
             new Document(2, ['created' => 1390965735000]),
             new Document(3, ['created' => 1390954935000]),
+            new Document(4, ['anything' => 'anything']),
         ]);
 
         $index->refresh();

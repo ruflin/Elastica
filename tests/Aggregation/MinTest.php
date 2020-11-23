@@ -29,6 +29,25 @@ class MinTest extends BaseAggregationTest
         $this->assertEquals(self::MIN_PRICE, $results['value']);
     }
 
+    /**
+     * @group functional
+     */
+    public function testMinAggregationWithMissing(): void
+    {
+        // feature is buggy on version prior 7.5;
+        $this->_checkVersion('7.5');
+
+        $agg = new Min('min_price');
+        $agg->setField('price');
+        $agg->setMissing(-42);
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('min_price');
+
+        $this->assertEquals(-42, $results['value']);
+    }
+
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
@@ -38,6 +57,7 @@ class MinTest extends BaseAggregationTest
             new Document(2, ['price' => 8]),
             new Document(3, ['price' => self::MIN_PRICE]),
             new Document(4, ['price' => 3]),
+            new Document(5, ['anything' => 'anything']),
         ]);
 
         $index->refresh();

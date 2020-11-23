@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Backward Compatibility Breaks
 * Allow the Terms query to accept arrays of strings, ints and floats [#1872](https://github.com/ruflin/Elastica/pull/1872)
 * Added a default value to `Elastica\Aggregation\Range::setKeyed()` and `Elastica\Aggregation\PercentilesBucket::setKeyed()` [#1876](https://github.com/ruflin/Elastica/pull/1876)
+* Removed type-hint to `Elastica\Aggregation\Percentiles::setMissing()` argument [#1875](https://github.com/ruflin/Elastica/pull/1875)
 ### Added
 * Ability to specify the type of authentication manually by the `auth_type` parameter (in the client class config) was added (allowed values are `basic, digest, gssnegotiate, ntlm`)
 * Added `if_seq_no` / `if_primary_term` to replace `version` for [optimistic concurrency control](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/optimistic-concurrency-control.html)
@@ -28,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added `Elastica\Aggregation\GeoDistance::setKeyed()` [#1876](https://github.com/ruflin/Elastica/pull/1876)
 * Added `Elastica\Aggregation\Histogram::setKeyed()` [#1876](https://github.com/ruflin/Elastica/pull/1876)
 * Added `Elastica\Aggregation\IpRange::setKeyed()` [#1876](https://github.com/ruflin/Elastica/pull/1876)
+* Added `Elastica\Aggregation\Avg::setMissing()`, `Elastica\Aggregation\Cardinality::setMissing()`, `Elastica\Aggregation\DateRange::setMissing()`, `Elastica\Aggregation\DateHistogram::setMissing()`, `Elastica\Aggregation\ExtendedStats::setMissing()`, `Elastica\Aggregation\Histogram::setMissing()`, `Elastica\Aggregation\Max::setMissing()`, `Elastica\Aggregation\Min::setMissing()`, `Elastica\Aggregation\Stats::setMissing()`, `Elastica\Aggregation\Sum::setMissing()`, `Elastica\Aggregation\Terms::setMissing()` [#1876](https://github.com/ruflin/Elastica/pull/1876)
 ### Changed
 * Allow `string` such as `wait_for` to be passed to `AbstractUpdateAction::setRefresh` [#1791](https://github.com/ruflin/Elastica/pull/1791)
 * Changed the return type of `AbstractUpdateAction::getRefresh` to `boolean|string` [#1791](https://github.com/ruflin/Elastica/pull/1791)
