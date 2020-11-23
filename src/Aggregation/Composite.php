@@ -25,6 +25,10 @@ class Composite extends AbstractAggregation
      */
     public function addAfter(?array $checkpoint): self
     {
+        if (null === $checkpoint) {
+            return $this;
+        }
+
         return $this->setParam('after', $checkpoint);
     }
 }
