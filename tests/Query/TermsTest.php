@@ -179,7 +179,7 @@ class TermsTest extends BaseTest
     public function testAddTermTypeError(): void
     {
         $this->expectException(\TypeError::class);
-        $this->expectExceptionMessage('Argument 1 passed to "Elastica\Query\Terms::addTerm()" must be of type float|int|string, stdClass given.');
+        $this->expectExceptionMessage('Argument 1 passed to "Elastica\Query\Terms::addTerm()" must be a scalar, stdClass given.');
 
         $query = new Terms('some_numeric_field');
         $query->addTerm(new \stdClass());
