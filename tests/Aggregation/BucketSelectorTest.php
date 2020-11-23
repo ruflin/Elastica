@@ -46,9 +46,12 @@ class BucketSelectorTest extends BaseAggregationTest
      */
     public function testMaxAggregation(): void
     {
+        $this->_checkVersion('7.2');
+
         $index = $this->_getIndexForTest();
 
-        $dateHistogramAgg = new DateHistogram('histogram_agg', 'date', 'day');
+        $dateHistogramAgg = new DateHistogram('histogram_agg', 'date');
+        $dateHistogramAgg->setFixedInterval('1d');
         $dateHistogramAgg->setFormat('yyyy-MM-dd');
 
         $maxAgg = new Max('max_agg');

@@ -20,7 +20,10 @@ class SerialDiffTest extends BaseAggregationTest
      */
     public function testSerialDiffAggregation(): void
     {
-        $dateHistogramAggregation = new DateHistogram('measurements', 'measured_at', 'hour');
+        $this->_checkVersion('7.2');
+
+        $dateHistogramAggregation = new DateHistogram('measurements', 'measured_at');
+        $dateHistogramAggregation->setFixedInterval('1h');
 
         $dateHistogramAggregation
             ->addAggregation((new Max('max_value'))->setField('value'))

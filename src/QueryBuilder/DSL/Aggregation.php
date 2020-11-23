@@ -355,9 +355,9 @@ class Aggregation implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-histogram-aggregation.html
      *
-     * @param string $name     the name of this aggregation
-     * @param string $field    the name of the field on which to perform the aggregation
-     * @param int    $interval the interval by which documents will be bucketed
+     * @param string     $name     the name of this aggregation
+     * @param string     $field    the name of the field on which to perform the aggregation
+     * @param int|string $interval the interval by which documents will be bucketed
      */
     public function histogram(string $name, string $field, $interval): Histogram
     {
@@ -373,7 +373,7 @@ class Aggregation implements DSL
      * @param string     $field    the name of the field on which to perform the aggregation
      * @param int|string $interval the interval by which documents will be bucketed
      */
-    public function date_histogram(string $name, string $field, $interval): DateHistogram
+    public function date_histogram(string $name, string $field, $interval = null): DateHistogram
     {
         return new DateHistogram($name, $field, $interval);
     }

@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Allow the Terms query to accept arrays of strings, ints and floats [#1872](https://github.com/ruflin/Elastica/pull/1872)
 * Added a default value to `Elastica\Aggregation\Range::setKeyed()` and `Elastica\Aggregation\PercentilesBucket::setKeyed()` [#1876](https://github.com/ruflin/Elastica/pull/1876)
 * Removed type-hint to `Elastica\Aggregation\Percentiles::setMissing()` argument [#1875](https://github.com/ruflin/Elastica/pull/1875)
+* Allow the Terms query to accept arrays of scalars [#1872](https://github.com/ruflin/Elastica/pull/1872)
+* `Elastica\Aggregation\DateHistogram` does not extends `Elastica\Aggregation\Histogram` anymore [#1874](https://github.com/ruflin/Elastica/pull/1874)
 ### Added
 * Ability to specify the type of authentication manually by the `auth_type` parameter (in the client class config) was added (allowed values are `basic, digest, gssnegotiate, ntlm`)
 * Added `if_seq_no` / `if_primary_term` to replace `version` for [optimistic concurrency control](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/optimistic-concurrency-control.html)
@@ -58,6 +60,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Deprecated Match query class and introduced MatchQuery instead for PHP 8.0 compatibility reason [#1799](https://github.com/ruflin/Elastica/pull/1799)
 * Deprecated `version`/`version_type` options [(deprecated in `6.7.0`)](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/docs-update.html) and added `if_seq_no` / `if_primary_term` that replaced it
 * Deprecated passing `bool` or `null` as 2nd argument to `Elastica\Index::create()` [#1828](https://github.com/ruflin/Elastica/pull/1828)
+* Deprecated `Elastica\Aggregation\DateHistogram::__construct` third argument (`$interval`) and `Elastica\Aggregation\DateHistogram::setInterval` in favor of `setFixedInterval()` and `setCalendarInterval()` [#1874](https://github.com/ruflin/Elastica/pull/1874)
 ### Removed
 * Removed HHVM proxy detection [#1818](https://github.com/ruflin/Elastica/pull/1818)
 ### Fixed

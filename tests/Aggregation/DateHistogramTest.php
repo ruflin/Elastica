@@ -7,18 +7,86 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
+use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 
 /**
  * @internal
  */
 class DateHistogramTest extends BaseAggregationTest
 {
+    use ExpectDeprecationTrait;
+
     /**
      * @group functional
      */
     public function testDateHistogramAggregation(): void
     {
-        $agg = new DateHistogram('hist', 'created', '1h');
+        $agg = new DateHistogram('hist', 'created');
+
+        $version = $this->_getVersion();
+
+        if (\version_compare($version, '7.2') < 0) {
+            $agg->setParam('interval', '1h');
+        } else {
+            $agg->setFixedInterval('1h');
+        }
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('hist');
+
+        $docCount = 0;
+        $nonDocCount = 0;
+        foreach ($results['buckets'] as $bucket) {
+            if (1 == $bucket['doc_count']) {
+                ++$docCount;
+            } else {
+                ++$nonDocCount;
+            }
+        }
+        // 3 Documents that were added
+        $this->assertEquals(3, $docCount);
+        // 1 document that was generated in between for the missing hour
+        $this->assertEquals(1, $nonDocCount);
+    }
+
+    /**
+     * @group unit
+     * @group legacy
+     */
+    public function testDateHistogramAggregationWithIntervalTriggersADeprecation(): void
+    {
+        $this->expectDeprecation('Since ruflin/elastica 7.1.0: Argument 3 passed to "Elastica\Aggregation\DateHistogram::__construct()" is deprecated, use "setDateInterval()" or "setCalendarInterval()" instead. It will be removed in 8.0.');
+        new DateHistogram('hist', 'created', 'day');
+    }
+
+    /**
+     * @group unit
+     * @group legacy
+     */
+    public function testDateHistogramAggregationSetIntervalTriggersADeprecation(): void
+    {
+        $agg = new DateHistogram('hist', 'created');
+
+        $this->expectDeprecation('Since ruflin/elastica 7.1.0: The "Elastica\Aggregation\DateHistogram::setInterval()" method is deprecated, use "setDateInterval()" or "setCalendarInterval()" instead. It will be removed in 8.0.');
+
+        $agg->setInterval('day');
+    }
+
+    /**
+     * @group functional
+     */
+    public function testDateHistogramCalendarAggregation(): void
+    {
+        $agg = new DateHistogram('hist', 'created');
+
+        $version = $this->_getVersion();
+
+        if (\version_compare($version, '7.2') < 0) {
+            $agg->setParam('interval', '1h');
+        } else {
+            $agg->setCalendarInterval('1h');
+        }
 
         $query = new Query();
         $query->addAggregation($agg);
@@ -44,7 +112,16 @@ class DateHistogramTest extends BaseAggregationTest
      */
     public function testDateHistogramAggregationWithMissing(): void
     {
-        $agg = new DateHistogram('hist', 'created', '1h');
+        $agg = new DateHistogram('hist', 'created');
+
+        $version = $this->_getVersion();
+
+        if (\version_compare($version, '7.2') < 0) {
+            $agg->setParam('interval', '1h');
+        } else {
+            $agg->setFixedInterval('1h');
+        }
+
         $agg->setMissing('2014-01-29T04:20:00');
 
         $query = new Query();
@@ -71,7 +148,16 @@ class DateHistogramTest extends BaseAggregationTest
      */
     public function testDateHistogramKeyedAggregation(): void
     {
-        $agg = new DateHistogram('hist', 'created', '1h');
+        $agg = new DateHistogram('hist', 'created');
+
+        $version = $this->_getVersion();
+
+        if (\version_compare($version, '7.2') < 0) {
+            $agg->setParam('interval', '1h');
+        } else {
+            $agg->setFixedInterval('1h');
+        }
+
         $agg->setKeyed();
 
         $query = new Query();
@@ -92,15 +178,16 @@ class DateHistogramTest extends BaseAggregationTest
      */
     public function testSetOffset(): void
     {
-        $agg = new DateHistogram('hist', 'created', '1h');
+        $agg = new DateHistogram('hist', 'created');
+        $agg->setFixedInterval('1h');
 
         $agg->setOffset('3m');
 
         $expected = [
             'date_histogram' => [
                 'field' => 'created',
-                'interval' => '1h',
                 'offset' => '3m',
+                'fixed_interval' => '1h',
             ],
         ];
 
@@ -114,10 +201,16 @@ class DateHistogramTest extends BaseAggregationTest
      */
     public function testSetOffsetWorks(): void
     {
-        $this->_checkVersion('1.5');
-
-        $agg = new DateHistogram('hist', 'created', '1m');
+        $agg = new DateHistogram('hist', 'created');
         $agg->setOffset('+40s');
+
+        $version = $this->_getVersion();
+
+        if (\version_compare($version, '7.2') < 0) {
+            $agg->setParam('interval', '1m');
+        } else {
+            $agg->setFixedInterval('1m');
+        }
 
         $query = new Query();
         $query->addAggregation($agg);
@@ -131,15 +224,16 @@ class DateHistogramTest extends BaseAggregationTest
      */
     public function testSetTimezone(): void
     {
-        $agg = new DateHistogram('hist', 'created', '1h');
+        $agg = new DateHistogram('hist', 'created');
+        $agg->setFixedInterval('1h');
 
         $agg->setTimezone('-02:30');
 
         $expected = [
             'date_histogram' => [
                 'field' => 'created',
-                'interval' => '1h',
                 'time_zone' => '-02:30',
+                'fixed_interval' => '1h',
             ],
         ];
 
