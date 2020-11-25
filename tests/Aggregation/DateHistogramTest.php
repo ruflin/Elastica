@@ -40,6 +40,27 @@ class DateHistogramTest extends BaseAggregationTest
     }
 
     /**
+     * @group functional
+     */
+    public function testDateHistogramKeyedAggregation(): void
+    {
+        $agg = new DateHistogram('hist', 'created', '1h');
+        $agg->setKeyed();
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('hist');
+
+        $expected = [
+            '2014-01-29T00:00:00.000Z',
+            '2014-01-29T01:00:00.000Z',
+            '2014-01-29T02:00:00.000Z',
+            '2014-01-29T03:00:00.000Z',
+        ];
+        $this->assertSame($expected, \array_keys($results['buckets']));
+    }
+
+    /**
      * @group unit
      */
     public function testSetOffset(): void

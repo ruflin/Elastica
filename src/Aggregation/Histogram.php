@@ -9,6 +9,8 @@ namespace Elastica\Aggregation;
  */
 class Histogram extends AbstractSimpleAggregation
 {
+    use KeyedTrait;
+
     /**
      * @param string     $name     the name of this aggregation
      * @param string     $field    the name of the field on which to perform the aggregation

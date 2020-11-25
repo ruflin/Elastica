@@ -59,6 +59,27 @@ class DateRangeTest extends BaseAggregationTest
     /**
      * @group functional
      */
+    public function testDateRangeKeyedAggregation(): void
+    {
+        $agg = new DateRange('date');
+        $agg->setField('created');
+        $agg->setKeyed();
+        $agg->addRange(1390958535000)->addRange(null, 1390958535000);
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('date');
+
+        $expected = [
+            '*-1390958535000',
+            '1390958535000-*',
+        ];
+        $this->assertSame($expected, \array_keys($results['buckets']));
+    }
+
+    /**
+     * @group functional
+     */
     public function testDateRangeSetFormat(): void
     {
         $agg = new DateRange('date');

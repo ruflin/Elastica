@@ -29,6 +29,26 @@ class RangeTest extends BaseAggregationTest
     }
 
     /**
+     * @group functional
+     */
+    public function testRangeKeyedAggregation(): void
+    {
+        $agg = new Range('range');
+        $agg->setField('price');
+        $agg->addRange(1.5, 5);
+        $agg->setKeyed();
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('range');
+
+        $expected = [
+            '1.5-5.0',
+        ];
+        $this->assertSame($expected, \array_keys($results['buckets']));
+    }
+
+    /**
      * @group unit
      */
     public function testRangeAggregationWithKey(): void

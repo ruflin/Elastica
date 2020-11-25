@@ -11,6 +11,8 @@ use Elastica\Exception\InvalidException;
  */
 class IpRange extends AbstractAggregation
 {
+    use KeyedTrait;
+
     /**
      * @param string $name  the name of this aggregation
      * @param string $field the field on which to perform this aggregation
