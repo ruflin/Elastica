@@ -2,7 +2,9 @@
 
 namespace Elastica\Test\Query;
 
+use Elastica\Client;
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query\Percolate;
 use Elastica\Test\Base as BaseTest;
@@ -131,7 +133,8 @@ class PercolateTest extends BaseTest
      */
     public function testSetDocumentIndex(): void
     {
-        $index = $this->_createIndex('indexone');
+        $client = $this->createMock(Client::class);
+        $index = new Index($client, 'indexone');
         $query = new Percolate();
         $query->setDocumentIndex($index->getName());
 

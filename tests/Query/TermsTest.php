@@ -9,10 +9,12 @@ use Elastica\Test\Base as BaseTest;
 
 /**
  * @internal
- * @group unit
  */
 class TermsTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testSetTermsLookup(): void
     {
         $terms = [
@@ -28,6 +30,9 @@ class TermsTest extends BaseTest
         $this->assertEquals($terms, $data['terms']['name']);
     }
 
+    /**
+     * @group unit
+     */
     public function testInvalidParams(): void
     {
         $query = new Terms('field', ['aaa', 'bbb']);
@@ -37,6 +42,9 @@ class TermsTest extends BaseTest
         $query->toArray();
     }
 
+    /**
+     * @group unit
+     */
     public function testEmptyField(): void
     {
         $this->expectException(InvalidException::class);
@@ -176,6 +184,9 @@ class TermsTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
+    /**
+     * @group unit
+     */
     public function testAddTermTypeError(): void
     {
         $this->expectException(\TypeError::class);

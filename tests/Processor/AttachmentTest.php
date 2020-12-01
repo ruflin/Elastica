@@ -9,8 +9,6 @@ use Elastica\Processor\Attachment;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
- * @group functional
- *
  * @internal
  */
 class AttachmentTest extends BasePipelineTest
@@ -55,6 +53,9 @@ class AttachmentTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
+    /**
+     * @group functional
+     */
     public function testAttachmentAddPdf(): void
     {
         $attachment = new Attachment('data');
@@ -94,6 +95,9 @@ class AttachmentTest extends BasePipelineTest
         $this->assertEquals(0, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testAttachmentAddPdfFileContent(): void
     {
         $attachment = new Attachment('data');
@@ -136,6 +140,9 @@ class AttachmentTest extends BasePipelineTest
         $this->assertEquals(0, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testAddWordxFile(): void
     {
         $attachment = new Attachment('data');
@@ -176,6 +183,9 @@ class AttachmentTest extends BasePipelineTest
         $this->assertEquals(0, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testExcludeFileSource(): void
     {
         $attachment = new Attachment('data');
