@@ -2,7 +2,7 @@
 
 namespace Elastica\Test\Aggregation;
 
-use Elastica\Aggregation\GeoCentroid;
+use Elastica\Aggregation\GeotileGrid;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Mapping;
@@ -11,20 +11,22 @@ use Elastica\Query;
 /**
  * @internal
  */
-class GeoCentroidTest extends BaseAggregationTest
+class GeotileGridTest extends BaseAggregationTest
 {
     /**
      * @group functional
      */
-    public function testGeoCentroidGridAggregation(): void
+    public function testGeotileGridAggregation(): void
     {
-        $agg = new GeoCentroid('centroid', 'location');
+        $agg = new GeotileGrid('tile', 'location');
+        $agg->setPrecision(7);
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('centroid');
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('tile');
 
-        $this->assertEquals(3, $results['count']);
+        $this->assertEquals(2, $results['buckets'][0]['doc_count']);
+        $this->assertEquals(1, $results['buckets'][1]['doc_count']);
     }
 
     protected function _getIndexForTest(): Index

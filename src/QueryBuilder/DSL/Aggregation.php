@@ -16,6 +16,7 @@ use Elastica\Aggregation\Filter;
 use Elastica\Aggregation\Filters;
 use Elastica\Aggregation\GeoDistance;
 use Elastica\Aggregation\GeohashGrid;
+use Elastica\Aggregation\GeotileGrid;
 use Elastica\Aggregation\GlobalAggregation;
 use Elastica\Aggregation\Histogram;
 use Elastica\Aggregation\IpRange;
@@ -402,6 +403,19 @@ class Aggregation implements DSL
     public function geohash_grid(string $name, string $field): GeohashGrid
     {
         return new GeohashGrid($name, $field);
+    }
+
+    /**
+     * geotile grid aggregation.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geotilegrid-aggregation.html
+     *
+     * @param string $name  the name of this aggregation
+     * @param string $field the field on which to perform this aggregation
+     */
+    public function geotile_grid(string $name, string $field): GeotileGrid
+    {
+        return new GeotileGrid($name, $field);
     }
 
     /**
