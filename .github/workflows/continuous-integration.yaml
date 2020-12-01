@@ -1,0 +1,20 @@
+name: 'Continuous integration'
+on: ['push', 'pull_request']
+jobs:
+  cs:
+    runs-on: 'ubuntu-latest'
+    name: 'Coding style'
+    steps:
+      - name: 'Checkout'
+        uses: 'actions/checkout@v2'
+
+      - name: 'Setup PHP'
+        uses: 'shivammathur/setup-php@v2'
+        with:
+          php-version: '7.2'
+          coverage: 'none'
+          extensions: 'json, mbstring, tokenizer'
+          tools: 'php-cs-fixer:2.16.4'
+
+      - name: 'Check PHP code'
+        run: 'php-cs-fixer fix --diff --dry-run --allow-risky=yes --using-cache=false'
