@@ -14,7 +14,10 @@ jobs:
           php-version: '7.2'
           coverage: 'none'
           extensions: 'json, mbstring, tokenizer'
-          tools: 'php-cs-fixer:2.16.7'
+          tools: 'composer-normalize:2.11.0, php-cs-fixer:2.16.7'
 
       - name: 'Check PHP code'
         run: 'php-cs-fixer fix --diff --dry-run --allow-risky=yes --using-cache=false'
+
+      - name: 'Check composer.json'
+        run: 'composer-normalize --diff --dry-run --indent-size=4 --indent-style=space --no-update-lock'
