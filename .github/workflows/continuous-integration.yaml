@@ -2,7 +2,7 @@ name: 'Continuous integration'
 on: ['push', 'pull_request']
 jobs:
   cs:
-    runs-on: 'ubuntu-latest'
+    runs-on: 'ubuntu-20.04'
     name: 'Coding style'
     steps:
       - name: 'Checkout'
@@ -23,7 +23,7 @@ jobs:
         run: 'composer-normalize --diff --dry-run --indent-size=4 --indent-style=space --no-update-lock'
 
   phpunit:
-    runs-on: 'ubuntu-latest'
+    runs-on: 'ubuntu-20.04'
     name: 'PHPUnit (PHP ${{ matrix.php }}, ES ${{ matrix.elasticsearch }})'
     timeout-minutes: 5
     strategy:
