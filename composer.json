@@ -1,9 +1,12 @@
 {
     "name": "ruflin/elastica",
-    "description": "Elasticsearch Client",
-    "keywords": ["search","client"],
-    "homepage": "http://elastica.io/",
     "type": "library",
+    "description": "Elasticsearch Client",
+    "keywords": [
+        "search",
+        "client"
+    ],
+    "homepage": "http://elastica.io/",
     "license": "MIT",
     "authors": [
         {
@@ -14,9 +17,9 @@
     "require": {
         "php": "^7.2 || ^8.0",
         "ext-json": "*",
-        "psr/log": "^1.0",
         "elasticsearch/elasticsearch": "^7.1.1",
         "nyholm/dsn": "^2.0.0",
+        "psr/log": "^1.0",
         "symfony/deprecation-contracts": "^2.2"
     },
     "require-dev": {
@@ -31,6 +34,11 @@
         "guzzlehttp/guzzle": "Allow using guzzle 6 as the http transport",
         "monolog/monolog": "Logging request"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "7.0.x-dev"
+        }
+    },
     "autoload": {
         "psr-4": {
             "Elastica\\": "src/"
@@ -39,11 +47,6 @@
     "autoload-dev": {
         "psr-4": {
             "Elastica\\Test\\": "tests/"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "7.0.x-dev"
         }
     }
 }
