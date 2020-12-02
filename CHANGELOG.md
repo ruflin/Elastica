@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Reviewed options handling in `Elastica\Index::create()` [#1822](https://github.com/ruflin/Elastica/pull/1822)
 * Replaced deprecated `exceptions` request option by `http_errors` request option in Guzzle transport [#1817](https://github.com/ruflin/Elastica/pull/1817)
 * Updated `php-cs-fixer` to `2.16.4` [#1830](https://github.com/ruflin/Elastica/pull/1830)
+* Updated `php-cs-fixer` to `2.16.7` [#1881](https://github.com/ruflin/Elastica/pull/1881)
 * Used `GuzzleHttp\RequestOptions` constants for configuring request options [#1820](https://github.com/ruflin/Elastica/pull/1820)
 * Used new alias endpoints classes [#1839](https://github.com/ruflin/Elastica/pull/1839)
 * Used new cache endpoints classes [#1840](https://github.com/ruflin/Elastica/pull/1840)
