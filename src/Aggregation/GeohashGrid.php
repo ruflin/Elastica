@@ -49,6 +49,18 @@ class GeohashGrid extends AbstractAggregation
     }
 
     /**
+     * Set the precision for this aggregation in meters or kilometers.
+     *
+     * @param string $precision a string like 100m or 1km
+     *
+     * @return $this
+     */
+    public function setDistancePrecision(string $precision): self
+    {
+        return $this->setParam('precision', $precision);
+    }
+
+    /**
      * Set the maximum number of buckets to return.
      *
      * @param int $size defaults to 10,000
