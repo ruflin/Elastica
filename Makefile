@@ -1,6 +1,3 @@
-# Default version to start ES on Docker, overide with `ES_VERSION=75 make start-docker` for ES 7.5
-ES_VERSION?=73
-
 .PHONY: clean
 clean:
 	rm -fr tools vendor build composer.lock .php_cs.cache
@@ -75,7 +72,7 @@ docker-start:
 	docker-compose --file=docker/docker-compose.yml \
 		--file=docker/docker-compose.proxy.yml \
 		--file=docker/docker-compose.es.yml \
-		--file=docker/docker-compose.es${ES_VERSION}.yml \
+		--file=docker/docker-compose.es.yml \
 		up ${DOCKER_OPTIONS}
 
 .PHONY: docker-stop
@@ -83,7 +80,6 @@ docker-stop:
 	docker-compose --file=docker/docker-compose.yml \
 		--file=docker/docker-compose.proxy.yml \
 		--file=docker/docker-compose.es.yml \
-		--file=docker/docker-compose.es${ES_VERSION}.yml \
 	    down
 
 .PHONY: docker-run-phpunit
