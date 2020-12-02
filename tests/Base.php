@@ -186,20 +186,20 @@ class Base extends TestCase
     {
         $groups = TestUtil::getGroups(\get_class($this), $this->getName(false));
 
-        return \in_array('unit', $groups);
+        return \in_array('unit', $groups, true);
     }
 
     protected function _isFunctionalGroup()
     {
         $groups = TestUtil::getGroups(\get_class($this), $this->getName(false));
 
-        return \in_array('functional', $groups);
+        return \in_array('functional', $groups, true);
     }
 
     protected function _isBenchmarkGroup()
     {
         $groups = TestUtil::getGroups(\get_class($this), $this->getName(false));
 
-        return \in_array('benchmark', $groups);
+        return \in_array('benchmark', $groups, true);
     }
 }

@@ -9,8 +9,6 @@ use Elastica\Mapping;
 use Elastica\Query;
 
 /**
- * @group functional
- *
  * @internal
  */
 class TermsTest extends BaseAggregationTest
@@ -73,6 +71,9 @@ class TermsTest extends BaseAggregationTest
         $this->assertSame(['first', 'second'], $agg->getParam('exclude'));
     }
 
+    /**
+     * @group functional
+     */
     public function testTermsAggregation(): void
     {
         $agg = new Terms('terms');
@@ -86,6 +87,9 @@ class TermsTest extends BaseAggregationTest
         $this->assertEquals('blue', $results['buckets'][0]['key']);
     }
 
+    /**
+     * @group functional
+     */
     public function testTermsSetOrder(): void
     {
         $agg = new Terms('terms');
@@ -99,6 +103,9 @@ class TermsTest extends BaseAggregationTest
         $this->assertEquals('blue', $results['buckets'][2]['key']);
     }
 
+    /**
+     * @group functional
+     */
     public function testTermsSetOrders(): void
     {
         $agg = new Terms('terms');

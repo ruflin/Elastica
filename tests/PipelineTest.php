@@ -3,6 +3,7 @@
 namespace Elastica\Test;
 
 use Elastica\Bulk;
+use Elastica\Client;
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Pipeline;
@@ -24,7 +25,8 @@ class PipelineTest extends BasePipeline
         $rename = new Rename('foo', 'target.field');
         $set = new Set('field4', 324);
 
-        $processors = new Pipeline($this->_getClient());
+        $client = $this->createMock(Client::class);
+        $processors = new Pipeline($client);
         $processors->setDescription('this is a new pipeline');
         $processors->addProcessor($trim);
         $processors->addProcessor($rename);

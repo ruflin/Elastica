@@ -2,7 +2,7 @@ name: 'Continuous integration'
 on: ['push', 'pull_request']
 jobs:
   cs:
-    runs-on: 'ubuntu-latest'
+    runs-on: 'ubuntu-20.04'
     name: 'Coding style'
     steps:
       - name: 'Checkout'
@@ -21,3 +21,53 @@ jobs:
 
       - name: 'Check composer.json'
         run: 'composer-normalize --diff --dry-run --indent-size=4 --indent-style=space --no-update-lock'
+
+  phpunit:
+    runs-on: 'ubuntu-20.04'
+    name: 'PHPUnit (PHP ${{ matrix.php }}, ES ${{ matrix.elasticsearch }})'
+    timeout-minutes: 5
+    strategy:
+      matrix:
+        include:
+          - php: '7.2'
+            elasticsearch: '7.1.1'
+          - php: '7.2'
+            elasticsearch: '7.2.1'
+          - php: '7.3'
+            elasticsearch: '7.3.2'
+          - php: '7.4'
+            elasticsearch: '7.3.2'
+          - php: '8.0'
+            elasticsearch: '7.3.2'
+            composer_flags: '--ignore-platform-reqs'
+      fail-fast: false
+    steps:
+      - name: 'Checkout'
+        uses: 'actions/checkout@v2'
+
+      - name: 'Setup PHP'
+        uses: 'shivammathur/setup-php@v2'
+        with:
+          php-version: '${{ matrix.php }}'
+          coverage: 'none'
+          tools: 'pecl, composer:v2'
+          extensions: 'curl, json, mbstring, openssl'
+
+      - name: 'Get composer cache directory'
+        id: 'composer_cache'
+        run: 'echo "::set-output name=dir::$(composer config cache-files-dir)"'
+
+      - name: 'Cache dependencies'
+        uses: 'actions/cache@v2'
+        with:
+          path: '${{ steps.composer_cache.outputs.dir }}'
+          key: '${{ runner.os }}-composer-php${{ matrix.php }}-${{ hashFiles(''**/composer.json'') }}'
+          restore-keys: |
+            ${{ runner.os }}-composer-php${{ matrix.php }}-
+            ${{ runner.os }}-composer-
+
+      - name: 'Update dependencies'
+        run: 'composer update --prefer-dist --no-interaction --no-progress --ansi ${{ matrix.composer_flags }}'
+
+      - name: 'Run tests'
+        run: 'vendor/bin/phpunit --group unit'
