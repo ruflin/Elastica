@@ -9,15 +9,7 @@ namespace Elastica\Aggregation;
  */
 class DiversifiedSampler extends AbstractSimpleAggregation
 {
-    /**
-     * Set the number of top-scoring documents to be returned from each shard.
-     *
-     * @return $this
-     */
-    public function setShardSize(int $shardSize): self
-    {
-        return $this->setParam('shard_size', $shardSize);
-    }
+    use Traits\ShardSizeTrait;
 
     /**
      * Set the maximum number of documents to be returned per value.
