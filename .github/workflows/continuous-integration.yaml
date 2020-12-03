@@ -17,10 +17,12 @@ jobs:
           tools: 'composer-normalize:2.11.0, php-cs-fixer:2.16.7'
 
       - name: 'Check PHP code'
-        run: 'php-cs-fixer fix --diff --dry-run --allow-risky=yes --using-cache=false'
+        run: |
+          php-cs-fixer fix --diff --dry-run --allow-risky=yes --using-cache=false
 
       - name: 'Check composer.json'
-        run: 'composer-normalize --diff --dry-run --indent-size=4 --indent-style=space --no-update-lock'
+        run: |
+          composer-normalize --diff --dry-run --indent-size=4 --indent-style=space --no-update-lock
 
   phpunit:
     runs-on: 'ubuntu-20.04'
@@ -55,7 +57,8 @@ jobs:
 
       - name: 'Get composer cache directory'
         id: 'composer_cache'
-        run: 'echo "::set-output name=dir::$(composer config cache-files-dir)"'
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
 
       - name: 'Cache dependencies'
         uses: 'actions/cache@v2'
@@ -67,7 +70,23 @@ jobs:
             ${{ runner.os }}-composer-
 
       - name: 'Update dependencies'
-        run: 'composer update --prefer-dist --no-interaction --no-progress --ansi ${{ matrix.composer_flags }}'
+        run: |
+          composer update --prefer-dist --no-interaction --no-progress --ansi ${{ matrix.composer_flags }}
 
-      - name: 'Run tests'
-        run: 'vendor/bin/phpunit --group unit'
+      - name: 'Run unit tests'
+        run: |
+          vendor/bin/phpunit --group unit
+
+      - name: 'Setup Elasticsearch'
+        run: |
+          sudo swapoff -a
+          sudo sysctl -w vm.swappiness=1
+          sudo sysctl -w fs.file-max=262144
+          sudo sysctl -w vm.max_map_count=262144
+          ES_VERSION=${{ matrix.elasticsearch }} docker-compose --file=docker/docker-compose.proxy.yml --file=docker/docker-compose.es.yml up --detach
+          docker run --rm --network=docker_elastic curlimages/curl --max-time 120 --retry-max-time 120 --retry 120 --retry-delay 5 --retry-all-errors --show-error --silent http://es01:9200
+          docker run --rm --network=docker_elastic curlimages/curl --max-time 120 --retry-max-time 120 --retry 120 --retry-delay 5 --retry-all-errors --show-error --silent http://es02:9200
+
+      - name: 'Run functional tests'
+        run: |
+          vendor/bin/phpunit --group functional
