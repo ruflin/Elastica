@@ -27,7 +27,7 @@ jobs:
   phpunit:
     runs-on: 'ubuntu-20.04'
     name: 'PHPUnit (PHP ${{ matrix.php }}, ES ${{ matrix.elasticsearch }})'
-    timeout-minutes: 5
+    timeout-minutes: 10
     strategy:
       matrix:
         include:
