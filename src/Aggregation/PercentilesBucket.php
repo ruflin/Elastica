@@ -11,7 +11,7 @@ use Elastica\Exception\InvalidException;
  */
 class PercentilesBucket extends AbstractAggregation
 {
-    use KeyedTrait;
+    use Traits\KeyedTrait;
 
     /**
      * @param string      $name        the name of this aggregation

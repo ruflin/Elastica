@@ -11,7 +11,7 @@ use Elastica\Exception\InvalidException;
  */
 class Range extends AbstractSimpleAggregation
 {
-    use KeyedTrait;
+    use Traits\KeyedTrait;
 
     /**
      * Add a range to this aggregation.

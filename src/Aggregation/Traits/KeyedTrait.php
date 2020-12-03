@@ -1,6 +1,6 @@
 <?php
 
-namespace Elastica\Aggregation;
+namespace Elastica\Aggregation\Traits;
 
 trait KeyedTrait
 {
