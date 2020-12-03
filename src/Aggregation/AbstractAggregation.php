@@ -5,6 +5,7 @@ namespace Elastica\Aggregation;
 use Elastica\Exception\InvalidException;
 use Elastica\NameableInterface;
 use Elastica\Param;
+use Elastica\Util;
 
 abstract class AbstractAggregation extends Param implements NameableInterface
 {
@@ -133,5 +134,13 @@ abstract class AbstractAggregation extends Param implements NameableInterface
         }
 
         return $array;
+    }
+
+    protected function _getBaseName()
+    {
+        $shortName = (new \ReflectionClass($this))->getShortName();
+        $shortName = \preg_replace('/Aggregation$/', '', $shortName);
+
+        return Util::toSnakeCase($shortName);
     }
 }
