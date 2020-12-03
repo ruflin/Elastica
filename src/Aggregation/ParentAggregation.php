@@ -20,9 +20,4 @@ class ParentAggregation extends AbstractAggregation
     {
         return $this->setParam('type', $type);
     }
-
-    protected function _getBaseName()
-    {
-        return 'parent';
-    }
 }

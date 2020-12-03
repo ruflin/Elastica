@@ -17,9 +17,4 @@ class GlobalAggregation extends AbstractAggregation
 
         return $array;
     }
-
-    protected function _getBaseName()
-    {
-        return 'global';
-    }
 }
