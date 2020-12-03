@@ -7,6 +7,8 @@ namespace Elastica\Aggregation;
  */
 abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
 {
+    use Traits\ShardSizeTrait;
+
     public const EXECUTION_HINT_MAP = 'map';
     public const EXECUTION_HINT_GLOBAL_ORDINALS = 'global_ordinals';
 
@@ -97,16 +99,6 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
     public function setSize(int $size): self
     {
         return $this->setParam('size', $size);
-    }
-
-    /**
-     * Sets how many terms the coordinating node will request from each shard.
-     *
-     * @return $this
-     */
-    public function setShardSize(int $shardSize): self
-    {
-        return $this->setParam('shard_size', $shardSize);
     }
 
     /**
