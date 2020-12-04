@@ -4,20 +4,20 @@ namespace Elastica\Test\Processor;
 
 use Elastica\Bulk;
 use Elastica\Document;
-use Elastica\Processor\Append;
+use Elastica\Processor\AppendProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class AppendTest extends BasePipelineTest
+class AppendProcessorTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
     public function testAppendSingleValue(): void
     {
-        $processor = new Append('field1', 'item2');
+        $processor = new AppendProcessor('field1', 'item2');
 
         $expected = [
             'append' => [
@@ -34,7 +34,7 @@ class AppendTest extends BasePipelineTest
      */
     public function testAppendArray(): void
     {
-        $processor = new Append('field1', ['item2', 'item3', 'item4']);
+        $processor = new AppendProcessor('field1', ['item2', 'item3', 'item4']);
 
         $expected = [
             'append' => [
@@ -51,7 +51,7 @@ class AppendTest extends BasePipelineTest
      */
     public function testAppend(): void
     {
-        $append = new Append('foo', ['item2', 'item3', 'item4']);
+        $append = new AppendProcessor('foo', ['item2', 'item3', 'item4']);
 
         $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for Append');
         $pipeline->addProcessor($append)->create();

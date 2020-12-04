@@ -4,24 +4,25 @@ namespace Elastica\Test\Processor;
 
 use Elastica\Bulk;
 use Elastica\Document;
-use Elastica\Processor\Remove;
+use Elastica\Processor\SetProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class RemoveTest extends BasePipelineTest
+class SetProcessorTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
-    public function testRemove(): void
+    public function testSet(): void
     {
-        $processor = new Remove('foo');
+        $processor = new SetProcessor('field1', 582.1);
 
         $expected = [
-            'remove' => [
-                'field' => 'foo',
+            'set' => [
+                'field' => 'field1',
+                'value' => 582.1,
             ],
         ];
 
@@ -31,13 +32,16 @@ class RemoveTest extends BasePipelineTest
     /**
      * @group unit
      */
-    public function testRemoveArray(): void
+    public function testSetWithNonDefaultOptions(): void
     {
-        $processor = new Remove(['foo', 'bar']);
+        $processor = new SetProcessor('field1', 582.1);
+        $processor->setOverride(false);
 
         $expected = [
-            'remove' => [
-                'field' => ['foo', 'bar'],
+            'set' => [
+                'field' => 'field1',
+                'value' => 582.1,
+                'override' => false,
             ],
         ];
 
@@ -47,20 +51,20 @@ class RemoveTest extends BasePipelineTest
     /**
      * @group functional
      */
-    public function testRemoveField(): void
+    public function testSetField(): void
     {
-        $remove = new Remove(['es_version', 'package']);
+        $set = new SetProcessor('package', 'Elastica');
 
-        $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for Remove');
-        $pipeline->addProcessor($remove)->create();
+        $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for Set');
+        $pipeline->addProcessor($set)->create();
 
         $index = $this->_createIndex();
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);
 
         $bulk->addDocuments([
-            new Document(null, ['name' => 'nicolas', 'es_version' => 6, 'package' => 'Elastica']),
-            new Document(null, ['name' => 'ruflin', 'es_version' => 5, 'package' => 'Elastica_old']),
+            new Document(null, ['name' => 'nicolas', 'package' => 'Elastico']),
+            new Document(null, ['name' => 'ruflin']),
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');
 
@@ -73,8 +77,7 @@ class RemoveTest extends BasePipelineTest
 
         foreach ($result->getResults() as $rx) {
             $value = $rx->getData();
-            $this->assertArrayNotHasKey('package', $value);
-            $this->assertArrayNotHasKey('es_version', $value);
+            $this->assertSame('Elastica', $value['package']);
         }
     }
 }

@@ -5,20 +5,20 @@ namespace Elastica\Test\Processor;
 use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Mapping;
-use Elastica\Processor\Attachment;
+use Elastica\Processor\AttachmentProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class AttachmentTest extends BasePipelineTest
+class AttachmentProcessorTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
     public function testAttachment(): void
     {
-        $processor = new Attachment('data');
+        $processor = new AttachmentProcessor('data');
 
         $expected = [
             'attachment' => [
@@ -34,7 +34,7 @@ class AttachmentTest extends BasePipelineTest
      */
     public function testAttachmentWithNonDefaultOptions(): void
     {
-        $processor = new Attachment('data');
+        $processor = new AttachmentProcessor('data');
         $processor->setIndexedChars(1000);
         $processor->setProperties(['content', 'title', 'language']);
         $processor->setTargetField('attachment-new-name');
@@ -58,7 +58,7 @@ class AttachmentTest extends BasePipelineTest
      */
     public function testAttachmentAddPdf(): void
     {
-        $attachment = new Attachment('data');
+        $attachment = new AttachmentProcessor('data');
         $pipeline = $this->_createPipeline('my_custom_pipeline_attachment', 'pipeline for Attachment');
         $pipeline->addProcessor($attachment);
         $pipeline->create();
@@ -100,7 +100,7 @@ class AttachmentTest extends BasePipelineTest
      */
     public function testAttachmentAddPdfFileContent(): void
     {
-        $attachment = new Attachment('data');
+        $attachment = new AttachmentProcessor('data');
         $pipeline = $this->_createPipeline('my_custom_pipeline_attachment', 'pipeline for Attachment');
         $pipeline->addProcessor($attachment);
         $pipeline->create();
@@ -145,7 +145,7 @@ class AttachmentTest extends BasePipelineTest
      */
     public function testAddWordxFile(): void
     {
-        $attachment = new Attachment('data');
+        $attachment = new AttachmentProcessor('data');
         $pipeline = $this->_createPipeline('my_custom_pipeline_attachment', 'pipeline for Attachment');
         $pipeline->addProcessor($attachment);
         $pipeline->create();
@@ -188,7 +188,7 @@ class AttachmentTest extends BasePipelineTest
      */
     public function testExcludeFileSource(): void
     {
-        $attachment = new Attachment('data');
+        $attachment = new AttachmentProcessor('data');
         $pipeline = $this->_createPipeline('my_custom_pipeline_attachment', 'pipeline for Attachment');
         $pipeline->addProcessor($attachment);
         $pipeline->create();

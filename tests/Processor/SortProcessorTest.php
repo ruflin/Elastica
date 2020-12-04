@@ -4,20 +4,20 @@ namespace Elastica\Test\Processor;
 
 use Elastica\Bulk;
 use Elastica\Document;
-use Elastica\Processor\Sort;
+use Elastica\Processor\SortProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class SortTest extends BasePipelineTest
+class SortProcessorTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
     public function testSort(): void
     {
-        $processor = new Sort('field_to_sort');
+        $processor = new SortProcessor('field_to_sort');
 
         $expected = [
             'sort' => [
@@ -33,7 +33,7 @@ class SortTest extends BasePipelineTest
      */
     public function testSortWithNonDefaultOptions(): void
     {
-        $processor = new Sort('field_to_sort');
+        $processor = new SortProcessor('field_to_sort');
         $processor->setOrder('desc');
 
         $expected = [
@@ -51,7 +51,7 @@ class SortTest extends BasePipelineTest
      */
     public function testSortField(): void
     {
-        $sort = new Sort('name');
+        $sort = new SortProcessor('name');
 
         $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for Sort');
         $pipeline->addProcessor($sort)->create();

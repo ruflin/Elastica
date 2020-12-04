@@ -4,20 +4,20 @@ namespace Elastica\Test\Processor;
 
 use Elastica\Bulk;
 use Elastica\Document;
-use Elastica\Processor\Join;
+use Elastica\Processor\JoinProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class JoinTest extends BasePipelineTest
+class JoinProcessorTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
     public function testJoin(): void
     {
-        $processor = new Join('joined_array_field', '-');
+        $processor = new JoinProcessor('joined_array_field', '-');
 
         $expected = [
             'join' => [
@@ -34,7 +34,7 @@ class JoinTest extends BasePipelineTest
      */
     public function testJoinField(): void
     {
-        $join = new Join('name', '-');
+        $join = new JoinProcessor('name', '-');
 
         $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for Join');
         $pipeline->addProcessor($join)->create();
