@@ -39,24 +39,16 @@ class GeohashGrid extends AbstractAggregation
     /**
      * Set the precision for this aggregation.
      *
-     * @param int $precision an integer between 1 and 12, inclusive. Defaults to 5.
+     * @param int|string $precision an integer between 1 and 12, inclusive. Defaults to 5 or distance like 1km, 10m
      *
      * @return $this
      */
-    public function setPrecision(int $precision): self
+    public function setPrecision($precision): self
     {
-        return $this->setParam('precision', $precision);
-    }
+        if (!\is_int($precision) && !\is_string($precision)) {
+            throw new \TypeError(\sprintf('Argument 1 passed to "%s()" must be a int or string, %s given.', __METHOD__, \is_object($precision) ? \get_class($precision) : \gettype($precision)));
+        }
 
-    /**
-     * Set the precision for this aggregation in meters or kilometers.
-     *
-     * @param string $precision a string like 100m or 1km
-     *
-     * @return $this
-     */
-    public function setDistancePrecision(string $precision): self
-    {
         return $this->setParam('precision', $precision);
     }
 

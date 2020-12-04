@@ -35,7 +35,7 @@ class GeohashGridTest extends BaseAggregationTest
     public function testGeohashGridAggregationWithDistancePrecision(): void
     {
         $agg = new GeohashGrid('hash', 'location');
-        $agg->setDistancePrecision('100km');
+        $agg->setPrecision('100km');
 
         $query = new Query();
         $query->addAggregation($agg);
@@ -43,6 +43,21 @@ class GeohashGridTest extends BaseAggregationTest
 
         $this->assertEquals(2, $results['buckets'][0]['doc_count']);
         $this->assertEquals(1, $results['buckets'][1]['doc_count']);
+    }
+
+    /**
+     * @group functional
+     */
+    public function testGeohashGridAggregationWithNotAllowedPrecision(): void
+    {
+        $this->expectException(\TypeError::class);
+
+        $agg = new GeohashGrid('hash', 'location');
+        $agg->setPrecision(1.5);
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $this->_createIndex()->search($query)->getAggregation('hash');
     }
 
     protected function _getIndexForTest(): Index
