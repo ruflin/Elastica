@@ -2,7 +2,7 @@
 
 namespace Elastica\Test\Aggregation;
 
-use Elastica\Aggregation\GeotileGrid;
+use Elastica\Aggregation\GeotileGridAggregation;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Mapping;
@@ -11,14 +11,14 @@ use Elastica\Query;
 /**
  * @internal
  */
-class GeotileGridTest extends BaseAggregationTest
+class GeotileGridAggregationTest extends BaseAggregationTest
 {
     /**
      * @group functional
      */
     public function testGeotileGridAggregation(): void
     {
-        $agg = new GeotileGrid('tile', 'location');
+        $agg = new GeotileGridAggregation('tile', 'location');
         $agg->setPrecision(7);
 
         $query = new Query();

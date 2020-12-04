@@ -28,7 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added `Elastica\Aggregation\GeoDistance::setKeyed()` [#1876](https://github.com/ruflin/Elastica/pull/1876)
 * Added `Elastica\Aggregation\Histogram::setKeyed()` [#1876](https://github.com/ruflin/Elastica/pull/1876)
 * Added `Elastica\Aggregation\IpRange::setKeyed()` [#1876](https://github.com/ruflin/Elastica/pull/1876)
-* Added `Elastica\Aggregation\GeotileGrid` [#1880](https://github.com/ruflin/Elastica/pull/1880)
+* Added `Elastica\Aggregation\GeotileGridAggregation` [#1880](https://github.com/ruflin/Elastica/pull/1880)
 ### Changed
 * Allow `string` such as `wait_for` to be passed to `AbstractUpdateAction::setRefresh` [#1791](https://github.com/ruflin/Elastica/pull/1791)
 * Changed the return type of `AbstractUpdateAction::getRefresh` to `boolean|string` [#1791](https://github.com/ruflin/Elastica/pull/1791)

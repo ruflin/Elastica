@@ -3,13 +3,15 @@
 namespace Elastica\Aggregation;
 
 /**
- * Class GeotileGrid.
+ * Class GeotileGridAggregation.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geotilegrid-aggregation.html
  */
-class GeotileGrid extends AbstractAggregation
+class GeotileGridAggregation extends AbstractAggregation
 {
-    public const DEFAULT_PRECISION_VALUE = 5;
+    use Traits\ShardSizeTrait;
+
+    public const DEFAULT_PRECISION_VALUE = 7;
     public const DEFAULT_SIZE_VALUE = 10000;
 
     /**
@@ -56,15 +58,5 @@ class GeotileGrid extends AbstractAggregation
     public function setSize(int $size): self
     {
         return $this->setParam('size', $size);
-    }
-
-    /**
-     * Set the number of results returned from each shard.
-     *
-     * @return $this
-     */
-    public function setShardSize(int $shardSize): self
-    {
-        return $this->setParam('shard_size', $shardSize);
     }
 }
