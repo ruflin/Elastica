@@ -13,7 +13,6 @@ namespace Elastica\Processor;
 class ForeachProcessor extends AbstractProcessor
 {
     public const DEFAULT_IGNORE_MISSING_VALUE = false;
-    protected const PROCESSOR_NAME = 'foreach';
 
     /**
      * @param AbstractProcessor|array $processor
@@ -28,7 +27,6 @@ class ForeachProcessor extends AbstractProcessor
             $this->setRawProcessor($processor);
         } else {
             throw new \TypeError(\sprintf('Argument 2 passed to %s::__construct() must be of type %s|array, %s given.', self::class, AbstractProcessor::class, \is_object($processor) ? \get_class($processor) : \gettype($processor)));
-
         }
     }
 
@@ -75,17 +73,5 @@ class ForeachProcessor extends AbstractProcessor
     public function setIgnoreMissing(bool $ignoreMissing): self
     {
         return $this->setParam('ignore_missing', $ignoreMissing);
-    }
-
-    /**
-     * Param's name
-     * Picks the last part of the class name and makes it snake_case
-     * You can override this method if you want to change the name.
-     *
-     * @return string name
-     */
-    protected function _getBaseName()
-    {
-        return self::PROCESSOR_NAME;
     }
 }
