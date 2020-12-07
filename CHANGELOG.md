@@ -61,6 +61,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Fixed type-hint for `Elastica\QueryBuilder\DSL\Aggregation::sampler()` not consistent with the underlying constructor call [#1815](https://github.com/ruflin/Elastica/pull/1815)
 * Replaced `_routing` and `_retry_on_conflict` by `routing` and `retry_on_conflict` in `AbstractUpdateAction` [#1807](https://github.com/ruflin/Elastica/issues/1807)
 * Fixed `Elastica\Util::toSnakeCase()` with first letter being lower cased [#1831](https://github.com/ruflin/Elastica/pull/1831)
+* Fixed handling precision as string in `Elastica\Aggregation\GeohashGrid::setPrecision()` [#1884](https://github.com/ruflin/Elastica/pull/1884)
 ### Security
 
 
