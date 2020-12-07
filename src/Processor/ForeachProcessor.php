@@ -43,8 +43,6 @@ class ForeachProcessor extends AbstractProcessor
     /**
      * Set processor.
      *
-     * @param AbstractProcessor
-     *
      * @return $this
      */
     public function setProcessor(AbstractProcessor $processor): self
