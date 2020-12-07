@@ -10,6 +10,7 @@ namespace Elastica\Aggregation;
 class Histogram extends AbstractSimpleAggregation
 {
     use Traits\KeyedTrait;
+    use Traits\MissingTrait;
 
     /**
      * @param string     $name     the name of this aggregation

@@ -9,4 +9,5 @@ namespace Elastica\Aggregation;
  */
 class Sum extends AbstractSimpleAggregation
 {
+    use Traits\MissingTrait;
 }

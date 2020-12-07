@@ -70,6 +70,27 @@ class MaxTest extends BaseAggregationTest
         $this->assertEquals(self::MAX_PRICE * 1.2, $results['value']);
     }
 
+    /**
+     * @group functional
+     */
+    public function testMaxAggregationWithMissing(): void
+    {
+        // feature is buggy on version prior 7.5;
+        $this->_checkVersion('7.5');
+
+        $index = $this->_getIndexForTest();
+
+        $agg = new Max('max_price');
+        $agg->setField('price');
+        $agg->setMissing(42);
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $index->search($query)->getAggregation('max_price');
+
+        $this->assertEquals(42, $results['value']);
+    }
+
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
@@ -79,6 +100,7 @@ class MaxTest extends BaseAggregationTest
             new Document(2, ['price' => self::MAX_PRICE]),
             new Document(3, ['price' => 1]),
             new Document(4, ['price' => 3]),
+            new Document(5, ['anything' => 'anything']),
         ]);
 
         $index->refresh();

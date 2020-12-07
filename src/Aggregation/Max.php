@@ -9,4 +9,5 @@ namespace Elastica\Aggregation;
  */
 class Max extends AbstractSimpleAggregation
 {
+    use Traits\MissingTrait;
 }

@@ -33,6 +33,25 @@ class HistogramTest extends BaseAggregationTest
     /**
      * @group functional
      */
+    public function testHistogramAggregationWithMissing(): void
+    {
+        $agg = new Histogram('hist', 'price', 10);
+        $agg->setMinimumDocumentCount(0); // should return empty buckets
+        $agg->setMissing(37);
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('hist');
+
+        $buckets = $results['buckets'];
+        $this->assertCount(5, $buckets);
+        $this->assertEquals(30, $buckets[3]['key']);
+        $this->assertEquals(3, $buckets[3]['doc_count']);
+    }
+
+    /**
+     * @group functional
+     */
     public function testHistogramKeyedAggregation(): void
     {
         $agg = new Histogram('hist', 'price', 10);
@@ -66,6 +85,7 @@ class HistogramTest extends BaseAggregationTest
             new Document(6, ['price' => 35, 'color' => 'green']),
             new Document(7, ['price' => 42, 'color' => 'red']),
             new Document(8, ['price' => 41, 'color' => 'blue']),
+            new Document(9, ['color' => 'yellow']),
         ]);
 
         $index->refresh();

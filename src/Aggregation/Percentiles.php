@@ -10,6 +10,7 @@ namespace Elastica\Aggregation;
 class Percentiles extends AbstractSimpleAggregation
 {
     use Traits\KeyedTrait;
+    use Traits\MissingTrait;
 
     /**
      * @param string $name  the name of this aggregation
@@ -68,16 +69,5 @@ class Percentiles extends AbstractSimpleAggregation
     public function addPercent(float $percent): self
     {
         return $this->addParam('percents', $percent);
-    }
-
-    /**
-     * Defines how documents that are missing a value should
-     * be treated.
-     *
-     * @return $this
-     */
-    public function setMissing(float $missing): self
-    {
-        return $this->setParam('missing', $missing);
     }
 }

@@ -9,4 +9,5 @@ namespace Elastica\Aggregation;
  */
 class Stats extends AbstractSimpleAggregation
 {
+    use Traits\MissingTrait;
 }

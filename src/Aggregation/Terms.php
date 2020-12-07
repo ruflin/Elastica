@@ -9,6 +9,8 @@ namespace Elastica\Aggregation;
  */
 class Terms extends AbstractTermsAggregation
 {
+    use Traits\MissingTrait;
+
     /**
      * Set the bucket sort order.
      *

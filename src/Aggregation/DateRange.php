@@ -9,6 +9,8 @@ namespace Elastica\Aggregation;
  */
 class DateRange extends Range
 {
+    use Traits\MissingTrait;
+
     /**
      * Set the formatting for the returned date values.
      *

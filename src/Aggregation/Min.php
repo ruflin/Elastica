@@ -9,4 +9,5 @@ namespace Elastica\Aggregation;
  */
 class Min extends AbstractSimpleAggregation
 {
+    use Traits\MissingTrait;
 }

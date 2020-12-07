@@ -28,6 +28,22 @@ class CardinalityTest extends BaseAggregationTest
         $this->assertEquals(3, $results['value']);
     }
 
+    /**
+     * @group functional
+     */
+    public function testCardinalityAggregationWithMissing(): void
+    {
+        $agg = new Cardinality('cardinality');
+        $agg->setField('color');
+        $agg->setMissing('yellow');
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('cardinality');
+
+        $this->assertEquals(4, $results['value']);
+    }
+
     public function validPrecisionThresholdProvider()
     {
         return [
@@ -88,6 +104,7 @@ class CardinalityTest extends BaseAggregationTest
             new Document(2, ['color' => 'blue']),
             new Document(3, ['color' => 'red']),
             new Document(4, ['color' => 'green']),
+            new Document(5, ['anything' => 'anything']),
         ]);
 
         $index->refresh();
