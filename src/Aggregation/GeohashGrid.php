@@ -46,7 +46,7 @@ class GeohashGrid extends AbstractAggregation
     public function setPrecision($precision): self
     {
         if (!\is_int($precision) && !\is_string($precision)) {
-            throw new \TypeError(\sprintf('Argument 1 passed to "%s()" must be a int or string, %s given.', __METHOD__, \is_object($precision) ? \get_class($precision) : \gettype($precision)));
+            throw new \TypeError(\sprintf('Argument 1 passed to "%s()" must be of type int|string, %s given.', __METHOD__, \is_object($precision) ? \get_class($precision) : \gettype($precision)));
         }
 
         return $this->setParam('precision', $precision);

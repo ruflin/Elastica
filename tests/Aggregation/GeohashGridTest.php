@@ -46,7 +46,7 @@ class GeohashGridTest extends BaseAggregationTest
     }
 
     /**
-     * @group functional
+     * @group unit
      */
     public function testGeohashGridAggregationWithNotAllowedPrecision(): void
     {
@@ -54,10 +54,6 @@ class GeohashGridTest extends BaseAggregationTest
 
         $agg = new GeohashGrid('hash', 'location');
         $agg->setPrecision(1.5);
-
-        $query = new Query();
-        $query->addAggregation($agg);
-        $this->_createIndex()->search($query)->getAggregation('hash');
     }
 
     protected function _getIndexForTest(): Index
