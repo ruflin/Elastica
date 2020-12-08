@@ -50,7 +50,7 @@ class Range extends AbstractSimpleAggregation
     /**
      * @return $this
      *
-     * @deprecated singe version 7.1.0, use the "setKeyed()" method instead.
+     * @deprecated since version 7.1.0, use the "setKeyed()" method instead.
      */
     public function setKeyedResponse(bool $keyed = true): self
     {

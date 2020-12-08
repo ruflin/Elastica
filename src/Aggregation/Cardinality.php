@@ -9,6 +9,8 @@ namespace Elastica\Aggregation;
  */
 class Cardinality extends AbstractSimpleAggregation
 {
+    use Traits\MissingTrait;
+
     public const DEFAULT_PRECISION_THRESHOLD_VALUE = 3000;
 
     /**

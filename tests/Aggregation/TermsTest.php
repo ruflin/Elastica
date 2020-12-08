@@ -103,6 +103,20 @@ class TermsTest extends BaseAggregationTest
         $this->assertEquals('blue', $results['buckets'][2]['key']);
     }
 
+    public function testTermsWithMissingAggregation(): void
+    {
+        $agg = new Terms('terms');
+        $agg->setField('color');
+        $agg->setMissing('blue');
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->getIndex()->search($query)->getAggregation('terms');
+
+        $this->assertEquals(3, $results['buckets'][0]['doc_count']);
+        $this->assertEquals('blue', $results['buckets'][0]['key']);
+    }
+
     /**
      * @group functional
      */
@@ -138,6 +152,7 @@ class TermsTest extends BaseAggregationTest
             new Document(2, ['color' => 'blue']),
             new Document(3, ['color' => 'red']),
             new Document(4, ['color' => 'green']),
+            new Document(5, ['anything' => 'anything']),
         ]);
 
         $index->refresh();
