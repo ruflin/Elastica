@@ -178,6 +178,43 @@ class CompositeTest extends BaseAggregationTest
         $this->assertEquals($expected, $results);
     }
 
+    /**
+     * @group functional
+     */
+    public function testCompositeWithNullAfter(): void
+    {
+        $composite = new Composite('products');
+        $composite->setSize(2);
+        $composite->addSource((new Terms('color'))->setField('color.keyword'));
+        $composite->addAfter(null);
+
+        $query = new Query();
+        $query->addAggregation($composite);
+
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('products');
+        $expected = [
+            'after_key' => [
+                'color' => 'green',
+            ],
+            'buckets' => [
+                [
+                    'key' => [
+                        'color' => 'blue',
+                    ],
+                    'doc_count' => 2,
+                ],
+                [
+                    'key' => [
+                        'color' => 'green',
+                    ],
+                    'doc_count' => 1,
+                ],
+            ],
+        ];
+
+        $this->assertEquals($expected, $results);
+    }
+
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
