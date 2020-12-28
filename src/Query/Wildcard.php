@@ -30,7 +30,7 @@ class Wildcard extends AbstractQuery
         $this->setParam($field, [
             'value' => $value,
             'boost' => $boost,
-            'case_insensitive' => $caseInsensitive
+            'case_insensitive' => $caseInsensitive,
         ]);
     }
 

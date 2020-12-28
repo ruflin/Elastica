@@ -40,7 +40,7 @@ class WildcardTest extends BaseTest
                     'value' => 'value*',
                     'boost' => 2.0,
                     'rewrite' => 'scoring_boolean',
-                    'case_insensitive' => false
+                    'case_insensitive' => false,
                 ],
             ],
         ];
@@ -120,7 +120,7 @@ class WildcardTest extends BaseTest
                         'value' => 'exampl*',
                         'boost' => 1.0,
                         'rewrite' => 'scoring_boolean',
-                        'case_insensitive' => $expected
+                        'case_insensitive' => $expected,
                     ],
                 ],
             ];
