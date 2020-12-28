@@ -119,7 +119,6 @@ class WildcardTest extends BaseTest
                     'name' => [
                         'value' => 'exampl*',
                         'boost' => 1.0,
-                        'rewrite' => 'scoring_boolean',
                         'case_insensitive' => $expected,
                     ],
                 ],
