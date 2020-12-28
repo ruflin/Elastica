@@ -23,13 +23,14 @@ class Wildcard extends AbstractQuery
      */
     private $field;
 
-    public function __construct(string $field, string $value, float $boost = 1.0)
+    public function __construct(string $field, string $value, float $boost = 1.0, bool $caseInsensitive = false)
     {
         $this->field = $field;
 
         $this->setParam($field, [
             'value' => $value,
             'boost' => $boost,
+            'case_insensitive' => $caseInsensitive
         ]);
     }
 
@@ -64,6 +65,14 @@ class Wildcard extends AbstractQuery
     {
         $data = $this->getParam($this->field);
         $this->setParam($this->field, \array_merge($data, ['rewrite' => $rewriteMode]));
+
+        return $this;
+    }
+
+    public function setCaseInsensitive(bool $caseInsensitive): self
+    {
+        $data = $this->getParam($this->field);
+        $this->setParam($this->field, \array_merge($data, ['case_insensitive' => $caseInsensitive]));
 
         return $this;
     }

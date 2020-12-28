@@ -40,6 +40,7 @@ class WildcardTest extends BaseTest
                     'value' => 'value*',
                     'boost' => 2.0,
                     'rewrite' => 'scoring_boolean',
+                    'case_insensitive' => false
                 ],
             ],
         ];
@@ -105,5 +106,30 @@ class WildcardTest extends BaseTest
         $resultSet = $index->search($query);
 
         $this->assertEquals(0, $resultSet->count());
+    }
+
+    /**
+     * @group functional
+     */
+    public function testCaseInsensitive(): void
+    {
+        foreach ([true, false] as $expected) {
+            $expectedArray = [
+                'wildcard' => [
+                    'name' => [
+                        'value' => 'exampl*',
+                        'boost' => 1.0,
+                        'rewrite' => 'scoring_boolean',
+                        'case_insensitive' => $expected
+                    ],
+                ],
+            ];
+
+            $query = new Wildcard('name', 'exampl*', 1.0, true);
+            $this->assertEquals($expectedArray, $query->toArray());
+
+            $query->setCaseInsensitive($expected);
+            $this->assertEquals($expectedArray, $query->toArray());
+        }
     }
 }
