@@ -40,7 +40,6 @@ class WildcardTest extends BaseTest
                     'value' => 'value*',
                     'boost' => 2.0,
                     'rewrite' => 'scoring_boolean',
-                    'case_insensitive' => false,
                 ],
             ],
         ];
