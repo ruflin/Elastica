@@ -112,6 +112,9 @@ class WildcardTest extends BaseTest
      */
     public function testCaseInsensitive(): void
     {
+        // feature doesn't exist on version prior 7.10;
+        $this->_checkVersion('7.10');
+
         foreach ([true, false] as $expected) {
             $expectedArray = [
                 'wildcard' => [
