@@ -23,14 +23,13 @@ class Wildcard extends AbstractQuery
      */
     private $field;
 
-    public function __construct(string $field, string $value, float $boost = 1.0, bool $caseInsensitive = false)
+    public function __construct(string $field, string $value, float $boost = 1.0)
     {
         $this->field = $field;
 
         $this->setParam($field, [
             'value' => $value,
             'boost' => $boost,
-            'case_insensitive' => $caseInsensitive,
         ]);
     }
 
@@ -69,6 +68,9 @@ class Wildcard extends AbstractQuery
         return $this;
     }
 
+    /**
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/7.10/query-dsl-wildcard-query.html#wildcard-query-field-params
+     */
     public function setCaseInsensitive(bool $caseInsensitive): self
     {
         $data = $this->getParam($this->field);
