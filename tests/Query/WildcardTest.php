@@ -124,7 +124,7 @@ class WildcardTest extends BaseTest
                 ],
             ];
 
-            $query = new Wildcard('name', 'exampl*', 1.0, true);
+            $query = new Wildcard('name', 'exampl*', 1.0);
             $this->assertEquals($expectedArray, $query->toArray());
 
             $query->setCaseInsensitive($expected);
