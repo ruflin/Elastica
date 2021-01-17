@@ -20,7 +20,7 @@ class ResponseFunctionalTest extends BaseTest
     public function testResponse(): void
     {
         $index = $this->_createIndex();
-        $index->setMapping(new  Mapping([
+        $index->setMapping(new Mapping([
             'name' => ['type' => 'text'],
             'dtmPosted' => ['type' => 'date', 'format' => 'yyyy-MM-dd HH:mm:ss'],
         ]));
