@@ -32,9 +32,9 @@ jobs:
       matrix:
         include:
           - php: '7.2'
-            elasticsearch: '7.1.1'
+            elasticsearch: '7.10.2'
           - php: '7.2'
-            elasticsearch: '7.2.1'
+            elasticsearch: '7.10.2'
           - php: '7.3'
             elasticsearch: '7.10.2'
           - php: '7.4'
