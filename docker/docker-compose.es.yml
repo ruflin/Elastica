@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
     es01:
-        image: docker.elastic.co/elasticsearch/elasticsearch-oss:${ES_VERSION:-7.3.2}
+        image: docker.elastic.co/elasticsearch/elasticsearch-oss:${ES_VERSION:-7.10.2}
         command: >
             /bin/sh -c "./bin/elasticsearch-plugin list | grep -q ingest-attachment
             || ./bin/elasticsearch-plugin install --batch ingest-attachment;
@@ -29,7 +29,7 @@ services:
         networks:
             - elastic
     es02:
-        image: docker.elastic.co/elasticsearch/elasticsearch-oss:${ES_VERSION:-7.3.2}
+        image: docker.elastic.co/elasticsearch/elasticsearch-oss:${ES_VERSION:-7.10.2}
         command: >
             /bin/sh -c "./bin/elasticsearch-plugin list | grep -q ingest-attachment
             || ./bin/elasticsearch-plugin install --batch ingest-attachment;
