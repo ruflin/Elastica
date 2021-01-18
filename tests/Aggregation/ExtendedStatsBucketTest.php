@@ -44,7 +44,9 @@ class ExtendedStatsBucketTest extends BaseAggregationTest
             'upper' => 76.32993161855453,
             'lower' => 43.670068381445475,
             'upper_sampling' => 80.0,
-            'lower_sampling' => 40.0
+            'lower_sampling' => 40.0,
+            'upper_population' => 76.32993161855453,
+            'lower_population' => 43.670068381445475,
         ], $results['std_deviation_bounds']);
     }
 
