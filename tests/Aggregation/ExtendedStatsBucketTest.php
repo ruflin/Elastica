@@ -40,7 +40,12 @@ class ExtendedStatsBucketTest extends BaseAggregationTest
         $this->assertEquals(11000, $results['sum_of_squares']);
         $this->assertEquals(66.66666666666667, $results['variance']);
         $this->assertEquals(8.16496580927726, $results['std_deviation']);
-        $this->assertEquals(['upper' => 76.32993161855453, 'lower' => 43.670068381445475], $results['std_deviation_bounds']);
+        $this->assertEquals([
+            'upper' => 76.32993161855453,
+            'lower' => 43.670068381445475,
+            'upper_sampling' => 80.0,
+            'lower_sampling' => 40.0
+        ], $results['std_deviation_bounds']);
     }
 
     /**
