@@ -795,6 +795,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(1, $stats['_all']['primaries']['docs']['count']);
 
         $index->forcemerge(['max_num_segments' => 1]);
+        $index->refresh();
 
         $stats = $index->getStats()->getData();
         $this->assertEquals(1, $stats['_all']['primaries']['docs']['count']);
