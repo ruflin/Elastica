@@ -40,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Updated `php-cs-fixer` to `2.16.4` [#1830](https://github.com/ruflin/Elastica/pull/1830)
 * Updated `php-cs-fixer` to `2.16.7` [#1881](https://github.com/ruflin/Elastica/pull/1881)
 * Updated `php-cs-fixer` to `2.17.3` [#1895](https://github.com/ruflin/Elastica/pull/1895)
+* Updated `php-cs-fixer` to `2.18.2` [#1897](https://github.com/ruflin/Elastica/pull/1897)
 * Used `GuzzleHttp\RequestOptions` constants for configuring request options [#1820](https://github.com/ruflin/Elastica/pull/1820)
 * Used new alias endpoints classes [#1839](https://github.com/ruflin/Elastica/pull/1839)
 * Used new cache endpoints classes [#1840](https://github.com/ruflin/Elastica/pull/1840)
