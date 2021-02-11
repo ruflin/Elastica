@@ -2,55 +2,16 @@
 
 namespace Elastica\Processor;
 
+trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s" class is deprecated, use "%s" instead. It will be removed in 8.0.', Rename::class, RenameProcessor::class);
+
 /**
  * Elastica Rename Processor.
  *
  * @author Federico Panini <fpanini@gmail.com>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/rename-processor.html
+ * @deprecated since version 7.1.0, use the RenameProcessor class instead.
  */
-class Rename extends AbstractProcessor
+class Rename extends RenameProcessor
 {
-    public const DEFAULT_IGNORE_MISSING_VALUE = false;
-
-    /**
-     * Rename constructor.
-     */
-    public function __construct(string $field, string $targetField)
-    {
-        $this->setField($field);
-        $this->setTargetField($targetField);
-    }
-
-    /**
-     * Set field.
-     *
-     * @return $this
-     */
-    public function setField(string $field): self
-    {
-        return $this->setParam('field', $field);
-    }
-
-    /**
-     * Set target_field.
-     *
-     * @return $this
-     */
-    public function setTargetField(string $targetField): self
-    {
-        return $this->setParam('target_field', $targetField);
-    }
-
-    /**
-     * Set ignore_missing. Default value false.
-     *
-     * @param bool $ignoreMissing only these values are allowed (integer|float|string|boolean|auto)
-     *
-     * @return $this
-     */
-    public function setIgnoreMissing(bool $ignoreMissing): self
-    {
-        return $this->setParam('ignore_missing', $ignoreMissing);
-    }
 }

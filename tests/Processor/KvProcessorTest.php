@@ -2,20 +2,20 @@
 
 namespace Elastica\Test\Processor;
 
-use Elastica\Processor\Kv;
+use Elastica\Processor\KvProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class KvTest extends BasePipelineTest
+class KvProcessorTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
     public function testKv(): void
     {
-        $processor = new Kv('message', ' ', '=');
+        $processor = new KvProcessor('message', ' ', '=');
 
         $expected = [
             'kv' => [
@@ -33,7 +33,7 @@ class KvTest extends BasePipelineTest
      */
     public function testKvWithNonDefaultOptions(): void
     {
-        $processor = new Kv('message', ' ', '=');
+        $processor = new KvProcessor('message', ' ', '=');
         $processor->setTargetField('target_field');
         $processor->setIncludeKeys(['l1', 'l2']);
         $processor->setExcludeKeys(['l4', 'l5']);
@@ -59,7 +59,7 @@ class KvTest extends BasePipelineTest
      */
     public function testKVIncludeExludeKeys(): void
     {
-        $kv = new Kv('field1', '&', '=');
+        $kv = new KvProcessor('field1', '&', '=');
         $kv->setExcludeKeys(['second']);
 
         $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for KV');

@@ -4,20 +4,20 @@ namespace Elastica\Test\Processor;
 
 use Elastica\Bulk;
 use Elastica\Document;
-use Elastica\Processor\Convert;
+use Elastica\Processor\ConvertProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class ConvertTest extends BasePipelineTest
+class ConvertProcessorTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
     public function testConvert(): void
     {
-        $processor = new Convert('foo', 'integer');
+        $processor = new ConvertProcessor('foo', 'integer');
 
         $expected = [
             'convert' => [
@@ -34,7 +34,7 @@ class ConvertTest extends BasePipelineTest
      */
     public function testConvertWithNonDefaultOptions(): void
     {
-        $processor = new Convert('foo', 'integer');
+        $processor = new ConvertProcessor('foo', 'integer');
         $processor->setIgnoreMissing(true);
 
         $expected = [
@@ -66,7 +66,7 @@ class ConvertTest extends BasePipelineTest
      */
     public function testConvertField(): void
     {
-        $append = new Convert('foo', 'float');
+        $append = new ConvertProcessor('foo', 'float');
 
         $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for Convert');
         $pipeline->addProcessor($append)->create();

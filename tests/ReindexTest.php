@@ -6,8 +6,8 @@ use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Index;
 use Elastica\Pipeline;
-use Elastica\Processor\Rename;
-use Elastica\Processor\Uppercase;
+use Elastica\Processor\RenameProcessor;
+use Elastica\Processor\UppercaseProcessor;
 use Elastica\Query\MatchQuery;
 use Elastica\Reindex;
 use Elastica\Script\Script;
@@ -215,8 +215,8 @@ class ReindexTest extends Base
         $pipeline = new Pipeline($newIndex->getClient());
         $pipeline->setId('my-pipeline');
         $pipeline->setDescription('For testing purposes"');
-        $pipeline->addProcessor(new Rename('id', 'identifier'));
-        $pipeline->addProcessor(new Uppercase('key'));
+        $pipeline->addProcessor(new RenameProcessor('id', 'identifier'));
+        $pipeline->addProcessor(new UppercaseProcessor('key'));
 
         $reindex = new Reindex($oldIndex, $newIndex);
         $reindex->setPipeline($pipeline);

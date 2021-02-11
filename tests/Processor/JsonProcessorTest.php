@@ -4,20 +4,20 @@ namespace Elastica\Test\Processor;
 
 use Elastica\Bulk;
 use Elastica\Document;
-use Elastica\Processor\Json;
+use Elastica\Processor\JsonProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class JsonTest extends BasePipelineTest
+class JsonProcessorTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
     public function testJson(): void
     {
-        $processor = new Json('string_source');
+        $processor = new JsonProcessor('string_source');
 
         $expected = [
             'json' => [
@@ -33,7 +33,7 @@ class JsonTest extends BasePipelineTest
      */
     public function testJsonWithNonDefaultOptions(): void
     {
-        $processor = new Json('string_source');
+        $processor = new JsonProcessor('string_source');
         $processor->setTargetField('json_target');
         $processor->setAddToRoot(true);
 
@@ -53,7 +53,7 @@ class JsonTest extends BasePipelineTest
      */
     public function testJsonField(): void
     {
-        $json = new Json('name');
+        $json = new JsonProcessor('name');
         $json->setTargetField('realname');
 
         $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for Json');

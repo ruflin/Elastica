@@ -2,44 +2,16 @@
 
 namespace Elastica\Processor;
 
+trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s" class is deprecated, use "%s" instead. It will be removed in 8.0.', Sort::class, SortProcessor::class);
+
 /**
  * Elastica Sort Processor.
  *
  * @author Federico Panini <fpanini@gmail.com>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/sort-processor.html
+ * @deprecated since version 7.1.0, use the SortProcessor class instead.
  */
-class Sort extends AbstractProcessor
+class Sort extends SortProcessor
 {
-    public const DEFAULT_ORDER_VALUE = 'asc';
-
-    /**
-     * Sort constructor.
-     *
-     * @param $field
-     */
-    public function __construct(string $field)
-    {
-        $this->setField($field);
-    }
-
-    /**
-     * Set the field.
-     *
-     * @return $this
-     */
-    public function setField(string $field): self
-    {
-        return $this->setParam('field', $field);
-    }
-
-    /**
-     * Set order. Default 'asc'.
-     *
-     * @return $this
-     */
-    public function setOrder(string $order): self
-    {
-        return $this->setParam('order', $order);
-    }
 }

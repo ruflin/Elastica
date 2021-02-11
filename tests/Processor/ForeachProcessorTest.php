@@ -5,7 +5,7 @@ namespace Elastica\Test\Processor;
 use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\ForeachProcessor;
-use Elastica\Processor\Uppercase;
+use Elastica\Processor\UppercaseProcessor;
 use Elastica\ResultSet;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
@@ -19,7 +19,7 @@ class ForeachProcessorTest extends BasePipelineTest
      */
     public function testForeachProcessorDefault(): void
     {
-        $subprocessor = new Uppercase('field2');
+        $subprocessor = new UppercaseProcessor('field2');
         $processor = new ForeachProcessor('field1', $subprocessor);
 
         $expected = [
@@ -67,7 +67,7 @@ class ForeachProcessorTest extends BasePipelineTest
      */
     public function testForeachProcessorIgnoreMissing(): void
     {
-        $subprocessor = new Uppercase('field2');
+        $subprocessor = new UppercaseProcessor('field2');
         $processor = new ForeachProcessor('field1', $subprocessor);
         $processor->setIgnoreMissing(true);
 
@@ -91,7 +91,7 @@ class ForeachProcessorTest extends BasePipelineTest
      */
     public function testForeachProcessor(): void
     {
-        $subprocessor = new Uppercase('_ingest._value');
+        $subprocessor = new UppercaseProcessor('_ingest._value');
         $foreach = new ForeachProcessor('values', $subprocessor);
 
         $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for Foreach');

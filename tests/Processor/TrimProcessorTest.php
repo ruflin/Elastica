@@ -4,23 +4,23 @@ namespace Elastica\Test\Processor;
 
 use Elastica\Bulk;
 use Elastica\Document;
-use Elastica\Processor\Uppercase;
+use Elastica\Processor\TrimProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class UppercaseTest extends BasePipelineTest
+class TrimProcessorTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
-    public function testUppercase(): void
+    public function testTrim(): void
     {
-        $processor = new Uppercase('foo');
+        $processor = new TrimProcessor('foo');
 
         $expected = [
-            'uppercase' => [
+            'trim' => [
                 'field' => 'foo',
             ],
         ];
@@ -31,20 +31,20 @@ class UppercaseTest extends BasePipelineTest
     /**
      * @group functional
      */
-    public function testUppercaseField(): void
+    public function testTrimField(): void
     {
-        $ucase = new Uppercase('name');
+        $trim = new TrimProcessor('name');
 
-        $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for Uppercase');
-        $pipeline->addProcessor($ucase)->create();
+        $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for Trim');
+        $pipeline->addProcessor($trim)->create();
 
         $index = $this->_createIndex();
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);
 
         $bulk->addDocuments([
-            new Document(null, ['name' => 'ruflin']),
-            new Document(null, ['name' => 'nicolas']),
+            new Document(null, ['name' => '   ruflin   ']),
+            new Document(null, ['name' => '     nicolas     ']),
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');
 
@@ -56,7 +56,7 @@ class UppercaseTest extends BasePipelineTest
         $this->assertCount(2, $result->getResults());
 
         $results = $result->getResults();
-        $this->assertSame('RUFLIN', ($results[0]->getHit())['_source']['name']);
-        $this->assertSame('NICOLAS', ($results[1]->getHit())['_source']['name']);
+        $this->assertSame('ruflin', ($results[0]->getHit())['_source']['name']);
+        $this->assertSame('nicolas', ($results[1]->getHit())['_source']['name']);
     }
 }

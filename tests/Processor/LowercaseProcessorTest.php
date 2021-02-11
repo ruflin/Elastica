@@ -4,23 +4,23 @@ namespace Elastica\Test\Processor;
 
 use Elastica\Bulk;
 use Elastica\Document;
-use Elastica\Processor\Trim;
+use Elastica\Processor\LowercaseProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class TrimTest extends BasePipelineTest
+class LowercaseProcessorTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
-    public function testTrim(): void
+    public function testLowercase(): void
     {
-        $processor = new Trim('foo');
+        $processor = new LowercaseProcessor('foo');
 
         $expected = [
-            'trim' => [
+            'lowercase' => [
                 'field' => 'foo',
             ],
         ];
@@ -31,20 +31,20 @@ class TrimTest extends BasePipelineTest
     /**
      * @group functional
      */
-    public function testTrimField(): void
+    public function testLowercaseField(): void
     {
-        $trim = new Trim('name');
+        $lcase = new LowercaseProcessor('name');
 
-        $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for Trim');
-        $pipeline->addProcessor($trim)->create();
+        $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for Lowercase');
+        $pipeline->addProcessor($lcase)->create();
 
         $index = $this->_createIndex();
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);
 
         $bulk->addDocuments([
-            new Document(null, ['name' => '   ruflin   ']),
-            new Document(null, ['name' => '     nicolas     ']),
+            new Document(null, ['name' => 'RUFLIN']),
+            new Document(null, ['name' => 'NICOLAS']),
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');
 

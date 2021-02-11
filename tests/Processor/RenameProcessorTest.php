@@ -4,25 +4,25 @@ namespace Elastica\Test\Processor;
 
 use Elastica\Bulk;
 use Elastica\Document;
-use Elastica\Processor\Split;
+use Elastica\Processor\RenameProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class SplitTest extends BasePipelineTest
+class RenameProcessorTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
-    public function testSplit(): void
+    public function testRename(): void
     {
-        $processor = new Split('joined_array_field', '-');
+        $processor = new RenameProcessor('foo', 'foobar');
 
         $expected = [
-            'split' => [
-                'field' => 'joined_array_field',
-                'separator' => '-',
+            'rename' => [
+                'field' => 'foo',
+                'target_field' => 'foobar',
             ],
         ];
 
@@ -32,15 +32,15 @@ class SplitTest extends BasePipelineTest
     /**
      * @group unit
      */
-    public function testSplitWithNonDefaultOptions(): void
+    public function testRenameWithNonDefaultOptions(): void
     {
-        $processor = new Split('joined_array_field', '-');
+        $processor = new RenameProcessor('foo', 'foobar');
         $processor->setIgnoreMissing(true);
 
         $expected = [
-            'split' => [
-                'field' => 'joined_array_field',
-                'separator' => '-',
+            'rename' => [
+                'field' => 'foo',
+                'target_field' => 'foobar',
                 'ignore_missing' => true,
             ],
         ];
@@ -51,19 +51,19 @@ class SplitTest extends BasePipelineTest
     /**
      * @group functional
      */
-    public function testSplitField(): void
+    public function testRenameField(): void
     {
-        $split = new Split('name', '&');
+        $rename = new RenameProcessor('package', 'packages');
 
-        $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for Split');
-        $pipeline->addProcessor($split)->create();
+        $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for Rename');
+        $pipeline->addProcessor($rename)->create();
 
         $index = $this->_createIndex();
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);
 
         $bulk->addDocuments([
-            new Document(null, ['name' => 'nicolas&ruflin']),
+            new Document(null, ['name' => 'nicolas', 'package' => 'Elastico']),
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');
 
@@ -75,6 +75,6 @@ class SplitTest extends BasePipelineTest
         $this->assertCount(1, $result->getResults());
 
         $results = $result->getResults();
-        $this->assertSame(['nicolas', 'ruflin'], ($results[0]->getHit())['_source']['name']);
+        $this->assertArrayHasKey('packages', ($results[0]->getHit())['_source']);
     }
 }

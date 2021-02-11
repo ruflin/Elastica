@@ -4,20 +4,20 @@ namespace Elastica\Test\Processor;
 
 use Elastica\Bulk;
 use Elastica\Document;
-use Elastica\Processor\DotExpander;
+use Elastica\Processor\DotExpanderProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class DotExpanderTest extends BasePipelineTest
+class DotExpanderProcessorTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
     public function testDotExpander(): void
     {
-        $processor = new DotExpander('foo.bar');
+        $processor = new DotExpanderProcessor('foo.bar');
 
         $expected = [
             'dot_expander' => [
@@ -33,7 +33,7 @@ class DotExpanderTest extends BasePipelineTest
      */
     public function testDotExpanderField(): void
     {
-        $dotExpander = new DotExpander('foo.bar');
+        $dotExpander = new DotExpanderProcessor('foo.bar');
 
         $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for DotExpander');
         $pipeline->addProcessor($dotExpander)->create();

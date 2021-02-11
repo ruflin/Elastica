@@ -4,20 +4,20 @@ namespace Elastica\Test\Processor;
 
 use Elastica\Bulk;
 use Elastica\Document;
-use Elastica\Processor\Date;
+use Elastica\Processor\DateProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
 
 /**
  * @internal
  */
-class DateTest extends BasePipelineTest
+class DateProcessorTest extends BasePipelineTest
 {
     /**
      * @group unit
      */
     public function testDate(): void
     {
-        $processor = new Date('initial_date', ['dd/MM/yyyy hh:mm:ss']);
+        $processor = new DateProcessor('initial_date', ['dd/MM/yyyy hh:mm:ss']);
 
         $expected = [
             'date' => [
@@ -28,7 +28,7 @@ class DateTest extends BasePipelineTest
 
         $this->assertEquals($expected, $processor->toArray());
 
-        $processor = new Date('initial_date', ['dd/MM/yyyy hh:mm:ss', 'ISO8601', 'UNIX', 'UNIX_MS']);
+        $processor = new DateProcessor('initial_date', ['dd/MM/yyyy hh:mm:ss', 'ISO8601', 'UNIX', 'UNIX_MS']);
 
         $expected = [
             'date' => [
@@ -45,7 +45,7 @@ class DateTest extends BasePipelineTest
      */
     public function testDateWithNonDefaultOptions(): void
     {
-        $processor = new Date('initial_date', ['dd/MM/yyyy hh:mm:ss', 'ISO8601', 'UNIX', 'UNIX_MS']);
+        $processor = new DateProcessor('initial_date', ['dd/MM/yyyy hh:mm:ss', 'ISO8601', 'UNIX', 'UNIX_MS']);
         $processor->setTargetField('timestamp');
         $processor->setTimezone('Europe/Rome');
         $processor->setLocale('ITALIAN');
@@ -68,7 +68,7 @@ class DateTest extends BasePipelineTest
      */
     public function testDateField(): void
     {
-        $date = new Date('date_field', ['yyyy dd MM hh:mm:ss']);
+        $date = new DateProcessor('date_field', ['yyyy dd MM hh:mm:ss']);
         $date->setTargetField('date_parsed');
         $date->setTimezone('Europe/Rome');
         $date->setLocale('IT');

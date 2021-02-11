@@ -7,9 +7,9 @@ use Elastica\Client;
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Pipeline;
-use Elastica\Processor\Rename;
-use Elastica\Processor\Set;
-use Elastica\Processor\Trim;
+use Elastica\Processor\RenameProcessor;
+use Elastica\Processor\SetProcessor;
+use Elastica\Processor\TrimProcessor;
 
 /**
  * @internal
@@ -21,9 +21,9 @@ class PipelineTest extends BasePipeline
      */
     public function testProcessor(): void
     {
-        $trim = new Trim('field1');
-        $rename = new Rename('foo', 'target.field');
-        $set = new Set('field4', 324);
+        $trim = new TrimProcessor('field1');
+        $rename = new RenameProcessor('foo', 'target.field');
+        $set = new SetProcessor('field4', 324);
 
         $client = $this->createMock(Client::class);
         $processors = new Pipeline($client);
@@ -57,9 +57,9 @@ class PipelineTest extends BasePipeline
      */
     public function testPipelineCreate(): void
     {
-        $set = new Set('field4', 333);
-        $trim = new Trim('field1');
-        $rename = new Rename('foo', 'target.field');
+        $set = new SetProcessor('field4', 333);
+        $trim = new TrimProcessor('field1');
+        $rename = new RenameProcessor('foo', 'target.field');
 
         $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for Set');
         $pipeline->addProcessor($set);
@@ -85,7 +85,7 @@ class PipelineTest extends BasePipeline
      */
     public function testPipelineonIndex(): void
     {
-        $set = new Set('foo', 333);
+        $set = new SetProcessor('foo', 333);
 
         $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for Set');
         $pipeline->addProcessor($set);
