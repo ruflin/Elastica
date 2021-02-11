@@ -14,7 +14,7 @@ jobs:
           php-version: '7.2'
           coverage: 'none'
           extensions: 'json, mbstring, tokenizer'
-          tools: 'composer-normalize:2.11.0, php-cs-fixer:2.17.3'
+          tools: 'composer-normalize:2.11.0, php-cs-fixer:2.18.2'
 
       - name: 'Check PHP code'
         run: |
