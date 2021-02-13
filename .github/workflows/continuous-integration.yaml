@@ -41,7 +41,6 @@ jobs:
             elasticsearch: '7.3.2'
           - php: '8.0'
             elasticsearch: '7.3.2'
-            composer_flags: '--ignore-platform-reqs'
       fail-fast: false
     steps:
       - name: 'Checkout'
