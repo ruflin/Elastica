@@ -1,9 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/6.1.1...6.x)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/6.1.2...6.x)
 
 ### Backward Compatibility Breaks
+### Bugfixes
+### Added
+### Improvements
+### Deprecated
+
+## [6.1.2](https://github.com/ruflin/Elastica/compare/6.1.1...6.1.2)
 
 ### Bugfixes
 
@@ -21,7 +27,7 @@ All notable changes to this project will be documented in this file based on the
 ### Deprecated
 * `Elastica\Query\Match` has been deprecated in favour of `Elastica\Query\MatchQuery`. [#1898](https://github.com/ruflin/Elastica/pull/1898)
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/6.1.0...6.1.1)
+## [6.1.1](https://github.com/ruflin/Elastica/compare/6.1.0...6.1.1)
 
 ### Added
 
