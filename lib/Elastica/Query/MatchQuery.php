@@ -9,3 +9,4 @@ namespace Elastica\Query;
  */
 class MatchQuery extends Match
 {
+}
