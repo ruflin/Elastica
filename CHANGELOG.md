@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Backward Compatibility Breaks
 ### Bugfixes
+* Make MatchQuery.php file valid PHP. [#1902](https://github.com/ruflin/Elastica/pull/1902)
 ### Added
 ### Improvements
 ### Deprecated
