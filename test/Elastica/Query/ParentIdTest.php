@@ -133,7 +133,7 @@ class ParentIdTest extends BaseTest
     }
 
     /**
-     * @group unit
+     * @group functional
      */
     public function testQueryBuilderParentId()
     {

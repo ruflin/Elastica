@@ -1,0 +1,58 @@
+version: '3.4'
+
+services:
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:${ES_VERSION:-6.5.2}
+    command: >
+      /bin/sh -c "./bin/elasticsearch-plugin list | grep -q ingest-attachment
+      || ./bin/elasticsearch-plugin install --batch ingest-attachment;
+      /usr/local/bin/docker-entrypoint.sh"
+    environment:
+      - node.name=es01
+      - node.max_local_storage_nodes=2
+      - cluster.name=es-docker-cluster
+      - bootstrap.memory_lock=true
+      - discovery.zen.minimum_master_nodes=2
+      - path.repo=/usr/share/elasticsearch/data
+      - processors=1
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - elastic
+  es02:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:${ES_VERSION:-6.5.2}
+    command: >
+      /bin/sh -c "./bin/elasticsearch-plugin list | grep -q ingest-attachment
+      || ./bin/elasticsearch-plugin install --batch ingest-attachment;
+      /usr/local/bin/docker-entrypoint.sh"
+    environment:
+      - node.name=es02
+      - node.max_local_storage_nodes=2
+      - cluster.name=es-docker-cluster
+      - bootstrap.memory_lock=true
+      - discovery.zen.ping.unicast.hosts=es01
+      - discovery.zen.minimum_master_nodes=2
+      - path.repo=/usr/share/elasticsearch/data
+      - processors=1
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    networks:
+      - elastic
+volumes:
+  esdata:
+
+networks:
+  elastic:
+    driver: bridge

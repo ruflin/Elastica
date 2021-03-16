@@ -127,10 +127,7 @@ class Base extends TestCase
 
         $client = $this->_getClient();
         $index = $client->getIndex('elastica_'.$name);
-
-        if ('elasticsearch' === getenv('ES_HOST')) {
-            $index->create(['index' => ['number_of_shards' => $shards, 'number_of_replicas' => 1]], $delete);
-        }
+        $index->create(['index' => ['number_of_shards' => $shards, 'number_of_replicas' => 1]], $delete);
 
         return $index;
     }

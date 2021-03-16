@@ -138,13 +138,12 @@ class PercolateTest extends BaseTest
      */
     public function testSetDocumentIndex()
     {
-        $index = $this->_createIndex('indexone');
         $query = new Percolate();
-        $query->setDocumentIndex($index->getName());
+        $query->setDocumentIndex('indexone');
 
         $data = $query->toArray();
 
-        $this->assertEquals($data['percolate']['index'], $index->getName());
+        $this->assertEquals($data['percolate']['index'], 'indexone');
     }
 
     /**

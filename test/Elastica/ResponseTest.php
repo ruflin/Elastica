@@ -224,6 +224,7 @@ class ResponseTest extends BaseTest
      */
     public function testGetDataEmpty()
     {
+        $response = null;
         $index = $this->_createIndex();
 
         try {

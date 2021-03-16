@@ -16,6 +16,10 @@ class IdsTest extends BaseTest
     {
         parent::setUp();
 
+        if (!$this->_isFunctionalGroup()) {
+            return;
+        }
+
         $index = $this->_createIndex();
 
         $type1 = $index->getType('_doc');
