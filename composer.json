@@ -21,6 +21,9 @@
         "guzzlehttp/guzzle": "~6.0",
         "phpunit/phpunit": "^6.0"
     },
+    "conflict": {
+        "elasticsearch/elasticsearch": "6.8.0"
+    },
     "suggest": {
         "aws/aws-sdk-php": "Allow using IAM authentication with Amazon ElasticSearch Service",
         "egeloen/http-adapter": "Allow using httpadapter transport",
