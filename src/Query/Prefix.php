@@ -10,8 +10,6 @@ namespace Elastica\Query;
 class Prefix extends AbstractQuery
 {
     /**
-     * Constructs the Prefix query object.
-     *
      * @param array $prefix OPTIONAL Calls setRawPrefix with the given $prefix array
      */
     public function __construct(array $prefix = [])

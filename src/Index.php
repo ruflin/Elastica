@@ -78,7 +78,7 @@ class Index implements SearchableInterface
     /**
      * Return Index Stats.
      *
-     * @return \Elastica\Index\Stats
+     * @return IndexStats
      */
     public function getStats()
     {
@@ -88,7 +88,7 @@ class Index implements SearchableInterface
     /**
      * Return Index Recovery.
      *
-     * @return \Elastica\Index\Recovery
+     * @return IndexRecovery
      */
     public function getRecovery()
     {
@@ -126,7 +126,7 @@ class Index implements SearchableInterface
     /**
      * Returns the index settings object.
      *
-     * @return \Elastica\Index\Settings Settings object
+     * @return IndexSettings
      */
     public function getSettings()
     {
@@ -255,7 +255,7 @@ class Index implements SearchableInterface
      * @param int|string $id      Document id
      * @param array      $options options for the get request
      *
-     * @throws \Elastica\Exception\ResponseException
+     * @throws ResponseException
      * @throws NotFoundException
      */
     public function getDocument($id, array $options = []): Document
@@ -384,7 +384,7 @@ class Index implements SearchableInterface
      *                            array => Associative array of options (option=>value)
      *
      * @throws InvalidException
-     * @throws \Elastica\Exception\ResponseException
+     * @throws ResponseException
      *
      * @return Response Server response
      */

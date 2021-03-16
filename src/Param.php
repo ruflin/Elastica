@@ -96,7 +96,7 @@ class Param implements ArrayableInterface, \Countable
      *
      * @param string $key Key to return
      *
-     * @throws \Elastica\Exception\InvalidException If requested key is not set
+     * @throws InvalidException If requested key is not set
      *
      * @return mixed Key value
      */

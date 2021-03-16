@@ -236,7 +236,7 @@ class Query extends Param
     /**
      * Set script fields.
      *
-     * @param array|\Elastica\Script\ScriptFields $scriptFields Script fields
+     * @param array|ScriptFields $scriptFields Script fields
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-script-fields
      */

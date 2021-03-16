@@ -172,7 +172,7 @@ class Bulk
     }
 
     /**
-     * @param array|\Elastica\Document|\Elastica\Script\AbstractScript $data
+     * @param AbstractScript|array|Document $data
      *
      * @return $this
      */

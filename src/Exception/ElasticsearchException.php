@@ -31,8 +31,6 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     private $_isRemote = false;
 
     /**
-     * Constructs elasticsearch exception.
-     *
      * @param int    $code  Error code
      * @param string $error Error message from elasticsearch
      */

@@ -11,12 +11,6 @@ namespace Elastica\Query;
  */
 class SpanWithin extends AbstractSpanQuery
 {
-    /**
-     * Constructs a SpanWithin query object.
-     *
-     * @param AbstractSpanQuery $little
-     * @param AbstractSpanQuery $big
-     */
     public function __construct(?AbstractSpanQuery $little = null, ?AbstractSpanQuery $big = null)
     {
         if (null !== $little) {

@@ -14,8 +14,6 @@ use Elastica\Exception\InvalidException;
 class SpanFirst extends AbstractSpanQuery
 {
     /**
-     * Constructs a SpanFirst query object.
-     *
      * @param AbstractQuery|array $match
      * @param int                 $end
      */

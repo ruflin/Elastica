@@ -288,7 +288,7 @@ class Response
     /**
      * Time request took.
      *
-     * @throws \Elastica\Exception\NotFoundException
+     * @throws NotFoundException
      *
      * @return int Time request took
      */
@@ -306,7 +306,7 @@ class Response
     /**
      * Get the _shard statistics for the response.
      *
-     * @throws \Elastica\Exception\NotFoundException
+     * @throws NotFoundException
      *
      * @return array
      */
@@ -324,7 +324,7 @@ class Response
     /**
      * Get the _scroll value for the response.
      *
-     * @throws \Elastica\Exception\NotFoundException
+     * @throws NotFoundException
      *
      * @return string
      */

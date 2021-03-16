@@ -19,8 +19,6 @@ class Result
     protected $_hit = [];
 
     /**
-     * Constructs a single results object.
-     *
      * @param array $hit Hit data
      */
     public function __construct(array $hit)

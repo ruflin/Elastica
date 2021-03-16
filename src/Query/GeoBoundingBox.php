@@ -28,7 +28,7 @@ class GeoBoundingBox extends AbstractQuery
      *
      * @param array $coordinates Array with top left coordinate as first and bottom right coordinate as second element
      *
-     * @throws \Elastica\Exception\InvalidException If $coordinates doesn't have two elements
+     * @throws InvalidException If $coordinates doesn't have two elements
      *
      * @return $this
      */

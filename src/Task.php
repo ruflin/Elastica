@@ -2,6 +2,8 @@
 
 namespace Elastica;
 
+use Elasticsearch\Endpoints\Tasks;
+
 /**
  * Represents elasticsearch task.
  *
@@ -21,23 +23,17 @@ class Task extends Param
     protected $_id;
 
     /**
-     * Contains all status infos.
-     *
-     * @var \Elastica\Response Response object
+     * @var Response
      */
     protected $_response;
 
     /**
-     * Data.
-     *
-     * @var array Data
+     * @var array
      */
     protected $_data;
 
     /**
-     * Client object.
-     *
-     * @var \Elastica\Client Client object
+     * @var Client
      */
     protected $_client;
 
@@ -59,8 +55,6 @@ class Task extends Param
 
     /**
      * Returns task data.
-     *
-     * @return array Task data
      */
     public function getData(): array
     {
@@ -73,8 +67,6 @@ class Task extends Param
 
     /**
      * Returns response object.
-     *
-     * @return \Elastica\Response
      */
     public function getResponse(): Response
     {
@@ -87,14 +79,13 @@ class Task extends Param
 
     /**
      * Refresh task status.
-     *
-     * @param array $options Options for endpoint
      */
     public function refresh(array $options = []): void
     {
-        $endpoint = new \Elasticsearch\Endpoints\Tasks\Get();
-        $endpoint->setTaskId($this->_id);
-        $endpoint->setParams($options);
+        $endpoint = (new Tasks\Get())
+            ->setTaskId($this->_id)
+            ->setParams($options)
+        ;
 
         $this->_response = $this->_client->requestEndpoint($endpoint);
         $this->_data = $this->getResponse()->getData();
@@ -109,12 +100,13 @@ class Task extends Param
 
     public function cancel(): Response
     {
-        if (empty($this->_id)) {
+        if ('' === $this->_id) {
             throw new \Exception('No task id given');
         }
 
-        $endpoint = new \Elasticsearch\Endpoints\Tasks\Cancel();
-        $endpoint->setTaskId($this->_id);
+        $endpoint = (new Tasks\Cancel())
+            ->setTaskId($this->_id)
+        ;
 
         return $this->_client->requestEndpoint($endpoint);
     }

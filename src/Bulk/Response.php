@@ -7,7 +7,7 @@ use Elastica\Response as BaseResponse;
 class Response extends BaseResponse
 {
     /**
-     * @var \Elastica\Bulk\Action
+     * @var Action
      */
     protected $_action;
 

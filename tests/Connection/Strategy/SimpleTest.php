@@ -41,7 +41,7 @@ class SimpleTest extends Base
      */
     public function testFailConnection(): void
     {
-        $this->expectException(\Elastica\Exception\ConnectionException::class);
+        $this->expectException(ConnectionException::class);
 
         $config = ['host' => '255.255.255.0', 'timeout' => $this->_timeout];
         $client = $this->_getClient($config);
