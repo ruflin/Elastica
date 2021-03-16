@@ -17,7 +17,7 @@ class QueryStringTest extends BaseTest
      */
     public function testSearchMultipleFields(): void
     {
-        $str = \md5(\rand());
+        $str = \md5(\mt_rand());
         $query = new QueryString($str);
 
         $expected = [
@@ -27,9 +27,9 @@ class QueryStringTest extends BaseTest
         $this->assertEquals(['query_string' => $expected], $query->toArray());
 
         $fields = [];
-        $max = \rand() % 10 + 1;
+        $max = \mt_rand(1, 10);
         for ($i = 0; $i < $max; ++$i) {
-            $fields[] = \md5(\rand());
+            $fields[] = \md5(\mt_rand());
         }
 
         $query->setFields($fields);

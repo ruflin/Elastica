@@ -72,7 +72,7 @@ class TransportBenchmarkTest extends BaseTest
 
         $times = [];
         for ($i = 0; $i < $this->_max; ++$i) {
-            $test = \rand(1, $this->_max);
+            $test = \mt_rand(1, $this->_max);
             $query = new Query();
             $query->setQuery(new MatchAll());
             $query->setPostFilter(new Term(['test' => $test]));
