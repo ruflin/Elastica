@@ -4,11 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/7.1.0...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/7.1.1...master)
+### Backward Compatibility Breaks
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [7.1.1](https://github.com/ruflin/Elastica/compare/7.1.0...7.1.1)
 ### Backward Compatibility Breaks
 * Changed `Elastica\Query\MatchQuery::setFieldParam()` signature to allow passing bool, float or int [#1941](https://github.com/ruflin/Elastica/pull/1941)
 * Changed `Elastica\Query\MatchPhraseQuery::setFieldParam()` signature to allow passing bool, float or int [#1944](https://github.com/ruflin/Elastica/pull/1944)
 ### Added
+* Excluded `docker` directory in `.gitattributes` [#1938](https://github.com/ruflin/Elastica/pull/1938)
 ### Changed
 * Included `Content-Type` HTTP header every time, whatever the content of the body is [#1780](https://github.com/ruflin/Elastica/pull/1780)
 * Changed `Elastica\Status::indexExists()`, `Elastica\Status::aliasExists()` and `Elastica\Status::getIndicesWithAlias()` signatures [#1929](https://github.com/ruflin/Elastica/pull/1929)
@@ -18,7 +28,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Updated `composer-normalize` to `2.13.3` [#1927](https://github.com/ruflin/Elastica/pull/1927)
 ### Deprecated
 * Deprecated `Elastica\Transport\HttpAdapter` class [#1940](https://github.com/ruflin/Elastica/pull/1940)
-### Removed
 ### Fixed
 * Fixed wrong `ltrim` usage in guzzle transport [#1783](https://github.com/ruflin/Elastica/pull/1783)
 * Fixed `_seq_no` and `_primary_term` wrong initialization [#1920](https://github.com/ruflin/Elastica/pull/1920)
@@ -26,7 +35,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Fixed various PHPDoc annotations [#1922](https://github.com/ruflin/Elastica/pull/1922)
 * Fixed numeric index names are returned as `int` in `Elastica\Status::getIndexNames()` [#1928](https://github.com/ruflin/Elastica/pull/1928)
 * Fixed using raw array in `post_filter` [#1950](https://github.com/ruflin/Elastica/pull/1950)
-### Security
 
 ## [7.1.0](https://github.com/ruflin/Elastica/compare/7.0.0...7.1.0)
 ### Backward Compatibility Breaks
