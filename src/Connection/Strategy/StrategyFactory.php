@@ -27,14 +27,13 @@ class StrategyFactory
         }
 
         if (\is_string($strategyName)) {
-            $requiredInterface = StrategyInterface::class;
             $predefinedStrategy = '\\Elastica\\Connection\\Strategy\\'.$strategyName;
 
-            if (\class_exists($predefinedStrategy) && \class_implements($predefinedStrategy, $requiredInterface)) {
+            if (\class_exists($predefinedStrategy) && \is_subclass_of($predefinedStrategy, StrategyInterface::class)) {
                 return new $predefinedStrategy();
             }
 
-            if (\class_exists($strategyName) && \class_implements($strategyName, $requiredInterface)) {
+            if (\class_exists($strategyName) && \is_subclass_of($strategyName, StrategyInterface::class)) {
                 return new $strategyName();
             }
         }
