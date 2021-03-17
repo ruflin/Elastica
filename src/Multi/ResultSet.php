@@ -28,15 +28,11 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     protected $_position = 0;
 
     /**
-     * Response.
-     *
-     * @var \Elastica\Response Response object
+     * @var Response
      */
     protected $_response;
 
     /**
-     * Constructs ResultSet object.
-     *
      * @param BaseResultSet[] $resultSets
      */
     public function __construct(Response $response, array $resultSets)

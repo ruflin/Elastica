@@ -68,9 +68,6 @@ class Search
      */
     private $builder;
 
-    /**
-     * Constructs search object.
-     */
     public function __construct(Client $client, ?BuilderInterface $builder = null)
     {
         $this->_client = $client;

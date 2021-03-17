@@ -50,7 +50,7 @@ class Query extends AbstractRescore
     /**
      * Sets rescoreQuery object.
      *
-     * @param \Elastica\Query|\Elastica\Query\AbstractQuery|string $rescoreQuery
+     * @param BaseQuery|\Elastica\Query\AbstractQuery|string $rescoreQuery
      *
      * @return $this
      */

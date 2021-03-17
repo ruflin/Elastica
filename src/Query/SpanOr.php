@@ -14,8 +14,6 @@ use Elastica\Exception\InvalidException;
 class SpanOr extends AbstractSpanQuery
 {
     /**
-     * Constructs a SpanOr query object.
-     *
      * @param AbstractSpanQuery[] $clauses
      */
     public function __construct(array $clauses = [])

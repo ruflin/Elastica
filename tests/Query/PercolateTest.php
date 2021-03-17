@@ -15,7 +15,7 @@ use Elastica\Test\Base as BaseTest;
 class PercolateTest extends BaseTest
 {
     /**
-     * @var \Elastica\Index
+     * @var Index
      */
     private $index;
 

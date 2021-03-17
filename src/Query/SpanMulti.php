@@ -15,8 +15,6 @@ use Elastica\Exception\InvalidException;
 class SpanMulti extends AbstractSpanQuery
 {
     /**
-     * Constructs a SpanMulti query object.
-     *
      * @param AbstractQuery|array $match
      */
     public function __construct($match = null)

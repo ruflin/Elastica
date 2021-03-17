@@ -19,7 +19,7 @@ class Status
     /**
      * Contains all status infos.
      *
-     * @var \Elastica\Response Response object
+     * @var Response
      */
     protected $_response;
 
@@ -31,17 +31,10 @@ class Status
     protected $_data;
 
     /**
-     * Client object.
-     *
-     * @var \Elastica\Client Client object
+     * @var Client
      */
     protected $_client;
 
-    /**
-     * Constructs Status object.
-     *
-     * @param \Elastica\Client $client Client object
-     */
     public function __construct(Client $client)
     {
         $this->_client = $client;
@@ -102,7 +95,7 @@ class Status
      *
      * @param string $alias Alias name
      *
-     * @return array|\Elastica\Index[] List of Elastica\Index
+     * @return array|Index[] List of Elastica\Index
      */
     public function getIndicesWithAlias($alias)
     {
@@ -133,7 +126,7 @@ class Status
     /**
      * Returns response object.
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      */
     public function getResponse()
     {

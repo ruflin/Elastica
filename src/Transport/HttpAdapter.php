@@ -44,7 +44,7 @@ class HttpAdapter extends AbstractTransport
      * @param array $params Host, Port, ...
      *
      * @throws \Elastica\Exception\ConnectionException
-     * @throws \Elastica\Exception\ResponseException
+     * @throws ResponseException
      * @throws \Elastica\Exception\Connection\HttpException
      */
     public function exec(ElasticaRequest $elasticaRequest, array $params): Response

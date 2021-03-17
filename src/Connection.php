@@ -244,9 +244,9 @@ class Connection extends Param
     /**
      * Returns an instance of the transport type.
      *
-     * @throws \Elastica\Exception\InvalidException If invalid transport type
+     * @throws InvalidException If invalid transport type
      *
-     * @return \Elastica\Transport\AbstractTransport Transport object
+     * @return AbstractTransport Transport object
      */
     public function getTransportObject()
     {
@@ -302,7 +302,7 @@ class Connection extends Param
      *
      * @param string $key Config key
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      *
      * @return array|string Config value
      */
@@ -321,7 +321,7 @@ class Connection extends Param
     }
 
     /**
-     * @param array|\Elastica\Connection $params Params to create a connection
+     * @param array|Connection $params Params to create a connection
      *
      * @throws Exception\InvalidException
      *

@@ -11,12 +11,6 @@ namespace Elastica\Query;
  */
 class SpanContaining extends AbstractSpanQuery
 {
-    /**
-     * Constructs a SpanContaining query object.
-     *
-     * @param AbstractSpanQuery $little OPTIONAL
-     * @param AbstractSpanQuery $big    OPTIONAL
-     */
     public function __construct(?AbstractSpanQuery $little = null, ?AbstractSpanQuery $big = null)
     {
         if (null !== $little) {

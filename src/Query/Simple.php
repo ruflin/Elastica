@@ -17,11 +17,6 @@ class Simple extends AbstractQuery
      */
     protected $_query = [];
 
-    /**
-     * Constructs a query based on an array.
-     *
-     * @param array $query Query array
-     */
     public function __construct(array $query)
     {
         $this->setQuery($query);

@@ -14,8 +14,6 @@ use Elastica\Exception\InvalidException;
 class SpanNear extends AbstractSpanQuery
 {
     /**
-     * Constructs a SpanNear query object.
-     *
      * @param AbstractSpanQuery[] $clauses
      * @param int                 $slop    maximum proximity
      * @param bool                $inOrder true if order of searched clauses is important
