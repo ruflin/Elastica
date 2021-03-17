@@ -361,8 +361,6 @@ class Query extends Param
     /**
      * Sets a post_filter to the current query.
      *
-     * @param AbstractQuery|array $filter
-     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-post-filter
      */
     public function setPostFilter(AbstractQuery $filter): self

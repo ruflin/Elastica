@@ -33,7 +33,7 @@ class Guzzle extends AbstractTransport
     /**
      * Curl resource to reuse.
      *
-     * @var Client Guzzle client to reuse
+     * @var Client|null Guzzle client to reuse
      */
     protected static $_guzzleClientConnection;
 

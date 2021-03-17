@@ -5,12 +5,11 @@ namespace Elastica\Exception\Bulk\Response;
 use Elastica\Bulk\Action;
 use Elastica\Bulk\Response as BulkResponse;
 use Elastica\Exception\BulkException;
-use Elastica\Response;
 
 class ActionException extends BulkException
 {
     /**
-     * @var Response
+     * @var BulkResponse
      */
     protected $_response;
 

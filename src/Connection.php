@@ -304,7 +304,7 @@ class Connection extends Param
      *
      * @throws InvalidException
      *
-     * @return array|string Config value
+     * @return array|bool|int|string|null Config value
      */
     public function getConfig($key = '')
     {

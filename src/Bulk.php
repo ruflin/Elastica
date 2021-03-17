@@ -157,15 +157,15 @@ class Bulk
     }
 
     /**
-     * @param Document[] $scripts
-     * @param mixed|null $opType
+     * @param AbstractScript[] $scripts
+     * @param string|null      $opType
      *
      * @return $this
      */
     public function addScripts(array $scripts, $opType = null): self
     {
-        foreach ($scripts as $document) {
-            $this->addScript($document, $opType);
+        foreach ($scripts as $script) {
+            $this->addScript($script, $opType);
         }
 
         return $this;

@@ -45,7 +45,7 @@ class Terms extends AbstractQuery
     /**
      * Sets terms for the query.
      *
-     * @param array<bool|float|int|string>
+     * @param array<bool|float|int|string> $terms
      */
     public function setTerms(array $terms): self
     {

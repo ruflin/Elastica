@@ -53,7 +53,7 @@ class Stats
      * Several arguments can be use
      * get('index', 'test', 'example')
      *
-     * @return array Node stats for the given field or null if not found
+     * @return array|null Node stats for the given field or null if not found
      */
     public function get()
     {
