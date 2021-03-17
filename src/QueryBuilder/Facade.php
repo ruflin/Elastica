@@ -50,6 +50,6 @@ class Facade
             throw new QueryBuilderException($this->_dsl->getType().' "'.$name.'" in '.$reflection->getShortName().' not supported');
         }
 
-        return \call_user_func_array([$this->_dsl, $name], $arguments);
+        return $this->_dsl->{$name}(...$arguments);
     }
 }
