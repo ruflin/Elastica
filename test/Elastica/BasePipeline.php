@@ -33,7 +33,10 @@ class BasePipeline extends BaseTest
      */
     protected function tearDown()
     {
-        $this->_createPipeline()->deletePipeline('*');
+        if ($this->_isFunctionalGroup()) {
+            $this->_createPipeline()->deletePipeline('*');
+        }
+
         parent::tearDown();
     }
 }

@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  proxy:
+    image: nginx:1.17-alpine
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 12345:12345
+      - 12346:12346
+    networks:
+      - elastic
+
+networks:
+  elastic:
+    driver: bridge

@@ -551,7 +551,7 @@ class IndexTest extends BaseTest
         $index = $this->_createIndex();
         $indexMappings = $index->getMapping();
 
-        $this->assertEmpty($indexMappings['elastica_test']);
+        $this->assertEmpty($indexMappings);
     }
 
     /**

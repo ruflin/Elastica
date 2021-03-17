@@ -9,7 +9,6 @@ namespace Elastica\Query;
  * @author WONG Wing Lun <luiges90@gmail.com>
  *
  * @deprecated since version 6.1.2, use the MatchQuery class instead.
- *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html
  */
 class Match extends AbstractQuery

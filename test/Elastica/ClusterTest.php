@@ -22,13 +22,14 @@ class ClusterTest extends BaseTest
         $data = $client->request('_nodes')->getData();
         $rawNodes = $data['nodes'];
 
+        $nodeNames = $cluster->getNodeNames();
         $rawNodeNames = [];
 
         foreach ($rawNodes as $rawNode) {
             $rawNodeNames[] = $rawNode['name'];
         }
 
-        $this->assertEquals(asort($rawNodeNames), asort($cluster->getNodeNames()));
+        $this->assertEquals(asort($rawNodeNames), asort($nodeNames));
     }
 
     /**
