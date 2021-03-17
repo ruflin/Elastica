@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Backward Compatibility Breaks
 ### Added
 ### Changed
+* Updated `php-cs-fixer` to `2.18.3` [#1915](https://github.com/ruflin/Elastica/pull/1915)
 ### Deprecated
 ### Removed
 ### Fixed
