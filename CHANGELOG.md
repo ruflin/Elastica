@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 ### Fixed
 * Fixed `_seq_no` and `_primary_term` wrong initialization [#1920](https://github.com/ruflin/Elastica/pull/1920)
+* Fixed `Elastica\Connection\StrategyInterface` instance checks [#1921](https://github.com/ruflin/Elastica/pull/1921)
 ### Security
 
 ## [7.1.0](https://github.com/ruflin/Elastica/compare/7.0.0...7.1.0)
