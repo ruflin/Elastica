@@ -98,8 +98,7 @@ class WeightedAvg extends AbstractAggregation
     /**
      * Set the value_type for this aggregation.
      *
-     * @param string $format
-     * @param mixed  $valueType
+     * @param mixed $valueType
      *
      * @return $this
      */

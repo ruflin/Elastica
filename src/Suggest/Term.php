@@ -19,7 +19,7 @@ class Term extends AbstractSuggest
     /**
      * @return $this
      */
-    public function setAnalyzer(string $analyzer): Term
+    public function setAnalyzer(string $analyzer): self
     {
         return $this->setParam('analyzer', $analyzer);
     }
@@ -29,7 +29,7 @@ class Term extends AbstractSuggest
      *
      * @return $this
      */
-    public function setSort(string $sort): Term
+    public function setSort(string $sort): self
     {
         return $this->setParam('sort', $sort);
     }
@@ -39,7 +39,7 @@ class Term extends AbstractSuggest
      *
      * @return $this
      */
-    public function setSuggestMode(string $mode): Term
+    public function setSuggestMode(string $mode): self
     {
         return $this->setParam('suggest_mode', $mode);
     }
@@ -49,7 +49,7 @@ class Term extends AbstractSuggest
      *
      * @return $this
      */
-    public function setLowercaseTerms(bool $lowercase = true): Term
+    public function setLowercaseTerms(bool $lowercase = true): self
     {
         return $this->setParam('lowercase_terms', $lowercase);
     }
@@ -61,7 +61,7 @@ class Term extends AbstractSuggest
      *
      * @return $this
      */
-    public function setMaxEdits(int $max = 2): Term
+    public function setMaxEdits(int $max = 2): self
     {
         return $this->setParam('max_edits', $max);
     }
@@ -69,11 +69,9 @@ class Term extends AbstractSuggest
     /**
      * The number of minimum prefix characters that must match in order to be a suggestion candidate.
      *
-     * @param int $length defaults to 1
-     *
      * @return $this
      */
-    public function setPrefixLength(int $length = 1): Term
+    public function setPrefixLength(int $length = 1): self
     {
         return $this->setParam('prefix_length', $length);
     }
@@ -81,21 +79,17 @@ class Term extends AbstractSuggest
     /**
      * The minimum length a suggest text term must have in order to be included.
      *
-     * @param int $length defaults to 4
-     *
      * @return $this
      */
-    public function setMinWordLength(int $length = 4): Term
+    public function setMinWordLength(int $length = 4): self
     {
         return $this->setParam('min_word_length', $length);
     }
 
     /**
-     * @param int $max defaults to 5
-     *
      * @return $this
      */
-    public function setMaxInspections(int $max = 5): Term
+    public function setMaxInspections(int $max = 5): self
     {
         return $this->setParam('max_inspections', $max);
     }
@@ -103,11 +97,9 @@ class Term extends AbstractSuggest
     /**
      * Set the minimum number of documents in which a suggestion should appear.
      *
-     * @param float|int $min Defaults to 0. If the value is greater than 1, it must be a whole number.
-     *
      * @return $this
      */
-    public function setMinDocFrequency(float $min = 0): Term
+    public function setMinDocFrequency(float $min = 0): self
     {
         return $this->setParam('min_doc_freq', $min);
     }
@@ -117,7 +109,7 @@ class Term extends AbstractSuggest
      *
      * @return $this
      */
-    public function setMaxTermFrequency(float $max = 0.01): Term
+    public function setMaxTermFrequency(float $max = 0.01): self
     {
         return $this->setParam('max_term_freq', $max);
     }
@@ -134,7 +126,7 @@ class Term extends AbstractSuggest
      *
      * @return $this
      */
-    public function setStringDistanceAlgorithm(string $distanceAlgorithm): Term
+    public function setStringDistanceAlgorithm(string $distanceAlgorithm): self
     {
         return $this->setParam('string_distance', $distanceAlgorithm);
     }

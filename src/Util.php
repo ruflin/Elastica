@@ -206,8 +206,7 @@ class Util
      * Tries to guess the name of the param, based on its class
      * Example: \Elastica\Query\MatchAll => match_all.
      *
-     * @param object|string Object or class name
-     * @param mixed $class
+     * @param object|string $class Object or class name
      *
      * @return string parameter name
      */

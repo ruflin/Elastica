@@ -135,7 +135,7 @@ class Pipeline extends Param
     }
 
     /**
-     * @param AbstractProcessor[]
+     * @param AbstractProcessor[] $processors
      */
     public function setProcessors(array $processors): self
     {

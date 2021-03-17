@@ -27,7 +27,7 @@ class Client
     protected $_config;
 
     /**
-     * @var callback
+     * @var callable
      */
     protected $_callback;
 
@@ -60,7 +60,7 @@ class Client
      * Creates a new Elastica client.
      *
      * @param array|string  $config   OPTIONAL Additional config or DSN of options
-     * @param callback|null $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
+     * @param callable|null $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
      *
      * @throws InvalidException
      */
