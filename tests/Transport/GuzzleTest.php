@@ -3,6 +3,7 @@
 namespace Elastica\Test\Transport;
 
 use Elastica\Document;
+use Elastica\Exception\Connection\GuzzleException;
 use Elastica\Query;
 use Elastica\ResultSet\DefaultBuilder;
 use Elastica\Test\Base as BaseTest;
@@ -133,7 +134,7 @@ class GuzzleTest extends BaseTest
      */
     public function testInvalidConnection(): void
     {
-        $this->expectException(\Elastica\Exception\Connection\GuzzleException::class);
+        $this->expectException(GuzzleException::class);
 
         $client = $this->_getClient(['transport' => 'Guzzle', 'port' => 4500, 'persistent' => false]);
         $response = $client->request('_stats', 'GET');

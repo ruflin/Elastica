@@ -6,6 +6,7 @@ use Elastica\Aggregation\Avg;
 use Elastica\Aggregation\PercentilesBucket;
 use Elastica\Aggregation\Terms;
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Query;
 
@@ -80,7 +81,7 @@ class PercentilesBucketTest extends BaseAggregationTest
      */
     public function testToArrayInvalidBucketsPath(): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         $serialDiffAgg = new PercentilesBucket('avg_bucket');
         $serialDiffAgg->toArray();

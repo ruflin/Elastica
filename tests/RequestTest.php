@@ -3,6 +3,7 @@
 namespace Elastica\Test;
 
 use Elastica\Connection;
+use Elastica\Exception\InvalidException;
 use Elastica\Request;
 use Elastica\Response;
 use Elastica\Test\Base as BaseTest;
@@ -35,7 +36,7 @@ class RequestTest extends BaseTest
      */
     public function testInvalidConnection(): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         $request = new Request('', Request::GET);
         $request->send();

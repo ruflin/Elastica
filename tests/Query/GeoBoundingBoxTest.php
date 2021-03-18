@@ -2,6 +2,7 @@
 
 namespace Elastica\Test\Query;
 
+use Elastica\Exception\InvalidException;
 use Elastica\Query\GeoBoundingBox;
 use Elastica\Test\Base as BaseTest;
 
@@ -32,7 +33,7 @@ class GeoBoundingBoxTest extends BaseTest
      */
     public function testAddCoordinatesInvalidException(): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         $query = new GeoBoundingBox('foo', []);
     }

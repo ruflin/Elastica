@@ -3,6 +3,7 @@
 namespace Elastica\Test;
 
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Task;
 
 /**
@@ -105,7 +106,7 @@ class TaskTest extends Base
         return new Task($this->_getClient(), $id);
     }
 
-    protected function _createIndexWithDocument(): \Elastica\Index
+    protected function _createIndexWithDocument(): Index
     {
         $index = $this->_createIndex();
         $index->addDocument(new Document(1, ['name' => 'ruflin nicolas']));

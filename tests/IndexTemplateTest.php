@@ -3,6 +3,7 @@
 namespace Elastica\Test;
 
 use Elastica\Client;
+use Elastica\Exception\InvalidException;
 use Elastica\Exception\ResponseException;
 use Elastica\IndexTemplate;
 use Elastica\Request;
@@ -36,7 +37,7 @@ class IndexTemplateTest extends BaseTest
      */
     public function testIncorrectInstantiate(): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         $client = $this->_getClient();
         new IndexTemplate($client, null);

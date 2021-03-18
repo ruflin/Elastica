@@ -6,6 +6,7 @@ use Elastica\Aggregation\Avg;
 use Elastica\Aggregation\AvgBucket;
 use Elastica\Aggregation\Terms;
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Query;
 
@@ -71,7 +72,7 @@ class AvgBucketTest extends BaseAggregationTest
      */
     public function testToArrayInvalidBucketsPath(): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         $serialDiffAgg = new AvgBucket('avg_bucket');
         $serialDiffAgg->toArray();

@@ -4,6 +4,7 @@ namespace Elastica\Test\Transport;
 
 use Elastica\Connection;
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
 use Elastica\Exception\ResponseException;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
@@ -81,7 +82,7 @@ class AbstractTransportTest extends BaseTest
      */
     public function testThrowsExecptionOnInvalidTransportDefinition($transport): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
         $this->expectExceptionMessage('Invalid transport');
 
         AbstractTransport::create($transport, new Connection());
