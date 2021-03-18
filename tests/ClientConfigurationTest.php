@@ -3,6 +3,7 @@
 namespace Elastica\Test;
 
 use Elastica\ClientConfiguration;
+use Elastica\Exception\InvalidException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -14,7 +15,7 @@ class ClientConfigurationTest extends TestCase
 {
     public function testInvalidDsn(): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
         $this->expectExceptionMessage('DSN "test foo" is invalid.');
 
         ClientConfiguration::fromDsn('test foo');
@@ -22,7 +23,7 @@ class ClientConfigurationTest extends TestCase
 
     public function testInvalidDsnPortOnly(): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
         $this->expectExceptionMessage('DSN ":0" is invalid.');
 
         ClientConfiguration::fromDsn(':0');
@@ -192,7 +193,7 @@ class ClientConfigurationTest extends TestCase
 
         $this->assertEquals($expected, $configuration->get(''));
 
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
         $configuration->get('invalidKey');
     }
 

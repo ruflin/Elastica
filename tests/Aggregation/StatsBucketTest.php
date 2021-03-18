@@ -6,6 +6,7 @@ use Elastica\Aggregation\Histogram;
 use Elastica\Aggregation\Max;
 use Elastica\Aggregation\StatsBucket;
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Query;
 
@@ -68,7 +69,7 @@ class StatsBucketTest extends BaseAggregationTest
      */
     public function testToArrayInvalidBucketsPath(): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         $serialDiffAgg = new StatsBucket('bucket_part');
         $serialDiffAgg->toArray();

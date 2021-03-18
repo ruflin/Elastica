@@ -12,6 +12,7 @@ use Elastica\Bulk\Response;
 use Elastica\Bulk\ResponseSet;
 use Elastica\Document;
 use Elastica\Exception\Bulk\ResponseException;
+use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
@@ -282,7 +283,7 @@ class BulkTest extends BaseTest
      */
     public function testInvalidRawData($rawData, $failMessage): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         $bulk = new Bulk($this->_getClient());
 

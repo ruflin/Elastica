@@ -6,6 +6,7 @@ use Elastica\Aggregation\Sum;
 use Elastica\Aggregation\SumBucket;
 use Elastica\Aggregation\Terms;
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Query;
 
@@ -71,7 +72,7 @@ class SumBucketTest extends BaseAggregationTest
      */
     public function testToArrayInvalidBucketsPath(): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         $serialDiffAgg = new SumBucket('sum_bucket');
         $serialDiffAgg->toArray();

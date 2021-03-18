@@ -5,8 +5,10 @@ namespace Elastica\Test\Collapse;
 use Elastica\Collapse;
 use Elastica\Collapse\InnerHits;
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
+use Elastica\ResultSet;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -277,7 +279,7 @@ class CollapseTest extends BaseTest
         $this->assertEquals('Keith', $results->getResults()[0]->getInnerHits()['by_zip']['hits']['hits'][1]['fields']['user'][0]);
     }
 
-    private function _getIndexForCollapseTest()
+    private function _getIndexForCollapseTest(): Index
     {
         $index = $this->_createIndex();
         $index->setMapping(new Mapping([
@@ -338,10 +340,7 @@ class CollapseTest extends BaseTest
         return $index;
     }
 
-    /**
-     * @return \Elastica\ResultSet
-     */
-    private function search(Query $query)
+    private function search(Query $query): ResultSet
     {
         return $this->_getIndexForCollapseTest()->search($query);
     }

@@ -5,6 +5,7 @@ namespace Elastica\Test\Aggregation;
 use Elastica\Aggregation\Avg;
 use Elastica\Aggregation\Filters;
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\Term;
@@ -60,7 +61,7 @@ class FiltersTest extends BaseAggregationTest
      */
     public function testMixNamedAndAnonymousFilters(): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
         $this->expectExceptionMessage('Mix named and anonymous keys are not allowed');
 
         $agg = new Filters('by_color');
@@ -73,7 +74,7 @@ class FiltersTest extends BaseAggregationTest
      */
     public function testMixAnonymousAndNamedFilters(): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
         $this->expectExceptionMessage('Mix named and anonymous keys are not allowed');
 
         $agg = new Filters('by_color');
