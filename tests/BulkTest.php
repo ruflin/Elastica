@@ -9,7 +9,6 @@ use Elastica\Bulk\Action\CreateDocument;
 use Elastica\Bulk\Action\IndexDocument;
 use Elastica\Bulk\Action\UpdateDocument;
 use Elastica\Bulk\Response;
-use Elastica\Bulk\ResponseSet;
 use Elastica\Document;
 use Elastica\Exception\Bulk\ResponseException;
 use Elastica\Exception\InvalidException;
@@ -95,8 +94,6 @@ class BulkTest extends BaseTest
         $this->assertEquals($expected, (string) \str_replace(\PHP_EOL, "\n", (string) $bulk));
 
         $response = $bulk->send();
-
-        $this->assertInstanceOf(ResponseSet::class, $response);
 
         $this->assertTrue($response->isOk());
         $this->assertFalse($response->hasError());
@@ -641,7 +638,8 @@ class BulkTest extends BaseTest
     public function testSetShardTimeout(): void
     {
         $bulk = new Bulk($this->_getClient());
-        $this->assertInstanceOf(Bulk::class, $bulk->setShardTimeout(10));
+
+        $this->assertSame($bulk, $bulk->setShardTimeout(10));
     }
 
     /**
@@ -650,7 +648,8 @@ class BulkTest extends BaseTest
     public function testSetRequestParam(): void
     {
         $bulk = new Bulk($this->_getClient());
-        $this->assertInstanceOf(Bulk::class, $bulk->setRequestParam('key', 'value'));
+
+        $this->assertSame($bulk, $bulk->setRequestParam('key', 'value'));
     }
 
     /**

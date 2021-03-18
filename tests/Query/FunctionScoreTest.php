@@ -505,12 +505,12 @@ class FunctionScoreTest extends BaseTest
             ],
         ];
 
-        $query = new FunctionScore();
-        $query->addDecayFunction(FunctionScore::DECAY_GAUSS, 'price', 0, 10);
-        $returnedValue = $query->setMinScore(0.8);
+        $query = (new FunctionScore())
+            ->addDecayFunction(FunctionScore::DECAY_GAUSS, 'price', 0, 10)
+            ->setMinScore(0.8)
+        ;
 
         $this->assertEquals($expected, $query->toArray());
-        $this->assertInstanceOf(FunctionScore::class, $returnedValue);
 
         $response = $this->_getIndexForTest()->search($query);
         $results = $response->getResults();

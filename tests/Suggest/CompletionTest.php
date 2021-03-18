@@ -130,9 +130,7 @@ class CompletionTest extends BaseTest
 
         $suggest->setFuzzy($fuzzy);
 
-        $this->assertEquals($fuzzy, $suggest->getParam('fuzzy'));
-
-        $this->assertInstanceOf(Completion::class, $suggest->setFuzzy($fuzzy));
+        $this->assertSame($fuzzy, $suggest->getParam('fuzzy'));
     }
 
     /**

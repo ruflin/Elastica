@@ -24,7 +24,8 @@ class DocumentTest extends BaseTest
         }
         $doc = new Document();
         $returnValue = $doc->addFile('key', $fileName);
-        $this->assertInstanceOf(Document::class, $returnValue);
+
+        $this->assertSame($doc, $returnValue);
     }
 
     /**
@@ -34,7 +35,8 @@ class DocumentTest extends BaseTest
     {
         $doc = new Document();
         $returnValue = $doc->addGeoPoint('point', 38.89859, -77.035971);
-        $this->assertInstanceOf(Document::class, $returnValue);
+
+        $this->assertSame($doc, $returnValue);
     }
 
     /**
@@ -44,7 +46,8 @@ class DocumentTest extends BaseTest
     {
         $doc = new Document();
         $returnValue = $doc->setData(['data']);
-        $this->assertInstanceOf(Document::class, $returnValue);
+
+        $this->assertSame($doc, $returnValue);
     }
 
     /**

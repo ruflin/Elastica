@@ -347,7 +347,7 @@ class SearchTest extends BaseTest
         $mockResponse = new Response(\json_encode(['timed_out' => true]));
         $client = $this->createMock(Client::class);
         $client->method('request')
-            ->will($this->returnValue($mockResponse))
+            ->willReturn($mockResponse)
         ;
         $search = new Search($client);
         $script = new Script('Thread.sleep(100); return _score;');
@@ -618,8 +618,7 @@ class SearchTest extends BaseTest
             $this->assertEquals('no such index [elastica_7086b4c2ee585bbb6740ece5ed7ece01]', $error['reason']);
         }
 
-        $results = $search->search($query, [Search::OPTION_SEARCH_IGNORE_UNAVAILABLE => true]);
-        $this->assertInstanceOf(ResultSet::class, $results);
+        $search->search($query, [Search::OPTION_SEARCH_IGNORE_UNAVAILABLE => true]);
     }
 
     /**

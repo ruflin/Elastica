@@ -35,9 +35,7 @@ class ConnectionPoolTest extends BaseTest
 
         $pool->setConnections($connections);
 
-        $this->assertEquals($connections, $pool->getConnections());
-
-        $this->assertInstanceOf(ConnectionPool::class, $pool->setConnections($connections));
+        $this->assertSame($connections, $pool->getConnections());
     }
 
     /**
@@ -54,9 +52,7 @@ class ConnectionPoolTest extends BaseTest
             $pool->addConnection($connection);
         }
 
-        $this->assertEquals($connections, $pool->getConnections());
-
-        $this->assertInstanceOf(ConnectionPool::class, $pool->addConnection($connections[0]));
+        $this->assertSame($connections, $pool->getConnections());
     }
 
     /**

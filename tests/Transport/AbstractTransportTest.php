@@ -62,7 +62,7 @@ class AbstractTransportTest extends BaseTest
         $connection = new Connection();
         $params = [];
         $transport = AbstractTransport::create($transport, $connection, $params);
-        $this->assertInstanceOf(AbstractTransport::class, $transport);
+
         $this->assertSame($connection, $transport->getConnection());
     }
 

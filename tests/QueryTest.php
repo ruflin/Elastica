@@ -60,16 +60,6 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetSuggestMustReturnQueryInstance(): void
-    {
-        $query = new Query();
-        $suggest = new Suggest();
-        $this->assertInstanceOf(Query::class, $query->setSuggest($suggest));
-    }
-
-    /**
-     * @group unit
-     */
     public function testArrayQuery(): void
     {
         $query = [

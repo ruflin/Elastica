@@ -5,7 +5,6 @@ namespace Elastica\Test;
 use Elastica\Connection;
 use Elastica\Exception\InvalidException;
 use Elastica\Request;
-use Elastica\Response;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -55,7 +54,7 @@ class RequestTest extends BaseTest
 
         $response = $request->send();
 
-        $this->assertInstanceOf(Response::class, $response);
+        $this->assertTrue($response->isOk());
     }
 
     /**

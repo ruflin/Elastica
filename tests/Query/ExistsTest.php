@@ -30,10 +30,10 @@ class ExistsTest extends BaseTest
         $field = 'test';
         $query = new Exists($field);
 
-        $this->assertEquals($field, $query->getParam('field'));
+        $this->assertSame($field, $query->getParam('field'));
 
         $newField = 'hello world';
-        $this->assertInstanceOf(Exists::class, $query->setField($newField));
+        $query->setField($newField);
 
         $this->assertEquals($newField, $query->getParam('field'));
     }

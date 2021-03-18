@@ -23,10 +23,11 @@ class InnerHitsTest extends BaseTest
      */
     public function testSetSize(): void
     {
-        $innerHits = new InnerHits();
-        $returnValue = $innerHits->setSize(12);
-        $this->assertEquals(12, $innerHits->getParam('size'));
-        $this->assertInstanceOf(InnerHits::class, $returnValue);
+        $innerHits = (new InnerHits())
+            ->setSize(12)
+        ;
+
+        $this->assertSame(12, $innerHits->getParam('size'));
     }
 
     /**
@@ -34,10 +35,11 @@ class InnerHitsTest extends BaseTest
      */
     public function testSetFrom(): void
     {
-        $innerHits = new InnerHits();
-        $returnValue = $innerHits->setFrom(12);
-        $this->assertEquals(12, $innerHits->getParam('from'));
-        $this->assertInstanceOf(InnerHits::class, $returnValue);
+        $innerHits = (new InnerHits())
+            ->setFrom(12)
+        ;
+
+        $this->assertSame(12, $innerHits->getParam('from'));
     }
 
     /**
@@ -46,10 +48,11 @@ class InnerHitsTest extends BaseTest
     public function testSetSort(): void
     {
         $sort = ['last_activity_date' => ['order' => 'desc']];
-        $innerHits = new InnerHits();
-        $returnValue = $innerHits->setSort($sort);
-        $this->assertEquals($sort, $innerHits->getParam('sort'));
-        $this->assertInstanceOf(InnerHits::class, $returnValue);
+        $innerHits = (new InnerHits())
+            ->setSort($sort)
+        ;
+
+        $this->assertSame($sort, $innerHits->getParam('sort'));
     }
 
     /**
@@ -58,10 +61,11 @@ class InnerHitsTest extends BaseTest
     public function testSetSource(): void
     {
         $fields = ['title', 'tags'];
-        $innerHits = new InnerHits();
-        $returnValue = $innerHits->setSource($fields);
-        $this->assertEquals($fields, $innerHits->getParam('_source'));
-        $this->assertInstanceOf(InnerHits::class, $returnValue);
+        $innerHits = (new InnerHits())
+            ->setSource($fields)
+        ;
+
+        $this->assertSame($fields, $innerHits->getParam('_source'));
     }
 
     /**
@@ -69,12 +73,14 @@ class InnerHitsTest extends BaseTest
      */
     public function testSetVersion(): void
     {
-        $innerHits = new InnerHits();
-        $returnValue = $innerHits->setVersion(true);
+        $innerHits = (new InnerHits())
+            ->setVersion(true)
+        ;
+
         $this->assertTrue($innerHits->getParam('version'));
-        $this->assertInstanceOf(InnerHits::class, $returnValue);
 
         $innerHits->setVersion(false);
+
         $this->assertFalse($innerHits->getParam('version'));
     }
 
@@ -83,12 +89,14 @@ class InnerHitsTest extends BaseTest
      */
     public function testSetExplain(): void
     {
-        $innerHits = new InnerHits();
-        $returnValue = $innerHits->setExplain(true);
+        $innerHits = (new InnerHits())
+            ->setExplain(true)
+        ;
+
         $this->assertTrue($innerHits->getParam('explain'));
-        $this->assertInstanceOf(InnerHits::class, $returnValue);
 
         $innerHits->setExplain(false);
+
         $this->assertFalse($innerHits->getParam('explain'));
     }
 
@@ -102,10 +110,11 @@ class InnerHitsTest extends BaseTest
                 'title',
             ],
         ];
-        $innerHits = new InnerHits();
-        $returnValue = $innerHits->setHighlight($highlight);
-        $this->assertEquals($highlight, $innerHits->getParam('highlight'));
-        $this->assertInstanceOf(InnerHits::class, $returnValue);
+        $innerHits = (new InnerHits())
+            ->setHighlight($highlight)
+        ;
+
+        $this->assertSame($highlight, $innerHits->getParam('highlight'));
     }
 
     /**
@@ -114,10 +123,11 @@ class InnerHitsTest extends BaseTest
     public function testSetFieldDataFields(): void
     {
         $fields = ['title', 'tags'];
-        $innerHits = new InnerHits();
-        $returnValue = $innerHits->setFieldDataFields($fields);
-        $this->assertEquals($fields, $innerHits->getParam('docvalue_fields'));
-        $this->assertInstanceOf(InnerHits::class, $returnValue);
+        $innerHits = (new InnerHits())
+            ->setFieldDataFields($fields)
+        ;
+
+        $this->assertSame($fields, $innerHits->getParam('docvalue_fields'));
     }
 
     /**
@@ -128,10 +138,11 @@ class InnerHitsTest extends BaseTest
         $script = new Script('1 + 2');
         $scriptFields = new ScriptFields(['three' => $script]);
 
-        $innerHits = new InnerHits();
-        $returnValue = $innerHits->setScriptFields($scriptFields);
-        $this->assertEquals($scriptFields->toArray(), $innerHits->getParam('script_fields')->toArray());
-        $this->assertInstanceOf(InnerHits::class, $returnValue);
+        $innerHits = (new InnerHits())
+            ->setScriptFields($scriptFields)
+        ;
+
+        $this->assertSame($scriptFields, $innerHits->getParam('script_fields'));
     }
 
     /**
@@ -140,10 +151,11 @@ class InnerHitsTest extends BaseTest
     public function testAddScriptField(): void
     {
         $script = new Script('2+3');
-        $innerHits = new InnerHits();
-        $returnValue = $innerHits->addScriptField('five', $script);
-        $this->assertEquals(['five' => $script->toArray()], $innerHits->getParam('script_fields')->toArray());
-        $this->assertInstanceOf(InnerHits::class, $returnValue);
+        $innerHits = (new InnerHits())
+            ->addScriptField('five', $script)
+        ;
+
+        $this->assertSame(['five' => $script->toArray()], $innerHits->getParam('script_fields')->toArray());
     }
 
     /**

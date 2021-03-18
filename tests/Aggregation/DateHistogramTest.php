@@ -92,9 +92,9 @@ class DateHistogramTest extends BaseAggregationTest
      */
     public function testSetOffset(): void
     {
-        $agg = new DateHistogram('hist', 'created', '1h');
-
-        $agg->setOffset('3m');
+        $agg = (new DateHistogram('hist', 'created', '1h'))
+            ->setOffset('3m')
+        ;
 
         $expected = [
             'date_histogram' => [
@@ -104,9 +104,7 @@ class DateHistogramTest extends BaseAggregationTest
             ],
         ];
 
-        $this->assertEquals($expected, $agg->toArray());
-
-        $this->assertInstanceOf(DateHistogram::class, $agg->setOffset('3m'));
+        $this->assertSame($expected, $agg->toArray());
     }
 
     /**
@@ -131,9 +129,9 @@ class DateHistogramTest extends BaseAggregationTest
      */
     public function testSetTimezone(): void
     {
-        $agg = new DateHistogram('hist', 'created', '1h');
-
-        $agg->setTimezone('-02:30');
+        $agg = (new DateHistogram('hist', 'created', '1h'))
+            ->setTimezone('-02:30')
+        ;
 
         $expected = [
             'date_histogram' => [
@@ -143,9 +141,7 @@ class DateHistogramTest extends BaseAggregationTest
             ],
         ];
 
-        $this->assertEquals($expected, $agg->toArray());
-
-        $this->assertInstanceOf(DateHistogram::class, $agg->setTimezone('-02:30'));
+        $this->assertSame($expected, $agg->toArray());
     }
 
     protected function _getIndexForTest(): Index

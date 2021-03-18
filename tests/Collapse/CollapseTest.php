@@ -21,10 +21,11 @@ class CollapseTest extends BaseTest
      */
     public function testSetFieldName(): void
     {
-        $collapse = new Collapse();
-        $returnValue = $collapse->setFieldname('some_name');
-        $this->assertEquals('some_name', $collapse->getParam('field'));
-        $this->assertInstanceOf(Collapse::class, $returnValue);
+        $collapse = (new Collapse())
+            ->setFieldname('some_name')
+        ;
+
+        $this->assertSame('some_name', $collapse->getParam('field'));
     }
 
     /**
@@ -32,12 +33,11 @@ class CollapseTest extends BaseTest
      */
     public function testSetInnerHits(): void
     {
-        $collapse = new Collapse();
-        $innerHits = new InnerHits();
-        $returnValue = $collapse->setInnerHits($innerHits);
-        $this->assertEquals($innerHits, $collapse->getParam('inner_hits'));
-        $this->assertInstanceOf(Collapse::class, $returnValue);
-        $this->assertInstanceOf(InnerHits::class, $collapse->getParam('inner_hits'));
+        $collapse = (new Collapse())
+            ->setInnerHits($innerHits = new InnerHits())
+        ;
+
+        $this->assertSame($innerHits, $collapse->getParam('inner_hits'));
     }
 
     /**
@@ -45,10 +45,11 @@ class CollapseTest extends BaseTest
      */
     public function testSetMaxConcurrentGroupSearches(): void
     {
-        $collapse = new Collapse();
-        $returnValue = $collapse->setMaxConcurrentGroupSearches(5);
-        $this->assertEquals(5, $collapse->getParam('max_concurrent_group_searches'));
-        $this->assertInstanceOf(Collapse::class, $returnValue);
+        $collapse = (new Collapse())
+            ->setMaxConcurrentGroupSearches(5)
+        ;
+
+        $this->assertSame(5, $collapse->getParam('max_concurrent_group_searches'));
     }
 
     /**

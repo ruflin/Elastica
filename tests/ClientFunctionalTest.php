@@ -429,7 +429,8 @@ class ClientFunctionalTest extends BaseTest
         $client = $this->_getClient(['url' => $url, 'port' => '9101', 'timeout' => 2]);
 
         $response = $client->request('_stats');
-        $this->assertInstanceOf(Response::class, $response);
+
+        $this->assertTrue($response->isOk());
     }
 
     public function testUpdateDocumentByDocument(): void

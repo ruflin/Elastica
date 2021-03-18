@@ -16,11 +16,11 @@ class PercentilesTest extends BaseAggregationTest
      */
     public function testConstruct(): void
     {
-        $aggr = new Percentiles('price_percentile');
-        $this->assertEquals('price_percentile', $aggr->getName());
+        $agg = new Percentiles('price_percentile');
+        $this->assertSame('price_percentile', $agg->getName());
 
-        $aggr = new Percentiles('price_percentile', 'price');
-        $this->assertEquals('price', $aggr->getParam('field'));
+        $agg = new Percentiles('price_percentile', 'price');
+        $this->assertSame('price', $agg->getParam('field'));
     }
 
     /**
@@ -28,11 +28,11 @@ class PercentilesTest extends BaseAggregationTest
      */
     public function testSetField(): void
     {
-        $aggr = new Percentiles('price_percentile');
-        $aggr->setField('price');
+        $agg = (new Percentiles('price_percentile'))
+            ->setField('price')
+        ;
 
-        $this->assertEquals('price', $aggr->getParam('field'));
-        $this->assertInstanceOf(Percentiles::class, $aggr->setField('price'));
+        $this->assertSame('price', $agg->getParam('field'));
     }
 
     /**
@@ -49,12 +49,13 @@ class PercentilesTest extends BaseAggregationTest
                 ],
             ],
         ];
-        $aggr = new Percentiles('price_percentile');
-        $aggr->setField('price');
-        $aggr->setKeyed(false);
-        $aggr->setCompression(100);
 
-        $this->assertEquals($expected, $aggr->toArray());
+        $agg = (new Percentiles('price_percentile', 'price'))
+            ->setKeyed(false)
+            ->setCompression(100)
+        ;
+
+        $this->assertEquals($expected, $agg->toArray());
     }
 
     /**
@@ -71,12 +72,13 @@ class PercentilesTest extends BaseAggregationTest
                 ],
             ],
         ];
-        $aggr = new Percentiles('price_percentile');
-        $aggr->setField('price');
-        $aggr->setKeyed(false);
-        $aggr->setHdr('number_of_significant_value_digits', 2);
 
-        $this->assertEquals($expected, $aggr->toArray());
+        $agg = (new Percentiles('price_percentile', 'price'))
+            ->setKeyed(false)
+            ->setHdr('number_of_significant_value_digits', 2)
+        ;
+
+        $this->assertEquals($expected, $agg->toArray());
     }
 
     /**
@@ -85,10 +87,11 @@ class PercentilesTest extends BaseAggregationTest
     public function testSetPercents(): void
     {
         $percents = [1, 2, 3];
-        $aggr = new Percentiles('price_percentile');
-        $aggr->setPercents($percents);
-        $this->assertEquals($percents, $aggr->getParam('percents'));
-        $this->assertInstanceOf(Percentiles::class, $aggr->setPercents($percents));
+        $agg = (new Percentiles('price_percentile'))
+            ->setPercents($percents)
+        ;
+
+        $this->assertSame($percents, $agg->getParam('percents'));
     }
 
     /**
@@ -97,13 +100,14 @@ class PercentilesTest extends BaseAggregationTest
     public function testAddPercent(): void
     {
         $percents = [1, 2, 3];
-        $aggr = new Percentiles('price_percentile');
-        $aggr->setPercents($percents);
-        $this->assertEquals($percents, $aggr->getParam('percents'));
-        $aggr->addPercent(4);
-        $percents[] = 4;
-        $this->assertEquals($percents, $aggr->getParam('percents'));
-        $this->assertInstanceOf(Percentiles::class, $aggr->addPercent(4));
+        $agg = (new Percentiles('price_percentile'))
+            ->setPercents($percents)
+        ;
+
+        $this->assertEquals($percents, $agg->getParam('percents'));
+
+        $agg->addPercent($percents[] = 4);
+        $this->assertEquals($percents, $agg->getParam('percents'));
     }
 
     /**
@@ -112,10 +116,11 @@ class PercentilesTest extends BaseAggregationTest
     public function testSetScript(): void
     {
         $script = 'doc["load_time"].value / 20';
-        $aggr = new Percentiles('price_percentile');
-        $aggr->setScript($script);
-        $this->assertEquals($script, $aggr->getParam('script'));
-        $this->assertInstanceOf(Percentiles::class, $aggr->setScript($script));
+        $agg = (new Percentiles('price_percentile'))
+            ->setScript($script)
+        ;
+
+        $this->assertEquals($script, $agg->getParam('script'));
     }
 
     /**
@@ -140,22 +145,19 @@ class PercentilesTest extends BaseAggregationTest
         $index->refresh();
 
         // execute
-        $aggr = new Percentiles('price_percentile');
-        $aggr->setField('price');
-
         $query = new Query();
-        $query->addAggregation($aggr);
+        $query->addAggregation(new Percentiles('price_percentile', 'price'));
 
         $resultSet = $index->search($query);
-        $aggrResult = $resultSet->getAggregation('price_percentile');
+        $aggResult = $resultSet->getAggregation('price_percentile');
 
-        $this->assertEquals(100.0, $aggrResult['values']['1.0']);
-        $this->assertEquals(100.0, $aggrResult['values']['5.0']);
-        $this->assertEquals(300.0, $aggrResult['values']['25.0']);
-        $this->assertEquals(550.0, $aggrResult['values']['50.0']);
-        $this->assertEquals(800.0, $aggrResult['values']['75.0']);
-        $this->assertEquals(1000.0, $aggrResult['values']['95.0']);
-        $this->assertEquals(1000.0, $aggrResult['values']['99.0']);
+        $this->assertEquals(100.0, $aggResult['values']['1.0']);
+        $this->assertEquals(100.0, $aggResult['values']['5.0']);
+        $this->assertEquals(300.0, $aggResult['values']['25.0']);
+        $this->assertEquals(550.0, $aggResult['values']['50.0']);
+        $this->assertEquals(800.0, $aggResult['values']['75.0']);
+        $this->assertEquals(1000.0, $aggResult['values']['95.0']);
+        $this->assertEquals(1000.0, $aggResult['values']['99.0']);
     }
 
     /**
@@ -213,17 +215,17 @@ class PercentilesTest extends BaseAggregationTest
         $index->refresh();
 
         // execute
-        $aggr = new Percentiles('price_percentile');
-        $aggr->setField('price');
-        $aggr->setKeyed(false);
+        $agg = (new Percentiles('price_percentile', 'price'))
+            ->setKeyed(false)
+        ;
 
         $query = new Query();
-        $query->addAggregation($aggr);
+        $query->addAggregation($agg);
 
         $resultSet = $index->search($query);
-        $aggrResult = $resultSet->getAggregation('price_percentile');
+        $aggResult = $resultSet->getAggregation('price_percentile');
 
-        $this->assertEquals($expected, $aggrResult);
+        $this->assertEquals($expected, $aggResult);
     }
 
     /**
@@ -241,12 +243,13 @@ class PercentilesTest extends BaseAggregationTest
                 'missing' => 10,
             ],
         ];
-        $aggr = new Percentiles('price_percentile');
-        $aggr->setField('price');
-        $aggr->setKeyed(false);
-        $aggr->setHdr('number_of_significant_value_digits', 2);
-        $aggr->setMissing(10);
 
-        $this->assertEquals($expected, $aggr->toArray());
+        $agg = (new Percentiles('price_percentile', 'price'))
+            ->setKeyed(false)
+            ->setHdr('number_of_significant_value_digits', 2)
+            ->setMissing(10)
+        ;
+
+        $this->assertEquals($expected, $agg->toArray());
     }
 }
