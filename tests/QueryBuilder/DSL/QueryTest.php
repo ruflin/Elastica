@@ -27,11 +27,11 @@ class QueryTest extends AbstractDSLTest
      */
     public function testMatch(): void
     {
-        $queryDSL = new DSL\Query();
+        $match = (new DSL\Query())
+            ->match('field', 'value')
+        ;
 
-        $match = $queryDSL->match('field', 'match');
-        $this->assertEquals('match', $match->getParam('field'));
-        $this->assertInstanceOf(MatchQuery::class, $match);
+        $this->assertEquals('value', $match->getParam('field'));
     }
 
     /**

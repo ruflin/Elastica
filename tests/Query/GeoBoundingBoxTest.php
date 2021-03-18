@@ -21,10 +21,7 @@ class GeoBoundingBoxTest extends BaseTest
 
         $query->addCoordinates($key, $coords);
         $expectedArray = ['top_left' => $coords[0], 'bottom_right' => $coords[1]];
-        $this->assertEquals($expectedArray, $query->getParam($key));
-
-        $returnValue = $query->addCoordinates($key, $coords);
-        $this->assertInstanceOf(GeoBoundingBox::class, $returnValue);
+        $this->assertSame($expectedArray, $query->getParam($key));
     }
 
     /**

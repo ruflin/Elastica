@@ -248,8 +248,9 @@ class QueryStringTest extends BaseTest
         $timezone = 'Europe/Paris';
         $text = 'date:[2012 TO 2014]';
 
-        $query = new QueryString($text);
-        $query->setTimezone($timezone);
+        $query = (new QueryString($text))
+            ->setTimezone($timezone)
+        ;
 
         $expected = [
             'query_string' => [
@@ -258,8 +259,7 @@ class QueryStringTest extends BaseTest
             ],
         ];
 
-        $this->assertEquals($expected, $query->toArray());
-        $this->assertInstanceOf(QueryString::class, $query->setTimezone($timezone));
+        $this->assertSame($expected, $query->toArray());
     }
 
     /**

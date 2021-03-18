@@ -53,9 +53,8 @@ class HealthTest extends BaseTest
         ;
 
         $health
-            ->expects($this->any())
             ->method('_retrieveHealthData')
-            ->will($this->returnValue($data))
+            ->willReturn($data)
         ;
 
         // need to explicitly refresh because the mocking won't refresh the data in the constructor

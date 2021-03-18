@@ -5,7 +5,6 @@ namespace Elastica\Test;
 use Elastica\Document;
 use Elastica\Exception\InvalidException;
 use Elastica\Result;
-use Elastica\ResultSet;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -28,7 +27,6 @@ class ResultSetTest extends BaseTest
 
         $resultSet = $index->search('elastica search');
 
-        $this->assertInstanceOf(ResultSet::class, $resultSet);
         $this->assertEquals(3, $resultSet->getTotalHits());
         $this->assertEquals('eq', $resultSet->getTotalHitsRelation());
         $this->assertGreaterThan(0, $resultSet->getMaxScore());
@@ -54,11 +52,7 @@ class ResultSetTest extends BaseTest
 
         $resultSet = $index->search('elastica search');
 
-        $this->assertInstanceOf(ResultSet::class, $resultSet);
-        $this->assertInstanceOf(Result::class, $resultSet[0]);
-        $this->assertInstanceOf(Result::class, $resultSet[1]);
-        $this->assertInstanceOf(Result::class, $resultSet[2]);
-
+        $this->assertContainsOnlyInstancesOf(Result::class, $resultSet);
         $this->assertArrayNotHasKey(3, $resultSet);
     }
 
@@ -76,16 +70,11 @@ class ResultSetTest extends BaseTest
         $index->refresh();
 
         $resultSet = $index->search('elastica search');
-
-        $this->assertInstanceOf(ResultSet::class, $resultSet);
-
         $documents = $resultSet->getDocuments();
 
         $this->assertIsArray($documents);
         $this->assertCount(3, $documents);
-        $this->assertInstanceOf(Document::class, $documents[0]);
-        $this->assertInstanceOf(Document::class, $documents[1]);
-        $this->assertInstanceOf(Document::class, $documents[2]);
+        $this->assertContainsOnlyInstancesOf(Document::class, $documents);
         $this->assertArrayNotHasKey(3, $documents);
         $this->assertEquals('elastica search', $documents[0]->get('name'));
     }

@@ -8,7 +8,6 @@ use Elastica\Multi\ResultSet as MultiResultSet;
 use Elastica\Multi\Search as MultiSearch;
 use Elastica\Query;
 use Elastica\Query\Term;
-use Elastica\Response;
 use Elastica\ResultSet;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
@@ -137,7 +136,6 @@ class SearchTest extends BaseTest
 
         $this->assertInstanceOf(MultiResultSet::class, $multiResultSet);
         $this->assertCount(2, $multiResultSet);
-        $this->assertInstanceOf(Response::class, $multiResultSet->getResponse());
         $this->assertContainsOnlyInstancesOf(ResultSet::class, $multiResultSet);
 
         $resultSets = $multiResultSet->getResultSets();
@@ -164,7 +162,6 @@ class SearchTest extends BaseTest
 
         $this->assertInstanceOf(MultiResultSet::class, $multiResultSet);
         $this->assertCount(2, $multiResultSet);
-        $this->assertInstanceOf(Response::class, $multiResultSet->getResponse());
 
         $resultSets = $multiResultSet->getResultSets();
 
@@ -227,7 +224,6 @@ class SearchTest extends BaseTest
 
         $this->assertInstanceOf(MultiResultSet::class, $multiResultSet);
         $this->assertCount(2, $multiResultSet);
-        $this->assertInstanceOf(Response::class, $multiResultSet->getResponse());
         $this->assertContainsOnlyInstancesOf(ResultSet::class, $multiResultSet);
         $this->assertInstanceOf(ResultSet::class, $multiResultSet['search1']);
         $this->assertInstanceOf(ResultSet::class, $multiResultSet['search2']);
@@ -256,7 +252,6 @@ class SearchTest extends BaseTest
 
         $this->assertInstanceOf(MultiResultSet::class, $multiResultSet);
         $this->assertCount(2, $multiResultSet);
-        $this->assertInstanceOf(Response::class, $multiResultSet->getResponse());
 
         $resultSets = $multiResultSet->getResultSets();
 
@@ -298,8 +293,6 @@ class SearchTest extends BaseTest
         $multiSearch->addSearch($searchBad);
 
         $multiResultSet = $multiSearch->search();
-
-        $this->assertInstanceOf(MultiResultSet::class, $multiResultSet);
         $resultSets = $multiResultSet->getResultSets();
         $this->assertIsArray($resultSets);
 
@@ -343,8 +336,6 @@ class SearchTest extends BaseTest
         $multiSearch->addSearch($searchBad);
 
         $multiResultSet = $multiSearch->search();
-
-        $this->assertInstanceOf(MultiResultSet::class, $multiResultSet);
         $resultSets = $multiResultSet->getResultSets();
         $this->assertIsArray($resultSets);
 
@@ -405,7 +396,6 @@ class SearchTest extends BaseTest
 
         $this->assertInstanceOf(MultiResultSet::class, $multiResultSet);
         $this->assertCount(2, $multiResultSet);
-        $this->assertInstanceOf(Response::class, $multiResultSet->getResponse());
 
         $resultSets = $multiResultSet->getResultSets();
 
@@ -427,9 +417,7 @@ class SearchTest extends BaseTest
 
         $multiResultSet = $multiSearch->search();
 
-        $this->assertInstanceOf(MultiResultSet::class, $multiResultSet);
         $this->assertCount(2, $multiResultSet);
-        $this->assertInstanceOf(Response::class, $multiResultSet->getResponse());
 
         $resultSets = $multiResultSet->getResultSets();
 
@@ -489,7 +477,6 @@ class SearchTest extends BaseTest
 
         $this->assertInstanceOf(MultiResultSet::class, $multiResultSet);
         $this->assertCount(2, $multiResultSet);
-        $this->assertInstanceOf(Response::class, $multiResultSet->getResponse());
 
         $resultSets = $multiResultSet->getResultSets();
 
@@ -511,9 +498,7 @@ class SearchTest extends BaseTest
 
         $multiResultSet = $multiSearch->search();
 
-        $this->assertInstanceOf(MultiResultSet::class, $multiResultSet);
         $this->assertCount(2, $multiResultSet);
-        $this->assertInstanceOf(Response::class, $multiResultSet->getResponse());
 
         $resultSets = $multiResultSet->getResultSets();
 

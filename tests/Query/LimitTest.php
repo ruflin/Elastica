@@ -16,10 +16,10 @@ class LimitTest extends BaseTest
     public function testSetType(): void
     {
         $query = new Limit(10);
-        $this->assertEquals(10, $query->getParam('value'));
+        $this->assertSame(10, $query->getParam('value'));
 
-        $this->assertInstanceOf(Limit::class, $query->setLimit(20));
-        $this->assertEquals(20, $query->getParam('value'));
+        $query->setLimit(20);
+        $this->assertSame(20, $query->getParam('value'));
     }
 
     /**

@@ -83,8 +83,6 @@ class NullTransportTest extends BaseTest
         $transport = new NullTransport();
         $response = $transport->exec($request, $params);
 
-        $this->assertInstanceOf(Response::class, $response);
-
         $data = $response->getData();
         $this->assertEquals($params, $data['params']);
     }

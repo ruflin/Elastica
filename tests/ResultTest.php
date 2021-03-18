@@ -28,8 +28,6 @@ class ResultTest extends BaseTest
 
         $result = $resultSet->current();
 
-        $this->assertInstanceOf(Result::class, $result);
-        $this->assertInstanceOf(Document::class, $result->getDocument());
         $this->assertEquals($index->getName(), $result->getIndex());
         $this->assertEquals(3, $result->getId());
         $this->assertGreaterThan(0, $result->getScore());
@@ -71,7 +69,6 @@ class ResultTest extends BaseTest
         $result = $resultSet->current();
 
         $this->assertEquals([], $result->getSource());
-        $this->assertInstanceOf(Result::class, $result);
         $this->assertEquals($indexName, $result->getIndex());
         $this->assertEquals($docId, $result->getId());
         $this->assertGreaterThan(0, $result->getScore());

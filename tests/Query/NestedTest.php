@@ -16,12 +16,14 @@ class NestedTest extends BaseTest
      */
     public function testSetQuery(): void
     {
-        $nested = new Nested();
+        $queryString = new QueryString('test');
         $path = 'test1';
 
-        $queryString = new QueryString('test');
-        $this->assertInstanceOf(Nested::class, $nested->setQuery($queryString));
-        $this->assertInstanceOf(Nested::class, $nested->setPath($path));
+        $nested = (new Nested())
+            ->setQuery($queryString)
+            ->setPath($path)
+        ;
+
         $expected = [
             'nested' => [
                 'query' => $queryString->toArray(),
@@ -29,6 +31,6 @@ class NestedTest extends BaseTest
             ],
         ];
 
-        $this->assertEquals($expected, $nested->toArray());
+        $this->assertSame($expected, $nested->toArray());
     }
 }

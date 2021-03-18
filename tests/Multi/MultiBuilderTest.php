@@ -3,7 +3,6 @@
 namespace Elastica\Test\Multi;
 
 use Elastica\Multi\MultiBuilder;
-use Elastica\Multi\ResultSet as MultiResultSet;
 use Elastica\Response;
 use Elastica\ResultSet;
 use Elastica\ResultSet\BuilderInterface;
@@ -46,7 +45,7 @@ class MultiBuilderTest extends BaseTest
 
         $result = $this->multiBuilder->buildMultiResultSet($response, $searches);
 
-        $this->assertInstanceOf(MultiResultSet::class, $result);
+        $this->assertCount(0, $result->getResultSets());
     }
 
     public function testBuildMultiResultSet(): void
@@ -75,7 +74,6 @@ class MultiBuilderTest extends BaseTest
 
         $result = $this->multiBuilder->buildMultiResultSet($response, $searches);
 
-        $this->assertInstanceOf(MultiResultSet::class, $result);
         $this->assertSame($resultSet1, $result[0]);
         $this->assertSame($resultSet2, $result[1]);
     }
