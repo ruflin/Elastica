@@ -74,11 +74,11 @@ class ClientConfiguration
             throw new InvalidException(\sprintf('DSN "%s" is invalid.', $dsnString), 0, $e);
         }
 
-        if ('dsn' == $func->getName()) {
+        if ('dsn' === $func->getName()) {
             /** @var Url $dsn */
             $dsn = $func->first();
             $clientConfiguration = self::fromArray(self::parseDsn($dsn));
-        } elseif ('pool' == $func->getName()) {
+        } elseif ('pool' === $func->getName()) {
             $connections = [];
             $clientConfiguration = new static();
             foreach ($func->getArguments() as $arg) {

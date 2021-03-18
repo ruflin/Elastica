@@ -150,7 +150,7 @@ class Http extends AbstractTransport
 
         \curl_setopt($conn, \CURLOPT_HTTPHEADER, $headers);
 
-        \curl_setopt($conn, \CURLOPT_NOBODY, 'HEAD' == $httpMethod);
+        \curl_setopt($conn, \CURLOPT_NOBODY, 'HEAD' === $httpMethod);
 
         \curl_setopt($conn, \CURLOPT_CUSTOMREQUEST, $httpMethod);
 

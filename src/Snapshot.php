@@ -57,7 +57,7 @@ class Snapshot
         try {
             $response = $this->request($name);
         } catch (ResponseException $e) {
-            if (404 == $e->getResponse()->getStatus()) {
+            if (404 === $e->getResponse()->getStatus()) {
                 throw new NotFoundException("Repository '".$name."' does not exist.");
             }
             throw $e;
@@ -108,7 +108,7 @@ class Snapshot
         try {
             $response = $this->request($repository.'/'.$name);
         } catch (ResponseException $e) {
-            if (404 == $e->getResponse()->getStatus()) {
+            if (404 === $e->getResponse()->getStatus()) {
                 throw new NotFoundException("Snapshot '".$name."' does not exist in repository '".$repository."'.");
             }
             throw $e;

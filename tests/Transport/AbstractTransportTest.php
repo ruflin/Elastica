@@ -140,7 +140,7 @@ class AbstractTransportTest extends BaseTest
             $this->fail('Failed to parse value [1] as only [true] or [false] are allowed.');
         }
 
-        if ('Http' == $transport['transport']) {
+        if ('Http' === $transport['transport']) {
             $info = $results->getResponse()->getTransferInfo();
             $url = $info['url'];
             $this->assertStringEndsWith('version=true', $url);

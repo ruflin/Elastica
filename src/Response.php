@@ -96,7 +96,7 @@ class Response
             $message .= ' [index: '.$rootError['index'].']';
         }
 
-        if (isset($error['reason']) && $rootError['reason'] != $error['reason']) {
+        if (isset($error['reason']) && $rootError['reason'] !== $error['reason']) {
             $message .= ' [reason: '.$error['reason'].']';
         }
 
