@@ -23,7 +23,8 @@ class SpanOrTest extends BaseTest
 
         $term1 = new Term(['name' => 'marek']);
         $term2 = new Term(['name' => 'nicolas']);
-        $spanOrQuery = new SpanOr([$term1, $term2]);
+
+        new SpanOr([$term1, $term2]);
     }
 
     /**

@@ -131,7 +131,7 @@ class DateRangeTest extends BaseAggregationTest
         $query->addAggregation($agg);
 
         try {
-            $results = $this->_getIndexForTest()->search($query)->getAggregation('date');
+            $this->_getIndexForTest()->search($query)->getAggregation('date');
             $this->fail('Should throw exception to and from parameters in date_range aggregation are interpreted according of the target field');
         } catch (ResponseException $e) {
             $error = $e->getResponse()->getFullError();

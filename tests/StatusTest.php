@@ -54,7 +54,6 @@ class StatusTest extends BaseTest
     public function testIndexExists(): void
     {
         $indexName = 'elastica_test';
-        $aliasName = 'elastica_test-alias';
 
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);

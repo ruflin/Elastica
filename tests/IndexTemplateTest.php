@@ -27,7 +27,7 @@ class IndexTemplateTest extends BaseTest
         $name = 'index_template1';
         $client = $this->_getClient();
         $indexTemplate = new IndexTemplate($client, $name);
-        $indexTemplate->getName();
+
         $this->assertSame($client, $indexTemplate->getClient());
         $this->assertEquals($name, $indexTemplate->getName());
     }

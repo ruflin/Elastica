@@ -40,8 +40,6 @@ class AbstractTransportTest extends BaseTest
      */
     public function getValidDefinitions()
     {
-        $connection = new Connection();
-
         return [
             ['Http'],
             [['type' => 'Http']],
@@ -60,8 +58,7 @@ class AbstractTransportTest extends BaseTest
     public function testCanCreateTransportInstances($transport): void
     {
         $connection = new Connection();
-        $params = [];
-        $transport = AbstractTransport::create($transport, $connection, $params);
+        $transport = AbstractTransport::create($transport, $connection);
 
         $this->assertSame($connection, $transport->getConnection());
     }

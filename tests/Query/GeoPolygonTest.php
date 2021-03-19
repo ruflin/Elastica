@@ -59,7 +59,6 @@ class GeoPolygonTest extends BaseTest
         $this->assertEquals(1, $a->count());
 
         // Both points should be inside
-        $query = new Query();
         $points = [[16, 16], [16, 40], [40, 40], [40, 16], [16, 16]];
         $geoQuery = new GeoPolygon('location', $points);
 
