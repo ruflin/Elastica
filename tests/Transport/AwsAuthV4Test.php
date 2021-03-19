@@ -36,7 +36,7 @@ class AwsAuthV4Test extends GuzzleTest
         $client = $this->_getClient($config);
 
         try {
-            $client->request('_status', 'GET');
+            $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
             if ($guzzleException instanceof TransferException) {
@@ -77,7 +77,7 @@ class AwsAuthV4Test extends GuzzleTest
         $client = $this->_getClient($config);
 
         try {
-            $client->request('_status', 'GET');
+            $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
             if ($guzzleException instanceof TransferException) {
@@ -115,7 +115,7 @@ class AwsAuthV4Test extends GuzzleTest
         $client = $this->_getClient($config);
 
         try {
-            $client->request('_status', 'GET');
+            $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
             if ($guzzleException instanceof TransferException) {
@@ -149,7 +149,7 @@ class AwsAuthV4Test extends GuzzleTest
         $client = $this->_getClient($config);
 
         try {
-            $client->request('_status', 'GET');
+            $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
             if ($guzzleException instanceof TransferException) {
@@ -174,7 +174,7 @@ class AwsAuthV4Test extends GuzzleTest
         $client = $this->_getClient($config);
 
         try {
-            $client->request('_status', 'GET');
+            $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
             if ($guzzleException instanceof TransferException) {
@@ -198,7 +198,7 @@ class AwsAuthV4Test extends GuzzleTest
 
         $client = $this->_getClient($config);
         try {
-            $client->request('_status', 'GET');
+            $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
             if ($guzzleException instanceof TransferException) {
