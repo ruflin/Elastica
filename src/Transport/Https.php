@@ -15,14 +15,4 @@ class Https extends Http
      * @var string https scheme
      */
     protected $_scheme = 'https';
-
-    /**
-     * Overloads setupCurl to set SSL params.
-     *
-     * @param resource $connection Curl connection resource
-     */
-    protected function _setupCurl($connection): void
-    {
-        parent::_setupCurl($connection);
-    }
 }
