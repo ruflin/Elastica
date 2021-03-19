@@ -36,7 +36,6 @@ class GuzzleTest extends BaseTest
      */
     public function testWithEnvironmentalProxy(): void
     {
-        $this->checkProxy($this->_getProxyUrl());
         \putenv('http_proxy='.$this->_getProxyUrl().'/');
 
         $client = $this->_getClient(['transport' => 'Guzzle', 'persistent' => false]);
@@ -55,7 +54,6 @@ class GuzzleTest extends BaseTest
      */
     public function testWithEnabledEnvironmentalProxy(): void
     {
-        $this->checkProxy($this->_getProxyUrl403());
         \putenv('http_proxy='.$this->_getProxyUrl403().'/');
 
         $client = $this->_getClient(['transport' => 'Guzzle', 'persistent' => false]);
@@ -75,7 +73,6 @@ class GuzzleTest extends BaseTest
      */
     public function testWithProxy(): void
     {
-        $this->checkProxy($this->_getProxyUrl());
         $client = $this->_getClient(['transport' => 'Guzzle', 'persistent' => false]);
         $client->getConnection()->setProxy($this->_getProxyUrl());
 
@@ -139,11 +136,5 @@ class GuzzleTest extends BaseTest
         $client = $this->_getClient(['transport' => 'Guzzle', 'port' => 4500, 'persistent' => false]);
         $response = $client->request('_stats', 'GET');
         $client->request('_status', 'GET');
-    }
-
-    protected function checkProxy($url): void
-    {
-        $url = \parse_url($url);
-        $this->_checkConnection($url['host'], $url['port']);
     }
 }
