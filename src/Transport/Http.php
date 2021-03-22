@@ -166,7 +166,7 @@ class Http extends AbstractTransport
         // Checks if error exists
         $errorNumber = \curl_errno($conn);
 
-        $response = new Response($responseString, \curl_getinfo($conn, \CURLINFO_HTTP_CODE));
+        $response = new Response($responseString, \curl_getinfo($conn, \CURLINFO_RESPONSE_CODE));
         $response->setQueryTime($end - $start);
         $response->setTransferInfo(\curl_getinfo($conn));
         if ($connection->hasConfig('bigintConversion')) {

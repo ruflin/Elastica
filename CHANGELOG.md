@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 ### Changed
 * Replaced `call_user_func()` and `call_user_func_array()` by direct calls [#1923](https://github.com/ruflin/Elastica/pull/1923)
+* Replaced legacy constant `CURLINFO_HTTP_CODE` by `CURLINFO_RESPONSE_CODE` [#1931](https://github.com/ruflin/Elastica/pull/1931)
 * Updated `php-cs-fixer` to `2.18.3` [#1915](https://github.com/ruflin/Elastica/pull/1915)
 * Updated `composer-normalize` to `2.13.3` [#1927](https://github.com/ruflin/Elastica/pull/1927)
 ### Deprecated
