@@ -94,7 +94,7 @@ class HttpAdapter extends AbstractTransport
         $method = $elasticaRequest->getMethod();
         $headers = $connection->hasConfig('headers') ?: [];
         if (!empty($data) || '0' === $data) {
-            if (ElasticaRequest::GET == $method) {
+            if (ElasticaRequest::GET === $method) {
                 $method = ElasticaRequest::POST;
             }
 

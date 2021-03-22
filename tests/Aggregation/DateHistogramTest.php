@@ -27,7 +27,7 @@ class DateHistogramTest extends BaseAggregationTest
         $docCount = 0;
         $nonDocCount = 0;
         foreach ($results['buckets'] as $bucket) {
-            if (1 == $bucket['doc_count']) {
+            if (1 === $bucket['doc_count']) {
                 ++$docCount;
             } else {
                 ++$nonDocCount;
@@ -54,7 +54,7 @@ class DateHistogramTest extends BaseAggregationTest
         $docCount = 0;
         $nonDocCount = 0;
         foreach ($results['buckets'] as $bucket) {
-            if (1 == $bucket['doc_count']) {
+            if (1 === $bucket['doc_count']) {
                 ++$docCount;
             } else {
                 ++$nonDocCount;
