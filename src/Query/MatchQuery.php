@@ -46,9 +46,11 @@ class MatchQuery extends AbstractQuery
     /**
      * Sets a param for the given field.
      *
+     * @param bool|float|int|string $value
+     *
      * @return $this
      */
-    public function setFieldParam(string $field, string $key, string $value): self
+    public function setFieldParam(string $field, string $key, $value): self
     {
         if (!isset($this->_params[$field])) {
             $this->_params[$field] = [];
