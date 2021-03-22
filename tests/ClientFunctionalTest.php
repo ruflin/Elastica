@@ -347,7 +347,7 @@ class ClientFunctionalTest extends BaseTest
 
         $client->setConnections([$connection1, $connection2]);
 
-        $client->request('_stats', Request::GET);
+        $client->request('_stats');
 
         $connections = $client->getConnections();
 
@@ -369,7 +369,7 @@ class ClientFunctionalTest extends BaseTest
         $client->setConnections([$connection1, $connection2]);
 
         try {
-            $client->request('_stats', Request::GET);
+            $client->request('_stats');
             $this->fail('Should throw exception as no connection valid');
         } catch (HttpException $e) {
         }
@@ -410,7 +410,7 @@ class ClientFunctionalTest extends BaseTest
         $this->assertEquals(0, $count);
 
         try {
-            $client->request('_stats', Request::GET);
+            $client->request('_stats');
             $this->fail('Should throw exception as no connection valid');
         } catch (HttpException $e) {
             $this->assertTrue(true);
@@ -875,7 +875,7 @@ class ClientFunctionalTest extends BaseTest
             )
         ;
 
-        $client->request('_stats', Request::GET);
+        $client->request('_stats');
     }
 
     public function testLoggerOnFailure(): void
@@ -901,7 +901,7 @@ class ClientFunctionalTest extends BaseTest
             )
         ;
 
-        $client->request('_stats', Request::GET);
+        $client->request('_stats');
     }
 
     public function testDateMathEscapingWithMixedRequestTypes(): void
