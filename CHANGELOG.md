@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Fixed `_seq_no` and `_primary_term` wrong initialization [#1920](https://github.com/ruflin/Elastica/pull/1920)
 * Fixed `Elastica\Connection\StrategyInterface` instance checks [#1921](https://github.com/ruflin/Elastica/pull/1921)
 * Fixed various PHPDoc annotations [#1922](https://github.com/ruflin/Elastica/pull/1922)
+* Fixed numeric index names are returned as `int` in `Elastica\Status::getIndexNames()` [#1928](https://github.com/ruflin/Elastica/pull/1928)
 ### Security
 
 ## [7.1.0](https://github.com/ruflin/Elastica/compare/7.0.0...7.1.0)

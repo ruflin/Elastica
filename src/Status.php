@@ -57,13 +57,15 @@ class Status
     /**
      * Returns a list of the existing index names.
      *
-     * @return array Index names list
+     * @return string[]
      */
     public function getIndexNames()
     {
         $data = $this->getData();
 
-        return \array_keys($data['indices']);
+        return \array_map(static function ($name): string {
+            return (string) $name;
+        }, \array_keys($data['indices']));
     }
 
     /**
