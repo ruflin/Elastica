@@ -102,7 +102,7 @@ class QueryStringTest extends BaseTest
         $query = $query->setFields(['title', 'firstname', 'lastname', 'price', 'year']);
 
         try {
-            $resultSet = $index->search($query);
+            $index->search($query);
         } catch (ResponseException $ex) {
             $error = $ex->getResponse()->getFullError();
 

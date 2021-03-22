@@ -51,6 +51,6 @@ class ExampleTest extends BaseTest
         // Refresh index
         $index->refresh();
 
-        $resultSet = $index->search('rolf');
+        $index->search('rolf');
     }
 }

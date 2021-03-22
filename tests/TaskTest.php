@@ -82,7 +82,7 @@ class TaskTest extends Base
     {
         $task = $this->_createTask();
         $task->refresh([Task::WAIT_FOR_COMPLETION => Task::WAIT_FOR_COMPLETION_TRUE]);
-        $response = $task->cancel();
+        $task->cancel();
 
         $task->refresh();
         $this->assertArrayNothasKey('canceled', $task->getData());

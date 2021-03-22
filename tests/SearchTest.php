@@ -366,8 +366,7 @@ class SearchTest extends BaseTest
 
         $client = $this->_getClient();
         $search = new Search($client);
-        // Throws InvalidException
-        $resultSet = $search->search('test', ['invalid_option' => 'invalid_option_value']);
+        $search->search('test', ['invalid_option' => 'invalid_option_value']);
     }
 
     /**

@@ -32,7 +32,7 @@ class GeoBoundingBoxTest extends BaseTest
     {
         $this->expectException(InvalidException::class);
 
-        $query = new GeoBoundingBox('foo', []);
+        new GeoBoundingBox('foo', []);
     }
 
     /**

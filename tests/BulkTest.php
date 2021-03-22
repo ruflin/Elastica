@@ -426,8 +426,7 @@ class BulkTest extends BaseTest
         $this->assertFalse($response->hasError());
 
         $index->refresh();
-
-        $doc = $index->getDocument(2);
+        $index->getDocument(2);
 
         //test updating via document
         $doc2 = new Document(2, ['name' => 'The Walrus'], $index);

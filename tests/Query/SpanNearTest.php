@@ -23,7 +23,8 @@ class SpanNearTest extends BaseTest
 
         $term1 = new Term(['name' => 'marek']);
         $term2 = new Term(['name' => 'nicolas']);
-        $spanNearQuery = new SpanNear([$term1, $term2]);
+
+        new SpanNear([$term1, $term2]);
     }
 
     /**

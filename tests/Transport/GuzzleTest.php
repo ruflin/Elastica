@@ -137,8 +137,7 @@ class GuzzleTest extends BaseTest
         $this->expectException(GuzzleException::class);
 
         $client = $this->_getClient(['transport' => 'Guzzle', 'port' => 4500, 'persistent' => false]);
-        $response = $client->request('_stats', 'GET');
-        $client->request('_status', 'GET');
+        $client->request('_stats', 'GET');
     }
 
     protected function checkProxy($url): void

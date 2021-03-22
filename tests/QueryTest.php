@@ -167,14 +167,13 @@ class QueryTest extends BaseTest
      */
     public function testSetStoredFields(): void
     {
-        $query = new Query();
-
-        $params = ['query' => 'test'];
-
-        $query->setStoredFields(['firstname', 'lastname']);
+        $query = (new Query())
+            ->setStoredFields(['firstname', 'lastname'])
+        ;
 
         $data = $query->toArray();
 
+        $this->assertArrayHasKey('stored_fields', $data);
         $this->assertContains('firstname', $data['stored_fields']);
         $this->assertContains('lastname', $data['stored_fields']);
         $this->assertCount(2, $data['stored_fields']);

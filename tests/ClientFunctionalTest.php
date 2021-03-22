@@ -10,7 +10,6 @@ use Elastica\Document;
 use Elastica\Exception\Connection\HttpException;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\NotFoundException;
-use Elastica\Index;
 use Elastica\Request;
 use Elastica\Response;
 use Elastica\Script\Script;
@@ -88,7 +87,7 @@ class ClientFunctionalTest extends BaseTest
         // Refresh index
         $index->refresh();
 
-        $resultSet = $index->search('rolf');
+        $index->search('rolf');
     }
 
     public function testTwoServersSame(): void
@@ -125,7 +124,7 @@ class ClientFunctionalTest extends BaseTest
         // Refresh index
         $index->refresh();
 
-        $resultSet = $index->search('rolf');
+        $index->search('rolf');
     }
 
     public function testBulk(): void
@@ -270,7 +269,7 @@ class ClientFunctionalTest extends BaseTest
         $idxString = $index->getName();
 
         // Using the existing $index variable that is a string
-        $resp = $index->getClient()->deleteIds($ids, $idxString);
+        $index->getClient()->deleteIds($ids, $idxString);
 
         // Refresh the index to clear out deleted ID information
         $index->refresh();
@@ -327,7 +326,7 @@ class ClientFunctionalTest extends BaseTest
         $this->assertEquals(1, $totalHits);
 
         // Using the existing $index variable which is \Elastica\Index object
-        $resp = $index->getClient()->deleteIds($ids, $index);
+        $index->getClient()->deleteIds($ids, $index);
 
         // Refresh the index to clear out deleted ID information
         $index->refresh();
@@ -582,7 +581,7 @@ class ClientFunctionalTest extends BaseTest
 
         //Confirm document one does not exist
         try {
-            $document = $index->getDocument(1);
+            $index->getDocument(1);
             $this->fail('Exception was not thrown. Maybe the document exists?');
         } catch (\Exception $e) {
             //Ignore the exception because we expect the document to not exist.
@@ -593,7 +592,6 @@ class ClientFunctionalTest extends BaseTest
         $client->updateDocument(1, $newDocument, $index->getName());
 
         $document = $index->getDocument(1);
-        $this->assertInstanceOf(Document::class, $document);
         $data = $document->getData();
         $this->assertArrayHasKey('field1', $data);
         $this->assertEquals('value1', $data['field1']);

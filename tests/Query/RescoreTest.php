@@ -218,18 +218,21 @@ class RescoreTest extends BaseTest
      */
     public function testQuery(): void
     {
-        $query = new Query();
-        $mainQuery = new MatchQuery();
-        $mainQuery = $mainQuery->setFieldQuery('test1', 'foo');
-        $secQuery = new Term();
-        $secQuery = $secQuery->setTerm('test2', 'bar', 2);
-        $queryRescore = new QueryRescore($secQuery);
-        $queryRescore->setWindowSize(50);
-        $queryRescore->setQueryWeight(.7);
-        $queryRescore->setRescoreQueryWeight(1.2);
-        $query->setQuery($mainQuery);
-        $query->setRescore($queryRescore);
-        $data = $query->toArray();
+        $mainQuery = (new MatchQuery())
+            ->setFieldQuery('test1', 'foo')
+        ;
+        $secQuery = (new Term())
+            ->setTerm('test2', 'bar', 2)
+        ;
+        $queryRescore = (new QueryRescore($secQuery))
+            ->setWindowSize(50)
+            ->setQueryWeight(.7)
+            ->setRescoreQueryWeight(1.2)
+        ;
+        $query = (new Query())
+            ->setQuery($mainQuery)
+            ->setRescore($queryRescore)
+        ;
 
         $index = $this->_createIndex();
         $index->refresh();
