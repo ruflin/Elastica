@@ -156,15 +156,6 @@ class Base extends TestCase
         }
     }
 
-    protected function _checkConnection($host, $port): void
-    {
-        $fp = @\pfsockopen($host, $port);
-
-        if (!$fp) {
-            $this->markTestSkipped('Connection to '.$host.':'.$port.' failed');
-        }
-    }
-
     protected function _waitForAllocation(Index $index): void
     {
         do {
