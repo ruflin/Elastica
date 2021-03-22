@@ -321,7 +321,7 @@ class AbstractUpdateAction extends Param
     {
         $refresh = $this->getParam('refresh');
 
-        return \in_array($refresh, [Reindex::REFRESH_TRUE, Reindex::REFRESH_FALSE])
+        return \in_array($refresh, [Reindex::REFRESH_TRUE, Reindex::REFRESH_FALSE], true)
             ? Reindex::REFRESH_TRUE === $refresh
             : $refresh;
     }
