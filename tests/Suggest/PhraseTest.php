@@ -65,10 +65,7 @@ class PhraseTest extends BaseTest
         $this->assertEquals('elasticsearch is bonsai cool', $suggests['suggest1'][0]['options'][0]['text']);
     }
 
-    /**
-     * @return Index
-     */
-    protected function _getIndexForTest()
+    protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
         $index->addDocuments([

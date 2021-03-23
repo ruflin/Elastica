@@ -67,7 +67,7 @@ class Settings
      *
      * @param string $setting OPTIONAL Setting name to return
      *
-     * @return array|string|null Settings data
+     * @return array|int|string|null Settings data
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html
      */

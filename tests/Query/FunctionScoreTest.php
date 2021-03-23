@@ -3,6 +3,7 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query\FunctionScore;
 use Elastica\Query\MatchAll;
@@ -553,7 +554,7 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals(2, $results[0]->getId());
     }
 
-    protected function _getIndexForTest()
+    protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
         $index->setMapping(new Mapping([

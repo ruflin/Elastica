@@ -289,7 +289,7 @@ class BulkTest extends BaseTest
         $this->fail($failMessage);
     }
 
-    public function invalidRawDataProvider()
+    public function invalidRawDataProvider(): array
     {
         return [
             [

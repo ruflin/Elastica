@@ -241,7 +241,7 @@ class TopHitsTest extends BaseAggregationTest
         $this->assertEquals([2, 4], $resultDocs);
     }
 
-    public function limitedSourceProvider()
+    public function limitedSourceProvider(): array
     {
         return [
             'string source' => ['title'],

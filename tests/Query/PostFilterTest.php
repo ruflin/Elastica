@@ -3,6 +3,7 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\MatchQuery;
 use Elastica\Query\Term;
@@ -49,7 +50,7 @@ class PostFilterTest extends BaseTest
         $this->assertEquals(1, $this->_getTestIndex()->count($query));
     }
 
-    protected function _getTestIndex()
+    protected function _getTestIndex(): Index
     {
         $index = $this->_createIndex();
         $docs = [

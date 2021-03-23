@@ -6,6 +6,7 @@ use Elastica\Aggregation\BucketSelector;
 use Elastica\Aggregation\DateHistogram;
 use Elastica\Aggregation\Max;
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Query;
 
 /**
@@ -70,7 +71,7 @@ class BucketSelectorTest extends BaseAggregationTest
         $this->assertEquals(7, $dateHistogramAggResult[3]['max_agg']['value']);
     }
 
-    protected function _getIndexForTest()
+    protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
 

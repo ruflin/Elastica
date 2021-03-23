@@ -114,7 +114,7 @@ class Client
      *
      * @throws InvalidException if the given key is not found in the configuration
      *
-     * @return array|string Config value
+     * @return array|bool|string
      */
     public function getConfig(string $key = '')
     {
@@ -528,8 +528,8 @@ class Client
 
         $this->_logger->debug('Elastica Request', [
             'request' => $request->toArray(),
-            'response' => $this->_lastResponse ? $this->_lastResponse->getData() : null,
-            'responseStatus' => $this->_lastResponse ? $this->_lastResponse->getStatus() : null,
+            'response' => $response->getData(),
+            'responseStatus' => $response->getStatus(),
         ]);
 
         return $response;

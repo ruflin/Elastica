@@ -126,10 +126,7 @@ class ScriptIdTest extends BaseTest
         ScriptId::create($data);
     }
 
-    /**
-     * @return array
-     */
-    public function dataProviderCreateInvalid()
+    public function dataProviderCreateInvalid(): array
     {
         return [
             [

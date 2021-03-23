@@ -21,7 +21,7 @@ class AbstractTransportTest extends BaseTest
      *
      * @return array[]
      */
-    public function getTransport()
+    public function getTransport(): array
     {
         return [
             [
@@ -38,7 +38,7 @@ class AbstractTransportTest extends BaseTest
      *
      * @return array[]
      */
-    public function getValidDefinitions()
+    public function getValidDefinitions(): array
     {
         return [
             ['Http'],
@@ -63,7 +63,7 @@ class AbstractTransportTest extends BaseTest
         $this->assertSame($connection, $transport->getConnection());
     }
 
-    public function getInvalidDefinitions()
+    public function getInvalidDefinitions(): array
     {
         return [
             [['transport' => 'Http']],

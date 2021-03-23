@@ -124,7 +124,7 @@ class Reindex extends Param
     {
         $taskId = null;
         if ($this->_lastResponse instanceof Response) {
-            $taskId = $this->_lastResponse->getData()['task'] ? $this->_lastResponse->getData()['task'] : null;
+            $taskId = $this->_lastResponse->getData()['task'] ?: null;
         }
 
         return $taskId;
