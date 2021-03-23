@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/7.1.0...master)
 ### Backward Compatibility Breaks
 * Changed `Elastica\Query\MatchQuery::setFieldParam()` signature to allow passing bool, float or int [#1941](https://github.com/ruflin/Elastica/pull/1941)
+* Changed `Elastica\Query\MatchPhraseQuery::setFieldParam()` signature to allow passing bool, float or int [#1944](https://github.com/ruflin/Elastica/pull/1944)
 ### Added
 ### Changed
 * Changed `Elastica\Status::indexExists()`, `Elastica\Status::aliasExists()` and `Elastica\Status::getIndicesWithAlias()` signatures [#1929](https://github.com/ruflin/Elastica/pull/1929)
