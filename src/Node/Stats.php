@@ -55,11 +55,11 @@ class Stats
      *
      * @return array|null Node stats for the given field or null if not found
      */
-    public function get()
+    public function get(...$args)
     {
         $data = $this->getData();
 
-        foreach (\func_get_args() as $arg) {
+        foreach ($args as $arg) {
             if (isset($data[$arg])) {
                 $data = $data[$arg];
             } else {

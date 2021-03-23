@@ -15,17 +15,14 @@ class JSON
      * @see http://php.net/manual/en/function.json-decode.php
      * @see http://php.net/manual/en/function.json-last-error.php
      *
-     * @param string $args,... JSON string to parse
+     * @param mixed $args,... JSON string to parse
      *
      * @throws JSONParseException
      *
      * @return array PHP array representation of JSON string
      */
-    public static function parse($args/* inherit from json_decode */)
+    public static function parse(...$args/* inherit from json_decode */)
     {
-        // extract arguments
-        $args = \func_get_args();
-
         // default to decoding into an assoc array
         if (1 === \count($args)) {
             $args[] = true;
@@ -55,11 +52,8 @@ class JSON
      *
      * @return string Valid JSON representation of $input
      */
-    public static function stringify($args/* inherit from json_encode */)
+    public static function stringify(...$args/* inherit from json_encode */)
     {
-        // extract arguments
-        $args = \func_get_args();
-
         // set defaults
         isset($args[1]) ? $args[1] |= \JSON_PRESERVE_ZERO_FRACTION : $args[1] = \JSON_PRESERVE_ZERO_FRACTION;
 
