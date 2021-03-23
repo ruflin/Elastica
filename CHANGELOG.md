@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Backward Compatibility Breaks
 ### Bugfixes
+* Added conflict with `elasticsearch/elasticsearch` version `6.8.1` [#1948](https://github.com/ruflin/Elastica/pull/1948)
 ### Added
 ### Improvements
 ### Deprecated
