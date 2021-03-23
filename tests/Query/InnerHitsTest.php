@@ -204,18 +204,17 @@ class InnerHitsTest extends BaseTest
      */
     public function testInnerHitsLimitedSource(): void
     {
-        $this->markTestSkipped('Source filtering on inner hits is bugged. See https://github.com/elastic/elasticsearch/issues/21312');
-
-        $innerHits = new InnerHits();
-        $innerHits->setSource(['includes' => ['name'], 'excludes' => ['last_activity_date']]);
+        $innerHits = (new InnerHits())
+            ->setSource(['users.name'])
+        ;
 
         $results = $this->getNestedQuery(new MatchAll(), $innerHits);
 
         foreach ($results as $row) {
             $innerHitsResult = $row->getInnerHits();
             foreach ($innerHitsResult['users']['hits']['hits'] as $doc) {
-                $this->assertArrayHasKey('name', $doc['_source']['users']);
-                $this->assertArrayNotHasKey('last_activity_date', $doc['_source']['users']);
+                $this->assertArrayHasKey('name', $doc['_source']);
+                $this->assertArrayNotHasKey('last_activity_date', $doc['_source']);
             }
         }
     }
@@ -226,8 +225,9 @@ class InnerHitsTest extends BaseTest
     public function testInnerHitsWithOffset(): void
     {
         $queryString = new SimpleQueryString('linux cool');
-        $innerHits = new InnerHits();
-        $innerHits->setFrom(1);
+        $innerHits = (new InnerHits())
+            ->setFrom(1)
+        ;
 
         $results = $this->getParentChildQuery($queryString, $innerHits);
         $firstResult = \current($results->getResults());
@@ -246,8 +246,9 @@ class InnerHitsTest extends BaseTest
     public function testInnerHitsWithSort(): void
     {
         $queryString = new SimpleQueryString('linux cool');
-        $innerHits = new InnerHits();
-        $innerHits->setSort(['answer' => 'asc']);
+        $innerHits = (new InnerHits())
+            ->setSort(['answer' => 'asc'])
+        ;
 
         $results = $this->getParentChildQuery($queryString, $innerHits);
         $firstResult = \current($results->getResults());
@@ -271,8 +272,9 @@ class InnerHitsTest extends BaseTest
     public function testInnerHitsWithExplain(): void
     {
         $matchAll = new MatchAll();
-        $innerHits = new InnerHits();
-        $innerHits->setExplain(true);
+        $innerHits = (new InnerHits())
+            ->setExplain(true)
+        ;
 
         $results = $this->getNestedQuery($matchAll, $innerHits);
 
@@ -290,8 +292,9 @@ class InnerHitsTest extends BaseTest
     public function testInnerHitsWithVersion(): void
     {
         $matchAll = new MatchAll();
-        $innerHits = new InnerHits();
-        $innerHits->setVersion(true);
+        $innerHits = (new InnerHits())
+            ->setVersion(true)
+        ;
 
         $results = $this->getNestedQuery($matchAll, $innerHits);
 
@@ -309,12 +312,14 @@ class InnerHitsTest extends BaseTest
     public function testInnerHitsWithScriptFields(): void
     {
         $matchAll = new MatchAll();
-        $innerHits = new InnerHits();
-        $innerHits->setSize(1);
-        $scriptFields = new ScriptFields();
-        $scriptFields->addScript('three', new Script('1 + 2'));
-        $scriptFields->addScript('five', new Script('3 + 2'));
-        $innerHits->setScriptFields($scriptFields);
+        $scriptFields = (new ScriptFields())
+            ->addScript('three', new Script('1 + 2'))
+            ->addScript('five', new Script('3 + 2'))
+        ;
+        $innerHits = (new InnerHits())
+            ->setSize(1)
+            ->setScriptFields($scriptFields)
+        ;
 
         $results = $this->getNestedQuery($matchAll, $innerHits);
 
@@ -333,8 +338,9 @@ class InnerHitsTest extends BaseTest
     public function testInnerHitsWithHighlight(): void
     {
         $queryString = new SimpleQueryString('question simon', ['title', 'users.name']);
-        $innerHits = new InnerHits();
-        $innerHits->setHighlight(['fields' => ['users.name' => new \stdClass()]]);
+        $innerHits = (new InnerHits())
+            ->setHighlight(['fields' => ['users.name' => new \stdClass()]])
+        ;
 
         $results = $this->getNestedQuery($queryString, $innerHits);
 
@@ -357,9 +363,9 @@ class InnerHitsTest extends BaseTest
     public function testInnerHitsWithFieldData(): void
     {
         $queryString = new SimpleQueryString('question simon', ['title', 'users.name']);
-        $innerHits = new InnerHits();
-
-        $innerHits->setFieldDataFields(['users.name']);
+        $innerHits = (new InnerHits())
+            ->setFieldDataFields(['users.name'])
+        ;
 
         $results = $this->getNestedQuery($queryString, $innerHits);
 
@@ -381,6 +387,7 @@ class InnerHitsTest extends BaseTest
                 'type' => 'nested',
                 'properties' => [
                     'name' => ['type' => 'text', 'fielddata' => true],
+                    'last_activity_date' => ['type' => 'date'],
                 ],
             ],
             'title' => ['type' => 'text'],
