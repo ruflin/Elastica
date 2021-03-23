@@ -22,7 +22,7 @@
         "phpunit/phpunit": "^6.0"
     },
     "conflict": {
-        "elasticsearch/elasticsearch": "6.8.0"
+        "elasticsearch/elasticsearch": "6.8.0 || 6.8.1"
     },
     "suggest": {
         "aws/aws-sdk-php": "Allow using IAM authentication with Amazon ElasticSearch Service",
