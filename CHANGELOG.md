@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Updated `php-cs-fixer` to `2.18.3` [#1915](https://github.com/ruflin/Elastica/pull/1915)
 * Updated `composer-normalize` to `2.13.3` [#1927](https://github.com/ruflin/Elastica/pull/1927)
 ### Deprecated
+* Deprecated `Elastica\Transport\HttpAdapter` class [#1940](https://github.com/ruflin/Elastica/pull/1940)
 ### Removed
 ### Fixed
 * Fixed `_seq_no` and `_primary_term` wrong initialization [#1920](https://github.com/ruflin/Elastica/pull/1920)
