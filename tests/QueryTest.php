@@ -390,6 +390,20 @@ class QueryTest extends BaseTest
     }
 
     /**
+     * @group unit
+     */
+    public function testSetPostFilterWithArray(): void
+    {
+        $query = (new Query())
+            ->setParam('post_filter', [
+                'term' => ['field' => 'value'],
+            ])
+        ;
+
+        $query->toArray();
+    }
+
+    /**
      * @group functional
      */
     public function testNoSource(): void
