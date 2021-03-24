@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Deprecated `Elastica\Transport\HttpAdapter` class [#1940](https://github.com/ruflin/Elastica/pull/1940)
 ### Removed
 ### Fixed
+* Fixed wrong `ltrim` usage in guzzle transport [#1783](https://github.com/ruflin/Elastica/pull/1783)
 * Fixed `_seq_no` and `_primary_term` wrong initialization [#1920](https://github.com/ruflin/Elastica/pull/1920)
 * Fixed `Elastica\Connection\StrategyInterface` instance checks [#1921](https://github.com/ruflin/Elastica/pull/1921)
 * Fixed various PHPDoc annotations [#1922](https://github.com/ruflin/Elastica/pull/1922)
