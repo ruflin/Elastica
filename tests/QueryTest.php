@@ -392,15 +392,27 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetPostFilterWithArray(): void
+    public function testRawPostFilter(): void
     {
         $query = (new Query())
+            ->setQuery(new Term(['field' => 'value']))
             ->setParam('post_filter', [
                 'term' => ['field' => 'value'],
             ])
         ;
 
-        $query->toArray();
+        $this->assertSame([
+            'query' => [
+                'term' => [
+                    'field' => 'value',
+                ],
+            ],
+            'post_filter' => [
+                'term' => [
+                    'field' => 'value',
+                ],
+            ],
+        ], $query->toArray());
     }
 
     /**
