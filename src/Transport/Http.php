@@ -120,6 +120,8 @@ class Http extends AbstractTransport
         $data = $request->getData();
         $httpMethod = $request->getMethod();
 
+        $headers[] = 'Content-Type: '.$request->getContentType();
+
         if (!empty($data) || '0' === $data) {
             if ($this->hasParam('postWithRequestBody') && true == $this->getParam('postWithRequestBody')) {
                 $httpMethod = Request::POST;
@@ -134,7 +136,6 @@ class Http extends AbstractTransport
                 $content = \str_replace('\/', '/', $content);
             }
 
-            $headers[] = 'Content-Type: '.$request->getContentType();
             if ($connection->hasCompression()) {
                 // Compress the body of the request ...
                 \curl_setopt($conn, \CURLOPT_POSTFIELDS, \gzencode($content));

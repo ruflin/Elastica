@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Changed `Elastica\Query\MatchPhraseQuery::setFieldParam()` signature to allow passing bool, float or int [#1944](https://github.com/ruflin/Elastica/pull/1944)
 ### Added
 ### Changed
+* Included `Content-Type` HTTP header every time, whatever the content of the body is [#1780](https://github.com/ruflin/Elastica/pull/1780)
 * Changed `Elastica\Status::indexExists()`, `Elastica\Status::aliasExists()` and `Elastica\Status::getIndicesWithAlias()` signatures [#1929](https://github.com/ruflin/Elastica/pull/1929)
 * Replaced `call_user_func()` and `call_user_func_array()` by direct calls [#1923](https://github.com/ruflin/Elastica/pull/1923)
 * Replaced legacy constant `CURLINFO_HTTP_CODE` by `CURLINFO_RESPONSE_CODE` [#1931](https://github.com/ruflin/Elastica/pull/1931)
