@@ -91,15 +91,13 @@ class ResultSetTest extends BaseTest
         $index->refresh();
 
         $resultSet = $index->search('elastica search');
-
-        $result = new Result(['_id' => 'fakeresult']);
-        $resultSet[1] = $result;
+        $resultSet[1] = new Result(['_id' => 'fakeresult']);
     }
 
     /**
      * @group functional
      */
-    public function testInvalidOffsetGet()
+    public function testInvalidOffsetGet(): void
     {
         $this->expectException(InvalidException::class);
 
@@ -109,8 +107,6 @@ class ResultSetTest extends BaseTest
         $index->addDocument($doc);
         $index->refresh();
 
-        $resultSet = $index->search('elastica search');
-
-        return $resultSet[3];
+        $index->search('elastica search')[3];
     }
 }

@@ -155,11 +155,14 @@ class Snapshot
      */
     public function restoreSnapshot($repository, $name, $options = [], $waitForCompletion = false)
     {
-        $endpoint = new Restore();
-        $endpoint->setRepository($repository);
-        $endpoint->setSnapshot($name);
-        $endpoint->setBody($options);
-        $endpoint->setParams(['wait_for_completion' => $waitForCompletion]);
+        $endpoint = (new Restore())
+            ->setRepository($repository)
+            ->setSnapshot($name)
+            ->setBody($options)
+            ->setParams([
+                'wait_for_completion' => $waitForCompletion ? 'true' : 'false',
+            ])
+        ;
 
         return $this->_client->requestEndpoint($endpoint);
     }

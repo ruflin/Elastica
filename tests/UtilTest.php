@@ -24,7 +24,7 @@ class UtilTest extends BaseTest
         $this->assertEquals($expectedIsEscaped, Util::isDateMathEscaped($requestUri));
     }
 
-    public function getIsDateMathEscapedPairs()
+    public function getIsDateMathEscapedPairs(): array
     {
         return [
             ['', false],
@@ -49,7 +49,7 @@ class UtilTest extends BaseTest
         $this->assertEquals($expectedEscapedRequestUri, Util::escapeDateMath($requestUri));
     }
 
-    public function getEscapeDateMathPairs()
+    public function getEscapeDateMathPairs(): array
     {
         return [
             ['', ''],
@@ -83,7 +83,7 @@ class UtilTest extends BaseTest
         $this->assertEquals($escaped, Util::escapeTerm($unescaped));
     }
 
-    public function getEscapeTermPairs()
+    public function getEscapeTermPairs(): array
     {
         return [
             ['', ''],
@@ -107,7 +107,7 @@ class UtilTest extends BaseTest
         $this->assertEquals($after, Util::replaceBooleanWords($before));
     }
 
-    public function getReplaceBooleanWordsPairs()
+    public function getReplaceBooleanWordsPairs(): array
     {
         return [
             ['to be OR not to be', 'to be || not to be'],

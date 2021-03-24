@@ -40,7 +40,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      *
      * @var Result[] Results
      */
-    private $_results = [];
+    private $_results;
 
     /**
      * @param Result[] $results

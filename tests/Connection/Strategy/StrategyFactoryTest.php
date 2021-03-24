@@ -6,6 +6,7 @@ use Elastica\Connection\Strategy\CallbackStrategy;
 use Elastica\Connection\Strategy\Simple;
 use Elastica\Connection\Strategy\StrategyFactory;
 use Elastica\Test\Base;
+use Elastica\Util;
 
 /**
  * Description of StrategyFactoryTest.
@@ -80,7 +81,7 @@ class StrategyFactoryTest extends Base
     {
         // create collision
         if (!\class_exists('Simple')) {
-            \class_alias('Elastica\Util', 'Simple');
+            \class_alias(Util::class, 'Simple');
         }
         $strategy = StrategyFactory::create('Simple');
         $this->assertInstanceOf(Simple::class, $strategy);

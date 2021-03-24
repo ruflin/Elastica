@@ -3,9 +3,11 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\MultiMatch;
+use Elastica\ResultSet;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -171,7 +173,7 @@ class MultiMatchTest extends BaseTest
     /**
      * Executes the query with the current multimatch.
      */
-    private function _getResults(MultiMatch $multiMatch)
+    private function _getResults(MultiMatch $multiMatch): ResultSet
     {
         return $this->_generateIndex()->search(new Query($multiMatch));
     }
@@ -179,7 +181,7 @@ class MultiMatchTest extends BaseTest
     /**
      * Builds an index for testing.
      */
-    private function _generateIndex()
+    private function _generateIndex(): Index
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');

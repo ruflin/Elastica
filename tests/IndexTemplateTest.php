@@ -50,7 +50,7 @@ class IndexTemplateTest extends BaseTest
     {
         $name = 'index_template1';
         $response = new Response('');
-        /** @var Client|\PHPUnit_Framework_MockObject_MockObject $clientMock */
+        /** @var Client|\PHPUnit\Framework\MockObject\MockObject $clientMock */
         $clientMock = $this->createMock(Client::class);
         $clientMock->expects($this->once())
             ->method('request')
@@ -69,7 +69,7 @@ class IndexTemplateTest extends BaseTest
         $args = [1];
         $response = new Response('');
         $name = 'index_template1';
-        /** @var Client|\PHPUnit_Framework_MockObject_MockObject $clientMock */
+        /** @var Client|\PHPUnit\Framework\MockObject\MockObject $clientMock */
         $clientMock = $this->createMock(Client::class);
         $clientMock->expects($this->once())
             ->method('request')
@@ -87,7 +87,7 @@ class IndexTemplateTest extends BaseTest
     {
         $name = 'index_template1';
         $response = new Response('', 200);
-        /** @var Client|\PHPUnit_Framework_MockObject_MockObject $clientMock */
+        /** @var Client|\PHPUnit\Framework\MockObject\MockObject $clientMock */
         $clientMock = $this->createMock(Client::class);
         $clientMock->expects($this->once())
             ->method('request')

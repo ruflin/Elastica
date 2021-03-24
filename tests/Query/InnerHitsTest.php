@@ -2,6 +2,7 @@
 
 namespace Elastica\Test\Query;
 
+use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\HasChild;
@@ -9,6 +10,7 @@ use Elastica\Query\InnerHits;
 use Elastica\Query\MatchAll;
 use Elastica\Query\Nested;
 use Elastica\Query\SimpleQueryString;
+use Elastica\ResultSet;
 use Elastica\Script\Script;
 use Elastica\Script\ScriptFields;
 use Elastica\Test\Base as BaseTest;
@@ -379,7 +381,7 @@ class InnerHitsTest extends BaseTest
         }
     }
 
-    private function _getIndexForNestedTest()
+    private function _getIndexForNestedTest(): Index
     {
         $index = $this->_createIndex();
         $index->setMapping(new Mapping([
@@ -444,7 +446,7 @@ class InnerHitsTest extends BaseTest
         return $index;
     }
 
-    private function _getIndexForParentChildrenTest()
+    private function _getIndexForParentChildrenTest(): Index
     {
         $index = $this->_createIndex();
         $mappingQuestion = new Mapping();
@@ -533,7 +535,7 @@ class InnerHitsTest extends BaseTest
         return $index;
     }
 
-    private function getNestedQuery(AbstractQuery $query, InnerHits $innerHits)
+    private function getNestedQuery(AbstractQuery $query, InnerHits $innerHits): ResultSet
     {
         $nested = (new Nested())
             ->setInnerHits($innerHits)
@@ -544,7 +546,7 @@ class InnerHitsTest extends BaseTest
         return $this->_getIndexForNestedTest()->search($nested);
     }
 
-    private function getParentChildQuery(AbstractQuery $query, InnerHits $innerHits)
+    private function getParentChildQuery(AbstractQuery $query, InnerHits $innerHits): ResultSet
     {
         $child = (new HasChild($query, 'answers'))->setInnerHits($innerHits);
 

@@ -6,6 +6,7 @@ use Elastica\Aggregation\DateHistogram;
 use Elastica\Aggregation\Derivative;
 use Elastica\Aggregation\Max;
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Query;
 
 /**
@@ -69,7 +70,7 @@ class DerivativeTest extends BaseAggregationTest
         $this->assertEquals(-1, $dateHistogramAggResult[4]['derivative_agg']['value']);
     }
 
-    protected function _getIndexForTest()
+    protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
 
