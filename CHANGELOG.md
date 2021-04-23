@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Backward Compatibility Breaks
 ### Added
 ### Changed
+
+* Using default Elasticsearch images for testing instead of OSS https://github.com/ruflin/Elastica/pull/1954
+
 ### Deprecated
 ### Removed
 ### Fixed
