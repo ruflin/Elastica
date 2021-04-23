@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Backward Compatibility Breaks
 ### Added
 ### Changed
-
+* Updated `php-cs-fixer` to `2.18.6` [#1955](https://github.com/ruflin/Elastica/pull/1955)
 * Using default Elasticsearch images for testing instead of OSS https://github.com/ruflin/Elastica/pull/1954
 
 ### Deprecated
