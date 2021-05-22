@@ -239,7 +239,7 @@ class Aggregation implements DSL
      */
     public function global_agg(string $name): GlobalAggregation
     {
-        trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s()" method is deprecated, use "global()" instead. It will be removed in 8.0.', __METHOD__);
+        \trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s()" method is deprecated, use "global()" instead. It will be removed in 8.0.', __METHOD__);
 
         return $this->global($name);
     }

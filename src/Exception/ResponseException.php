@@ -59,7 +59,7 @@ class ResponseException extends \RuntimeException implements ExceptionInterface
      */
     public function getElasticsearchException(): ElasticsearchException
     {
-        trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s()" method is deprecated, use "getResponse()::getFullError()" instead. It will be removed in 8.0.', __METHOD__);
+        \trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s()" method is deprecated, use "getResponse()::getFullError()" instead. It will be removed in 8.0.', __METHOD__);
 
         $response = $this->getResponse();
 
