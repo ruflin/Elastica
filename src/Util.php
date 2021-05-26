@@ -212,7 +212,7 @@ class Util
      */
     public static function getParamName($class)
     {
-        trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s()" method is deprecated. It will be removed in 8.0.', __METHOD__);
+        \trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s()" method is deprecated. It will be removed in 8.0.', __METHOD__);
 
         if (\is_object($class)) {
             $class = \get_class($class);

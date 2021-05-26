@@ -1,8 +1,8 @@
 .DS_Store
 .idea
 *.iml
-.php_cs
-.php_cs.cache
+.php-cs-fixer.php
+.php-cs-fixer.cache
 .phpunit.result.cache
 
 cache.properties

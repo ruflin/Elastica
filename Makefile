@@ -1,6 +1,6 @@
 .PHONY: clean
 clean:
-	rm -fr tools vendor build composer.lock .php_cs.cache
+	rm -fr tools vendor build composer.lock .php-cs-fixer.cache
 
 tools/phive.phar:
 	mkdir tools; \
@@ -33,11 +33,11 @@ composer-update:
 install-tools: install-phpcs
 
 .PHONY: run-phpcs
-run-phpcs: composer-install install-phpcs
-	tools/php-cs-fixer.phar fix --dry-run --allow-risky=yes -v
+run-phpcs: install-phpcs
+	tools/php-cs-fixer.phar fix --diff --dry-run --allow-risky=yes -v
 
 .PHONY: fix-phpcs
-fix-phpcs: composer-install install-phpcs
+fix-phpcs: install-phpcs
 	tools/php-cs-fixer.phar fix --allow-risky=yes -v
 
 .PHONY: run-phpunit

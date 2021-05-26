@@ -15,7 +15,7 @@ use Ivory\HttpAdapter\Message\Request as HttpAdapterRequest;
 use Ivory\HttpAdapter\Message\Response as HttpAdapterResponse;
 use Ivory\HttpAdapter\Message\Stream\StringStream;
 
-trigger_deprecation('ruflin/elastica', '7.1.1', 'The "%s" class is deprecated. It will be removed in 8.0.', HttpAdapter::class);
+\trigger_deprecation('ruflin/elastica', '7.1.1', 'The "%s" class is deprecated. It will be removed in 8.0.', HttpAdapter::class);
 
 /**
  * @deprecated since version 7.1.1
