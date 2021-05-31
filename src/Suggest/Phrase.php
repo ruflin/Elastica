@@ -140,7 +140,7 @@ class Phrase extends AbstractSuggest
      */
     public function addCandidateGenerator(AbstractCandidateGenerator $generator): Phrase
     {
-        return $this->setParam('candidate_generator', $generator);
+        return $this->addParam('candidate_generator', $generator);
     }
 
     /**
@@ -153,13 +153,15 @@ class Phrase extends AbstractSuggest
         $baseName = $this->_getBaseName();
 
         if (isset($array[$baseName]['candidate_generator'])) {
-            $generator = $array[$baseName]['candidate_generator'];
+            $generators = $array[$baseName]['candidate_generator'];
             unset($array[$baseName]['candidate_generator']);
 
-            $keys = \array_keys($generator);
-            $values = \array_values($generator);
+            foreach ($generators as $generator) {
+                $keys = \array_keys($generator);
+                $values = \array_values($generator);
 
-            $array[$baseName][$keys[0]][] = $values[0];
+                $array[$baseName][$keys[0]][] = $values[0];
+            }
         }
 
         return $array;
