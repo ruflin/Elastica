@@ -51,6 +51,29 @@ class PhraseTest extends BaseTest
         $phraseSuggest = new Phrase('suggest1', 'text');
         $phraseSuggest->setText('elasticsearch is bansai coor');
         $phraseSuggest->setAnalyzer('simple')->setHighlight('<suggest>', '</suggest>')->setStupidBackoffSmoothing(0.4);
+        $phraseSuggest->addDirectGenerator(new DirectGenerator('text'));
+        $suggest->addSuggestion($phraseSuggest);
+
+        $index = $this->_getIndexForTest();
+        $result = $index->search($suggest);
+        $suggests = $result->getSuggests();
+
+        // 3 suggestions should be returned: One in which both misspellings are corrected, and two in which only one misspelling is corrected.
+        $this->assertCount(3, $suggests['suggest1'][0]['options']);
+
+        $this->assertEquals('elasticsearch is <suggest>bonsai cool</suggest>', $suggests['suggest1'][0]['options'][0]['highlighted']);
+        $this->assertEquals('elasticsearch is bonsai cool', $suggests['suggest1'][0]['options'][0]['text']);
+    }
+
+    /**
+     * @group functional
+     */
+    public function testPhraseSuggestWithBackwardsCompatibility(): void
+    {
+        $suggest = new Suggest();
+        $phraseSuggest = new Phrase('suggest1', 'text');
+        $phraseSuggest->setText('elasticsearch is bansai coor');
+        $phraseSuggest->setAnalyzer('simple')->setHighlight('<suggest>', '</suggest>')->setStupidBackoffSmoothing(0.4);
         $phraseSuggest->addCandidateGenerator(new DirectGenerator('text'));
         $suggest->addSuggestion($phraseSuggest);
 

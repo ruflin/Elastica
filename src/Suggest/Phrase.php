@@ -3,6 +3,7 @@
 namespace Elastica\Suggest;
 
 use Elastica\Suggest\CandidateGenerator\AbstractCandidateGenerator;
+use Elastica\Suggest\CandidateGenerator\DirectGenerator;
 
 /**
  * Class Phrase.
@@ -138,32 +139,18 @@ class Phrase extends AbstractSuggest
     /**
      * @return $this
      */
-    public function addCandidateGenerator(AbstractCandidateGenerator $generator): Phrase
+    public function addDirectGenerator(DirectGenerator $generator): Phrase
     {
-        return $this->addParam('candidate_generator', $generator);
+        return $this->addParam('direct_generator', $generator);
     }
 
     /**
-     * {@inheritdoc}
+     * @deprecated Please use addDirectGenerator instead.
+     *
+     * @return $this
      */
-    public function toArray(): array
+    public function addCandidateGenerator(AbstractCandidateGenerator $generator): Phrase
     {
-        $array = parent::toArray();
-
-        $baseName = $this->_getBaseName();
-
-        if (isset($array[$baseName]['candidate_generator'])) {
-            $generators = $array[$baseName]['candidate_generator'];
-            unset($array[$baseName]['candidate_generator']);
-
-            foreach ($generators as $generator) {
-                $keys = \array_keys($generator);
-                $values = \array_values($generator);
-
-                $array[$baseName][$keys[0]][] = $values[0];
-            }
-        }
-
-        return $array;
+        return $this->addParam('candidate_generator', $generator);
     }
 }

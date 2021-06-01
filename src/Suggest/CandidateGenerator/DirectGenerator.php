@@ -132,4 +132,20 @@ class DirectGenerator extends AbstractCandidateGenerator
     {
         return $this->setParam('post_filter', $post);
     }
+
+    /**
+     * Convert to array so the generator can be included in a direct_generator list.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $data = $this->getParams();
+
+        if (!empty($this->_rawParams)) {
+            $data = \array_merge($data, $this->_rawParams);
+        }
+
+        return $this->_convertArrayable($data);
+    }
 }
