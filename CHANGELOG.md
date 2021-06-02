@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * Added `Elastica\Aggregation\NormalizeAggregation` [#1956](https://github.com/ruflin/Elastica/pull/1956)
+* Added `\Elastica\Suggest\Phrase::addDirectGenerator` to align with ES specification [#1964](https://github.com/ruflin/Elastica/pull/1964)
 
 ### Changed
 * Updated `php-cs-fixer` to `2.18.6` [#1955](https://github.com/ruflin/Elastica/pull/1955)
@@ -18,10 +19,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 ### Fixed
 ### Security
-
-## [7.1.2](https://github.com/ruflin/Elastica/compare/7.1.1...7.1.2)
-### Added
-* Added `\Elastica\Suggest\Phrase::addDirectGenerator` to align with ES specification [#1964](https://github.com/ruflin/Elastica/pull/1964)
 
 ## [7.1.1](https://github.com/ruflin/Elastica/compare/7.1.0...7.1.1)
 ### Backward Compatibility Breaks
