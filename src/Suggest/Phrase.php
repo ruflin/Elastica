@@ -145,7 +145,7 @@ class Phrase extends AbstractSuggest
     }
 
     /**
-     * @deprecated Please use addDirectGenerator instead.
+     * @deprecated since version 7.2.0, use the "addDirectGenerator()" method instead.
      *
      * @return $this
      */
