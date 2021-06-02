@@ -141,11 +141,11 @@ class Phrase extends AbstractSuggest
      */
     public function addDirectGenerator(DirectGenerator $generator): self
     {
-        return $this->addParam('direct_generator', $generator);
+        return $this->addParam('candidate_generator', $generator);
     }
 
     /**
-     * @deprecated since version 7.2.0, use the "addDirectGenerator()" method instead.
+     * @deprecated since version 7.1.2, use the "addDirectGenerator()" method instead.
      *
      * @return $this
      */
@@ -154,5 +154,29 @@ class Phrase extends AbstractSuggest
         \trigger_deprecation('ruflin/elastica', '7.2.0', 'The "%s()" method is deprecated, use the "addDirectGenerator()" method instead. It will be removed in 8.0.', __METHOD__);
 
         return $this->addParam('candidate_generator', $generator);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toArray(): array
+    {
+        $array = parent::toArray();
+
+        $baseName = $this->_getBaseName();
+
+        if (isset($array[$baseName]['candidate_generator'])) {
+            $generators = $array[$baseName]['candidate_generator'];
+            unset($array[$baseName]['candidate_generator']);
+
+            foreach ($generators as $generator) {
+                $keys = \array_keys($generator);
+                $values = \array_values($generator);
+
+                $array[$baseName][$keys[0]][] = $values[0];
+            }
+        }
+
+        return $array;
     }
 }
