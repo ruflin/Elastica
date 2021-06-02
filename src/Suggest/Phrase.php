@@ -151,6 +151,8 @@ class Phrase extends AbstractSuggest
      */
     public function addCandidateGenerator(AbstractCandidateGenerator $generator): Phrase
     {
+        \trigger_deprecation('ruflin/elastica', '7.2.0', 'The "%s()" method is deprecated, use the "addDirectGenerator()" method instead. It will be removed in 8.0.', __METHOD__);
+
         return $this->addParam('candidate_generator', $generator);
     }
 }
