@@ -139,7 +139,7 @@ class Phrase extends AbstractSuggest
     /**
      * @return $this
      */
-    public function addDirectGenerator(DirectGenerator $generator): Phrase
+    public function addDirectGenerator(DirectGenerator $generator): self
     {
         return $this->addParam('direct_generator', $generator);
     }
