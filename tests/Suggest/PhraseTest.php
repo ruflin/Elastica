@@ -67,6 +67,8 @@ class PhraseTest extends BaseTest
 
     /**
      * @group functional
+     *
+     * @group legacy
      */
     public function testPhraseSuggestWithBackwardsCompatibility(): void
     {
@@ -74,6 +76,8 @@ class PhraseTest extends BaseTest
         $phraseSuggest = new Phrase('suggest1', 'text');
         $phraseSuggest->setText('elasticsearch is bansai coor');
         $phraseSuggest->setAnalyzer('simple')->setHighlight('<suggest>', '</suggest>')->setStupidBackoffSmoothing(0.4);
+
+        $this->expectDeprecation('The "addCandidateGenerator()" method is deprecated, use the "addDirectGenerator()" method instead. It will be removed in 8.0.');
         $phraseSuggest->addCandidateGenerator(new DirectGenerator('text'));
         $suggest->addSuggestion($phraseSuggest);
 
