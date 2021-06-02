@@ -4,7 +4,9 @@ namespace Elastica\Exception;
 
 /**
  * JSON Parse exception.
+ *
+ * @deprecated since version 7.2.0, catch \JsonException instead
  */
-class JSONParseException extends \RuntimeException implements ExceptionInterface
+class JSONParseException extends \JsonException implements ExceptionInterface
 {
 }
