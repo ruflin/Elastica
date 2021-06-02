@@ -51,7 +51,7 @@ class Collapse extends Param
     {
         $data = $this->getParams();
 
-        if (!empty($this->_rawParams)) {
+        if ($this->_rawParams) {
             $data = \array_merge($data, $this->_rawParams);
         }
 

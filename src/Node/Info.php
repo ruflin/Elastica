@@ -214,7 +214,7 @@ class Info
         $endpoint = \class_exists(NodesInfo::class) ? new NodesInfo() : new \Elasticsearch\Endpoints\Cluster\Nodes\Info();
         $endpoint->setNodeID($this->getNode()->getId());
 
-        if (!empty($params)) {
+        if ($params) {
             $endpoint->setMetric($params);
         }
 

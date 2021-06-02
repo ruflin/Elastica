@@ -101,7 +101,7 @@ abstract class AbstractSuggest extends Param implements NameableInterface
      */
     public function setName(string $name): self
     {
-        if (empty($name)) {
+        if ('' === $name) {
             throw new InvalidException('Suggest name has to be set');
         }
         $this->_name = $name;

@@ -113,7 +113,7 @@ class ClientConfiguration
      */
     public function get(string $key)
     {
-        if (empty($key)) {
+        if ('' === $key) {
             return $this->configuration;
         }
 

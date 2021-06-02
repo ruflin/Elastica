@@ -332,7 +332,7 @@ class Settings
     {
         $path = '_settings';
 
-        if (!empty($data)) {
+        if ($data) {
             $data = ['index' => $data];
         }
 
