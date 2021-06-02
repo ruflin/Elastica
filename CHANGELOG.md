@@ -6,15 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/7.1.1...master)
 ### Backward Compatibility Breaks
+* Changed `Elastica\Exception\JSONParseException` inheritance, it now extends `\JsonException` instead of `\RuntimeException` [#1949](https://github.com/ruflin/Elastica/pull/1949)
 ### Added
-
 * Added `Elastica\Aggregation\NormalizeAggregation` [#1956](https://github.com/ruflin/Elastica/pull/1956)
-* Added `\Elastica\Suggest\Phrase::addDirectGenerator` to align with ES specification [#1964](https://github.com/ruflin/Elastica/pull/1964)
-
+* Added `Elastica\Suggest\Phrase::addDirectGenerator` to align with ES specification [#1964](https://github.com/ruflin/Elastica/pull/1964)
 ### Changed
 * Updated `php-cs-fixer` to `2.18.6` [#1955](https://github.com/ruflin/Elastica/pull/1955)
+* Updated `php-cs-fixer` to `3.0.0` [#1959](https://github.com/ruflin/Elastica/pull/1959)
 * Using default Elasticsearch images for testing instead of OSS https://github.com/ruflin/Elastica/pull/1954
-
 ### Deprecated
 ### Removed
 ### Fixed
@@ -35,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Updated `composer-normalize` to `2.13.3` [#1927](https://github.com/ruflin/Elastica/pull/1927)
 ### Deprecated
 * Deprecated `Elastica\Transport\HttpAdapter` class [#1940](https://github.com/ruflin/Elastica/pull/1940)
+* Deprecated `Elastica\Exception\JSONParseException` exception, catch `\JsonException` instead [#1949](https://github.com/ruflin/Elastica/pull/1949)
 ### Fixed
 * Fixed wrong `ltrim` usage in guzzle transport [#1783](https://github.com/ruflin/Elastica/pull/1783)
 * Fixed `_seq_no` and `_primary_term` wrong initialization [#1920](https://github.com/ruflin/Elastica/pull/1920)
@@ -108,7 +108,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Fixed handling precision as string in `Elastica\Aggregation\GeohashGrid::setPrecision()` [#1884](https://github.com/ruflin/Elastica/pull/1884)
 * Fixed calling `Elastica\Aggregation\Composite::addAfter()` with the `null` value [1877](https://github.com/ruflin/Elastica/pull/1877)
 * Replaced `_routing` and `_retry_on_conflict` by `routing` and `retry_on_conflict` in `AbstractUpdateAction` [#1807](https://github.com/ruflin/Elastica/issues/1807)
-### Security
 
 
 ## [7.0.0](https://github.com/ruflin/Elastica/compare/7.0.0-beta.4...7.0.0)

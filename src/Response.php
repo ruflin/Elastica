@@ -2,7 +2,6 @@
 
 namespace Elastica;
 
-use Elastica\Exception\JSONParseException;
 use Elastica\Exception\NotFoundException;
 
 /**
@@ -217,7 +216,7 @@ class Response
                 } else {
                     $response = JSON::parse($response);
                 }
-            } catch (JSONParseException $e) {
+            } catch (\JsonException $e) {
                 // leave response as is if parse fails
             }
 
