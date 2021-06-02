@@ -80,7 +80,7 @@ class PhraseTest extends BaseTest
         $phraseSuggest->setText('elasticsearch is bansai coor');
         $phraseSuggest->setAnalyzer('simple')->setHighlight('<suggest>', '</suggest>')->setStupidBackoffSmoothing(0.4);
 
-        $this->expectDeprecation('The "addCandidateGenerator()" method is deprecated, use the "addDirectGenerator()" method instead. It will be removed in 8.0.');
+        $this->expectDeprecation('Since ruflin/elastica 7.2.0: The "Elastica\Suggest\Phrase::addCandidateGenerator()" method is deprecated, use the "addDirectGenerator()" method instead. It will be removed in 8.0.');
         $phraseSuggest->addCandidateGenerator(new DirectGenerator('text'));
         $suggest->addSuggestion($phraseSuggest);
 
