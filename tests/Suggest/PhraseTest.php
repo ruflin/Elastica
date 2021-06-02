@@ -8,12 +8,15 @@ use Elastica\Suggest;
 use Elastica\Suggest\CandidateGenerator\DirectGenerator;
 use Elastica\Suggest\Phrase;
 use Elastica\Test\Base as BaseTest;
+use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 
 /**
  * @internal
  */
 class PhraseTest extends BaseTest
 {
+    use ExpectDeprecationTrait;
+
     /**
      * @group unit
      */
