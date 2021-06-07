@@ -22,12 +22,15 @@ class PhraseTest extends BaseTest
      */
     public function testToArray(): void
     {
-        $suggest = new Suggest();
-        $phraseSuggest = new Phrase('suggest1', 'text');
-        $phraseSuggest->setText('elasticsearch is bansai coor');
-        $phraseSuggest->setAnalyzer('simple');
-        $suggest->addSuggestion($phraseSuggest);
-        $suggest->setGlobalText('global!');
+        $phraseSuggest = (new Phrase('suggest1', 'text'))
+            ->setText('elasticsearch is bansai coor')
+            ->setAnalyzer('simple')
+        ;
+
+        $suggest = (new Suggest())
+            ->addSuggestion($phraseSuggest)
+            ->setGlobalText('global!')
+        ;
 
         $expected = [
             'suggest' => [
@@ -50,12 +53,17 @@ class PhraseTest extends BaseTest
      */
     public function testPhraseSuggest(): void
     {
-        $suggest = new Suggest();
-        $phraseSuggest = new Phrase('suggest1', 'text');
-        $phraseSuggest->setText('elasticsearch is bansai coor');
-        $phraseSuggest->setAnalyzer('simple')->setHighlight('<suggest>', '</suggest>')->setStupidBackoffSmoothing(0.4);
-        $phraseSuggest->addDirectGenerator(new DirectGenerator('text'));
-        $suggest->addSuggestion($phraseSuggest);
+        $phraseSuggest = (new Phrase('suggest1', 'text'))
+            ->setText('elasticsearch is bansai coor')
+            ->setAnalyzer('simple')
+            ->setHighlight('<suggest>', '</suggest>')
+            ->setStupidBackoffSmoothing(Phrase::DEFAULT_STUPID_BACKOFF_DISCOUNT)
+            ->addDirectGenerator(new DirectGenerator('text'))
+        ;
+
+        $suggest = (new Suggest())
+            ->addSuggestion($phraseSuggest)
+        ;
 
         $index = $this->_getIndexForTest();
         $result = $index->search($suggest);
@@ -70,19 +78,23 @@ class PhraseTest extends BaseTest
 
     /**
      * @group functional
-     *
      * @group legacy
      */
     public function testPhraseSuggestWithBackwardsCompatibility(): void
     {
-        $suggest = new Suggest();
-        $phraseSuggest = new Phrase('suggest1', 'text');
-        $phraseSuggest->setText('elasticsearch is bansai coor');
-        $phraseSuggest->setAnalyzer('simple')->setHighlight('<suggest>', '</suggest>')->setStupidBackoffSmoothing(0.4);
-
         $this->expectDeprecation('Since ruflin/elastica 7.2.0: The "Elastica\Suggest\Phrase::addCandidateGenerator()" method is deprecated, use the "addDirectGenerator()" method instead. It will be removed in 8.0.');
-        $phraseSuggest->addCandidateGenerator(new DirectGenerator('text'));
-        $suggest->addSuggestion($phraseSuggest);
+
+        $phraseSuggest = (new Phrase('suggest1', 'text'))
+            ->setText('elasticsearch is bansai coor')
+            ->setAnalyzer('simple')
+            ->setHighlight('<suggest>', '</suggest>')
+            ->setStupidBackoffSmoothing(Phrase::DEFAULT_STUPID_BACKOFF_DISCOUNT)
+            ->addCandidateGenerator(new DirectGenerator('text'))
+        ;
+
+        $suggest = (new Suggest())
+            ->addSuggestion($phraseSuggest)
+        ;
 
         $index = $this->_getIndexForTest();
         $result = $index->search($suggest);
