@@ -38,7 +38,7 @@ class Param implements ArrayableInterface, \Countable
     {
         $data = [$this->_getBaseName() => $this->getParams()];
 
-        if (!empty($this->_rawParams)) {
+        if ($this->_rawParams) {
             $data = \array_merge($data, $this->_rawParams);
         }
 

@@ -34,7 +34,7 @@ class Terms extends AbstractQuery
      */
     public function __construct(string $field, array $terms = [])
     {
-        if (empty($field)) {
+        if ('' === $field) {
             throw new InvalidException('Terms field name has to be set');
         }
 

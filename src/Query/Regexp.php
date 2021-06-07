@@ -20,7 +20,7 @@ class Regexp extends AbstractQuery
      */
     public function __construct(string $key = '', ?string $value = null, float $boost = 1.0)
     {
-        if (!empty($key)) {
+        if ('' !== $key) {
             $this->setValue($key, $value, $boost);
         }
     }

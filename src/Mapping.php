@@ -29,7 +29,7 @@ class Mapping
      */
     public function __construct(array $properties = [])
     {
-        if (!empty($properties)) {
+        if ($properties) {
             $this->setProperties($properties);
         }
     }

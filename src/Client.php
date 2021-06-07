@@ -204,7 +204,7 @@ class Client
      */
     public function updateDocuments(array $docs, array $requestParams = []): ResponseSet
     {
-        if (empty($docs)) {
+        if (!$docs) {
             throw new InvalidException('Array has to consist of at least one element');
         }
 
@@ -233,7 +233,7 @@ class Client
      */
     public function addDocuments(array $docs, array $requestParams = []): ResponseSet
     {
-        if (empty($docs)) {
+        if (!$docs) {
             throw new InvalidException('Array has to consist of at least one element');
         }
 
@@ -321,7 +321,7 @@ class Client
      */
     public function deleteDocuments(array $docs, array $requestParams = []): ResponseSet
     {
-        if (empty($docs)) {
+        if (!$docs) {
             throw new InvalidException('Array has to consist of at least one element');
         }
 
@@ -434,7 +434,7 @@ class Client
      */
     public function deleteIds(array $ids, $index, $routing = false): ResponseSet
     {
-        if (empty($ids)) {
+        if (!$ids) {
             throw new InvalidException('Array has to consist of at least one id');
         }
 
@@ -478,7 +478,7 @@ class Client
      */
     public function bulk(array $params): ResponseSet
     {
-        if (empty($params)) {
+        if (!$params) {
             throw new InvalidException('Array has to consist of at least one param');
         }
 
@@ -614,7 +614,7 @@ class Client
         }
 
         // If no connections set, create default connection
-        if (empty($connections)) {
+        if (!$connections) {
             $connections[] = Connection::create($this->_prepareConnectionParams($this->getConfig()));
         }
 

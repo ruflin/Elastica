@@ -72,7 +72,7 @@ class Node
      */
     public function getName(): string
     {
-        if (empty($this->_name)) {
+        if (null === $this->_name) {
             $this->_name = $this->getInfo()->getName();
         }
 

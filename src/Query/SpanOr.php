@@ -18,13 +18,12 @@ class SpanOr extends AbstractSpanQuery
      */
     public function __construct(array $clauses = [])
     {
-        if (!empty($clauses)) {
-            foreach ($clauses as $clause) {
-                if (!$clause instanceof AbstractSpanQuery) {
-                    throw new InvalidException('Invalid parameter. Has to be array or instance of '.AbstractSpanQuery::class);
-                }
+        foreach ($clauses as $clause) {
+            if (!$clause instanceof AbstractSpanQuery) {
+                throw new InvalidException('Invalid parameter. Has to be array or instance of '.AbstractSpanQuery::class);
             }
         }
+
         $this->setParams(['clauses' => $clauses]);
     }
 

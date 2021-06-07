@@ -112,7 +112,7 @@ class Pipeline extends Param
 
     public function addProcessor(AbstractProcessor $processor): self
     {
-        if (empty($this->_processors)) {
+        if (!$this->_processors) {
             $this->_processors['processors'] = $processor->toArray();
             $this->_params['processors'] = [];
         } else {

@@ -88,7 +88,7 @@ abstract class AbstractAggregation extends Param implements NameableInterface
      */
     public function setMeta(array $meta): self
     {
-        if (empty($meta)) {
+        if (!$meta) {
             return $this->clearMeta();
         }
 

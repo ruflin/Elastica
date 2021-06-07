@@ -88,7 +88,7 @@ class BoolQuery extends AbstractQuery
      */
     public function toArray(): array
     {
-        if (empty($this->_params)) {
+        if (!$this->_params) {
             $this->_params = new \stdClass();
         }
 

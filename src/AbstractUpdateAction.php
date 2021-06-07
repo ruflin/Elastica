@@ -448,7 +448,7 @@ class AbstractUpdateAction extends Param
      */
     public function getOptions(array $fields = [])
     {
-        if (!empty($fields)) {
+        if ($fields) {
             return \array_filter(\array_intersect_key($this->getParams(), \array_flip($fields)));
         }
 
