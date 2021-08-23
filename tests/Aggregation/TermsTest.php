@@ -103,6 +103,9 @@ class TermsTest extends BaseAggregationTest
         $this->assertEquals('blue', $results['buckets'][2]['key']);
     }
 
+    /**
+     * @group functional
+     */
     public function testTermsWithMissingAggregation(): void
     {
         $agg = new Terms('terms');
