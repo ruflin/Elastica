@@ -219,6 +219,28 @@ class ClientFunctionalTest extends BaseTest
         $this->assertEquals($modifiedValue, $docData2['age']);
     }
 
+    public function testGetDocumentWithVersion(): void
+    {
+        $indexName = 'test';
+
+        $client = $this->_getClient();
+        $index = $client->getIndex($indexName);
+
+        $initialValue = 28;
+
+        $doc1 = new Document(
+            1,
+            ['name' => 'hans', 'age' => $initialValue],
+            $indexName
+        );
+        $data = [$doc1];
+        $client->addDocuments($data);
+
+        $doc1 = $index->getDocument(1);
+
+        $this->assertGreaterThan(0, $doc1->getVersion());
+    }
+
     /**
      * Test deleteIds method using string parameter for $index
      * and object parameter for $type.
