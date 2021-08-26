@@ -169,7 +169,7 @@ class MoreLikeThis extends AbstractQuery
         } elseif (!empty($array['more_like_this']['like']['_source'])) {
             $doc = $array['more_like_this']['like'];
             $doc['doc'] = $array['more_like_this']['like']['_source'];
-            unset($doc['_id'], $doc['_source']);
+            unset($doc['_id'], $doc['_source'], $doc['if_seq_no'], $doc['if_primary_term']);
 
             $array['more_like_this']['like'] = $doc;
         }

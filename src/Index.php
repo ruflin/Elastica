@@ -280,7 +280,7 @@ class Index implements SearchableInterface
         }
 
         $doc = new Document($id, $data, $this->getName());
-        $doc->setVersionParams($data);
+        $doc->setVersionParams($result);
 
         return $doc;
     }
