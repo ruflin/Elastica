@@ -602,11 +602,11 @@ class BulkTest extends BaseTest
         $defaultData = [
             'field' => null,
             'sub_field' => [],
-            'sub_field_2' => []
+            'sub_field_2' => [],
         ];
 
         //insert doc and update field
-        $script = new Script("ctx._source.field = params.field", ['field' => $field]);
+        $script = new Script('ctx._source.field = params.field', ['field' => $field]);
         $script->setUpsert($defaultData);
         $script->setId($id);
 
@@ -614,7 +614,7 @@ class BulkTest extends BaseTest
         $bulk->addAction($action);
 
         //update sub_field
-        $script = new Script("if ( !ctx._source.sub_field.contains(params) ) ctx._source.sub_field.add(params)", $subField);
+        $script = new Script('if ( !ctx._source.sub_field.contains(params) ) ctx._source.sub_field.add(params)', $subField);
         $script->setUpsert($defaultData);
         $script->setId($id);
 
@@ -622,7 +622,7 @@ class BulkTest extends BaseTest
         $bulk->addAction($action);
 
         //update sub_field_2
-        $script = new Script("if ( !ctx._source.sub_field_2.contains(params) ) ctx._source.sub_field_2.add(params)", $subField2);
+        $script = new Script('if ( !ctx._source.sub_field_2.contains(params) ) ctx._source.sub_field_2.add(params)', $subField2);
         $script->setUpsert($defaultData);
         $script->setId($id);
 
