@@ -584,6 +584,69 @@ class BulkTest extends BaseTest
     }
 
     /**
+     * @group functional
+     */
+    public function testScriptUpsert(): void
+    {
+        $index = $this->_createIndex();
+        $client = $index->getClient();
+
+        $bulk = new Bulk($client);
+        $bulk->setIndex($index);
+
+        $id = 1;
+        $field = 123456789;
+        $subField = ['field' => 'a'];
+        $subField2 = ['field_2' => 'b'];
+
+        $defaultData = [
+            'field' => null,
+            'sub_field' => [],
+            'sub_field_2' => []
+        ];
+
+        //insert doc and update field
+        $script = new Script("ctx._source.field = params.field", ['field' => $field]);
+        $script->setUpsert($defaultData);
+        $script->setId($id);
+
+        $action = AbstractDocument::create($script, Action::OP_TYPE_UPDATE);
+        $bulk->addAction($action);
+
+        //update sub_field
+        $script = new Script("if ( !ctx._source.sub_field.contains(params) ) ctx._source.sub_field.add(params)", $subField);
+        $script->setUpsert($defaultData);
+        $script->setId($id);
+
+        $action = AbstractDocument::create($script, Action::OP_TYPE_UPDATE);
+        $bulk->addAction($action);
+
+        //update sub_field_2
+        $script = new Script("if ( !ctx._source.sub_field_2.contains(params) ) ctx._source.sub_field_2.add(params)", $subField2);
+        $script->setUpsert($defaultData);
+        $script->setId($id);
+
+        $action = AbstractDocument::create($script, Action::OP_TYPE_UPDATE);
+        $bulk->addAction($action);
+
+        $response = $bulk->send();
+
+        $this->assertTrue($response->isOk());
+
+        $index->refresh();
+
+        $doc = $index->getDocument($id);
+
+        $this->assertEquals($field, $doc->getData()['field']);
+
+        $this->assertCount(1, $doc->getData()['sub_field']);
+        $this->assertCount(1, $doc->getData()['sub_field_2']);
+
+        $this->assertEquals($subField['field'], $doc->getData()['sub_field'][0]['field']);
+        $this->assertEquals($subField2['field_2'], $doc->getData()['sub_field_2'][0]['field_2']);
+    }
+
+    /**
      * @group unit
      */
     public function testGetPath(): void
