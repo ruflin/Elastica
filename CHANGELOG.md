@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 ### Fixed
 * Fixed the assignment of `version`, `seq_no` and `primary_term` on `getDocument` [#1973](https://github.com/ruflin/Elastica/pull/1973)
+* Fixed the upsert scripts on bulk requests [#1974](https://github.com/ruflin/Elastica/pull/1974)
 ### Security
 
 ## [7.1.1](https://github.com/ruflin/Elastica/compare/7.1.0...7.1.1)
