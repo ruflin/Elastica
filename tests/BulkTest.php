@@ -462,7 +462,7 @@ class BulkTest extends BaseTest
         $this->assertEquals('The Walrus was Paul', $doc2->name);
 
         //test upsert
-        $script = new Script('', [], null, 5);
+        $script = new Script('return;', [], null, 5);
         $doc = new Document('', ['counter' => 1]);
         $script->setUpsert($doc);
         $updateAction = AbstractDocument::create($script, Action::OP_TYPE_UPDATE);
