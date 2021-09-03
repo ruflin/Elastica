@@ -4,6 +4,8 @@ namespace Elastica\Test;
 
 use Elastica\Client;
 use Elastica\Connection;
+use Elastica\Exception\ConnectionException;
+use Elastica\Exception\InvalidException;
 use Elastica\Request;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Transport\AbstractTransport;
@@ -48,7 +50,7 @@ class ConnectionTest extends BaseTest
      */
     public function testInvalidConnection(): void
     {
-        $this->expectException(\Elastica\Exception\ConnectionException::class);
+        $this->expectException(ConnectionException::class);
 
         $connection = new Connection(['port' => 9999]);
 
@@ -81,7 +83,7 @@ class ConnectionTest extends BaseTest
      */
     public function testCreateInvalid(): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         Connection::create('test');
     }
@@ -111,7 +113,7 @@ class ConnectionTest extends BaseTest
      */
     public function testGetInvalidConfigWithArrayUsedForTransport(): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
         $this->expectExceptionMessage('Invalid transport');
 
         $connection = new Connection(['transport' => ['type' => 'invalidtransport']]);
@@ -123,7 +125,7 @@ class ConnectionTest extends BaseTest
      */
     public function testGetConfigInvalidValue(): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         $connection = new Connection();
         $connection->getConfig('url');

@@ -130,9 +130,7 @@ class CompletionTest extends BaseTest
 
         $suggest->setFuzzy($fuzzy);
 
-        $this->assertEquals($fuzzy, $suggest->getParam('fuzzy'));
-
-        $this->assertInstanceOf(Completion::class, $suggest->setFuzzy($fuzzy));
+        $this->assertSame($fuzzy, $suggest->getParam('fuzzy'));
     }
 
     /**
@@ -151,10 +149,7 @@ class CompletionTest extends BaseTest
         $this->assertCount(3, $options);
     }
 
-    /**
-     * @return Index
-     */
-    protected function _getIndexForTest()
+    protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
         $index->setMapping(new Mapping([

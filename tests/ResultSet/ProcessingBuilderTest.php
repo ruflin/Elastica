@@ -23,12 +23,12 @@ class ProcessingBuilderTest extends BaseTest
     private $builder;
 
     /**
-     * @var BuilderInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var BuilderInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $innerBuilder;
 
     /**
-     * @var PHPUnit_Framework_MockObject_MockObject|ProcessorInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|ProcessorInterface
      */
     private $processor;
 

@@ -206,14 +206,13 @@ class Util
      * Tries to guess the name of the param, based on its class
      * Example: \Elastica\Query\MatchAll => match_all.
      *
-     * @param object|string Object or class name
-     * @param mixed $class
+     * @param object|string $class Object or class name
      *
      * @return string parameter name
      */
     public static function getParamName($class)
     {
-        trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s()" method is deprecated. It will be removed in 8.0.', __METHOD__);
+        \trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s()" method is deprecated. It will be removed in 8.0.', __METHOD__);
 
         if (\is_object($class)) {
             $class = \get_class($class);

@@ -27,7 +27,7 @@ class Client
     protected $_config;
 
     /**
-     * @var callback
+     * @var callable
      */
     protected $_callback;
 
@@ -60,7 +60,7 @@ class Client
      * Creates a new Elastica client.
      *
      * @param array|string  $config   OPTIONAL Additional config or DSN of options
-     * @param callback|null $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
+     * @param callable|null $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
      *
      * @throws InvalidException
      */
@@ -114,7 +114,7 @@ class Client
      *
      * @throws InvalidException if the given key is not found in the configuration
      *
-     * @return array|string Config value
+     * @return array|bool|string
      */
     public function getConfig(string $key = '')
     {
@@ -153,8 +153,6 @@ class Client
 
     /**
      * Returns the index for the given connection.
-     *
-     * @param string $name Index name to create connection to
      */
     public function getIndex(string $name): Index
     {
@@ -200,13 +198,13 @@ class Client
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
-     * @param array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @param array|Document[] $docs Array of Elastica\Document
      *
      * @throws InvalidException If docs is empty
      */
     public function updateDocuments(array $docs, array $requestParams = []): ResponseSet
     {
-        if (empty($docs)) {
+        if (!$docs) {
             throw new InvalidException('Array has to consist of at least one element');
         }
 
@@ -229,13 +227,13 @@ class Client
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
-     * @param array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @param array|Document[] $docs Array of Elastica\Document
      *
      * @throws InvalidException If docs is empty
      */
     public function addDocuments(array $docs, array $requestParams = []): ResponseSet
     {
-        if (empty($docs)) {
+        if (!$docs) {
             throw new InvalidException('Array has to consist of at least one element');
         }
 
@@ -253,10 +251,10 @@ class Client
     /**
      * Update document, using update script. Requires elasticsearch >= 0.19.0.
      *
-     * @param int|string                                               $id      document id
-     * @param array|\Elastica\Document|\Elastica\Script\AbstractScript $data    raw data for request body
-     * @param string                                                   $index   index to update
-     * @param array                                                    $options array of query params to use for query. For possible options check es api
+     * @param int|string                    $id      document id
+     * @param AbstractScript|array|Document $data    raw data for request body
+     * @param string                        $index   index to update
+     * @param array                         $options array of query params to use for query. For possible options check es api
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
      */
@@ -317,13 +315,13 @@ class Client
     /**
      * Bulk deletes documents.
      *
-     * @param array|\Elastica\Document[] $docs
+     * @param array|Document[] $docs
      *
      * @throws InvalidException
      */
     public function deleteDocuments(array $docs, array $requestParams = []): ResponseSet
     {
-        if (empty($docs)) {
+        if (!$docs) {
             throw new InvalidException('Array has to consist of at least one element');
         }
 
@@ -340,7 +338,7 @@ class Client
     /**
      * Returns the status object for all indices.
      *
-     * @return \Elastica\Status Status object
+     * @return Status
      */
     public function getStatus()
     {
@@ -350,7 +348,7 @@ class Client
     /**
      * Returns the current cluster.
      *
-     * @return \Elastica\Cluster Cluster object
+     * @return Cluster
      */
     public function getCluster()
     {
@@ -366,8 +364,6 @@ class Client
     }
 
     /**
-     * @param \Elastica\Connection $connection
-     *
      * @return $this
      */
     public function addConnection(Connection $connection)
@@ -390,7 +386,7 @@ class Client
     /**
      * @throws \Elastica\Exception\ClientException
      *
-     * @return \Elastica\Connection
+     * @return Connection
      */
     public function getConnection()
     {
@@ -398,7 +394,7 @@ class Client
     }
 
     /**
-     * @return \Elastica\Connection[]
+     * @return Connection[]
      */
     public function getConnections()
     {
@@ -414,7 +410,7 @@ class Client
     }
 
     /**
-     * @param array|\Elastica\Connection[] $connections
+     * @param array|Connection[] $connections
      *
      * @return $this
      */
@@ -430,15 +426,15 @@ class Client
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
-     * @param array                  $ids     Document ids
-     * @param \Elastica\Index|string $index   Index name
-     * @param bool|string            $routing Optional routing key for all ids
+     * @param array        $ids     Document ids
+     * @param Index|string $index   Index name
+     * @param bool|string  $routing Optional routing key for all ids
      *
      * @throws InvalidException
      */
     public function deleteIds(array $ids, $index, $routing = false): ResponseSet
     {
-        if (empty($ids)) {
+        if (!$ids) {
             throw new InvalidException('Array has to consist of at least one id');
         }
 
@@ -482,7 +478,7 @@ class Client
      */
     public function bulk(array $params): ResponseSet
     {
-        if (empty($params)) {
+        if (!$params) {
             throw new InvalidException('Array has to consist of at least one param');
         }
 
@@ -532,8 +528,8 @@ class Client
 
         $this->_logger->debug('Elastica Request', [
             'request' => $request->toArray(),
-            'response' => $this->_lastResponse ? $this->_lastResponse->getData() : null,
-            'responseStatus' => $this->_lastResponse ? $this->_lastResponse->getStatus() : null,
+            'response' => $response->getData(),
+            'responseStatus' => $response->getStatus(),
         ]);
 
         return $response;
@@ -618,7 +614,7 @@ class Client
         }
 
         // If no connections set, create default connection
-        if (empty($connections)) {
+        if (!$connections) {
             $connections[] = Connection::create($this->_prepareConnectionParams($this->getConfig()));
         }
 

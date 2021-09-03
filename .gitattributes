@@ -3,13 +3,14 @@
 /.gitattributes export-ignore
 /.github export-ignore
 /.gitignore export-ignore
-/.php_cs.dist export-ignore
+/.php-cs-fixer.dist.php export-ignore
 /CHANGELOG.md merge=union
-/codecov.yml
+/codecov.yml export-ignore
 /CONTRIBUTING.md export-ignore
+/docker export-ignore
 /docker-compose.yml export-ignore
-/Makefile
-/phive.xml
+/Makefile export-ignore
+/phive.xml export-ignore
 /phpdoc.dist.xml export-ignore
 /phpunit.xml.dist export-ignore
 /tests export-ignore

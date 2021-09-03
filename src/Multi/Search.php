@@ -46,9 +46,6 @@ class Search
      */
     private $_builder;
 
-    /**
-     * Constructs search object.
-     */
     public function __construct(Client $client, ?MultiBuilderInterface $builder = null)
     {
         $this->_builder = $builder ?? new MultiBuilder();

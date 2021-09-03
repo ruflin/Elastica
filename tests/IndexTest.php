@@ -556,10 +556,7 @@ class IndexTest extends BaseTest
             $index->delete();
             $this->fail('This should never be reached. Deleting an unknown index will throw an exception');
         } catch (ResponseException $error) {
-            $response = $error->getResponse();
-            $this->assertTrue($response->hasError());
-            $request = $error->getRequest();
-            $this->assertInstanceOf(Request::class, $request);
+            $this->assertTrue($error->getResponse()->hasError());
         }
     }
 

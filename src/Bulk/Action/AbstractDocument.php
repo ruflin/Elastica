@@ -115,9 +115,8 @@ abstract class AbstractDocument extends Action
      * The action can be index, update, create or delete based on the $opType param (by default index).
      *
      * @param AbstractScript|Document $data
-     * @param string                  $opType
      *
-     * @return static
+     * @return AbstractDocument
      */
     public static function create($data, ?string $opType = null): self
     {
@@ -141,24 +140,18 @@ abstract class AbstractDocument extends Action
 
         switch ($opType) {
             case self::OP_TYPE_DELETE:
-                $action = new DeleteDocument($data);
-                break;
+                return new DeleteDocument($data);
 
             case self::OP_TYPE_CREATE:
-                $action = new CreateDocument($data);
-                break;
+                return new CreateDocument($data);
 
             case self::OP_TYPE_UPDATE:
-                $action = new UpdateDocument($data);
-                break;
+                return new UpdateDocument($data);
 
             case self::OP_TYPE_INDEX:
             default:
-                $action = new IndexDocument($data);
-                break;
+                return new IndexDocument($data);
         }
-
-        return $action;
     }
 
     abstract protected function _getMetadata(AbstractUpdateAction $source): array;

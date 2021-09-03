@@ -15,6 +15,11 @@ use Ivory\HttpAdapter\Message\Request as HttpAdapterRequest;
 use Ivory\HttpAdapter\Message\Response as HttpAdapterResponse;
 use Ivory\HttpAdapter\Message\Stream\StringStream;
 
+\trigger_deprecation('ruflin/elastica', '7.1.1', 'The "%s" class is deprecated. It will be removed in 8.0.', HttpAdapter::class);
+
+/**
+ * @deprecated since version 7.1.1
+ */
 class HttpAdapter extends AbstractTransport
 {
     /**
@@ -44,7 +49,7 @@ class HttpAdapter extends AbstractTransport
      * @param array $params Host, Port, ...
      *
      * @throws \Elastica\Exception\ConnectionException
-     * @throws \Elastica\Exception\ResponseException
+     * @throws ResponseException
      * @throws \Elastica\Exception\Connection\HttpException
      */
     public function exec(ElasticaRequest $elasticaRequest, array $params): Response
@@ -94,7 +99,7 @@ class HttpAdapter extends AbstractTransport
         $method = $elasticaRequest->getMethod();
         $headers = $connection->hasConfig('headers') ?: [];
         if (!empty($data) || '0' === $data) {
-            if (ElasticaRequest::GET == $method) {
+            if (ElasticaRequest::GET === $method) {
                 $method = ElasticaRequest::POST;
             }
 

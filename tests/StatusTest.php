@@ -27,25 +27,24 @@ class StatusTest extends BaseTest
      */
     public function testGetIndexNames(): void
     {
-        $indexName = 'test';
         $client = $this->_getClient();
-        $index = $client->getIndex($indexName);
-        $index->create([], [
-            'recreate' => true,
-        ]);
-        $index = $this->_createIndex();
-        $index->refresh();
-        $index->forcemerge();
+        $indexes = [
+            '1',
+            'test',
+        ];
 
-        $status = new Status($index->getClient());
-        $names = $status->getIndexNames();
-
-        $this->assertIsArray($names);
-        $this->assertContains($index->getName(), $names);
-
-        foreach ($names as $name) {
-            $this->assertIsString($name);
+        foreach ($indexes as $name) {
+            $client->getIndex($name)->create([], [
+                'recreate' => true,
+            ]);
         }
+
+        $status = new Status($client);
+        $indexNames = $status->getIndexNames();
+
+        $this->assertIsArray($indexNames);
+        $this->assertContainsOnly('string', $indexNames);
+        $this->assertSame($indexes, \array_intersect($indexes, $indexNames));
     }
 
     /**
@@ -54,7 +53,6 @@ class StatusTest extends BaseTest
     public function testIndexExists(): void
     {
         $indexName = 'elastica_test';
-        $aliasName = 'elastica_test-alias';
 
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);

@@ -4,6 +4,7 @@ namespace Elastica\Test\Transport;
 
 use Elastica\Connection;
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
 use Elastica\Exception\ResponseException;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
@@ -20,7 +21,7 @@ class AbstractTransportTest extends BaseTest
      *
      * @return array[]
      */
-    public function getTransport()
+    public function getTransport(): array
     {
         return [
             [
@@ -37,10 +38,8 @@ class AbstractTransportTest extends BaseTest
      *
      * @return array[]
      */
-    public function getValidDefinitions()
+    public function getValidDefinitions(): array
     {
-        $connection = new Connection();
-
         return [
             ['Http'],
             [['type' => 'Http']],
@@ -59,13 +58,12 @@ class AbstractTransportTest extends BaseTest
     public function testCanCreateTransportInstances($transport): void
     {
         $connection = new Connection();
-        $params = [];
-        $transport = AbstractTransport::create($transport, $connection, $params);
-        $this->assertInstanceOf(AbstractTransport::class, $transport);
+        $transport = AbstractTransport::create($transport, $connection);
+
         $this->assertSame($connection, $transport->getConnection());
     }
 
-    public function getInvalidDefinitions()
+    public function getInvalidDefinitions(): array
     {
         return [
             [['transport' => 'Http']],
@@ -81,7 +79,7 @@ class AbstractTransportTest extends BaseTest
      */
     public function testThrowsExecptionOnInvalidTransportDefinition($transport): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
         $this->expectExceptionMessage('Invalid transport');
 
         AbstractTransport::create($transport, new Connection());
@@ -139,7 +137,7 @@ class AbstractTransportTest extends BaseTest
             $this->fail('Failed to parse value [1] as only [true] or [false] are allowed.');
         }
 
-        if ('Http' == $transport['transport']) {
+        if ('Http' === $transport['transport']) {
             $info = $results->getResponse()->getTransferInfo();
             $url = $info['url'];
             $this->assertStringEndsWith('version=true', $url);

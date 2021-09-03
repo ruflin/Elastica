@@ -20,7 +20,7 @@ class Request extends Param
     public const NDJSON_CONTENT_TYPE = 'application/x-ndjson';
 
     /**
-     * @var \Elastica\Connection
+     * @var Connection
      */
     protected $_connection;
 

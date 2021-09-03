@@ -19,7 +19,7 @@ class Status
     /**
      * Contains all status infos.
      *
-     * @var \Elastica\Response Response object
+     * @var Response
      */
     protected $_response;
 
@@ -31,17 +31,10 @@ class Status
     protected $_data;
 
     /**
-     * Client object.
-     *
-     * @var \Elastica\Client Client object
+     * @var Client
      */
     protected $_client;
 
-    /**
-     * Constructs Status object.
-     *
-     * @param \Elastica\Client $client Client object
-     */
     public function __construct(Client $client)
     {
         $this->_client = $client;
@@ -64,35 +57,33 @@ class Status
     /**
      * Returns a list of the existing index names.
      *
-     * @return array Index names list
+     * @return string[]
      */
     public function getIndexNames()
     {
         $data = $this->getData();
 
-        return \array_keys($data['indices']);
+        return \array_map(static function ($name): string {
+            return (string) $name;
+        }, \array_keys($data['indices']));
     }
 
     /**
      * Checks if the given index exists.
      *
-     * @param string $name Index name to check
-     *
      * @return bool True if index exists
      */
-    public function indexExists($name)
+    public function indexExists(string $name)
     {
-        return \in_array($name, $this->getIndexNames());
+        return \in_array($name, $this->getIndexNames(), true);
     }
 
     /**
      * Checks if the given alias exists.
      *
-     * @param string $name Alias name
-     *
      * @return bool True if alias exists
      */
-    public function aliasExists($name)
+    public function aliasExists(string $name)
     {
         return \count($this->getIndicesWithAlias($name)) > 0;
     }
@@ -100,11 +91,9 @@ class Status
     /**
      * Returns an array with all indices that the given alias name points to.
      *
-     * @param string $alias Alias name
-     *
-     * @return array|\Elastica\Index[] List of Elastica\Index
+     * @return Index[]
      */
-    public function getIndicesWithAlias($alias)
+    public function getIndicesWithAlias(string $alias)
     {
         // TODO: Use only GetAlias when dropping support for elasticsearch/elasticsearch 7.x
         $endpoint = \class_exists(GetAlias::class) ? new GetAlias() : new Get();
@@ -133,7 +122,7 @@ class Status
     /**
      * Returns response object.
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      */
     public function getResponse()
     {

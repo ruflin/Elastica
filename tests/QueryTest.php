@@ -60,16 +60,6 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetSuggestMustReturnQueryInstance(): void
-    {
-        $query = new Query();
-        $suggest = new Suggest();
-        $this->assertInstanceOf(Query::class, $query->setSuggest($suggest));
-    }
-
-    /**
-     * @group unit
-     */
     public function testArrayQuery(): void
     {
         $query = [
@@ -177,14 +167,13 @@ class QueryTest extends BaseTest
      */
     public function testSetStoredFields(): void
     {
-        $query = new Query();
-
-        $params = ['query' => 'test'];
-
-        $query->setStoredFields(['firstname', 'lastname']);
+        $query = (new Query())
+            ->setStoredFields(['firstname', 'lastname'])
+        ;
 
         $data = $query->toArray();
 
+        $this->assertArrayHasKey('stored_fields', $data);
         $this->assertContains('firstname', $data['stored_fields']);
         $this->assertContains('lastname', $data['stored_fields']);
         $this->assertCount(2, $data['stored_fields']);
@@ -398,6 +387,32 @@ class QueryTest extends BaseTest
         $anotherQuery->setPostFilter($postFilter);
 
         $this->assertEquals($query->toArray(), $anotherQuery->toArray());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testRawPostFilter(): void
+    {
+        $query = (new Query())
+            ->setQuery(new Term(['field' => 'value']))
+            ->setParam('post_filter', [
+                'term' => ['field' => 'value'],
+            ])
+        ;
+
+        $this->assertSame([
+            'query' => [
+                'term' => [
+                    'field' => 'value',
+                ],
+            ],
+            'post_filter' => [
+                'term' => [
+                    'field' => 'value',
+                ],
+            ],
+        ], $query->toArray());
     }
 
     /**

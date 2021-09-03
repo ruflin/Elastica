@@ -33,7 +33,7 @@ class Guzzle extends AbstractTransport
     /**
      * Curl resource to reuse.
      *
-     * @var Client Guzzle client to reuse
+     * @var Client|null Guzzle client to reuse
      */
     protected static $_guzzleClientConnection;
 
@@ -42,13 +42,9 @@ class Guzzle extends AbstractTransport
      *
      * All calls that are made to the server are done through this function
      *
-     * @param array $params Host, Port, ...
-     *
      * @throws \Elastica\Exception\ConnectionException
-     * @throws \Elastica\Exception\ResponseException
+     * @throws ResponseException
      * @throws \Elastica\Exception\Connection\HttpException
-     *
-     * @return \Elastica\Response Response object
      */
     public function exec(Request $request, array $params): Response
     {
@@ -122,7 +118,7 @@ class Guzzle extends AbstractTransport
 
         $data = $request->getData();
         if (!empty($data) || '0' === $data) {
-            if (Request::GET == $req->getMethod()) {
+            if (Request::GET === $req->getMethod()) {
                 $req = $req->withMethod(Request::POST);
             }
 
@@ -172,7 +168,7 @@ class Guzzle extends AbstractTransport
                 'scheme' => $this->_scheme,
                 'host' => $connection->getHost(),
                 'port' => $connection->getPort(),
-                'path' => \ltrim('/', $connection->getPath()),
+                'path' => \ltrim($connection->getPath(), '/'),
             ]);
         }
 

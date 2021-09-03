@@ -38,7 +38,6 @@ class TransportBenchmarkTest extends BaseTest
      */
     public function testAddDocument(array $config, string $transport): void
     {
-        $this->_checkTransport($config, $transport);
         $index = $this->getIndex($config);
         $index->create([], [
             'recreate' => true,
@@ -66,13 +65,12 @@ class TransportBenchmarkTest extends BaseTest
      */
     public function testRandomRead(array $config, $transport): void
     {
-        $this->_checkTransport($config, $transport);
         $index = $this->getIndex($config);
         $index->search('test');
 
         $times = [];
         for ($i = 0; $i < $this->_max; ++$i) {
-            $test = \rand(1, $this->_max);
+            $test = \mt_rand(1, $this->_max);
             $query = new Query();
             $query->setQuery(new MatchAll());
             $query->setPostFilter(new Term(['test' => $test]));
@@ -91,7 +89,6 @@ class TransportBenchmarkTest extends BaseTest
      */
     public function testBulk(array $config, $transport): void
     {
-        $this->_checkTransport($config, $transport);
         $index = $this->getIndex($config);
 
         $times = [];
@@ -114,8 +111,6 @@ class TransportBenchmarkTest extends BaseTest
      */
     public function testGetMapping(array $config, string $transport): void
     {
-        $this->_checkTransport($config, $transport);
-
         $client = $this->_getClient($config);
         $index = $client->getIndex('benchmark');
         $index->create([], [
@@ -245,10 +240,5 @@ class TransportBenchmarkTest extends BaseTest
             }
             echo "\n";
         }
-    }
-
-    protected function _checkTransport(array $config, $transport): void
-    {
-        $this->_checkConnection($config['host'], $config['port']);
     }
 }

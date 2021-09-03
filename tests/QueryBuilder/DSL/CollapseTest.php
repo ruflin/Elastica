@@ -29,7 +29,5 @@ class CollapseTest extends AbstractDSLTest
         $collapseDSL = new DSL\Collapse();
 
         $this->_assertImplemented($collapseDSL, 'inner_hits', Collapse\InnerHits::class, []);
-        // Make sure collapse returns an instance of Collapse\InnerHits instead of Query\InnerHits
-        $this->assertInstanceOf(Collapse\InnerHits::class, $collapseDSL->inner_hits());
     }
 }

@@ -75,11 +75,11 @@ class AbstractUpdateAction extends Param
             $this->setVersion($responseData['_version']);
         }
 
-        if (isset($data['_seq_no'])) {
+        if (isset($responseData['_seq_no'])) {
             $this->setSequenceNumber($responseData['_seq_no']);
         }
 
-        if (isset($data['_primary_term'])) {
+        if (isset($responseData['_primary_term'])) {
             $this->setPrimaryTerm($responseData['_primary_term']);
         }
 
@@ -321,7 +321,7 @@ class AbstractUpdateAction extends Param
     {
         $refresh = $this->getParam('refresh');
 
-        return \in_array($refresh, [Reindex::REFRESH_TRUE, Reindex::REFRESH_FALSE])
+        return \in_array($refresh, [Reindex::REFRESH_TRUE, Reindex::REFRESH_FALSE], true)
             ? Reindex::REFRESH_TRUE === $refresh
             : $refresh;
     }
@@ -448,7 +448,7 @@ class AbstractUpdateAction extends Param
      */
     public function getOptions(array $fields = [])
     {
-        if (!empty($fields)) {
+        if ($fields) {
             return \array_filter(\array_intersect_key($this->getParams(), \array_flip($fields)));
         }
 

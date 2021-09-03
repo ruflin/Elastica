@@ -24,6 +24,7 @@ use Elastica\Aggregation\Max;
 use Elastica\Aggregation\Min;
 use Elastica\Aggregation\Missing;
 use Elastica\Aggregation\Nested;
+use Elastica\Aggregation\NormalizeAggregation;
 use Elastica\Aggregation\Percentiles;
 use Elastica\Aggregation\PercentilesBucket;
 use Elastica\Aggregation\Range;
@@ -238,7 +239,7 @@ class Aggregation implements DSL
      */
     public function global_agg(string $name): GlobalAggregation
     {
-        trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s()" method is deprecated, use "global()" instead. It will be removed in 8.0.', __METHOD__);
+        \trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s()" method is deprecated, use "global()" instead. It will be removed in 8.0.', __METHOD__);
 
         return $this->global($name);
     }
@@ -486,5 +487,15 @@ class Aggregation implements DSL
     public function composite(string $name): Composite
     {
         return new Composite($name);
+    }
+
+    /**
+     * normalize aggregation.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-normalize-aggregation.html
+     */
+    public function normalize(string $name, ?string $bucketsPath = null, ?string $method = null): NormalizeAggregation
+    {
+        return new NormalizeAggregation($name, $bucketsPath, $method);
     }
 }

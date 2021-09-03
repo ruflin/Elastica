@@ -28,7 +28,7 @@ class Http extends AbstractTransport
     /**
      * Curl resource to reuse.
      *
-     * @var resource Curl resource to reuse
+     * @var resource|null Curl resource to reuse
      */
     protected static $_curlConnection;
 
@@ -120,6 +120,8 @@ class Http extends AbstractTransport
         $data = $request->getData();
         $httpMethod = $request->getMethod();
 
+        $headers[] = 'Content-Type: '.$request->getContentType();
+
         if (!empty($data) || '0' === $data) {
             if ($this->hasParam('postWithRequestBody') && true == $this->getParam('postWithRequestBody')) {
                 $httpMethod = Request::POST;
@@ -134,7 +136,6 @@ class Http extends AbstractTransport
                 $content = \str_replace('\/', '/', $content);
             }
 
-            $headers[] = 'Content-Type: '.$request->getContentType();
             if ($connection->hasCompression()) {
                 // Compress the body of the request ...
                 \curl_setopt($conn, \CURLOPT_POSTFIELDS, \gzencode($content));
@@ -150,7 +151,7 @@ class Http extends AbstractTransport
 
         \curl_setopt($conn, \CURLOPT_HTTPHEADER, $headers);
 
-        \curl_setopt($conn, \CURLOPT_NOBODY, 'HEAD' == $httpMethod);
+        \curl_setopt($conn, \CURLOPT_NOBODY, 'HEAD' === $httpMethod);
 
         \curl_setopt($conn, \CURLOPT_CUSTOMREQUEST, $httpMethod);
 
@@ -166,7 +167,7 @@ class Http extends AbstractTransport
         // Checks if error exists
         $errorNumber = \curl_errno($conn);
 
-        $response = new Response($responseString, \curl_getinfo($conn, \CURLINFO_HTTP_CODE));
+        $response = new Response($responseString, \curl_getinfo($conn, \CURLINFO_RESPONSE_CODE));
         $response->setQueryTime($end - $start);
         $response->setTransferInfo(\curl_getinfo($conn));
         if ($connection->hasConfig('bigintConversion')) {

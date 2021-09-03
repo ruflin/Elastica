@@ -13,8 +13,6 @@ namespace Elastica\Query;
 class SpanTerm extends AbstractSpanQuery
 {
     /**
-     * Constructs the SpanTerm query object.
-     *
      * @param array $term Calls setRawTerm with the given $term array
      */
     public function __construct(array $term = [])

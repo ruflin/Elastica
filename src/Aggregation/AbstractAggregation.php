@@ -60,7 +60,7 @@ abstract class AbstractAggregation extends Param implements NameableInterface
     /**
      * Add a sub-aggregation.
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      *
      * @return $this
      */
@@ -88,7 +88,7 @@ abstract class AbstractAggregation extends Param implements NameableInterface
      */
     public function setMeta(array $meta): self
     {
-        if (empty($meta)) {
+        if (!$meta) {
             return $this->clearMeta();
         }
 

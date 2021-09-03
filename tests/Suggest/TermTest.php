@@ -135,10 +135,7 @@ class TermTest extends BaseTest
         $this->assertCount(0, $suggests['suggest1'][0]['options']);
     }
 
-    /**
-     * @return Index
-     */
-    protected function _getIndexForTest()
+    protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
         $index->addDocuments([

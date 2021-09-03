@@ -40,11 +40,9 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      *
      * @var Result[] Results
      */
-    private $_results = [];
+    private $_results;
 
     /**
-     * Constructs ResultSet object.
-     *
      * @param Result[] $results
      */
     public function __construct(Response $response, Query $query, $results)
@@ -221,7 +219,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Returns the current object of the set.
      *
-     * @return \Elastica\Result Set object
+     * @return Result Set object
      */
     public function current(): Result
     {

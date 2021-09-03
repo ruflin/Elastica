@@ -3,6 +3,7 @@
 namespace Elastica\Test;
 
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Task;
 
 /**
@@ -81,7 +82,7 @@ class TaskTest extends Base
     {
         $task = $this->_createTask();
         $task->refresh([Task::WAIT_FOR_COMPLETION => Task::WAIT_FOR_COMPLETION_TRUE]);
-        $response = $task->cancel();
+        $task->cancel();
 
         $task->refresh();
         $this->assertArrayNothasKey('canceled', $task->getData());
@@ -105,7 +106,7 @@ class TaskTest extends Base
         return new Task($this->_getClient(), $id);
     }
 
-    protected function _createIndexWithDocument(): \Elastica\Index
+    protected function _createIndexWithDocument(): Index
     {
         $index = $this->_createIndex();
         $index->addDocument(new Document(1, ['name' => 'ruflin nicolas']));

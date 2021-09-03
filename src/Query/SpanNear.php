@@ -14,21 +14,18 @@ use Elastica\Exception\InvalidException;
 class SpanNear extends AbstractSpanQuery
 {
     /**
-     * Constructs a SpanNear query object.
-     *
      * @param AbstractSpanQuery[] $clauses
      * @param int                 $slop    maximum proximity
      * @param bool                $inOrder true if order of searched clauses is important
      */
     public function __construct(array $clauses = [], int $slop = 1, bool $inOrder = false)
     {
-        if (!empty($clauses)) {
-            foreach ($clauses as $clause) {
-                if (!$clause instanceof AbstractSpanQuery) {
-                    throw new InvalidException('Invalid parameter. Has to be array or instance of '.AbstractSpanQuery::class);
-                }
+        foreach ($clauses as $clause) {
+            if (!$clause instanceof AbstractSpanQuery) {
+                throw new InvalidException('Invalid parameter. Has to be array or instance of '.AbstractSpanQuery::class);
             }
         }
+
         $this->setParams(['clauses' => $clauses]);
         $this->setSlop($slop);
         $this->setInOrder($inOrder);

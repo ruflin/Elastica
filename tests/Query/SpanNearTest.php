@@ -3,6 +3,7 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
 use Elastica\Query\SpanNear;
 use Elastica\Query\SpanTerm;
 use Elastica\Query\Term;
@@ -18,11 +19,12 @@ class SpanNearTest extends BaseTest
      */
     public function testConstructWrongTypeInvalid(): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         $term1 = new Term(['name' => 'marek']);
         $term2 = new Term(['name' => 'nicolas']);
-        $spanNearQuery = new SpanNear([$term1, $term2]);
+
+        new SpanNear([$term1, $term2]);
     }
 
     /**

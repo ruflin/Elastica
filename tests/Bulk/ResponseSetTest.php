@@ -130,7 +130,6 @@ class ResponseSetTest extends BaseTest
 
         $this->assertEquals(0, $responseSet->key());
         $this->assertTrue($responseSet->valid());
-        $this->assertInstanceOf(Bulk\Response::class, $responseSet->current());
     }
 
     public function isOkDataProvider(): \Generator

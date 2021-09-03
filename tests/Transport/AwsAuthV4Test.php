@@ -4,6 +4,7 @@ namespace Elastica\Test\Transport;
 
 use Aws\Credentials\CredentialProvider;
 use Aws\Credentials\Credentials;
+use Aws\Sdk;
 use Elastica\Exception\Connection\GuzzleException;
 use GuzzleHttp\Exception\TransferException;
 
@@ -14,7 +15,7 @@ class AwsAuthV4Test extends GuzzleTest
 {
     public static function setUpbeforeClass(): void
     {
-        if (!\class_exists('Aws\\Sdk')) {
+        if (!\class_exists(Sdk::class)) {
             self::markTestSkipped('aws/aws-sdk-php package should be installed to run SignatureV4 transport tests');
         }
     }
@@ -36,7 +37,7 @@ class AwsAuthV4Test extends GuzzleTest
         $client = $this->_getClient($config);
 
         try {
-            $client->request('_status', 'GET');
+            $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
             if ($guzzleException instanceof TransferException) {
@@ -77,7 +78,7 @@ class AwsAuthV4Test extends GuzzleTest
         $client = $this->_getClient($config);
 
         try {
-            $client->request('_status', 'GET');
+            $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
             if ($guzzleException instanceof TransferException) {
@@ -115,7 +116,7 @@ class AwsAuthV4Test extends GuzzleTest
         $client = $this->_getClient($config);
 
         try {
-            $client->request('_status', 'GET');
+            $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
             if ($guzzleException instanceof TransferException) {
@@ -149,7 +150,7 @@ class AwsAuthV4Test extends GuzzleTest
         $client = $this->_getClient($config);
 
         try {
-            $client->request('_status', 'GET');
+            $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
             if ($guzzleException instanceof TransferException) {
@@ -174,7 +175,7 @@ class AwsAuthV4Test extends GuzzleTest
         $client = $this->_getClient($config);
 
         try {
-            $client->request('_status', 'GET');
+            $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
             if ($guzzleException instanceof TransferException) {
@@ -198,7 +199,7 @@ class AwsAuthV4Test extends GuzzleTest
 
         $client = $this->_getClient($config);
         try {
-            $client->request('_status', 'GET');
+            $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
             if ($guzzleException instanceof TransferException) {

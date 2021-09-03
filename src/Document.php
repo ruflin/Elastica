@@ -150,7 +150,7 @@ class Document extends AbstractUpdateAction
     {
         $value = \base64_encode(\file_get_contents($filepath));
 
-        if (!empty($mimeType)) {
+        if ('' !== $mimeType) {
             $value = ['_content_type' => $mimeType, '_name' => $filepath, '_content' => $value];
         }
 

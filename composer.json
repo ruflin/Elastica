@@ -19,8 +19,9 @@
         "ext-json": "*",
         "elasticsearch/elasticsearch": "^7.1.1",
         "nyholm/dsn": "^2.0.0",
-        "psr/log": "^1.0",
-        "symfony/deprecation-contracts": "^2.2"
+        "psr/log": "^1.0 || ^2.0 || ^3.0",
+        "symfony/deprecation-contracts": "^2.2",
+        "symfony/polyfill-php73": "^1.19"
     },
     "require-dev": {
         "aws/aws-sdk-php": "^3.155",
@@ -30,8 +31,8 @@
     },
     "suggest": {
         "aws/aws-sdk-php": "Allow using IAM authentication with Amazon ElasticSearch Service",
-        "egeloen/http-adapter": "Allow using httpadapter transport",
-        "guzzlehttp/guzzle": "Allow using guzzle 6 as the http transport",
+        "egeloen/http-adapter": "Allow using httpadapter as transport",
+        "guzzlehttp/guzzle": "Allow using guzzle as transport",
         "monolog/monolog": "Logging request"
     },
     "extra": {

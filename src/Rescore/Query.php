@@ -34,7 +34,7 @@ class Query extends AbstractRescore
     {
         $data = $this->getParams();
 
-        if (!empty($this->_rawParams)) {
+        if ($this->_rawParams) {
             $data = \array_merge($data, $this->_rawParams);
         }
 
@@ -50,7 +50,7 @@ class Query extends AbstractRescore
     /**
      * Sets rescoreQuery object.
      *
-     * @param \Elastica\Query|\Elastica\Query\AbstractQuery|string $rescoreQuery
+     * @param BaseQuery|\Elastica\Query\AbstractQuery|string $rescoreQuery
      *
      * @return $this
      */

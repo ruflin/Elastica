@@ -93,7 +93,7 @@ abstract class AbstractScript extends AbstractUpdateAction
     {
         $array = $this->getScriptTypeArray();
 
-        if (!empty($this->_params)) {
+        if ($this->_params) {
             $array['params'] = $this->_convertArrayable($this->_params);
         }
 

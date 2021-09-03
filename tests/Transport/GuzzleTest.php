@@ -3,6 +3,7 @@
 namespace Elastica\Test\Transport;
 
 use Elastica\Document;
+use Elastica\Exception\Connection\GuzzleException;
 use Elastica\Query;
 use Elastica\ResultSet\DefaultBuilder;
 use Elastica\Test\Base as BaseTest;
@@ -35,7 +36,6 @@ class GuzzleTest extends BaseTest
      */
     public function testWithEnvironmentalProxy(): void
     {
-        $this->checkProxy($this->_getProxyUrl());
         \putenv('http_proxy='.$this->_getProxyUrl().'/');
 
         $client = $this->_getClient(['transport' => 'Guzzle', 'persistent' => false]);
@@ -54,7 +54,6 @@ class GuzzleTest extends BaseTest
      */
     public function testWithEnabledEnvironmentalProxy(): void
     {
-        $this->checkProxy($this->_getProxyUrl403());
         \putenv('http_proxy='.$this->_getProxyUrl403().'/');
 
         $client = $this->_getClient(['transport' => 'Guzzle', 'persistent' => false]);
@@ -74,7 +73,6 @@ class GuzzleTest extends BaseTest
      */
     public function testWithProxy(): void
     {
-        $this->checkProxy($this->_getProxyUrl());
         $client = $this->_getClient(['transport' => 'Guzzle', 'persistent' => false]);
         $client->getConnection()->setProxy($this->_getProxyUrl());
 
@@ -133,16 +131,9 @@ class GuzzleTest extends BaseTest
      */
     public function testInvalidConnection(): void
     {
-        $this->expectException(\Elastica\Exception\Connection\GuzzleException::class);
+        $this->expectException(GuzzleException::class);
 
         $client = $this->_getClient(['transport' => 'Guzzle', 'port' => 4500, 'persistent' => false]);
-        $response = $client->request('_stats', 'GET');
-        $client->request('_status', 'GET');
-    }
-
-    protected function checkProxy($url): void
-    {
-        $url = \parse_url($url);
-        $this->_checkConnection($url['host'], $url['port']);
+        $client->request('_stats', 'GET');
     }
 }

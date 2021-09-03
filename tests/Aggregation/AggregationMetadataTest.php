@@ -3,6 +3,7 @@
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Cardinality;
+use Elastica\Index;
 use Elastica\Query;
 
 /**
@@ -55,7 +56,7 @@ class AggregationMetadataTest extends BaseAggregationTest
         $this->assertEquals($metadata, $results['meta']);
     }
 
-    protected function _getIndexForTest()
+    protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
         $index->refresh();

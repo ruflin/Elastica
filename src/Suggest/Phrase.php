@@ -3,6 +3,7 @@
 namespace Elastica\Suggest;
 
 use Elastica\Suggest\CandidateGenerator\AbstractCandidateGenerator;
+use Elastica\Suggest\CandidateGenerator\DirectGenerator;
 
 /**
  * Class Phrase.
@@ -20,7 +21,7 @@ class Phrase extends AbstractSuggest
     /**
      * @return $this
      */
-    public function setAnalyzer(string $analyzer): Phrase
+    public function setAnalyzer(string $analyzer): self
     {
         return $this->setParam('analyzer', $analyzer);
     }
@@ -30,7 +31,7 @@ class Phrase extends AbstractSuggest
      *
      * @return $this
      */
-    public function setGramSize(int $size): Phrase
+    public function setGramSize(int $size): self
     {
         return $this->setParam('gram_size', $size);
     }
@@ -42,7 +43,7 @@ class Phrase extends AbstractSuggest
      *
      * @return $this
      */
-    public function setRealWordErrorLikelihood(float $likelihood): Phrase
+    public function setRealWordErrorLikelihood(float $likelihood): self
     {
         return $this->setParam('real_word_error_likelihood', $likelihood);
     }
@@ -55,7 +56,7 @@ class Phrase extends AbstractSuggest
      *
      * @return $this
      */
-    public function setConfidence(float $confidence): Phrase
+    public function setConfidence(float $confidence): self
     {
         return $this->setParam('confidence', $confidence);
     }
@@ -65,7 +66,7 @@ class Phrase extends AbstractSuggest
      *
      * @return $this
      */
-    public function setMaxErrors(float $max): Phrase
+    public function setMaxErrors(float $max): self
     {
         return $this->setParam('max_errors', $max);
     }
@@ -73,7 +74,7 @@ class Phrase extends AbstractSuggest
     /**
      * @return $this
      */
-    public function setSeparator(string $separator): Phrase
+    public function setSeparator(string $separator): self
     {
         return $this->setParam('separator', $separator);
     }
@@ -83,7 +84,7 @@ class Phrase extends AbstractSuggest
      *
      * @return $this
      */
-    public function setHighlight(string $preTag, string $postTag): Phrase
+    public function setHighlight(string $preTag, string $postTag): self
     {
         return $this->setParam('highlight', [
             'pre_tag' => $preTag,
@@ -94,7 +95,7 @@ class Phrase extends AbstractSuggest
     /**
      * @return $this
      */
-    public function setStupidBackoffSmoothing(float $discount): Phrase
+    public function setStupidBackoffSmoothing(float $discount): self
     {
         return $this->setSmoothingModel('stupid_backoff', [
             'discount' => $discount,
@@ -104,7 +105,7 @@ class Phrase extends AbstractSuggest
     /**
      * @return $this
      */
-    public function setLaplaceSmoothing(float $alpha): Phrase
+    public function setLaplaceSmoothing(float $alpha): self
     {
         return $this->setSmoothingModel('laplace', [
             'alpha' => $alpha,
@@ -114,7 +115,7 @@ class Phrase extends AbstractSuggest
     /**
      * @return $this
      */
-    public function setLinearInterpolationSmoothing(float $trigramLambda, float $bigramLambda, float $unigramLambda): Phrase
+    public function setLinearInterpolationSmoothing(float $trigramLambda, float $bigramLambda, float $unigramLambda): self
     {
         return $this->setSmoothingModel('linear_interpolation', [
             'trigram_lambda' => $trigramLambda,
@@ -128,7 +129,7 @@ class Phrase extends AbstractSuggest
      *
      * @return $this
      */
-    public function setSmoothingModel(string $model, array $params): Phrase
+    public function setSmoothingModel(string $model, array $params): self
     {
         return $this->setParam('smoothing', [
             $model => $params,
@@ -138,9 +139,21 @@ class Phrase extends AbstractSuggest
     /**
      * @return $this
      */
-    public function addCandidateGenerator(AbstractCandidateGenerator $generator): Phrase
+    public function addDirectGenerator(DirectGenerator $generator): self
     {
-        return $this->setParam('candidate_generator', $generator);
+        return $this->addParam('candidate_generator', $generator);
+    }
+
+    /**
+     * @deprecated since version 7.2.0, use the "addDirectGenerator()" method instead.
+     *
+     * @return $this
+     */
+    public function addCandidateGenerator(AbstractCandidateGenerator $generator): self
+    {
+        \trigger_deprecation('ruflin/elastica', '7.2.0', 'The "%s()" method is deprecated, use the "addDirectGenerator()" method instead. It will be removed in 8.0.', __METHOD__);
+
+        return $this->addParam('candidate_generator', $generator);
     }
 
     /**
@@ -149,17 +162,16 @@ class Phrase extends AbstractSuggest
     public function toArray(): array
     {
         $array = parent::toArray();
-
         $baseName = $this->_getBaseName();
 
         if (isset($array[$baseName]['candidate_generator'])) {
-            $generator = $array[$baseName]['candidate_generator'];
+            $generators = $array[$baseName]['candidate_generator'];
             unset($array[$baseName]['candidate_generator']);
 
-            $keys = \array_keys($generator);
-            $values = \array_values($generator);
-
-            $array[$baseName][$keys[0]][] = $values[0];
+            foreach ($generators as $generator) {
+                $key = \array_key_first($generator);
+                $array[$baseName][$key][] = $generator[$key];
+            }
         }
 
         return $array;

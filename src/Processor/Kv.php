@@ -2,7 +2,7 @@
 
 namespace Elastica\Processor;
 
-trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s" class is deprecated, use "%s" instead. It will be removed in 8.0.', Kv::class, KvProcessor::class);
+\trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s" class is deprecated, use "%s" instead. It will be removed in 8.0.', Kv::class, KvProcessor::class);
 
 /**
  * Elastica KV Processor.

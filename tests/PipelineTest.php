@@ -112,7 +112,6 @@ class PipelineTest extends BasePipeline
         $bulk->send();
         $index->refresh();
 
-        /** @var ResultSet $result */
         $result = $index->search('elastica');
 
         $this->assertCount(2, $result->getResults());

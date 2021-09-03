@@ -4,6 +4,7 @@ namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\ParentAggregation;
 use Elastica\Aggregation\Terms;
+use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
 
@@ -86,7 +87,7 @@ class ParentAggregationTest extends BaseAggregationTest
         $this->assertEquals($samTags, $topNamesAggregation['buckets'][1]['to-questions']['top-tags']['buckets']);
     }
 
-    protected function _getIndexForTest()
+    protected function _getIndexForTest(): Index
     {
         $client = $this->_getClient();
         $index = $client->getIndex('testaggregationparent');

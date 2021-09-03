@@ -74,11 +74,11 @@ class SimpleQueryStringTest extends Base
             ],
         ];
 
-        $query = new SimpleQueryString($expected['simple_query_string']['query']);
-        $query->setMinimumShouldMatch($expected['simple_query_string']['minimum_should_match']);
+        $query = (new SimpleQueryString($expected['simple_query_string']['query']))
+            ->setMinimumShouldMatch($expected['simple_query_string']['minimum_should_match'])
+        ;
 
         $this->assertEquals($expected, $query->toArray());
-        $this->assertInstanceOf(SimpleQueryString::class, $query->setMinimumShouldMatch('75%'));
     }
 
     /**

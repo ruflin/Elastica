@@ -57,7 +57,7 @@ class Snapshot
         try {
             $response = $this->request($name);
         } catch (ResponseException $e) {
-            if (404 == $e->getResponse()->getStatus()) {
+            if (404 === $e->getResponse()->getStatus()) {
                 throw new NotFoundException("Repository '".$name."' does not exist.");
             }
             throw $e;
@@ -108,7 +108,7 @@ class Snapshot
         try {
             $response = $this->request($repository.'/'.$name);
         } catch (ResponseException $e) {
-            if (404 == $e->getResponse()->getStatus()) {
+            if (404 === $e->getResponse()->getStatus()) {
                 throw new NotFoundException("Snapshot '".$name."' does not exist in repository '".$repository."'.");
             }
             throw $e;
@@ -155,11 +155,14 @@ class Snapshot
      */
     public function restoreSnapshot($repository, $name, $options = [], $waitForCompletion = false)
     {
-        $endpoint = new Restore();
-        $endpoint->setRepository($repository);
-        $endpoint->setSnapshot($name);
-        $endpoint->setBody($options);
-        $endpoint->setParams(['wait_for_completion' => $waitForCompletion]);
+        $endpoint = (new Restore())
+            ->setRepository($repository)
+            ->setSnapshot($name)
+            ->setBody($options)
+            ->setParams([
+                'wait_for_completion' => $waitForCompletion ? 'true' : 'false',
+            ])
+        ;
 
         return $this->_client->requestEndpoint($endpoint);
     }

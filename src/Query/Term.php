@@ -12,8 +12,6 @@ namespace Elastica\Query;
 class Term extends AbstractQuery
 {
     /**
-     * Constructs the Term query object.
-     *
      * @param array $term Calls setTerm with the given $term array
      */
     public function __construct(array $term = [])

@@ -6,6 +6,7 @@ use Elastica\Aggregation\DateHistogram;
 use Elastica\Aggregation\Max;
 use Elastica\Aggregation\SerialDiff;
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
@@ -68,7 +69,7 @@ class SerialDiffTest extends BaseAggregationTest
      */
     public function testToArrayInvalidBucketsPath(): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         $serialDiffAgg = new SerialDiff('difference');
         $serialDiffAgg->toArray();

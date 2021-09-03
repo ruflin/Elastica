@@ -64,17 +64,13 @@ class SettingsTest extends BaseTest
         // Create two indices to check that the complete cluster is read only
         $settings = new Settings($this->_getClient());
         $settings->setReadOnly(false);
-        $index1 = $this->_createIndex();
+        $index = $this->_createIndex();
 
         $doc1 = new Document(null, ['hello' => 'world']);
         $doc2 = new Document(null, ['hello' => 'world']);
-        $doc3 = new Document(null, ['hello' => 'world']);
-        $doc4 = new Document(null, ['hello' => 'world']);
-        $doc5 = new Document(null, ['hello' => 'world']);
-        $doc6 = new Document(null, ['hello' => 'world']);
 
         // Check that adding documents work
-        $index1->addDocument($doc1);
+        $index->addDocument($doc1);
 
         $response = $settings->setReadOnly(true);
         $this->assertFalse($response->hasError());
@@ -83,7 +79,7 @@ class SettingsTest extends BaseTest
 
         // Make sure both index are read only
         try {
-            $index1->addDocument($doc3);
+            $index->addDocument($doc2);
             $this->fail('should throw read only exception');
         } catch (ResponseException $e) {
             $error = $e->getResponse()->getFullError();
@@ -97,11 +93,11 @@ class SettingsTest extends BaseTest
         $this->assertEquals('false', $setting);
 
         // Check that adding documents works again
-        $index1->addDocument($doc5);
+        $index->addDocument($doc2);
 
-        $index1->refresh();
+        $index->refresh();
 
         // 2 docs should be in each index
-        $this->assertEquals(2, $index1->count());
+        $this->assertEquals(2, $index->count());
     }
 }

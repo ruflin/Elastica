@@ -72,11 +72,11 @@ class Info
      *
      * @return mixed Data array entry or null if not found
      */
-    public function get()
+    public function get(...$args)
     {
         $data = $this->getData();
 
-        foreach (\func_get_args() as $arg) {
+        foreach ($args as $arg) {
             if (isset($data[$arg])) {
                 $data = $data[$arg];
             } else {
@@ -214,7 +214,7 @@ class Info
         $endpoint = \class_exists(NodesInfo::class) ? new NodesInfo() : new \Elasticsearch\Endpoints\Cluster\Nodes\Info();
         $endpoint->setNodeID($this->getNode()->getId());
 
-        if (!empty($params)) {
+        if ($params) {
             $endpoint->setMetric($params);
         }
 

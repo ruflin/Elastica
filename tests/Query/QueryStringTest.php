@@ -17,7 +17,7 @@ class QueryStringTest extends BaseTest
      */
     public function testSearchMultipleFields(): void
     {
-        $str = \md5(\rand());
+        $str = \md5(\mt_rand());
         $query = new QueryString($str);
 
         $expected = [
@@ -27,9 +27,9 @@ class QueryStringTest extends BaseTest
         $this->assertEquals(['query_string' => $expected], $query->toArray());
 
         $fields = [];
-        $max = \rand() % 10 + 1;
+        $max = \mt_rand(1, 10);
         for ($i = 0; $i < $max; ++$i) {
-            $fields[] = \md5(\rand());
+            $fields[] = \md5(\mt_rand());
         }
 
         $query->setFields($fields);
@@ -102,7 +102,7 @@ class QueryStringTest extends BaseTest
         $query = $query->setFields(['title', 'firstname', 'lastname', 'price', 'year']);
 
         try {
-            $resultSet = $index->search($query);
+            $index->search($query);
         } catch (ResponseException $ex) {
             $error = $ex->getResponse()->getFullError();
 
@@ -248,8 +248,9 @@ class QueryStringTest extends BaseTest
         $timezone = 'Europe/Paris';
         $text = 'date:[2012 TO 2014]';
 
-        $query = new QueryString($text);
-        $query->setTimezone($timezone);
+        $query = (new QueryString($text))
+            ->setTimezone($timezone)
+        ;
 
         $expected = [
             'query_string' => [
@@ -258,8 +259,7 @@ class QueryStringTest extends BaseTest
             ],
         ];
 
-        $this->assertEquals($expected, $query->toArray());
-        $this->assertInstanceOf(QueryString::class, $query->setTimezone($timezone));
+        $this->assertSame($expected, $query->toArray());
     }
 
     /**

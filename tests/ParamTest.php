@@ -2,6 +2,7 @@
 
 namespace Elastica\Test;
 
+use Elastica\Exception\InvalidException;
 use Elastica\Param;
 use Elastica\Test\Base as BaseTest;
 
@@ -89,7 +90,7 @@ class ParamTest extends BaseTest
      */
     public function testGetParamInvalid(): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         $param = new Param();
 

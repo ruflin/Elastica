@@ -236,7 +236,7 @@ class Query extends Param
     /**
      * Set script fields.
      *
-     * @param array|\Elastica\Script\ScriptFields $scriptFields Script fields
+     * @param array|ScriptFields $scriptFields Script fields
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-script-fields
      */
@@ -282,7 +282,7 @@ class Query extends Param
             $this->setQuery(new MatchAll());
         }
 
-        if (isset($this->_params['post_filter']) && 0 === \count(($this->_params['post_filter'])->toArray())) {
+        if (isset($this->_params['post_filter']) && 0 === \count($this->_params['post_filter'])) {
             unset($this->_params['post_filter']);
         }
 
@@ -360,8 +360,6 @@ class Query extends Param
 
     /**
      * Sets a post_filter to the current query.
-     *
-     * @param AbstractQuery|array $filter
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-post-filter
      */

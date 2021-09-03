@@ -78,7 +78,7 @@ class Index implements SearchableInterface
     /**
      * Return Index Stats.
      *
-     * @return \Elastica\Index\Stats
+     * @return IndexStats
      */
     public function getStats()
     {
@@ -88,7 +88,7 @@ class Index implements SearchableInterface
     /**
      * Return Index Recovery.
      *
-     * @return \Elastica\Index\Recovery
+     * @return IndexRecovery
      */
     public function getRecovery()
     {
@@ -126,7 +126,7 @@ class Index implements SearchableInterface
     /**
      * Returns the index settings object.
      *
-     * @return \Elastica\Index\Settings Settings object
+     * @return IndexSettings
      */
     public function getSettings()
     {
@@ -255,7 +255,7 @@ class Index implements SearchableInterface
      * @param int|string $id      Document id
      * @param array      $options options for the get request
      *
-     * @throws \Elastica\Exception\ResponseException
+     * @throws ResponseException
      * @throws NotFoundException
      */
     public function getDocument($id, array $options = []): Document
@@ -280,7 +280,7 @@ class Index implements SearchableInterface
         }
 
         $doc = new Document($id, $data, $this->getName());
-        $doc->setVersionParams($data);
+        $doc->setVersionParams($result);
 
         return $doc;
     }
@@ -384,7 +384,7 @@ class Index implements SearchableInterface
      *                            array => Associative array of options (option=>value)
      *
      * @throws InvalidException
-     * @throws \Elastica\Exception\ResponseException
+     * @throws ResponseException
      *
      * @return Response Server response
      */
@@ -392,11 +392,11 @@ class Index implements SearchableInterface
     {
         if (null === $options) {
             if (\func_num_args() >= 2) {
-                trigger_deprecation('ruflin/elastica', '7.1.0', 'Passing null as 2nd argument to "%s()" is deprecated, avoid passing this argument or pass an array instead. It will be removed in 8.0.', __METHOD__);
+                \trigger_deprecation('ruflin/elastica', '7.1.0', 'Passing null as 2nd argument to "%s()" is deprecated, avoid passing this argument or pass an array instead. It will be removed in 8.0.', __METHOD__);
             }
             $options = [];
         } elseif (\is_bool($options)) {
-            trigger_deprecation('ruflin/elastica', '7.1.0', 'Passing a bool as 2nd argument to "%s()" is deprecated, pass an array with the key "recreate" instead. It will be removed in 8.0.', __METHOD__);
+            \trigger_deprecation('ruflin/elastica', '7.1.0', 'Passing a bool as 2nd argument to "%s()" is deprecated, pass an array with the key "recreate" instead. It will be removed in 8.0.', __METHOD__);
             $options = ['recreate' => $options];
         } elseif (!\is_array($options)) {
             throw new \TypeError(\sprintf('Argument 2 passed to "%s()" must be of type array|bool|null, %s given.', __METHOD__, \is_object($options) ? \get_class($options) : \gettype($options)));

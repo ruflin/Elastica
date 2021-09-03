@@ -5,8 +5,10 @@ namespace Elastica\Test\Collapse;
 use Elastica\Collapse;
 use Elastica\Collapse\InnerHits;
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
+use Elastica\ResultSet;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -19,10 +21,11 @@ class CollapseTest extends BaseTest
      */
     public function testSetFieldName(): void
     {
-        $collapse = new Collapse();
-        $returnValue = $collapse->setFieldname('some_name');
-        $this->assertEquals('some_name', $collapse->getParam('field'));
-        $this->assertInstanceOf(Collapse::class, $returnValue);
+        $collapse = (new Collapse())
+            ->setFieldname('some_name')
+        ;
+
+        $this->assertSame('some_name', $collapse->getParam('field'));
     }
 
     /**
@@ -30,12 +33,11 @@ class CollapseTest extends BaseTest
      */
     public function testSetInnerHits(): void
     {
-        $collapse = new Collapse();
-        $innerHits = new InnerHits();
-        $returnValue = $collapse->setInnerHits($innerHits);
-        $this->assertEquals($innerHits, $collapse->getParam('inner_hits'));
-        $this->assertInstanceOf(Collapse::class, $returnValue);
-        $this->assertInstanceOf(InnerHits::class, $collapse->getParam('inner_hits'));
+        $collapse = (new Collapse())
+            ->setInnerHits($innerHits = new InnerHits())
+        ;
+
+        $this->assertSame($innerHits, $collapse->getParam('inner_hits'));
     }
 
     /**
@@ -43,10 +45,11 @@ class CollapseTest extends BaseTest
      */
     public function testSetMaxConcurrentGroupSearches(): void
     {
-        $collapse = new Collapse();
-        $returnValue = $collapse->setMaxConcurrentGroupSearches(5);
-        $this->assertEquals(5, $collapse->getParam('max_concurrent_group_searches'));
-        $this->assertInstanceOf(Collapse::class, $returnValue);
+        $collapse = (new Collapse())
+            ->setMaxConcurrentGroupSearches(5)
+        ;
+
+        $this->assertSame(5, $collapse->getParam('max_concurrent_group_searches'));
     }
 
     /**
@@ -277,7 +280,7 @@ class CollapseTest extends BaseTest
         $this->assertEquals('Keith', $results->getResults()[0]->getInnerHits()['by_zip']['hits']['hits'][1]['fields']['user'][0]);
     }
 
-    private function _getIndexForCollapseTest()
+    private function _getIndexForCollapseTest(): Index
     {
         $index = $this->_createIndex();
         $index->setMapping(new Mapping([
@@ -338,10 +341,7 @@ class CollapseTest extends BaseTest
         return $index;
     }
 
-    /**
-     * @return \Elastica\ResultSet
-     */
-    private function search(Query $query)
+    private function search(Query $query): ResultSet
     {
         return $this->_getIndexForCollapseTest()->search($query);
     }

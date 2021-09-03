@@ -91,7 +91,7 @@ class ConnectionPool
         $connection->setEnabled(false);
 
         if ($this->_callback) {
-            \call_user_func($this->_callback, $connection, $e, $client);
+            ($this->_callback)($connection, $e, $client);
         }
     }
 

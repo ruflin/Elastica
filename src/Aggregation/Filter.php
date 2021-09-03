@@ -32,7 +32,7 @@ class Filter extends AbstractAggregation
     }
 
     /**
-     * @throws \Elastica\Exception\InvalidException If filter is not set
+     * @throws InvalidException If filter is not set
      */
     public function toArray(): array
     {

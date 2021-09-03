@@ -34,7 +34,7 @@ class Terms extends AbstractQuery
      */
     public function __construct(string $field, array $terms = [])
     {
-        if (empty($field)) {
+        if ('' === $field) {
             throw new InvalidException('Terms field name has to be set');
         }
 
@@ -45,7 +45,7 @@ class Terms extends AbstractQuery
     /**
      * Sets terms for the query.
      *
-     * @param array<bool|float|int|string>
+     * @param array<bool|float|int|string> $terms
      */
     public function setTerms(array $terms): self
     {

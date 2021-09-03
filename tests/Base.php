@@ -60,18 +60,12 @@ class Base extends TestCase
         return new Client($config, $callback, $logger);
     }
 
-    /**
-     * @return string Host to es for elastica tests
-     */
-    protected function _getHost()
+    protected function _getHost(): string
     {
         return \getenv('ES_HOST') ?: Connection::DEFAULT_HOST;
     }
 
-    /**
-     * @return int Port to es for elastica tests
-     */
-    protected function _getPort()
+    protected function _getPort(): int
     {
         return \getenv('ES_PORT') ?: Connection::DEFAULT_PORT;
     }
@@ -156,15 +150,6 @@ class Base extends TestCase
         }
     }
 
-    protected function _checkConnection($host, $port): void
-    {
-        $fp = @\pfsockopen($host, $port);
-
-        if (!$fp) {
-            $this->markTestSkipped('Connection to '.$host.':'.$port.' failed');
-        }
-    }
-
     protected function _waitForAllocation(Index $index): void
     {
         do {
@@ -182,21 +167,21 @@ class Base extends TestCase
         } while (!$allocated);
     }
 
-    protected function _isUnitGroup()
+    protected function _isUnitGroup(): bool
     {
         $groups = TestUtil::getGroups(\get_class($this), $this->getName(false));
 
         return \in_array('unit', $groups, true);
     }
 
-    protected function _isFunctionalGroup()
+    protected function _isFunctionalGroup(): bool
     {
         $groups = TestUtil::getGroups(\get_class($this), $this->getName(false));
 
         return \in_array('functional', $groups, true);
     }
 
-    protected function _isBenchmarkGroup()
+    protected function _isBenchmarkGroup(): bool
     {
         $groups = TestUtil::getGroups(\get_class($this), $this->getName(false));
 

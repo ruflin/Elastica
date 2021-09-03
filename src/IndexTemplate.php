@@ -21,19 +21,16 @@ class IndexTemplate
     protected $_name;
 
     /**
-     * Client object.
-     *
-     * @var \Elastica\Client Client object
+     * @var Client
      */
     protected $_client;
 
     /**
      * Creates a new index template object.
      *
-     * @param \Elastica\Client $client Client object
-     * @param string           $name   Index template name
+     * @param string $name Index template name
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      */
     public function __construct(Client $client, $name)
     {
@@ -48,7 +45,7 @@ class IndexTemplate
     /**
      * Deletes the index template.
      *
-     * @return \Elastica\Response Response object
+     * @return Response
      */
     public function delete()
     {
@@ -62,7 +59,7 @@ class IndexTemplate
      *
      * @param array $args OPTIONAL Arguments to use
      *
-     * @return \Elastica\Response
+     * @return Response
      */
     public function create(array $args = [])
     {
@@ -72,7 +69,7 @@ class IndexTemplate
     /**
      * Checks if the given index template is already created.
      *
-     * @return bool True if index exists
+     * @return bool
      */
     public function exists()
     {
@@ -94,7 +91,7 @@ class IndexTemplate
     /**
      * Returns index template client.
      *
-     * @return \Elastica\Client Index client object
+     * @return Client
      */
     public function getClient()
     {
@@ -107,7 +104,7 @@ class IndexTemplate
      * @param string $method Rest method to use (GET, POST, DELETE, PUT)
      * @param array  $data   OPTIONAL Arguments as array
      *
-     * @return \Elastica\Response Response object
+     * @return Response
      */
     public function request($method, $data = [])
     {

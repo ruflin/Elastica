@@ -12,8 +12,6 @@ namespace Elastica\Query;
 class SpanNot extends AbstractSpanQuery
 {
     /**
-     * Constructs a SpanWithin query object.
-     *
      * @param AbstractSpanQuery $include
      * @param AbstractSpanQuery $exclude
      */

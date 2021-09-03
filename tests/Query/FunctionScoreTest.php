@@ -3,6 +3,7 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query\FunctionScore;
 use Elastica\Query\MatchAll;
@@ -505,12 +506,12 @@ class FunctionScoreTest extends BaseTest
             ],
         ];
 
-        $query = new FunctionScore();
-        $query->addDecayFunction(FunctionScore::DECAY_GAUSS, 'price', 0, 10);
-        $returnedValue = $query->setMinScore(0.8);
+        $query = (new FunctionScore())
+            ->addDecayFunction(FunctionScore::DECAY_GAUSS, 'price', 0, 10)
+            ->setMinScore(0.8)
+        ;
 
         $this->assertEquals($expected, $query->toArray());
-        $this->assertInstanceOf(FunctionScore::class, $returnedValue);
 
         $response = $this->_getIndexForTest()->search($query);
         $results = $response->getResults();
@@ -553,7 +554,7 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals(2, $results[0]->getId());
     }
 
-    protected function _getIndexForTest()
+    protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
         $index->setMapping(new Mapping([

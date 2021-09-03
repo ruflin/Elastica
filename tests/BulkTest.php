@@ -9,9 +9,9 @@ use Elastica\Bulk\Action\CreateDocument;
 use Elastica\Bulk\Action\IndexDocument;
 use Elastica\Bulk\Action\UpdateDocument;
 use Elastica\Bulk\Response;
-use Elastica\Bulk\ResponseSet;
 use Elastica\Document;
 use Elastica\Exception\Bulk\ResponseException;
+use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
@@ -94,8 +94,6 @@ class BulkTest extends BaseTest
         $this->assertEquals($expected, (string) \str_replace(\PHP_EOL, "\n", (string) $bulk));
 
         $response = $bulk->send();
-
-        $this->assertInstanceOf(ResponseSet::class, $response);
 
         $this->assertTrue($response->isOk());
         $this->assertFalse($response->hasError());
@@ -282,7 +280,7 @@ class BulkTest extends BaseTest
      */
     public function testInvalidRawData($rawData, $failMessage): void
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         $bulk = new Bulk($this->_getClient());
 
@@ -291,7 +289,7 @@ class BulkTest extends BaseTest
         $this->fail($failMessage);
     }
 
-    public function invalidRawDataProvider()
+    public function invalidRawDataProvider(): array
     {
         return [
             [
@@ -428,8 +426,7 @@ class BulkTest extends BaseTest
         $this->assertFalse($response->hasError());
 
         $index->refresh();
-
-        $doc = $index->getDocument(2);
+        $index->getDocument(2);
 
         //test updating via document
         $doc2 = new Document(2, ['name' => 'The Walrus'], $index);
@@ -640,7 +637,8 @@ class BulkTest extends BaseTest
     public function testSetShardTimeout(): void
     {
         $bulk = new Bulk($this->_getClient());
-        $this->assertInstanceOf(Bulk::class, $bulk->setShardTimeout(10));
+
+        $this->assertSame($bulk, $bulk->setShardTimeout(10));
     }
 
     /**
@@ -649,7 +647,8 @@ class BulkTest extends BaseTest
     public function testSetRequestParam(): void
     {
         $bulk = new Bulk($this->_getClient());
-        $this->assertInstanceOf(Bulk::class, $bulk->setRequestParam('key', 'value'));
+
+        $this->assertSame($bulk, $bulk->setRequestParam('key', 'value'));
     }
 
     /**
