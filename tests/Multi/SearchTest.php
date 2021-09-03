@@ -287,7 +287,7 @@ class SearchTest extends BaseTest
         $multiSearch->addSearch($searchGood);
 
         $searchBad = new Search($client);
-        $searchBad->setOption(Search::OPTION_SIZE, -2);
+        $searchBad->setOption(Search::OPTION_SIZE, 2);
         $searchBad->addIndex($index);
 
         $multiSearch->addSearch($searchBad);
@@ -330,7 +330,7 @@ class SearchTest extends BaseTest
         $multiSearch->addSearch($searchGood, 'search1');
 
         $searchBad = new Search($client);
-        $searchBad->setOption(Search::OPTION_SIZE, -2);
+        $searchBad->setOption(Search::OPTION_SIZE, 2);
         $searchBad->addIndex($index);
 
         $multiSearch->addSearch($searchBad);
