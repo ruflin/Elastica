@@ -773,7 +773,22 @@ class IndexTest extends BaseTest
      */
     public function testForcemerge(): void
     {
-        $index = $this->_createIndex('testforcemerge_indextest', false, 3);
+        $client = $this->_getClient();
+        $index = $client->getIndex('testforcemerge_indextest');
+
+        $index->create([
+            'settings' => [
+                'index' => [
+                    'merge' => [
+                        'policy' => [
+                            'expunge_deletes_allowed' => 0,
+                        ],
+                    ],
+                    'number_of_shards' => 3,
+                    'number_of_replicas' => 1,
+                ],
+            ],
+        ]);
 
         $docs = [
             new Document(1, ['foo' => 'bar']),
@@ -791,13 +806,11 @@ class IndexTest extends BaseTest
         $this->assertSame(1, $stats['_all']['primaries']['docs']['count']);
         $this->assertGreaterThanOrEqual(1, $stats['_all']['primaries']['docs']['deleted']);
 
-        $index->forcemerge(['only_expunge_deletes' => 'true', 'flush' => 'true']);
+        $index->forcemerge(['max_num_segments' => '1']);
         $index->refresh();
 
         $stats = $index->getStats()->getData();
         $this->assertSame(1, $stats['_all']['primaries']['docs']['count']);
-
-        $this->markTestSkipped('This is 2 according to tests?');
         $this->assertSame(0, $stats['_all']['primaries']['docs']['deleted']);
     }
 
