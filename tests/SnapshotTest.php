@@ -73,7 +73,7 @@ class SnapshotTest extends Base
         $data = $response->getData();
         $this->assertContains($this->index->getName(), $data['snapshot']['indices']);
 
-        $this->markTestSkipped("Failed asserting that actual size 2 matches expected size 1.");
+        $this->markTestSkipped('Failed asserting that actual size 2 matches expected size 1.');
         $this->assertCount(1, $data['snapshot']['indices']); // only the specified index should be present
         $this->assertEquals($snapshotName, $data['snapshot']['snapshot']);
 
