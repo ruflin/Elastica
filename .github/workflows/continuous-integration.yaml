@@ -32,15 +32,15 @@ jobs:
       matrix:
         include:
           - php: '7.2'
-            elasticsearch: '7.10.2'
+            elasticsearch: '7.14.1'
           - php: '7.2'
-            elasticsearch: '7.10.2'
+            elasticsearch: '7.14.1'
           - php: '7.3'
-            elasticsearch: '7.10.2'
+            elasticsearch: '7.14.1'
           - php: '7.4'
-            elasticsearch: '7.10.2'
+            elasticsearch: '7.14.1'
           - php: '8.0'
-            elasticsearch: '7.10.2'
+            elasticsearch: '7.14.1'
             composer_flags: '--ignore-platform-reqs'
       fail-fast: false
     steps:
