@@ -796,6 +796,7 @@ class IndexTest extends BaseTest
 
         $stats = $index->getStats()->getData();
         $this->assertSame(1, $stats['_all']['primaries']['docs']['count']);
+        // This is 2 according to tests?
         $this->assertSame(0, $stats['_all']['primaries']['docs']['deleted']);
     }
 
