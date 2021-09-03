@@ -775,28 +775,28 @@ class IndexTest extends BaseTest
     {
         $index = $this->_createIndex('testforcemerge_indextest', false, 3);
 
-        $docs = [];
-        $docs[] = new Document(1, ['foo' => 'bar']);
-        $docs[] = new Document(2, ['foo' => 'bar']);
-        $index->addDocuments($docs);
+        $docs = [
+            new Document(1, ['foo' => 'bar']),
+            new Document(2, ['foo' => 'bar']),
+        ];
+        $index->addDocuments($docs, ['refresh' => 'true']);
+
+        $stats = $index->getStats()->getData();
+        $this->assertSame(2, $stats['_all']['primaries']['docs']['count']);
+        $this->assertSame(0, $stats['_all']['primaries']['docs']['deleted']);
+
+        $index->deleteById('1', ['refresh' => 'true']);
+
+        $stats = $index->getStats()->getData();
+        $this->assertSame(1, $stats['_all']['primaries']['docs']['count']);
+        $this->assertGreaterThanOrEqual(1, $stats['_all']['primaries']['docs']['deleted']);
+
+        $index->forcemerge(['only_expunge_deletes' => 'true', 'flush' => 'true']);
         $index->refresh();
 
         $stats = $index->getStats()->getData();
-        $this->assertEquals(2, $stats['_all']['primaries']['docs']['count']);
-        $this->assertEquals(0, $stats['_all']['primaries']['docs']['deleted']);
-
-        $index->deleteById('1');
-        $index->refresh();
-
-        $stats = $index->getStats()->getData();
-        $this->assertEquals(1, $stats['_all']['primaries']['docs']['count']);
-
-        $index->forcemerge(['max_num_segments' => 1]);
-        $index->refresh();
-
-        $stats = $index->getStats()->getData();
-        $this->assertEquals(1, $stats['_all']['primaries']['docs']['count']);
-        $this->assertEquals(2, $stats['_all']['primaries']['docs']['deleted']);
+        $this->assertSame(1, $stats['_all']['primaries']['docs']['count']);
+        $this->assertSame(0, $stats['_all']['primaries']['docs']['deleted']);
     }
 
     /**
