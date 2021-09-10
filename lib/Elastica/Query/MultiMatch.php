@@ -3,7 +3,7 @@
 namespace Elastica\Query;
 
 /**
- * Multi Match.
+ * Multi MatchQuery.
  *
  * @author Rodolfo Adhenawer Campagnoli Moraes <adhenawer@gmail.com>
  * @author Wong Wing Lun <luiges90@gmail.com>
@@ -80,7 +80,7 @@ class MultiMatch extends AbstractQuery
     }
 
     /**
-     * Sets operator for Match Query.
+     * Sets operator for MatchQuery Query.
      *
      * If not set, defaults to 'or'
      *
@@ -94,7 +94,7 @@ class MultiMatch extends AbstractQuery
     }
 
     /**
-     * Set field minimum should match for Match Query.
+     * Set field minimum should match for MatchQuery Query.
      *
      * @param mixed $minimumShouldMatch
      *
@@ -106,7 +106,7 @@ class MultiMatch extends AbstractQuery
     }
 
     /**
-     * Set zero terms query for Match Query.
+     * Set zero terms query for MatchQuery Query.
      *
      * If not set, default to 'none'
      *
@@ -120,7 +120,7 @@ class MultiMatch extends AbstractQuery
     }
 
     /**
-     * Set cutoff frequency for Match Query.
+     * Set cutoff frequency for MatchQuery Query.
      *
      * @param float $cutoffFrequency
      *

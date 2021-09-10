@@ -3,7 +3,7 @@
 namespace Elastica\Query;
 
 /**
- * Match all query. Returns all results.
+ * MatchQuery all query. Returns all results.
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

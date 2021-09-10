@@ -3,7 +3,7 @@
 namespace Elastica\Test\QueryBuilder\DSL;
 
 use Elastica\Query;
-use Elastica\Query\Match;
+use Elastica\Query\MatchQuery;
 use Elastica\QueryBuilder\DSL;
 
 class QueryTest extends AbstractDSLTest
@@ -28,7 +28,7 @@ class QueryTest extends AbstractDSLTest
 
         $match = $queryDSL->match('field', 'match');
         $this->assertEquals('match', $match->getParam('field'));
-        $this->assertInstanceOf(Match::class, $match);
+        $this->assertInstanceOf(MatchQuery::class, $match);
     }
 
     /**
@@ -44,10 +44,10 @@ class QueryTest extends AbstractDSLTest
         $this->_assertImplemented($queryDSL, 'dis_max', Query\DisMax::class, []);
         $this->_assertImplemented($queryDSL, 'function_score', Query\FunctionScore::class, []);
         $this->_assertImplemented($queryDSL, 'fuzzy', Query\Fuzzy::class, ['field', 'type']);
-        $this->_assertImplemented($queryDSL, 'has_child', Query\HasChild::class, [new Match()]);
-        $this->_assertImplemented($queryDSL, 'has_parent', Query\HasParent::class, [new Match(), 'type']);
+        $this->_assertImplemented($queryDSL, 'has_child', Query\HasChild::class, [new MatchQuery()]);
+        $this->_assertImplemented($queryDSL, 'has_parent', Query\HasParent::class, [new MatchQuery(), 'type']);
         $this->_assertImplemented($queryDSL, 'ids', Query\Ids::class, [[]]);
-        $this->_assertImplemented($queryDSL, 'match', Match::class, ['field', 'values']);
+        $this->_assertImplemented($queryDSL, 'match', MatchQuery::class, ['field', 'values']);
         $this->_assertImplemented($queryDSL, 'match_all', Query\MatchAll::class, []);
         $this->_assertImplemented($queryDSL, 'match_none', Query\MatchNone::class, []);
         $this->_assertImplemented($queryDSL, 'more_like_this', Query\MoreLikeThis::class, []);

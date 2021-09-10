@@ -3,7 +3,7 @@
 namespace Elastica\Query;
 
 /**
- * Match none query. Returns no results.
+ * MatchQuery none query. Returns no results.
  *
  * @author David Causse
  *

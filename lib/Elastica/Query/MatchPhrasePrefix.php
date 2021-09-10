@@ -3,7 +3,7 @@
 namespace Elastica\Query;
 
 /**
- * Match Phrase Prefix query.
+ * MatchQuery Phrase Prefix query.
  *
  * @author Jacques Moati <jacques@moati.net>
  * @author Tobias Schultze <http://tobion.de>
