@@ -40,6 +40,7 @@ class WildcardTest extends BaseTest
                     'value' => 'value*',
                     'boost' => 2.0,
                     'rewrite' => 'scoring_boolean',
+                    'case_insensitive' => true,
                 ],
             ],
         ];
@@ -127,9 +128,10 @@ class WildcardTest extends BaseTest
         ];
 
         $query = new Wildcard('name', 'exampl*', 1.0);
+        $query->setCaseInsensitive($expected);
         $this->assertEquals($expectedArray, $query->toArray());
 
-        $query->setCaseInsensitive($expected);
+        $query = new Wildcard('name', 'exampl*', 1.0, $expected);
         $this->assertEquals($expectedArray, $query->toArray());
     }
 

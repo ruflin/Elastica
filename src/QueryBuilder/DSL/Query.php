@@ -476,9 +476,9 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html
      */
-    public function wildcard(string $field, string $value, float $boost = 1.0): Wildcard
+    public function wildcard(string $field, string $value, float $boost = 1.0, bool $caseInsensitive = true): Wildcard
     {
-        return new Wildcard($field, $value, $boost);
+        return new Wildcard($field, $value, $boost, $caseInsensitive);
     }
 
     /**
