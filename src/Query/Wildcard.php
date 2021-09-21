@@ -31,7 +31,7 @@ class Wildcard extends AbstractQuery
             'value' => $value,
             'boost' => $boost,
         ]);
-        if (null !== $caseInsensitive){
+        if (null !== $caseInsensitive) {
             $this->setCaseInsensitive($caseInsensitive);
         }
     }
