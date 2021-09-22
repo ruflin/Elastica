@@ -23,7 +23,7 @@ class Wildcard extends AbstractQuery
      */
     private $field;
 
-    public function __construct(string $field, string $value, float $boost = 1.0, ?bool $caseInsensitive = null)
+    public function __construct(string $field, string $value, float $boost = 1.0)
     {
         $this->field = $field;
 
@@ -31,9 +31,6 @@ class Wildcard extends AbstractQuery
             'value' => $value,
             'boost' => $boost,
         ]);
-        if (null !== $caseInsensitive) {
-            $this->setCaseInsensitive($caseInsensitive);
-        }
     }
 
     public function getField(): string
