@@ -106,4 +106,34 @@ class WildcardTest extends BaseTest
 
         $this->assertEquals(0, $resultSet->count());
     }
+
+    /**
+     * @group functional
+     * @dataProvider caseInsensitiveDataProvider
+     */
+    public function testCaseInsensitive(bool $expected): void
+    {
+        // feature doesn't exist on version prior 7.10;
+        $this->_checkVersion('7.10');
+
+        $expectedArray = [
+            'wildcard' => [
+                'name' => [
+                    'value' => 'exampl*',
+                    'boost' => 1.0,
+                    'case_insensitive' => $expected,
+                ],
+            ],
+        ];
+
+        $query = new Wildcard('name', 'exampl*', 1.0);
+        $query->setCaseInsensitive($expected);
+        $this->assertEquals($expectedArray, $query->toArray());
+    }
+
+    public function caseInsensitiveDataProvider(): iterable
+    {
+        yield [true];
+        yield [false];
+    }
 }

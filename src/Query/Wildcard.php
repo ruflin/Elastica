@@ -67,4 +67,15 @@ class Wildcard extends AbstractQuery
 
         return $this;
     }
+
+    /**
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/7.10/query-dsl-wildcard-query.html#wildcard-query-field-params
+     */
+    public function setCaseInsensitive(bool $caseInsensitive): self
+    {
+        $data = $this->getParam($this->field);
+        $this->setParam($this->field, \array_merge($data, ['case_insensitive' => $caseInsensitive]));
+
+        return $this;
+    }
 }
