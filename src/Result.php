@@ -137,6 +137,21 @@ class Result
     }
 
     /**
+     * Returns the sort values of the result.
+     * Null is returned in case no sorting has been defined for the query.
+     *
+     * @return mixed[]|null
+     */
+    public function getSort(): ?array
+    {
+        if (!$this->hasParam('sort')) {
+            return null;
+        }
+
+        return $this->getParam('sort');
+    }
+
+    /**
      * Returns the raw hit array.
      */
     public function getHit(): array
