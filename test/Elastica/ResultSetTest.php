@@ -6,9 +6,12 @@ use Elastica\Document;
 use Elastica\Result;
 use Elastica\ResultSet;
 use Elastica\Test\Base as BaseTest;
+use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;
 
 class ResultSetTest extends BaseTest
 {
+    use AssertIsType;
+
     /**
      * @group functional
      */
@@ -32,7 +35,7 @@ class ResultSetTest extends BaseTest
         $this->assertNotTrue($resultSet->hasTimedOut());
         $this->assertNotTrue($resultSet->hasAggregations());
         $this->assertNotTrue($resultSet->hasSuggests());
-        $this->assertInternalType('array', $resultSet->getResults());
+        self::assertIsArray($resultSet->getResults());
         $this->assertCount(3, $resultSet);
     }
 
@@ -82,7 +85,7 @@ class ResultSetTest extends BaseTest
 
         $documents = $resultSet->getDocuments();
 
-        $this->assertInternalType('array', $documents);
+        self::assertIsArray($documents);
         $this->assertCount(3, $documents);
         $this->assertInstanceOf(Document::class, $documents[0]);
         $this->assertInstanceOf(Document::class, $documents[1]);

@@ -88,8 +88,8 @@ class DateRangeTest extends BaseAggregationTest
         } catch (ResponseException $e) {
             $error = $e->getResponse()->getFullError();
 
-            $this->assertContains('search_phase_execution_exception', $error['type']);
-            $this->assertContains('failed to parse date field', $error['root_cause'][0]['reason']);
+            $this->assertSame('search_phase_execution_exception', $error['type']);
+            $this->assertStringStartsWith('failed to parse date field', $error['root_cause'][0]['reason']);
         }
     }
 }

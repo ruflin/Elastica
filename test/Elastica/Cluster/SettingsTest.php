@@ -84,8 +84,8 @@ class SettingsTest extends BaseTest
             $this->fail('should throw read only exception');
         } catch (ResponseException $e) {
             $error = $e->getResponse()->getFullError();
-            $this->assertContains('cluster_block_exception', $error['type']);
-            $this->assertContains('cluster read-only', $error['reason']);
+            $this->assertSame('cluster_block_exception', $error['type']);
+            $this->assertStringContainsString('cluster read-only', $error['reason']);
         }
 
         $response = $settings->setReadOnly(false);

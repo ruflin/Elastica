@@ -9,15 +9,15 @@ namespace Elastica\Test;
  */
 class DeprecatedClassBase extends Base
 {
-    protected function setUp()
+    protected function set_up()
     {
-        parent::setUp();
+        parent::set_up();
         $this->hideDeprecated();
     }
 
-    protected function tearDown()
+    protected function tear_down()
     {
         $this->showDeprecated();
-        parent::tearDown();
+        parent::tear_down();
     }
 }

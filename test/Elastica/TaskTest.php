@@ -5,9 +5,12 @@ namespace Elastica\Test;
 use Elastica\Document;
 use Elastica\Task;
 use Elastica\Type;
+use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;
 
 class TaskTest extends Base
 {
+    use AssertIsType;
+
     /**
      * @group functional
      */
@@ -16,7 +19,7 @@ class TaskTest extends Base
         $task = $this->_createTask();
         $data = $task->getData();
 
-        $this->assertInternalType('array', $data);
+        self::assertIsArray($data);
         $this->assertNotEmpty($data);
     }
 

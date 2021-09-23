@@ -10,9 +10,12 @@ use Elastica\Request;
 use Elastica\Response;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type\Mapping;
+use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;
 
 class ResponseTest extends BaseTest
 {
+    use AssertIsType;
+
     /**
      * @group functional
      */
@@ -43,8 +46,8 @@ class ResponseTest extends BaseTest
         $engineTime = $resultSet->getResponse()->getEngineTime();
         $shardsStats = $resultSet->getResponse()->getShardsStatistics();
 
-        $this->assertInternalType('int', $engineTime);
-        $this->assertInternalType('array', $shardsStats);
+        self::assertIsInt($engineTime);
+        self::assertIsArray($shardsStats);
         $this->assertArrayHasKey('total', $shardsStats);
         $this->assertArrayHasKey('successful', $shardsStats);
     }
@@ -216,7 +219,7 @@ class ResponseTest extends BaseTest
         ]));
         $response->setJsonBigintConversion(true);
 
-        $this->assertInternalType('array', $response->getData());
+        self::assertIsArray($response->getData());
     }
 
     /**
@@ -235,7 +238,7 @@ class ResponseTest extends BaseTest
         } catch (ResponseException $e) {
             $error = $e->getResponse()->getFullError();
             $this->assertEquals('type_missing_exception', $error['type']);
-            $this->assertContains('non-existent-type', $error['reason']);
+            $this->assertStringContainsString('non-existent-type', $error['reason']);
         }
 
         $this->assertNull($response);

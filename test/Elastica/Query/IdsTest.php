@@ -12,9 +12,9 @@ class IdsTest extends BaseTest
     protected $_index;
     protected $_type;
 
-    protected function setUp()
+    protected function set_up()
     {
-        parent::setUp();
+        parent::set_up();
 
         if (!$this->_isFunctionalGroup()) {
             return;

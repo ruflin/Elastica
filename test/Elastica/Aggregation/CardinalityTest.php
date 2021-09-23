@@ -6,9 +6,12 @@ use Elastica\Aggregation\Cardinality;
 use Elastica\Document;
 use Elastica\Query;
 use Elastica\Type\Mapping;
+use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;
 
 class CardinalityTest extends BaseAggregationTest
 {
+    use AssertIsType;
+
     protected function _getIndexForTest()
     {
         $index = $this->_createIndex();
@@ -73,7 +76,7 @@ class CardinalityTest extends BaseAggregationTest
         $agg->setPrecisionThreshold($threshold);
 
         $this->assertNotNull($agg->getParam('precision_threshold'));
-        $this->assertInternalType('int', $agg->getParam('precision_threshold'));
+        self::assertIsInt($agg->getParam('precision_threshold'));
     }
 
     public function invalidPrecisionThresholdProvider()
@@ -109,7 +112,7 @@ class CardinalityTest extends BaseAggregationTest
         $agg->setRehash($rehash);
 
         $this->assertNotNull($agg->getParam('rehash'));
-        $this->assertInternalType('boolean', $agg->getParam('rehash'));
+        self::assertIsBool($agg->getParam('rehash'));
     }
 
     /**

@@ -20,9 +20,12 @@ use Elastica\Type;
 use Elasticsearch\Endpoints\Get;
 use Elasticsearch\Endpoints\Indices\Stats;
 use Elasticsearch\Endpoints\Search;
+use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;
 
 class ClientTest extends BaseTest
 {
+    use AssertIsType;
+
     /**
      * @group unit
      */
@@ -377,8 +380,8 @@ class ClientTest extends BaseTest
         // deleteIds are the type we are testing for
         $idxString = $index->getName();
         $typeString = $type->getName();
-        $this->assertInternalType('string', $idxString);
-        $this->assertInternalType('string', $typeString);
+        self::assertIsString($idxString);
+        self::assertIsString($typeString);
 
         // Try to delete doc with a routing value which hashes to
         // a different shard then the id.
@@ -453,7 +456,7 @@ class ClientTest extends BaseTest
         // And verify that the variables we are doing to send to
         // deleteIds are the type we are testing for
         $idxString = $index->getName();
-        $this->assertInternalType('string', $idxString);
+        self::assertIsString($idxString);
         $this->assertInstanceOf(Type::class, $type);
 
         // Using the existing $index and $type variables which
@@ -518,7 +521,7 @@ class ClientTest extends BaseTest
         // deleteIds are the type we are testing for
         $typeString = $type->getName();
         $this->assertInstanceOf(Index::class, $index);
-        $this->assertInternalType('string', $typeString);
+        self::assertIsString($typeString);
 
         // Using the existing $index and $type variables which
         // are \Elastica\Index and \Elastica\Type objects respectively
@@ -1167,7 +1170,7 @@ class ClientTest extends BaseTest
         $this->assertNotEquals(10, $client->getConfigValue('level11', 10));
 
         $this->assertEquals('value3', $client->getConfigValue(['level1', 'level2', 'level3']));
-        $this->assertInternalType('array', $client->getConfigValue(['level1', 'level2']));
+        self::assertIsArray($client->getConfigValue(['level1', 'level2']));
     }
 
     /**

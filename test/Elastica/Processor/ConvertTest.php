@@ -7,9 +7,12 @@ use Elastica\Document;
 use Elastica\Processor\Convert;
 use Elastica\ResultSet;
 use Elastica\Test\BasePipeline as BasePipelineTest;
+use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;
 
 class ConvertTest extends BasePipelineTest
 {
+    use AssertIsType;
+
     /**
      * @group unit
      */
@@ -96,7 +99,7 @@ class ConvertTest extends BasePipelineTest
         $results = $result->getResults();
         foreach ($results as $result) {
             $value = $result->getData();
-            $this->assertInternalType('float', $value['foo']);
+            self::assertIsFloat($value['foo']);
         }
 
         $this->assertSame(5.290, ($results[0]->getHit())['_source']['foo']);

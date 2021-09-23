@@ -20,9 +20,9 @@ class NullTransportTest extends BaseTest
     /** @var NullTransport NullTransport */
     protected $transport;
 
-    public function setUp()
+    public function set_up()
     {
-        parent::setUp();
+        parent::set_up();
         $this->transport = new NullTransport();
     }
 
@@ -47,13 +47,13 @@ class NullTransportTest extends BaseTest
         // Validate most of the expected fields in the response data.  Consumers of the response
         // object have a reasonable expectation of finding "hits", "took", etc
         $responseData = $response->getData();
-        $this->assertContains('took', $responseData);
+        $this->assertArrayHasKey('took', $responseData);
         $this->assertEquals(0, $responseData['took']);
-        $this->assertContains('_shards', $responseData);
-        $this->assertContains('hits', $responseData);
-        $this->assertContains('total', $responseData['hits']);
+        $this->assertArrayHasKey('_shards', $responseData);
+        $this->assertArrayHasKey('hits', $responseData);
+        $this->assertArrayHasKey('total', $responseData['hits']);
         $this->assertEquals(0, $responseData['hits']['total']);
-        $this->assertContains('params', $responseData);
+        $this->assertArrayHasKey('params', $responseData);
 
         $took = $response->getEngineTime();
         $this->assertEquals(0, $took);
@@ -62,11 +62,11 @@ class NullTransportTest extends BaseTest
         $this->assertEmpty($errorString);
 
         $shards = $response->getShardsStatistics();
-        $this->assertContains('total', $shards);
+        $this->assertArrayHasKey('total', $shards);
         $this->assertEquals(0, $shards['total']);
-        $this->assertContains('successful', $shards);
+        $this->assertArrayHasKey('successful', $shards);
         $this->assertEquals(0, $shards['successful']);
-        $this->assertContains('failed', $shards);
+        $this->assertArrayHasKey('failed', $shards);
         $this->assertEquals(0, $shards['failed']);
     }
 
@@ -107,7 +107,7 @@ class NullTransportTest extends BaseTest
         $this->assertEquals([], $response->getTransferInfo());
 
         $responseData = $response->getData();
-        $this->assertContains('params', $responseData);
+        $this->assertArrayHasKey('params', $responseData);
         $this->assertEquals($params, $responseData['params']);
     }
 }

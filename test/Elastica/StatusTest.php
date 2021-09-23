@@ -6,9 +6,12 @@ use Elastica\Exception\ResponseException;
 use Elastica\Response;
 use Elastica\Status;
 use Elastica\Test\Base as BaseTest;
+use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;
 
 class StatusTest extends BaseTest
 {
+    use AssertIsType;
+
     /**
      * @group functional
      */
@@ -35,11 +38,11 @@ class StatusTest extends BaseTest
         $status = new Status($index->getClient());
         $names = $status->getIndexNames();
 
-        $this->assertInternalType('array', $names);
+        self::assertIsArray($names);
         $this->assertContains($index->getName(), $names);
 
         foreach ($names as $name) {
-            $this->assertInternalType('string', $name);
+            self::assertIsString($name);
         }
     }
 

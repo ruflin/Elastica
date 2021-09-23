@@ -30,9 +30,9 @@ class ProcessingBuilderTest extends BaseTest
      */
     private $processor;
 
-    protected function setUp()
+    protected function set_up()
     {
-        parent::setUp();
+        parent::set_up();
 
         $this->innerBuilder = $this->createMock(BuilderInterface::class);
         $this->processor = $this->createMock(ProcessorInterface::class);

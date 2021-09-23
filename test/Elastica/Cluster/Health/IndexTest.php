@@ -5,17 +5,20 @@ namespace Elastica\Test\Cluster\Health;
 use Elastica\Cluster\Health\Index;
 use Elastica\Cluster\Health\Shard;
 use Elastica\Test\Base as BaseTest;
+use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;
 
 class IndexTest extends BaseTest
 {
+    use AssertIsType;
+
     /**
      * @var Index
      */
     protected $_index;
 
-    protected function setUp()
+    protected function set_up()
     {
-        parent::setUp();
+        parent::set_up();
 
         $data = [
             'status' => 'yellow',
@@ -136,7 +139,7 @@ class IndexTest extends BaseTest
     {
         $shards = $this->_index->getShards();
 
-        $this->assertInternalType('array', $shards);
+        self::assertIsArray($shards);
         $this->assertCount(3, $shards);
         $this->assertContainsOnlyInstancesOf(Shard::class, $shards);
     }

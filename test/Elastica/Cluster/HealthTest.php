@@ -5,17 +5,20 @@ namespace Elastica\Test\Cluster;
 use Elastica\Cluster\Health;
 use Elastica\Cluster\Health\Index;
 use Elastica\Test\Base as BaseTest;
+use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;
 
 class HealthTest extends BaseTest
 {
+    use AssertIsType;
+
     /**
      * @var Health
      */
     protected $_health;
 
-    protected function setUp()
+    protected function set_up()
     {
-        parent::setUp();
+        parent::set_up();
 
         $data = [
             'cluster_name' => 'test_cluster',
@@ -186,7 +189,7 @@ class HealthTest extends BaseTest
     {
         $indices = $this->_health->getIndices();
 
-        $this->assertInternalType('array', $indices);
+        self::assertIsArray($indices);
         $this->assertCount(2, $indices);
         $this->assertArrayHasKey('index_one', $indices);
         $this->assertArrayHasKey('index_two', $indices);

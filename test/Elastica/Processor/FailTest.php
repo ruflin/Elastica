@@ -57,7 +57,7 @@ class FailTest extends BasePipelineTest
             $index->refresh();
             $this->fail('test should raise an exception!');
         } catch (\Exception $e) {
-            $this->assertContains('custom error fail message', $e->getMessage());
+            $this->assertStringContainsString('custom error fail message', $e->getMessage());
         }
     }
 }
