@@ -69,7 +69,7 @@ abstract class AbstractDSLTest extends BaseTest
 
     protected function _getHintName(\ReflectionParameter $param): ?string
     {
-        if (null === $type = $param->getType()) {
+        if (null === $param->getType()) {
             return null;
         }
 
