@@ -15,9 +15,12 @@ use Elastica\Exception\Bulk\ResponseException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
+use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;
 
 class BulkTest extends BaseTest
 {
+    use AssertIsType;
+
     /**
      * @group functional
      */
@@ -257,7 +260,7 @@ class BulkTest extends BaseTest
 
         $actions = $bulk->getActions();
 
-        $this->assertInternalType('array', $actions);
+        self::assertIsArray($actions);
         $this->assertCount(5, $actions);
 
         $this->assertInstanceOf(Action::class, $actions[0]);
@@ -368,9 +371,9 @@ class BulkTest extends BaseTest
             $bulk->fail('3rd document create should produce error');
         } catch (ResponseException $e) {
             $error = $e->getResponseSet()->getFullError();
-            $this->assertContains('version_conflict_engine_exception', $error['type']);
+            $this->assertSame('version_conflict_engine_exception', $error['type']);
             $failures = $e->getFailures();
-            $this->assertInternalType('array', $failures);
+            self::assertIsArray($failures);
             $this->assertArrayHasKey(0, $failures);
         }
     }

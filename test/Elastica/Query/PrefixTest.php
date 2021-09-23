@@ -4,9 +4,12 @@ namespace Elastica\Test\Query;
 
 use Elastica\Query\Prefix;
 use Elastica\Test\Base as BaseTest;
+use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;
 
 class PrefixTest extends BaseTest
 {
+    use AssertIsType;
+
     /**
      * @group unit
      */
@@ -20,8 +23,8 @@ class PrefixTest extends BaseTest
 
         $data = $query->toArray();
 
-        $this->assertInternalType('array', $data['prefix']);
-        $this->assertInternalType('array', $data['prefix'][$key]);
+        self::assertIsArray($data['prefix']);
+        self::assertIsArray($data['prefix'][$key]);
         $this->assertEquals($data['prefix'][$key]['value'], $value);
         $this->assertEquals($data['prefix'][$key]['boost'], $boost);
     }

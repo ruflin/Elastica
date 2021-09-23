@@ -6,9 +6,12 @@ use Elastica\Connection;
 use Elastica\Request;
 use Elastica\Response;
 use Elastica\Test\Base as BaseTest;
+use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;
 
 class RequestTest extends BaseTest
 {
+    use AssertIsType;
+
     /**
      * @group unit
      */
@@ -72,7 +75,7 @@ class RequestTest extends BaseTest
 
         $data = $request->toArray();
 
-        $this->assertInternalType('array', $data);
+        self::assertIsArray($data);
         $this->assertArrayHasKey('method', $data);
         $this->assertArrayHasKey('path', $data);
         $this->assertArrayHasKey('query', $data);
@@ -82,7 +85,7 @@ class RequestTest extends BaseTest
         $this->assertEquals($request->getPath(), $data['path']);
         $this->assertEquals($request->getQuery(), $data['query']);
         $this->assertEquals($request->getData(), $data['data']);
-        $this->assertInternalType('array', $data['connection']);
+        self::assertIsArray($data['connection']);
         $this->assertArrayHasKey('host', $data['connection']);
         $this->assertArrayHasKey('port', $data['connection']);
         $this->assertEquals($request->getConnection()->getHost(), $data['connection']['host']);
@@ -90,9 +93,9 @@ class RequestTest extends BaseTest
 
         $string = $request->toString();
 
-        $this->assertInternalType('string', $string);
+        self::assertIsString($string);
 
         $string = (string) $request;
-        $this->assertInternalType('string', $string);
+        self::assertIsString($string);
     }
 }

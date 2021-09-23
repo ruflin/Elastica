@@ -5,9 +5,12 @@ namespace Elastica\Test\Query;
 use Elastica\Query\Script as ScriptQuery;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
+use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;
 
 class ScriptTest extends BaseTest
 {
+    use AssertIsType;
+
     /**
      * @group unit
      */
@@ -18,7 +21,7 @@ class ScriptTest extends BaseTest
         $query = new ScriptQuery($string);
 
         $array = $query->toArray();
-        $this->assertInternalType('array', $array);
+        self::assertIsArray($array);
 
         $expected = [
             'script' => [

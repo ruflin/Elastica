@@ -5,9 +5,12 @@ namespace Elastica\Test\Node;
 use Elastica\Node;
 use Elastica\Node\Info as NodeInfo;
 use Elastica\Test\Base as BaseTest;
+use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;
 
 class InfoTest extends BaseTest
 {
+    use AssertIsType;
+
     /**
      * @group functional
      */
@@ -28,7 +31,7 @@ class InfoTest extends BaseTest
         $this->assertNotNull($info->get('os', 'name'));
         $this->assertNotNull($info->get('process', 'id'));
         $this->assertNotNull($info->get('jvm', 'mem', 'heap_init_in_bytes'));
-        $this->assertInternalType('array', $info->get('jvm', 'mem'));
+        self::assertIsArray($info->get('jvm', 'mem'));
         $this->assertNull($info->get('test', 'notest', 'notexist'));
     }
 

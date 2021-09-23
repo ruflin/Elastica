@@ -17,9 +17,9 @@ class BuilderTest extends BaseTest
      */
     private $builder;
 
-    protected function setUp()
+    protected function set_up()
     {
-        parent::setUp();
+        parent::set_up();
 
         $this->builder = new DefaultBuilder();
     }

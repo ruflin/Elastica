@@ -31,12 +31,12 @@ class BasePipeline extends BaseTest
     /**
      * {@inheritdoc}
      */
-    protected function tearDown()
+    protected function tear_down()
     {
         if ($this->_isFunctionalGroup()) {
             $this->_createPipeline()->deletePipeline('*');
         }
 
-        parent::tearDown();
+        parent::tear_down();
     }
 }

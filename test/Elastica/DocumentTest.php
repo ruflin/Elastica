@@ -6,9 +6,12 @@ use Elastica\Document;
 use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Test\Base as BaseTest;
+use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;
 
 class DocumentTest extends BaseTest
 {
+    use AssertIsType;
+
     /**
      * @group unit
      */
@@ -153,7 +156,7 @@ class DocumentTest extends BaseTest
 
         $options = $document->getOptions(['index', 'type', 'id', 'parent']);
 
-        $this->assertInternalType('array', $options);
+        self::assertIsArray($options);
         $this->assertCount(3, $options);
         $this->assertArrayHasKey('index', $options);
         $this->assertArrayHasKey('id', $options);
@@ -169,7 +172,7 @@ class DocumentTest extends BaseTest
 
         $options = $document->getOptions(['parent', 'op_type', 'percolate'], true);
 
-        $this->assertInternalType('array', $options);
+        self::assertIsArray($options);
         $this->assertCount(2, $options);
         $this->assertArrayHasKey('_parent', $options);
         $this->assertArrayHasKey('_op_type', $options);

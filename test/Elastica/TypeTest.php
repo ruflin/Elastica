@@ -667,9 +667,9 @@ class TypeTest extends BaseTest
         } catch (ResponseException $e) {
             $error = $e->getResponse()->getFullError();
 
-            $this->assertContains('action_request_validation_exception', $error['type']);
-            $this->assertContains('can\'t provide version in upsert request', $error['reason']);
-            $this->assertContains('can\'t provide both upsert request and a version', $error['reason']);
+            $this->assertStringContainsString('action_request_validation_exception', $error['type']);
+            $this->assertStringContainsString('can\'t provide version in upsert request', $error['reason']);
+            $this->assertStringContainsString('can\'t provide both upsert request and a version', $error['reason']);
         }
         $updatedDoc = $type->getDocument($id)->getData();
 
@@ -781,7 +781,7 @@ class TypeTest extends BaseTest
             $this->fail('Update request should fail because source is disabled. Fields param is not set');
         } catch (ResponseException $e) {
             $error = $e->getResponse()->getFullError();
-            $this->assertContains('document_source_missing_exception', $error['type']);
+            $this->assertStringContainsString('document_source_missing_exception', $error['type']);
         }
 
         $newDocument->setFieldsSource();
@@ -791,7 +791,7 @@ class TypeTest extends BaseTest
             $this->fail('Update request should fail because source is disabled. Fields param is set to _source');
         } catch (ResponseException $e) {
             $error = $e->getResponse()->getFullError();
-            $this->assertContains('document_source_missing_exception', $error['type']);
+            $this->assertStringContainsString('document_source_missing_exception', $error['type']);
         }
     }
 

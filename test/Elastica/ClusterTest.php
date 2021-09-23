@@ -6,9 +6,12 @@ use Elastica\Cluster;
 use Elastica\Cluster\Health;
 use Elastica\Node;
 use Elastica\Test\Base as BaseTest;
+use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;
 
 class ClusterTest extends BaseTest
 {
+    use AssertIsType;
+
     /**
      * @group functional
      */
@@ -54,7 +57,7 @@ class ClusterTest extends BaseTest
         $client = $this->_getClient();
         $cluster = $client->getCluster();
         $state = $cluster->getState();
-        $this->assertInternalType('array', $state);
+        self::assertIsArray($state);
     }
 
     /**

@@ -11,8 +11,10 @@ class LogTest extends BaseTest
     private $_context = [];
     private $_message = 'hello world';
 
-    public static function setUpBeforeClass()
+    public static function set_up_before_class()
     {
+        parent::set_up_before_class();
+
         if (!class_exists('Psr\Log\AbstractLogger')) {
             self::markTestSkipped('The Psr extension is not available.');
         }

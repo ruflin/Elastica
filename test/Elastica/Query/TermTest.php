@@ -4,9 +4,12 @@ namespace Elastica\Test\Query;
 
 use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
+use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;
 
 class TermTest extends BaseTest
 {
+    use AssertIsType;
+
     /**
      * @group unit
      */
@@ -20,8 +23,8 @@ class TermTest extends BaseTest
 
         $data = $query->toArray();
 
-        $this->assertInternalType('array', $data['term']);
-        $this->assertInternalType('array', $data['term'][$key]);
+        self::assertIsArray($data['term']);
+        self::assertIsArray($data['term'][$key]);
         $this->assertEquals($data['term'][$key]['value'], $value);
         $this->assertEquals($data['term'][$key]['boost'], $boost);
     }
@@ -39,8 +42,8 @@ class TermTest extends BaseTest
 
         $data = $query->toArray();
 
-        $this->assertInternalType('array', $data['term']);
-        $this->assertInternalType('array', $data['term'][$key]);
+        self::assertIsArray($data['term']);
+        self::assertIsArray($data['term'][$key]);
         $this->assertEquals($data['term'][$key]['value'], $value);
         $this->assertEquals($data['term'][$key]['boost'], $boost);
     }

@@ -103,10 +103,10 @@ abstract class AbstractDSLTest extends BaseTest
             return null;
         }
 
-        if ($class = $param->getClass()) {
-            return $class->getName();
+        if (\in_array($type->getName(), ['array', 'callable'], true)
+            || !$type->isBuiltin()
+        ) {
+            return $type->getName();
         }
-
-        return null;
     }
 }
