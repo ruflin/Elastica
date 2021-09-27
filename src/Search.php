@@ -3,6 +3,7 @@
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
+use Elastica\Query\AbstractQuery;
 use Elastica\ResultSet\BuilderInterface;
 use Elastica\ResultSet\DefaultBuilder;
 
@@ -253,8 +254,8 @@ class Search
     /**
      * Search in the set indices.
      *
-     * @param array|Query|string $query
-     * @param array|int          $options Limit or associative array of options (option=>value)
+     * @param AbstractQuery|array|Query|string $query
+     * @param array|int                        $options Limit or associative array of options (option=>value)
      *
      * @throws InvalidException
      */
@@ -281,8 +282,8 @@ class Search
     }
 
     /**
-     * @param array|Query|string $query
-     * @param bool               $fullResult By default only the total hit count is returned. If set to true, the full ResultSet including aggregations is returned
+     * @param AbstractQuery|array|Query|string $query
+     * @param bool                             $fullResult By default only the total hit count is returned. If set to true, the full ResultSet including aggregations is returned
      *
      * @return int|ResultSet
      */
@@ -309,8 +310,8 @@ class Search
     }
 
     /**
-     * @param array|int          $options
-     * @param array|Query|string $query
+     * @param array|int                        $options
+     * @param AbstractQuery|array|Query|string $query
      */
     public function setOptionsAndQuery($options = null, $query = ''): self
     {
