@@ -163,9 +163,9 @@ class Index implements SearchableInterface
     /**
      * Update entries in the db based on a query.
      *
-     * @param array|Query|string $query   Query object or array
-     * @param AbstractScript     $script  Script
-     * @param array              $options Optional params
+     * @param AbstractQuery|array|Collapse|Query|string|Suggest $query   Query object or array
+     * @param AbstractScript                                    $script  Script
+     * @param array                                             $options Optional params
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html
      */
@@ -306,8 +306,8 @@ class Index implements SearchableInterface
     /**
      * Deletes documents matching the given query.
      *
-     * @param AbstractQuery|array|Query|string $query   Query object or array
-     * @param array                            $options Optional params
+     * @param AbstractQuery|array|Collapse|Query|string|Suggest $query   Query object or array
+     * @param array                                             $options Optional params
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
      */
@@ -442,9 +442,9 @@ class Index implements SearchableInterface
     }
 
     /**
-     * @param array|Query|string $query
-     * @param array|int          $options
-     * @param BuilderInterface   $builder
+     * @param AbstractQuery|array|Collapse|Query|string|Suggest $query
+     * @param array|int                                         $options
+     * @param BuilderInterface                                  $builder
      */
     public function createSearch($query = '', $options = null, ?BuilderInterface $builder = null): Search
     {
@@ -456,13 +456,7 @@ class Index implements SearchableInterface
     }
 
     /**
-     * Searches in this index.
-     *
-     * @param array|Query|string $query   Array with all query data inside or a Elastica\Query object
-     * @param array|int          $options Limit or associative array of options (option=>value)
-     * @param string             $method  Request method, see Request's constants
-     *
-     * @see \Elastica\SearchableInterface::search
+     * {@inheritdoc}
      */
     public function search($query = '', $options = null, string $method = Request::POST): ResultSet
     {
@@ -472,12 +466,7 @@ class Index implements SearchableInterface
     }
 
     /**
-     * Counts results of query.
-     *
-     * @param array|Query|string $query  Array with all query data inside or a Elastica\Query object
-     * @param string             $method Request method, see Request's constants
-     *
-     * @see \Elastica\SearchableInterface::count
+     * {@inheritdoc}
      */
     public function count($query = '', string $method = Request::POST): int
     {
