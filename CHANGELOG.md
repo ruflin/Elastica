@@ -1,13 +1,21 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/6.1.5...6.x)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/6.2.0...6.x)
 
 ### Backward Compatibility Breaks
 ### Bugfixes
 ### Added
 ### Improvements
 ### Deprecated
+
+## [6.2.0](https://github.com/ruflin/Elastica/compare/6.1.5...6.2.0)
+
+### Added
+* PHP 8.0 support [#1981](https://github.com/ruflin/Elastica/pull/1981)
+### Improvements
+* Fixed display issue in dependancy table [#1980](https://github.com/ruflin/Elastica/pull/1980)
+* Explicitly equire ext-json in composer.json [#1673](https://github.com/ruflin/Elastica/pull/1673) [#1983](https://github.com/ruflin/Elastica/pull/1983)
 
 ## [6.1.5](https://github.com/ruflin/Elastica/compare/6.1.4...6.1.5)
 
@@ -18,13 +26,10 @@ All notable changes to this project will be documented in this file based on the
 
 ## [6.1.4](https://github.com/ruflin/Elastica/compare/6.1.3...6.1.4)
 
-### Backward Compatibility Breaks
 ### Bugfixes
 * Added conflict with `elasticsearch/elasticsearch` version `6.8.0` [#1918](https://github.com/ruflin/Elastica/pull/1918)
-### Added
 ### Improvements
 * Marked Elastica 5.x as unmaintained [#1909](https://github.com/ruflin/Elastica/pull/1909)
-### Deprecated
 
 ## [6.1.3](https://github.com/ruflin/Elastica/compare/6.1.2...6.1.3)
 
