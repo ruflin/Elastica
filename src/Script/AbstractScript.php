@@ -147,7 +147,7 @@ abstract class AbstractScript extends AbstractUpdateAction
         $this->scriptedUpsert = $scriptedUpsert;
     }
 
-    public function getScriptedUpsert(): bool
+    public function getScriptedUpsert(): ?bool
     {
         return $this->scriptedUpsert;
     }

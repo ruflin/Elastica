@@ -609,6 +609,7 @@ class BulkTest extends BaseTest
         $script = new Script('ctx._source.field = params.field', ['field' => $field]);
         $script->setUpsert($defaultData);
         $script->setId($id);
+        $script->setScriptedUpsert(true);
 
         $action = AbstractDocument::create($script, Action::OP_TYPE_UPDATE);
         $bulk->addAction($action);
@@ -617,6 +618,7 @@ class BulkTest extends BaseTest
         $script = new Script('if ( !ctx._source.sub_field.contains(params) ) ctx._source.sub_field.add(params)', $subField);
         $script->setUpsert($defaultData);
         $script->setId($id);
+        $script->setScriptedUpsert(true);
 
         $action = AbstractDocument::create($script, Action::OP_TYPE_UPDATE);
         $bulk->addAction($action);
@@ -625,6 +627,7 @@ class BulkTest extends BaseTest
         $script = new Script('if ( !ctx._source.sub_field_2.contains(params) ) ctx._source.sub_field_2.add(params)', $subField2);
         $script->setUpsert($defaultData);
         $script->setId($id);
+        $script->setScriptedUpsert(true);
 
         $action = AbstractDocument::create($script, Action::OP_TYPE_UPDATE);
         $bulk->addAction($action);
