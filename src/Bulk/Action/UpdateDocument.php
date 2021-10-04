@@ -51,7 +51,10 @@ class UpdateDocument extends IndexDocument
 
             if (!empty($upsert)) {
                 $source['upsert'] = $upsert;
-                $source['scripted_upsert'] = true;
+
+                if ($script->getScriptedUpsert()) {
+                    $source['scripted_upsert'] = true;
+                }
             }
         }
 

@@ -28,6 +28,11 @@ abstract class AbstractScript extends AbstractUpdateAction
     private $_lang;
 
     /**
+     * @var bool|null
+     */
+    private $scriptedUpsert;
+
+    /**
      * @param string|null $lang       Script language, see constants
      * @param string|null $documentId Document ID the script action should be performed on (only relevant in update context)
      */
@@ -135,5 +140,15 @@ abstract class AbstractScript extends AbstractUpdateAction
         }
 
         throw new InvalidException('Failed to create script. Invalid data passed.');
+    }
+
+    public function setScriptedUpsert(bool $scriptedUpsert): void
+    {
+        $this->scriptedUpsert = $scriptedUpsert;
+    }
+
+    public function getScriptedUpsert(): bool
+    {
+        return $this->scriptedUpsert;
     }
 }
