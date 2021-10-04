@@ -18,7 +18,8 @@ All library issues should go to the [issue tracker from github](https://github.c
 Compatibility
 -------------
 This release is compatible with all Elasticsearch 7.0 releases and onwards.
-It was tested with version 7.3.0.
+
+The testsuite is run against the most recent minor version of Elasticsearch, currently 7.14.1.
 
 
 Contributing

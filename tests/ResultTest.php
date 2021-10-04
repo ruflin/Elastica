@@ -4,6 +4,7 @@ namespace Elastica\Test;
 
 use Elastica\Document;
 use Elastica\Mapping;
+use Elastica\Query;
 use Elastica\Result;
 use Elastica\Test\Base as BaseTest;
 
@@ -98,6 +99,43 @@ class ResultTest extends BaseTest
             \gettype($resultSet->getTotalTime()),
             'Total Time should be an integer'
         );
+    }
+
+    /**
+     * @group functional
+     */
+    public function testGetSort(): void
+    {
+        $index = $this->_createIndex();
+        $index->addDocument(new Document('3', ['username' => 'hans']));
+        $index->refresh();
+
+        $query = (Query::create(null)->addSort(['_id' => 'desc']));
+        $resultSet = $index->search($query);
+
+        $this->assertCount(1, $resultSet->getResults());
+        $result = $resultSet->getResults()[0];
+
+        $this->assertIsArray($result->getSort());
+        $this->assertSame(['3'], $result->getSort());
+    }
+
+    /**
+     * @group functional
+     */
+    public function testGetSortWithNoSorting(): void
+    {
+        $index = $this->_createIndex();
+        $index->addDocument(new Document('3', ['username' => 'hans']));
+        $index->refresh();
+
+        $query = (Query::create(null));
+        $resultSet = $index->search($query);
+
+        $this->assertCount(1, $resultSet->getResults());
+        $result = $resultSet->getResults()[0];
+
+        $this->assertNull($result->getSort());
     }
 
     /**
