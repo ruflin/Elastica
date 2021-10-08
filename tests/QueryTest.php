@@ -8,12 +8,14 @@ use Elastica\Collapse\InnerHits;
 use Elastica\Document;
 use Elastica\Exception\InvalidException;
 use Elastica\Mapping;
+use Elastica\PointInTime;
 use Elastica\Query;
 use Elastica\Query\Term;
 use Elastica\Query\Terms;
 use Elastica\Rescore\Query as RescoreQuery;
 use Elastica\Script\Script;
 use Elastica\Script\ScriptFields;
+use Elastica\Search;
 use Elastica\Suggest;
 use Elastica\Test\Base as BaseTest;
 
@@ -553,7 +555,37 @@ class QueryTest extends BaseTest
     }
 
     /**
+     * @group unit
+     */
+    public function testPointInTimeInQuery(): void
+    {
+        $query = new Query();
+        $query->setPointInTime(new PointInTime('id-hash', '5m'));
+        $queryAsArray = $query->toArray();
+
+        $this->assertArrayHasKey('pit', $queryAsArray);
+        $this->assertArrayHasKey('id', $queryAsArray['pit']);
+        $this->assertSame('id-hash', $queryAsArray['pit']['id']);
+        $this->assertArrayHasKey('keep_alive', $queryAsArray['pit']);
+        $this->assertSame('5m', $queryAsArray['pit']['keep_alive']);
+    }
+
+    /**
      * @group functional
+     */
+    public function testPointInTimeQueryExecution(): void
+    {
+        $index = $this->_createIndex();
+        $pitId = $index->openPointInTime('20s')->getData()['id'];
+
+        $query = (new Query())->setPointInTime(new PointInTime($pitId, '20s'));
+        $search = (new Search($index->getClient()))->setQuery($query);
+
+        $this->assertSame($pitId, $search->search()->getPointInTimeId());
+    }
+
+    /**
+     * @group unit
      */
     public function testSetTrackTotalHitsIsInParams(): void
     {

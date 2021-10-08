@@ -379,6 +379,17 @@ class Query extends Param
     }
 
     /**
+     * Set the Point-in-Time used for the query.
+     * Use for results pagination with Search with search_after requests.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/paginate-search-results.html#search-after
+     */
+    public function setPointInTime(PointInTime $pit): self
+    {
+        return $this->setParam('pit', $pit);
+    }
+
+    /**
      * Adds a track_total_hits argument.
      *
      * @param bool|int $trackTotalHits Track total hits parameter
