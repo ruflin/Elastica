@@ -16,7 +16,7 @@ class Range extends AbstractSimpleAggregation
     /**
      * Add a range to this aggregation.
      *
-     * @param string|float|int|null $fromValue low end of this range, exclusive (greater than or equal to)
+     * @param float|int|string|null $fromValue low end of this range, exclusive (greater than or equal to)
      * @param float|int|string|null $toValue   high end of this range, exclusive (less than)
      * @param string|null           $key       customized key value
      *
