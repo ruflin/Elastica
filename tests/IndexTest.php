@@ -431,6 +431,21 @@ class IndexTest extends BaseTest
     /**
      * @group functional
      */
+    public function testOpenPointInTime(): void
+    {
+        $index = $this->_createIndex();
+        $response = $index->openPointInTime('10s');
+
+        $this->assertTrue($response->isOk());
+
+        $data = $response->getData();
+        $this->assertIsArray($data);
+        $this->assertArrayHasKey('id', $data);
+    }
+
+    /**
+     * @group functional
+     */
     public function testAddAliasTwoIndices(): void
     {
         $indexName1 = 'test1';
