@@ -34,6 +34,7 @@ class ResultSetTest extends BaseTest
         $this->assertNotTrue($resultSet->hasAggregations());
         $this->assertNotTrue($resultSet->hasSuggests());
         $this->assertIsArray($resultSet->getResults());
+        $this->assertNull($resultSet->getPointInTimeId());
         $this->assertCount(3, $resultSet);
     }
 

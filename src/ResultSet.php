@@ -178,6 +178,18 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     }
 
     /**
+     * Returns the Point-In-Time ID, if available.
+     *
+     * @See: https://www.elastic.co/guide/en/elasticsearch/reference/current/paginate-search-results.html#search-after
+     */
+    public function getPointInTimeId(): ?string
+    {
+        $data = $this->_response->getData();
+
+        return $data['pit_id'] ?? null;
+    }
+
+    /**
      * Returns true if the query has timed out.
      */
     public function hasTimedOut(): bool
