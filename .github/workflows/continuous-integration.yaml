@@ -33,8 +33,6 @@ jobs:
         include:
           - php: '7.2'
             elasticsearch: '7.14.1'
-          - php: '7.2'
-            elasticsearch: '7.14.1'
           - php: '7.3'
             elasticsearch: '7.14.1'
           - php: '7.4'
