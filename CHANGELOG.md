@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added new optional 'case_insensitive' option to `Elastica\Query\Wildcard` [#1894](https://github.com/ruflin/Elastica/pull/1894)
 * Added `Elastica\Result::getSort()` fetching the "sort" property of results [#1979](https://github.com/ruflin/Elastica/pull/1979)
 * Added exposure of Point-In-Time ID for search responses in `Elastica\ResultSet::getPointInTimeId()` [#1991](https://github.com/ruflin/Elastica/pull/1991)
+* Added `Elastica\Index::openPointInTime()` for opening a PiT on the index [#1994](https://github.com/ruflin/Elastica/pull/1994)
 ### Changed
 * Updated `php-cs-fixer` to `2.18.6` [#1955](https://github.com/ruflin/Elastica/pull/1955)
 * Updated `php-cs-fixer` to `3.0.0` [#1959](https://github.com/ruflin/Elastica/pull/1959)
