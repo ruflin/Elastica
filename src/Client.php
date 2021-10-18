@@ -8,6 +8,7 @@ use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
 use Elastica\Script\AbstractScript;
 use Elasticsearch\Endpoints\AbstractEndpoint;
+use Elasticsearch\Endpoints\ClosePointInTime;
 use Elasticsearch\Endpoints\Indices\ForceMerge;
 use Elasticsearch\Endpoints\Indices\Refresh;
 use Elasticsearch\Endpoints\Update;
@@ -559,6 +560,19 @@ class Client
     {
         $endpoint = new ForceMerge();
         $endpoint->setParams($args);
+
+        return $this->requestEndpoint($endpoint);
+    }
+
+    /**
+     * Closes the given PointInTime.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/point-in-time-api.html#close-point-in-time-api
+     */
+    public function closePointInTime(string $pointInTimeId): Response
+    {
+        $endpoint = new ClosePointInTime();
+        $endpoint->setBody(['id' => $pointInTimeId]);
 
         return $this->requestEndpoint($endpoint);
     }
