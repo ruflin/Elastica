@@ -29,6 +29,25 @@ class LowercaseProcessorTest extends BasePipelineTest
     }
 
     /**
+     * @group unit
+     */
+    public function testLowercaseWithNonDefaultOptions(): void
+    {
+        $processor = (new LowercaseProcessor('foo'))
+            ->setIgnoreMissing(true)
+        ;
+
+        $expected = [
+            'lowercase' => [
+                'field' => 'foo',
+                'ignore_missing' => true,
+            ],
+        ];
+
+        $this->assertEquals($expected, $processor->toArray());
+    }
+
+    /**
      * @group functional
      */
     public function testLowercaseField(): void

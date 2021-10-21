@@ -29,6 +29,25 @@ class TrimProcessorTest extends BasePipelineTest
     }
 
     /**
+     * @group unit
+     */
+    public function testTrimWithNonDefaultOptions(): void
+    {
+        $processor = (new TrimProcessor('foo'))
+            ->setIgnoreMissing(true)
+        ;
+
+        $expected = [
+            'trim' => [
+                'field' => 'foo',
+                'ignore_missing' => true,
+            ],
+        ];
+
+        $this->assertEquals($expected, $processor->toArray());
+    }
+
+    /**
      * @group functional
      */
     public function testTrimField(): void
