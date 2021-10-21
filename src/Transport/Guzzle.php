@@ -15,6 +15,7 @@ use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\StreamInterface;
 
 /**
  * Elastica Guzzle Transport object.
@@ -127,13 +128,7 @@ class Guzzle extends AbstractTransport
                 $req = $req->withMethod(Request::POST);
             }
 
-            $req = $req->withBody(
-                Psr7\stream_for(
-                    \is_array($data)
-                    ? JSON::stringify($data, \JSON_UNESCAPED_UNICODE)
-                    : $data
-                )
-            );
+            $req = $req->withBody($this->streamFor($data));
         }
 
         return $req;
@@ -198,5 +193,17 @@ class Guzzle extends AbstractTransport
         }
 
         return $action;
+    }
+
+    private function streamFor($data): StreamInterface
+    {
+        if (\is_array($data)) {
+            $data = JSON::stringify($data, \JSON_UNESCAPED_UNICODE);
+        }
+
+        return \class_exists(Psr7\Utils::class)
+            ? Psr7\Utils::streamFor($data)
+            : Psr7\stream_for($data)
+        ;
     }
 }
