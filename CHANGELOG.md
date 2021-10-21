@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 ### Removed
 ### Fixed
+* Fixed compatibility with `guzzlehttp/psr7` version `2.x` [#2002](https://github.com/ruflin/Elastica/pull/2002)
 * Fixed the assignment of `version`, `seq_no` and `primary_term` on `getDocument` [#1973](https://github.com/ruflin/Elastica/pull/1973)
 ### Security
 
