@@ -12,6 +12,8 @@ namespace Elastica\Processor;
  */
 class ForeachProcessor extends AbstractProcessor
 {
+    use Traits\IgnoreMissingTrait;
+
     public const DEFAULT_IGNORE_MISSING_VALUE = false;
 
     /**
@@ -59,17 +61,5 @@ class ForeachProcessor extends AbstractProcessor
     public function setRawProcessor(array $processor): self
     {
         return $this->setParam('processor', $processor);
-    }
-
-    /**
-     * Set ignore_missing. Default value false.
-     *
-     * If true and field does not exist or is null, the processor quietly exits without modifying the document
-     *
-     * @return $this
-     */
-    public function setIgnoreMissing(bool $ignoreMissing): self
-    {
-        return $this->setParam('ignore_missing', $ignoreMissing);
     }
 }

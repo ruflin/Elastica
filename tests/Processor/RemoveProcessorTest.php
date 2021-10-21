@@ -31,6 +31,25 @@ class RemoveProcessorTest extends BasePipelineTest
     /**
      * @group unit
      */
+    public function testRemoveWithNonDefaultOptions(): void
+    {
+        $processor = (new RemoveProcessor('foo'))
+            ->setIgnoreMissing(true)
+        ;
+
+        $expected = [
+            'remove' => [
+                'field' => 'foo',
+                'ignore_missing' => true,
+            ],
+        ];
+
+        $this->assertEquals($expected, $processor->toArray());
+    }
+
+    /**
+     * @group unit
+     */
     public function testRemoveArray(): void
     {
         $processor = new RemoveProcessor(['foo', 'bar']);

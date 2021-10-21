@@ -29,6 +29,25 @@ class UppercaseProcessorTest extends BasePipelineTest
     }
 
     /**
+     * @group unit
+     */
+    public function testUppercaseWithNonDefaultOptions(): void
+    {
+        $processor = (new UppercaseProcessor('foo'))
+            ->setIgnoreMissing(true)
+        ;
+
+        $expected = [
+            'uppercase' => [
+                'field' => 'foo',
+                'ignore_missing' => true,
+            ],
+        ];
+
+        $this->assertEquals($expected, $processor->toArray());
+    }
+
+    /**
      * @group functional
      */
     public function testUppercaseField(): void

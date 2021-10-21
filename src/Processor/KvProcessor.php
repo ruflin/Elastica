@@ -11,6 +11,8 @@ namespace Elastica\Processor;
  */
 class KvProcessor extends AbstractProcessor
 {
+    use Traits\IgnoreMissingTrait;
+
     public const DEFAULT_TARGET_FIELD_VALUE = null;
     public const DEFAULT_IGNORE_MISSING_VALUE = false;
 
@@ -79,17 +81,5 @@ class KvProcessor extends AbstractProcessor
     public function setExcludeKeys(array $listOfKeys): self
     {
         return $this->setParam('exclude_keys', $listOfKeys);
-    }
-
-    /**
-     * Set ignore_missing. Default value false.
-     *
-     * @param bool $ignoreMissing only these values are allowed (integer|float|string|boolean|auto)
-     *
-     * @return $this
-     */
-    public function setIgnoreMissing(bool $ignoreMissing): self
-    {
-        return $this->setParam('ignore_missing', $ignoreMissing);
     }
 }

@@ -11,6 +11,8 @@ namespace Elastica\Processor;
  */
 class RemoveProcessor extends AbstractProcessor
 {
+    use Traits\IgnoreMissingTrait;
+
     /**
      * @param array|string $field
      */

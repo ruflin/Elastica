@@ -11,6 +11,8 @@ namespace Elastica\Processor;
  */
 class RenameProcessor extends AbstractProcessor
 {
+    use Traits\IgnoreMissingTrait;
+
     public const DEFAULT_IGNORE_MISSING_VALUE = false;
 
     public function __construct(string $field, string $targetField)
@@ -37,17 +39,5 @@ class RenameProcessor extends AbstractProcessor
     public function setTargetField(string $targetField): self
     {
         return $this->setParam('target_field', $targetField);
-    }
-
-    /**
-     * Set ignore_missing. Default value false.
-     *
-     * @param bool $ignoreMissing only these values are allowed (integer|float|string|boolean|auto)
-     *
-     * @return $this
-     */
-    public function setIgnoreMissing(bool $ignoreMissing): self
-    {
-        return $this->setParam('ignore_missing', $ignoreMissing);
     }
 }
