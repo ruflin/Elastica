@@ -4,7 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/7.1.1...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/7.1.2...master)
+### Backward Compatibility Breaks
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [7.1.2](https://github.com/ruflin/Elastica/compare/7.1.1...7.1.2)
 ### Backward Compatibility Breaks
 * Changed `Elastica\Exception\JSONParseException` inheritance, it now extends `\JsonException` instead of `\RuntimeException` [#1949](https://github.com/ruflin/Elastica/pull/1949)
 ### Added
@@ -18,15 +27,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added possibility to specify PointInTime on `Elastica\Query::setPointInTime()` [#1992](https://github.com/ruflin/Elastica/pull/1992)
 * Added `Elastica\Client::closePointInTime()` for closing a PiT [#1995](https://github.com/ruflin/Elastica/pull/1995)
 ### Changed
-* Updated `php-cs-fixer` to `2.18.6` [#1955](https://github.com/ruflin/Elastica/pull/1955)
-* Updated `php-cs-fixer` to `3.0.0` [#1959](https://github.com/ruflin/Elastica/pull/1959)
+* Updated `php-cs-fixer` to `3.2.1`
+  [#1996](https://github.com/ruflin/Elastica/pull/1996)
+  [#1959](https://github.com/ruflin/Elastica/pull/1959)
+  [#1955](https://github.com/ruflin/Elastica/pull/1955)
 * Using default Elasticsearch images for testing instead of OSS https://github.com/ruflin/Elastica/pull/1954
-### Deprecated
-### Removed
 ### Fixed
 * Fixed compatibility with `guzzlehttp/psr7` version `2.x` [#2002](https://github.com/ruflin/Elastica/pull/2002)
 * Fixed the assignment of `version`, `seq_no` and `primary_term` on `getDocument` [#1973](https://github.com/ruflin/Elastica/pull/1973)
-### Security
 
 ## [7.1.1](https://github.com/ruflin/Elastica/compare/7.1.0...7.1.1)
 ### Backward Compatibility Breaks
