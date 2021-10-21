@@ -11,6 +11,8 @@ namespace Elastica\Processor;
  */
 class UppercaseProcessor extends AbstractProcessor
 {
+    use Traits\IgnoreMissingTrait;
+
     public function __construct(string $field)
     {
         $this->setField($field);
