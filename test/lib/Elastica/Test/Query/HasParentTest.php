@@ -3,7 +3,7 @@ namespace Elastica\Test\Query;
 
 use Elastica\Document;
 use Elastica\Query\HasParent;
-use Elastica\Query\Match;
+use Elastica\Query\MatchQuery;
 use Elastica\Query\MatchAll;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
@@ -94,7 +94,7 @@ class HasParentTest extends BaseTest
         $results = $search->search($parentQuery);
         $this->assertEquals(2, $results->count());
 
-        $match = new Match();
+        $match = new MatchQuery();
         $match->setField('brand', 'google');
 
         $parentQuery = new HasParent($match, $shopType->getName());

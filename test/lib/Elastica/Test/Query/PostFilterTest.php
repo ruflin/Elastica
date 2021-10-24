@@ -4,7 +4,7 @@ namespace Elastica\Test\Query;
 use Elastica\Document;
 use Elastica\Filter\Term;
 use Elastica\Query;
-use Elastica\Query\Match;
+use Elastica\Query\MatchQuery;
 use Elastica\Test\Base as BaseTest;
 
 class PostFilterTest extends BaseTest
@@ -113,7 +113,7 @@ class PostFilterTest extends BaseTest
     {
         $query = new Query();
 
-        $match = new Match();
+        $match = new MatchQuery();
         $match->setField('make', 'ford');
 
         $query->setQuery($match);
@@ -134,7 +134,7 @@ class PostFilterTest extends BaseTest
     {
         $query = new Query();
 
-        $match = new Match();
+        $match = new MatchQuery();
         $match->setField('make', 'ford');
 
         $query->setQuery($match);

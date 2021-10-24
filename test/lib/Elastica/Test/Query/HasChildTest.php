@@ -4,7 +4,7 @@ namespace Elastica\Test\Query;
 use Elastica\Document;
 use Elastica\Query;
 use Elastica\Query\HasChild;
-use Elastica\Query\Match;
+use Elastica\Query\MatchQuery;
 use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type\Mapping;
@@ -64,7 +64,7 @@ class HasChildTest extends BaseTest
     {
         $index = $this->_getTestIndex();
 
-        $f = new Match();
+        $f = new MatchQuery();
         $f->setField('alt.name', 'testname');
         $query = new HasChild($f, 'child');
 
