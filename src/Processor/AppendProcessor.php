@@ -42,4 +42,14 @@ class AppendProcessor extends AbstractProcessor
     {
         return $this->setParam('value', $value);
     }
+
+    /**
+     * Set allow_duplicates value.
+     *
+     * @return $this
+     */
+    public function setAllowDuplicates(bool $allowDuplicates): self
+    {
+        return $this->setParam('allow_duplicates', $allowDuplicates);
+    }
 }
