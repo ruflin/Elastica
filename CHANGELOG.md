@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Backward Compatibility Breaks
 ### Added
 * Added `ignore_missing` option to `lowercase`, `remove`, `trim` and `uppercase` processors [#2001](https://github.com/ruflin/Elastica/pull/2001)
+* Added `allow_duplicates` option to `append` processor [#2004](https://github.com/ruflin/Elastica/pull/2004)
 ### Changed
 ### Deprecated
 ### Removed
