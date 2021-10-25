@@ -29,6 +29,25 @@ class DotExpanderProcessorTest extends BasePipelineTest
     }
 
     /**
+     * @group unit
+     */
+    public function testDotExpanderWithNonDefaultOptions(): void
+    {
+        $processor = (new DotExpanderProcessor('foo.bar'))
+            ->setIgnoreFailure(true)
+        ;
+
+        $expected = [
+            'dot_expander' => [
+                'field' => 'foo.bar',
+                'ignore_failure' => true,
+            ],
+        ];
+
+        $this->assertEquals($expected, $processor->toArray());
+    }
+
+    /**
      * @group functional
      */
     public function testDotExpanderField(): void

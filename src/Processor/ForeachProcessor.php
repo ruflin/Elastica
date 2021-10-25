@@ -12,6 +12,7 @@ namespace Elastica\Processor;
  */
 class ForeachProcessor extends AbstractProcessor
 {
+    use Traits\IgnoreFailureTrait;
     use Traits\IgnoreMissingTrait;
 
     public const DEFAULT_IGNORE_MISSING_VALUE = false;

@@ -33,11 +33,13 @@ class KvProcessorTest extends BasePipelineTest
      */
     public function testKvWithNonDefaultOptions(): void
     {
-        $processor = new KvProcessor('message', ' ', '=');
-        $processor->setTargetField('target_field');
-        $processor->setIncludeKeys(['l1', 'l2']);
-        $processor->setExcludeKeys(['l4', 'l5']);
-        $processor->setIgnoreMissing(true);
+        $processor = (new KvProcessor('message', ' ', '='))
+            ->setTargetField('target_field')
+            ->setIncludeKeys(['l1', 'l2'])
+            ->setExcludeKeys(['l4', 'l5'])
+            ->setIgnoreFailure(true)
+            ->setIgnoreMissing(true)
+        ;
 
         $expected = [
             'kv' => [
@@ -47,6 +49,7 @@ class KvProcessorTest extends BasePipelineTest
                 'target_field' => 'target_field',
                 'include_keys' => ['l1', 'l2'],
                 'exclude_keys' => ['l4', 'l5'],
+                'ignore_failure' => true,
                 'ignore_missing' => true,
             ],
         ];

@@ -11,6 +11,7 @@ namespace Elastica\Processor;
  */
 class ConvertProcessor extends AbstractProcessor
 {
+    use Traits\IgnoreFailureTrait;
     use Traits\IgnoreMissingTrait;
 
     public const DEFAULT_TARGET_FIELD_VALUE = 'field';

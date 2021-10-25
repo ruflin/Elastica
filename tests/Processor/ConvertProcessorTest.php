@@ -34,13 +34,16 @@ class ConvertProcessorTest extends BasePipelineTest
      */
     public function testConvertWithNonDefaultOptions(): void
     {
-        $processor = new ConvertProcessor('foo', 'integer');
-        $processor->setIgnoreMissing(true);
+        $processor = (new ConvertProcessor('foo', 'integer'))
+            ->setIgnoreFailure(true)
+            ->setIgnoreMissing(true)
+        ;
 
         $expected = [
             'convert' => [
                 'field' => 'foo',
                 'type' => 'integer',
+                'ignore_failure' => true,
                 'ignore_missing' => true,
             ],
         ];
@@ -53,6 +56,7 @@ class ConvertProcessorTest extends BasePipelineTest
             'convert' => [
                 'field' => 'foo',
                 'type' => 'integer',
+                'ignore_failure' => true,
                 'ignore_missing' => true,
                 'target_field' => 'field2',
             ],

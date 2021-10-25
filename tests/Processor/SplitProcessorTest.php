@@ -34,13 +34,16 @@ class SplitProcessorTest extends BasePipelineTest
      */
     public function testSplitWithNonDefaultOptions(): void
     {
-        $processor = new SplitProcessor('joined_array_field', '-');
-        $processor->setIgnoreMissing(true);
+        $processor = (new SplitProcessor('joined_array_field', '-'))
+            ->setIgnoreFailure(true)
+            ->setIgnoreMissing(true)
+        ;
 
         $expected = [
             'split' => [
                 'field' => 'joined_array_field',
                 'separator' => '-',
+                'ignore_failure' => true,
                 'ignore_missing' => true,
             ],
         ];

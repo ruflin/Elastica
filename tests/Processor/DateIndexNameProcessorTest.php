@@ -32,16 +32,19 @@ class DateIndexNameProcessorTest extends BasePipelineTest
      */
     public function testDateIndexNameWithNonDefaultOptions(): void
     {
-        $processor = new DateIndexNameProcessor('date1', 'M');
-        $processor->setTimezone('Europe/Rome');
-        $processor->setLocale('ITALIAN');
-        $processor->setIndexNamePrefix('myindex-');
-        $processor->setDateFormats(['dd/MM/yyyy hh:mm:ss', 'ISO8601', 'UNIX', 'UNIX_MS']);
+        $processor = (new DateIndexNameProcessor('date1', 'M'))
+            ->setIgnoreFailure(true)
+            ->setTimezone('Europe/Rome')
+            ->setLocale('ITALIAN')
+            ->setIndexNamePrefix('myindex-')
+            ->setDateFormats(['dd/MM/yyyy hh:mm:ss', 'ISO8601', 'UNIX', 'UNIX_MS'])
+        ;
 
         $expected = [
             'date_index_name' => [
                 'field' => 'date1',
                 'date_rounding' => 'M',
+                'ignore_failure' => true,
                 'timezone' => 'Europe/Rome',
                 'locale' => 'ITALIAN',
                 'date_formats' => ['dd/MM/yyyy hh:mm:ss', 'ISO8601', 'UNIX', 'UNIX_MS'],

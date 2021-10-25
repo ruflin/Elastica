@@ -34,13 +34,16 @@ class RenameProcessorTest extends BasePipelineTest
      */
     public function testRenameWithNonDefaultOptions(): void
     {
-        $processor = new RenameProcessor('foo', 'foobar');
-        $processor->setIgnoreMissing(true);
+        $processor = (new RenameProcessor('foo', 'foobar'))
+            ->setIgnoreFailure(true)
+            ->setIgnoreMissing(true)
+        ;
 
         $expected = [
             'rename' => [
                 'field' => 'foo',
                 'target_field' => 'foobar',
+                'ignore_failure' => true,
                 'ignore_missing' => true,
             ],
         ];

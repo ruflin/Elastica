@@ -11,6 +11,8 @@ namespace Elastica\Processor;
  */
 class DateIndexNameProcessor extends AbstractProcessor
 {
+    use Traits\IgnoreFailureTrait;
+
     public const DEFAULT_DATE_FORMATS_VALUE = ['ISO8601'];
     public const DEFAULT_INDEX_NAME_FORMAT_VALUE = 'yyyy-MM-dd';
     public const DEFAULT_TIMEZONE_VALUE = 'UTC';

@@ -30,6 +30,25 @@ class FailProcessorTest extends BasePipelineTest
     }
 
     /**
+     * @group unit
+     */
+    public function testFailWithNonDefaultOptions(): void
+    {
+        $processor = (new FailProcessor('This is a custom fail message for processor'))
+            ->setIgnoreFailure(true)
+        ;
+
+        $expected = [
+            'fail' => [
+                'message' => 'This is a custom fail message for processor',
+                'ignore_failure' => true,
+            ],
+        ];
+
+        $this->assertEquals($expected, $processor->toArray());
+    }
+
+    /**
      * @group functional
      */
     public function testFailField(): void
