@@ -11,6 +11,8 @@ namespace Elastica\Processor;
  */
 class SetProcessor extends AbstractProcessor
 {
+    use Traits\IgnoreFailureTrait;
+
     public const DEFAULT_OVERRIDE_VALUE = true;
 
     public function __construct(string $field, string $value)

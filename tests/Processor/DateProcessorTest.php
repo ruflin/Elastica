@@ -45,15 +45,18 @@ class DateProcessorTest extends BasePipelineTest
      */
     public function testDateWithNonDefaultOptions(): void
     {
-        $processor = new DateProcessor('initial_date', ['dd/MM/yyyy hh:mm:ss', 'ISO8601', 'UNIX', 'UNIX_MS']);
-        $processor->setTargetField('timestamp');
-        $processor->setTimezone('Europe/Rome');
-        $processor->setLocale('ITALIAN');
+        $processor = (new DateProcessor('initial_date', ['dd/MM/yyyy hh:mm:ss', 'ISO8601', 'UNIX', 'UNIX_MS']))
+            ->setIgnoreFailure(true)
+            ->setTargetField('timestamp')
+            ->setTimezone('Europe/Rome')
+            ->setLocale('ITALIAN')
+        ;
 
         $expected = [
             'date' => [
                 'field' => 'initial_date',
                 'formats' => ['dd/MM/yyyy hh:mm:ss', 'ISO8601', 'UNIX', 'UNIX_MS'],
+                'ignore_failure' => true,
                 'target_field' => 'timestamp',
                 'timezone' => 'Europe/Rome',
                 'locale' => 'ITALIAN',

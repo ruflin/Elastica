@@ -33,13 +33,16 @@ class JsonProcessorTest extends BasePipelineTest
      */
     public function testJsonWithNonDefaultOptions(): void
     {
-        $processor = new JsonProcessor('string_source');
-        $processor->setTargetField('json_target');
-        $processor->setAddToRoot(true);
+        $processor = (new JsonProcessor('string_source'))
+            ->setIgnoreFailure(true)
+            ->setTargetField('json_target')
+            ->setAddToRoot(true)
+        ;
 
         $expected = [
             'json' => [
                 'field' => 'string_source',
+                'ignore_failure' => true,
                 'target_field' => 'json_target',
                 'add_to_root' => true,
             ],

@@ -34,14 +34,17 @@ class SetProcessorTest extends BasePipelineTest
      */
     public function testSetWithNonDefaultOptions(): void
     {
-        $processor = new SetProcessor('field1', 582.1);
-        $processor->setOverride(false);
+        $processor = (new SetProcessor('field1', 582.1))
+            ->setOverride(false)
+            ->setIgnoreFailure(true)
+        ;
 
         $expected = [
             'set' => [
                 'field' => 'field1',
                 'value' => 582.1,
                 'override' => false,
+                'ignore_failure' => true,
             ],
         ];
 

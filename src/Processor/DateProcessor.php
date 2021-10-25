@@ -11,6 +11,8 @@ namespace Elastica\Processor;
  */
 class DateProcessor extends AbstractProcessor
 {
+    use Traits\IgnoreFailureTrait;
+
     public const DEFAULT_TARGET_FIELD_VALUE = '@timestamp';
     public const DEFAULT_TIMEZONE_VALUE = 'UTC';
     public const DEFAULT_LOCALE_VALUE = 'ENGLISH';

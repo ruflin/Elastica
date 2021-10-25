@@ -11,6 +11,8 @@ namespace Elastica\Processor;
  */
 class SortProcessor extends AbstractProcessor
 {
+    use Traits\IgnoreFailureTrait;
+
     public const DEFAULT_ORDER_VALUE = 'asc';
 
     public function __construct(string $field)

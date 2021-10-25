@@ -34,12 +34,14 @@ class TrimProcessorTest extends BasePipelineTest
     public function testTrimWithNonDefaultOptions(): void
     {
         $processor = (new TrimProcessor('foo'))
+            ->setIgnoreFailure(true)
             ->setIgnoreMissing(true)
         ;
 
         $expected = [
             'trim' => [
                 'field' => 'foo',
+                'ignore_failure' => true,
                 'ignore_missing' => true,
             ],
         ];

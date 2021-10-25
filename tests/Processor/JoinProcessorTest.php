@@ -30,6 +30,26 @@ class JoinProcessorTest extends BasePipelineTest
     }
 
     /**
+     * @group unit
+     */
+    public function testJoinWithNonDefaultOptions(): void
+    {
+        $processor = (new JoinProcessor('joined_array_field', '-'))
+            ->setIgnoreFailure(true)
+        ;
+
+        $expected = [
+            'join' => [
+                'field' => 'joined_array_field',
+                'separator' => '-',
+                'ignore_failure' => true,
+            ],
+        ];
+
+        $this->assertEquals($expected, $processor->toArray());
+    }
+
+    /**
      * @group functional
      */
     public function testJoinField(): void

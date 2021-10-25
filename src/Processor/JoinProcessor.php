@@ -11,6 +11,8 @@ namespace Elastica\Processor;
  */
 class JoinProcessor extends AbstractProcessor
 {
+    use Traits\IgnoreFailureTrait;
+
     public function __construct(string $field, string $separator)
     {
         $this->setField($field);

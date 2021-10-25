@@ -11,6 +11,8 @@ namespace Elastica\Processor;
  */
 class AppendProcessor extends AbstractProcessor
 {
+    use Traits\IgnoreFailureTrait;
+
     /**
      * @param string       $field field name
      * @param array|string $value field values to append

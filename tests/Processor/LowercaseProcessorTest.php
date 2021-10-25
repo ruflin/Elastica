@@ -34,12 +34,14 @@ class LowercaseProcessorTest extends BasePipelineTest
     public function testLowercaseWithNonDefaultOptions(): void
     {
         $processor = (new LowercaseProcessor('foo'))
+            ->setIgnoreFailure(true)
             ->setIgnoreMissing(true)
         ;
 
         $expected = [
             'lowercase' => [
                 'field' => 'foo',
+                'ignore_failure' => true,
                 'ignore_missing' => true,
             ],
         ];

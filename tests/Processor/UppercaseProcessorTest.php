@@ -34,12 +34,14 @@ class UppercaseProcessorTest extends BasePipelineTest
     public function testUppercaseWithNonDefaultOptions(): void
     {
         $processor = (new UppercaseProcessor('foo'))
+            ->setIgnoreFailure(true)
             ->setIgnoreMissing(true)
         ;
 
         $expected = [
             'uppercase' => [
                 'field' => 'foo',
+                'ignore_failure' => true,
                 'ignore_missing' => true,
             ],
         ];

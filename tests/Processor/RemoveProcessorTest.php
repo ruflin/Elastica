@@ -34,12 +34,14 @@ class RemoveProcessorTest extends BasePipelineTest
     public function testRemoveWithNonDefaultOptions(): void
     {
         $processor = (new RemoveProcessor('foo'))
+            ->setIgnoreFailure(true)
             ->setIgnoreMissing(true)
         ;
 
         $expected = [
             'remove' => [
                 'field' => 'foo',
+                'ignore_failure' => true,
                 'ignore_missing' => true,
             ],
         ];

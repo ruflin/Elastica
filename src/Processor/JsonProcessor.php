@@ -11,6 +11,8 @@ namespace Elastica\Processor;
  */
 class JsonProcessor extends AbstractProcessor
 {
+    use Traits\IgnoreFailureTrait;
+
     public const DEFAULT_TARGET_FIELD_VALUE = 'field';
     public const DEFAULT_ADD_TO_ROOT_VALUE = false;
 

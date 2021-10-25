@@ -11,6 +11,8 @@ namespace Elastica\Processor;
  */
 class FailProcessor extends AbstractProcessor
 {
+    use Traits\IgnoreFailureTrait;
+
     public function __construct(string $message)
     {
         $this->setMessage($message);

@@ -33,13 +33,16 @@ class SortProcessorTest extends BasePipelineTest
      */
     public function testSortWithNonDefaultOptions(): void
     {
-        $processor = new SortProcessor('field_to_sort');
-        $processor->setOrder('desc');
+        $processor = (new SortProcessor('field_to_sort'))
+            ->setOrder('desc')
+            ->setIgnoreFailure(true)
+        ;
 
         $expected = [
             'sort' => [
                 'field' => 'field_to_sort',
                 'order' => 'desc',
+                'ignore_failure' => true,
             ],
         ];
 
