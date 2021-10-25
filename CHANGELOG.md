@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added `Elastica\Aggregation\NormalizeAggregation` [#1956](https://github.com/ruflin/Elastica/pull/1956)
 * Added `Elastica\Suggest\Phrase::addDirectGenerator` to align with ES specification [#1964](https://github.com/ruflin/Elastica/pull/1964)
 * Added support for `psr/log` 2.0 and 3.0 [#1971](https://github.com/ruflin/Elastica/pull/1971)
+* Added support for scripted upsert on bulk requests [#1974](https://github.com/ruflin/Elastica/pull/1974)
 * Added new optional 'case_insensitive' option to `Elastica\Query\Wildcard` [#1894](https://github.com/ruflin/Elastica/pull/1894)
 * Added `Elastica\Result::getSort()` fetching the "sort" property of results [#1979](https://github.com/ruflin/Elastica/pull/1979)
 * Added exposure of Point-In-Time ID for search responses in `Elastica\ResultSet::getPointInTimeId()` [#1991](https://github.com/ruflin/Elastica/pull/1991)
