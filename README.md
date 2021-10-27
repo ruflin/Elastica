@@ -30,9 +30,10 @@ For details on how to contribute, check the [CONTRIBUTING](https://github.com/ru
 
 Versions & Dependencies
 ------------
-This project tries to follow Elasticsearch in terms of [End of Life](https://www.elastic.co/support/eol) and maintenance since 5.x. It is generally recommended to use the latest point release of the relevant branch.
+This project tries to follow Elasticsearch in terms of [End of Life](https://www.elastic.co/support/eol) and maintenance since 5.x.
+It is generally recommended to use the latest point release of the relevant branch.
 
-| Elastica version                                      | ElasticSearch | elasticsearch-php | PHP            |
+| Elastica branch                                       | ElasticSearch | elasticsearch-php | PHP            |
 | ----------------------------------------------------- | ------------- | ----------------- | -------------- |
 | [7.x](https://github.com/ruflin/Elastica/tree/master) | 7.x           | ^7.0              | ^7.2 \|\| ^8.0 |
 | [6.x](https://github.com/ruflin/Elastica/tree/6.x)    | 6.x           | ^6.0              | ^7.0 \|\| ^8.0 |
