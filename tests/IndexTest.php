@@ -643,7 +643,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(10, $resultSet->count());
 
         // limit = 1
-        $resultSet = $index->search('farrelley', 1);
+        $resultSet = $index->search('farrelley', ['limit' => 1]);
         $this->assertEquals(1, $resultSet->count());
     }
 
@@ -709,16 +709,28 @@ class IndexTest extends BaseTest
 
     /**
      * @group unit
+     * @group legacy
+     */
+    public function testLegacyCreateSearch(): void
+    {
+        $client = $this->createMock(Client::class);
+        $index = new Index($client, 'test');
+        $query = new QueryString('test');
+
+        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Passing an int as 1st argument to "Elastica\Search::setOptionsAndQuery()" is deprecated, pass an array with the key "limit" instead. It will be removed in 8.0.');
+        $index->createSearch($query, 5);
+    }
+
+    /**
+     * @group unit
      */
     public function testCreateSearch(): void
     {
         $client = $this->createMock(Client::class);
         $index = new Index($client, 'test');
-
         $query = new QueryString('test');
-        $options = 5;
 
-        $search = $index->createSearch($query, $options);
+        $search = $index->createSearch($query, ['limit' => 5]);
 
         $expected = [
             'query' => [
