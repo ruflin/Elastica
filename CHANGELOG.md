@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added `allow_duplicates` option to `append` processor [#2004](https://github.com/ruflin/Elastica/pull/2004)
 ### Changed
 ### Deprecated
+* Deprecated passing an `int` as 1st argument to `Elastica\Search::setOptionsAndQuery()` [#2010](https://github.com/ruflin/Elastica/pull/2010)
 ### Removed
 ### Fixed
 * Fixed type-hint for `Elastica\Search::setOptionsAndQuery()` [#2009](https://github.com/ruflin/Elastica/pull/2009)
