@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 ### Removed
 ### Fixed
+* Fixed type-hint for `Elastica\Search::setOptionsAndQuery()` [#2009](https://github.com/ruflin/Elastica/pull/2009)
 ### Security
 
 ## [7.1.2](https://github.com/ruflin/Elastica/compare/7.1.1...7.1.2)
