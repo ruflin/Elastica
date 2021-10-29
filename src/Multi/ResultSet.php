@@ -76,6 +76,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->_resultSets[$this->key()];
@@ -132,6 +133,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->_resultSets[$offset] ?? null;
