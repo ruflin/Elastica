@@ -717,7 +717,7 @@ class IndexTest extends BaseTest
         $index = new Index($client, 'test');
         $query = new QueryString('test');
 
-        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Passing an int as 1st argument to "Elastica\Search::setOptionsAndQuery()" is deprecated, pass an array with the key "limit" instead. It will be removed in 8.0.');
+        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Passing an int as 1st argument to "Elastica\Search::setOptionsAndQuery()" is deprecated, pass an array with the key "size" instead. It will be removed in 8.0.');
         $index->createSearch($query, 5);
     }
 
