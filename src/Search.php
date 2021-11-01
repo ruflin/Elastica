@@ -319,6 +319,7 @@ class Search
         }
 
         if (\is_int($options)) {
+            \trigger_deprecation('ruflin/elastica', '7.1.3', 'Passing an int as 1st argument to "%s()" is deprecated, pass an array with the key "size" instead. It will be removed in 8.0.', __METHOD__);
             $this->getQuery()->setSize($options);
         } elseif (\is_array($options)) {
             if (isset($options['limit'])) {

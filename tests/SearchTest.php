@@ -254,7 +254,7 @@ class SearchTest extends BaseTest
         $this->assertEquals(10, $resultSet->count());
 
         // limit = 1
-        $resultSet = $search->search('farrelley', 1);
+        $resultSet = $search->search('farrelley', ['limit' => 1]);
         $this->assertEquals(1, $resultSet->count());
     }
 
@@ -294,10 +294,6 @@ class SearchTest extends BaseTest
         // default limit results  (default limit is 10)
         $resultSet = $search->search('test');
         $this->assertEquals(10, $resultSet->count());
-
-        // limit = 1
-        $resultSet = $search->search('test', 1);
-        $this->assertEquals(1, $resultSet->count());
 
         //Array with limit
         $resultSet = $search->search('test', ['limit' => 2]);

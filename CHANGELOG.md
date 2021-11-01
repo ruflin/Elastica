@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added `bytes` processor [#2008](https://github.com/ruflin/Elastica/pull/2008)
 ### Changed
 ### Deprecated
+* Deprecated passing an `int` as 1st argument to `Elastica\Search::setOptionsAndQuery()`, pass an array with the key `size` instead [#2010](https://github.com/ruflin/Elastica/pull/2010)
 ### Removed
 ### Fixed
 * Fixed type-hint for `Elastica\Search::setOptionsAndQuery()` [#2009](https://github.com/ruflin/Elastica/pull/2009)
