@@ -111,6 +111,7 @@ class Query implements DSL
      * common terms query.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-common-terms-query.html
+     * @deprecated since version 7.1.3, use the "match()" method instead.
      *
      * @param float $cutoffFrequency percentage in decimal form (.001 == 0.1%)
      */

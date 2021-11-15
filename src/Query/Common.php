@@ -8,6 +8,7 @@ namespace Elastica\Query;
  * Class Common.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-common-terms-query.html
+ * @deprecated since version 7.1.3, use the MatchQuery class instead.
  */
 class Common extends AbstractQuery
 {
