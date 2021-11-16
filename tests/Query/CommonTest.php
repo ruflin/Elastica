@@ -5,17 +5,23 @@ namespace Elastica\Test\Query;
 use Elastica\Document;
 use Elastica\Query\Common;
 use Elastica\Test\Base as BaseTest;
+use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 
 /**
  * @internal
  */
 class CommonTest extends BaseTest
 {
+    use ExpectDeprecationTrait;
+
     /**
      * @group unit
+     * @group legacy
      */
     public function testToArray(): void
     {
+        $this->expectDeprecation('Since ruflin/elastica 7.1.3: The "Elastica\Query\Common" class is deprecated, use "Elastica\Query\MatchQuery" instead. It will be removed in 8.0.');
+
         $query = new Common('body', 'test query', .001);
         $query->setLowFrequencyOperator(Common::OPERATOR_AND);
 
@@ -34,6 +40,7 @@ class CommonTest extends BaseTest
 
     /**
      * @group functional
+     * @group legacy
      */
     public function testQuery(): void
     {
@@ -66,6 +73,7 @@ class CommonTest extends BaseTest
 
     /**
      * @group unit
+     * @group legacy
      */
     public function testSetHighFrequencyOperator(): void
     {
@@ -78,6 +86,7 @@ class CommonTest extends BaseTest
 
     /**
      * @group unit
+     * @group legacy
      */
     public function testSetBoost(): void
     {
@@ -90,6 +99,7 @@ class CommonTest extends BaseTest
 
     /**
      * @group unit
+     * @group legacy
      */
     public function testSetAnalyzer(): void
     {

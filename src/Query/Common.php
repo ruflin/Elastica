@@ -2,10 +2,13 @@
 
 namespace Elastica\Query;
 
+\trigger_deprecation('ruflin/elastica', '7.1.3', 'The "%s" class is deprecated, use "%s" instead. It will be removed in 8.0.', Common::class, MatchQuery::class);
+
 /**
  * Class Common.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-common-terms-query.html
+ * @deprecated since version 7.1.3, use the MatchQuery class instead.
  */
 class Common extends AbstractQuery
 {

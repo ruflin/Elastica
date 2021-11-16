@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added `bytes` processor [#2008](https://github.com/ruflin/Elastica/pull/2008)
 ### Changed
 ### Deprecated
+* Deprecated `Elastica\Query\Common` class, use `Elastica\Query\MatchQuery` instead [#2013](https://github.com/ruflin/Elastica/pull/2013)
+* Deprecated `Elastica\QueryBuilder\DSL\Query::common_terms()`, use `match()` instead [#2013](https://github.com/ruflin/Elastica/pull/2013)
 * Deprecated passing an `int` as 1st argument to `Elastica\Search::setOptionsAndQuery()`, pass an array with the key `size` instead [#2010](https://github.com/ruflin/Elastica/pull/2010)
 ### Removed
 ### Fixed
