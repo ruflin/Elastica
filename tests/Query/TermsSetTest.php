@@ -1,0 +1,184 @@
+<?php
+
+namespace Elastica\Test\Query;
+
+use Elastica\Document;
+use Elastica\Exception\InvalidException;
+use Elastica\Query\TermsSet;
+use Elastica\Script\Script;
+use Elastica\Test\Base as BaseTest;
+
+/**
+ * @internal
+ */
+class TermsSetTest extends BaseTest
+{
+    /**
+     * @group unit
+     */
+    public function testEmptyTerms(): void
+    {
+        $this->expectException(InvalidException::class);
+        $query = new TermsSet('field', []);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testEmptyField(): void
+    {
+        $this->expectException(InvalidException::class);
+        new TermsSet('', [1]);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testEmptyMinimumFields(): void
+    {
+        $this->expectException(InvalidException::class);
+        (new TermsSet('field', ['php']))->toArray();
+    }
+
+    /**
+     * @group functional
+     */
+    public function testMinimumShouldMatchScriptSearch(): void
+    {
+        $index = $this->_createIndex();
+
+        $index->addDocuments([
+            new Document(1, ['skills' => ['php', 'js']]),
+            new Document(2, ['skills' => ['php']]),
+            new Document(3, ['skills' => ['java']]),
+        ]);
+
+        $index->refresh();
+
+        $query = new TermsSet('skills', ['php']);
+        $query->setMinimumShouldMatchScript(new Script('1'));
+        $resultSet = $index->search($query);
+
+        $this->assertEquals(2, $resultSet->count());
+
+        $query = new TermsSet('skills', ['php', 'java']);
+        $query->setMinimumShouldMatchScript(new Script('1'));
+        $resultSet = $index->search($query);
+
+        $this->assertEquals(3, $resultSet->count());
+
+        $query = new TermsSet('skills', ['php', 'js']);
+        $query->setMinimumShouldMatchScript(new Script('2'));
+        $resultSet = $index->search($query);
+
+        $this->assertEquals(1, $resultSet->count());
+
+        $query = new TermsSet('skills', ['php', 'java']);
+        $query->setMinimumShouldMatchScript(new Script('2'));
+        $resultSet = $index->search($query);
+
+        $this->assertEquals(0, $resultSet->count());
+    }
+
+    /**
+     * @group functional
+     */
+    public function testMinimumShouldMatchFieldSearch(): void
+    {
+        $index = $this->_createIndex();
+
+        $index->addDocuments([
+            new Document(1, ['skill_count' => 2, 'skills' => ['php', 'js']]),
+            new Document(2, ['skill_count' => 1, 'skills' => ['php']]),
+            new Document(3, ['skill_count' => 1, 'skills' => ['java']]),
+        ]);
+
+        $index->refresh();
+
+        $query = new TermsSet('skills', ['php']);
+        $query->setMinimumShouldMatchField('skill_count');
+        $resultSet = $index->search($query);
+
+        $this->assertEquals(1, $resultSet->count());
+
+        $query = new TermsSet('skills', ['php', 'java']);
+        $query->setMinimumShouldMatchField('skill_count');
+        $resultSet = $index->search($query);
+
+        $this->assertEquals(2, $resultSet->count());
+
+        $query = new TermsSet('skills', ['php', 'js']);
+        $query->setMinimumShouldMatchField('skill_count');
+        $resultSet = $index->search($query);
+
+        $this->assertEquals(2, $resultSet->count());
+
+        $query = new TermsSet('skills', ['js', 'c++']);
+        $query->setMinimumShouldMatchField('skill_count');
+        $resultSet = $index->search($query);
+
+        $this->assertEquals(0, $resultSet->count());
+    }
+
+    /**
+     * @group functional
+     */
+    public function testVariousDataTypesViaConstructor(): void
+    {
+        $index = $this->_createIndex();
+
+        $index->addDocuments([
+            new Document(1, ['some_numeric_field' => 9876]),
+        ]);
+        $index->refresh();
+
+        // string
+        $query = new TermsSet('some_numeric_field', ['9876']);
+        $query->setMinimumShouldMatchScript(new Script('1'));
+        $resultSet = $index->search($query);
+        $this->assertEquals(1, $resultSet->count());
+
+        // int
+        $query = new TermsSet('some_numeric_field', [9876]);
+        $query->setMinimumShouldMatchScript(new Script('1'));
+        $resultSet = $index->search($query);
+        $this->assertEquals(1, $resultSet->count());
+
+        // float
+        $query = new TermsSet('some_numeric_field', [9876.0]);
+        $query->setMinimumShouldMatchScript(new Script('1'));
+        $resultSet = $index->search($query);
+        $this->assertEquals(1, $resultSet->count());
+    }
+
+    /**
+     * @group functional
+     */
+    public function testVariousDataTypesViaAddTerm(): void
+    {
+        $index = $this->_createIndex();
+
+        $index->addDocuments([
+            new Document(1, ['some_numeric_field' => 9876]),
+        ]);
+        $index->refresh();
+
+        // string
+        $query = new TermsSet('some_numeric_field', ['9876']);
+        $query->setMinimumShouldMatchScript(new Script('1'));
+        $resultSet = $index->search($query);
+        $this->assertEquals(1, $resultSet->count());
+
+        // int
+        $query = new TermsSet('some_numeric_field', [9876]);
+        $query->setMinimumShouldMatchScript(new Script('1'));
+        $resultSet = $index->search($query);
+        $this->assertEquals(1, $resultSet->count());
+
+        // float
+        $query = new TermsSet('some_numeric_field', [9876.0]);
+        $query->setMinimumShouldMatchScript(new Script('1'));
+        $resultSet = $index->search($query);
+        $this->assertEquals(1, $resultSet->count());
+    }
+}
