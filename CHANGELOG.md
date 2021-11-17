@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added `allow_duplicates` option to `append` processor [#2004](https://github.com/ruflin/Elastica/pull/2004)
 * Added `bytes` processor [#2008](https://github.com/ruflin/Elastica/pull/2008)
 ### Changed
+* Triggered deprecation in `Elastica\Result::getType()` method [#2016](https://github.com/ruflin/Elastica/pull/2016)
 ### Deprecated
 * Deprecated `Elastica\Query\Common` class, use `Elastica\Query\MatchQuery` instead [#2013](https://github.com/ruflin/Elastica/pull/2013)
 * Deprecated `Elastica\QueryBuilder\DSL\Query::common_terms()`, use `match()` instead [#2013](https://github.com/ruflin/Elastica/pull/2013)
