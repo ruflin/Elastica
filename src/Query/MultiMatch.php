@@ -115,9 +115,13 @@ class MultiMatch extends AbstractQuery
      * Set cutoff frequency for Match Query.
      *
      * @return $this
+     *
+     * @deprecated since 7.1.3
      */
     public function setCutoffFrequency(float $cutoffFrequency): self
     {
+        \trigger_deprecation('ruflin/elastica', '7.1.3', 'The "%s()" method is deprecated. It will be removed in 8.0.', __METHOD__);
+
         return $this->setParam('cutoff_frequency', $cutoffFrequency);
     }
 
