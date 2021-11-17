@@ -18,8 +18,8 @@ class ResponseTest extends BaseTest
             'took' => 213,
             'errors' => false,
             'items' => [
-                ['index' => ['_index' => 'rohlik', '_type' => 'grocery', '_id' => '707891', '_version' => 4, 'status' => 200]],
-                ['index' => ['_index' => 'rohlik', '_type' => 'grocery', '_id' => '707893', '_version' => 4, 'status' => 200]],
+                ['index' => ['_index' => 'rohlik', '_id' => '707891', '_version' => 4, 'status' => 200]],
+                ['index' => ['_index' => 'rohlik', '_id' => '707893', '_version' => 4, 'status' => 200]],
             ],
         ]));
 
@@ -32,8 +32,8 @@ class ResponseTest extends BaseTest
             'took' => 213,
             'errors' => true,
             'items' => [
-                ['index' => ['_index' => 'rohlik', '_type' => 'grocery', '_id' => '707891', '_version' => 4, 'status' => 200]],
-                ['index' => ['_index' => 'rohlik', '_type' => 'grocery', '_id' => '707893', '_version' => 4, 'status' => 200]],
+                ['index' => ['_index' => 'rohlik', '_id' => '707891', '_version' => 4, 'status' => 200]],
+                ['index' => ['_index' => 'rohlik', '_id' => '707893', '_version' => 4, 'status' => 200]],
             ],
         ]));
 
@@ -45,8 +45,8 @@ class ResponseTest extends BaseTest
         $response = new Response(\json_encode([
             'took' => 213,
             'items' => [
-                ['index' => ['_index' => 'rohlik', '_type' => 'grocery', '_id' => '707891', '_version' => 4, 'ok' => true]],
-                ['index' => ['_index' => 'rohlik', '_type' => 'grocery', '_id' => '707893', '_version' => 4, 'ok' => true]],
+                ['index' => ['_index' => 'rohlik', '_id' => '707891', '_version' => 4, 'ok' => true]],
+                ['index' => ['_index' => 'rohlik', '_id' => '707893', '_version' => 4, 'ok' => true]],
             ],
         ]));
 
@@ -76,8 +76,8 @@ class ResponseTest extends BaseTest
         $response = new Response(\json_encode([
             'took' => 213,
             'items' => [
-                ['index' => ['_index' => 'rohlik', '_type' => 'grocery', '_id' => '707891', '_version' => 4, 'ok' => true]],
-                ['index' => ['_index' => 'rohlik', '_type' => 'grocery', '_id' => '707893', '_version' => 4, 'ok' => false]],
+                ['index' => ['_index' => 'rohlik', '_id' => '707891', '_version' => 4, 'ok' => true]],
+                ['index' => ['_index' => 'rohlik', '_id' => '707893', '_version' => 4, 'ok' => false]],
             ],
         ]));
 
@@ -89,8 +89,8 @@ class ResponseTest extends BaseTest
         $response = new Response(\json_encode([
             'took' => 213,
             'items' => [
-                ['index' => ['_index' => 'rohlik', '_type' => 'grocery', '_id' => '707891', '_version' => 4, 'status' => 200]],
-                ['index' => ['_index' => 'rohlik', '_type' => 'grocery', '_id' => '707893', '_version' => 4, 'status' => 200]],
+                ['index' => ['_index' => 'rohlik', '_id' => '707891', '_version' => 4, 'status' => 200]],
+                ['index' => ['_index' => 'rohlik', '_id' => '707893', '_version' => 4, 'status' => 200]],
             ],
         ]));
 
@@ -102,8 +102,8 @@ class ResponseTest extends BaseTest
         $response = new Response(\json_encode([
             'took' => 213,
             'items' => [
-                ['index' => ['_index' => 'rohlik', '_type' => 'grocery', '_id' => '707891', '_version' => 4, 'status' => 200]],
-                ['index' => ['_index' => 'rohlik', '_type' => 'grocery', '_id' => '707893', '_version' => 4, 'status' => 301]],
+                ['index' => ['_index' => 'rohlik', '_id' => '707891', '_version' => 4, 'status' => 200]],
+                ['index' => ['_index' => 'rohlik', '_id' => '707893', '_version' => 4, 'status' => 301]],
             ],
         ]));
 
@@ -115,8 +115,8 @@ class ResponseTest extends BaseTest
         $response = new Response(\json_encode([
             'took' => 213,
             'items' => [
-                ['index' => ['_index' => 'rohlik', '_type' => 'grocery', '_id' => '707891', '_version' => 4, 'status' => 200]],
-                ['index' => ['_index' => 'rohlik', '_type' => 'grocery', '_id' => '707893', '_version' => 4, 'status' => 200]],
+                ['index' => ['_index' => 'rohlik', '_id' => '707891', '_version' => 4, 'status' => 200]],
+                ['index' => ['_index' => 'rohlik', '_id' => '707893', '_version' => 4, 'status' => 200]],
             ],
         ]));
         $response->setJsonBigintConversion(true);

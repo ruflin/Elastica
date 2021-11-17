@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Deprecated `Elastica\QueryBuilder\DSL\Query::common_terms()`, use `match()` instead [#2013](https://github.com/ruflin/Elastica/pull/2013)
 * Deprecated passing an `int` as 1st argument to `Elastica\Search::setOptionsAndQuery()`, pass an array with the key `size` instead [#2010](https://github.com/ruflin/Elastica/pull/2010)
 ### Removed
+* Removed remaining `_type` field usages [#2017](https://github.com/ruflin/Elastica/pull/2017)
 ### Fixed
 * Fixed type-hint for `Elastica\Search::setOptionsAndQuery()` [#2009](https://github.com/ruflin/Elastica/pull/2009)
 ### Security
