@@ -557,6 +557,30 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
+    public function testIndicesBoostQuery(): void
+    {
+        $query = (new Query(new Term(['field' => 'value'])))
+            ->setIndicesBoost(['foo' => 1.0, 'bar' => 2])
+        ;
+
+        $expected = [
+            'query' => [
+                'term' => [
+                    'field' => 'value',
+                ],
+            ],
+            'indices_boost' => [
+                ['foo' => 1.0],
+                ['bar' => 2],
+            ],
+        ];
+
+        $this->assertSame($expected, $query->toArray());
+    }
+
+    /**
+     * @group unit
+     */
     public function testPointInTimeInQuery(): void
     {
         $query = new Query();
