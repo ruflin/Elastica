@@ -390,6 +390,16 @@ class Query extends Param
     }
 
     /**
+     * @param array<string, float> $indicesBoost
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multiple-indices.html#index-boost
+     */
+    public function setIndicesBoost(array $indicesBoost): self
+    {
+        return $this->setParam('indices_boost', \array_chunk($indicesBoost, 1, true));
+    }
+
+    /**
      * Adds a track_total_hits argument.
      *
      * @param bool|int $trackTotalHits Track total hits parameter
