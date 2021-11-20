@@ -9,8 +9,10 @@ use Elastica\Exception\InvalidException;
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-script-aggregation.html
  */
-class BucketScript extends AbstractAggregation
+class BucketScript extends AbstractAggregation implements GapPolicyInterface
 {
+    use Traits\GapPolicyTrait;
+
     public function __construct(string $name, ?array $bucketsPath = null, ?string $script = null)
     {
         parent::__construct($name);
@@ -42,16 +44,6 @@ class BucketScript extends AbstractAggregation
     public function setScript(string $script): self
     {
         return $this->setParam('script', $script);
-    }
-
-    /**
-     * Set the gap policy for this aggregation.
-     *
-     * @return $this
-     */
-    public function setGapPolicy(string $gapPolicy = 'skip'): self
-    {
-        return $this->setParam('gap_policy', $gapPolicy);
     }
 
     /**

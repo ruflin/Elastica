@@ -9,8 +9,10 @@ use Elastica\Exception\InvalidException;
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-sum-bucket-aggregation.html
  */
-class SumBucket extends AbstractAggregation
+class SumBucket extends AbstractAggregation implements GapPolicyInterface
 {
+    use Traits\GapPolicyTrait;
+
     public function __construct(string $name, ?string $bucketsPath = null)
     {
         parent::__construct($name);
@@ -28,16 +30,6 @@ class SumBucket extends AbstractAggregation
     public function setBucketsPath(string $bucketsPath): self
     {
         return $this->setParam('buckets_path', $bucketsPath);
-    }
-
-    /**
-     * Set the gap policy for this aggregation.
-     *
-     * @return $this
-     */
-    public function setGapPolicy(string $gapPolicy): self
-    {
-        return $this->setParam('gap_policy', $gapPolicy);
     }
 
     /**
