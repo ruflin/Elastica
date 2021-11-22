@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Triggered deprecation in `Elastica\Result::getType()` method [#2016](https://github.com/ruflin/Elastica/pull/2016)
 * Updated `php-cs-fixer` to `3.3.2` [#2022](https://github.com/ruflin/Elastica/pull/2022)
 * Updated `composer-normalize` to `2.15.0` [#2021](https://github.com/ruflin/Elastica/pull/2021)
+* Extracted setting gap policy to `\Elastica\Aggregation\Traits\GapPolicyTrait` and introduced `\Elastica\Aggregation\GapPolicyInterface` with constants for options [#2023](https://github.com/ruflin/Elastica/pull/2023)
 ### Deprecated
 * Deprecated `Elastica\Query\Common` class, use `Elastica\Query\MatchQuery` instead [#2013](https://github.com/ruflin/Elastica/pull/2013)
 * Deprecated `Elastica\QueryBuilder\DSL\Query::common_terms()`, use `match()` instead [#2013](https://github.com/ruflin/Elastica/pull/2013)
