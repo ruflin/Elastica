@@ -9,8 +9,9 @@ use Elastica\Exception\InvalidException;
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-percentiles-bucket-aggregation.html
  */
-class PercentilesBucket extends AbstractAggregation
+class PercentilesBucket extends AbstractAggregation implements GapPolicyInterface
 {
+    use Traits\GapPolicyTrait;
     use Traits\KeyedTrait;
 
     /**
@@ -44,14 +45,6 @@ class PercentilesBucket extends AbstractAggregation
     public function setBucketsPath(string $bucketsPath): self
     {
         return $this->setParam('buckets_path', $bucketsPath);
-    }
-
-    /**
-     * Set the gap policy for this aggregation.
-     */
-    public function setGapPolicy(string $gapPolicy): self
-    {
-        return $this->setParam('gap_policy', $gapPolicy);
     }
 
     /**

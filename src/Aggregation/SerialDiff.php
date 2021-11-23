@@ -9,9 +9,9 @@ use Elastica\Exception\InvalidException;
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-serialdiff-aggregation.html
  */
-class SerialDiff extends AbstractAggregation
+class SerialDiff extends AbstractAggregation implements GapPolicyInterface
 {
-    public const DEFAULT_GAP_POLICY_VALUE = 'insert_zero';
+    public const DEFAULT_GAP_POLICY_VALUE = GapPolicyInterface::INSERT_ZEROS;
 
     public function __construct(string $name, ?string $bucketsPath = null)
     {
@@ -47,7 +47,7 @@ class SerialDiff extends AbstractAggregation
      *
      * @return $this
      */
-    public function setGapPolicy(string $gapPolicy): self
+    public function setGapPolicy(string $gapPolicy = self::DEFAULT_GAP_POLICY_VALUE): self
     {
         return $this->setParam('gap_policy', $gapPolicy);
     }
