@@ -13,6 +13,7 @@ class ConvertProcessor extends AbstractProcessor
 {
     use Traits\IgnoreFailureTrait;
     use Traits\IgnoreMissingTrait;
+    use Traits\TargetFieldTrait;
 
     public const DEFAULT_TARGET_FIELD_VALUE = 'field';
     public const DEFAULT_IGNORE_MISSING_VALUE = false;
@@ -41,15 +42,5 @@ class ConvertProcessor extends AbstractProcessor
     public function setType(string $type): self
     {
         return $this->setParam('type', $type);
-    }
-
-    /**
-     * Set target_field. Default value field.
-     *
-     * @return $this
-     */
-    public function setTargetField(string $targetField): self
-    {
-        return $this->setParam('target_field', $targetField);
     }
 }

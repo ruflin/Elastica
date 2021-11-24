@@ -13,6 +13,7 @@ class KvProcessor extends AbstractProcessor
 {
     use Traits\IgnoreFailureTrait;
     use Traits\IgnoreMissingTrait;
+    use Traits\TargetFieldTrait;
 
     public const DEFAULT_TARGET_FIELD_VALUE = null;
     public const DEFAULT_IGNORE_MISSING_VALUE = false;
@@ -52,16 +53,6 @@ class KvProcessor extends AbstractProcessor
     public function setValueSplit(string $valueSplit): self
     {
         return $this->setParam('value_split', $valueSplit);
-    }
-
-    /**
-     * Set target_field. Default value null.
-     *
-     * @return $this
-     */
-    public function setTargetField(string $targetField): self
-    {
-        return $this->setParam('target_field', $targetField);
     }
 
     /**
