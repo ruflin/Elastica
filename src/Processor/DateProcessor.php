@@ -12,6 +12,7 @@ namespace Elastica\Processor;
 class DateProcessor extends AbstractProcessor
 {
     use Traits\IgnoreFailureTrait;
+    use Traits\TargetFieldTrait;
 
     public const DEFAULT_TARGET_FIELD_VALUE = '@timestamp';
     public const DEFAULT_TIMEZONE_VALUE = 'UTC';
@@ -41,16 +42,6 @@ class DateProcessor extends AbstractProcessor
     public function setFormats(array $formats): self
     {
         return $this->setParam('formats', $formats);
-    }
-
-    /**
-     * Set target_field. Default value @timestamp.
-     *
-     * @return $this
-     */
-    public function setTargetField(string $targetField): self
-    {
-        return $this->setParam('target_field', $targetField);
     }
 
     /**

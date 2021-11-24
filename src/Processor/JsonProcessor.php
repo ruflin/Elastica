@@ -12,6 +12,7 @@ namespace Elastica\Processor;
 class JsonProcessor extends AbstractProcessor
 {
     use Traits\IgnoreFailureTrait;
+    use Traits\TargetFieldTrait;
 
     public const DEFAULT_TARGET_FIELD_VALUE = 'field';
     public const DEFAULT_ADD_TO_ROOT_VALUE = false;
@@ -29,16 +30,6 @@ class JsonProcessor extends AbstractProcessor
     public function setField(string $field): self
     {
         return $this->setParam('field', $field);
-    }
-
-    /**
-     * Set target_field. Default field.
-     *
-     * @return $this
-     */
-    public function setTargetField(string $targetField): self
-    {
-        return $this->setParam('target_field', $targetField);
     }
 
     /**
