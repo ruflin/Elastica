@@ -11,6 +11,7 @@ namespace Elastica\Processor;
  */
 class SplitProcessor extends AbstractProcessor
 {
+    use Traits\FieldTrait;
     use Traits\IgnoreFailureTrait;
     use Traits\IgnoreMissingTrait;
 
@@ -20,16 +21,6 @@ class SplitProcessor extends AbstractProcessor
     {
         $this->setField($field);
         $this->setSeparator($separator);
-    }
-
-    /**
-     * Set the field.
-     *
-     * @return $this
-     */
-    public function setField(string $field): self
-    {
-        return $this->setParam('field', $field);
     }
 
     /**

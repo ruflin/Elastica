@@ -6,6 +6,8 @@ trait IgnoreMissingTrait
 {
     /**
      * Set "ignore_missing" option.
+     *
+     * @return $this
      */
     public function setIgnoreMissing(bool $ignoreMissing): self
     {

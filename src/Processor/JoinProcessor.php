@@ -11,22 +11,13 @@ namespace Elastica\Processor;
  */
 class JoinProcessor extends AbstractProcessor
 {
+    use Traits\FieldTrait;
     use Traits\IgnoreFailureTrait;
 
     public function __construct(string $field, string $separator)
     {
         $this->setField($field);
         $this->setSeparator($separator);
-    }
-
-    /**
-     * Set the field.
-     *
-     * @return $this
-     */
-    public function setField(string $field): self
-    {
-        return $this->setParam('field', $field);
     }
 
     /**

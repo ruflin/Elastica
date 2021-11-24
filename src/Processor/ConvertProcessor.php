@@ -11,6 +11,7 @@ namespace Elastica\Processor;
  */
 class ConvertProcessor extends AbstractProcessor
 {
+    use Traits\FieldTrait;
     use Traits\IgnoreFailureTrait;
     use Traits\IgnoreMissingTrait;
     use Traits\TargetFieldTrait;
@@ -22,16 +23,6 @@ class ConvertProcessor extends AbstractProcessor
     {
         $this->setField($field);
         $this->setType($type);
-    }
-
-    /**
-     * Set field.
-     *
-     * @return $this
-     */
-    public function setField(string $field): self
-    {
-        return $this->setParam('field', $field);
     }
 
     /**

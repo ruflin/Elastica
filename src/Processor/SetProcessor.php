@@ -11,6 +11,7 @@ namespace Elastica\Processor;
  */
 class SetProcessor extends AbstractProcessor
 {
+    use Traits\FieldTrait;
     use Traits\IgnoreFailureTrait;
 
     public const DEFAULT_OVERRIDE_VALUE = true;
@@ -19,16 +20,6 @@ class SetProcessor extends AbstractProcessor
     {
         $this->setField($field);
         $this->setValue($value);
-    }
-
-    /**
-     * Set field.
-     *
-     * @return $this
-     */
-    public function setField(string $field): self
-    {
-        return $this->setParam('field', $field);
     }
 
     /**

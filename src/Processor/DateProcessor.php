@@ -11,6 +11,7 @@ namespace Elastica\Processor;
  */
 class DateProcessor extends AbstractProcessor
 {
+    use Traits\FieldTrait;
     use Traits\IgnoreFailureTrait;
     use Traits\TargetFieldTrait;
 
@@ -22,16 +23,6 @@ class DateProcessor extends AbstractProcessor
     {
         $this->setField($field);
         $this->setFormats($formats);
-    }
-
-    /**
-     * Set field.
-     *
-     * @return $this
-     */
-    public function setField(string $field): self
-    {
-        return $this->setParam('field', $field);
     }
 
     /**
