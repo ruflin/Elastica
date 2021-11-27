@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Triggered deprecation in `Elastica\Result::getType()` method [#2016](https://github.com/ruflin/Elastica/pull/2016)
 * Updated `php-cs-fixer` to `3.3.2` [#2022](https://github.com/ruflin/Elastica/pull/2022)
 * Updated `composer-normalize` to `2.15.0` [#2021](https://github.com/ruflin/Elastica/pull/2021)
+* Updated `elasticsearch` test version to `7.15.2` [#2027](https://github.com/ruflin/Elastica/pull/2027)
 * Extracted setting gap policy to `\Elastica\Aggregation\Traits\GapPolicyTrait` and introduced `\Elastica\Aggregation\GapPolicyInterface` with constants for options [#2023](https://github.com/ruflin/Elastica/pull/2023)
 * Extracted setting `field` to `Elastica\Processor\Traits\FieldTrait` [#2024](https://github.com/ruflin/Elastica/pull/2024)
 * Extracted setting `target_field` to `Elastica\Processor\Traits\TargetFieldTrait` [#2026](https://github.com/ruflin/Elastica/pull/2026)
