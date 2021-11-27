@@ -37,7 +37,7 @@ jobs:
           - '8.0'
           - '8.1'
         elasticsearch:
-          - '7.14.1'
+          - '7.15.2'
       fail-fast: false
     steps:
       - name: 'Checkout'
