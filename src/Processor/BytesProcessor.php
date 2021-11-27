@@ -7,6 +7,7 @@ namespace Elastica\Processor;
  */
 class BytesProcessor extends AbstractProcessor
 {
+    use Traits\FieldTrait;
     use Traits\IgnoreFailureTrait;
     use Traits\IgnoreMissingTrait;
     use Traits\TargetFieldTrait;
@@ -14,15 +15,5 @@ class BytesProcessor extends AbstractProcessor
     public function __construct(string $field)
     {
         $this->setField($field);
-    }
-
-    /**
-     * Set field.
-     *
-     * @return $this
-     */
-    public function setField(string $field): self
-    {
-        return $this->setParam('field', $field);
     }
 }

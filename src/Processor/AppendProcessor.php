@@ -11,6 +11,7 @@ namespace Elastica\Processor;
  */
 class AppendProcessor extends AbstractProcessor
 {
+    use Traits\FieldTrait;
     use Traits\IgnoreFailureTrait;
 
     /**
@@ -21,16 +22,6 @@ class AppendProcessor extends AbstractProcessor
     {
         $this->setField($field);
         $this->setValue($value);
-    }
-
-    /**
-     * Set field.
-     *
-     * @return $this
-     */
-    public function setField(string $field): self
-    {
-        return $this->setParam('field', $field);
     }
 
     /**

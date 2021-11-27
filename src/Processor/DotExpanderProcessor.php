@@ -11,20 +11,11 @@ namespace Elastica\Processor;
  */
 class DotExpanderProcessor extends AbstractProcessor
 {
+    use Traits\FieldTrait;
     use Traits\IgnoreFailureTrait;
 
     public function __construct(string $field)
     {
         $this->setField($field);
-    }
-
-    /**
-     * Set the field.
-     *
-     * @return $this
-     */
-    public function setField(string $field): self
-    {
-        return $this->setParam('field', $field);
     }
 }

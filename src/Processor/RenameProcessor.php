@@ -11,6 +11,7 @@ namespace Elastica\Processor;
  */
 class RenameProcessor extends AbstractProcessor
 {
+    use Traits\FieldTrait;
     use Traits\IgnoreFailureTrait;
     use Traits\IgnoreMissingTrait;
     use Traits\TargetFieldTrait;
@@ -21,15 +22,5 @@ class RenameProcessor extends AbstractProcessor
     {
         $this->setField($field);
         $this->setTargetField($targetField);
-    }
-
-    /**
-     * Set field.
-     *
-     * @return $this
-     */
-    public function setField(string $field): self
-    {
-        return $this->setParam('field', $field);
     }
 }

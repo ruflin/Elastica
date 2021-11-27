@@ -11,6 +11,7 @@ namespace Elastica\Processor;
  */
 class KvProcessor extends AbstractProcessor
 {
+    use Traits\FieldTrait;
     use Traits\IgnoreFailureTrait;
     use Traits\IgnoreMissingTrait;
     use Traits\TargetFieldTrait;
@@ -23,16 +24,6 @@ class KvProcessor extends AbstractProcessor
         $this->setField($field);
         $this->setFieldSplit($fieldSplit);
         $this->setValueSplit($valueSplit);
-    }
-
-    /**
-     * Set field name.
-     *
-     * @return $this
-     */
-    public function setField(string $field): self
-    {
-        return $this->setParam('field', $field);
     }
 
     /**

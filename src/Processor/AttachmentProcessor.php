@@ -11,6 +11,7 @@ namespace Elastica\Processor;
  */
 class AttachmentProcessor extends AbstractProcessor
 {
+    use Traits\FieldTrait;
     use Traits\IgnoreMissingTrait;
     use Traits\TargetFieldTrait;
 
@@ -21,16 +22,6 @@ class AttachmentProcessor extends AbstractProcessor
     public function __construct(string $field)
     {
         $this->setField($field);
-    }
-
-    /**
-     * Set field.
-     *
-     * @return $this
-     */
-    public function setField(string $field): self
-    {
-        return $this->setParam('field', $field);
     }
 
     /**
