@@ -28,7 +28,7 @@ class MultiBuilder implements MultiBuilderInterface
      *
      * @return BaseResultSet[]
      */
-    private function buildResultSets(Response $response, $searches): array
+    private function buildResultSets(Response $response, array $searches): array
     {
         $data = $response->getData();
         if (!isset($data['responses']) || !\is_array($data['responses'])) {
