@@ -15,21 +15,6 @@ use Elastica\Exception\InvalidException;
 class Terms extends AbstractQuery
 {
     /**
-     * @var string
-     */
-    private $field;
-
-    /**
-     * @var array<float|int|string>
-     */
-    private $terms;
-
-    /**
-     * @var string[]|null
-     */
-    private $lookup;
-
-    /**
      * @param array<bool|float|int|string> $terms Terms list, leave empty if building a terms-lookup query
      */
     public function __construct(string $field, array $terms = [])
@@ -38,8 +23,7 @@ class Terms extends AbstractQuery
             throw new InvalidException('Terms field name has to be set');
         }
 
-        $this->field = $field;
-        $this->terms = $terms;
+        $this->setParam($field, $terms);
     }
 
     /**
@@ -49,9 +33,11 @@ class Terms extends AbstractQuery
      */
     public function setTerms(array $terms): self
     {
-        $this->terms = $terms;
+        if (null === $field = \array_key_first($this->getParams())) {
+            throw new InvalidException('No field has been set.');
+        }
 
-        return $this;
+        return $this->setParam($field, $terms);
     }
 
     /**
@@ -65,37 +51,27 @@ class Terms extends AbstractQuery
             throw new \TypeError(\sprintf('Argument 1 passed to "%s()" must be a scalar, %s given.', __METHOD__, \is_object($term) ? \get_class($term) : \gettype($term)));
         }
 
-        $this->terms[] = $term;
+        if (null === $field = \array_key_first($params = $this->getParams())) {
+            throw new InvalidException('No field has been set.');
+        }
 
-        return $this;
+        if (isset($params[$field]['index'])) {
+            throw new InvalidException('Mixed terms and terms lookup are not allowed.');
+        }
+
+        return $this->addParam($field, $term);
     }
 
     public function setTermsLookup(string $index, string $id, string $path): self
     {
-        $this->lookup = [
+        if (null === $field = \array_key_first($this->getParams())) {
+            throw new InvalidException('No field has been set.');
+        }
+
+        return $this->setParam($field, [
             'index' => $index,
             'id' => $id,
             'path' => $path,
-        ];
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toArray(): array
-    {
-        if (null !== $this->lookup && \count($this->terms)) {
-            throw new InvalidException('Unable to build Terms query: only one of terms or lookup properties should be set');
-        }
-
-        if (null !== $this->lookup) {
-            $this->setParam($this->field, $this->lookup);
-        } else {
-            $this->setParam($this->field, $this->terms);
-        }
-
-        return parent::toArray();
+        ]);
     }
 }
