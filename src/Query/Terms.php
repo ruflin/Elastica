@@ -15,6 +15,11 @@ use Elastica\Exception\InvalidException;
 class Terms extends AbstractQuery
 {
     /**
+     * @var string
+     */
+    private $field;
+
+    /**
      * @param array<bool|float|int|string> $terms Terms list, leave empty if building a terms-lookup query
      */
     public function __construct(string $field, array $terms = [])
@@ -23,7 +28,8 @@ class Terms extends AbstractQuery
             throw new InvalidException('Terms field name has to be set');
         }
 
-        $this->setParam($field, $terms);
+        $this->field = $field;
+        $this->setTerms($terms);
     }
 
     /**
@@ -33,11 +39,7 @@ class Terms extends AbstractQuery
      */
     public function setTerms(array $terms): self
     {
-        if (null === $field = \array_key_first($this->getParams())) {
-            throw new InvalidException('No field has been set.');
-        }
-
-        return $this->setParam($field, $terms);
+        return $this->setParam($this->field, $terms);
     }
 
     /**
@@ -51,24 +53,18 @@ class Terms extends AbstractQuery
             throw new \TypeError(\sprintf('Argument 1 passed to "%s()" must be a scalar, %s given.', __METHOD__, \is_object($term) ? \get_class($term) : \gettype($term)));
         }
 
-        if (null === $field = \array_key_first($params = $this->getParams())) {
-            throw new InvalidException('No field has been set.');
-        }
+        $terms = $this->getParam($this->field);
 
-        if (isset($params[$field]['index'])) {
+        if (isset($terms['index'])) {
             throw new InvalidException('Mixed terms and terms lookup are not allowed.');
         }
 
-        return $this->addParam($field, $term);
+        return $this->addParam($this->field, $term);
     }
 
     public function setTermsLookup(string $index, string $id, string $path): self
     {
-        if (null === $field = \array_key_first($this->getParams())) {
-            throw new InvalidException('No field has been set.');
-        }
-
-        return $this->setParam($field, [
+        return $this->setParam($this->field, [
             'index' => $index,
             'id' => $id,
             'path' => $path,
