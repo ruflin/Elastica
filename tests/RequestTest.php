@@ -6,12 +6,15 @@ use Elastica\Connection;
 use Elastica\Exception\InvalidException;
 use Elastica\Request;
 use Elastica\Test\Base as BaseTest;
+use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 
 /**
  * @internal
  */
 class RequestTest extends BaseTest
 {
+    use ExpectDeprecationTrait;
+
     /**
      * @group unit
      */
@@ -91,11 +94,18 @@ class RequestTest extends BaseTest
         $this->assertEquals($request->getConnection()->getHost(), $data['connection']['host']);
         $this->assertEquals($request->getConnection()->getPort(), $data['connection']['port']);
 
-        $string = $request->toString();
+        $this->assertIsString((string) $request);
+    }
 
-        $this->assertIsString($string);
+    /**
+     * @group unit
+     * @group legacy
+     */
+    public function testLegacyToString(): void
+    {
+        $request = new Request('test');
 
-        $string = (string) $request;
-        $this->assertIsString($string);
+        $this->expectDeprecation('Since ruflin/elastica 7.1.3: The "Elastica\Request::toString()" method is deprecated, use "__toString()" or cast to string instead. It will be removed in 8.0.');
+        $this->assertIsString($request->toString());
     }
 }

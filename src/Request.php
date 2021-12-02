@@ -46,12 +46,9 @@ class Request extends Param
         $this->setContentType($contentType);
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->toString();
+        return JSON::stringify($this->toArray());
     }
 
     /**
@@ -197,10 +194,14 @@ class Request extends Param
     /**
      * Converts request to curl request format.
      *
+     * @deprecated since version 7.1.3, use the "__toString()" method or cast to string instead.
+     *
      * @return string
      */
     public function toString()
     {
-        return JSON::stringify($this->toArray());
+        \trigger_deprecation('ruflin/elastica', '7.1.3', 'The "%s()" method is deprecated, use "__toString()" or cast to string instead. It will be removed in 8.0.', __METHOD__);
+
+        return (string) $this;
     }
 }
