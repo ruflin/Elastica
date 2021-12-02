@@ -20,16 +20,6 @@ class Terms extends AbstractQuery
     private $field;
 
     /**
-     * @var array<float|int|string>
-     */
-    private $terms;
-
-    /**
-     * @var string[]|null
-     */
-    private $lookup;
-
-    /**
      * @param array<bool|float|int|string> $terms Terms list, leave empty if building a terms-lookup query
      */
     public function __construct(string $field, array $terms = [])
@@ -39,7 +29,7 @@ class Terms extends AbstractQuery
         }
 
         $this->field = $field;
-        $this->terms = $terms;
+        $this->setTerms($terms);
     }
 
     /**
@@ -49,9 +39,7 @@ class Terms extends AbstractQuery
      */
     public function setTerms(array $terms): self
     {
-        $this->terms = $terms;
-
-        return $this;
+        return $this->setParam($this->field, $terms);
     }
 
     /**
@@ -65,37 +53,21 @@ class Terms extends AbstractQuery
             throw new \TypeError(\sprintf('Argument 1 passed to "%s()" must be a scalar, %s given.', __METHOD__, \is_object($term) ? \get_class($term) : \gettype($term)));
         }
 
-        $this->terms[] = $term;
+        $terms = $this->getParam($this->field);
 
-        return $this;
+        if (isset($terms['index'])) {
+            throw new InvalidException('Mixed terms and terms lookup are not allowed.');
+        }
+
+        return $this->addParam($this->field, $term);
     }
 
     public function setTermsLookup(string $index, string $id, string $path): self
     {
-        $this->lookup = [
+        return $this->setParam($this->field, [
             'index' => $index,
             'id' => $id,
             'path' => $path,
-        ];
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toArray(): array
-    {
-        if (null !== $this->lookup && \count($this->terms)) {
-            throw new InvalidException('Unable to build Terms query: only one of terms or lookup properties should be set');
-        }
-
-        if (null !== $this->lookup) {
-            $this->setParam($this->field, $this->lookup);
-        } else {
-            $this->setParam($this->field, $this->terms);
-        }
-
-        return parent::toArray();
+        ]);
     }
 }

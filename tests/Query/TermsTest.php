@@ -17,17 +17,21 @@ class TermsTest extends BaseTest
      */
     public function testSetTermsLookup(): void
     {
-        $terms = [
-            'index' => 'index_name',
-            'id' => '1',
-            'path' => 'terms',
+        $expected = [
+            'terms' => [
+                'name' => [
+                    'index' => 'index_name',
+                    'id' => '1',
+                    'path' => 'terms',
+                ],
+            ],
         ];
 
-        $query = new Terms('name');
-        $query->setTermsLookup('index_name', '1', 'terms');
+        $query = (new Terms('name'))
+            ->setTermsLookup('index_name', '1', 'terms')
+        ;
 
-        $data = $query->toArray();
-        $this->assertEquals($terms, $data['terms']['name']);
+        $this->assertSame($expected, $query->toArray());
     }
 
     /**
@@ -35,11 +39,13 @@ class TermsTest extends BaseTest
      */
     public function testInvalidParams(): void
     {
-        $query = new Terms('field', ['aaa', 'bbb']);
-        $query->setTermsLookup('index', '1', 'path');
-
         $this->expectException(InvalidException::class);
-        $query->toArray();
+        $this->expectExceptionMessage('Mixed terms and terms lookup are not allowed.');
+
+        (new Terms('field', ['aaa', 'bbb']))
+            ->setTermsLookup('index', '1', 'path')
+            ->addTerm('ccc')
+        ;
     }
 
     /**
@@ -48,6 +54,8 @@ class TermsTest extends BaseTest
     public function testEmptyField(): void
     {
         $this->expectException(InvalidException::class);
+        $this->expectExceptionMessage('Terms field name has to be set');
+
         new Terms('');
     }
 
