@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Deprecated passing an `int` as 1st argument to `Elastica\Search::setOptionsAndQuery()`, pass an array with the key `size` instead [#2010](https://github.com/ruflin/Elastica/pull/2010)
 * Deprecated `cutoff_frequency` option of `Elastica\Query\MatchQuery` [#2014](https://github.com/ruflin/Elastica/pull/2014)
 * Deprecated `cutoff_frequency` option of `Elastica\Query\MultiMatch` [#2015](https://github.com/ruflin/Elastica/pull/2015)
+* Deprecated `Elastica\Bulk::toString()`, `Elastica\Bulk\Action::toString()` and `Elastica\Request::toString()` methods, use `__toString()` method or cast to string instead [#2033](https://github.com/ruflin/Elastica/pull/2033)
 ### Removed
 * Removed remaining `_type` field usages [#2017](https://github.com/ruflin/Elastica/pull/2017)
 ### Fixed
