@@ -374,19 +374,22 @@ class BulkTest extends BaseTest
             new Document(null, '{"name":"The Human Torch"}'),
         ];
 
-        $bulk = new Bulk($client);
-        $bulk->addDocuments($documents);
-        $bulk->setIndex($index);
+        $bulk = (new Bulk($client))
+            ->setIndex($index)
+            ->addDocuments($documents)
+        ;
 
-        $expectedJson = '{"index":{}}
+        $expectedJson = <<<'JSON'
+{"index":{}}
 {"name":"Mister Fantastic"}
 {"index":{}}
 {"name":"Invisible Woman"}
 {"index":{}}
 {"name":"The Human Torch"}
-';
+JSON;
+
         $expectedJson = \str_replace(\PHP_EOL, "\n", $expectedJson);
-        $this->assertEquals($expectedJson, $bulk->toString());
+        $this->assertSame($expectedJson, \trim((string) $bulk));
 
         $response = $bulk->send();
         $this->assertTrue($response->isOk());

@@ -45,6 +45,30 @@ class Action
         $this->setSource($source);
     }
 
+    public function __toString(): string
+    {
+        $string = JSON::stringify($this->getActionMetadata(), \JSON_FORCE_OBJECT).Bulk::DELIMITER;
+
+        if ($this->hasSource()) {
+            $source = $this->getSource();
+            if (\is_string($source)) {
+                $string .= $source;
+            } elseif (\is_array($source) && \array_key_exists('doc', $source) && \is_string($source['doc'])) {
+                if (isset($source['doc_as_upsert'])) {
+                    $docAsUpsert = ', "doc_as_upsert": '.($source['doc_as_upsert'] ? 'true' : 'false');
+                } else {
+                    $docAsUpsert = '';
+                }
+                $string .= '{"doc": '.$source['doc'].$docAsUpsert.'}';
+            } else {
+                $string .= JSON::stringify($source, \JSON_UNESCAPED_UNICODE);
+            }
+            $string .= Bulk::DELIMITER;
+        }
+
+        return $string;
+    }
+
     /**
      * @return $this
      */
@@ -152,27 +176,14 @@ class Action
         return $data;
     }
 
+    /**
+     * @deprecated since version 7.1.3, use the "__toString()" method or cast to string instead.
+     */
     public function toString(): string
     {
-        $string = JSON::stringify($this->getActionMetadata(), \JSON_FORCE_OBJECT).Bulk::DELIMITER;
-        if ($this->hasSource()) {
-            $source = $this->getSource();
-            if (\is_string($source)) {
-                $string .= $source;
-            } elseif (\is_array($source) && \array_key_exists('doc', $source) && \is_string($source['doc'])) {
-                if (isset($source['doc_as_upsert'])) {
-                    $docAsUpsert = ', "doc_as_upsert": '.($source['doc_as_upsert'] ? 'true' : 'false');
-                } else {
-                    $docAsUpsert = '';
-                }
-                $string .= '{"doc": '.$source['doc'].$docAsUpsert.'}';
-            } else {
-                $string .= JSON::stringify($source, \JSON_UNESCAPED_UNICODE);
-            }
-            $string .= Bulk::DELIMITER;
-        }
+        \trigger_deprecation('ruflin/elastica', '7.1.3', 'The "%s()" method is deprecated, use "__toString()" or cast to string instead. It will be removed in 8.0.', __METHOD__);
 
-        return $string;
+        return (string) $this;
     }
 
     public static function isValidOpType(?string $opType = null): bool

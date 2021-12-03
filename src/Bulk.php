@@ -42,7 +42,13 @@ class Bulk
 
     public function __toString(): string
     {
-        return $this->toString();
+        $data = '';
+
+        foreach ($this->getActions() as $action) {
+            $data .= (string) $action;
+        }
+
+        return $data;
     }
 
     /**
@@ -255,14 +261,14 @@ class Bulk
         return $this->setRequestParam('timeout', $time);
     }
 
+    /**
+     * @deprecated since version 7.1.3, use the "__toString()" method or cast to string instead.
+     */
     public function toString(): string
     {
-        $data = '';
-        foreach ($this->getActions() as $action) {
-            $data .= $action->toString();
-        }
+        \trigger_deprecation('ruflin/elastica', '7.1.3', 'The "%s()" method is deprecated, use "__toString()" or cast to string instead. It will be removed in 8.0.', __METHOD__);
 
-        return $data;
+        return (string) $this;
     }
 
     public function toArray(): array
@@ -279,10 +285,7 @@ class Bulk
 
     public function send(): ResponseSet
     {
-        $path = $this->getPath();
-        $data = $this->toString();
-
-        $response = $this->_client->request($path, Request::POST, $data, $this->_requestParams, Request::NDJSON_CONTENT_TYPE);
+        $response = $this->_client->request($this->getPath(), Request::POST, (string) $this, $this->_requestParams, Request::NDJSON_CONTENT_TYPE);
 
         return $this->_processResponse($response);
     }
