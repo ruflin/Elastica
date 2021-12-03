@@ -31,11 +31,6 @@ class Bulk
     protected $_index;
 
     /**
-     * @var string|null
-     */
-    protected $_type;
-
-    /**
      * @var array request parameters to the bulk api
      */
     protected $_requestParams = [];
