@@ -37,6 +37,25 @@ class TermsTest extends BaseTest
     /**
      * @group unit
      */
+    public function testSetBoost(): void
+    {
+        $expected = [
+            'terms' => [
+                'name' => ['foo', 'bar'],
+                'boost' => 2.0,
+            ],
+        ];
+
+        $query = (new Terms('name', ['foo', 'bar']))
+            ->setBoost(2.0)
+        ;
+
+        $this->assertSame($expected, $query->toArray());
+    }
+
+    /**
+     * @group unit
+     */
     public function testInvalidParams(): void
     {
         $this->expectException(InvalidException::class);

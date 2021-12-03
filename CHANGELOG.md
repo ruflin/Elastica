@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added `allow_duplicates` option to `append` processor [#2004](https://github.com/ruflin/Elastica/pull/2004)
 * Added `bytes` processor [#2008](https://github.com/ruflin/Elastica/pull/2008)
 * Added `indices_boost` option to `Elastica\Query` [#2018](https://github.com/ruflin/Elastica/pull/2018)
+* Added `Elastica\Query\Terms::setBoost()` method to configure boost [#2035](https://github.com/ruflin/Elastica/pull/2035)
 ### Changed
 * Triggered deprecation in `Elastica\Result::getType()` method [#2016](https://github.com/ruflin/Elastica/pull/2016)
 * Updated `php-cs-fixer` to `3.3.2` [#2022](https://github.com/ruflin/Elastica/pull/2022)

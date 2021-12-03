@@ -70,4 +70,9 @@ class Terms extends AbstractQuery
             'path' => $path,
         ]);
     }
+
+    public function setBoost(float $boost): self
+    {
+        return $this->setParam('boost', $boost);
+    }
 }
