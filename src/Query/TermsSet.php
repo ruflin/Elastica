@@ -11,53 +11,47 @@ use Elastica\Script\AbstractScript;
 class TermsSet extends AbstractQuery
 {
     /**
-     * @param array<bool|float|int|string> $terms
+     * @var string
      */
-    public function __construct(string $field, array $terms)
+    private $field;
+
+    /**
+     * @param array<bool|float|int|string> $terms
+     * @param AbstractScript|string        $minimumShouldMatch
+     */
+    public function __construct(string $field, array $terms, $minimumShouldMatch)
     {
         if ('' === $field) {
-            throw new InvalidException('Terms field name has to be set');
+            throw new InvalidException('TermsSet field name has to be set');
         }
 
-        if (0 === \count($terms)) {
-            throw new InvalidException('Unable to build Terms query: terms must contains at least one item');
-        }
+        $this->field = $field;
+        $this->setTerms($terms);
 
-        $this->setParam($field, ['terms' => $terms]);
+        if (\is_string($minimumShouldMatch)) {
+            $this->setMinimumShouldMatchField($minimumShouldMatch);
+        } elseif ($minimumShouldMatch instanceof AbstractScript) {
+            $this->setMinimumShouldMatchScript($minimumShouldMatch);
+        } else {
+            throw new \TypeError(\sprintf('Argument 3 passed to "%s()" must be of type %s|string, %s given.', __METHOD__, AbstractScript::class, \is_object($minimumShouldMatch) ? \get_class($minimumShouldMatch) : \gettype($minimumShouldMatch)));
+        }
+    }
+
+    /**
+     * @param array<bool|float|int|string> $terms
+     */
+    public function setTerms(array $terms): self
+    {
+        return $this->addParam($this->field, $terms, 'terms');
     }
 
     public function setMinimumShouldMatchField(string $minimumShouldMatchField): self
     {
-        $params = $this->getParams();
-        $field = \array_key_first($params);
-
-        $this->setParam($field, \array_merge($params[$field], ['minimum_should_match_field' => $minimumShouldMatchField]));
-
-        return $this;
+        return $this->addParam($this->field, $minimumShouldMatchField, 'minimum_should_match_field');
     }
 
     public function setMinimumShouldMatchScript(AbstractScript $script): self
     {
-        $params = $this->getParams();
-        $field = \array_key_first($params);
-
-        $this->setParam($field, \array_merge($params[$field], ['minimum_should_match_script' => $script->toArray()['script']]));
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toArray(): array
-    {
-        $params = $this->getParams();
-        $field = \array_key_first($params);
-
-        if (!isset($params[$field]['minimum_should_match_field']) && !isset($params[$field]['minimum_should_match_script'])) {
-            throw new InvalidException('One minimum should match criteria must be specified');
-        }
-
-        return parent::toArray();
+        return $this->addParam($this->field, $script->toArray()['script'], 'minimum_should_match_script');
     }
 }
