@@ -29,16 +29,7 @@ class Filters extends AbstractAggregation
      */
     public function addFilter(AbstractQuery $filter, ?string $name = null): self
     {
-        $filterArray = [];
-
-        $type = self::NAMED_TYPE;
-
-        if (null === $name) {
-            $filterArray[] = $filter;
-            $type = self::ANONYMOUS_TYPE;
-        } else {
-            $filterArray[$name] = $filter;
-        }
+        $type = null !== $name ? self::NAMED_TYPE : self::ANONYMOUS_TYPE;
 
         if ($this->hasParam('filters')
             && \count($this->getParam('filters'))
@@ -49,7 +40,7 @@ class Filters extends AbstractAggregation
 
         $this->_type = $type;
 
-        return $this->addParam('filters', $filterArray);
+        return $this->addParam('filters', $filter, $name);
     }
 
     /**
@@ -66,34 +57,5 @@ class Filters extends AbstractAggregation
     public function setOtherBucketKey(string $otherBucketKey): self
     {
         return $this->setParam('other_bucket_key', $otherBucketKey);
-    }
-
-    public function toArray(): array
-    {
-        $array = [];
-        $filters = $this->getParam('filters');
-
-        foreach ($filters as $filter) {
-            if (self::NAMED_TYPE === $this->_type) {
-                $key = \key($filter);
-                $array['filters']['filters'][$key] = \current($filter)->toArray();
-            } else {
-                $array['filters']['filters'][] = \current($filter)->toArray();
-            }
-        }
-
-        if ($this->hasParam('other_bucket')) {
-            $array['filters']['other_bucket'] = $this->getParam('other_bucket');
-        }
-
-        if ($this->hasParam('other_bucket_key')) {
-            $array['filters']['other_bucket_key'] = $this->getParam('other_bucket_key');
-        }
-
-        if ($this->_aggs) {
-            $array['aggs'] = $this->_convertArrayable($this->_aggs);
-        }
-
-        return $array;
     }
 }

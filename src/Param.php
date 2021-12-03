@@ -84,9 +84,13 @@ class Param implements ArrayableInterface, \Countable
      *
      * @return $this
      */
-    public function addParam($key, $value)
+    public function addParam($key, $value, ?string $subKey = null)
     {
-        $this->_params[$key][] = $value;
+        if (null !== $subKey) {
+            $this->_params[$key][$subKey] = $value;
+        } else {
+            $this->_params[$key][] = $value;
+        }
 
         return $this;
     }
