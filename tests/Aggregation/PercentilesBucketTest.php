@@ -9,12 +9,15 @@ use Elastica\Document;
 use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Query;
+use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 
 /**
  * @internal
  */
 class PercentilesBucketTest extends BaseAggregationTest
 {
+    use ExpectDeprecationTrait;
+
     /**
      * @group functional
      */
@@ -31,13 +34,12 @@ class PercentilesBucketTest extends BaseAggregationTest
                     )
             )
             ->addAggregation(
-                (new PercentilesBucket('percentiles_likes_by_page'))
-                    ->setBucketsPath('pages>avg_likes')
+                (new PercentilesBucket('percentiles_likes_by_page', 'pages>avg_likes'))
                     ->setPercents([5, 50, 95])
             )
         ;
 
-        $results = $this->_getIndexForTest()->search($query)->getAggregations();
+        $results = $this->getIndexForTest()->search($query)->getAggregations();
 
         $this->assertEquals(5, $results['pages']['buckets'][0]['avg_likes']['value']);
         $this->assertEquals(100, $results['pages']['buckets'][1]['avg_likes']['value']);
@@ -53,10 +55,7 @@ class PercentilesBucketTest extends BaseAggregationTest
      */
     public function testConstructThroughSetters(): void
     {
-        $serialDiffAgg = new PercentilesBucket('percentiles_bucket');
-
-        $serialDiffAgg
-            ->setBucketsPath('pages>avg_likes_by_page')
+        $aggregation = (new PercentilesBucket('percentiles_bucket', 'pages>avg_likes_by_page'))
             ->setFormat('test_format')
             ->setPercents([10, 80])
             ->setGapPolicy(10)
@@ -73,21 +72,44 @@ class PercentilesBucketTest extends BaseAggregationTest
             ],
         ];
 
-        $this->assertEquals($expected, $serialDiffAgg->toArray());
+        $this->assertEquals($expected, $aggregation->toArray());
     }
 
     /**
      * @group unit
+     * @group legacy
      */
-    public function testToArrayInvalidBucketsPath(): void
+    public function testLegacyConstructWithNoBucketsPath(): void
     {
-        $this->expectException(InvalidException::class);
+        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Not passing a 2nd argument to "Elastica\Aggregation\PercentilesBucket::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
 
-        $serialDiffAgg = new PercentilesBucket('avg_bucket');
-        $serialDiffAgg->toArray();
+        new PercentilesBucket('percentiles_bucket');
     }
 
-    protected function _getIndexForTest(): Index
+    /**
+     * @group unit
+     * @group legacy
+     */
+    public function testLegacyConstructWithNullBucketsPath(): void
+    {
+        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Passing null as 2nd argument to "Elastica\Aggregation\PercentilesBucket::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
+
+        new PercentilesBucket('percentiles_bucket', null);
+    }
+
+    /**
+     * @group unit
+     * @group legacy
+     */
+    public function testLegacyToArrayWithNoBucketsPath(): void
+    {
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessage('Buckets path is required');
+
+        (new PercentilesBucket('percentiles_bucket'))->toArray();
+    }
+
+    private function getIndexForTest(): Index
     {
         $index = $this->_createIndex();
 
@@ -95,9 +117,7 @@ class PercentilesBucketTest extends BaseAggregationTest
             Document::create(['page' => 1, 'likes' => 5]),
             Document::create(['page' => 2, 'likes' => 100]),
             Document::create(['page' => 3, 'likes' => 150]),
-        ]);
-
-        $index->refresh();
+        ], ['refresh' => 'true']);
 
         return $index;
     }
