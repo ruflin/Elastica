@@ -9,12 +9,15 @@ use Elastica\Document;
 use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Query;
+use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 
 /**
  * @internal
  */
 class AvgBucketTest extends BaseAggregationTest
 {
+    use ExpectDeprecationTrait;
+
     /**
      * @group functional
      */
@@ -31,12 +34,11 @@ class AvgBucketTest extends BaseAggregationTest
                     )
             )
             ->addAggregation(
-                (new AvgBucket('avg_likes_by_page'))
-                    ->setBucketsPath('pages>avg_likes')
+                (new AvgBucket('avg_likes_by_page', 'pages>avg_likes'))
             )
         ;
 
-        $results = $this->_getIndexForTest()->search($query)->getAggregations();
+        $results = $this->getIndexForTest()->search($query)->getAggregations();
 
         $this->assertEquals(168, $results['pages']['buckets'][0]['avg_likes']['value']);
         $this->assertEquals(155, $results['pages']['buckets'][1]['avg_likes']['value']);
@@ -48,10 +50,7 @@ class AvgBucketTest extends BaseAggregationTest
      */
     public function testConstructThroughSetters(): void
     {
-        $serialDiffAgg = new AvgBucket('avg_bucket');
-
-        $serialDiffAgg
-            ->setBucketsPath('pages>avg_likes_by_page')
+        $aggregation = (new AvgBucket('avg_bucket', 'pages>avg_likes_by_page'))
             ->setFormat('test_format')
             ->setGapPolicy(10)
         ;
@@ -64,21 +63,44 @@ class AvgBucketTest extends BaseAggregationTest
             ],
         ];
 
-        $this->assertEquals($expected, $serialDiffAgg->toArray());
+        $this->assertEquals($expected, $aggregation->toArray());
     }
 
     /**
      * @group unit
+     * @group legacy
      */
-    public function testToArrayInvalidBucketsPath(): void
+    public function testLegacyConstructWithNoBucketsPath(): void
     {
-        $this->expectException(InvalidException::class);
+        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Not passing a 2nd argument to "Elastica\Aggregation\AvgBucket::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
 
-        $serialDiffAgg = new AvgBucket('avg_bucket');
-        $serialDiffAgg->toArray();
+        new AvgBucket('avg_bucket');
     }
 
-    protected function _getIndexForTest(): Index
+    /**
+     * @group unit
+     * @group legacy
+     */
+    public function testLegacyConstructWithNullBucketsPath(): void
+    {
+        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Passing null as 2nd argument to "Elastica\Aggregation\AvgBucket::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
+
+        new AvgBucket('avg_bucket', null);
+    }
+
+    /**
+     * @group unit
+     * @group legacy
+     */
+    public function testLegacyToArrayWithNoBucketsPath(): void
+    {
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessage('Buckets path is required');
+
+        (new AvgBucket('avg_bucket'))->toArray();
+    }
+
+    private function getIndexForTest(): Index
     {
         $index = $this->_createIndex();
 
@@ -86,9 +108,7 @@ class AvgBucketTest extends BaseAggregationTest
             Document::create(['page' => 1, 'likes' => 180]),
             Document::create(['page' => 1, 'likes' => 156]),
             Document::create(['page' => 2, 'likes' => 155]),
-        ]);
-
-        $index->refresh();
+        ], ['refresh' => 'true']);
 
         return $index;
     }
