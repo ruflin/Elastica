@@ -66,6 +66,7 @@ class Version700 extends Version
         'avg_bucket',
         'derivative',
         'stats',
+        'stats_bucket',
         'extended_stats',
         'value_count',
         'percentiles',

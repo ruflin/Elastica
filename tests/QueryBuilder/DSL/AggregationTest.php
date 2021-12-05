@@ -60,6 +60,7 @@ class AggregationTest extends AbstractDSLTest
         $this->_assertImplemented($aggregationDSL, 'scripted_metric', Aggregation\ScriptedMetric::class, ['name', null, null, 'return state.durations', 'return states']);
         $this->_assertImplemented($aggregationDSL, 'significant_terms', Aggregation\SignificantTerms::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'stats', Aggregation\Stats::class, ['name']);
+        $this->_assertImplemented($aggregationDSL, 'stats_bucket', Aggregation\StatsBucket::class, ['name', 'buckets_path']);
         $this->_assertImplemented($aggregationDSL, 'sum', Aggregation\Sum::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'sum_bucket', Aggregation\SumBucket::class, ['name', 'buckets_path']);
         $this->_assertImplemented($aggregationDSL, 'terms', Aggregation\Terms::class, ['name']);

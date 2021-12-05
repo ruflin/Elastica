@@ -36,6 +36,7 @@ use Elastica\Aggregation\ScriptedMetric;
 use Elastica\Aggregation\SerialDiff;
 use Elastica\Aggregation\SignificantTerms;
 use Elastica\Aggregation\Stats;
+use Elastica\Aggregation\StatsBucket;
 use Elastica\Aggregation\Sum;
 use Elastica\Aggregation\SumBucket;
 use Elastica\Aggregation\Terms;
@@ -131,6 +132,14 @@ class Aggregation implements DSL
     public function stats(string $name): Stats
     {
         return new Stats($name);
+    }
+
+    /**
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-stats-bucket-aggregation.html
+     */
+    public function stats_bucket(string $name, ?string $bucketsPath = null): StatsBucket
+    {
+        return new StatsBucket($name, $bucketsPath);
     }
 
     /**

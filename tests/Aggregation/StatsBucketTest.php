@@ -9,12 +9,15 @@ use Elastica\Document;
 use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Query;
+use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 
 /**
  * @internal
  */
 class StatsBucketTest extends BaseAggregationTest
 {
+    use ExpectDeprecationTrait;
+
     /**
      * @group functional
      */
@@ -22,7 +25,9 @@ class StatsBucketTest extends BaseAggregationTest
     {
         $bucketScriptAggregation = new StatsBucket('result', 'age_groups>max_weight');
 
-        $histogramAggregation = new Histogram('age_groups', 'age', 10);
+        $histogramAggregation = (new Histogram('age_groups', 'age', 10))
+            ->addAggregation((new Max('max_weight'))->setField('weight'))
+        ;
 
         $histogramAggregation->addAggregation((new Max('max_weight'))->setField('weight'));
 
@@ -31,7 +36,7 @@ class StatsBucketTest extends BaseAggregationTest
             ->addAggregation($bucketScriptAggregation)
         ;
 
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('result');
+        $results = $this->getIndexForTest()->search($query)->getAggregation('result');
 
         $this->assertEquals(3, $results['count']);
         $this->assertEquals(50, $results['min']);
@@ -45,10 +50,7 @@ class StatsBucketTest extends BaseAggregationTest
      */
     public function testConstructThroughSetters(): void
     {
-        $serialDiffAgg = new StatsBucket('bucket_part');
-
-        $serialDiffAgg
-            ->setBucketsPath('age_groups>max_weight')
+        $aggregation = (new StatsBucket('bucket_part', 'age_groups>max_weight'))
             ->setFormat('test_format')
             ->setGapPolicy(10)
         ;
@@ -61,21 +63,44 @@ class StatsBucketTest extends BaseAggregationTest
             ],
         ];
 
-        $this->assertEquals($expected, $serialDiffAgg->toArray());
+        $this->assertEquals($expected, $aggregation->toArray());
     }
 
     /**
      * @group unit
+     * @group legacy
      */
-    public function testToArrayInvalidBucketsPath(): void
+    public function testLegacyConstructWithNoBucketsPath(): void
     {
-        $this->expectException(InvalidException::class);
+        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Not passing a 2nd argument to "Elastica\Aggregation\StatsBucket::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
 
-        $serialDiffAgg = new StatsBucket('bucket_part');
-        $serialDiffAgg->toArray();
+        new StatsBucket('stats_bucket');
     }
 
-    protected function _getIndexForTest(): Index
+    /**
+     * @group unit
+     * @group legacy
+     */
+    public function testLegacyConstructWithNullBucketsPath(): void
+    {
+        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Passing null as 2nd argument to "Elastica\Aggregation\StatsBucket::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
+
+        new StatsBucket('stats_bucket', null);
+    }
+
+    /**
+     * @group unit
+     * @group legacy
+     */
+    public function testLegacyToArrayWithNoBucketsPath(): void
+    {
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessage('Buckets path is required');
+
+        (new StatsBucket('stats_bucket'))->toArray();
+    }
+
+    private function getIndexForTest(): Index
     {
         $index = $this->_createIndex();
 
@@ -83,9 +108,7 @@ class StatsBucketTest extends BaseAggregationTest
             Document::create(['weight' => 60, 'height' => 180, 'age' => 25]),
             Document::create(['weight' => 70, 'height' => 156, 'age' => 32]),
             Document::create(['weight' => 50, 'height' => 155, 'age' => 45]),
-        ]);
-
-        $index->refresh();
+        ], ['refresh' => 'true']);
 
         return $index;
     }
