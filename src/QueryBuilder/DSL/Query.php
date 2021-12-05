@@ -45,8 +45,10 @@ use Elastica\Query\SpanTerm;
 use Elastica\Query\SpanWithin;
 use Elastica\Query\Term;
 use Elastica\Query\Terms;
+use Elastica\Query\TermsSet;
 use Elastica\Query\Wildcard;
 use Elastica\QueryBuilder\DSL;
+use Elastica\Script\AbstractScript;
 
 /**
  * elasticsearch query DSL.
@@ -472,6 +474,17 @@ class Query implements DSL
     public function terms(string $field, array $terms = []): Terms
     {
         return new Terms($field, $terms);
+    }
+
+    /**
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-set-query.html
+     *
+     * @param array<bool|float|int|string> $terms
+     * @param AbstractScript|string        $minimumShouldMatch
+     */
+    public function terms_set(string $field, array $terms, $minimumShouldMatch): TermsSet
+    {
+        return new TermsSet($field, $terms, $minimumShouldMatch);
     }
 
     /**
