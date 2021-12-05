@@ -60,12 +60,12 @@ class AggregationTest extends AbstractDSLTest
         $this->_assertImplemented($aggregationDSL, 'significant_terms', Aggregation\SignificantTerms::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'stats', Aggregation\Stats::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'sum', Aggregation\Sum::class, ['name']);
+        $this->_assertImplemented($aggregationDSL, 'sum_bucket', Aggregation\SumBucket::class, ['name', 'buckets_path']);
         $this->_assertImplemented($aggregationDSL, 'terms', Aggregation\Terms::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'top_hits', Aggregation\TopHits::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'value_count', Aggregation\ValueCount::class, ['name', 'field']);
         $this->_assertImplemented($aggregationDSL, 'bucket_script', Aggregation\BucketScript::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'serial_diff', Aggregation\SerialDiff::class, ['name']);
-        $this->_assertImplemented($aggregationDSL, 'sum_bucket', Aggregation\SumBucket::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'adjacency_matrix', Aggregation\AdjacencyMatrix::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'sampler', Aggregation\Sampler::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'diversified_sampler', Aggregation\DiversifiedSampler::class, ['name']);
