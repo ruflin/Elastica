@@ -11,6 +11,7 @@ use Elastica\Exception\InvalidException;
  */
 class PercentilesBucket extends AbstractAggregation implements GapPolicyInterface
 {
+    use Traits\BucketsPathTrait;
     use Traits\GapPolicyTrait;
     use Traits\KeyedTrait;
 
@@ -37,14 +38,6 @@ class PercentilesBucket extends AbstractAggregation implements GapPolicyInterfac
         }
 
         return parent::toArray();
-    }
-
-    /**
-     * Set the buckets_path for this aggregation.
-     */
-    public function setBucketsPath(string $bucketsPath): self
-    {
-        return $this->setParam('buckets_path', $bucketsPath);
     }
 
     /**

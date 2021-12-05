@@ -11,6 +11,8 @@ use Elastica\Exception\InvalidException;
  */
 class SerialDiff extends AbstractAggregation implements GapPolicyInterface
 {
+    use Traits\BucketsPathTrait;
+
     public const DEFAULT_GAP_POLICY_VALUE = GapPolicyInterface::INSERT_ZEROS;
 
     public function __construct(string $name, ?string $bucketsPath = null)
@@ -20,16 +22,6 @@ class SerialDiff extends AbstractAggregation implements GapPolicyInterface
         if (null !== $bucketsPath) {
             $this->setBucketsPath($bucketsPath);
         }
-    }
-
-    /**
-     * Set the buckets_path for this aggregation.
-     *
-     * @return $this
-     */
-    public function setBucketsPath(string $bucketsPath): self
-    {
-        return $this->setParam('buckets_path', $bucketsPath);
     }
 
     /**

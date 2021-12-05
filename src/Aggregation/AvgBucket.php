@@ -11,6 +11,7 @@ use Elastica\Exception\InvalidException;
  */
 class AvgBucket extends AbstractAggregation implements GapPolicyInterface
 {
+    use Traits\BucketsPathTrait;
     use Traits\GapPolicyTrait;
 
     public const DEFAULT_FORMAT_VALUE = null;
@@ -22,16 +23,6 @@ class AvgBucket extends AbstractAggregation implements GapPolicyInterface
         if (null !== $bucketsPath) {
             $this->setBucketsPath($bucketsPath);
         }
-    }
-
-    /**
-     * Set the buckets_path for this aggregation.
-     *
-     * @return $this
-     */
-    public function setBucketsPath(string $bucketsPath): self
-    {
-        return $this->setParam('buckets_path', $bucketsPath);
     }
 
     /**
