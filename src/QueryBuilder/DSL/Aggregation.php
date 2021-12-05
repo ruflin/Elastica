@@ -11,6 +11,7 @@ use Elastica\Aggregation\Composite;
 use Elastica\Aggregation\CumulativeSum;
 use Elastica\Aggregation\DateHistogram;
 use Elastica\Aggregation\DateRange;
+use Elastica\Aggregation\Derivative;
 use Elastica\Aggregation\DiversifiedSampler;
 use Elastica\Aggregation\ExtendedStats;
 use Elastica\Aggregation\Filter;
@@ -466,6 +467,14 @@ class Aggregation implements DSL
     public function sampler(string $name): Sampler
     {
         return new Sampler($name);
+    }
+
+    /**
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-derivative-aggregation.html
+     */
+    public function derivative(string $name, ?string $bucketsPath = null): Derivative
+    {
+        return new Derivative($name, $bucketsPath);
     }
 
     /**
