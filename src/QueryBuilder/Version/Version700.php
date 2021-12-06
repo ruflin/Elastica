@@ -70,6 +70,7 @@ class Version700 extends Version
         'percentiles_bucket',
         // 'percentile_ranks', // Not implemented
         'cardinality',
+        'cumulative_sum',
         'geo_bounds',
         'top_hits',
         'scripted_metric',
