@@ -2,8 +2,6 @@
 
 namespace Elastica\Aggregation;
 
-use Elastica\Exception\InvalidException;
-
 /**
  * Class CumulativeSum.
  *
