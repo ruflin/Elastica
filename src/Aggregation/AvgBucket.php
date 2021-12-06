@@ -22,7 +22,7 @@ class AvgBucket extends AbstractAggregation implements GapPolicyInterface
 
         if (null !== $bucketsPath) {
             $this->setBucketsPath($bucketsPath);
-        } elseif (2 === \func_num_args()) {
+        } elseif (\func_num_args() >= 2) {
             \trigger_deprecation('ruflin/elastica', '7.1.3', 'Passing null as 2nd argument to "%s()" is deprecated, pass a string instead. It will be removed in 8.0.', __METHOD__);
         } else {
             \trigger_deprecation('ruflin/elastica', '7.1.3', 'Not passing a 2nd argument to "%s()" is deprecated, pass a string instead. It will be removed in 8.0.', __METHOD__);
