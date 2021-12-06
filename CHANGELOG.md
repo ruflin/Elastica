@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 * Removed remaining `_type` field usages [#2017](https://github.com/ruflin/Elastica/pull/2017)
 * Removed `Elastica\Bulk::$_type` dead property [#2034](https://github.com/ruflin/Elastica/pull/2034)
+* Removed Elasticsearch old version checks in tests [#2041](https://github.com/ruflin/Elastica/pull/2041)
 ### Fixed
 * Fixed type-hint for `Elastica\Search::setOptionsAndQuery()` [#2009](https://github.com/ruflin/Elastica/pull/2009)
 * Fixed terms query params resolution [#2032](https://github.com/ruflin/Elastica/pull/2032)
