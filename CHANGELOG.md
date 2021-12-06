@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added `indices_boost` option to `Elastica\Query` [#2018](https://github.com/ruflin/Elastica/pull/2018)
 * Added `Elastica\Query\Terms::setBoost()` method to configure boost [#2035](https://github.com/ruflin/Elastica/pull/2035)
 * Added `Elastica\Query\TermsSet` query [#2020](https://github.com/ruflin/Elastica/pull/2020)
-* Added `Elastica\Aggregation\Traits\BucketsPathTrait` to configure `buckets_path` on aggregations []()
+* Added `Elastica\Aggregation\Traits\BucketsPathTrait` to configure `buckets_path` on aggregations [#2037](https://github.com/ruflin/Elastica/pull/2037)
 * Allowed to configure a sub key when adding a param with `Elastica\Param::addParam()` [#2030](https://github.com/ruflin/Elastica/pull/2030)
 ### Changed
 * Triggered deprecation in `Elastica\Result::getType()` method [#2016](https://github.com/ruflin/Elastica/pull/2016)
