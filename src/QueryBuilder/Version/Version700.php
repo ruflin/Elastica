@@ -51,6 +51,7 @@ class Version700 extends Version
         'span_term',
         'term',
         'terms',
+        'terms_set',
         'wildcard',
         'exists',
         'percolate',
