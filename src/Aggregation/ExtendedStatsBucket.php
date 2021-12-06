@@ -9,17 +9,14 @@ namespace Elastica\Aggregation;
  */
 class ExtendedStatsBucket extends AbstractAggregation implements GapPolicyInterface
 {
+    use Traits\BucketsPathTrait;
     use Traits\GapPolicyTrait;
 
     public function __construct(string $name, string $bucketsPath)
     {
         parent::__construct($name);
-        $this->setBucketsPath($bucketsPath);
-    }
 
-    public function setBucketsPath(string $bucketsPath): self
-    {
-        return $this->setParam('buckets_path', $bucketsPath);
+        $this->setBucketsPath($bucketsPath);
     }
 
     public function setFormat(string $format): self

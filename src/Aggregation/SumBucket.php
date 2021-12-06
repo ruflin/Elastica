@@ -11,6 +11,7 @@ use Elastica\Exception\InvalidException;
  */
 class SumBucket extends AbstractAggregation implements GapPolicyInterface
 {
+    use Traits\BucketsPathTrait;
     use Traits\GapPolicyTrait;
 
     public function __construct(string $name, ?string $bucketsPath = null)
@@ -20,16 +21,6 @@ class SumBucket extends AbstractAggregation implements GapPolicyInterface
         if (null !== $bucketsPath) {
             $this->setBucketsPath($bucketsPath);
         }
-    }
-
-    /**
-     * Set the buckets_path for this aggregation.
-     *
-     * @return $this
-     */
-    public function setBucketsPath(string $bucketsPath): self
-    {
-        return $this->setParam('buckets_path', $bucketsPath);
     }
 
     /**

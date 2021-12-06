@@ -11,6 +11,8 @@ use Elastica\Exception\InvalidException;
  */
 class NormalizeAggregation extends AbstractAggregation
 {
+    use Traits\BucketsPathTrait;
+
     public function __construct(string $name, ?string $bucketsPath = null, ?string $method = null)
     {
         parent::__construct($name);
@@ -22,16 +24,6 @@ class NormalizeAggregation extends AbstractAggregation
         if (null !== $method) {
             $this->setMethod($method);
         }
-    }
-
-    /**
-     * Set the buckets_path for this aggregation.
-     *
-     * @return $this
-     */
-    public function setBucketsPath(string $bucketsPath): self
-    {
-        return $this->setParam('buckets_path', $bucketsPath);
     }
 
     /**
