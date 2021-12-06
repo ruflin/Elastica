@@ -8,6 +8,7 @@ use Elastica\Aggregation\AvgBucket;
 use Elastica\Aggregation\BucketScript;
 use Elastica\Aggregation\Cardinality;
 use Elastica\Aggregation\Composite;
+use Elastica\Aggregation\CumulativeSum;
 use Elastica\Aggregation\DateHistogram;
 use Elastica\Aggregation\DateRange;
 use Elastica\Aggregation\DiversifiedSampler;
@@ -185,6 +186,14 @@ class Aggregation implements DSL
     public function cardinality(string $name): Cardinality
     {
         return new Cardinality($name);
+    }
+
+    /**
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-cumulative-sum-aggregation.html
+     */
+    public function cumulative_sum(string $name, string $bucketsPath): CumulativeSum
+    {
+        return new CumulativeSum($name, $bucketsPath);
     }
 
     /**

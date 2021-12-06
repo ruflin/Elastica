@@ -34,6 +34,7 @@ class AggregationTest extends AbstractDSLTest
 
         $this->_assertImplemented($aggregationDSL, 'avg', Aggregation\Avg::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'cardinality', Aggregation\Cardinality::class, ['name']);
+        $this->_assertImplemented($aggregationDSL, 'cumulative_sum', Aggregation\CumulativeSum::class, ['name', 'buckets_path']);
         $this->_assertImplemented($aggregationDSL, 'date_histogram', Aggregation\DateHistogram::class, ['name', 'field', 1]);
         $this->_assertImplemented($aggregationDSL, 'date_range', Aggregation\DateRange::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'extended_stats', Aggregation\ExtendedStats::class, ['name']);
