@@ -488,8 +488,6 @@ class FunctionScoreTest extends BaseTest
      */
     public function testSetMinScore(): void
     {
-        $this->_checkVersion('1.5');
-
         $expected = [
             'function_score' => [
                 'min_score' => 0.8,
@@ -525,8 +523,6 @@ class FunctionScoreTest extends BaseTest
      */
     public function testFieldValueFactor(): void
     {
-        $this->_checkVersion('1.6');
-
         $expected = [
             'function_score' => [
                 'functions' => [
