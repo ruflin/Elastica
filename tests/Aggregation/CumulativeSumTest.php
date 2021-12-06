@@ -6,7 +6,6 @@ use Elastica\Aggregation\CumulativeSum;
 use Elastica\Aggregation\DateHistogram;
 use Elastica\Aggregation\Sum;
 use Elastica\Document;
-use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Query;
 
@@ -28,13 +27,12 @@ class CumulativeSumTest extends BaseAggregationTest
                             ->setField('price')
                     )
                     ->addAggregation(
-                        (new CumulativeSum('cumulative_sales'))
-                            ->setBucketsPath('sales')
+                        (new CumulativeSum('cumulative_sales', 'sales'))
                     )
             )
         ;
 
-        $results = $this->_getIndexForTest()->search($query)->getAggregations();
+        $results = $this->getIndexForTest()->search($query)->getAggregations();
 
         $this->assertEquals(15, $results['sales_per_month']['buckets'][0]['sales']['value']);
         $this->assertEquals(15, $results['sales_per_month']['buckets'][0]['cumulative_sales']['value']);
@@ -49,10 +47,7 @@ class CumulativeSumTest extends BaseAggregationTest
      */
     public function testConstructThroughSetters(): void
     {
-        $cumulativeSumAgg = new CumulativeSum('cumulative_sum');
-
-        $cumulativeSumAgg
-            ->setBucketsPath('sales')
+        $aggregation = (new CumulativeSum('cumulative_sum', 'sales'))
             ->setFormat('test_format')
         ;
 
@@ -63,21 +58,10 @@ class CumulativeSumTest extends BaseAggregationTest
             ],
         ];
 
-        $this->assertEquals($expected, $cumulativeSumAgg->toArray());
+        $this->assertSame($expected, $aggregation->toArray());
     }
 
-    /**
-     * @group unit
-     */
-    public function testToArrayInvalidBucketsPath(): void
-    {
-        $this->expectException(InvalidException::class);
-
-        $serialDiffAgg = new CumulativeSum('cumulative_sum');
-        $serialDiffAgg->toArray();
-    }
-
-    protected function _getIndexForTest(): Index
+    private function getIndexForTest(): Index
     {
         $index = $this->_createIndex();
 
@@ -88,9 +72,7 @@ class CumulativeSumTest extends BaseAggregationTest
             Document::create(['date' => '2021-02-10', 'price' => 10]),
             Document::create(['date' => '2021-02-12', 'price' => 12]),
             Document::create(['date' => '2021-03-21', 'price' => 21]),
-        ]);
-
-        $index->refresh();
+        ], ['refresh' => 'true']);
 
         return $index;
     }
