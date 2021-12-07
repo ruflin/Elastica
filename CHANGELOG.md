@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Deprecated `cutoff_frequency` option of `Elastica\Query\MatchQuery` [#2014](https://github.com/ruflin/Elastica/pull/2014)
 * Deprecated `cutoff_frequency` option of `Elastica\Query\MultiMatch` [#2015](https://github.com/ruflin/Elastica/pull/2015)
 * Deprecated `Elastica\Bulk::toString()`, `Elastica\Bulk\Action::toString()` and `Elastica\Request::toString()` methods, use `__toString()` method or cast to string instead [#2033](https://github.com/ruflin/Elastica/pull/2033)
+* Deprecated not passing a `buckets_path` when constructing `Elastica\Aggregation\AvgBucket`, `Elastica\Aggregation\Derivative`, `Elastica\Aggregation\NormalizeAggregation`, `Elastica\Aggregation\PercentilesBucket`, `Elastica\Aggregation\SerialDiff`, `Elastica\Aggregation\StatsBucket` and `Elastica\Aggregation\SumBucket` [#2038](https://github.com/ruflin/Elastica/pull/2038)
 ### Removed
 * Removed remaining `_type` field usages [#2017](https://github.com/ruflin/Elastica/pull/2017)
 * Removed `Elastica\Bulk::$_type` dead property [#2034](https://github.com/ruflin/Elastica/pull/2034)

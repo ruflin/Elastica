@@ -8,12 +8,37 @@ use Elastica\Aggregation\Max;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
+use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 
 /**
  * @internal
  */
 class DerivativeTest extends BaseAggregationTest
 {
+    use ExpectDeprecationTrait;
+
+    /**
+     * @group unit
+     * @group legacy
+     */
+    public function testLegacyConstructWithNoBucketsPath(): void
+    {
+        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Not passing a 2nd argument to "Elastica\Aggregation\Derivative::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
+
+        new Derivative('derivative');
+    }
+
+    /**
+     * @group unit
+     * @group legacy
+     */
+    public function testLegacyConstructWithNullBucketsPath(): void
+    {
+        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Passing null as 2nd argument to "Elastica\Aggregation\Derivative::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
+
+        new Derivative('derivative', null);
+    }
+
     /**
      * @group unit
      */
@@ -32,11 +57,12 @@ class DerivativeTest extends BaseAggregationTest
             ],
         ];
 
-        $maxAgg = new Max('max_agg');
-        $maxAgg->setField('value');
-
         $deriveAgg = new Derivative('derivative_agg', 'max_agg');
-        $maxAgg->addAggregation($deriveAgg);
+
+        $maxAgg = (new Max('max_agg'))
+            ->setField('value')
+            ->addAggregation($deriveAgg)
+        ;
 
         $this->assertEquals($expected, $maxAgg->toArray());
     }
@@ -46,20 +72,22 @@ class DerivativeTest extends BaseAggregationTest
      */
     public function testMaxAggregation(): void
     {
-        $index = $this->_getIndexForTest();
-
-        $dateHistogramAgg = new DateHistogram('histogram_agg', 'date', 'day');
-        $dateHistogramAgg->setFormat('yyyy-MM-dd');
-
-        $maxAgg = new Max('max_agg');
-        $maxAgg->setField('value');
-        $dateHistogramAgg->addAggregation($maxAgg);
+        $index = $this->getIndexForTest();
 
         $deriveAgg = new Derivative('derivative_agg', 'max_agg');
-        $dateHistogramAgg->addAggregation($deriveAgg);
+        $maxAgg = (new Max('max_agg'))
+            ->setField('value')
+        ;
 
-        $query = new Query();
-        $query->addAggregation($dateHistogramAgg);
+        $dateHistogramAgg = (new DateHistogram('histogram_agg', 'date', 'day'))
+            ->setFormat('yyyy-MM-dd')
+            ->addAggregation($maxAgg)
+            ->addAggregation($deriveAgg)
+        ;
+
+        $query = (new Query())
+            ->addAggregation($dateHistogramAgg)
+        ;
 
         $dateHistogramAggResult = $index->search($query)->getAggregation('histogram_agg')['buckets'];
 
@@ -70,7 +98,7 @@ class DerivativeTest extends BaseAggregationTest
         $this->assertEquals(-1, $dateHistogramAggResult[4]['derivative_agg']['value']);
     }
 
-    protected function _getIndexForTest(): Index
+    private function getIndexForTest(): Index
     {
         $index = $this->_createIndex();
 
@@ -80,9 +108,7 @@ class DerivativeTest extends BaseAggregationTest
             new Document(3, ['date' => '2018-12-03', 'value' => 2]),
             new Document(4, ['date' => '2018-12-04', 'value' => 4]),
             new Document(5, ['date' => '2018-12-05', 'value' => 3]),
-        ]);
-
-        $index->refresh();
+        ], ['refresh' => 'true']);
 
         return $index;
     }

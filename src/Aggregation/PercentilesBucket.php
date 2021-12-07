@@ -15,16 +15,16 @@ class PercentilesBucket extends AbstractAggregation implements GapPolicyInterfac
     use Traits\GapPolicyTrait;
     use Traits\KeyedTrait;
 
-    /**
-     * @param string      $name        the name of this aggregation
-     * @param string|null $bucketsPath the field on which to perform this aggregation
-     */
     public function __construct(string $name, ?string $bucketsPath = null)
     {
         parent::__construct($name);
 
         if (null !== $bucketsPath) {
             $this->setBucketsPath($bucketsPath);
+        } elseif (\func_num_args() >= 2) {
+            \trigger_deprecation('ruflin/elastica', '7.1.3', 'Passing null as 2nd argument to "%s()" is deprecated, pass a string instead. It will be removed in 8.0.', __METHOD__);
+        } else {
+            \trigger_deprecation('ruflin/elastica', '7.1.3', 'Not passing a 2nd argument to "%s()" is deprecated, pass a string instead. It will be removed in 8.0.', __METHOD__);
         }
     }
 

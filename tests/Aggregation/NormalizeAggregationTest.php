@@ -9,12 +9,15 @@ use Elastica\Document;
 use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Query;
+use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 
 /**
  * @internal
  */
 class NormalizeAggregationTest extends BaseAggregationTest
 {
+    use ExpectDeprecationTrait;
+
     /**
      * @group unit
      */
@@ -41,28 +44,54 @@ class NormalizeAggregationTest extends BaseAggregationTest
             ],
         ];
 
-        $dateHistogramAgg = new DateHistogram('histogram_agg', 'date', 'day');
+        $sumAgg = (new Sum('sum_agg'))
+            ->setField('value')
+        ;
 
-        $sumAgg = new Sum('sum_agg');
-        $sumAgg->setField('value');
-        $dateHistogramAgg->addAggregation($sumAgg);
+        $normalizeAgg = (new NormalizeAggregation('normalize_agg', 'sum_agg', 'percent_of_sum'))
+            ->setFormat('00.00%')
+        ;
 
-        $normalizeAgg = new NormalizeAggregation('normalize_agg', 'sum_agg', 'percent_of_sum');
-        $normalizeAgg->setFormat('00.00%');
-        $dateHistogramAgg->addAggregation($normalizeAgg);
+        $dateHistogramAgg = (new DateHistogram('histogram_agg', 'date', 'day'))
+            ->addAggregation($sumAgg)
+            ->addAggregation($normalizeAgg)
+        ;
 
         $this->assertEquals($expected, $dateHistogramAgg->toArray());
     }
 
     /**
      * @group unit
+     * @group legacy
      */
-    public function testToArrayInvalidBucketsPath(): void
+    public function testLegacyConstructWithNoBucketsPath(): void
+    {
+        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Not passing a 2nd argument to "Elastica\Aggregation\NormalizeAggregation::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
+
+        new NormalizeAggregation('normalize_agg');
+    }
+
+    /**
+     * @group unit
+     * @group legacy
+     */
+    public function testLegacyConstructWithNullBucketsPath(): void
+    {
+        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Passing null as 2nd argument to "Elastica\Aggregation\NormalizeAggregation::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
+
+        new NormalizeAggregation('normalize_agg', null);
+    }
+
+    /**
+     * @group unit
+     * @group legacy
+     */
+    public function testLegacyToArrayWithNoBucketsPath(): void
     {
         $this->expectException(InvalidException::class);
+        $this->expectExceptionMessage('Buckets path is required');
 
-        $normalizeAgg = new NormalizeAggregation('normalize_agg');
-        $normalizeAgg->toArray();
+        (new NormalizeAggregation('normalize_agg'))->toArray();
     }
 
     /**
@@ -83,7 +112,7 @@ class NormalizeAggregationTest extends BaseAggregationTest
     {
         $this->_checkVersion('7.9');
 
-        $index = $this->_getIndexForTest();
+        $index = $this->getIndexForTest();
 
         $dateHistogramAgg = new DateHistogram('histogram_agg', 'date', 'day');
         $dateHistogramAgg->setFormat('yyyy-MM-dd');
@@ -108,7 +137,7 @@ class NormalizeAggregationTest extends BaseAggregationTest
         $this->assertEquals('28.57%', $dateHistogramAggResult[2]['normalize_agg']['value_as_string']);
     }
 
-    protected function _getIndexForTest(): Index
+    private function getIndexForTest(): Index
     {
         $index = $this->_createIndex();
 
@@ -119,9 +148,7 @@ class NormalizeAggregationTest extends BaseAggregationTest
             new Document(4, ['date' => '2018-12-02T15:00:00', 'value' => 4]),
             new Document(5, ['date' => '2018-12-02T20:00:00', 'value' => 5]),
             new Document(6, ['date' => '2018-12-03T03:00:00', 'value' => 6]),
-        ]);
-
-        $index->refresh();
+        ], ['refresh' => 'true']);
 
         return $index;
     }
