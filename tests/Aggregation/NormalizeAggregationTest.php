@@ -64,9 +64,10 @@ class NormalizeAggregationTest extends BaseAggregationTest
      * @group unit
      * @group legacy
      */
-    public function testLegacyConstructWithNoBucketsPath(): void
+    public function testLegacyConstructWithNoBucketsPathAndNoMethod(): void
     {
         $this->expectDeprecation('Since ruflin/elastica 7.1.3: Not passing a 2nd argument to "Elastica\Aggregation\NormalizeAggregation::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
+        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Not passing a 3rd argument to "Elastica\Aggregation\NormalizeAggregation::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
 
         new NormalizeAggregation('normalize_agg');
     }
@@ -79,7 +80,18 @@ class NormalizeAggregationTest extends BaseAggregationTest
     {
         $this->expectDeprecation('Since ruflin/elastica 7.1.3: Passing null as 2nd argument to "Elastica\Aggregation\NormalizeAggregation::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
 
-        new NormalizeAggregation('normalize_agg', null);
+        new NormalizeAggregation('normalize_agg', null, 'method');
+    }
+
+    /**
+     * @group unit
+     * @group legacy
+     */
+    public function testLegacyConstructWithNullMethod(): void
+    {
+        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Passing null as 3rd argument to "Elastica\Aggregation\NormalizeAggregation::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
+
+        new NormalizeAggregation('normalize_agg', 'buckets_path', null);
     }
 
     /**
@@ -96,13 +108,14 @@ class NormalizeAggregationTest extends BaseAggregationTest
 
     /**
      * @group unit
+     * @group legacy
      */
     public function testToArrayInvalidMethod(): void
     {
         $this->expectException(InvalidException::class);
+        $this->expectExceptionMessage('Method parameter is required');
 
-        $normalizeAgg = new NormalizeAggregation('normalize_agg', 'agg');
-        $normalizeAgg->toArray();
+        (new NormalizeAggregation('normalize_agg', 'buckets_path'))->toArray();
     }
 
     /**
