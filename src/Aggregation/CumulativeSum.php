@@ -9,21 +9,13 @@ namespace Elastica\Aggregation;
  */
 class CumulativeSum extends AbstractAggregation
 {
+    use Traits\BucketsPathTrait;
+
     public function __construct(string $name, string $bucketsPath)
     {
         parent::__construct($name);
 
         $this->setBucketsPath($bucketsPath);
-    }
-
-    /**
-     * Set the buckets_path for this aggregation.
-     *
-     * @return $this
-     */
-    public function setBucketsPath(string $bucketsPath): self
-    {
-        return $this->setParam('buckets_path', $bucketsPath);
     }
 
     /**

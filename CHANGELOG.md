@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Backward Compatibility Breaks
 ### Added
 * Added support for scripted upsert on bulk requests [#1974](https://github.com/ruflin/Elastica/pull/1974)
+* Added `Elastica\Aggregation\CumulativeSum` [#1987](https://github.com/ruflin/Elastica/pull/1987)
 * Added `ignore_failure` option to suitable ingest processors [#2003](https://github.com/ruflin/Elastica/pull/2003)
 * Added `ignore_missing` option to `lowercase`, `remove`, `trim` and `uppercase` processors [#2001](https://github.com/ruflin/Elastica/pull/2001)
 * Added `allow_duplicates` option to `append` processor [#2004](https://github.com/ruflin/Elastica/pull/2004)
@@ -16,7 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added `Elastica\Query\Terms::setBoost()` method to configure boost [#2035](https://github.com/ruflin/Elastica/pull/2035)
 * Added `Elastica\Query\TermsSet` query [#2020](https://github.com/ruflin/Elastica/pull/2020)
 * Added `terms_set` in query builder [#2036](https://github.com/ruflin/Elastica/pull/2036)
-* Added `Elastica\Aggregation\Traits\BucketsPathTrait` to configure `buckets_path` on aggregations [#2037](https://github.com/ruflin/Elastica/pull/2037)
+* Added `Elastica\Aggregation\Traits\BucketsPathTrait` to configure `buckets_path` on aggregations
+  [#2037](https://github.com/ruflin/Elastica/pull/2037)
+  [#2039](https://github.com/ruflin/Elastica/pull/2039)
 * Allowed to configure a sub key when adding a param with `Elastica\Param::addParam()` [#2030](https://github.com/ruflin/Elastica/pull/2030)
 ### Changed
 * Triggered deprecation in `Elastica\Result::getType()` method [#2016](https://github.com/ruflin/Elastica/pull/2016)
@@ -49,7 +52,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Changed `Elastica\Exception\JSONParseException` inheritance, it now extends `\JsonException` instead of `\RuntimeException` [#1949](https://github.com/ruflin/Elastica/pull/1949)
 ### Added
 * Added `Elastica\Aggregation\NormalizeAggregation` [#1956](https://github.com/ruflin/Elastica/pull/1956)
-* Added `Elastica\Aggregation\CumulativeSum` [#1987](https://github.com/ruflin/Elastica/pull/1987)
 * Added `Elastica\Suggest\Phrase::addDirectGenerator` to align with ES specification [#1964](https://github.com/ruflin/Elastica/pull/1964)
 * Added support for `psr/log` 2.0 and 3.0 [#1971](https://github.com/ruflin/Elastica/pull/1971)
 * Added new optional 'case_insensitive' option to `Elastica\Query\Wildcard` [#1894](https://github.com/ruflin/Elastica/pull/1894)
