@@ -27,6 +27,10 @@ class NormalizeAggregation extends AbstractAggregation
 
         if (null !== $method) {
             $this->setMethod($method);
+        } elseif (\func_num_args() >= 3) {
+            \trigger_deprecation('ruflin/elastica', '7.1.3', 'Passing null as 3rd argument to "%s()" is deprecated, pass a string instead. It will be removed in 8.0.', __METHOD__);
+        } else {
+            \trigger_deprecation('ruflin/elastica', '7.1.3', 'Not passing a 3rd argument to "%s()" is deprecated, pass a string instead. It will be removed in 8.0.', __METHOD__);
         }
     }
 
