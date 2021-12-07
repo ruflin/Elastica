@@ -86,8 +86,6 @@ class SimpleQueryStringTest extends Base
      */
     public function testSetMinimumShouldMatchWorks(): void
     {
-        $this->_checkVersion('1.5');
-
         $index = $this->_createIndex();
 
         $index->addDocuments([

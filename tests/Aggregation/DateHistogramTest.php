@@ -112,8 +112,6 @@ class DateHistogramTest extends BaseAggregationTest
      */
     public function testSetOffsetWorks(): void
     {
-        $this->_checkVersion('1.5');
-
         $agg = new DateHistogram('hist', 'created', '1m');
         $agg->setOffset('+40s');
 

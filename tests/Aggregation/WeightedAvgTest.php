@@ -18,8 +18,6 @@ class WeightedAvgTest extends BaseAggregationTest
      */
     public function testWeightedAvgAggregation(): void
     {
-        $this->_checkVersion('6.4');
-
         $agg = new WeightedAvg('weighted');
         $agg->setValue('price');
         $weightWhenMissing = 2;
