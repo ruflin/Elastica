@@ -72,7 +72,6 @@ docker-start:
 	docker-compose --file=docker/docker-compose.yml \
 		--file=docker/docker-compose.proxy.yml \
 		--file=docker/docker-compose.es.yml \
-		--file=docker/docker-compose.es.yml \
 		up ${DOCKER_OPTIONS}
 
 .PHONY: docker-stop
