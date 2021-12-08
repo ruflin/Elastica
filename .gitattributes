@@ -8,7 +8,6 @@
 /codecov.yml export-ignore
 /CONTRIBUTING.md export-ignore
 /docker export-ignore
-/docker-compose.yml export-ignore
 /Makefile export-ignore
 /phive.xml export-ignore
 /phpdoc.dist.xml export-ignore
