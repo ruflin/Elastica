@@ -4,8 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/7.1.2...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/7.1.3...master)
 ### Backward Compatibility Breaks
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [7.1.3](https://github.com/ruflin/Elastica/compare/7.1.2...7.1.3)
 ### Added
 * Added support for scripted upsert on bulk requests [#1974](https://github.com/ruflin/Elastica/pull/1974)
 * Added `Elastica\Aggregation\CumulativeSum` [#1987](https://github.com/ruflin/Elastica/pull/1987)
@@ -46,7 +54,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 * Fixed type-hint for `Elastica\Search::setOptionsAndQuery()` [#2009](https://github.com/ruflin/Elastica/pull/2009)
 * Fixed terms query params resolution [#2032](https://github.com/ruflin/Elastica/pull/2032)
-### Security
 
 ## [7.1.2](https://github.com/ruflin/Elastica/compare/7.1.1...7.1.2)
 ### Backward Compatibility Breaks
