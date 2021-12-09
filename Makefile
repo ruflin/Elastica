@@ -1,3 +1,5 @@
+DOCKER_COMPOSE_OPTIONS	= --project-name=elastica --file=docker/docker-compose.yml --file=docker/docker-compose.proxy.yml --file=docker/docker-compose.es.yml
+
 .PHONY: clean
 clean:
 	rm -fr tools vendor build composer.lock .php-cs-fixer.cache
@@ -69,33 +71,27 @@ run-phpdoc: tools/phpdocumentor.phar
 
 .PHONY: docker-start
 docker-start:
-	docker-compose --file=docker/docker-compose.yml \
-		--file=docker/docker-compose.proxy.yml \
-		--file=docker/docker-compose.es.yml \
-		up ${DOCKER_OPTIONS}
+	docker-compose ${DOCKER_COMPOSE_OPTIONS} up ${DOCKER_OPTIONS}
 
 .PHONY: docker-stop
 docker-stop:
-	docker-compose --file=docker/docker-compose.yml \
-		--file=docker/docker-compose.proxy.yml \
-		--file=docker/docker-compose.es.yml \
-	    down
+	docker-compose ${DOCKER_COMPOSE_OPTIONS} down
 
 .PHONY: docker-run-phpunit
 docker-run-phpunit:
-	docker exec -ti 'elastica_php' env TERM=xterm-256color make run-phpunit PHPUNIT_OPTIONS=${PHPUNIT_OPTIONS}
+	docker-compose ${DOCKER_COMPOSE_OPTIONS} exec php env TERM=xterm-256color make run-phpunit PHPUNIT_OPTIONS=${PHPUNIT_OPTIONS}
 
 .PHONY: docker-run-phpcs
 docker-run-phpcs:
-	docker exec -ti 'elastica_php' env TERM=xterm-256color make run-phpcs
+	docker-compose ${DOCKER_COMPOSE_OPTIONS} exec php env TERM=xterm-256color make run-phpcs
 
 .PHONY: docker-fix-phpcs
 docker-fix-phpcs:
-	docker exec -ti 'elastica_php' env TERM=xterm-256color make fix-phpcs
+	docker-compose ${DOCKER_COMPOSE_OPTIONS} exec php env TERM=xterm-256color make fix-phpcs
 
 .PHONY: docker-shell
 docker-shell:
-	docker exec -ti 'elastica_php' sh
+	docker-compose ${DOCKER_COMPOSE_OPTIONS} exec php sh
 
 ## Additional commands
 

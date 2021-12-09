@@ -2,22 +2,21 @@ version: '3.4'
 
 services:
     es01:
-        image: docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION:-7.15.2}
-        command: >
+        image: &image docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION:-7.15.2}
+        command: &command >
             /bin/sh -c "./bin/elasticsearch-plugin list | grep -q ingest-attachment
             || ./bin/elasticsearch-plugin install --batch ingest-attachment;
             chown elasticsearch /usr/share/elasticsearch/repository;
             /usr/local/bin/docker-entrypoint.sh"
-        environment:
-            - node.name=es01
-            - cluster.name=es-docker-cluster
-            - cluster.initial_master_nodes=es01
-            - discovery.seed_hosts=es01
-            - bootstrap.memory_lock=true
-            - processors=1
-            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-            - path.repo=/usr/share/elasticsearch/repository
-        ulimits:
+        environment: &environment
+            node.name: es01
+            cluster.name: es-docker-cluster
+            cluster.initial_master_nodes: es01
+            discovery.seed_hosts: es01
+            bootstrap.memory_lock: 'true'
+            ES_JAVA_OPTS: -Xms512m -Xmx512m
+            path.repo: /usr/share/elasticsearch/repository
+        ulimits: &ulimits
             memlock:
                 soft: -1
                 hard: -1
@@ -26,33 +25,19 @@ services:
             - esrepo:/usr/share/elasticsearch/repository
         ports:
             - 9200:9200
-        networks:
+        networks: &networks
             - elastic
     es02:
-        image: docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION:-7.15.2}
-        command: >
-            /bin/sh -c "./bin/elasticsearch-plugin list | grep -q ingest-attachment
-            || ./bin/elasticsearch-plugin install --batch ingest-attachment;
-            chown elasticsearch /usr/share/elasticsearch/repository;
-            /usr/local/bin/docker-entrypoint.sh"
+        image: *image
+        command: *command
         environment:
-            - node.name=es02
-            - cluster.name=es-docker-cluster
-            - cluster.initial_master_nodes=es01
-            - discovery.seed_hosts=es01
-            - bootstrap.memory_lock=true
-            - processors=1
-            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-            - path.repo=/usr/share/elasticsearch/repository
-        ulimits:
-            memlock:
-                soft: -1
-                hard: -1
+            <<: *environment
+            node.name: es02
+        ulimits: *ulimits
         volumes:
             - data02:/usr/share/elasticsearch/data
             - esrepo:/usr/share/elasticsearch/repository
-        networks:
-            - elastic
+        networks: *networks
 volumes:
     data01:
     data02:

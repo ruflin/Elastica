@@ -28,8 +28,6 @@ The ES server version started by that command can be configured by passing a `ES
 As an example, running `make docker-start ES_VERSION=7.5.0` will use `7.5.0` release.
 If you specify an ES version, use the same version when stopping the containers: `make docker-stop ES_VERSION=7.5.0`.
 
-For a list of supported Elasticsearch containers look in the `docker/` folder for the `docker-compose.es.yml` files.
-
 ### Local Docker configuration
 For ES to properly run, the `vm.max_map_count=262144` system configuration is needed by ES to properly spin up the nodes.
 for further information.
