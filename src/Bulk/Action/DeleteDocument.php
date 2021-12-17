@@ -19,7 +19,8 @@ class DeleteDocument extends AbstractDocument
         return $action->getOptions([
             '_index',
             '_id',
-            'version',
+            'if_seq_no',
+            'if_primary_term',
             'version_type',
             'routing',
             'parent',
