@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/7.1.3...master)
 ### Backward Compatibility Breaks
 ### Added
+* Added support for `symfony/deprecation-contracts` 3.0 by @rguennichi [#2047](https://github.com/ruflin/Elastica/pull/2047)
 ### Changed
 ### Deprecated
 ### Removed
