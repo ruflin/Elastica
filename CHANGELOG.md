@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 ### Removed
 ### Fixed
-* Fixed version parameters for DeleteDocument [#2048](https://github.com/ruflin/Elastica/pull/2048)
+* Fixed version parameters for DeleteDocument by @pheyse24 [#2048](https://github.com/ruflin/Elastica/pull/2048)
 ### Security
 
 ## [7.1.3](https://github.com/ruflin/Elastica/compare/7.1.2...7.1.3)
