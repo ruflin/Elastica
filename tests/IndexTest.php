@@ -522,6 +522,28 @@ class IndexTest extends BaseTest
     /**
      * @group functional
      */
+    public function testAddDocumentAcrossIndices(): void
+    {
+        $client = $this->_getClient();
+        $index1 = $client->getIndex('test');
+        $index2 = $client->getIndex('test_2');
+
+        $doc = new Document(1);
+        $doc->set('title', 'Hello world');
+
+        $index1->addDocument($doc);
+
+        $index1Doc = $index1->getDocument(1);
+
+        $index2->addDocument($index1Doc);
+        $index2Doc = $index1->getDocument(1);
+
+        $this->assertEquals('Hello world', $index2Doc->get('title'));
+    }
+
+    /**
+     * @group functional
+     */
     public function testClearCache(): void
     {
         $index = $this->_createIndex();

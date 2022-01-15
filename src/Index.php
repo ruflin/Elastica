@@ -198,17 +198,16 @@ class Index implements SearchableInterface
 
         $options = $doc->getOptions(
             [
-                'version',
-                'version_type',
-                'routing',
-                'percolate',
-                'parent',
-                'op_type',
                 'consistency',
-                'replication',
-                'refresh',
-                'timeout',
+                'op_type',
+                'parent',
+                'percolate',
                 'pipeline',
+                'refresh',
+                'replication',
+                'retry_on_conflict',
+                'routing',
+                'timeout',
             ]
         );
 
