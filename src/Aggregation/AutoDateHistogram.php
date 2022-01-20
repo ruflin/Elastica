@@ -18,8 +18,6 @@ class AutoDateHistogram extends AbstractSimpleAggregation
      * A target number of buckets.
      * The buckets field is optional, and will default to 10 buckets if not specified.
      *
-     * @param int $buckets
-     *
      * @return $this
      */
     public function setBuckets(int $buckets): self
@@ -30,8 +28,6 @@ class AutoDateHistogram extends AbstractSimpleAggregation
     /**
      * Set the format for this aggregation.
      * If no format is specified, then it will use the first date format specified in the field mapping.
-     *
-     * @param string $format
      *
      * @return $this
      */
@@ -44,8 +40,6 @@ class AutoDateHistogram extends AbstractSimpleAggregation
      * Set time_zone option.
      * The time_zone parameter can be used to indicate that bucketing should use a different time zone.
      *
-     * @param string $timezone
-     *
      * @return $this
      */
     public function setTimezone(string $timezone): self
@@ -55,9 +49,7 @@ class AutoDateHistogram extends AbstractSimpleAggregation
 
     /**
      * The minimum_interval allows the caller to specify the minimum rounding interval that should be used.
-     * The accepted units: year, month, day, hour, minute, second
-     *
-     * @param string $minimumInterval
+     * The accepted units: year, month, day, hour, minute, second.
      *
      * @return $this
      */
