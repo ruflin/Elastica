@@ -4,18 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/7.1.3...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/7.1.4...master)
 ### Backward Compatibility Breaks
 ### Added
-* Added support for `symfony/deprecation-contracts` 3.0 by @rguennichi [#2047](https://github.com/ruflin/Elastica/pull/2047)
-* Added aggregation `auto_date_histogram` @andriinavrotskii [#2051](https://github.com/ruflin/Elastica/pull/2051)
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
+### Security
+
+## [7.1.4](https://github.com/ruflin/Elastica/compare/7.1.4...7.1.3)
+### Added
+* Added support for `symfony/deprecation-contracts` 3.0 by @rguennichi [#2047](https://github.com/ruflin/Elastica/pull/2047)
+* Added aggregation `auto_date_histogram` @andriinavrotskii [#2051](https://github.com/ruflin/Elastica/pull/2051)
+### Fixed
 * Fixed version parameters for DeleteDocument by @pheyse24 [#2048](https://github.com/ruflin/Elastica/pull/2048)
 * Fixed version parameters for Index::addDocument() by @pidera [#2050](https://github.com/ruflin/Elastica/pull/2050)
-### Security
 
 ## [7.1.3](https://github.com/ruflin/Elastica/compare/7.1.2...7.1.3)
 ### Added
