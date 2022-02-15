@@ -9,6 +9,7 @@ use Elastica\Bulk\ResponseSet;
 use Elastica\Exception\Bulk\ResponseException;
 use Elastica\Exception\Bulk\ResponseException as BulkResponseException;
 use Elastica\Exception\InvalidException;
+use Elastica\Exception\RequestEntityTooLargeException;
 use Elastica\Script\AbstractScript;
 
 class Bulk
@@ -296,6 +297,10 @@ class Bulk
      */
     protected function _processResponse(Response $response): ResponseSet
     {
+        switch ($response->getStatus()) {
+            case 413: throw new RequestEntityTooLargeException();
+        }
+
         $responseData = $response->getData();
 
         $actions = $this->getActions();
