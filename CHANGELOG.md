@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/7.1.4...master)
 ### Backward Compatibility Breaks
 ### Added
+* Added explicit return annotation to `Elastica\Multi\ResultSet::current()` and `Elastica\Multi\ResultSet::offsetGet()` by @franmomu
+  [2056](https://github.com/ruflin/Elastica/pull/2056)
+
 ### Changed
 ### Deprecated
 ### Removed
