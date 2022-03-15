@@ -4,12 +4,18 @@ namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\AbstractSimpleAggregation;
 use Elastica\Exception\InvalidException;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
  */
 class AbstractSimpleAggregationTest extends BaseAggregationTest
 {
+    /**
+     * @var AbstractSimpleAggregation&MockObject
+     */
+    private $aggregation;
+
     protected function setUp(): void
     {
         $this->aggregation = $this->getMockForAbstractClass(

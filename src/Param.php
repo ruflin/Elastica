@@ -16,7 +16,7 @@ class Param implements ArrayableInterface, \Countable
     /**
      * Params.
      *
-     * @var array
+     * @var array|\stdClass
      */
     protected $_params = [];
 

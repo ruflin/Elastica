@@ -250,6 +250,7 @@ class QueryTest extends BaseTest
         $queryArray = $query->toArray();
 
         $termQuery = $query->getQuery();
+        $this->assertInstanceOf(Term::class, $termQuery);
         $termQuery->setTerm('text', 'another value');
 
         $this->assertNotEquals($queryArray, $query->toArray());

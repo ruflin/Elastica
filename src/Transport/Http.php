@@ -28,7 +28,7 @@ class Http extends AbstractTransport
     /**
      * Curl resource to reuse.
      *
-     * @var resource|null Curl resource to reuse
+     * @var \CurlHandle|resource|null Curl resource to reuse
      */
     protected static $_curlConnection;
 

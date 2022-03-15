@@ -361,7 +361,7 @@ class Client
      */
     public function connect()
     {
-        return $this->_initConnections();
+        $this->_initConnections();
     }
 
     /**
