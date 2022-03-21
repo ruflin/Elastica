@@ -1959,3 +1959,7 @@ The changelog before version 2.0.0 was organised by date. All changes can be fou
 
 2011-03-21
 - ChildrenAggregation added - https://www.elastic.co/guide/en/elasticsearch/guide/current/children-agg.html
+
+2022-03-21
+- Added `\Elastica\Exception\RequestEntityTooLargeException`
+- Adjusted `\Elastica\Bulk`, throw RequestEntityTooLargeException if response code 413
