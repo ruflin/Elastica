@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 * Added support for `symfony/deprecation-contracts` 3.0 by @rguennichi [#2047](https://github.com/ruflin/Elastica/pull/2047)
 * Added aggregation `auto_date_histogram` @andriinavrotskii [#2051](https://github.com/ruflin/Elastica/pull/2051)
+* Add throwing `\Elastica\Exception\RequestEntityTooLargeException` on HTTP-413 responses in `\Elastica\Bulk`
 ### Changed
 ### Deprecated
 ### Removed
@@ -1959,7 +1960,3 @@ The changelog before version 2.0.0 was organised by date. All changes can be fou
 
 2011-03-21
 - ChildrenAggregation added - https://www.elastic.co/guide/en/elasticsearch/guide/current/children-agg.html
-
-2022-03-21
-- Added `\Elastica\Exception\RequestEntityTooLargeException`
-- Adjusted `\Elastica\Bulk`, throw RequestEntityTooLargeException if response code 413
