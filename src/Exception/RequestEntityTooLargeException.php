@@ -2,10 +2,15 @@
 
 namespace Elastica\Exception;
 
+use Throwable;
+
 class RequestEntityTooLargeException extends \RuntimeException implements ExceptionInterface
 {
     /**
-     * @var string
+     * @param Throwable|null $previous
      */
-    protected $message = 'Request entity is too large.';
+    public function __construct(Throwable $previous = null)
+    {
+        parent::__construct('Request entity is too large.', 0, $previous);
+    }
 }

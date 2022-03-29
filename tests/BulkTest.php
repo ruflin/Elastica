@@ -18,6 +18,7 @@ use Elastica\Exception\RequestEntityTooLargeException;
 use Elastica\Response as ElasticaResponse;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
@@ -776,7 +777,7 @@ JSON;
     {
         $response = new ElasticaResponse('', 413);
 
-        /** @var Client|\PHPUnit\Framework\MockObject\MockObject $clientMock */
+        /** @var Client|MockObject $clientMock */
         $clientMock = $this->createMock(Client::class);
         $clientMock
             ->method('request')
