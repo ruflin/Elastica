@@ -4,18 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/7.1.4...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/7.1.5...master)
 ### Backward Compatibility Breaks
 ### Added
-* Added explicit return annotation to `Elastica\Multi\ResultSet::current()` and `Elastica\Multi\ResultSet::offsetGet()` by @franmomu
-  [2056](https://github.com/ruflin/Elastica/pull/2056)
-* Add throwing `\Elastica\Exception\RequestEntityTooLargeException` on HTTP-413 responses in `\Elastica\Bulk` by @Vetaxon [2055](https://github.com/ruflin/Elastica/pull/2055)
-
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## [7.1.5](https://github.com/ruflin/Elastica/compare/7.1.5...7.1.4)
+### Added
+* Added explicit return annotation to `Elastica\Multi\ResultSet::current()` and `Elastica\Multi\ResultSet::offsetGet()` by @franmomu [2056](https://github.com/ruflin/Elastica/pull/2056)
+* Add throwing `\Elastica\Exception\RequestEntityTooLargeException` on HTTP-413 responses in `\Elastica\Bulk` by @Vetaxon [2055](https://github.com/ruflin/Elastica/pull/2055)
 
 ## [7.1.4](https://github.com/ruflin/Elastica/compare/7.1.4...7.1.3)
 ### Added
