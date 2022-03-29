@@ -781,14 +781,13 @@ JSON;
         $clientMock = $this->createMock(Client::class);
         $clientMock
             ->method('request')
-            ->willReturn($response);
-
-        $index = $this->_createIndex();
+            ->willReturn($response)
+        ;
 
         $documents = [
-            new Document(1, ['name' => 'Mister Fantastic'], $index),
-            new Document(2, ['name' => 'Invisible Woman'], $index),
-            new Document(2, ['name' => 'The Human Torch'], $index),
+            new Document(1, ['name' => 'Mister Fantastic']),
+            new Document(2, ['name' => 'Invisible Woman']),
+            new Document(2, ['name' => 'The Human Torch']),
         ];
 
         $bulk = new Bulk($clientMock);
