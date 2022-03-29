@@ -6,9 +6,6 @@ use Throwable;
 
 class RequestEntityTooLargeException extends \RuntimeException implements ExceptionInterface
 {
-    /**
-     * @param Throwable|null $previous
-     */
     public function __construct(Throwable $previous = null)
     {
         parent::__construct('Request entity is too large.', 0, $previous);
