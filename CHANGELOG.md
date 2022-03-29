@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 * Added explicit return annotation to `Elastica\Multi\ResultSet::current()` and `Elastica\Multi\ResultSet::offsetGet()` by @franmomu
   [2056](https://github.com/ruflin/Elastica/pull/2056)
+* Add throwing `\Elastica\Exception\RequestEntityTooLargeException` on HTTP-413 responses in `\Elastica\Bulk` by @Vetaxon [2055](https://github.com/ruflin/Elastica/pull/2055)
 
 ### Changed
 ### Deprecated

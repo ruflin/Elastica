@@ -9,12 +9,16 @@ use Elastica\Bulk\Action\CreateDocument;
 use Elastica\Bulk\Action\IndexDocument;
 use Elastica\Bulk\Action\UpdateDocument;
 use Elastica\Bulk\Response;
+use Elastica\Client;
 use Elastica\Document;
 use Elastica\Exception\Bulk\ResponseException;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotFoundException;
+use Elastica\Exception\RequestEntityTooLargeException;
+use Elastica\Response as ElasticaResponse;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
@@ -764,5 +768,32 @@ JSON;
         $this->assertFalse($bulk->hasIndex());
         $bulk->setIndex('unittest');
         $this->assertTrue($bulk->hasIndex());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testSendRequestEntityTooLargeExceptionIf413Response(): void
+    {
+        $response = new ElasticaResponse('', 413);
+
+        /** @var Client|MockObject $clientMock */
+        $clientMock = $this->createMock(Client::class);
+        $clientMock
+            ->method('request')
+            ->willReturn($response)
+        ;
+
+        $documents = [
+            new Document(1, ['name' => 'Mister Fantastic']),
+            new Document(2, ['name' => 'Invisible Woman']),
+            new Document(2, ['name' => 'The Human Torch']),
+        ];
+
+        $bulk = new Bulk($clientMock);
+        $bulk->addDocuments($documents);
+
+        $this->expectException(RequestEntityTooLargeException::class);
+        $bulk->send();
     }
 }
