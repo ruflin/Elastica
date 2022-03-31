@@ -204,31 +204,21 @@ class Bulk
      */
     public function addRawData(array $data): self
     {
+        $action = null;
+
         foreach ($data as $row) {
-            if (\is_array($row)) {
-                $opType = \key($row);
-                $metadata = \reset($row);
-                if (Action::isValidOpType($opType)) {
-                    // add previous action
-                    if (isset($action)) {
-                        $this->addAction($action);
-                    }
-                    $action = new Action($opType, $metadata);
-                } elseif (isset($action)) {
-                    $action->setSource($row);
-                    $this->addAction($action);
-                    $action = null;
-                } else {
-                    throw new InvalidException('Invalid bulk data, source must follow action metadata');
-                }
-            } else {
+            if (!\is_array($row) || null === ($opType = \array_key_first($row))) {
                 throw new InvalidException('Invalid bulk data, should be array of array, Document or Bulk/Action');
             }
-        }
 
-        // add last action if available
-        if (isset($action)) {
-            $this->addAction($action);
+            if (Action::isValidOpType($opType)) {
+                $action = new Action($opType, $row[$opType]);
+                $this->addAction($action);
+            } elseif (null !== $action && !$action->hasSource()) {
+                $action->setSource($row);
+            } else {
+                throw new InvalidException('Invalid bulk data, source must follow action metadata');
+            }
         }
 
         return $this;
@@ -302,9 +292,7 @@ class Bulk
         }
 
         $responseData = $response->getData();
-
         $actions = $this->getActions();
-
         $bulkResponses = [];
 
         if (isset($responseData['items']) && \is_array($responseData['items'])) {
@@ -314,16 +302,15 @@ class Bulk
                 }
 
                 $action = $actions[$key];
-
-                $opType = \key($item);
-                $bulkResponseData = \reset($item);
+                $opType = \array_key_first($item);
+                $bulkResponseData = $item[$opType];
 
                 if ($action instanceof AbstractDocumentAction) {
                     $data = $action->getData();
-                    if ($data instanceof Document && $data->isAutoPopulate()
+                    if (($data instanceof Document && $data->isAutoPopulate())
                         || $this->_client->getConfigValue(['document', 'autoPopulate'], false)
                     ) {
-                        if (!$data->hasId() && isset($bulkResponseData['_id'])) {
+                        if (isset($bulkResponseData['_id']) && !$data->hasId()) {
                             $data->setId($bulkResponseData['_id']);
                         }
                         $data->setVersionParams($bulkResponseData);

@@ -221,9 +221,11 @@ class Info
         $this->_response = $this->getNode()->getClient()->requestEndpoint($endpoint);
         $data = $this->getResponse()->getData();
 
-        $this->_data = \reset($data['nodes']);
-        $this->_id = \key($data['nodes']);
-        $this->getNode()->setId($this->getId());
+        if (null !== $nodeId = \array_key_first($data['nodes'])) {
+            $this->_data = $data['nodes'][$nodeId];
+            $this->_id = $nodeId;
+            $this->getNode()->setId($nodeId);
+        }
 
         return $this->_response;
     }
