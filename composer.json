@@ -26,6 +26,8 @@
     "require-dev": {
         "aws/aws-sdk-php": "^3.155",
         "guzzlehttp/guzzle": "^6.3 || ^7.2",
+        "phpstan/phpstan": "^1.5",
+        "phpstan/phpstan-phpunit": "^1.1",
         "phpunit/phpunit": "^8.5.8 || ^9.4",
         "symfony/phpunit-bridge": "^6.0"
     },

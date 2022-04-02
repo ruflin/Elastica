@@ -1,0 +1,15 @@
+includes:
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - phpstan-baseline.neon
+
+parameters:
+    level: 3
+    paths:
+        - src
+        - tests
+    excludePaths:
+        - src/Transport/HttpAdapter.php
+        - src/Query/Match.php
+    ignoreErrors:
+        # we don't have different constructors for parent/child
+        - '~^Unsafe usage of new static\(\)\.$~'
