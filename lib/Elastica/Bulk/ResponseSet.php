@@ -101,11 +101,13 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     /**
      * @return \Elastica\Bulk\Response
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->_bulkResponses[$this->key()];
     }
 
+    #[\ReturnTypeWillChange]
     public function next()
     {
         ++$this->_position;
@@ -114,6 +116,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     /**
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->_position;
@@ -122,11 +125,13 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     /**
      * @return bool
      */
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return isset($this->_bulkResponses[$this->key()]);
     }
 
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         $this->_position = 0;
@@ -135,6 +140,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     /**
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->_bulkResponses);
