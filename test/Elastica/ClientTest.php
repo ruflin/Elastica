@@ -17,7 +17,6 @@ use Elastica\Response;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
-use Elasticsearch\Endpoints\Get;
 use Elasticsearch\Endpoints\Indices\Stats;
 use Elasticsearch\Endpoints\Search;
 use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;

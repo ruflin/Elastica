@@ -23,9 +23,7 @@ class SpanOr extends AbstractSpanQuery
         if (!empty($clauses)) {
             foreach ($clauses as $clause) {
                 if (!is_subclass_of($clause, AbstractSpanQuery::class)) {
-                    throw new InvalidException(
-                        'Invalid parameter. Has to be array or instance of Elastica\Query\SpanQuery'
-                    );
+                    throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Query\SpanQuery');
                 }
             }
         }
