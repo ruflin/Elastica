@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/6.2.0...6.x)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/6.2.1...6.x)
 
 ### Backward Compatibility Breaks
 ### Bugfixes
@@ -9,6 +9,11 @@ All notable changes to this project will be documented in this file based on the
 ### Improvements
 * Solve PHP 8.1 deprecations for every class implementing Countable, Iterator or ArrayAccess [#2061](https://github.com/ruflin/Elastica/pull/2061)
 ### Deprecated
+
+## [6.2.1](https://github.com/ruflin/Elastica/compare/6.2.0...6.2.1)
+
+### Improvements
+* Solve PHP 8.1 deprecations for every class implementing Countable, Iterator or ArrayAccess [#2061](https://github.com/ruflin/Elastica/pull/2061)
 
 ## [6.2.0](https://github.com/ruflin/Elastica/compare/6.1.5...6.2.0)
 
