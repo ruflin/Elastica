@@ -61,6 +61,7 @@ class Scroll implements \Iterator
      *
      * @return ResultSet
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->_currentResultSet;
@@ -71,6 +72,7 @@ class Scroll implements \Iterator
      *
      * @see http://php.net/manual/en/iterator.next.php
      */
+    #[\ReturnTypeWillChange]
     public function next()
     {
         if ($this->currentPage < $this->totalPages) {
@@ -95,6 +97,7 @@ class Scroll implements \Iterator
      *
      * @return string
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->_nextScrollId;
@@ -107,6 +110,7 @@ class Scroll implements \Iterator
      *
      * @return bool
      */
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return null !== $this->_nextScrollId;
@@ -117,6 +121,7 @@ class Scroll implements \Iterator
      *
      * @see http://php.net/manual/en/iterator.rewind.php
      */
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         // reset state
