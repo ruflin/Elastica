@@ -118,7 +118,7 @@ class Guzzle extends AbstractTransport
         );
 
         $data = $request->getData();
-        if (!empty($data) || '0' === $data) {
+        if (!empty($data)) {
             if (Request::GET === $req->getMethod()) {
                 $req = $req->withMethod(Request::POST);
             }
