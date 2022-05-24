@@ -33,7 +33,6 @@
     },
     "suggest": {
         "aws/aws-sdk-php": "Allow using IAM authentication with Amazon ElasticSearch Service",
-        "egeloen/http-adapter": "Allow using httpadapter as transport",
         "guzzlehttp/guzzle": "Allow using guzzle as transport",
         "monolog/monolog": "Logging request"
     },
