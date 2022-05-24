@@ -20,7 +20,7 @@ class Request extends Param
     public const NDJSON_CONTENT_TYPE = 'application/x-ndjson';
 
     /**
-     * @var Connection
+     * @var Connection|null
      */
     protected $_connection;
 

@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Removed `egeloen/http-adapter` as suggested package since the project is abandoned by @franmomu [#2069](https://github.com/ruflin/Elastica/pull/2069)
 * Removed `0` as valid request data using Analyze API by @franmomu [#2068](https://github.com/ruflin/Elastica/pull/2068)
 ### Fixed
+* Fixed some PHPDoc types adding `null` as possible value by @franmomu [#2070](https://github.com/ruflin/Elastica/pull/2070)
 ### Security
 
 ## [7.1.5](https://github.com/ruflin/Elastica/compare/7.1.5...7.1.4)
