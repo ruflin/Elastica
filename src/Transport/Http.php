@@ -28,7 +28,7 @@ class Http extends AbstractTransport
     /**
      * Curl resource to reuse.
      *
-     * @var resource|null Curl resource to reuse
+     * @var \CurlHandle|resource|null Curl resource to reuse
      */
     protected static $_curlConnection;
 
@@ -122,7 +122,7 @@ class Http extends AbstractTransport
 
         $headers[] = 'Content-Type: '.$request->getContentType();
 
-        if (!empty($data) || '0' === $data) {
+        if (!empty($data)) {
             if ($this->hasParam('postWithRequestBody') && true == $this->getParam('postWithRequestBody')) {
                 $httpMethod = Request::POST;
             }
