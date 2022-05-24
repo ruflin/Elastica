@@ -75,7 +75,9 @@ class Reindex extends Param
 
     public function setWaitForCompletion($value): void
     {
-        \is_bool($value) && $value = $value ? 'true' : 'false';
+        if (\is_bool($value)) {
+            $value = $value ? 'true' : 'false';
+        }
 
         $this->setParam(self::WAIT_FOR_COMPLETION, $value);
     }
