@@ -58,7 +58,7 @@ abstract class AbstractScript extends AbstractUpdateAction
      *
      * @throws InvalidException
      *
-     * @return Script|ScriptId
+     * @return Script|ScriptId|self
      */
     public static function create($data)
     {

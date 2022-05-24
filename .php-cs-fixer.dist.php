@@ -30,6 +30,5 @@ return (new PhpCsFixer\Config())
         'static_lambda' => true,
         'ternary_to_null_coalescing' => true,
         'visibility_required' => ['elements' => ['property', 'method', 'const']],
-        'void_return' => true,
     ])
 ;

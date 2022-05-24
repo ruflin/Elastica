@@ -8,6 +8,7 @@ use Elastica\ResultSet;
 use Elastica\ResultSet\BuilderInterface;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @group unit
@@ -17,7 +18,7 @@ use Elastica\Test\Base as BaseTest;
 class MultiBuilderTest extends BaseTest
 {
     /**
-     * @var BuilderInterface
+     * @var BuilderInterface&MockObject
      */
     private $builder;
 

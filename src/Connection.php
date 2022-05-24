@@ -32,7 +32,7 @@ class Connection extends Param
     /**
      * Default compression.
      *
-     * @var string
+     * @var bool
      */
     public const DEFAULT_COMPRESSION = false;
 

@@ -1,0 +1,102 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method Elastica\\\\QueryBuilder\\:\\:aggregation\\(\\) should return Elastica\\\\QueryBuilder\\\\DSL\\\\Aggregation but returns Elastica\\\\QueryBuilder\\\\Facade\\.$#"
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: "#^Method Elastica\\\\QueryBuilder\\:\\:collapse\\(\\) should return Elastica\\\\QueryBuilder\\\\DSL\\\\Collapse but returns Elastica\\\\QueryBuilder\\\\Facade\\.$#"
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: "#^Method Elastica\\\\QueryBuilder\\:\\:query\\(\\) should return Elastica\\\\QueryBuilder\\\\DSL\\\\Query but returns Elastica\\\\QueryBuilder\\\\Facade\\.$#"
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: "#^Method Elastica\\\\QueryBuilder\\:\\:suggest\\(\\) should return Elastica\\\\QueryBuilder\\\\DSL\\\\Suggest but returns Elastica\\\\QueryBuilder\\\\Facade\\.$#"
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: "#^Function GuzzleHttp\\\\Psr7\\\\stream_for not found\\.$#"
+			count: 1
+			path: src/Transport/Guzzle.php
+
+		-
+			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$counter\\.$#"
+			count: 1
+			path: tests/BulkTest.php
+
+		-
+			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$name\\.$#"
+			count: 1
+			path: tests/BulkTest.php
+
+		-
+			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$test\\.$#"
+			count: 3
+			path: tests/BulkTest.php
+
+		-
+			message: "#^Call to an undefined method Elastica\\\\Bulk\\\\Action\\:\\:getDocument\\(\\)\\.$#"
+			count: 3
+			path: tests/BulkTest.php
+
+		-
+			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$age\\.$#"
+			count: 1
+			path: tests/ClientFunctionalTest.php
+
+		-
+			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$field1\\.$#"
+			count: 1
+			path: tests/DocumentTest.php
+
+		-
+			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$field2\\.$#"
+			count: 1
+			path: tests/DocumentTest.php
+
+		-
+			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$field3\\.$#"
+			count: 1
+			path: tests/DocumentTest.php
+
+		-
+			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$field4\\.$#"
+			count: 1
+			path: tests/DocumentTest.php
+
+		-
+			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$field5\\.$#"
+			count: 1
+			path: tests/DocumentTest.php
+
+		-
+			message: "#^Call to an undefined method ReflectionType\\:\\:getName\\(\\)\\.$#"
+			count: 2
+			path: tests/QueryBuilder/DSL/AbstractDSLTest.php
+
+		-
+			message: "#^Call to an undefined method ReflectionType\\:\\:isBuiltin\\(\\)\\.$#"
+			count: 1
+			path: tests/QueryBuilder/DSL/AbstractDSLTest.php
+
+		-
+			message: "#^Call to an undefined method Elastica\\\\QueryBuilder\\:\\:custom\\(\\)\\.$#"
+			count: 1
+			path: tests/QueryBuilderTest.php
+
+		-
+			message: "#^Call to an undefined method Elastica\\\\QueryBuilder\\:\\:invalid\\(\\)\\.$#"
+			count: 1
+			path: tests/QueryBuilderTest.php
+
+		-
+			message: "#^Call to an undefined method GuzzleHttp\\\\Exception\\\\TransferException\\:\\:getRequest\\(\\)\\.$#"
+			count: 6
+			path: tests/Transport/AwsAuthV4Test.php
+
