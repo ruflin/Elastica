@@ -380,18 +380,17 @@ class InnerHitsTest extends BaseTest
      */
     public function testInnerHitsLimitedSource()
     {
-        $this->markTestSkipped('Source filtering on inner hits is bugged. See https://github.com/elastic/elasticsearch/issues/21312');
-
-        $innerHits = new InnerHits();
-        $innerHits->setSource(['includes' => ['name'], 'excludes' => ['last_activity_date']]);
+        $innerHits = (new InnerHits())
+            ->setSource(['users.name'])
+        ;
 
         $results = $this->getNestedQuery(new MatchAll(), $innerHits);
 
         foreach ($results as $row) {
             $innerHitsResult = $row->getInnerHits();
             foreach ($innerHitsResult['users']['hits']['hits'] as $doc) {
-                $this->assertArrayHasKey('name', $doc['_source']['users']);
-                $this->assertArrayNotHasKey('last_activity_date', $doc['_source']['users']);
+                $this->assertArrayHasKey('name', $doc['_source']);
+                $this->assertArrayNotHasKey('last_activity_date', $doc['_source']);
             }
         }
     }
