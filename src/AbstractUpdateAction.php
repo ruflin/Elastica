@@ -303,6 +303,8 @@ class AbstractUpdateAction extends Param
     /**
      * @param bool|string $refresh
      *
+     * @phpstan-param bool|Reindex::REFRESH_* $refresh
+     *
      * @return $this
      */
     public function setRefresh($refresh = true)

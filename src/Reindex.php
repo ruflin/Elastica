@@ -73,6 +73,9 @@ class Reindex extends Param
         return $this->_lastResponse;
     }
 
+    /**
+     * @param bool $value
+     */
     public function setWaitForCompletion($value): void
     {
         if (\is_bool($value)) {
