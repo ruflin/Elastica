@@ -143,13 +143,25 @@ class ReindexTest extends Base
         $newIndex = $this->_createIndex('idx2', true, 2);
 
         $reindex = new Reindex($oldIndex, $newIndex);
-        $reindex->setWaitForCompletion(Reindex::WAIT_FOR_COMPLETION_FALSE);
+        $reindex->setWaitForCompletion(false);
         $reindex->run();
 
         $this->assertNotEmpty($reindex->getTaskId());
+    }
+
+    /**
+     * @group functional
+     * @group legacy
+     */
+    public function testReindexWithDeprecatedConstantSetOnWaitForCompletion(): void
+    {
+        $oldIndex = $this->_createIndex('idx1', true, 2);
+        $this->_addDocs($oldIndex, 10);
+
+        $newIndex = $this->_createIndex('idx2', true, 2);
 
         $reindex = new Reindex($oldIndex, $newIndex);
-        $reindex->setWaitForCompletion(false);
+        $reindex->setWaitForCompletion(Reindex::WAIT_FOR_COMPLETION_FALSE);
         $reindex->run();
 
         $this->assertNotEmpty($reindex->getTaskId());

@@ -27,6 +27,10 @@ class Reindex extends Param
     public const REFRESH_FALSE = 'false';
     public const REFRESH_WAIT_FOR = 'wait_for';
     public const WAIT_FOR_COMPLETION = 'wait_for_completion';
+
+    /**
+     * @deprecated since version 7.2.0, use a boolean as parameter instead.
+     */
     public const WAIT_FOR_COMPLETION_FALSE = 'false';
     public const WAIT_FOR_ACTIVE_SHARDS = 'wait_for_active_shards';
     public const TIMEOUT = 'timeout';
@@ -80,6 +84,8 @@ class Reindex extends Param
     {
         if (\is_bool($value)) {
             $value = $value ? 'true' : 'false';
+        } else {
+            \trigger_deprecation('ruflin/elastica', '7.1.6', 'Passing anything else than a boolean as 1st argument to "%s()" is deprecated, pass a boolean instead. It will be removed in 8.0.', __METHOD__);
         }
 
         $this->setParam(self::WAIT_FOR_COMPLETION, $value);
