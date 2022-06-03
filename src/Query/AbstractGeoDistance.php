@@ -36,14 +36,14 @@ abstract class AbstractGeoDistance extends AbstractQuery
     /**
      * Latitude.
      *
-     * @var float
+     * @var float|null
      */
     protected $_latitude;
 
     /**
      * Longitude.
      *
-     * @var float
+     * @var float|null
      */
     protected $_longitude;
 

@@ -20,7 +20,7 @@ class NullTransport extends AbstractTransport
     /**
      * Response you want to get from the transport.
      *
-     * @var Response Response
+     * @var Response|null Response
      */
     protected $_response;
 

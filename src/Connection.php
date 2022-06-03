@@ -341,7 +341,7 @@ class Connection extends Param
     }
 
     /**
-     * @return string User
+     * @return string|null User
      */
     public function getUsername()
     {
@@ -349,7 +349,7 @@ class Connection extends Param
     }
 
     /**
-     * @return string Password
+     * @return string|null Password
      */
     public function getPassword()
     {
