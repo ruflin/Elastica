@@ -38,7 +38,7 @@ class ClientConfiguration
         'bigintConversion' => false,
         'username' => null,
         'password' => null,
-        'auth_type' => null, //basic, digest, gssnegotiate, ntlm
+        'auth_type' => null, // basic, digest, gssnegotiate, ntlm
     ];
 
     /**

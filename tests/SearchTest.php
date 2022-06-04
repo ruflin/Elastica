@@ -184,9 +184,9 @@ class SearchTest extends BaseTest
         $this->assertNotEmpty($scrollId);
         $this->assertCount(5, $result->getResults());
 
-        //There are 10 items, and we're scrolling with a size of 5
-        //So we should get two results of 5 items, and then no items
-        //We should also have sent the raw scroll_id as the HTTP request body
+        // There are 10 items, and we're scrolling with a size of 5
+        // So we should get two results of 5 items, and then no items
+        // We should also have sent the raw scroll_id as the HTTP request body
         $search = new Search($client);
         $result = $search->search([], [
             Search::OPTION_SCROLL => '5m',
@@ -290,45 +290,45 @@ class SearchTest extends BaseTest
         $index->refresh();
 
         $search->addIndex($index);
-        //Backward compatibility, integer => limit
+        // Backward compatibility, integer => limit
         // default limit results  (default limit is 10)
         $resultSet = $search->search('test');
         $this->assertEquals(10, $resultSet->count());
 
-        //Array with limit
+        // Array with limit
         $resultSet = $search->search('test', ['limit' => 2]);
         $this->assertEquals(2, $resultSet->count());
 
-        //Array with size
+        // Array with size
         $resultSet = $search->search('test', ['size' => 2]);
         $this->assertEquals(2, $resultSet->count());
 
-        //Array with from
+        // Array with from
         $resultSet = $search->search('test', ['from' => 10]);
         $this->assertEquals(10, $resultSet->current()->getId());
 
-        //Array with routing
+        // Array with routing
         $resultSet = $search->search('test', ['routing' => 'r1,r2']);
         $this->assertEquals(10, $resultSet->count());
 
-        //Array with limit and routing
+        // Array with limit and routing
         $resultSet = $search->search('test', ['limit' => 5, 'routing' => 'r1,r2']);
         $this->assertEquals(5, $resultSet->count());
 
-        //Array with terminate_after
+        // Array with terminate_after
         $resultSet = $search->search('test', ['terminate_after' => 100]);
         $this->assertEquals(10, $resultSet->count());
 
         $resultSet = $search->search('test', ['limit' => 0]);
         $this->assertTrue((0 === $resultSet->count()) && 11 === $resultSet->getTotalHits());
 
-        //test with filter_path
+        // test with filter_path
         $resultSet = $search->search('test', [Search::OPTION_FILTER_PATH => 'hits.hits._source']);
         $filteredData = $resultSet->getResponse()->getData();
         $this->assertArrayNotHasKey('took', $filteredData);
         $this->assertArrayNotHasKey('max_score', $filteredData['hits']);
 
-        //test with typed_keys
+        // test with typed_keys
         $countIds = (new Cardinality('count_ids'))->setField('id');
         $suggestName = new Suggest((new Suggest\Term('name_suggest', 'username'))->setText('tes'));
         $typedKeysQuery = (new Query())
@@ -339,7 +339,7 @@ class SearchTest extends BaseTest
         $this->assertNotEmpty($resultSet->getAggregation('cardinality#count_ids'));
         $this->assertNotEmpty($resultSet->getSuggests(), 'term#name_suggest');
 
-        //Timeout - this one is a bit more tricky to test
+        // Timeout - this one is a bit more tricky to test
         $mockResponse = new Response(\json_encode(['timed_out' => true]));
         $client = $this->createMock(Client::class);
         $client->method('request')

@@ -90,7 +90,7 @@ class UtilTest extends BaseTest
             ['pragmatic banana', 'pragmatic banana'],
             ['oh yeah!', 'oh yeah\\!'],
             // Separate test below because phpunit seems to have some problems
-            //array('\\+-&&||!(){}[]^"~*?:', '\\\\\\+\\-\\&&\\||\\!\\(\\)\\{\\}\\[\\]\\^\\"\\~\\*\\?\\:'),
+            // array('\\+-&&||!(){}[]^"~*?:', '\\\\\\+\\-\\&&\\||\\!\\(\\)\\{\\}\\[\\]\\^\\"\\~\\*\\?\\:'),
             ['some signs, can stay.', 'some signs, can stay.'],
         ];
     }

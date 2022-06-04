@@ -231,7 +231,7 @@ class SettingsTest extends BaseTest
         $index->create([], [
             'recreate' => true,
         ]);
-        //wait for the shards to be allocated
+        // wait for the shards to be allocated
         $this->_waitForAllocation($index);
 
         $settings = $index->getSettings();
@@ -255,7 +255,7 @@ class SettingsTest extends BaseTest
             'recreate' => true,
         ]);
 
-        //wait for the shards to be allocated
+        // wait for the shards to be allocated
         $this->_waitForAllocation($index);
 
         $settings = $index->getSettings();
@@ -276,7 +276,7 @@ class SettingsTest extends BaseTest
     public function testSetReadOnly(): void
     {
         $index = $this->_createIndex();
-        //wait for the shards to be allocated
+        // wait for the shards to be allocated
         $this->_waitForAllocation($index);
         $index->getSettings()->setReadOnly(false);
 

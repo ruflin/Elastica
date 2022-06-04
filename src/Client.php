@@ -291,7 +291,7 @@ class Client
             $requestData = $data;
         }
 
-        //If an upsert document exists
+        // If an upsert document exists
         if ($data instanceof AbstractScript || $data instanceof Document) {
             if ($data->hasUpsert()) {
                 $requestData['upsert'] = $data->getUpsert()->getData();
