@@ -6,7 +6,6 @@ use Aws\Credentials\CredentialProvider;
 use Aws\Credentials\Credentials;
 use Aws\Sdk;
 use Elastica\Exception\Connection\GuzzleException;
-use GuzzleHttp\Exception\TransferException;
 
 /**
  * @internal
@@ -40,21 +39,17 @@ class AwsAuthV4Test extends GuzzleTest
             $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
-            if ($guzzleException instanceof TransferException) {
-                $request = $guzzleException->getRequest();
-                $expected = 'AWS4-HMAC-SHA256 Credential=foo/'
-                    .\date('Ymd').'/us-east-1/es/aws4_request, ';
-                $this->assertStringStartsWith(
-                    $expected,
-                    $request->getHeaderLine('Authorization')
-                );
-                $this->assertSame(
-                    'baz',
-                    $request->getHeaderLine('X-Amz-Security-Token')
-                );
-            } else {
-                throw $e;
-            }
+            $request = $guzzleException->getRequest();
+            $expected = 'AWS4-HMAC-SHA256 Credential=foo/'
+                .\date('Ymd').'/us-east-1/es/aws4_request, ';
+            $this->assertStringStartsWith(
+                $expected,
+                $request->getHeaderLine('Authorization')
+            );
+            $this->assertSame(
+                'baz',
+                $request->getHeaderLine('X-Amz-Security-Token')
+            );
         }
     }
 
@@ -81,21 +76,17 @@ class AwsAuthV4Test extends GuzzleTest
             $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
-            if ($guzzleException instanceof TransferException) {
-                $request = $guzzleException->getRequest();
-                $expected = 'AWS4-HMAC-SHA256 Credential=foo/'
-                    .\date('Ymd').'/us-east-1/es/aws4_request, ';
-                $this->assertStringStartsWith(
-                    $expected,
-                    $request->getHeaderLine('Authorization')
-                );
-                $this->assertSame(
-                    'baz',
-                    $request->getHeaderLine('X-Amz-Security-Token')
-                );
-            } else {
-                throw $e;
-            }
+            $request = $guzzleException->getRequest();
+            $expected = 'AWS4-HMAC-SHA256 Credential=foo/'
+                .\date('Ymd').'/us-east-1/es/aws4_request, ';
+            $this->assertStringStartsWith(
+                $expected,
+                $request->getHeaderLine('Authorization')
+            );
+            $this->assertSame(
+                'baz',
+                $request->getHeaderLine('X-Amz-Security-Token')
+            );
         }
     }
 
@@ -119,21 +110,17 @@ class AwsAuthV4Test extends GuzzleTest
             $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
-            if ($guzzleException instanceof TransferException) {
-                $request = $guzzleException->getRequest();
-                $expected = 'AWS4-HMAC-SHA256 Credential=foo/'
-                    .\date('Ymd').'/us-east-1/es/aws4_request, ';
-                $this->assertStringStartsWith(
-                    $expected,
-                    $request->getHeaderLine('Authorization')
-                );
-                $this->assertSame(
-                    'baz',
-                    $request->getHeaderLine('X-Amz-Security-Token')
-                );
-            } else {
-                throw $e;
-            }
+            $request = $guzzleException->getRequest();
+            $expected = 'AWS4-HMAC-SHA256 Credential=foo/'
+                .\date('Ymd').'/us-east-1/es/aws4_request, ';
+            $this->assertStringStartsWith(
+                $expected,
+                $request->getHeaderLine('Authorization')
+            );
+            $this->assertSame(
+                'baz',
+                $request->getHeaderLine('X-Amz-Security-Token')
+            );
         }
     }
 
@@ -153,11 +140,9 @@ class AwsAuthV4Test extends GuzzleTest
             $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
-            if ($guzzleException instanceof TransferException) {
-                $request = $guzzleException->getRequest();
+            $request = $guzzleException->getRequest();
 
-                $this->assertSame('http', $request->getUri()->getScheme());
-            }
+            $this->assertSame('http', $request->getUri()->getScheme());
         }
     }
 
@@ -178,11 +163,9 @@ class AwsAuthV4Test extends GuzzleTest
             $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
-            if ($guzzleException instanceof TransferException) {
-                $request = $guzzleException->getRequest();
+            $request = $guzzleException->getRequest();
 
-                $this->assertSame('https', $request->getUri()->getScheme());
-            }
+            $this->assertSame('https', $request->getUri()->getScheme());
         }
     }
 
@@ -202,21 +185,17 @@ class AwsAuthV4Test extends GuzzleTest
             $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
-            if ($guzzleException instanceof TransferException) {
-                $request = $guzzleException->getRequest();
-                $expected = 'AWS4-HMAC-SHA256 Credential=foo/'
-                    .\date('Ymd').'/us-east-1/es/aws4_request, ';
-                $this->assertStringStartsWith(
-                    $expected,
-                    $request->getHeaderLine('Authorization')
-                );
-                $this->assertSame(
-                    'baz',
-                    $request->getHeaderLine('X-Amz-Security-Token')
-                );
-            } else {
-                throw $e;
-            }
+            $request = $guzzleException->getRequest();
+            $expected = 'AWS4-HMAC-SHA256 Credential=foo/'
+                .\date('Ymd').'/us-east-1/es/aws4_request, ';
+            $this->assertStringStartsWith(
+                $expected,
+                $request->getHeaderLine('Authorization')
+            );
+            $this->assertSame(
+                'baz',
+                $request->getHeaderLine('X-Amz-Security-Token')
+            );
         }
     }
 }

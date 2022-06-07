@@ -208,7 +208,8 @@ class ReindexTest extends Base
 
         try {
             $reindex->run();
-            $this->assertFalse(true, 'Elasticsearch should have thrown an Exception, maybe the remote option has not been sent.');
+
+            $this->fail('Elasticsearch should have thrown an Exception, maybe the remote option has not been sent.');
         } catch (ResponseException $exception) {
             $this->assertStringContainsString('reindex.remote.whitelist', $exception->getMessage());
         }
