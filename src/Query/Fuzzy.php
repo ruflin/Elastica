@@ -50,7 +50,7 @@ class Fuzzy extends AbstractQuery
      */
     public function setFieldOption(string $option, $value): self
     {
-        //Retrieve the single existing field for alteration.
+        // Retrieve the single existing field for alteration.
         $params = $this->getParams();
         if (\count($params) < 1) {
             throw new InvalidException('No field has been set');

@@ -81,13 +81,13 @@ class SpanMultiTest extends BaseTest
 
         $spanMultiQuery = new SpanMulti();
 
-        //multi with prefix will match 3
+        // multi with prefix will match 3
         $prefixQuery = new Prefix([$field => ['value' => 'conse']]);
         $spanMultiQuery->setMatch($prefixQuery);
         $resultSet = $index->search($spanMultiQuery);
         $this->assertEquals(3, $resultSet->count());
 
-        //multi with wildcard will match 3
+        // multi with wildcard will match 3
         $wildcardQuery = new Wildcard($field, '*ll*');
         $spanMultiQuery->setMatch($wildcardQuery);
         $resultSet = $index->search($spanMultiQuery);

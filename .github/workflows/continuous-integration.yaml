@@ -11,10 +11,10 @@ jobs:
       - name: 'Setup PHP'
         uses: 'shivammathur/setup-php@v2'
         with:
-          php-version: '7.2'
+          php-version: '7.4'
           coverage: 'none'
           extensions: 'json, mbstring, tokenizer'
-          tools: 'composer-normalize:2.15.0, php-cs-fixer:3.3.2'
+          tools: 'composer-normalize:2.15.0, php-cs-fixer:3.8.0'
 
       - name: 'Check PHP code'
         run: |

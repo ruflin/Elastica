@@ -80,14 +80,14 @@ class SpanOrTest extends BaseTest
         ]);
         $index->refresh();
 
-        //all 3 docs match
+        // all 3 docs match
         $spanTermQuery1 = new SpanTerm([$field => 'lorem']);
         $spanTermQuery2 = new SpanTerm([$field => 'ipsum']);
         $spanOrQuery = new SpanOr([$spanTermQuery1, $spanTermQuery2]);
         $resultSet = $index->search($spanOrQuery);
         $this->assertEquals(3, $resultSet->count());
 
-        //only 1 match hit
+        // only 1 match hit
         $spanTermQuery1 = new SpanTerm([$field => 'amet']);
         $spanTermQuery2 = new SpanTerm([$field => 'sit']);
         $spanOrQuery = new SpanOr([$spanTermQuery1, $spanTermQuery2]);

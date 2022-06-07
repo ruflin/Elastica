@@ -601,12 +601,12 @@ class ClientFunctionalTest extends BaseTest
         $index = $this->_createIndex();
         $client = $index->getClient();
 
-        //Confirm document one does not exist
+        // Confirm document one does not exist
         try {
             $index->getDocument(1);
             $this->fail('Exception was not thrown. Maybe the document exists?');
         } catch (\Exception $e) {
-            //Ignore the exception because we expect the document to not exist.
+            // Ignore the exception because we expect the document to not exist.
         }
 
         $newDocument = new Document(1, ['field1' => 'value1', 'field2' => 'value2']);
@@ -626,14 +626,14 @@ class ClientFunctionalTest extends BaseTest
         $index = $this->_createIndex();
         $client = $index->getClient();
 
-        //Try to update using a stdClass object
+        // Try to update using a stdClass object
         $badDocument = new \stdClass();
 
         try {
             $client->updateDocument(1, $badDocument, $index->getName());
             $this->fail('Tried to update using an object that is not a Document or a Script but no exception was thrown');
         } catch (\Throwable $e) {
-            //Good. An exception was thrown.
+            // Good. An exception was thrown.
         }
     }
 
