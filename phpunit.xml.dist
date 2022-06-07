@@ -12,6 +12,9 @@
   <filter>
     <whitelist>
       <directory>src/</directory>
+      <exclude>
+        <file>src/Query/Match.php</file>
+      </exclude>
     </whitelist>
   </filter>
   <listeners>
