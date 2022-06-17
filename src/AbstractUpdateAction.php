@@ -2,6 +2,8 @@
 
 namespace Elastica;
 
+use Elastica\Exception\InvalidException;
+
 /**
  * Base class for things that can be sent to the update api (Document and
  * Script).
@@ -55,7 +57,7 @@ class AbstractUpdateAction extends Param
     /**
      * Get the document index name.
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      *
      * @return string Index name
      */
@@ -103,6 +105,8 @@ class AbstractUpdateAction extends Param
     /**
      * Returns document version.
      *
+     * @throws InvalidException
+     *
      * @return int Document version
      */
     public function getSequenceNumber(): int
@@ -132,6 +136,8 @@ class AbstractUpdateAction extends Param
     /**
      * Returns document version.
      *
+     * @throws InvalidException
+     *
      * @return int Document version
      */
     public function getPrimaryTerm(): int
@@ -160,6 +166,8 @@ class AbstractUpdateAction extends Param
 
     /**
      * Returns document version.
+     *
+     * @throws InvalidException
      *
      * @return int|string Document version
      */
@@ -191,6 +199,8 @@ class AbstractUpdateAction extends Param
     /**
      * Get operation type.
      *
+     * @throws InvalidException
+     *
      * @return string
      */
     public function getOpType()
@@ -220,6 +230,8 @@ class AbstractUpdateAction extends Param
 
     /**
      * Get routing parameter.
+     *
+     * @throws InvalidException
      *
      * @return string
      */
@@ -259,6 +271,8 @@ class AbstractUpdateAction extends Param
     }
 
     /**
+     * @throws InvalidException
+     *
      * @return string
      */
     public function getFields()
@@ -285,6 +299,8 @@ class AbstractUpdateAction extends Param
     }
 
     /**
+     * @throws InvalidException
+     *
      * @return int
      */
     public function getRetryOnConflict()
@@ -317,6 +333,8 @@ class AbstractUpdateAction extends Param
     }
 
     /**
+     * @throws InvalidException
+     *
      * @return bool|string
      */
     public function getRefresh()
@@ -347,6 +365,8 @@ class AbstractUpdateAction extends Param
     }
 
     /**
+     * @throws InvalidException
+     *
      * @return bool
      */
     public function getTimeout()
@@ -373,6 +393,8 @@ class AbstractUpdateAction extends Param
     }
 
     /**
+     * @throws InvalidException
+     *
      * @return string
      */
     public function getConsistency()
@@ -399,6 +421,8 @@ class AbstractUpdateAction extends Param
     }
 
     /**
+     * @throws InvalidException
+     *
      * @return string
      */
     public function getReplication()
