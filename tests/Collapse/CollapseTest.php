@@ -112,10 +112,12 @@ class CollapseTest extends BaseTest
         $collapse->setInnerHits($innerHits1);
         $collapse->addInnerHits($innerHits2);
 
-        $this->assertCount(2, $collapse->getParam('inner_hits'));
-        $this->assertIsArray($collapse->getParam('inner_hits'));
-        $this->assertEquals($innerHits1, $collapse->getParam('inner_hits')[0]);
-        $this->assertEquals($innerHits2, $collapse->getParam('inner_hits')[1]);
+        $innerHits = $collapse->getParam('inner_hits');
+
+        $this->assertCount(2, $innerHits);
+        $this->assertIsArray($innerHits);
+        $this->assertEquals($innerHits1, $innerHits[0]);
+        $this->assertEquals($innerHits2, $innerHits[1]);
 
         $innerHitsOverride = new InnerHits();
         $innerHitsOverride->setName('override');
