@@ -51,7 +51,7 @@ class RequestTest extends BaseTest
     {
         $connection = new Connection();
         $connection->setHost($this->_getHost());
-        $connection->setPort('9200');
+        $connection->setPort(9200);
 
         $request = new Request('_stats', Request::GET, [], [], $connection);
 
@@ -72,7 +72,7 @@ class RequestTest extends BaseTest
 
         $connection = new Connection();
         $connection->setHost($this->_getHost());
-        $connection->setPort('9200');
+        $connection->setPort(9200);
 
         $request = new Request($path, $method, $data, $query, $connection);
 

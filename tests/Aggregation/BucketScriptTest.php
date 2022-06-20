@@ -3,6 +3,7 @@
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\BucketScript;
+use Elastica\Aggregation\GapPolicyInterface;
 use Elastica\Aggregation\Histogram;
 use Elastica\Aggregation\Max;
 use Elastica\Document;
@@ -61,7 +62,7 @@ class BucketScriptTest extends BaseAggregationTest
                 'z' => 'agg_min',
             ])
             ->setFormat('test_format')
-            ->setGapPolicy(10)
+            ->setGapPolicy(GapPolicyInterface::INSERT_ZEROS)
         ;
 
         $expected = [
@@ -73,7 +74,7 @@ class BucketScriptTest extends BaseAggregationTest
                     'z' => 'agg_min',
                 ],
                 'format' => 'test_format',
-                'gap_policy' => 10,
+                'gap_policy' => GapPolicyInterface::INSERT_ZEROS,
             ],
         ];
 

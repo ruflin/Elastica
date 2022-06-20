@@ -2,6 +2,7 @@
 
 namespace Elastica\Test\Aggregation;
 
+use Elastica\Aggregation\GapPolicyInterface;
 use Elastica\Aggregation\Sum;
 use Elastica\Aggregation\SumBucket;
 use Elastica\Aggregation\Terms;
@@ -52,14 +53,14 @@ class SumBucketTest extends BaseAggregationTest
     {
         $aggregation = (new SumBucket('sum_bucket', 'pages>sum_likes_by_page'))
             ->setFormat('test_format')
-            ->setGapPolicy(10)
+            ->setGapPolicy(GapPolicyInterface::INSERT_ZEROS)
         ;
 
         $expected = [
             'sum_bucket' => [
                 'buckets_path' => 'pages>sum_likes_by_page',
                 'format' => 'test_format',
-                'gap_policy' => 10,
+                'gap_policy' => GapPolicyInterface::INSERT_ZEROS,
             ],
         ];
 

@@ -73,7 +73,7 @@ JSON;
 
         $this->assertSame($expected, \trim((string) $action));
 
-        $document->setDocAsUpsert(1);
+        $document->setDocAsUpsert(true);
         $action->setDocument($document);
         $this->assertSame($expected, \trim((string) $action));
 
@@ -87,7 +87,7 @@ JSON;
 
         $this->assertSame($expected, \trim((string) $action));
 
-        $document->setDocAsUpsert(0);
+        $document->setDocAsUpsert(false);
         $action->setDocument($document);
         $this->assertSame($expected, \trim((string) $action));
     }

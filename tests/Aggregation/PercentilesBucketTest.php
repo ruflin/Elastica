@@ -3,6 +3,7 @@
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Avg;
+use Elastica\Aggregation\GapPolicyInterface;
 use Elastica\Aggregation\PercentilesBucket;
 use Elastica\Aggregation\Terms;
 use Elastica\Document;
@@ -58,7 +59,7 @@ class PercentilesBucketTest extends BaseAggregationTest
         $aggregation = (new PercentilesBucket('percentiles_bucket', 'pages>avg_likes_by_page'))
             ->setFormat('test_format')
             ->setPercents([10, 80])
-            ->setGapPolicy(10)
+            ->setGapPolicy(GapPolicyInterface::INSERT_ZEROS)
             ->setKeyed(false)
         ;
 
@@ -66,7 +67,7 @@ class PercentilesBucketTest extends BaseAggregationTest
             'percentiles_bucket' => [
                 'buckets_path' => 'pages>avg_likes_by_page',
                 'format' => 'test_format',
-                'gap_policy' => 10,
+                'gap_policy' => GapPolicyInterface::INSERT_ZEROS,
                 'percents' => [10, 80],
                 'keyed' => false,
             ],
