@@ -2,7 +2,9 @@
 
 namespace Elastica;
 
+use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
+use Elastica\Exception\ResponseException;
 
 /**
  * Elastica Request object.
@@ -169,6 +171,9 @@ class Request extends Param
 
     /**
      * Sends request to server.
+     *
+     * @throws ResponseException
+     * @throws ConnectionException
      */
     public function send(): Response
     {

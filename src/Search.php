@@ -3,6 +3,7 @@
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
+use Elastica\Exception\ResponseException;
 use Elastica\ResultSet\BuilderInterface;
 use Elastica\ResultSet\DefaultBuilder;
 
@@ -257,6 +258,7 @@ class Search
      * @param array|int                              $options Limit or associative array of options (option=>value)
      *
      * @throws InvalidException
+     * @throws ResponseException
      */
     public function search($query = '', $options = null, string $method = Request::POST): ResultSet
     {
