@@ -1,6 +1,11 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
+			count: 1
+			path: src/Client.php
+
+		-
 			message: "#^Method Elastica\\\\QueryBuilder\\:\\:aggregation\\(\\) should return Elastica\\\\QueryBuilder\\\\DSL\\\\Aggregation but returns Elastica\\\\QueryBuilder\\\\Facade\\.$#"
 			count: 1
 			path: src/QueryBuilder.php
@@ -76,6 +81,31 @@ parameters:
 			path: tests/DocumentTest.php
 
 		-
+			message: "#^Dead catch \\- Elastica\\\\Exception\\\\InvalidException is never thrown in the try block\\.$#"
+			count: 1
+			path: tests/DocumentTest.php
+
+		-
+			message: "#^Expression \"\\$document\\-\\>field5\" on a separate line does not do anything\\.$#"
+			count: 1
+			path: tests/DocumentTest.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: tests/DocumentTest.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: tests/IndexTest.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 2
+			path: tests/Multi/SearchTest.php
+
+		-
 			message: "#^Call to an undefined method ReflectionType\\:\\:getName\\(\\)\\.$#"
 			count: 2
 			path: tests/QueryBuilder/DSL/AbstractDSLTest.php
@@ -94,6 +124,16 @@ parameters:
 			message: "#^Call to an undefined method Elastica\\\\QueryBuilder\\:\\:invalid\\(\\)\\.$#"
 			count: 1
 			path: tests/QueryBuilderTest.php
+
+		-
+			message: "#^Expression \"\\$index\\-\\>search\\('elastica search'\\)\\[3\\]\" on a separate line does not do anything\\.$#"
+			count: 1
+			path: tests/ResultSetTest.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: tests/SnapshotTest.php
 
 		-
 			message: "#^Call to an undefined method GuzzleHttp\\\\Exception\\\\TransferException\\:\\:getRequest\\(\\)\\.$#"
