@@ -29,11 +29,11 @@ class Request extends Param
     /**
      * Construct.
      *
-     * @param string $path        Request path
-     * @param string $method      OPTIONAL Request method (use const's) (default = self::GET)
-     * @param array  $data        OPTIONAL Data array
-     * @param array  $query       OPTIONAL Query params
-     * @param string $contentType Content-Type sent with this request
+     * @param string       $path        Request path
+     * @param string       $method      OPTIONAL Request method (use const's) (default = self::GET)
+     * @param array|string $data        OPTIONAL Data array
+     * @param array        $query       OPTIONAL Query params
+     * @param string       $contentType Content-Type sent with this request
      */
     public function __construct(string $path, string $method = self::GET, $data = [], array $query = [], ?Connection $connection = null, string $contentType = self::DEFAULT_CONTENT_TYPE)
     {
@@ -74,7 +74,7 @@ class Request extends Param
     /**
      * Sets the request data.
      *
-     * @param array $data Request data
+     * @param array|string $data Request data
      *
      * @return $this
      */
@@ -86,7 +86,7 @@ class Request extends Param
     /**
      * Return request data.
      *
-     * @return array Request data
+     * @return array|string Request data
      */
     public function getData()
     {
