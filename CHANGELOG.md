@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 * Added `PHPStan` at level 3 by @franmomu [#2064](https://github.com/ruflin/Elastica/pull/2064)
 * Added coverage check to CI by @franmomu [#2071](https://github.com/ruflin/Elastica/pull/2071)
+* Added missing `throws` PHPDoc tags
 ### Changed
 * Updated `symfony/phpunit-bridge` to `6.0` by @franmomu [#2067](https://github.com/ruflin/Elastica/pull/2067)
 * Updated `php-cs-fixer` to `3.8.0` [#2074](https://github.com/ruflin/Elastica/pull/2074)

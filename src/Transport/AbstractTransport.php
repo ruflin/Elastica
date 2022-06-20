@@ -3,7 +3,9 @@
 namespace Elastica\Transport;
 
 use Elastica\Connection;
+use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
+use Elastica\Exception\ResponseException;
 use Elastica\Param;
 use Elastica\Request;
 use Elastica\Response;
@@ -50,6 +52,9 @@ abstract class AbstractTransport extends Param
      *
      * @param Request $request Request object
      * @param array   $params  Hostname, port, path, ...
+     *
+     * @throws ResponseException
+     * @throws ConnectionException
      */
     abstract public function exec(Request $request, array $params): Response;
 
