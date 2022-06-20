@@ -192,7 +192,7 @@ class Http extends AbstractTransport
     /**
      * Called to add additional curl params.
      *
-     * @param resource $curlConnection Curl connection
+     * @param \CurlHandle|resource $curlConnection Curl connection
      */
     protected function _setupCurl($curlConnection): void
     {
@@ -208,7 +208,7 @@ class Http extends AbstractTransport
      *
      * @param bool $persistent False if not persistent connection
      *
-     * @return resource Connection resource
+     * @return \CurlHandle|resource Connection resource
      */
     protected function _getConnection(bool $persistent = true)
     {
