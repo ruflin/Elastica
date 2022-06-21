@@ -3,6 +3,7 @@
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\ExtendedStatsBucket;
+use Elastica\Aggregation\GapPolicyInterface;
 use Elastica\Aggregation\Histogram;
 use Elastica\Aggregation\Max;
 use Elastica\Document;
@@ -60,14 +61,14 @@ class ExtendedStatsBucketTest extends BaseAggregationTest
         $serialDiffAgg
             ->setBucketsPath('age_groups>max_weight')
             ->setFormat('test_format')
-            ->setGapPolicy(10)
+            ->setGapPolicy(GapPolicyInterface::INSERT_ZEROS)
         ;
 
         $expected = [
             'extended_stats_bucket' => [
                 'buckets_path' => 'age_groups>max_weight',
                 'format' => 'test_format',
-                'gap_policy' => 10,
+                'gap_policy' => GapPolicyInterface::INSERT_ZEROS,
             ],
         ];
 

@@ -4,6 +4,7 @@ namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Avg;
 use Elastica\Aggregation\AvgBucket;
+use Elastica\Aggregation\GapPolicyInterface;
 use Elastica\Aggregation\Terms;
 use Elastica\Document;
 use Elastica\Exception\InvalidException;
@@ -52,14 +53,14 @@ class AvgBucketTest extends BaseAggregationTest
     {
         $aggregation = (new AvgBucket('avg_bucket', 'pages>avg_likes_by_page'))
             ->setFormat('test_format')
-            ->setGapPolicy(10)
+            ->setGapPolicy(GapPolicyInterface::INSERT_ZEROS)
         ;
 
         $expected = [
             'avg_bucket' => [
                 'buckets_path' => 'pages>avg_likes_by_page',
                 'format' => 'test_format',
-                'gap_policy' => 10,
+                'gap_policy' => GapPolicyInterface::INSERT_ZEROS,
             ],
         ];
 
