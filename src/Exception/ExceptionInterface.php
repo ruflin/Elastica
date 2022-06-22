@@ -7,6 +7,6 @@ namespace Elastica\Exception;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-interface ExceptionInterface
+interface ExceptionInterface extends \Throwable
 {
 }

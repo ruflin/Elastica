@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Updated `symfony/phpunit-bridge` to `6.0` by @franmomu [#2067](https://github.com/ruflin/Elastica/pull/2067)
 * Updated `php-cs-fixer` to `3.8.0` [#2074](https://github.com/ruflin/Elastica/pull/2074)
 * Increased `PHPStan` level to `4` [#2080](https://github.com/ruflin/Elastica/pull/2080)
+* `ExceptionInterface` extends `Throwable` [#2083](https://github.com/ruflin/Elastica/pull/2083)
 ### Deprecated
 * Deprecated `Elastica\Reindex::WAIT_FOR_COMPLETION_FALSE`, use a boolean as parameter instead by @franmomu [#2070](https://github.com/ruflin/Elastica/pull/2070)
 * Passing anything else than a boolean as 1st argument to `Reindex::setWaitForCompletion`, pass a boolean instead by @franmomu [#2070](https://github.com/ruflin/Elastica/pull/2070)
