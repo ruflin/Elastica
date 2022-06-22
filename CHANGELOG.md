@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/7.1.5...master)
 ### Backward Compatibility Breaks
 * Changed `SetProcessor::setValue` signature to allow to pass any type, if you are overriding this method you must update the signature removing the `string` type-hint.
+* Changed `Settings::setMergePolicy` signature to allow to pass `int` and `string` as argument 2, if you are overriding this method you must update the signature removing the `string` type-hint.
 ### Added
 * Added `PHPStan` at level 3 by @franmomu [#2064](https://github.com/ruflin/Elastica/pull/2064)
 * Added coverage check to CI by @franmomu [#2071](https://github.com/ruflin/Elastica/pull/2071)

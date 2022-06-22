@@ -259,11 +259,12 @@ class Settings
      *
      * To have this changes made the index has to be closed and reopened
      *
-     * @param string $key Merge policy key (for ex. expunge_deletes_allowed)
+     * @param string     $key   Merge policy key (for ex. expunge_deletes_allowed)
+     * @param int|string $value
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
      */
-    public function setMergePolicy(string $key, string $value): Response
+    public function setMergePolicy(string $key, $value): Response
     {
         $this->_index->close();
         $response = $this->set(['merge.policy.'.$key => $value]);
@@ -277,7 +278,7 @@ class Settings
      *
      * @param string $key Merge policy key (for ex. expunge_deletes_allowed)
      *
-     * @return string Refresh interval
+     * @return int|string
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
      */
