@@ -1,19 +1,19 @@
 {
     "name": "ruflin/elastica",
-    "type": "library",
     "description": "Elasticsearch Client",
+    "license": "MIT",
+    "type": "library",
     "keywords": [
         "search",
         "client"
     ],
-    "homepage": "http://elastica.io/",
-    "license": "MIT",
     "authors": [
         {
             "name": "Nicolas Ruflin",
             "homepage": "http://ruflin.com/"
         }
     ],
+    "homepage": "http://elastica.io/",
     "require": {
         "php": "^7.2 || ^8.0",
         "ext-json": "*",
@@ -36,11 +36,6 @@
         "guzzlehttp/guzzle": "Allow using guzzle as transport",
         "monolog/monolog": "Logging request"
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "7.0.x-dev"
-        }
-    },
     "autoload": {
         "psr-4": {
             "Elastica\\": "src/"
@@ -49,6 +44,11 @@
     "autoload-dev": {
         "psr-4": {
             "Elastica\\Test\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "7.0.x-dev"
         }
     }
 }
