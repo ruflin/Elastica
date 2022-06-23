@@ -76,7 +76,7 @@ class PipelineTest extends BasePipeline
 
         $this->assertSame('pipeline for Set', $result['my_custom_pipeline']['description']);
         $this->assertSame('field4', $result['my_custom_pipeline']['processors'][0]['set']['field']);
-        $this->assertSame('333', $result['my_custom_pipeline']['processors'][0]['set']['value']);
+        $this->assertSame(333, $result['my_custom_pipeline']['processors'][0]['set']['value']);
         $this->assertSame('field1', $result['my_custom_pipeline']['processors'][0]['trim']['field']);
     }
 

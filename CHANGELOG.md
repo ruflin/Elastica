@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/7.1.5...master)
 ### Backward Compatibility Breaks
+* Changed `SetProcessor::setValue` signature to allow to pass any type, if you are overriding this method you must update the signature removing the `string` type-hint.
 ### Added
 * Added `PHPStan` at level 3 by @franmomu [#2064](https://github.com/ruflin/Elastica/pull/2064)
 * Added coverage check to CI by @franmomu [#2071](https://github.com/ruflin/Elastica/pull/2071)
@@ -18,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Updated `composer-normalize` to `2.2.28` by @deguif [#2084](https://github.com/ruflin/Elastica/pull/2084)
 * Increased `PHPStan` level to `4` [#2080](https://github.com/ruflin/Elastica/pull/2080)
 * `ExceptionInterface` extends `Throwable` [#2083](https://github.com/ruflin/Elastica/pull/2083)
+* Changed `value` in `SetProcessor` to accept `mixed` instead of `string`.
 ### Deprecated
 * Deprecated `Elastica\Reindex::WAIT_FOR_COMPLETION_FALSE`, use a boolean as parameter instead by @franmomu [#2070](https://github.com/ruflin/Elastica/pull/2070)
 * Passing anything else than a boolean as 1st argument to `Reindex::setWaitForCompletion`, pass a boolean instead by @franmomu [#2070](https://github.com/ruflin/Elastica/pull/2070)
