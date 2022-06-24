@@ -455,8 +455,7 @@ class Index implements SearchableInterface
     }
 
     /**
-     * @param AbstractQuery|array|Collapse|Query|string|Suggest $query
-     * @param array|int                                         $options
+     * {@inheritdoc}
      */
     public function createSearch($query = '', $options = null, ?BuilderInterface $builder = null): Search
     {

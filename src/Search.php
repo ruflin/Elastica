@@ -4,8 +4,10 @@ namespace Elastica;
 
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\ResponseException;
+use Elastica\Query\AbstractQuery;
 use Elastica\ResultSet\BuilderInterface;
 use Elastica\ResultSet\DefaultBuilder;
+use Elastica\Suggest\AbstractSuggest;
 
 /**
  * Elastica search object.
@@ -112,7 +114,7 @@ class Search
     }
 
     /**
-     * @param array|Query|Query\AbstractQuery|string|Suggest $query
+     * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest $query
      */
     public function setQuery($query): self
     {
@@ -254,8 +256,8 @@ class Search
     /**
      * Search in the set indices.
      *
-     * @param array|Query|Query\AbstractQuery|string $query
-     * @param array|int                              $options Limit or associative array of options (option=>value)
+     * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest $query
+     * @param array|int                                                         $options Limit or associative array of options (option=>value)
      *
      * @throws InvalidException
      * @throws ResponseException
@@ -311,8 +313,8 @@ class Search
     }
 
     /**
-     * @param array|int                                      $options
-     * @param array|Query|Query\AbstractQuery|string|Suggest $query
+     * @param array|int                                                         $options
+     * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest $query
      */
     public function setOptionsAndQuery($options = null, $query = ''): self
     {

@@ -3,6 +3,7 @@
 namespace Elastica;
 
 use Elastica\Query\AbstractQuery;
+use Elastica\Suggest\AbstractSuggest;
 
 /**
  * Elastica searchable interface.
@@ -27,9 +28,9 @@ interface SearchableInterface
      *      }
      * }
      *
-     * @param AbstractQuery|array|Collapse|Query|string|Suggest $query   Array with all query data inside or a Elastica\Query object
-     * @param array|int                                         $options Limit or associative array of options (option=>value)
-     * @param string                                            $method  Request method, see Request's constants
+     * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest $query   Array with all query data inside or a Elastica\Query object
+     * @param array|int|null                                                    $options Limit or associative array of options (option=>value)
+     * @param string                                                            $method  Request method, see Request's constants
      */
     public function search($query = '', $options = null, string $method = Request::POST): ResultSet;
 
@@ -38,16 +39,16 @@ interface SearchableInterface
      *
      * If no query is set, matchall query is created
      *
-     * @param AbstractQuery|array|Collapse|Query|string|Suggest $query  Array with all query data inside or a Elastica\Query object
-     * @param string                                            $method Request method, see Request's constants
+     * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest $query  Array with all query data inside or a Elastica\Query object
+     * @param string                                                            $method Request method, see Request's constants
      *
      * @return int number of documents matching the query
      */
     public function count($query = '', string $method = Request::POST);
 
     /**
-     * @param AbstractQuery|array|Collapse|Query|string|Suggest $query
-     * @param mixed|null                                        $options
+     * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest $query
+     * @param array|int|null                                                    $options
      */
     public function createSearch($query = '', $options = null): Search;
 }
