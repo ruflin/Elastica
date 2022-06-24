@@ -12,9 +12,6 @@ use Elastica\Suggest\AbstractSuggest;
  */
 class Suggest extends Param
 {
-    /**
-     * @param AbstractSuggest $suggestion
-     */
     public function __construct(?AbstractSuggest $suggestion = null)
     {
         if (null !== $suggestion) {

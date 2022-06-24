@@ -15,7 +15,6 @@ class SpanFirst extends AbstractSpanQuery
 {
     /**
      * @param AbstractQuery|array $match
-     * @param int                 $end
      */
     public function __construct($match = null, ?int $end = null)
     {

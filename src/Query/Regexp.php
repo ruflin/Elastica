@@ -14,9 +14,9 @@ class Regexp extends AbstractQuery
     /**
      * Construct regexp query.
      *
-     * @param string $key   OPTIONAL Regexp key
-     * @param string $value OPTIONAL Regexp value
-     * @param float  $boost OPTIONAL Boost value (default = 1)
+     * @param string      $key   OPTIONAL Regexp key
+     * @param string|null $value OPTIONAL Regexp value
+     * @param float       $boost OPTIONAL Boost value (default = 1)
      */
     public function __construct(string $key = '', ?string $value = null, float $boost = 1.0)
     {
@@ -27,8 +27,6 @@ class Regexp extends AbstractQuery
 
     /**
      * Sets the query expression for a key with its boost value.
-     *
-     * @param string $value
      *
      * @return $this
      */

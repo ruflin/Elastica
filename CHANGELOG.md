@@ -29,7 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Removed `0` as valid request data using Analyze API by @franmomu [#2068](https://github.com/ruflin/Elastica/pull/2068)
 * Removed dead code in `AwsAuthV4Test` by @franmomu [#2073](https://github.com/ruflin/Elastica/pull/2073)
 ### Fixed
-* Fixed some PHPDoc types adding `null` as possible value by @franmomu [#2070](https://github.com/ruflin/Elastica/pull/2070)
+* Fixed some PHPDoc types adding `null` as possible value by @franmomu [#2070](https://github.com/ruflin/Elastica/pull/2070) and [#2087](https://github.com/ruflin/Elastica/pull/2087)
 * Fixed passing wrong types to `GapPolicyInterface::setGapPolicy()`, `Document::setDocAsUpsert()` and `Connection::setPort()` methods  by @franmomu [#2081](https://github.com/ruflin/Elastica/pull/2081)
 * Fixed `Http` PHPDoc adding `\CurlHandle` type for Curl connection by @franmomu [#2086](https://github.com/ruflin/Elastica/pull/2086)
 * Fixed case mismatch in method calls by @franmomu [#2087](https://github.com/ruflin/Elastica/pull/2087)

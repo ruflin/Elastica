@@ -14,8 +14,8 @@ class Range extends AbstractQuery
     /**
      * Constructor.
      *
-     * @param string $fieldName Field name
-     * @param array  $args      Field arguments
+     * @param string|null $fieldName Field name
+     * @param array       $args      Field arguments
      */
     public function __construct(?string $fieldName = null, array $args = [])
     {

@@ -10,8 +10,8 @@ namespace Elastica\Aggregation;
 class ReverseNested extends AbstractAggregation
 {
     /**
-     * @param string $name The name of this aggregation
-     * @param string $path Optional path to the nested object for this aggregation. Defaults to the root of the main document.
+     * @param string      $name The name of this aggregation
+     * @param string|null $path Optional path to the nested object for this aggregation. Defaults to the root of the main document.
      */
     public function __construct(string $name, ?string $path = null)
     {

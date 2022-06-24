@@ -16,7 +16,7 @@ class Fuzzy extends AbstractQuery
     /**
      * Construct a fuzzy query.
      *
-     * @param string $value String to search for
+     * @param string|null $value String to search for
      */
     public function __construct(?string $fieldName = null, ?string $value = null)
     {

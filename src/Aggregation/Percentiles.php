@@ -13,8 +13,8 @@ class Percentiles extends AbstractSimpleAggregation
     use Traits\MissingTrait;
 
     /**
-     * @param string $name  the name of this aggregation
-     * @param string $field the field on which to perform this aggregation
+     * @param string      $name  the name of this aggregation
+     * @param string|null $field the field on which to perform this aggregation
      */
     public function __construct(string $name, ?string $field = null)
     {
