@@ -50,7 +50,7 @@ class Query extends Param
      *
      * For example, an empty argument will return a \Elastica\Query with a \Elastica\Query\MatchAll.
      *
-     * @param mixed $query
+     * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest|null $query
      *
      * @throws InvalidException For an invalid argument
      */
