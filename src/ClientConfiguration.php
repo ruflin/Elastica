@@ -81,6 +81,7 @@ class ClientConfiguration
         } elseif ('pool' === $func->getName()) {
             $connections = [];
             $clientConfiguration = new static();
+            /** @var Url $arg */
             foreach ($func->getArguments() as $arg) {
                 $connections[] = self::parseDsn($arg);
             }
