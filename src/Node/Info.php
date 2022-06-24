@@ -212,7 +212,7 @@ class Info
 
         // TODO: Use only NodesInfo when dropping support for elasticsearch/elasticsearch 7.x
         $endpoint = \class_exists(NodesInfo::class) ? new NodesInfo() : new \Elasticsearch\Endpoints\Cluster\Nodes\Info();
-        $endpoint->setNodeID($this->getNode()->getId());
+        $endpoint->setNodeId($this->getNode()->getId());
 
         if ($params) {
             $endpoint->setMetric($params);

@@ -171,7 +171,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html
      *
-     * @param string $value String to search for
+     * @param string|null $value String to search for
      */
     public function fuzzy(?string $fieldName = null, ?string $value = null): Fuzzy
     {
@@ -216,7 +216,7 @@ class Query implements DSL
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html
      *
      * @param AbstractQuery|BaseQuery|string $query
-     * @param string                         $type  Parent document type
+     * @param string|null                    $type  Parent document type
      */
     public function has_child($query, ?string $type = null): HasChild
     {

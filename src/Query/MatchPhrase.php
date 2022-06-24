@@ -13,8 +13,7 @@ namespace Elastica\Query;
 class MatchPhrase extends AbstractQuery
 {
     /**
-     * @param string $field
-     * @param mixed  $values
+     * @param mixed $values
      */
     public function __construct(?string $field = null, $values = null)
     {

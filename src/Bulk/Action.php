@@ -34,7 +34,7 @@ class Action
     protected $_metadata = [];
 
     /**
-     * @var array
+     * @var array|string
      */
     protected $_source = [];
 

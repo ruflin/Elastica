@@ -57,8 +57,8 @@ class GeoDistance extends AbstractAggregation
     /**
      * Add a distance range to this aggregation.
      *
-     * @param int $fromValue a distance
-     * @param int $toValue   a distance
+     * @param int|null $fromValue a distance
+     * @param int|null $toValue   a distance
      *
      * @throws InvalidException
      *

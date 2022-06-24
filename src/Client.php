@@ -264,7 +264,7 @@ class Client
     public function updateDocument($id, $data, $index, array $options = []): Response
     {
         $endpoint = new Update();
-        $endpoint->setID($id);
+        $endpoint->setId($id);
         $endpoint->setIndex($index);
 
         if ($data instanceof AbstractScript) {
@@ -387,7 +387,7 @@ class Client
     }
 
     /**
-     * @throws \Elastica\Exception\ClientException
+     * @throws ClientException
      *
      * @return Connection
      */

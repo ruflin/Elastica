@@ -21,8 +21,7 @@ class MatchQuery extends AbstractQuery
     public const FUZZINESS_AUTO = 'AUTO';
 
     /**
-     * @param string $field
-     * @param mixed  $values
+     * @param mixed $values
      */
     public function __construct(?string $field = null, $values = null)
     {

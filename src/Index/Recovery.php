@@ -90,7 +90,7 @@ class Recovery
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     protected function getRecoveryData()
     {

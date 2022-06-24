@@ -38,8 +38,8 @@ class IpRange extends AbstractAggregation
     /**
      * Add an ip range to this aggregation.
      *
-     * @param string $fromValue a valid ipv4 address. Low end of this range, exclusive (greater than)
-     * @param string $toValue   a valid ipv4 address. High end of this range, exclusive (less than)
+     * @param string|null $fromValue a valid ipv4 address. Low end of this range, exclusive (greater than)
+     * @param string|null $toValue   a valid ipv4 address. High end of this range, exclusive (less than)
      *
      * @throws InvalidException
      *

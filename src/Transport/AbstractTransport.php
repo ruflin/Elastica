@@ -62,7 +62,7 @@ abstract class AbstractTransport extends Param
      * BOOL values true|false should be sanityzed and passed to Elasticsearch
      * as string.
      *
-     * @return mixed
+     * @return array
      */
     public function sanityzeQueryStringBool(array $query)
     {

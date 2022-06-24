@@ -167,8 +167,8 @@ class Aggregation implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-aggregation.html
      *
-     * @param string $name  the name of this aggregation
-     * @param string $field the field on which to perform this aggregation
+     * @param string      $name  the name of this aggregation
+     * @param string|null $field the field on which to perform this aggregation
      */
     public function percentiles(string $name, ?string $field = null): Percentiles
     {
@@ -180,8 +180,8 @@ class Aggregation implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-percentiles-bucket-aggregation.html
      *
-     * @param string $name        the name of this aggregation
-     * @param string $bucketsPath the field on which to perform this aggregation
+     * @param string      $name        the name of this aggregation
+     * @param string|null $bucketsPath the field on which to perform this aggregation
      */
     public function percentiles_bucket(string $name, ?string $bucketsPath = null): PercentilesBucket
     {
@@ -267,8 +267,6 @@ class Aggregation implements DSL
      * filter aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html
-     *
-     * @param AbstractQuery $filter
      */
     public function filter(string $name, ?AbstractQuery $filter = null): Filter
     {
@@ -312,8 +310,8 @@ class Aggregation implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html
      *
-     * @param string $name The name of this aggregation
-     * @param string $path Optional path to the nested object for this aggregation. Defaults to the root of the main document.
+     * @param string      $name The name of this aggregation
+     * @param string|null $path Optional path to the nested object for this aggregation. Defaults to the root of the main document.
      */
     public function reverse_nested(string $name, ?string $path = null): ReverseNested
     {

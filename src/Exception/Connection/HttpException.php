@@ -23,9 +23,7 @@ class HttpException extends ConnectionException
     /**
      * Construct Exception.
      *
-     * @param int      $error
-     * @param Request  $request
-     * @param Response $response
+     * @param int $error
      */
     public function __construct($error, ?Request $request = null, ?Response $response = null)
     {
