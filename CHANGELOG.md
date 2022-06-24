@@ -6,12 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/7.1.5...master)
 ### Backward Compatibility Breaks
-* Changed `SetProcessor::setValue` signature to allow to pass any type, if you are overriding this method you must update the signature removing the `string` type-hint.
+* Changed `SetProcessor::setValue` signature to allow to pass any type, if you are overriding this method you must update the signature removing the `string` type-hint by @franmomu [#2082](https://github.com/ruflin/Elastica/pull/2082)
+* Changed `Settings::setMergePolicy` signature to allow to pass `int` and `string` as argument 2, if you are overriding this method you must update the signature removing the `string` type-hint by @franmomu [#2085](https://github.com/ruflin/Elastica/pull/2085)
 ### Added
 * Added `PHPStan` at level 3 by @franmomu [#2064](https://github.com/ruflin/Elastica/pull/2064)
 * Added coverage check to CI by @franmomu [#2071](https://github.com/ruflin/Elastica/pull/2071)
-* Added `string` as a valid type for `data` in `Request`
-* Added missing `throws` PHPDoc tags
+* Added `string` as a valid type for `data` in `Request`  by @franmomu [#2078](https://github.com/ruflin/Elastica/pull/2078)
+* Added missing `throws` PHPDoc tags by @franmomu [#2077](https://github.com/ruflin/Elastica/pull/2077)
 
 ### Changed
 * Updated `symfony/phpunit-bridge` to `6.0` by @franmomu [#2067](https://github.com/ruflin/Elastica/pull/2067)
@@ -19,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Updated `composer-normalize` to `2.2.28` by @deguif [#2084](https://github.com/ruflin/Elastica/pull/2084)
 * Increased `PHPStan` level to `4` [#2080](https://github.com/ruflin/Elastica/pull/2080)
 * `ExceptionInterface` extends `Throwable` [#2083](https://github.com/ruflin/Elastica/pull/2083)
-* Changed `value` in `SetProcessor` to accept `mixed` instead of `string`.
+* Changed `value` in `SetProcessor` to accept `mixed` instead of `string` by @franmomu [#2082](https://github.com/ruflin/Elastica/pull/2082)
 ### Deprecated
 * Deprecated `Elastica\Reindex::WAIT_FOR_COMPLETION_FALSE`, use a boolean as parameter instead by @franmomu [#2070](https://github.com/ruflin/Elastica/pull/2070)
 * Passing anything else than a boolean as 1st argument to `Reindex::setWaitForCompletion`, pass a boolean instead by @franmomu [#2070](https://github.com/ruflin/Elastica/pull/2070)
@@ -29,8 +30,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Removed dead code in `AwsAuthV4Test` by @franmomu [#2073](https://github.com/ruflin/Elastica/pull/2073)
 ### Fixed
 * Fixed some PHPDoc types adding `null` as possible value by @franmomu [#2070](https://github.com/ruflin/Elastica/pull/2070)
-* Fixed passing wrong types to `GapPolicyInterface::setGapPolicy()`, `Document::setDocAsUpsert()` and `Connection::setPort()` methods.
+* Fixed passing wrong types to `GapPolicyInterface::setGapPolicy()`, `Document::setDocAsUpsert()` and `Connection::setPort()` methods  by @franmomu [#2081](https://github.com/ruflin/Elastica/pull/2081)
 * Fixed `Http` PHPDoc adding `\CurlHandle` type for Curl connection by @franmomu [#2086](https://github.com/ruflin/Elastica/pull/2086)
+
 ### Security
 
 ## [7.1.5](https://github.com/ruflin/Elastica/compare/7.1.5...7.1.4)
