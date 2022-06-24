@@ -109,7 +109,7 @@ class Stats
     {
         // TODO: Use only NodesStats when dropping support for elasticsearch/elasticsearch 7.x
         $endpoint = \class_exists(NodesStats::class) ? new NodesStats() : new \Elasticsearch\Endpoints\Cluster\Nodes\Stats();
-        $endpoint->setNodeID($this->getNode()->getName());
+        $endpoint->setNodeId($this->getNode()->getName());
 
         $this->_response = $this->getNode()->getClient()->requestEndpoint($endpoint);
         $data = $this->getResponse()->getData();

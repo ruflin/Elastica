@@ -193,7 +193,7 @@ class Index implements SearchableInterface
         $endpoint = new IndexEndpoint();
 
         if (null !== $doc->getId() && '' !== $doc->getId()) {
-            $endpoint->setID($doc->getId());
+            $endpoint->setId($doc->getId());
         }
 
         $options = $doc->getOptions(
@@ -261,7 +261,7 @@ class Index implements SearchableInterface
     public function getDocument($id, array $options = []): Document
     {
         $endpoint = new DocumentGet();
-        $endpoint->setID($id);
+        $endpoint->setId($id);
         $endpoint->setParams($options);
 
         $response = $this->requestEndpoint($endpoint);
@@ -297,7 +297,7 @@ class Index implements SearchableInterface
         }
 
         $endpoint = new \Elasticsearch\Endpoints\Delete();
-        $endpoint->setID(\trim($id));
+        $endpoint->setId(\trim($id));
         $endpoint->setParams($options);
 
         return $this->requestEndpoint($endpoint);

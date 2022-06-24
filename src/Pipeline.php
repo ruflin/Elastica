@@ -65,7 +65,7 @@ class Pipeline extends Param
 
         // TODO: Use only PutPipeline when dropping support for elasticsearch/elasticsearch 7.x
         $endpoint = \class_exists(PutPipeline::class) ? new PutPipeline() : new Put();
-        $endpoint->setID($this->id);
+        $endpoint->setId($this->id);
         $endpoint->setBody($this->toArray());
 
         return $this->requestEndpoint($endpoint);
@@ -80,7 +80,7 @@ class Pipeline extends Param
     {
         // TODO: Use only GetPipeline when dropping support for elasticsearch/elasticsearch 7.x
         $endpoint = \class_exists(GetPipeline::class) ? new GetPipeline() : new Get();
-        $endpoint->setID($id);
+        $endpoint->setId($id);
 
         return $this->requestEndpoint($endpoint);
     }
@@ -94,7 +94,7 @@ class Pipeline extends Param
     {
         // TODO: Use only DeletePipeline when dropping support for elasticsearch/elasticsearch 7.x
         $endpoint = \class_exists(DeletePipeline::class) ? new DeletePipeline() : new Delete();
-        $endpoint->setID($id);
+        $endpoint->setId($id);
 
         return $this->requestEndpoint($endpoint);
     }
