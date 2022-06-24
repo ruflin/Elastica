@@ -2,6 +2,8 @@
 
 namespace Elastica\Query;
 
+use Elastica\Document;
+
 /**
  * More Like This query.
  *
@@ -26,7 +28,7 @@ class MoreLikeThis extends AbstractQuery
     /**
      * Set the "like" value.
      *
-     * @param self|string $like
+     * @param Document|self|string $like
      *
      * @return $this
      */
