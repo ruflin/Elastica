@@ -10,6 +10,7 @@ use GuzzleHttp;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
+use GuzzleHttp\Psr7;
 use Psr\Http\Message\RequestInterface;
 
 class AwsAuthV4 extends Guzzle
@@ -42,13 +43,31 @@ class AwsAuthV4 extends Guzzle
             : \getenv('AWS_REGION');
         $signer = new SignatureV4('es', $region);
         $credProvider = $this->getCredentialProvider();
+        $transport = $this;
 
         return Middleware::mapRequest(static function (RequestInterface $req) use (
             $signer,
-            $credProvider
+            $credProvider,
+            $transport
         ) {
-            return $signer->signRequest($req, $credProvider()->wait());
+            return $signer->signRequest($transport->sanitizeRequest($req), $credProvider()->wait());
         });
+    }
+
+    private function sanitizeRequest(RequestInterface $request): RequestInterface
+    {
+        // Trailing dots are valid parts of DNS host names (see RFC 1034),
+        // but interferes with header signing where AWS expects a stripped host name.
+        if ('.' === \substr($request->getHeader('host')[0], -1)) {
+            $changes = ['set_headers' => ['host' => \rtrim($request->getHeader('host')[0], '.')]];
+            if (\class_exists(Psr7\Utils::class)) {
+                $request = Psr7\Utils::modifyRequest($request, $changes);
+            } else {
+                $request = Psr7\modify_request($request, $changes);
+            }
+        }
+
+        return $request;
     }
 
     private function getCredentialProvider(): callable
