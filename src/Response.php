@@ -203,7 +203,7 @@ class Response
     /**
      * Response data array.
      *
-     * @return array Response data array
+     * @return array<string, mixed> Response data array
      */
     public function getData()
     {

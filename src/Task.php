@@ -28,7 +28,7 @@ class Task extends Param
     protected $_response;
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     protected $_data;
 
@@ -55,6 +55,8 @@ class Task extends Param
 
     /**
      * Returns task data.
+     *
+     * @return array<string, mixed>
      */
     public function getData(): array
     {
@@ -79,6 +81,8 @@ class Task extends Param
 
     /**
      * Refresh task status.
+     *
+     * @param array<string, mixed> $options
      */
     public function refresh(array $options = []): void
     {
