@@ -16,14 +16,14 @@ class Param implements ArrayableInterface, \Countable
     /**
      * Params.
      *
-     * @var array|\stdClass
+     * @var array<string, mixed>|\stdClass
      */
     protected $_params = [];
 
     /**
      * Raw Params.
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected $_rawParams = [];
 
@@ -32,7 +32,7 @@ class Param implements ArrayableInterface, \Countable
      * the an array out of the class name (last part of the class name)
      * and the params.
      *
-     * @return array Filter array
+     * @return array<string, mixed> Filter array
      */
     public function toArray()
     {

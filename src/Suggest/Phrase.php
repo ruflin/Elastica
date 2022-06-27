@@ -125,7 +125,8 @@ class Phrase extends AbstractSuggest
     }
 
     /**
-     * @param string $model the name of the smoothing model
+     * @param string               $model  the name of the smoothing model
+     * @param array<string, mixed> $params
      *
      * @return $this
      */

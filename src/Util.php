@@ -12,10 +12,10 @@ namespace Elastica;
  */
 class Util
 {
-    /** @var array */
+    /** @var list<string> */
     protected static $dateMathSymbols = ['<', '>', '/', '{', '}', '|', '+', ':', ','];
 
-    /** @var array */
+    /** @var list<string> */
     protected static $escapedDateMathSymbols = ['%3C', '%3E', '%2F', '%7B', '%7D', '%7C', '%2B', '%3A', '%2C'];
 
     /**

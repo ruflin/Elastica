@@ -37,7 +37,7 @@ class Http extends AbstractTransport
      *
      * All calls that are made to the server are done through this function
      *
-     * @param array $params Host, Port, ...
+     * @param array<string, mixed> $params Host, Port, ...
      *
      * @throws ConnectionException
      * @throws ResponseException
@@ -219,6 +219,9 @@ class Http extends AbstractTransport
         return self::$_curlConnection;
     }
 
+    /**
+     * @return int
+     */
     protected function _getAuthType()
     {
         switch ($this->_connection->getAuthType()) {

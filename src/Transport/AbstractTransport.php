@@ -50,8 +50,8 @@ abstract class AbstractTransport extends Param
     /**
      * Executes the transport request.
      *
-     * @param Request $request Request object
-     * @param array   $params  Hostname, port, path, ...
+     * @param Request              $request Request object
+     * @param array<string, mixed> $params  Hostname, port, path, ...
      *
      * @throws ResponseException
      * @throws ConnectionException
@@ -62,7 +62,9 @@ abstract class AbstractTransport extends Param
      * BOOL values true|false should be sanityzed and passed to Elasticsearch
      * as string.
      *
-     * @return array
+     * @param array<string, mixed> $query
+     *
+     * @return array<string, mixed>
      */
     public function sanityzeQueryStringBool(array $query)
     {
@@ -85,9 +87,9 @@ abstract class AbstractTransport extends Param
      * * array: An array with a "type" key which must be set to one of the two options. All other
      *          keys in the array will be set as parameters in the transport instance
      *
-     * @param mixed      $transport  A transport definition
-     * @param Connection $connection A connection instance
-     * @param array      $params     Parameters for the transport class
+     * @param AbstractTransport|array<string, mixed>|string $transport  A transport definition
+     * @param Connection                                    $connection A connection instance
+     * @param array<string, mixed>                          $params     Parameters for the transport class
      *
      * @throws InvalidException
      */

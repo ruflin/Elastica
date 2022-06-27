@@ -46,7 +46,7 @@ class HttpAdapter extends AbstractTransport
      *
      * All calls that are made to the server are done through this function
      *
-     * @param array $params Host, Port, ...
+     * @param array<string, mixed> $params Host, Port, ...
      *
      * @throws \Elastica\Exception\ConnectionException
      * @throws ResponseException
