@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Fixed passing wrong types to `GapPolicyInterface::setGapPolicy()`, `Document::setDocAsUpsert()` and `Connection::setPort()` methods  by @franmomu [#2081](https://github.com/ruflin/Elastica/pull/2081)
 * Fixed `Http` PHPDoc adding `\CurlHandle` type for Curl connection by @franmomu [#2086](https://github.com/ruflin/Elastica/pull/2086)
 * Fixed case mismatch in method calls by @franmomu [#2087](https://github.com/ruflin/Elastica/pull/2087)
+* Fixed `MoreLikeThis::setLike()` PHPDoc allowing `Document` by @franmomu [#2091](https://github.com/ruflin/Elastica/pull/2091)
 
 ### Security
 

@@ -17,7 +17,7 @@ class QueryStringTest extends BaseTest
      */
     public function testSearchMultipleFields(): void
     {
-        $str = \md5(\mt_rand());
+        $str = \uniqid();
         $query = new QueryString($str);
 
         $expected = [
@@ -29,7 +29,7 @@ class QueryStringTest extends BaseTest
         $fields = [];
         $max = \mt_rand(1, 10);
         for ($i = 0; $i < $max; ++$i) {
-            $fields[] = \md5(\mt_rand());
+            $fields[] = \uniqid();
         }
 
         $query->setFields($fields);
