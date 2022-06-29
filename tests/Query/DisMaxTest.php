@@ -21,13 +21,13 @@ class DisMaxTest extends BaseTest
         $query = new DisMax();
 
         $idsQuery1 = new Ids();
-        $idsQuery1->setIds(1);
+        $idsQuery1->setIds('1');
 
         $idsQuery2 = new Ids();
-        $idsQuery2->setIds(2);
+        $idsQuery2->setIds('2');
 
         $idsQuery3 = new Ids();
-        $idsQuery3->setIds(3);
+        $idsQuery3->setIds('3');
 
         $boost = 1.2;
         $tieBreaker = 0.7;
@@ -61,10 +61,10 @@ class DisMaxTest extends BaseTest
         $index = $this->_createIndex();
 
         $index->addDocuments([
-            new Document(1, ['name' => 'Basel-Stadt']),
-            new Document(2, ['name' => 'New York']),
-            new Document(3, ['name' => 'Baden']),
-            new Document(4, ['name' => 'Baden Baden']),
+            new Document('1', ['name' => 'Basel-Stadt']),
+            new Document('2', ['name' => 'New York']),
+            new Document('3', ['name' => 'Baden']),
+            new Document('4', ['name' => 'Baden Baden']),
         ]);
 
         $index->refresh();
@@ -93,10 +93,10 @@ class DisMaxTest extends BaseTest
         $index = $this->_createIndex();
 
         $index->addDocuments([
-            new Document(1, ['name' => 'Basel-Stadt']),
-            new Document(2, ['name' => 'New York']),
-            new Document(3, ['name' => 'Baden']),
-            new Document(4, ['name' => 'Baden Baden']),
+            new Document('1', ['name' => 'Basel-Stadt']),
+            new Document('2', ['name' => 'New York']),
+            new Document('3', ['name' => 'Baden']),
+            new Document('4', ['name' => 'Baden Baden']),
         ]);
 
         $index->refresh();

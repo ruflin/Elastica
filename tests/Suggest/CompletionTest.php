@@ -162,31 +162,31 @@ class CompletionTest extends BaseTest
         ]));
 
         $index->addDocuments([
-            new Document(1, [
+            new Document('1', [
                 'fieldName' => [
                     'input' => ['Nevermind', 'Nirvana'],
                     'weight' => 5,
                 ],
             ]),
-            new Document(2, [
+            new Document('2', [
                 'fieldName' => [
                     'input' => ['Bleach', 'Nirvana'],
                     'weight' => 2,
                 ],
             ]),
-            new Document(3, [
+            new Document('3', [
                 'fieldName' => [
                     'input' => ['Incesticide', 'Nirvana'],
                     'weight' => 7,
                 ],
             ]),
-            new Document(4, [
+            new Document('4', [
                 'fieldName2' => [
                     'input' => ['Bleach', 'Nirvana'],
                     'weight' => 3,
                 ],
             ]),
-            new Document(5, [
+            new Document('5', [
                 'fieldName2' => [
                     'input' => ['Incesticide', 'Nirvana'],
                     'weight' => 3,

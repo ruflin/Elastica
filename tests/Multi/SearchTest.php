@@ -581,17 +581,17 @@ class SearchTest extends BaseTest
         );
 
         $docs = [];
-        $docs[] = new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
-        $docs[] = new Document(2, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
-        $docs[] = new Document(3, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
-        $docs[] = new Document(4, ['id' => 1, 'email' => 'test@test.com', 'username' => 'kate']);
-        $docs[] = new Document(5, ['id' => 1, 'email' => 'test@test.com', 'username' => 'kate']);
-        $docs[] = new Document(6, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
-        $docs[] = new Document(7, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
-        $docs[] = new Document(8, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
-        $docs[] = new Document(9, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
-        $docs[] = new Document(10, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
-        $docs[] = new Document(11, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
+        $docs[] = new Document('1', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
+        $docs[] = new Document('2', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
+        $docs[] = new Document('3', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
+        $docs[] = new Document('4', ['id' => 1, 'email' => 'test@test.com', 'username' => 'kate']);
+        $docs[] = new Document('5', ['id' => 1, 'email' => 'test@test.com', 'username' => 'kate']);
+        $docs[] = new Document('6', ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
+        $docs[] = new Document('7', ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
+        $docs[] = new Document('8', ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
+        $docs[] = new Document('9', ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
+        $docs[] = new Document('10', ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
+        $docs[] = new Document('11', ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
         $index->addDocuments($docs);
         $index->refresh();
 

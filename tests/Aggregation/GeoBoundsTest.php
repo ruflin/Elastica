@@ -38,9 +38,9 @@ class GeoBoundsTest extends BaseAggregationTest
         ]));
 
         $index->addDocuments([
-            new Document(1, ['location' => ['lat' => 32.849437, 'lon' => -117.271732]]),
-            new Document(2, ['location' => ['lat' => 32.798320, 'lon' => -117.246648]]),
-            new Document(3, ['location' => ['lat' => 37.782439, 'lon' => -122.392560]]),
+            new Document('1', ['location' => ['lat' => 32.849437, 'lon' => -117.271732]]),
+            new Document('2', ['location' => ['lat' => 32.798320, 'lon' => -117.246648]]),
+            new Document('3', ['location' => ['lat' => 37.782439, 'lon' => -122.392560]]),
         ]);
 
         $index->refresh();

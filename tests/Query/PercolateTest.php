@@ -26,8 +26,8 @@ class PercolateTest extends BaseTest
     {
         $this->_prepareIndexForPercolate();
         // Register a query in the percolator:
-        $queryDoc = new Document(1, ['query' => ['match' => ['message' => 'bonsai tree']]]);
-        $doc = new Document(2, ['message' => 'A new bonsai tree in the office']);
+        $queryDoc = new Document('1', ['query' => ['match' => ['message' => 'bonsai tree']]]);
+        $doc = new Document('2', ['message' => 'A new bonsai tree in the office']);
         $this->index->addDocument($queryDoc);
         $this->index->refresh();
         // Match a document to the registered percolator queries:
@@ -40,7 +40,7 @@ class PercolateTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
 
         // Register a new query in the percolator:
-        $queryDoc = new Document(3, ['query' => ['match' => ['message' => 'i have nice bonsai tree']]]);
+        $queryDoc = new Document('3', ['query' => ['match' => ['message' => 'i have nice bonsai tree']]]);
         $this->index->addDocument($queryDoc);
         $this->index->refresh();
         $resultSet = $this->index->search($percolateQuery);
@@ -49,7 +49,7 @@ class PercolateTest extends BaseTest
         $this->assertEquals(2, $resultSet->count());
 
         // Check on the document without keywords from percolate stored query
-        $doc2 = new Document(4, ['message' => 'Just a simple text for test']);
+        $doc2 = new Document('4', ['message' => 'Just a simple text for test']);
         $percolateQuery = new Percolate();
         $percolateQuery->setField('query')
             ->setDocument($doc2->getData())
@@ -66,8 +66,8 @@ class PercolateTest extends BaseTest
     {
         $this->_prepareIndexForPercolate();
         // Register a query in the percolator:
-        $queryDoc = new Document(1, ['query' => ['match' => ['message' => 'bonsai tree']]]);
-        $doc = new Document(2, ['message' => 'A new bonsai tree in the office']);
+        $queryDoc = new Document('1', ['query' => ['match' => ['message' => 'bonsai tree']]]);
+        $doc = new Document('2', ['message' => 'A new bonsai tree in the office']);
         $this->index->addDocument($doc);
         $this->index->addDocument($queryDoc);
         $this->index->refresh();
@@ -81,14 +81,14 @@ class PercolateTest extends BaseTest
 
         $this->assertEquals(1, $resultSet->count());
 
-        $queryDoc = new Document(3, ['query' => ['match' => ['message' => 'i have nice bonsai tree']]]);
+        $queryDoc = new Document('3', ['query' => ['match' => ['message' => 'i have nice bonsai tree']]]);
         $this->index->addDocument($queryDoc);
         $this->index->refresh();
         $resultSet = $this->index->search($percolateQuery);
 
         $this->assertEquals(2, $resultSet->count());
 
-        $doc2 = new Document(4, ['message' => 'Just a simple text for test']);
+        $doc2 = new Document('4', ['message' => 'Just a simple text for test']);
         $this->index->addDocument($doc2);
         $percolateQuery = new Percolate();
         $percolateQuery->setField('query')
@@ -120,7 +120,7 @@ class PercolateTest extends BaseTest
     public function testSetDocument(): void
     {
         $query = new Percolate();
-        $doc = new Document(1, ['message' => 'A new bonsai tree in the office']);
+        $doc = new Document('1', ['message' => 'A new bonsai tree in the office']);
         $query->setDocument($doc->getData());
 
         $data = $query->toArray();

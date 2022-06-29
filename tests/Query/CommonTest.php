@@ -47,13 +47,13 @@ class CommonTest extends BaseTest
         $index = $this->_createIndex();
 
         $docs = [
-            new Document(1, ['body' => 'foo baz']),
-            new Document(2, ['body' => 'foo bar baz']),
-            new Document(3, ['body' => 'foo bar baz bat']),
+            new Document('1', ['body' => 'foo baz']),
+            new Document('2', ['body' => 'foo bar baz']),
+            new Document('3', ['body' => 'foo bar baz bat']),
         ];
         // add documents to create common terms
         for ($i = 4; $i < 24; ++$i) {
-            $docs[] = new Document($i, ['body' => 'foo bar']);
+            $docs[] = new Document((string) $i, ['body' => 'foo bar']);
         }
         $index->addDocuments($docs);
         $index->refresh();

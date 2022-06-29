@@ -108,7 +108,7 @@ class ParentAggregationTest extends BaseAggregationTest
         $index->setMapping($mapping);
         $index->refresh();
 
-        $doc1 = $index->createDocument(1, [
+        $doc1 = $index->createDocument('1', [
             'text' => 'this is the 1st question',
             'tags' => [
                 'windows-server-2003',
@@ -120,7 +120,7 @@ class ParentAggregationTest extends BaseAggregationTest
             ],
         ]);
 
-        $doc2 = $index->createDocument(2, [
+        $doc2 = $index->createDocument('2', [
             'text' => 'this is the 2nd question',
             'tags' => [
                 'windows-server-2008',
@@ -133,7 +133,7 @@ class ParentAggregationTest extends BaseAggregationTest
 
         $index->addDocuments([$doc1, $doc2]);
 
-        $doc3 = $index->createDocument(3, [
+        $doc3 = $index->createDocument('3', [
             'text' => 'this is an top answer, the 1st',
             'owner' => 'Sam',
             'join' => [
@@ -142,7 +142,7 @@ class ParentAggregationTest extends BaseAggregationTest
             ],
         ]);
 
-        $doc4 = $index->createDocument(4, [
+        $doc4 = $index->createDocument('4', [
             'text' => 'this is a top answer, the 2nd',
             'owner' => 'Sam',
             'join' => [
@@ -151,7 +151,7 @@ class ParentAggregationTest extends BaseAggregationTest
             ],
         ]);
 
-        $doc5 = $index->createDocument(5, [
+        $doc5 = $index->createDocument('5', [
             'text' => 'this is an answer, the 3rd',
             'owner' => 'Troll',
             'join' => [

@@ -22,8 +22,8 @@ class HighlightTest extends BaseTest
         $phrase = 'My name is ruflin';
 
         $index->addDocuments([
-            new Document(1, ['id' => 1, 'phrase' => $phrase, 'username' => 'hanswurst', 'test' => ['2', '3', '5']]),
-            new Document(2, ['id' => 2, 'phrase' => $phrase, 'username' => 'peter', 'test' => ['2', '3', '5']]),
+            new Document('1', ['id' => 1, 'phrase' => $phrase, 'username' => 'hanswurst', 'test' => ['2', '3', '5']]),
+            new Document('2', ['id' => 2, 'phrase' => $phrase, 'username' => 'peter', 'test' => ['2', '3', '5']]),
         ]);
 
         $matchQuery = new MatchPhrase('phrase', 'ruflin');

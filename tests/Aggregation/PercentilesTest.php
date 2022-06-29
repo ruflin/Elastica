@@ -131,16 +131,16 @@ class PercentilesTest extends BaseAggregationTest
         // prepare
         $index = $this->_createIndex();
         $index->addDocuments([
-            new Document(1, ['price' => 100]),
-            new Document(2, ['price' => 200]),
-            new Document(3, ['price' => 300]),
-            new Document(4, ['price' => 400]),
-            new Document(5, ['price' => 500]),
-            new Document(6, ['price' => 600]),
-            new Document(7, ['price' => 700]),
-            new Document(8, ['price' => 800]),
-            new Document(9, ['price' => 900]),
-            new Document(10, ['price' => 1000]),
+            new Document('1', ['price' => 100]),
+            new Document('2', ['price' => 200]),
+            new Document('3', ['price' => 300]),
+            new Document('4', ['price' => 400]),
+            new Document('5', ['price' => 500]),
+            new Document('6', ['price' => 600]),
+            new Document('7', ['price' => 700]),
+            new Document('8', ['price' => 800]),
+            new Document('9', ['price' => 900]),
+            new Document('10', ['price' => 1000]),
         ]);
         $index->refresh();
 
@@ -201,16 +201,16 @@ class PercentilesTest extends BaseAggregationTest
         // prepare
         $index = $this->_createIndex();
         $index->addDocuments([
-            new Document(1, ['price' => 100]),
-            new Document(2, ['price' => 200]),
-            new Document(3, ['price' => 300]),
-            new Document(4, ['price' => 400]),
-            new Document(5, ['price' => 500]),
-            new Document(6, ['price' => 600]),
-            new Document(7, ['price' => 700]),
-            new Document(8, ['price' => 800]),
-            new Document(9, ['price' => 900]),
-            new Document(10, ['price' => 1000]),
+            new Document('1', ['price' => 100]),
+            new Document('2', ['price' => 200]),
+            new Document('3', ['price' => 300]),
+            new Document('4', ['price' => 400]),
+            new Document('5', ['price' => 500]),
+            new Document('6', ['price' => 600]),
+            new Document('7', ['price' => 700]),
+            new Document('8', ['price' => 800]),
+            new Document('9', ['price' => 900]),
+            new Document('10', ['price' => 1000]),
         ]);
         $index->refresh();
 

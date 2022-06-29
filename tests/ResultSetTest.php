@@ -19,9 +19,9 @@ class ResultSetTest extends BaseTest
     {
         $index = $this->_createIndex();
         $index->addDocuments([
-            new Document(1, ['name' => 'elastica search']),
-            new Document(2, ['name' => 'elastica library']),
-            new Document(3, ['name' => 'elastica test']),
+            new Document('1', ['name' => 'elastica search']),
+            new Document('2', ['name' => 'elastica library']),
+            new Document('3', ['name' => 'elastica test']),
         ]);
         $index->refresh();
 
@@ -45,9 +45,9 @@ class ResultSetTest extends BaseTest
     {
         $index = $this->_createIndex();
         $index->addDocuments([
-            new Document(1, ['name' => 'elastica search']),
-            new Document(2, ['name' => 'elastica library']),
-            new Document(3, ['name' => 'elastica test']),
+            new Document('1', ['name' => 'elastica search']),
+            new Document('2', ['name' => 'elastica library']),
+            new Document('3', ['name' => 'elastica test']),
         ]);
         $index->refresh();
 
@@ -64,9 +64,9 @@ class ResultSetTest extends BaseTest
     {
         $index = $this->_createIndex();
         $index->addDocuments([
-            new Document(1, ['name' => 'elastica search']),
-            new Document(2, ['name' => 'elastica library']),
-            new Document(3, ['name' => 'elastica test']),
+            new Document('1', ['name' => 'elastica search']),
+            new Document('2', ['name' => 'elastica library']),
+            new Document('3', ['name' => 'elastica test']),
         ]);
         $index->refresh();
 
@@ -88,7 +88,7 @@ class ResultSetTest extends BaseTest
         $this->expectException(InvalidException::class);
 
         $index = $this->_createIndex();
-        $index->addDocument(new Document(1, ['name' => 'elastica search']));
+        $index->addDocument(new Document('1', ['name' => 'elastica search']));
         $index->refresh();
 
         $resultSet = $index->search('elastica search');
@@ -104,7 +104,7 @@ class ResultSetTest extends BaseTest
 
         $index = $this->_createIndex();
 
-        $doc = new Document(1, ['name' => 'elastica search']);
+        $doc = new Document('1', ['name' => 'elastica search']);
         $index->addDocument($doc);
         $index->refresh();
 

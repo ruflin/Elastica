@@ -51,10 +51,10 @@ class MatchPhraseTest extends BaseTest
         ]);
 
         $index->addDocuments([
-            new Document(1, ['name' => 'Basel-Stadt']),
-            new Document(2, ['name' => 'New York']),
-            new Document(3, ['name' => 'New Hampshire']),
-            new Document(4, ['name' => 'Basel Land']),
+            new Document('1', ['name' => 'Basel-Stadt']),
+            new Document('2', ['name' => 'New York']),
+            new Document('3', ['name' => 'New Hampshire']),
+            new Document('4', ['name' => 'Basel Land']),
         ]);
 
         $index->refresh();

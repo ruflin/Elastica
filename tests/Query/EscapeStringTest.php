@@ -21,7 +21,7 @@ class EscapeStringTest extends BaseTest
         $index->getSettings()->setNumberOfReplicas(0);
 
         $doc = new Document(
-            1,
+            '1',
             [
                 'email' => 'test@test.com', 'username' => 'test 7/6 123', 'test' => ['2', '3', '5'], ]
         );

@@ -155,12 +155,12 @@ class NormalizeAggregationTest extends BaseAggregationTest
         $index = $this->_createIndex();
 
         $index->addDocuments([
-            new Document(1, ['date' => '2018-12-01T01:00:00', 'value' => 1]),
-            new Document(2, ['date' => '2018-12-01T10:00:00', 'value' => 2]),
-            new Document(3, ['date' => '2018-12-02T02:00:00', 'value' => 3]),
-            new Document(4, ['date' => '2018-12-02T15:00:00', 'value' => 4]),
-            new Document(5, ['date' => '2018-12-02T20:00:00', 'value' => 5]),
-            new Document(6, ['date' => '2018-12-03T03:00:00', 'value' => 6]),
+            new Document('1', ['date' => '2018-12-01T01:00:00', 'value' => 1]),
+            new Document('2', ['date' => '2018-12-01T10:00:00', 'value' => 2]),
+            new Document('3', ['date' => '2018-12-02T02:00:00', 'value' => 3]),
+            new Document('4', ['date' => '2018-12-02T15:00:00', 'value' => 4]),
+            new Document('5', ['date' => '2018-12-02T20:00:00', 'value' => 5]),
+            new Document('6', ['date' => '2018-12-03T03:00:00', 'value' => 6]),
         ], ['refresh' => 'true']);
 
         return $index;

@@ -108,7 +108,7 @@ class ParentIdTest extends BaseTest
         $this->_getClient()->addDocuments([$doc3, $doc4, $doc5], ['routing' => 1]);
         $index->refresh();
 
-        $parentQuery = new ParentId('answer', 1, true);
+        $parentQuery = new ParentId('answer', '1', true);
         $search = new Search($index->getClient());
         $results = $search->search($parentQuery);
         $this->assertEquals(1, $results->count());

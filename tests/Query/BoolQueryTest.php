@@ -22,13 +22,13 @@ class BoolQueryTest extends BaseTest
         $query = new BoolQuery();
 
         $idsQuery1 = new Ids();
-        $idsQuery1->setIds(1);
+        $idsQuery1->setIds('1');
 
         $idsQuery2 = new Ids();
-        $idsQuery2->setIds(2);
+        $idsQuery2->setIds('2');
 
         $idsQuery3 = new Ids();
-        $idsQuery3->setIds(3);
+        $idsQuery3->setIds('3');
 
         $filter1 = new Term();
         $filter1->setTerm('test', '1');
@@ -95,13 +95,13 @@ class BoolQueryTest extends BaseTest
             'recreate' => true,
         ]);
 
-        $doc = new Document(1, ['id' => 1, 'email' => 'hans@test.com', 'username' => 'hans', 'test' => ['2', '4', '5']]);
+        $doc = new Document('1', ['id' => 1, 'email' => 'hans@test.com', 'username' => 'hans', 'test' => ['2', '4', '5']]);
         $index->addDocument($doc);
-        $doc = new Document(2, ['id' => 2, 'email' => 'emil@test.com', 'username' => 'emil', 'test' => ['1', '3', '6']]);
+        $doc = new Document('2', ['id' => 2, 'email' => 'emil@test.com', 'username' => 'emil', 'test' => ['1', '3', '6']]);
         $index->addDocument($doc);
-        $doc = new Document(3, ['id' => 3, 'email' => 'ruth@test.com', 'username' => 'ruth', 'test' => ['2', '3', '7']]);
+        $doc = new Document('3', ['id' => 3, 'email' => 'ruth@test.com', 'username' => 'ruth', 'test' => ['2', '3', '7']]);
         $index->addDocument($doc);
-        $doc = new Document(4, ['id' => 4, 'email' => 'john@test.com', 'username' => 'john', 'test' => ['2', '4', '8']]);
+        $doc = new Document('4', ['id' => 4, 'email' => 'john@test.com', 'username' => 'john', 'test' => ['2', '4', '8']]);
         $index->addDocument($doc);
 
         // Refresh index
@@ -148,7 +148,7 @@ class BoolQueryTest extends BaseTest
 
         $docNumber = 3;
         for ($i = 0; $i < $docNumber; ++$i) {
-            $doc = new Document($i, ['email' => 'test@test.com']);
+            $doc = new Document((string) $i, ['email' => 'test@test.com']);
             $index->addDocument($doc);
         }
 

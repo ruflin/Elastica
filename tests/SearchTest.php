@@ -165,7 +165,7 @@ class SearchTest extends BaseTest
 
         $docs = [];
         for ($x = 1; $x <= 10; ++$x) {
-            $docs[] = new Document($x, ['id' => $x, 'testscroll' => 'jbafford']);
+            $docs[] = new Document((string) $x, ['id' => $x, 'testscroll' => 'jbafford']);
         }
 
         $index->addDocuments($docs);
@@ -233,17 +233,17 @@ class SearchTest extends BaseTest
         );
 
         $index->addDocuments([
-            new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(2, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(3, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(4, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(5, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(6, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(7, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(8, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(9, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(10, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(11, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('1', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('2', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('3', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('4', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('5', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('6', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('7', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('8', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('9', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('10', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('11', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
         ]);
         $index->refresh();
 
@@ -283,7 +283,7 @@ class SearchTest extends BaseTest
 
         $docs = [];
         for ($i = 0; $i < 11; ++$i) {
-            $docs[] = new Document($i, ['id' => 1, 'email' => 'test@test.com', 'username' => 'test']);
+            $docs[] = new Document((string) $i, ['id' => 1, 'email' => 'test@test.com', 'username' => 'test']);
         }
 
         $index->addDocuments($docs);
@@ -371,7 +371,7 @@ class SearchTest extends BaseTest
     public function testSearchWithVersionOption(): void
     {
         $index = $this->_createIndex();
-        $doc = new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin']);
+        $doc = new Document('1', ['id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin']);
         $index->addDocuments([$doc]);
         $index->refresh();
 
@@ -425,17 +425,17 @@ class SearchTest extends BaseTest
         );
 
         $index->addDocuments([
-            new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(2, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(3, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(4, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(5, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(6, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
-            new Document(7, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
-            new Document(8, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
-            new Document(9, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
-            new Document(10, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
-            new Document(11, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document('1', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('2', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('3', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('4', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('5', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('6', ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document('7', ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document('8', ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document('9', ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document('10', ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document('11', ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
         ]);
         $index->refresh();
 
@@ -481,17 +481,17 @@ class SearchTest extends BaseTest
         );
 
         $index->addDocuments([
-            new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(2, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(3, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(4, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(5, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(6, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
-            new Document(7, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
-            new Document(8, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
-            new Document(9, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
-            new Document(10, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
-            new Document(11, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document('1', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('2', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('3', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('4', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('5', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('6', ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document('7', ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document('8', ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document('9', ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document('10', ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document('11', ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
         ]);
         $index->refresh();
 
@@ -536,17 +536,17 @@ class SearchTest extends BaseTest
             ]
         );
         $index->addDocuments([
-            new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(2, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(3, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(4, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(5, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(6, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(7, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(8, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']),
-            new Document(9, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']),
-            new Document(10, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']),
-            new Document(11, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']),
+            new Document('1', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('2', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('3', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('4', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('5', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('6', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('7', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('8', ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']),
+            new Document('9', ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']),
+            new Document('10', ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']),
+            new Document('11', ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']),
         ]);
         $index->refresh();
 
@@ -575,7 +575,7 @@ class SearchTest extends BaseTest
         $index = $this->_createIndex();
         $search = new Search($index->getClient());
 
-        $doc = new Document(1, ['id' => 1, 'username' => 'ruflin']);
+        $doc = new Document('1', ['id' => 1, 'username' => 'ruflin']);
 
         $index->addDocuments([$doc]);
         $index->refresh();

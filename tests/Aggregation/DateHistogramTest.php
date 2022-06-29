@@ -150,10 +150,10 @@ class DateHistogramTest extends BaseAggregationTest
         ]));
 
         $index->addDocuments([
-            new Document(1, ['created' => '2014-01-29T00:20:00']),
-            new Document(2, ['created' => '2014-01-29T02:20:00']),
-            new Document(3, ['created' => '2014-01-29T03:20:00']),
-            new Document(4, ['anything' => 'anything']),
+            new Document('1', ['created' => '2014-01-29T00:20:00']),
+            new Document('2', ['created' => '2014-01-29T02:20:00']),
+            new Document('3', ['created' => '2014-01-29T03:20:00']),
+            new Document('4', ['anything' => 'anything']),
         ]);
 
         $index->refresh();

@@ -96,11 +96,11 @@ class MaxTest extends BaseAggregationTest
         $index = $this->_createIndex();
 
         $index->addDocuments([
-            new Document(1, ['price' => 5]),
-            new Document(2, ['price' => self::MAX_PRICE]),
-            new Document(3, ['price' => 1]),
-            new Document(4, ['price' => 3]),
-            new Document(5, ['anything' => 'anything']),
+            new Document('1', ['price' => 5]),
+            new Document('2', ['price' => self::MAX_PRICE]),
+            new Document('3', ['price' => 1]),
+            new Document('4', ['price' => 3]),
+            new Document('5', ['anything' => 'anything']),
         ]);
 
         $index->refresh();

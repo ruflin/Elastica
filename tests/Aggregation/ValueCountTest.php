@@ -31,11 +31,11 @@ class ValueCountTest extends BaseAggregationTest
         $index = $this->_createIndex();
 
         $index->addDocuments([
-            new Document(1, ['price' => 5]),
-            new Document(2, ['price' => 8]),
-            new Document(3, ['price' => 1]),
-            new Document(4, ['price' => 3]),
-            new Document(5, ['price' => 3]),
+            new Document('1', ['price' => 5]),
+            new Document('2', ['price' => 8]),
+            new Document('3', ['price' => 1]),
+            new Document('4', ['price' => 3]),
+            new Document('5', ['price' => 3]),
         ]);
 
         $index->refresh();

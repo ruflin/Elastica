@@ -71,7 +71,7 @@ class SpanWithinTest extends BaseTest
         $index = $this->_createIndex();
 
         $docHitData = [$field => $value];
-        $doc = new Document(1, $docHitData);
+        $doc = new Document('1', $docHitData);
         $index->addDocument($doc);
         $index->refresh();
 

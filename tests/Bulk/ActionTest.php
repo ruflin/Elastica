@@ -30,7 +30,7 @@ class ActionTest extends BaseTest
         $expected = '{"index":{"_index":"index"}}'."\n";
         $this->assertEquals($expected, (string) $action);
 
-        $action->setId(1);
+        $action->setId('1');
         $expected = '{"index":{"_index":"index","_id":"1"}}'."\n";
         $this->assertEquals($expected, (string) $action);
 

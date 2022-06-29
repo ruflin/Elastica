@@ -21,9 +21,9 @@ class IdsTest extends BaseTest
 
         $this->index = $this->_createIndex();
 
-        $this->index->addDocument(new Document(1, ['name' => 'hello world']));
-        $this->index->addDocument(new Document(2, ['name' => 'nicolas ruflin']));
-        $this->index->addDocument(new Document(3, ['name' => 'ruflin']));
+        $this->index->addDocument(new Document('1', ['name' => 'hello world']));
+        $this->index->addDocument(new Document('2', ['name' => 'nicolas ruflin']));
+        $this->index->addDocument(new Document('3', ['name' => 'ruflin']));
 
         $this->index->refresh();
     }

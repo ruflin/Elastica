@@ -77,15 +77,15 @@ class HistogramTest extends BaseAggregationTest
         $index = $this->_createIndex();
 
         $index->addDocuments([
-            new Document(1, ['price' => 5, 'color' => 'blue']),
-            new Document(2, ['price' => 8, 'color' => 'blue']),
-            new Document(3, ['price' => 1, 'color' => 'red']),
-            new Document(4, ['price' => 30, 'color' => 'green']),
-            new Document(5, ['price' => 40, 'color' => 'red']),
-            new Document(6, ['price' => 35, 'color' => 'green']),
-            new Document(7, ['price' => 42, 'color' => 'red']),
-            new Document(8, ['price' => 41, 'color' => 'blue']),
-            new Document(9, ['color' => 'yellow']),
+            new Document('1', ['price' => 5, 'color' => 'blue']),
+            new Document('2', ['price' => 8, 'color' => 'blue']),
+            new Document('3', ['price' => 1, 'color' => 'red']),
+            new Document('4', ['price' => 30, 'color' => 'green']),
+            new Document('5', ['price' => 40, 'color' => 'red']),
+            new Document('6', ['price' => 35, 'color' => 'green']),
+            new Document('7', ['price' => 42, 'color' => 'red']),
+            new Document('8', ['price' => 41, 'color' => 'blue']),
+            new Document('9', ['color' => 'yellow']),
         ]);
 
         $index->refresh();

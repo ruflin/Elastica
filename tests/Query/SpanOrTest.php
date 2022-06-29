@@ -74,9 +74,9 @@ class SpanOrTest extends BaseTest
         $index = $this->_createIndex();
 
         $index->addDocuments([
-            new Document(1, [$field => $text1]),
-            new Document(2, [$field => $text2]),
-            new Document(3, [$field => $text3]),
+            new Document('1', [$field => $text1]),
+            new Document('2', [$field => $text2]),
+            new Document('3', [$field => $text3]),
         ]);
         $index->refresh();
 

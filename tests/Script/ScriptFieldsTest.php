@@ -66,7 +66,7 @@ class ScriptFieldsTest extends BaseTest
     {
         $index = $this->_createIndex();
 
-        $doc = $index->createDocument(1, ['firstname' => 'guschti', 'lastname' => 'ruflin']);
+        $doc = $index->createDocument('1', ['firstname' => 'guschti', 'lastname' => 'ruflin']);
         $index->addDocument($doc);
         $index->refresh();
 
@@ -109,13 +109,13 @@ class ScriptFieldsTest extends BaseTest
         $index->setMapping($mapping);
         $index->refresh();
 
-        $doc1 = $index->createDocument(1, [
+        $doc1 = $index->createDocument('1', [
             'text' => 'this is the 1st question',
             'my_join_field' => [
                 'name' => 'question',
             ],
         ]);
-        $doc2 = $index->createDocument(2, [
+        $doc2 = $index->createDocument('2', [
             'text' => 'this is the 2nd question',
             'my_join_field' => [
                 'name' => 'question',
@@ -123,7 +123,7 @@ class ScriptFieldsTest extends BaseTest
         ]);
         $index->addDocuments([$doc1, $doc2]);
 
-        $doc3 = $index->createDocument(3, [
+        $doc3 = $index->createDocument('3', [
             'text' => 'this is an answer, the 1st',
             'name' => 'rico',
             'my_join_field' => [
@@ -131,7 +131,7 @@ class ScriptFieldsTest extends BaseTest
                 'parent' => 1,
             ],
         ]);
-        $doc4 = $index->createDocument(4, [
+        $doc4 = $index->createDocument('4', [
             'text' => 'this is an answer, the 2nd',
             'name' => 'fede',
             'my_join_field' => [
@@ -139,7 +139,7 @@ class ScriptFieldsTest extends BaseTest
                 'parent' => 2,
             ],
         ]);
-        $doc5 = $index->createDocument(5, [
+        $doc5 = $index->createDocument('5', [
             'text' => 'this is an answer, the 3rd',
             'name' => 'fede',
             'my_join_field' => [

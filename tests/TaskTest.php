@@ -109,7 +109,7 @@ class TaskTest extends Base
     protected function _createIndexWithDocument(): Index
     {
         $index = $this->_createIndex();
-        $index->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
+        $index->addDocument(new Document('1', ['name' => 'ruflin nicolas']));
         $index->refresh();
 
         return $index;

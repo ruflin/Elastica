@@ -20,7 +20,7 @@ class ExampleTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('ruflin');
 
-        $id = 2;
+        $id = '2';
         $data = ['firstname' => 'Nicolas', 'lastname' => 'Ruflin'];
         $doc = new Document($id, $data);
 
@@ -40,12 +40,12 @@ class ExampleTest extends BaseTest
         ]);
 
         // Adds 1 document to the index
-        $index->addDocument(new Document(1, ['username' => 'hans', 'test' => ['2', '3', '5']]));
+        $index->addDocument(new Document('1', ['username' => 'hans', 'test' => ['2', '3', '5']]));
 
         // Adds a list of documents with _bulk upload to the index
         $index->addDocuments([
-            new Document(2, ['username' => 'john', 'test' => ['1', '3', '6']]),
-            new Document(3, ['username' => 'rolf', 'test' => ['2', '3', '7']]),
+            new Document('2', ['username' => 'john', 'test' => ['1', '3', '6']]),
+            new Document('3', ['username' => 'rolf', 'test' => ['2', '3', '7']]),
         ]);
 
         // Refresh index

@@ -26,7 +26,7 @@ class GeoPolygonTest extends BaseTest
 
         // Add doc 1
         $doc1 = new Document(
-            1,
+            '1',
             [
                 'name' => 'ruflin',
             ]
@@ -37,7 +37,7 @@ class GeoPolygonTest extends BaseTest
 
         // Add doc 2
         $doc2 = new Document(
-            2,
+            '2',
             [
                 'name' => 'ruflin',
             ]

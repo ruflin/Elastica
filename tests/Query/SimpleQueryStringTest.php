@@ -41,11 +41,11 @@ class SimpleQueryStringTest extends Base
     {
         $index = $this->_createIndex();
         $docs = [
-            new Document(1, ['make' => 'Gibson', 'model' => 'Les Paul']),
-            new Document(2, ['make' => 'Gibson', 'model' => 'SG Standard']),
-            new Document(3, ['make' => 'Gibson', 'model' => 'SG Supreme']),
-            new Document(4, ['make' => 'Gibson', 'model' => 'SG Faded']),
-            new Document(5, ['make' => 'Fender', 'model' => 'Stratocaster']),
+            new Document('1', ['make' => 'Gibson', 'model' => 'Les Paul']),
+            new Document('2', ['make' => 'Gibson', 'model' => 'SG Standard']),
+            new Document('3', ['make' => 'Gibson', 'model' => 'SG Supreme']),
+            new Document('4', ['make' => 'Gibson', 'model' => 'SG Faded']),
+            new Document('5', ['make' => 'Fender', 'model' => 'Stratocaster']),
         ];
         $index->addDocuments($docs);
         $index->refresh();
@@ -89,10 +89,10 @@ class SimpleQueryStringTest extends Base
         $index = $this->_createIndex();
 
         $index->addDocuments([
-            new Document(1, ['body' => 'foo']),
-            new Document(2, ['body' => 'bar']),
-            new Document(3, ['body' => 'foo bar']),
-            new Document(4, ['body' => 'foo baz bar']),
+            new Document('1', ['body' => 'foo']),
+            new Document('2', ['body' => 'bar']),
+            new Document('3', ['body' => 'foo bar']),
+            new Document('4', ['body' => 'foo baz bar']),
         ]);
         $index->refresh();
 

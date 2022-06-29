@@ -34,9 +34,9 @@ class BulkTest extends BaseTest
         $indexName = $index->getName();
         $client = $index->getClient();
 
-        $newDocument1 = new Document(1, ['name' => 'Mister Fantastic'], $index);
-        $newDocument2 = new Document(2, ['name' => 'Invisible Woman']);
-        $newDocument3 = new Document(3, ['name' => 'The Human Torch'], $index);
+        $newDocument1 = new Document('1', ['name' => 'Mister Fantastic'], $index);
+        $newDocument2 = new Document('2', ['name' => 'Invisible Woman']);
+        $newDocument3 = new Document('3', ['name' => 'The Human Torch'], $index);
         $newDocument4 = new Document(null, ['name' => 'The Thing'], $index);
 
         $newDocument3->setOpType(Document::OP_TYPE_CREATE);
@@ -73,11 +73,11 @@ class BulkTest extends BaseTest
         $data = $bulk->toArray();
 
         $expected = [
-            ['index' => ['_id' => 1, '_index' => $indexName]],
+            ['index' => ['_id' => '1', '_index' => $indexName]],
             ['name' => 'Mister Fantastic'],
-            ['index' => ['_id' => 2]],
+            ['index' => ['_id' => '2']],
             ['name' => 'Invisible Woman'],
-            ['create' => ['_id' => 3, '_index' => $indexName]],
+            ['create' => ['_id' => '3', '_index' => $indexName]],
             ['name' => 'The Human Torch'],
             ['index' => ['_index' => $indexName]],
             ['name' => 'The Thing'],
@@ -119,7 +119,7 @@ class BulkTest extends BaseTest
         $data = $bulk->toArray();
 
         $expected = [
-            ['delete' => ['_index' => $indexName, '_id' => 3]],
+            ['delete' => ['_index' => $indexName, '_id' => '3']],
         ];
         $this->assertEquals($expected, $data);
 
@@ -145,9 +145,9 @@ class BulkTest extends BaseTest
         $index = $this->_createIndex();
         $client = $index->getClient();
 
-        $newDocument1 = new Document(1, ['name' => 'Сегодня, я вижу, особенно грустен твой взгляд,'], $index);
-        $newDocument2 = new Document(2, ['name' => 'И руки особенно тонки, колени обняв.']);
-        $newDocument3 = new Document(3, ['name' => 'Послушай: далеко, далеко, на озере Чад / Изысканный бродит жираф.'], $index);
+        $newDocument1 = new Document('1', ['name' => 'Сегодня, я вижу, особенно грустен твой взгляд,'], $index);
+        $newDocument2 = new Document('2', ['name' => 'И руки особенно тонки, колени обняв.']);
+        $newDocument3 = new Document('3', ['name' => 'Послушай: далеко, далеко, на озере Чад / Изысканный бродит жираф.'], $index);
 
         $documents = [
             $newDocument1,
@@ -203,11 +203,11 @@ class BulkTest extends BaseTest
 
         $action1 = new Action(Action::OP_TYPE_DELETE);
         $action1->setIndex('index');
-        $action1->setId(1);
+        $action1->setId('1');
 
         $action2 = new Action(Action::OP_TYPE_INDEX);
         $action2->setIndex('index');
-        $action2->setId(1);
+        $action2->setId('1');
         $action2->setSource(['name' => 'Batman']);
 
         $actions = [
@@ -342,9 +342,9 @@ class BulkTest extends BaseTest
         $client = $index->getClient();
 
         $documents = [
-            new Document(1, ['name' => 'Mister Fantastic'], $index),
-            new Document(2, ['name' => 'Invisible Woman'], $index),
-            new Document(2, ['name' => 'The Human Torch'], $index),
+            new Document('1', ['name' => 'Mister Fantastic'], $index),
+            new Document('2', ['name' => 'Invisible Woman'], $index),
+            new Document('2', ['name' => 'The Human Torch'], $index),
         ];
 
         $documents[2]->setOpType(Document::OP_TYPE_CREATE);
@@ -417,10 +417,10 @@ JSON;
         $index = $this->_createIndex();
         $client = $index->getClient();
 
-        $doc1 = new Document(1, ['name' => 'John'], $index);
-        $doc2 = new Document(2, ['name' => 'Paul'], $index);
-        $doc3 = new Document(3, ['name' => 'George'], $index);
-        $doc4 = new Document(4, ['name' => 'Ringo'], $index);
+        $doc1 = new Document('1', ['name' => 'John'], $index);
+        $doc2 = new Document('2', ['name' => 'Paul'], $index);
+        $doc3 = new Document('3', ['name' => 'George'], $index);
+        $doc4 = new Document('4', ['name' => 'Ringo'], $index);
         $documents = [$doc1, $doc2, $doc3, $doc4];
 
         // index some documents
@@ -436,7 +436,7 @@ JSON;
         $index->getDocument(2);
 
         // test updating via document
-        $doc2 = new Document(2, ['name' => 'The Walrus'], $index);
+        $doc2 = new Document('2', ['name' => 'The Walrus'], $index);
         $bulk = new Bulk($client);
         $bulk->setIndex($index);
         $updateAction = new UpdateDocument($doc2);
@@ -453,7 +453,7 @@ JSON;
         $this->assertEquals('The Walrus', $docData['name']);
 
         // test updating via script
-        $script = new Script('ctx._source.name += params.param1;', ['param1' => ' was Paul'], Script::LANG_PAINLESS, 2);
+        $script = new Script('ctx._source.name += params.param1;', ['param1' => ' was Paul'], Script::LANG_PAINLESS, '2');
         $updateAction = AbstractDocument::create($script, Action::OP_TYPE_UPDATE);
         $bulk = new Bulk($client);
         $bulk->setIndex($index);
@@ -469,7 +469,7 @@ JSON;
         $this->assertEquals('The Walrus was Paul', $doc2->name);
 
         // test upsert
-        $script = new Script('', [], null, 5);
+        $script = new Script('', [], null, '5');
         $doc = new Document('', ['counter' => 1]);
         $script->setUpsert($doc);
         $updateAction = AbstractDocument::create($script, Action::OP_TYPE_UPDATE);
@@ -486,7 +486,7 @@ JSON;
         $this->assertEquals(1, $doc->counter);
 
         // test doc_as_upsert
-        $doc = new Document(6, ['test' => 'test']);
+        $doc = new Document('6', ['test' => 'test']);
         $doc->setDocAsUpsert(true);
         $updateAction = AbstractDocument::create($doc, Action::OP_TYPE_UPDATE);
         $bulk = new Bulk($client);
@@ -502,9 +502,9 @@ JSON;
         $this->assertEquals('test', $doc->test);
 
         // test doc_as_upsert with set of documents (use of addDocuments)
-        $doc1 = new Document(7, ['test' => 'test1']);
+        $doc1 = new Document('7', ['test' => 'test1']);
         $doc1->setDocAsUpsert(true);
-        $doc2 = new Document(8, ['test' => 'test2']);
+        $doc2 = new Document('8', ['test' => 'test2']);
         $doc2->setDocAsUpsert(true);
         $docs = [$doc1, $doc2];
         $bulk = new Bulk($client);
@@ -522,7 +522,7 @@ JSON;
         $this->assertEquals('test2', $doc->test);
 
         // test updating via document with json string as data
-        $doc3 = new Document(2, [], $index);
+        $doc3 = new Document('2', [], $index);
         $bulk = new Bulk($client);
         $bulk->setIndex($index);
         $doc3->setData('{"name" : "Paul it is"}');
@@ -550,10 +550,10 @@ JSON;
         $index = $this->_createIndex();
         $client = $index->getClient();
 
-        $doc1 = new Document(1, ['name' => 'Pele'], $index);
-        $doc2 = new Document(2, ['name' => 'Beckenbauer'], $index);
-        $doc3 = new Document(3, ['name' => 'Baggio'], $index);
-        $doc4 = new Document(4, ['name' => 'Cruyff'], $index);
+        $doc1 = new Document('1', ['name' => 'Pele'], $index);
+        $doc2 = new Document('2', ['name' => 'Beckenbauer'], $index);
+        $doc3 = new Document('3', ['name' => 'Baggio'], $index);
+        $doc4 = new Document('4', ['name' => 'Cruyff'], $index);
         $documents = \array_map(static function ($d) {
             $d->setDocAsUpsert(true);
 
@@ -572,7 +572,7 @@ JSON;
         $index->refresh();
 
         // test updating via document
-        $doc1 = new Document(1, ['name' => 'Maradona'], $index);
+        $doc1 = new Document('1', ['name' => 'Maradona'], $index);
         $doc1->setDocAsUpsert(true);
         $bulk = new Bulk($client);
         $bulk->setIndex($index);
@@ -601,7 +601,7 @@ JSON;
         $bulk = new Bulk($client);
         $bulk->setIndex($index);
 
-        $id = 1;
+        $id = '1';
         $field = 123456789;
         $subField = ['field' => 'a'];
         $subField2 = ['field_2' => 'b'];
@@ -680,7 +680,7 @@ JSON;
         $index = $this->_createIndex();
         $client = $index->getClient();
 
-        $doc1 = new Document(1, ['name' => 'Mister Fantastic'], $index);
+        $doc1 = new Document('1', ['name' => 'Mister Fantastic'], $index);
         $doc1->setOpType(Action::OP_TYPE_UPDATE);
         $doc1->setRetryOnConflict(5);
 
@@ -785,9 +785,9 @@ JSON;
         ;
 
         $documents = [
-            new Document(1, ['name' => 'Mister Fantastic']),
-            new Document(2, ['name' => 'Invisible Woman']),
-            new Document(2, ['name' => 'The Human Torch']),
+            new Document('1', ['name' => 'Mister Fantastic']),
+            new Document('2', ['name' => 'Invisible Woman']),
+            new Document('2', ['name' => 'The Human Torch']),
         ];
 
         $bulk = new Bulk($clientMock);

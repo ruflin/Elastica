@@ -233,10 +233,10 @@ class FiltersTest extends BaseAggregationTest
         $index = $this->_createIndex('filter');
 
         $index->addDocuments([
-            new Document(1, ['price' => 5, 'color' => 'blue']),
-            new Document(2, ['price' => 8, 'color' => 'blue']),
-            new Document(3, ['price' => 1, 'color' => 'red']),
-            new Document(4, ['price' => 3, 'color' => 'green']),
+            new Document('1', ['price' => 5, 'color' => 'blue']),
+            new Document('2', ['price' => 8, 'color' => 'blue']),
+            new Document('3', ['price' => 1, 'color' => 'red']),
+            new Document('4', ['price' => 3, 'color' => 'green']),
         ]);
 
         $index->refresh();

@@ -33,7 +33,7 @@ class HttpTest extends BaseTest
         // Force HEAD request to set CURLOPT_NOBODY = true
         $index->exists();
 
-        $id = 1;
+        $id = '1';
         $data = ['id' => $id, 'name' => 'Item 1'];
         $doc = new Document($id, $data);
 
@@ -63,7 +63,7 @@ class HttpTest extends BaseTest
         // Force HEAD request to set CURLOPT_NOBODY = true
         $index->exists();
 
-        $id = 22;
+        $id = '22';
         $data = ['id' => $id, 'name' => '
             Сегодня, я вижу, особенно грустен твой взгляд, /
             И руки особенно тонки, колени обняв. /
@@ -154,7 +154,7 @@ class HttpTest extends BaseTest
         ]);
         $this->_waitForAllocation($index);
 
-        $index->addDocument(new Document(1, ['test' => 'test']));
+        $index->addDocument(new Document('1', ['test' => 'test']));
 
         $index->refresh();
 

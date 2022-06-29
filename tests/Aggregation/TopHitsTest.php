@@ -391,27 +391,27 @@ class TopHitsTest extends BaseAggregationTest
         $index->setMapping($mapping);
 
         $index->addDocuments([
-            new Document(1, [
+            new Document('1', [
                 'tags' => ['linux'],
                 'last_activity_date' => '2015-01-05',
                 'title' => 'Question about linux #1',
             ]),
-            new Document(2, [
+            new Document('2', [
                 'tags' => ['linux'],
                 'last_activity_date' => '2014-12-23',
                 'title' => 'Question about linux #2',
             ]),
-            new Document(3, [
+            new Document('3', [
                 'tags' => ['windows'],
                 'last_activity_date' => '2015-01-05',
                 'title' => 'Question about windows #1',
             ]),
-            new Document(4, [
+            new Document('4', [
                 'tags' => ['windows'],
                 'last_activity_date' => '2014-12-23',
                 'title' => 'Question about windows #2',
             ]),
-            new Document(5, [
+            new Document('5', [
                 'tags' => ['osx', 'apple'],
                 'last_activity_date' => '2014-12-23',
                 'title' => 'Question about osx',

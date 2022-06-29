@@ -46,7 +46,7 @@ class TransportBenchmarkTest extends BaseTest
         $times = [];
         for ($i = 0; $i < $this->_max; ++$i) {
             $data = $this->getData($i);
-            $doc = new Document($i, $data);
+            $doc = new Document((string) $i, $data);
             $result = $index->addDocument($doc);
             $times[] = $result->getQueryTime();
             $this->assertTrue($result->isOk());
@@ -96,7 +96,7 @@ class TransportBenchmarkTest extends BaseTest
             $docs = [];
             for ($j = 0; $j < 10; ++$j) {
                 $data = $this->getData($i.$j);
-                $docs[] = new Document($i, $data);
+                $docs[] = new Document((string) $i, $data);
             }
 
             $result = $index->addDocuments($docs);

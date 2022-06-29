@@ -67,7 +67,7 @@ class ClientFunctionalTest extends BaseTest
 
         // Adds 1 document to the index
         $doc1 = new Document(
-            1,
+            '1',
             ['username' => 'hans', 'test' => ['2', '3', '5']]
         );
         $index->addDocument($doc1);
@@ -75,11 +75,11 @@ class ClientFunctionalTest extends BaseTest
         // Adds a list of documents with _bulk upload to the index
         $docs = [];
         $docs[] = new Document(
-            2,
+            '2',
             ['username' => 'john', 'test' => ['1', '3', '6']]
         );
         $docs[] = new Document(
-            3,
+            '3',
             ['username' => 'rolf', 'test' => ['2', '3', '7']]
         );
         $index->addDocuments($docs);
@@ -104,7 +104,7 @@ class ClientFunctionalTest extends BaseTest
 
         // Adds 1 document to the index
         $doc1 = new Document(
-            1,
+            '1',
             ['username' => 'hans', 'test' => ['2', '3', '5']]
         );
         $index->addDocument($doc1);
@@ -112,11 +112,11 @@ class ClientFunctionalTest extends BaseTest
         // Adds a list of documents with _bulk upload to the index
         $docs = [];
         $docs[] = new Document(
-            2,
+            '2',
             ['username' => 'john', 'test' => ['1', '3', '6']]
         );
         $docs[] = new Document(
-            3,
+            '3',
             ['username' => 'rolf', 'test' => ['2', '3', '7']]
         );
         $index->addDocuments($docs);
@@ -158,8 +158,8 @@ class ClientFunctionalTest extends BaseTest
     {
         $index = $this->_getClient()->getIndex('cryptocurrencies');
 
-        $anonCoin = new Document(1, ['name' => 'anoncoin']);
-        $ixCoin = new Document(2, ['name' => 'ixcoin']);
+        $anonCoin = new Document('1', ['name' => 'anoncoin']);
+        $ixCoin = new Document('2', ['name' => 'ixcoin']);
 
         $index->addDocuments([$anonCoin, $ixCoin]);
 
@@ -167,8 +167,8 @@ class ClientFunctionalTest extends BaseTest
         $this->assertEquals('ixcoin', $index->getDocument(2)->get('name'));
 
         $index->updateDocuments([
-            new Document(1, ['name' => 'AnonCoin']),
-            new Document(2, ['name' => 'iXcoin']),
+            new Document('1', ['name' => 'AnonCoin']),
+            new Document('2', ['name' => 'iXcoin']),
         ]);
 
         $this->assertEquals('AnonCoin', $index->getDocument(1)->get('name'));
@@ -193,12 +193,12 @@ class ClientFunctionalTest extends BaseTest
         $modifiedValue = 27;
 
         $doc1 = new Document(
-            1,
+            '1',
             ['name' => 'hans', 'age' => $initialValue],
             $indexName
         );
         $doc2 = new Document(
-            2,
+            '2',
             ['name' => 'anna', 'age' => $initialValue],
             $indexName
         );
@@ -229,7 +229,7 @@ class ClientFunctionalTest extends BaseTest
         $initialValue = 28;
 
         $doc1 = new Document(
-            1,
+            '1',
             ['name' => 'hans', 'age' => $initialValue],
             $indexName
         );
@@ -459,10 +459,10 @@ class ClientFunctionalTest extends BaseTest
         $index = $this->_createIndex();
         $client = $index->getClient();
 
-        $newDocument = new Document(1, ['field1' => 'value1', 'field2' => 'value2']);
+        $newDocument = new Document('1', ['field1' => 'value1', 'field2' => 'value2']);
         $index->addDocument($newDocument);
 
-        $updateDocument = new Document(1, ['field2' => 'value2changed', 'field3' => 'value3added']);
+        $updateDocument = new Document('1', ['field2' => 'value2changed', 'field3' => 'value3added']);
         $client->updateDocument(1, $updateDocument, $index->getName());
 
         $document = $index->getDocument(1);
@@ -481,7 +481,7 @@ class ClientFunctionalTest extends BaseTest
         $index = $this->_createIndex();
         $client = $index->getClient();
 
-        $newDocument = new Document(1, ['field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'should be changed']);
+        $newDocument = new Document('1', ['field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'should be changed']);
         $index->addDocument($newDocument);
 
         $script = new Script('ctx._source.field2 += 5; ctx._source.remove("field3"); ctx._source.field4 = "changed"', null, Script::LANG_PAINLESS);
@@ -545,7 +545,7 @@ class ClientFunctionalTest extends BaseTest
         $index = $this->_createIndex();
         $client = $index->getClient();
 
-        $newDocument = new Document(1, ['field1' => 'value1']);
+        $newDocument = new Document('1', ['field1' => 'value1']);
         $index->addDocument($newDocument);
 
         $rawData = [
@@ -571,8 +571,8 @@ class ClientFunctionalTest extends BaseTest
         $index = $this->_createIndex();
         $client = $index->getClient();
 
-        $newDocument = new Document(1, ['field1' => 'value1updated', 'field2' => 'value2updated']);
-        $upsert = new Document(1, ['field1' => 'value1', 'field2' => 'value2']);
+        $newDocument = new Document('1', ['field1' => 'value1updated', 'field2' => 'value2updated']);
+        $upsert = new Document('1', ['field1' => 'value1', 'field2' => 'value2']);
         $newDocument->setUpsert($upsert);
         $client->updateDocument(1, $newDocument, $index->getName());
 
@@ -609,7 +609,7 @@ class ClientFunctionalTest extends BaseTest
             // Ignore the exception because we expect the document to not exist.
         }
 
-        $newDocument = new Document(1, ['field1' => 'value1', 'field2' => 'value2']);
+        $newDocument = new Document('1', ['field1' => 'value1', 'field2' => 'value2']);
         $newDocument->setDocAsUpsert(true);
         $client->updateDocument(1, $newDocument, $index->getName());
 
@@ -643,9 +643,9 @@ class ClientFunctionalTest extends BaseTest
         $client = $index->getClient();
 
         $docs = [
-            new Document(1, ['field' => 'value1'], $index),
-            new Document(2, ['field' => 'value2'], $index),
-            new Document(3, ['field' => 'value3'], $index),
+            new Document('1', ['field' => 'value1'], $index),
+            new Document('2', ['field' => 'value2'], $index),
+            new Document('3', ['field' => 'value3'], $index),
         ];
 
         $response = $client->addDocuments($docs);
@@ -684,9 +684,9 @@ class ClientFunctionalTest extends BaseTest
         $client = $index->getClient();
 
         $docs = [
-            new Document(1, ['field' => 'value1'], $index),
-            new Document(2, ['field' => 'value2'], $index),
-            new Document(3, ['field' => 'value3'], $index),
+            new Document('1', ['field' => 'value1'], $index),
+            new Document('2', ['field' => 'value2'], $index),
+            new Document('3', ['field' => 'value3'], $index),
         ];
 
         $response = $client->addDocuments($docs);
@@ -737,7 +737,7 @@ class ClientFunctionalTest extends BaseTest
         $index = $this->_createIndex();
         $client = $index->getClient();
 
-        $newDocument = new Document(1, ['field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'value4']);
+        $newDocument = new Document('1', ['field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'value4']);
         $newDocument->setAutoPopulate();
         $index->addDocument($newDocument);
 
@@ -746,7 +746,7 @@ class ClientFunctionalTest extends BaseTest
         $script->setUpsert($newDocument);
 
         $client->updateDocument(
-            1,
+            '1',
             $script,
             $index->getName()
         );
@@ -766,7 +766,7 @@ class ClientFunctionalTest extends BaseTest
         $script->setUpsert($newDocument);
 
         $client->updateDocument(
-            1,
+            '1',
             $script,
             $index->getName()
         );
@@ -839,7 +839,7 @@ class ClientFunctionalTest extends BaseTest
         $index->create([], [
             'recreate' => true,
         ]);
-        $index->addDocument(new Document(1, ['username' => 'ruflin']));
+        $index->addDocument(new Document('1', ['username' => 'ruflin']));
         $index->refresh();
 
         $query = [
@@ -866,7 +866,7 @@ class ClientFunctionalTest extends BaseTest
         $index->create([], [
             'recreate' => true,
         ]);
-        $index->addDocument(new Document(1, ['username' => 'ruflin']));
+        $index->addDocument(new Document('1', ['username' => 'ruflin']));
         $index->refresh();
 
         $query = '{"query":{"query_string":{"query":"ruflin"}}}';
@@ -942,8 +942,8 @@ class ClientFunctionalTest extends BaseTest
         // Also, index should exist (matches $staticIndex)
         $dynamicIndex->refresh();
 
-        $doc1 = $dynamicIndex->createDocument(1, ['name' => 'one']);
-        $doc2 = $dynamicIndex->createDocument(2, ['name' => 'two']);
+        $doc1 = $dynamicIndex->createDocument('1', ['name' => 'one']);
+        $doc2 = $dynamicIndex->createDocument('2', ['name' => 'two']);
 
         // Index name goes through JSON body, should remain unescaped
         $bulk = new Bulk($client);
@@ -1005,7 +1005,7 @@ class ClientFunctionalTest extends BaseTest
         $index->create([], [
             'recreate' => true,
         ]);
-        $index->addDocument(new Document(1, ['username' => 'ruflin']));
+        $index->addDocument(new Document('1', ['username' => 'ruflin']));
         $index->refresh();
 
         $query = [

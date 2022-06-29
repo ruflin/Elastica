@@ -47,13 +47,13 @@ class NestedTest extends BaseAggregationTest
         ]));
 
         $index->addDocuments([
-            new Document(1, [
+            new Document('1', [
                 'resellers' => [
                     'name' => 'spacely sprockets',
                     'price' => 5.55,
                 ],
             ]),
-            new Document(2, [
+            new Document('2', [
                 'resellers' => [
                     'name' => 'cogswell cogs',
                     'price' => 4.98,

@@ -51,9 +51,9 @@ class TermsSetTest extends BaseTest
         $index = $this->_createIndex();
 
         $index->addDocuments([
-            new Document(1, ['skills' => ['php', 'js']]),
-            new Document(2, ['skills' => ['php']]),
-            new Document(3, ['skills' => ['java']]),
+            new Document('1', ['skills' => ['php', 'js']]),
+            new Document('2', ['skills' => ['php']]),
+            new Document('3', ['skills' => ['java']]),
         ]);
 
         $index->refresh();
@@ -87,9 +87,9 @@ class TermsSetTest extends BaseTest
         $index = $this->_createIndex();
 
         $index->addDocuments([
-            new Document(1, ['skill_count' => 2, 'skills' => ['php', 'js']]),
-            new Document(2, ['skill_count' => 1, 'skills' => ['php']]),
-            new Document(3, ['skill_count' => 1, 'skills' => ['java']]),
+            new Document('1', ['skill_count' => 2, 'skills' => ['php', 'js']]),
+            new Document('2', ['skill_count' => 1, 'skills' => ['php']]),
+            new Document('3', ['skill_count' => 1, 'skills' => ['java']]),
         ]);
 
         $index->refresh();
@@ -123,7 +123,7 @@ class TermsSetTest extends BaseTest
         $index = $this->_createIndex();
 
         $index->addDocuments([
-            new Document(1, ['some_numeric_field' => 9876]),
+            new Document('1', ['some_numeric_field' => 9876]),
         ]);
         $index->refresh();
 
