@@ -35,9 +35,9 @@ class Term extends AbstractQuery
     /**
      * Adds a term to the term query.
      *
-     * @param string       $key   Key to query
-     * @param array|string $value Values(s) for the query. Boost can be set with array
-     * @param float        $boost OPTIONAL Boost value (default = 1.0)
+     * @param string                $key   Key to query
+     * @param bool|float|int|string $value Values(s) for the query
+     * @param float                 $boost OPTIONAL Boost value (default = 1.0)
      *
      * @return $this
      */
