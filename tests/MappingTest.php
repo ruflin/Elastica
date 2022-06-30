@@ -36,7 +36,7 @@ class MappingTest extends BaseTest
 
         $firstname = 'Nicolas';
         $doc = new Document(
-            1,
+            '1',
             [
                 'firstname' => $firstname,
                 'lastname' => 'Ruflin',
@@ -91,7 +91,7 @@ class MappingTest extends BaseTest
         $response = $index->setMapping($mapping);
         $this->assertFalse($response->hasError());
 
-        $doc = new Document(1, [
+        $doc = new Document('1', [
             'user' => [
                 'firstname' => 'Nicolas',
                 'lastname' => 'Ruflin',
@@ -146,14 +146,14 @@ class MappingTest extends BaseTest
         $this->assertEquals($expected, $mapping->toArray());
         $index->refresh();
 
-        $doc1 = new Document(1, [
+        $doc1 = new Document('1', [
             'text' => 'this is the 1st question',
             'my_join_field' => [
                 'name' => 'question',
             ],
         ]);
 
-        $doc2 = new Document(2, [
+        $doc2 = new Document('2', [
             'text' => 'this is the 2nd question',
             'my_join_field' => [
                 'name' => 'question',
@@ -162,7 +162,7 @@ class MappingTest extends BaseTest
 
         $index->addDocuments([$doc1, $doc2]);
 
-        $doc3 = new Document(3, [
+        $doc3 = new Document('3', [
             'text' => 'this is an answer, the 1st',
             'my_join_field' => [
                 'name' => 'answer',
@@ -170,7 +170,7 @@ class MappingTest extends BaseTest
             ],
         ]);
 
-        $doc4 = new Document(4, [
+        $doc4 = new Document('4', [
             'text' => 'this is an answer, the 2nd',
             'my_join_field' => [
                 'name' => 'answer',
@@ -209,7 +209,7 @@ class MappingTest extends BaseTest
         $index->setMapping($mapping);
 
         $doc = new Document(
-            1,
+            '1',
             [
                 'note' => [
                     [

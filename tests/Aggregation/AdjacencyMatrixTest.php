@@ -128,9 +128,9 @@ class AdjacencyMatrixTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
         $index->addDocuments([
-            new Document(1, ['accounts' => ['hillary', 'sidney']]),
-            new Document(2, ['accounts' => ['hillary', 'donald']]),
-            new Document(3, ['accounts' => ['vladimir', 'donald']]),
+            new Document('1', ['accounts' => ['hillary', 'sidney']]),
+            new Document('2', ['accounts' => ['hillary', 'donald']]),
+            new Document('3', ['accounts' => ['vladimir', 'donald']]),
         ]);
 
         $index->refresh();

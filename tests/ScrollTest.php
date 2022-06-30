@@ -160,7 +160,7 @@ class ScrollTest extends Base
         if ($indexSize > 0) {
             $docs = [];
             for ($x = 1; $x <= $indexSize; ++$x) {
-                $docs[] = new Document($x, ['id' => $x, 'key' => 'value']);
+                $docs[] = new Document((string) $x, ['id' => $x, 'key' => 'value']);
             }
             $index->addDocuments($docs);
             $index->refresh();

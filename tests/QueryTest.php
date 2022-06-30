@@ -92,9 +92,9 @@ class QueryTest extends BaseTest
         ]));
 
         $index->addDocuments([
-            new Document(1, ['name' => 'hello world']),
-            new Document(2, ['firstname' => 'guschti', 'lastname' => 'ruflin']),
-            new Document(3, ['firstname' => 'nicolas', 'lastname' => 'ruflin']),
+            new Document('1', ['name' => 'hello world']),
+            new Document('2', ['firstname' => 'guschti', 'lastname' => 'ruflin']),
+            new Document('3', ['firstname' => 'nicolas', 'lastname' => 'ruflin']),
         ]);
         $index->refresh();
 
@@ -427,7 +427,7 @@ class QueryTest extends BaseTest
 
         // Adds 1 document to the index
         $doc1 = new Document(
-            1,
+            '1',
             ['username' => 'ruflin', 'test' => ['2', '3', '5']]
         );
         $index->addDocument($doc1);
@@ -653,7 +653,7 @@ class QueryTest extends BaseTest
 
         $documents = [];
         for ($i = 0; $i < 50; ++$i) {
-            $documents[] = new Document($i, ['firstname' => 'antoine '.$i]);
+            $documents[] = new Document((string) $i, ['firstname' => 'antoine '.$i]);
         }
 
         $index->addDocuments($documents);

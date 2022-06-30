@@ -40,7 +40,7 @@ class IndexTest extends BaseTest
         ]);
         $index->setMapping($mappings);
         $index->addDocument(
-            new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => ['2', '3', '5']])
+            new Document('1', ['id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => ['2', '3', '5']])
         );
         $index->forcemerge();
 
@@ -108,7 +108,7 @@ class IndexTest extends BaseTest
                 'recreate' => true,
             ]
         );
-        $index->addDocument(new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin']));
+        $index->addDocument(new Document('1', ['id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin']));
         $index->refresh();
 
         $resultSet = $index->search('ruflin');
@@ -182,8 +182,8 @@ class IndexTest extends BaseTest
     {
         $index = $this->_createIndex();
         $index->addDocuments([
-            new Document(1, ['name' => 'ruflin nicolas']),
-            new Document(2, ['name' => 'ruflin']),
+            new Document('1', ['name' => 'ruflin nicolas']),
+            new Document('2', ['name' => 'ruflin']),
         ]);
         $index->refresh();
 
@@ -214,8 +214,8 @@ class IndexTest extends BaseTest
     {
         $index = $this->_createIndex();
         $index->addDocuments([
-            new Document(1, ['name' => 'ruflin nicolas']),
-            new Document(2, ['name' => 'ruflin']),
+            new Document('1', ['name' => 'ruflin nicolas']),
+            new Document('2', ['name' => 'ruflin']),
         ]);
         $index->refresh();
 
@@ -246,8 +246,8 @@ class IndexTest extends BaseTest
     {
         $index = $this->_createIndex();
         $index->addDocuments([
-            new Document(1, ['name' => 'ruflin nicolas']),
-            new Document(2, ['name' => 'ruflin']),
+            new Document('1', ['name' => 'ruflin nicolas']),
+            new Document('2', ['name' => 'ruflin']),
         ]);
         $index->refresh();
 
@@ -281,15 +281,15 @@ class IndexTest extends BaseTest
         $routing1 = 'first_routing';
         $routing2 = 'second_routing';
 
-        $doc = new Document(1, ['name' => 'ruflin nicolas']);
+        $doc = new Document('1', ['name' => 'ruflin nicolas']);
         $doc->setRouting($routing1);
         $index->addDocument($doc);
 
-        $doc = new Document(2, ['name' => 'ruflin']);
+        $doc = new Document('2', ['name' => 'ruflin']);
         $doc->setRouting($routing1);
         $index->addDocument($doc);
 
-        $doc = new Document(2, ['name' => 'ruflin']);
+        $doc = new Document('2', ['name' => 'ruflin']);
         $doc->setRouting($routing1);
         $index->addDocument($doc);
 
@@ -337,8 +337,8 @@ class IndexTest extends BaseTest
     {
         $index = $this->_createIndex();
         $index->addDocuments([
-            new Document(1, ['name' => 'ruflin nicolas']),
-            new Document(2, ['name' => 'ruflin']),
+            new Document('1', ['name' => 'ruflin nicolas']),
+            new Document('2', ['name' => 'ruflin']),
         ]);
         $index->refresh();
 
@@ -372,8 +372,8 @@ class IndexTest extends BaseTest
     {
         $index = $this->_createIndex();
         $index->addDocuments([
-            new Document(1, ['name' => 'ruflin nicolas']),
-            new Document(2, ['name' => 'ruflin']),
+            new Document('1', ['name' => 'ruflin nicolas']),
+            new Document('2', ['name' => 'ruflin']),
         ]);
         $index->refresh();
 
@@ -507,7 +507,7 @@ class IndexTest extends BaseTest
             'recreate' => true,
         ]);
 
-        $doc1 = new Document(1);
+        $doc1 = new Document('1');
         $doc1->set('title', 'Hello world');
 
         $return = $index->addDocument($doc1);
@@ -528,7 +528,7 @@ class IndexTest extends BaseTest
         $index1 = $client->getIndex('test');
         $index2 = $client->getIndex('test_2');
 
-        $doc = new Document(1);
+        $doc = new Document('1');
         $doc->set('title', 'Hello world');
 
         $index1->addDocument($doc);
@@ -645,17 +645,17 @@ class IndexTest extends BaseTest
         $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]]);
 
         $docs = [
-            new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(2, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(3, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(4, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(5, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(6, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(7, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(8, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(9, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(10, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(11, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('1', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('2', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('3', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('4', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('5', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('6', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('7', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('8', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('9', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('10', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document('11', ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
         ];
         $index->addDocuments($docs);
         $index->refresh();
@@ -777,9 +777,9 @@ class IndexTest extends BaseTest
         $index = $this->_createIndex();
 
         $docs = [];
-        $docs[] = new Document(1, ['username' => 'hans', 'test' => ['2', '3', '5']]);
-        $docs[] = new Document(2, ['username' => 'john', 'test' => ['1', '3', '6']]);
-        $docs[] = new Document(3, ['username' => 'rolf', 'test' => ['2', '3', '7']]);
+        $docs[] = new Document('1', ['username' => 'hans', 'test' => ['2', '3', '5']]);
+        $docs[] = new Document('2', ['username' => 'john', 'test' => ['1', '3', '6']]);
+        $docs[] = new Document('3', ['username' => 'rolf', 'test' => ['2', '3', '7']]);
         $index->addDocuments($docs);
         $index->refresh();
 
@@ -806,7 +806,7 @@ class IndexTest extends BaseTest
     {
         $index = $this->_createIndex();
         $docs = [];
-        $docs[] = new Document(1, ['username' => 'hans']);
+        $docs[] = new Document('1', ['username' => 'hans']);
         $index->addDocuments($docs);
         $index->refresh();
 
@@ -840,8 +840,8 @@ class IndexTest extends BaseTest
         ]);
 
         $docs = [
-            new Document(1, ['foo' => 'bar']),
-            new Document(2, ['foo' => 'bar']),
+            new Document('1', ['foo' => 'bar']),
+            new Document('2', ['foo' => 'bar']),
         ];
         $index->addDocuments($docs, ['refresh' => 'true']);
 

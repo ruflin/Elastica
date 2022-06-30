@@ -105,7 +105,7 @@ class ReverseNestedTest extends BaseAggregationTest
         $index->setMapping($mapping);
 
         $index->addDocuments([
-            new Document(1, [
+            new Document('1', [
                 'comments' => [
                     [
                         'name' => 'bob',
@@ -118,7 +118,7 @@ class ReverseNestedTest extends BaseAggregationTest
                 ],
                 'tags' => ['foo', 'bar'],
             ]),
-            new Document(2, [
+            new Document('2', [
                 'comments' => [
                     [
                         'name' => 'bob',

@@ -149,10 +149,10 @@ class DateRangeTest extends BaseAggregationTest
         ]));
 
         $index->addDocuments([
-            new Document(1, ['created' => 1390962135000]),
-            new Document(2, ['created' => 1390965735000]),
-            new Document(3, ['created' => 1390954935000]),
-            new Document(4, ['anything' => 'anything']),
+            new Document('1', ['created' => 1390962135000]),
+            new Document('2', ['created' => 1390965735000]),
+            new Document('3', ['created' => 1390954935000]),
+            new Document('4', ['anything' => 'anything']),
         ]);
 
         $index->refresh();

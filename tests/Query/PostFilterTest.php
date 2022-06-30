@@ -54,10 +54,10 @@ class PostFilterTest extends BaseTest
     {
         $index = $this->_createIndex();
         $docs = [
-            new Document(1, ['color' => 'green', 'make' => 'ford']),
-            new Document(2, ['color' => 'blue', 'make' => 'volvo']),
-            new Document(3, ['color' => 'red', 'make' => 'ford']),
-            new Document(4, ['color' => 'green', 'make' => 'renault']),
+            new Document('1', ['color' => 'green', 'make' => 'ford']),
+            new Document('2', ['color' => 'blue', 'make' => 'volvo']),
+            new Document('3', ['color' => 'red', 'make' => 'ford']),
+            new Document('4', ['color' => 'green', 'make' => 'renault']),
         ];
         $index->addDocuments($docs);
         $index->refresh();

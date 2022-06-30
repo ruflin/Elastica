@@ -94,7 +94,7 @@ class DocumentTest extends BaseTest
         $this->assertFalse($document->hasId());
         $document->setId(null);
         $this->assertFalse($document->hasId());
-        $document->setId(0);
+        $document->setId('0');
         $this->assertTrue($document->hasId());
         $document->setId('hello');
         $this->assertTrue($document->hasId());
@@ -136,7 +136,7 @@ class DocumentTest extends BaseTest
         $document = new Document();
         $document->setIndex('index');
         $document->setOpType('create');
-        $document->setId(1);
+        $document->setId('1');
 
         $options = $document->getOptions(['_index', 'type', '_id', 'op_type']);
 
@@ -159,7 +159,7 @@ class DocumentTest extends BaseTest
      */
     public function testGetSetHasRemove(): void
     {
-        $document = new Document(1, ['field1' => 'value1', 'field2' => 'value2', 'field3' => 'value3', 'field4' => null]);
+        $document = new Document('1', ['field1' => 'value1', 'field2' => 'value2', 'field3' => 'value3', 'field4' => null]);
 
         $this->assertEquals('value1', $document->get('field1'));
         $this->assertEquals('value2', $document->get('field2'));
@@ -213,7 +213,7 @@ class DocumentTest extends BaseTest
      */
     public function testDataPropertiesOverloading(): void
     {
-        $document = new Document(1, ['field1' => 'value1', 'field2' => 'value2', 'field3' => 'value3', 'field4' => null]);
+        $document = new Document('1', ['field1' => 'value1', 'field2' => 'value2', 'field3' => 'value3', 'field4' => null]);
 
         $this->assertEquals('value1', $document->field1);
         $this->assertEquals('value2', $document->field2);
@@ -266,7 +266,7 @@ class DocumentTest extends BaseTest
     public function testSerializedData(): void
     {
         $data = '{"user":"rolf"}';
-        $document = new Document(1, $data);
+        $document = new Document('1', $data);
 
         $this->assertFalse($document->has('user'));
 

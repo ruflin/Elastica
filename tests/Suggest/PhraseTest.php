@@ -111,11 +111,11 @@ class PhraseTest extends BaseTest
     {
         $index = $this->_createIndex();
         $index->addDocuments([
-            new Document(1, ['text' => 'Github is pretty cool']),
-            new Document(2, ['text' => 'Elasticsearch is bonsai cool']),
-            new Document(3, ['text' => 'This is a test phrase']),
-            new Document(4, ['text' => 'Another sentence for testing']),
-            new Document(5, ['text' => 'Some more words here']),
+            new Document('1', ['text' => 'Github is pretty cool']),
+            new Document('2', ['text' => 'Elasticsearch is bonsai cool']),
+            new Document('3', ['text' => 'This is a test phrase']),
+            new Document('4', ['text' => 'Another sentence for testing']),
+            new Document('5', ['text' => 'Some more words here']),
         ]);
         $index->refresh();
 

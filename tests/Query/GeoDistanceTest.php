@@ -22,12 +22,12 @@ class GeoDistanceTest extends BaseTest
         $index->setMapping(new Mapping(['point' => ['type' => 'geo_point']]));
 
         // Add doc 1
-        $doc1 = new Document(1);
+        $doc1 = new Document('1');
         $doc1->addGeoPoint('point', 17, 19);
         $index->addDocument($doc1);
 
         // Add doc 2
-        $doc2 = new Document(2);
+        $doc2 = new Document('2');
         $doc2->addGeoPoint('point', 30, 40);
         $index->addDocument($doc2);
 

@@ -271,7 +271,7 @@ class ReindexTest extends Base
     {
         $insert = [];
         for ($i = 1; $i <= $docs; ++$i) {
-            $insert[] = new Document($i, ['id' => $i, 'key' => 'value']);
+            $insert[] = new Document((string) $i, ['id' => $i, 'key' => 'value']);
         }
 
         $index->addDocuments($insert);

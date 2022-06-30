@@ -139,12 +139,12 @@ class TermTest extends BaseTest
     {
         $index = $this->_createIndex();
         $index->addDocuments([
-            new Document(1, ['id' => 1, 'text' => 'GitHub']),
-            new Document(2, ['id' => 1, 'text' => 'Elastic']),
-            new Document(3, ['id' => 1, 'text' => 'Search']),
-            new Document(4, ['id' => 1, 'text' => 'Food']),
-            new Document(5, ['id' => 1, 'text' => 'Flood']),
-            new Document(6, ['id' => 1, 'text' => 'Folks']),
+            new Document('1', ['id' => 1, 'text' => 'GitHub']),
+            new Document('2', ['id' => 1, 'text' => 'Elastic']),
+            new Document('3', ['id' => 1, 'text' => 'Search']),
+            new Document('4', ['id' => 1, 'text' => 'Food']),
+            new Document('5', ['id' => 1, 'text' => 'Flood']),
+            new Document('6', ['id' => 1, 'text' => 'Folks']),
         ]);
         $index->refresh();
 

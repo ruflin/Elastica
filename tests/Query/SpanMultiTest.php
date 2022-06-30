@@ -71,11 +71,11 @@ class SpanMultiTest extends BaseTest
         $index = $this->_createIndex();
 
         $index->addDocuments([
-            new Document(1, [$field => $text1]),
-            new Document(2, [$field => $text2]),
-            new Document(3, [$field => $text3]),
-            new Document(4, [$field => $text4]),
-            new Document(5, [$field => $text5]),
+            new Document('1', [$field => $text1]),
+            new Document('2', [$field => $text2]),
+            new Document('3', [$field => $text3]),
+            new Document('4', [$field => $text4]),
+            new Document('5', [$field => $text5]),
         ]);
         $index->refresh();
 

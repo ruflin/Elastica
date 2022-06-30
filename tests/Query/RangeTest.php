@@ -23,10 +23,10 @@ class RangeTest extends BaseTest
         ]);
 
         $index->addDocuments([
-            new Document(1, ['age' => 16, 'height' => 140]),
-            new Document(2, ['age' => 21, 'height' => 155]),
-            new Document(3, ['age' => 33, 'height' => 160]),
-            new Document(4, ['age' => 68, 'height' => 160]),
+            new Document('1', ['age' => 16, 'height' => 140]),
+            new Document('2', ['age' => 21, 'height' => 155]),
+            new Document('3', ['age' => 33, 'height' => 160]),
+            new Document('4', ['age' => 68, 'height' => 160]),
         ]);
 
         $index->forcemerge();

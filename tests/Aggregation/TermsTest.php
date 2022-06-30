@@ -151,11 +151,11 @@ class TermsTest extends BaseAggregationTest
         $index->setMapping($mapping);
 
         $index->addDocuments([
-            new Document(1, ['color' => 'blue']),
-            new Document(2, ['color' => 'blue']),
-            new Document(3, ['color' => 'red']),
-            new Document(4, ['color' => 'green']),
-            new Document(5, ['anything' => 'anything']),
+            new Document('1', ['color' => 'blue']),
+            new Document('2', ['color' => 'blue']),
+            new Document('3', ['color' => 'red']),
+            new Document('4', ['color' => 'green']),
+            new Document('5', ['anything' => 'anything']),
         ]);
 
         $index->refresh();

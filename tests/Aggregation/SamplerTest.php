@@ -80,11 +80,11 @@ class SamplerTest extends BaseAggregationTest
         $routing2 = 'second_routing';
 
         $index->addDocuments([
-            (new Document(1, ['price' => 5]))->setRouting($routing1),
-            (new Document(2, ['price' => 8]))->setRouting($routing1),
-            (new Document(3, ['price' => 1]))->setRouting($routing1),
-            (new Document(4, ['price' => 3]))->setRouting($routing2),
-            (new Document(5, ['price' => 1.5]))->setRouting($routing2),
+            (new Document('1', ['price' => 5]))->setRouting($routing1),
+            (new Document('2', ['price' => 8]))->setRouting($routing1),
+            (new Document('3', ['price' => 1]))->setRouting($routing1),
+            (new Document('4', ['price' => 3]))->setRouting($routing2),
+            (new Document('5', ['price' => 1.5]))->setRouting($routing2),
         ]);
 
         $index->refresh();

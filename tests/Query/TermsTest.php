@@ -86,9 +86,9 @@ class TermsTest extends BaseTest
         $index = $this->_createIndex();
 
         $index->addDocuments([
-            new Document(1, ['name' => 'hello world']),
-            new Document(2, ['name' => 'nicolas ruflin']),
-            new Document(3, ['name' => 'ruflin']),
+            new Document('1', ['name' => 'hello world']),
+            new Document('2', ['name' => 'nicolas ruflin']),
+            new Document('3', ['name' => 'ruflin']),
         ]);
 
         $query = new Terms('name', ['nicolas', 'hello']);
@@ -113,13 +113,13 @@ class TermsTest extends BaseTest
 
         $lookupIndex = $this->_createIndex('lookup_index');
         $lookupIndex->addDocuments([
-            new Document(1, ['terms' => ['ruflin', 'nicolas']]),
+            new Document('1', ['terms' => ['ruflin', 'nicolas']]),
         ]);
 
         $index->addDocuments([
-            new Document(1, ['name' => 'hello world']),
-            new Document(2, ['name' => 'nicolas ruflin']),
-            new Document(3, ['name' => 'ruflin']),
+            new Document('1', ['name' => 'hello world']),
+            new Document('2', ['name' => 'nicolas ruflin']),
+            new Document('3', ['name' => 'ruflin']),
         ]);
 
         $query = new Terms('name');
@@ -140,7 +140,7 @@ class TermsTest extends BaseTest
         $index = $this->_createIndex();
 
         $index->addDocuments([
-            new Document(1, ['some_numeric_field' => 9876]),
+            new Document('1', ['some_numeric_field' => 9876]),
         ]);
         $index->refresh();
 
@@ -168,10 +168,10 @@ class TermsTest extends BaseTest
         $index = $this->_createIndex();
 
         $index->addDocuments([
-            new Document(1, ['some_numeric_field' => 9876]),
-            new Document(2, ['some_numeric_field' => 5678]),
-            new Document(3, ['some_numeric_field' => 1234]),
-            new Document(4, ['some_numeric_field' => 8899]),
+            new Document('1', ['some_numeric_field' => 9876]),
+            new Document('2', ['some_numeric_field' => 5678]),
+            new Document('3', ['some_numeric_field' => 1234]),
+            new Document('4', ['some_numeric_field' => 8899]),
         ]);
         $index->refresh();
 
@@ -188,7 +188,7 @@ class TermsTest extends BaseTest
         $index = $this->_createIndex();
 
         $index->addDocuments([
-            new Document(1, ['some_numeric_field' => 9876]),
+            new Document('1', ['some_numeric_field' => 9876]),
         ]);
         $index->refresh();
 

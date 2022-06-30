@@ -70,7 +70,7 @@ class AttachmentProcessorTest extends BasePipelineTest
 
         $doc1 = new Document(null);
         $doc1->addFile('data', __DIR__.'/../data/test.pdf');
-        $doc2 = new Document(2, ['data' => '', 'text' => 'test running in basel']);
+        $doc2 = new Document('2', ['data' => '', 'text' => 'test running in basel']);
 
         $bulk->addDocuments([
             $doc1, $doc2,
@@ -114,7 +114,7 @@ class AttachmentProcessorTest extends BasePipelineTest
         $doc1->addFile('data', __DIR__.'/../data/test.pdf');
         $doc1->set('text', 'basel world');
 
-        $doc2 = new Document(2, ['data' => '', 'text' => 'test running in basel']);
+        $doc2 = new Document('2', ['data' => '', 'text' => 'test running in basel']);
         $doc2->set('text', 'running in basel');
 
         $bulk->addDocuments([
@@ -159,7 +159,7 @@ class AttachmentProcessorTest extends BasePipelineTest
         $doc1->addFile('data', __DIR__.'/../data/test.docx');
         $doc1->set('text', 'basel world');
 
-        $doc2 = new Document(2, ['data' => '', 'text' => 'test running in basel']);
+        $doc2 = new Document('2', ['data' => '', 'text' => 'test running in basel']);
 
         $bulk->addDocuments([
             $doc1, $doc2,
@@ -203,7 +203,7 @@ class AttachmentProcessorTest extends BasePipelineTest
 
         $index->setMapping($mapping);
 
-        $docId = 1;
+        $docId = '1';
         $text = 'Basel World';
         $title = 'No Title';
 

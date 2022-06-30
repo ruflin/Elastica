@@ -36,10 +36,10 @@ class MoreLikeThisTest extends BaseTest
         $mapping->setSource(['enabled' => false]);
         $index->setMapping($mapping);
 
-        $doc = new Document(1000, ['email' => 'testemail@gmail.com', 'content' => 'This is a sample post. Hello World Fuzzy Like This!']);
+        $doc = new Document('1000', ['email' => 'testemail@gmail.com', 'content' => 'This is a sample post. Hello World Fuzzy Like This!']);
         $index->addDocument($doc);
 
-        $doc = new Document(1001, ['email' => 'nospam@gmail.com', 'content' => 'This is a fake nospam email address for gmail']);
+        $doc = new Document('1001', ['email' => 'nospam@gmail.com', 'content' => 'This is a fake nospam email address for gmail']);
         $index->addDocument($doc);
 
         // Refresh index
@@ -82,13 +82,13 @@ class MoreLikeThisTest extends BaseTest
         );
 
         $index->addDocuments([
-            new Document(1, ['visible' => true, 'name' => 'bruce wayne batman']),
-            new Document(2, ['visible' => true, 'name' => 'bruce wayne']),
-            new Document(3, ['visible' => false, 'name' => 'bruce wayne']),
-            new Document(4, ['visible' => true, 'name' => 'batman']),
-            new Document(5, ['visible' => false, 'name' => 'batman']),
-            new Document(6, ['visible' => true, 'name' => 'superman']),
-            new Document(7, ['visible' => true, 'name' => 'spiderman']),
+            new Document('1', ['visible' => true, 'name' => 'bruce wayne batman']),
+            new Document('2', ['visible' => true, 'name' => 'bruce wayne']),
+            new Document('3', ['visible' => false, 'name' => 'bruce wayne']),
+            new Document('4', ['visible' => true, 'name' => 'batman']),
+            new Document('5', ['visible' => false, 'name' => 'batman']),
+            new Document('6', ['visible' => true, 'name' => 'superman']),
+            new Document('7', ['visible' => true, 'name' => 'spiderman']),
         ]);
 
         $index->refresh();

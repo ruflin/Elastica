@@ -93,7 +93,7 @@ class SignificantTermsTest extends BaseAggregationTest
 
         $docs = [];
         for ($i = 0; $i < 250; ++$i) {
-            $docs[] = new Document($i, ['color' => $colors[$i % \count($colors)], 'temperature' => $temperatures[$i % \count($temperatures)]]);
+            $docs[] = new Document((string) $i, ['color' => $colors[$i % \count($colors)], 'temperature' => $temperatures[$i % \count($temperatures)]]);
         }
         $index->addDocuments($docs);
         $index->refresh();

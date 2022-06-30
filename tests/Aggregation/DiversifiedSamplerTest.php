@@ -104,16 +104,16 @@ class DiversifiedSamplerTest extends BaseAggregationTest
         $routing2 = 'second_routing';
 
         $index->addDocuments([
-            (new Document(1, ['price' => 5, 'color' => 'blue']))->setRouting($routing1),
-            (new Document(2, ['price' => 8, 'color' => 'blue']))->setRouting($routing1),
-            (new Document(3, ['price' => 1, 'color' => 'blue']))->setRouting($routing1),
-            (new Document(4, ['price' => 3, 'color' => 'red']))->setRouting($routing1),
-            (new Document(5, ['price' => 1.5, 'color' => 'red']))->setRouting($routing1),
-            (new Document(6, ['price' => 2, 'color' => 'green']))->setRouting($routing1),
-            (new Document(7, ['price' => 5, 'color' => 'blue']))->setRouting($routing2),
-            (new Document(8, ['price' => 8, 'color' => 'blue']))->setRouting($routing2),
-            (new Document(9, ['price' => 1, 'color' => 'red']))->setRouting($routing2),
-            (new Document(10, ['price' => 3, 'color' => 'red']))->setRouting($routing2),
+            (new Document('1', ['price' => 5, 'color' => 'blue']))->setRouting($routing1),
+            (new Document('2', ['price' => 8, 'color' => 'blue']))->setRouting($routing1),
+            (new Document('3', ['price' => 1, 'color' => 'blue']))->setRouting($routing1),
+            (new Document('4', ['price' => 3, 'color' => 'red']))->setRouting($routing1),
+            (new Document('5', ['price' => 1.5, 'color' => 'red']))->setRouting($routing1),
+            (new Document('6', ['price' => 2, 'color' => 'green']))->setRouting($routing1),
+            (new Document('7', ['price' => 5, 'color' => 'blue']))->setRouting($routing2),
+            (new Document('8', ['price' => 8, 'color' => 'blue']))->setRouting($routing2),
+            (new Document('9', ['price' => 1, 'color' => 'red']))->setRouting($routing2),
+            (new Document('10', ['price' => 3, 'color' => 'red']))->setRouting($routing2),
         ]);
 
         $index->refresh();

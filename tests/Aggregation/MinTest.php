@@ -53,11 +53,11 @@ class MinTest extends BaseAggregationTest
         $index = $this->_createIndex();
 
         $index->addDocuments([
-            new Document(1, ['price' => 5]),
-            new Document(2, ['price' => 8]),
-            new Document(3, ['price' => self::MIN_PRICE]),
-            new Document(4, ['price' => 3]),
-            new Document(5, ['anything' => 'anything']),
+            new Document('1', ['price' => 5]),
+            new Document('2', ['price' => 8]),
+            new Document('3', ['price' => self::MIN_PRICE]),
+            new Document('4', ['price' => 3]),
+            new Document('5', ['anything' => 'anything']),
         ]);
 
         $index->refresh();

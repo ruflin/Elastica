@@ -44,9 +44,9 @@ class ScriptedMetricTest extends BaseAggregationTest
         ]));
 
         $index->addDocuments([
-            new Document(1, ['start' => 100, 'end' => 200]),
-            new Document(2, ['start' => 200, 'end' => 250]),
-            new Document(3, ['start' => 300, 'end' => 450]),
+            new Document('1', ['start' => 100, 'end' => 200]),
+            new Document('2', ['start' => 200, 'end' => 250]),
+            new Document('3', ['start' => 300, 'end' => 450]),
         ]);
 
         $index->refresh();

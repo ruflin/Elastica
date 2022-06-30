@@ -28,7 +28,7 @@ class GeoShapeProvidedTest extends BaseTest
         $index->setMapping($mapping);
 
         // add docs
-        $index->addDocument(new Document(1, [
+        $index->addDocument(new Document('1', [
             'location' => [
                 'type' => 'envelope',
                 'coordinates' => [

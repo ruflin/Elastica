@@ -104,7 +104,7 @@ class GuzzleTest extends BaseTest
         ]);
         $this->_waitForAllocation($index);
 
-        $index->addDocument(new Document(1, ['test' => 'test']));
+        $index->addDocument(new Document('1', ['test' => 'test']));
 
         $index->refresh();
 

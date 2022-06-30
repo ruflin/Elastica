@@ -32,7 +32,7 @@ class MatchNoneTest extends BaseTest
         $index = $this->_createIndex();
         $client = $index->getClient();
 
-        $doc = new Document(1, ['name' => 'ruflin']);
+        $doc = new Document('1', ['name' => 'ruflin']);
         $index->addDocument($doc);
 
         $index->refresh();

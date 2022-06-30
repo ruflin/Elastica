@@ -561,13 +561,13 @@ class FunctionScoreTest extends BaseTest
         ]));
 
         $index->addDocuments([
-            new Document(1, [
+            new Document('1', [
                 'name' => "Mr. Frostie's",
                 'location' => [['lat' => 32.799605, 'lon' => -117.243027], ['lat' => 32.792744, 'lon' => -117.2387341]],
                 'price' => 4.5,
                 'popularity' => null,
             ]),
-            new Document(2, [
+            new Document('2', [
                 'name' => "Miller's Field",
                 'location' => ['lat' => 32.795964, 'lon' => -117.255028],
                 'price' => 9.5,

@@ -20,7 +20,7 @@ class ResultTest extends BaseTest
     {
         // Creates a new index 'xodoa'
         $index = $this->_createIndex();
-        $index->addDocument(new Document(3, ['username' => 'hans']));
+        $index->addDocument(new Document('3', ['username' => 'hans']));
         $index->refresh();
 
         $resultSet = $index->search('hans');
@@ -56,7 +56,7 @@ class ResultTest extends BaseTest
         $index->setMapping($mapping);
 
         // Adds 1 document to the index
-        $docId = 3;
+        $docId = '3';
         $doc1 = new Document($docId, ['username' => 'hans']);
         $index->addDocument($doc1);
 
@@ -84,7 +84,7 @@ class ResultTest extends BaseTest
         $index = $this->_createIndex();
 
         // Adds 1 document to the index
-        $docId = 3;
+        $docId = '3';
         $doc1 = new Document($docId, ['username' => 'hans']);
         $index->addDocument($doc1);
 

@@ -52,7 +52,7 @@ class QueryStringTest extends BaseTest
         $index = $this->_createIndex();
         $index->getSettings()->setNumberOfReplicas(0);
 
-        $doc = new Document(1, ['email' => 'test@test.com', 'username' => 'hanswurst', 'test' => ['2', '3', '5']]);
+        $doc = new Document('1', ['email' => 'test@test.com', 'username' => 'hanswurst', 'test' => ['2', '3', '5']]);
         $index->addDocument($doc);
         $index->refresh();
 
@@ -71,7 +71,7 @@ class QueryStringTest extends BaseTest
     {
         $index = $this->_createIndex();
 
-        $doc = new Document(1, ['title' => 'hello world', 'firstname' => 'nicolas', 'lastname' => 'ruflin', 'price' => '102', 'year' => '2012']);
+        $doc = new Document('1', ['title' => 'hello world', 'firstname' => 'nicolas', 'lastname' => 'ruflin', 'price' => '102', 'year' => '2012']);
         $index->addDocument($doc);
         $index->refresh();
 
@@ -92,7 +92,7 @@ class QueryStringTest extends BaseTest
     {
         $index = $this->_createIndex();
 
-        $doc = new Document(1, ['title' => 'hello world', 'firstname' => 'nicolas', 'lastname' => 'ruflin', 'price' => '102', 'year' => '2012']);
+        $doc = new Document('1', ['title' => 'hello world', 'firstname' => 'nicolas', 'lastname' => 'ruflin', 'price' => '102', 'year' => '2012']);
         $index->addDocument($doc);
         $index->refresh();
 

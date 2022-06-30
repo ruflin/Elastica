@@ -294,42 +294,42 @@ class CollapseTest extends BaseTest
         ]));
 
         $index->addDocuments([
-            new Document(1, [
+            new Document('1', [
                 'user' => 'Veronica',
                 'message' => 'Always keeping an eye on elasticsearch.',
                 'date' => '2019-08-15',
                 'likes' => 10,
                 'zip' => '07',
             ]),
-            new Document(2, [
+            new Document('2', [
                 'user' => 'Wallace',
                 'message' => 'Elasticsearch DevOps is awesome!',
                 'date' => '2019-08-05',
                 'likes' => 50,
                 'zip' => '06',
             ]),
-            new Document(3, [
+            new Document('3', [
                 'user' => 'Logan',
                 'message' => 'Can I find my lost stuff on elasticsearch?',
                 'date' => '2019-08-02',
                 'likes' => 1,
                 'zip' => '09',
             ]),
-            new Document(4, [
+            new Document('4', [
                 'user' => 'Keith',
                 'message' => 'Investigating again.',
                 'date' => '2019-08-10',
                 'likes' => 30,
                 'zip' => '07',
             ]),
-            new Document(5, [
+            new Document('5', [
                 'user' => 'Veronica',
                 'message' => 'Finding out new stuff.',
                 'date' => '2019-08-01',
                 'likes' => 20,
                 'zip' => '07',
             ]),
-            new Document(6, [
+            new Document('6', [
                 'user' => 'Wallace',
                 'message' => 'Baller.',
                 'date' => '2019-08-15',
