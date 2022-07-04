@@ -6,6 +6,7 @@ use Aws\Credentials\CredentialProvider;
 use Aws\Credentials\Credentials;
 use Aws\Sdk;
 use Elastica\Exception\Connection\GuzzleException;
+use GuzzleHttp\Exception\ConnectException;
 
 /**
  * @internal
@@ -39,6 +40,7 @@ class AwsAuthV4Test extends GuzzleTest
             $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
+            $this->assertInstanceOf(ConnectException::class, $guzzleException);
             $request = $guzzleException->getRequest();
             $expected = 'AWS4-HMAC-SHA256 Credential=foo/'
                 .\date('Ymd').'/us-east-1/es/aws4_request, ';
@@ -76,6 +78,7 @@ class AwsAuthV4Test extends GuzzleTest
             $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
+            $this->assertInstanceOf(ConnectException::class, $guzzleException);
             $request = $guzzleException->getRequest();
             $expected = 'AWS4-HMAC-SHA256 Credential=foo/'
                 .\date('Ymd').'/us-east-1/es/aws4_request, ';
@@ -110,6 +113,7 @@ class AwsAuthV4Test extends GuzzleTest
             $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
+            $this->assertInstanceOf(ConnectException::class, $guzzleException);
             $request = $guzzleException->getRequest();
             $expected = 'AWS4-HMAC-SHA256 Credential=foo/'
                 .\date('Ymd').'/us-east-1/es/aws4_request, ';
@@ -140,6 +144,7 @@ class AwsAuthV4Test extends GuzzleTest
             $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
+            $this->assertInstanceOf(ConnectException::class, $guzzleException);
             $request = $guzzleException->getRequest();
 
             $this->assertSame('http', $request->getUri()->getScheme());
@@ -163,6 +168,7 @@ class AwsAuthV4Test extends GuzzleTest
             $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
+            $this->assertInstanceOf(ConnectException::class, $guzzleException);
             $request = $guzzleException->getRequest();
 
             $this->assertSame('https', $request->getUri()->getScheme());
@@ -185,6 +191,7 @@ class AwsAuthV4Test extends GuzzleTest
             $client->request('_stats');
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
+            $this->assertInstanceOf(ConnectException::class, $guzzleException);
             $request = $guzzleException->getRequest();
             $expected = 'AWS4-HMAC-SHA256 Credential=foo/'
                 .\date('Ymd').'/us-east-1/es/aws4_request, ';

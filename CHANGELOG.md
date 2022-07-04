@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Changed `value` in `SetProcessor` to accept `mixed` instead of `string` by @franmomu [#2082](https://github.com/ruflin/Elastica/pull/2082)
 * Updated `Query::create` PHPDoc to include supported types and propagate it to callers by @franmomu [#2088](https://github.com/ruflin/Elastica/pull/2088)
 * Update some iterable types in PHPDoc to be more specific by @franmomu [#2092](https://github.com/ruflin/Elastica/pull/2092)
+* Updated `AwsAuthV4Test` adding assertions for exception type by @franmomu [#2094](https://github.com/ruflin/Elastica/pull/2094)
 
 ### Deprecated
 * Deprecated `Elastica\Reindex::WAIT_FOR_COMPLETION_FALSE`, use a boolean as parameter instead by @franmomu [#2070](https://github.com/ruflin/Elastica/pull/2070)

@@ -135,8 +135,3 @@ parameters:
 			count: 1
 			path: tests/SnapshotTest.php
 
-		-
-			message: "#^Call to an undefined method GuzzleHttp\\\\Exception\\\\TransferException\\:\\:getRequest\\(\\)\\.$#"
-			count: 6
-			path: tests/Transport/AwsAuthV4Test.php
-
