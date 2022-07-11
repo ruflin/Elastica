@@ -99,7 +99,7 @@ class DateHistogramTest extends BaseAggregationTest
         $expected = [
             'date_histogram' => [
                 'field' => 'created',
-                'interval' => '1h',
+                'calendar_interval' => '1h',
                 'offset' => '3m',
             ],
         ];
@@ -134,7 +134,7 @@ class DateHistogramTest extends BaseAggregationTest
         $expected = [
             'date_histogram' => [
                 'field' => 'created',
-                'interval' => '1h',
+                'calendar_interval' => '1h',
                 'time_zone' => '-02:30',
             ],
         ];

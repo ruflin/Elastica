@@ -26,7 +26,7 @@ class NormalizeAggregationTest extends BaseAggregationTest
         $expected = [
             'date_histogram' => [
                 'field' => 'date',
-                'interval' => 'day',
+                'calendar_interval' => 'day',
             ],
             'aggs' => [
                 'sum_agg' => [
