@@ -11,6 +11,57 @@ class DateHistogram extends Histogram
 {
     public const DEFAULT_TIMEZONE_VALUE = 'UTC';
 
+    private const CALENDAR_INTERVAL_VALUES = [
+        '1m',
+        'minute',
+        '1h',
+        'hour',
+        '1d',
+        'day',
+        '1w',
+        'week',
+        '1M',
+        'month',
+        '1q',
+        'quarter',
+        '1y',
+        'year',
+    ];
+
+    /**
+     * Set the interval by which documents will be bucketed.
+     *
+     * @param int|string $interval
+     *
+     * @return $this
+     */
+    public function setInterval($interval)
+    {
+        $interval = (string) $interval;
+
+        if (\in_array($interval, self::CALENDAR_INTERVAL_VALUES, true)) {
+            return $this->setCalendarInterval($interval);
+        }
+
+        return $this->setFixedInterval($interval);
+    }
+
+    /**
+     * @return $this
+     */
+    public function setCalendarInterval(string $interval): self
+    {
+        return $this->setParam('calendar_interval', $interval);
+    }
+
+    /**
+     * @return $this
+     */
+    public function setFixedInterval(string $interval): self
+    {
+        return $this->setParam('fixed_interval', $interval);
+    }
+
     /**
      * Set time_zone option.
      *

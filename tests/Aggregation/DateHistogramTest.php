@@ -14,6 +14,40 @@ use Elastica\Query;
 class DateHistogramTest extends BaseAggregationTest
 {
     /**
+     * @group unit
+     */
+    public function testConstructForCalendarInterval(): void
+    {
+        $agg = new DateHistogram('hist', 'created', '1h');
+
+        $expected = [
+            'date_histogram' => [
+                'field' => 'created',
+                'calendar_interval' => '1h',
+            ],
+        ];
+
+        $this->assertSame($expected, $agg->toArray());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testConstructForFixedInterval(): void
+    {
+        $agg = new DateHistogram('hist', 'created', '2h');
+
+        $expected = [
+            'date_histogram' => [
+                'field' => 'created',
+                'fixed_interval' => '2h',
+            ],
+        ];
+
+        $this->assertSame($expected, $agg->toArray());
+    }
+
+    /**
      * @group functional
      */
     public function testDateHistogramAggregation(): void
@@ -99,7 +133,7 @@ class DateHistogramTest extends BaseAggregationTest
         $expected = [
             'date_histogram' => [
                 'field' => 'created',
-                'interval' => '1h',
+                'calendar_interval' => '1h',
                 'offset' => '3m',
             ],
         ];
@@ -134,7 +168,7 @@ class DateHistogramTest extends BaseAggregationTest
         $expected = [
             'date_histogram' => [
                 'field' => 'created',
-                'interval' => '1h',
+                'calendar_interval' => '1h',
                 'time_zone' => '-02:30',
             ],
         ];

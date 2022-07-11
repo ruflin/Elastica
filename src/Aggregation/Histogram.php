@@ -31,7 +31,7 @@ class Histogram extends AbstractSimpleAggregation
      *
      * @return $this
      */
-    public function setInterval($interval): self
+    public function setInterval($interval)
     {
         return $this->setParam('interval', $interval);
     }

@@ -39,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Fixed case mismatch in method calls by @franmomu [#2087](https://github.com/ruflin/Elastica/pull/2087)
 * Fixed `MoreLikeThis::setLike()` PHPDoc allowing `Document` by @franmomu [#2091](https://github.com/ruflin/Elastica/pull/2091)
 * Fixed `Term::setTerm()` PHPDoc allowing scalar values for `$value` parameter by @franmomu [#2094](https://github.com/ruflin/Elastica/pull/2094)
+* Fixed `DateHistogram` deprecation: use `fixed_internal` or `calendar_interval` instead of `interval` by @VincentLanglet [#2099](https://github.com/ruflin/Elastica/pull/2099)
 
 ### Security
 
