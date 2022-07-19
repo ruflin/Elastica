@@ -37,7 +37,7 @@ class DateHistogram extends Histogram
      */
     public function setInterval($interval): Histogram
     {
-        if (\in_array($interval, self::CALENDAR_INTERVAL)) {
+        if (\in_array($interval, self::CALENDAR_INTERVAL, true)) {
             return $this->setCalendarInterval($interval);
         }
 
