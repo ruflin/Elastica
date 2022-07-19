@@ -11,7 +11,7 @@ class DateHistogram extends Histogram
 {
     public const DEFAULT_TIMEZONE_VALUE = 'UTC';
 
-    private const CALENDAR_INTERVAL = [
+    private const CALENDAR_INTERVAL_VALUES = [
         '1m',
         'minute',
         '1h',
@@ -37,7 +37,7 @@ class DateHistogram extends Histogram
      */
     public function setInterval($interval): Histogram
     {
-        if (\in_array($interval, self::CALENDAR_INTERVAL, true)) {
+        if (\in_array($interval, self::CALENDAR_INTERVAL_VALUES, true)) {
             return $this->setCalendarInterval($interval);
         }
 
