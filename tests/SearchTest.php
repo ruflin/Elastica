@@ -98,19 +98,6 @@ class SearchTest extends BaseTest
     }
 
     /**
-     * @group unit
-     */
-    public function testAddNumericIndex(): void
-    {
-        $client = $this->_getClient();
-        $search = new Search($client);
-
-        $search->addIndex(1);
-
-        $this->assertContains('1', $search->getIndices(), 'Make sure it has been added and converted to string');
-    }
-
-    /**
      * @group functional
      */
     public function testGetPath(): void
