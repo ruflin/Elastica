@@ -711,7 +711,7 @@ JSON;
     {
         $bulk = new Bulk($this->_getClient());
 
-        $this->assertSame($bulk, $bulk->setShardTimeout(10));
+        $this->assertSame($bulk, $bulk->setShardTimeout('10s'));
     }
 
     /**
