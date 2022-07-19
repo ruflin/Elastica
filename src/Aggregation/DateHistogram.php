@@ -38,9 +38,29 @@ class DateHistogram extends Histogram
     public function setInterval($interval): Histogram
     {
         if (\in_array($interval, self::CALENDAR_INTERVAL)) {
-            return $this->setParam('calendar_interval', $interval);
+            return $this->setCalendarInterface($interval);
         }
 
+        return $this->setFixedInterface($interval);
+    }
+
+    /**
+     * @param int|string $interval
+     *
+     * @return $this
+     */
+    public function setCalendarInterface($interval): self
+    {
+        return $this->setParam('calendar_interval', $interval);
+    }
+
+    /**
+     * @param int|string $interval
+     *
+     * @return $this
+     */
+    public function setFixedInterface($interval): self
+    {
         return $this->setParam('fixed_interval', $interval);
     }
 
