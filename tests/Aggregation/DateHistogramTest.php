@@ -18,7 +18,7 @@ class DateHistogramTest extends BaseAggregationTest
      */
     public function testConstructForCalendarInterval(): void
     {
-        $agg = (new DateHistogram('hist', 'created', '1h'));
+        $agg = new DateHistogram('hist', 'created', '1h');
 
         $expected = [
             'date_histogram' => [
