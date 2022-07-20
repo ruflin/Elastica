@@ -5,6 +5,7 @@ namespace Elastica;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\ResponseException;
 use Elastica\Query\AbstractQuery;
+use Elastica\Query\MatchAll;
 use Elastica\ResultSet\BuilderInterface;
 use Elastica\ResultSet\DefaultBuilder;
 use Elastica\Suggest\AbstractSuggest;
@@ -13,6 +14,7 @@ use Elastica\Suggest\AbstractSuggest;
  * Elastica search object.
  *
  * @author   Nicolas Ruflin <spam@ruflin.com>
+ * @phpstan-import-type TCreateQueryArgs from Query
  */
 class Search
 {
@@ -162,7 +164,8 @@ class Search
     }
 
     /**
-     * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest $query
+     * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest|null $query
+     * @phpstan-param TCreateQueryArgs $query
      */
     public function setQuery($query): self
     {
@@ -288,7 +291,7 @@ class Search
     public function getQuery(): Query
     {
         if (null === $this->_query) {
-            $this->_query = Query::create('');
+            $this->_query = new Query(new MatchAll());
         }
 
         return $this->_query;
@@ -317,8 +320,10 @@ class Search
     /**
      * Search in the set indices.
      *
-     * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest $query
-     * @param array|int                                                         $options Limit or associative array of options (option=>value)
+     * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest|null $query
+     * @phpstan-param TCreateQueryArgs $query
+     *
+     * @param array|int $options Limit or associative array of options (option=>value)
      *
      * @throws InvalidException
      * @throws ResponseException
@@ -374,8 +379,9 @@ class Search
     }
 
     /**
-     * @param array|int                                                         $options
-     * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest $query
+     * @param array|int                                                              $options
+     * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest|null $query
+     * @phpstan-param TCreateQueryArgs $query
      */
     public function setOptionsAndQuery($options = null, $query = ''): self
     {
