@@ -67,7 +67,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      *
      * @return Document[]
      */
-    public function getDocuments()
+    public function getDocuments(): array
     {
         $documents = [];
         foreach ($this->_results as $doc) {

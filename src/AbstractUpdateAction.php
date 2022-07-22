@@ -461,20 +461,15 @@ class AbstractUpdateAction extends Param
         return $this->_upsert;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasUpsert()
+    public function hasUpsert(): bool
     {
         return null !== $this->_upsert;
     }
 
     /**
      * @param array $fields if empty array all options will be returned
-     *
-     * @return array
      */
-    public function getOptions(array $fields = [])
+    public function getOptions(array $fields = []): array
     {
         if ($fields) {
             return \array_filter(\array_intersect_key($this->getParams(), \array_flip($fields)));

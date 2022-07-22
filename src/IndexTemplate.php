@@ -68,10 +68,8 @@ class IndexTemplate
 
     /**
      * Checks if the given index template is already created.
-     *
-     * @return bool
      */
-    public function exists()
+    public function exists(): bool
     {
         $response = $this->request(Request::HEAD);
 

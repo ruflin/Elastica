@@ -18,7 +18,7 @@ abstract class AbstractExceptionTest extends BaseTest
         $this->assertTrue($reflection->implementsInterface(ExceptionInterface::class));
     }
 
-    protected function _getExceptionClass()
+    protected function _getExceptionClass(): ?string
     {
         $reflection = new \ReflectionObject($this);
 

@@ -22,10 +22,8 @@ class Util
      * Checks if date math is already escaped within request URI.
      *
      * @param string $requestUri
-     *
-     * @return bool
      */
-    public static function isDateMathEscaped($requestUri)
+    public static function isDateMathEscaped($requestUri): bool
     {
         // In practice, the only symbol that really needs to be escaped in URI is '/' => '%2F'
         return false !== \strpos(\strtoupper($requestUri), '%2F');
@@ -133,7 +131,7 @@ class Util
      *
      * @return string Replaced query term
      */
-    public static function replaceBooleanWords($term)
+    public static function replaceBooleanWords($term): string
     {
         $replacementMap = [' AND ' => ' && ', ' OR ' => ' || ', ' NOT ' => ' !'];
 
@@ -149,7 +147,7 @@ class Util
      *
      * @return string CamelCase string
      */
-    public static function toCamelCase($string)
+    public static function toCamelCase($string): string
     {
         return \str_replace(' ', '', \ucwords(\str_replace('_', ' ', $string)));
     }
@@ -163,7 +161,7 @@ class Util
      *
      * @return string SnakeCase string
      */
-    public static function toSnakeCase($string)
+    public static function toSnakeCase($string): string
     {
         return \strtolower(\preg_replace('/[A-Z]/', '_\\0', \lcfirst($string)));
     }
@@ -177,7 +175,7 @@ class Util
      *
      * @return string Converted date string
      */
-    public static function convertDate($date)
+    public static function convertDate($date): string
     {
         if (\is_int($date)) {
             $timestamp = $date;

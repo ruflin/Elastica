@@ -340,20 +340,16 @@ class Client
 
     /**
      * Returns the status object for all indices.
-     *
-     * @return Status
      */
-    public function getStatus()
+    public function getStatus(): Status
     {
         return new Status($this);
     }
 
     /**
      * Returns the current cluster.
-     *
-     * @return Cluster
      */
-    public function getCluster()
+    public function getCluster(): Cluster
     {
         return new Cluster($this);
     }

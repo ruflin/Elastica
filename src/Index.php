@@ -78,20 +78,16 @@ class Index implements SearchableInterface
 
     /**
      * Return Index Stats.
-     *
-     * @return IndexStats
      */
-    public function getStats()
+    public function getStats(): IndexStats
     {
         return new IndexStats($this);
     }
 
     /**
      * Return Index Recovery.
-     *
-     * @return IndexRecovery
      */
-    public function getRecovery()
+    public function getRecovery(): IndexRecovery
     {
         return new IndexRecovery($this);
     }
@@ -126,20 +122,16 @@ class Index implements SearchableInterface
 
     /**
      * Returns the index settings object.
-     *
-     * @return IndexSettings
      */
-    public function getSettings()
+    public function getSettings(): IndexSettings
     {
         return new IndexSettings($this);
     }
 
     /**
      * @param array|string $data
-     *
-     * @return Document
      */
-    public function createDocument(string $id = '', $data = [])
+    public function createDocument(string $id = '', $data = []): Document
     {
         return new Document($id, $data, $this);
     }

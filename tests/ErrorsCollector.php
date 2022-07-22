@@ -28,7 +28,7 @@ class ErrorsCollector
         $this->errors[] = $error;
     }
 
-    public function getCount()
+    public function getCount(): int
     {
         return \count($this->errors);
     }

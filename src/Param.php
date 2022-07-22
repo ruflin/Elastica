@@ -137,11 +137,9 @@ class Param implements ArrayableInterface, \Countable
 
     /**
      * {@inheritdoc}
-     *
-     * @return int
      */
     #[\ReturnTypeWillChange]
-    public function count()
+    public function count(): int
     {
         return \count($this->_params);
     }
@@ -149,9 +147,9 @@ class Param implements ArrayableInterface, \Countable
     /**
      * Cast objects to arrays.
      *
-     * @return array
+     * @return mixed[]
      */
-    protected function _convertArrayable(array $array)
+    protected function _convertArrayable(array $array): array
     {
         $arr = [];
 

@@ -133,7 +133,7 @@ class Base extends TestCase
         }
     }
 
-    protected function _getVersion()
+    protected function _getVersion(): string
     {
         $data = $this->_getClient()->request('/')->getData();
 

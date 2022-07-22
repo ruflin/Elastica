@@ -59,7 +59,7 @@ class Status
      *
      * @return string[]
      */
-    public function getIndexNames()
+    public function getIndexNames(): array
     {
         $data = $this->getData();
 
@@ -73,7 +73,7 @@ class Status
      *
      * @return bool True if index exists
      */
-    public function indexExists(string $name)
+    public function indexExists(string $name): bool
     {
         return \in_array($name, $this->getIndexNames(), true);
     }

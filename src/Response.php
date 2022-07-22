@@ -141,7 +141,7 @@ class Response
      *
      * @return bool True if response has failed shards
      */
-    public function hasFailedShards()
+    public function hasFailedShards(): bool
     {
         try {
             $shardsStatistics = $this->getShardsStatistics();
@@ -157,7 +157,7 @@ class Response
      *
      * @return bool True if ok
      */
-    public function isOk()
+    public function isOk(): bool
     {
         $data = $this->getData();
 
