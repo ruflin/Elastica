@@ -765,7 +765,7 @@ class IndexTest extends BaseTest
         $this->assertEquals($expected, $search->getQuery()->toArray());
         $this->assertEquals(['test'], $search->getIndices());
         $this->assertTrue($search->hasIndices());
-        $this->assertTrue($search->hasIndex('test'));
+        $this->assertTrue($search->hasIndexByName('test'));
         $this->assertTrue($search->hasIndex($index));
     }
 
