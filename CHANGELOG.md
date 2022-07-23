@@ -4,7 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/7.1.5...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/7.2.0...master)
+### Backward Compatibility Breaks
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [7.2.0](https://github.com/ruflin/Elastica/compare/7.2.0...7.1.5)
 ### Backward Compatibility Breaks
 * Changed `SetProcessor::setValue` signature to allow to pass any type, if you are overriding this method you must update the signature removing the `string` type-hint by @franmomu [#2082](https://github.com/ruflin/Elastica/pull/2082)
 * Changed `Settings::setMergePolicy` signature to allow to pass `int` and `string` as argument 2, if you are overriding this method you must update the signature removing the `string` type-hint by @franmomu [#2085](https://github.com/ruflin/Elastica/pull/2085)
@@ -14,7 +23,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added `string` as a valid type for `data` in `Request`  by @franmomu [#2078](https://github.com/ruflin/Elastica/pull/2078)
 * Added missing `throws` PHPDoc tags by @franmomu [#2077](https://github.com/ruflin/Elastica/pull/2077)
 * Added `Search::addIndexByName()`, `Search::hasIndexByName()` and `Search::addIndicesByName()` by @franmomu [#2103](https://github.com/ruflin/Elastica/pull/2103)
-
 ### Changed
 * Updated `symfony/phpunit-bridge` to `6.0` by @franmomu [#2067](https://github.com/ruflin/Elastica/pull/2067)
 * Updated `php-cs-fixer` to `3.8.0` [#2074](https://github.com/ruflin/Elastica/pull/2074)
@@ -25,7 +33,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Updated `Query::create` PHPDoc to include supported types and propagate it to callers by @franmomu [#2088](https://github.com/ruflin/Elastica/pull/2088)
 * Update some iterable types in PHPDoc to be more specific by @franmomu [#2092](https://github.com/ruflin/Elastica/pull/2092)
 * Updated `AwsAuthV4Test` adding assertions for exception type by @franmomu [#2094](https://github.com/ruflin/Elastica/pull/2094)
-
 ### Deprecated
 * Deprecated `Elastica\Reindex::WAIT_FOR_COMPLETION_FALSE`, use a boolean as parameter instead by @franmomu [#2070](https://github.com/ruflin/Elastica/pull/2070)
 * Passing anything else than a boolean as 1st argument to `Reindex::setWaitForCompletion`, pass a boolean instead by @franmomu [#2070](https://github.com/ruflin/Elastica/pull/2070)
@@ -44,8 +51,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Fixed `MoreLikeThis::setLike()` PHPDoc allowing `Document` by @franmomu [#2091](https://github.com/ruflin/Elastica/pull/2091)
 * Fixed `Term::setTerm()` PHPDoc allowing scalar values for `$value` parameter by @franmomu [#2094](https://github.com/ruflin/Elastica/pull/2094)
 * Fixed `DateHistogram` deprecation: use `fixed_internal` or `calendar_interval` instead of `interval` by @VincentLanglet [#2099](https://github.com/ruflin/Elastica/pull/2099)
-
-### Security
 
 ## [7.1.5](https://github.com/ruflin/Elastica/compare/7.1.5...7.1.4)
 ### Added
