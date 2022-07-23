@@ -127,39 +127,6 @@ class MatchQueryTest extends BaseTest
     /**
      * @group functional
      */
-    public function testMatchSetFieldBoostWithString(): void
-    {
-        $client = $this->_getClient();
-        $index = $client->getIndex('test');
-        $index->create([], [
-            'recreate' => true,
-        ]);
-
-        $index->addDocuments([
-            new Document('1', ['name' => 'Basel-Stadt']),
-            new Document('2', ['name' => 'New York']),
-            new Document('3', ['name' => 'New Hampshire']),
-            new Document('4', ['name' => 'Basel Land']),
-        ]);
-
-        $index->refresh();
-
-        $field = 'name';
-        $operator = 'or';
-
-        $query = new MatchQuery();
-        $query->setFieldQuery($field, 'Basel New');
-        $query->setFieldOperator($field, $operator);
-        $query->setFieldBoost($field, '1.2');
-
-        $resultSet = $index->search($query);
-
-        $this->assertEquals(4, $resultSet->count());
-    }
-
-    /**
-     * @group functional
-     */
     public function testMatchZeroTerm(): void
     {
         $client = $this->_getClient();
