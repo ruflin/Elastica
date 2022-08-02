@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added coverage check to CI by @franmomu [#2071](https://github.com/ruflin/Elastica/pull/2071)
 * Added `string` as a valid type for `data` in `Request`  by @franmomu [#2078](https://github.com/ruflin/Elastica/pull/2078)
 * Added missing `throws` PHPDoc tags by @franmomu [#2077](https://github.com/ruflin/Elastica/pull/2077)
+* Added `Search::addIndexByName()`, `Search::hasIndexByName()` and `Search::addIndicesByName()` by @franmomu [#2103](https://github.com/ruflin/Elastica/pull/2103)
 
 ### Changed
 * Updated `symfony/phpunit-bridge` to `6.0` by @franmomu [#2067](https://github.com/ruflin/Elastica/pull/2067)
@@ -28,6 +29,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 * Deprecated `Elastica\Reindex::WAIT_FOR_COMPLETION_FALSE`, use a boolean as parameter instead by @franmomu [#2070](https://github.com/ruflin/Elastica/pull/2070)
 * Passing anything else than a boolean as 1st argument to `Reindex::setWaitForCompletion`, pass a boolean instead by @franmomu [#2070](https://github.com/ruflin/Elastica/pull/2070)
+* Deprecated passing a `string` as 1st argument to `Search::addIndex()` and `Search::hasIndex()`, pass an Index instance instead by @franmomu [#2103](https://github.com/ruflin/Elastica/pull/2103)
+* Deprecated passing an array of `string` as 1st argument to `Search::addIndices()`, use an array of Index instances by @franmomu [#2103](https://github.com/ruflin/Elastica/pull/2103)
+
 ### Removed
 * Removed `egeloen/http-adapter` as suggested package since the project is abandoned by @franmomu [#2069](https://github.com/ruflin/Elastica/pull/2069)
 * Removed `0` as valid request data using Analyze API by @franmomu [#2068](https://github.com/ruflin/Elastica/pull/2068)

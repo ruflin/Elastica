@@ -18,12 +18,15 @@ use Elastica\Script\Script;
 use Elastica\Search;
 use Elastica\Suggest;
 use Elastica\Test\Base as BaseTest;
+use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 
 /**
  * @internal
  */
 class SearchTest extends BaseTest
 {
+    use ExpectDeprecationTrait;
+
     /**
      * @group unit
      */
@@ -58,13 +61,109 @@ class SearchTest extends BaseTest
 
         $this->assertContains($index1->getName(), $indices);
         $this->assertContains($index2->getName(), $indices);
+    }
 
-        // Add string
-        $search->addIndex('test3');
+    /**
+     * @group functional
+     */
+    public function testAddIndexByName(): void
+    {
+        $client = $this->_getClient();
+        $search = new Search($client);
+
+        $search->addIndexByName('index1');
         $indices = $search->getIndices();
 
-        $this->assertCount(3, $indices);
-        $this->assertContains('test3', $indices);
+        $this->assertCount(1, $indices);
+        $this->assertContains('index1', $indices);
+    }
+
+    /**
+     * @group functional
+     * @group legacy
+     */
+    public function testAddIndexTriggersDeprecationWithString(): void
+    {
+        $client = $this->_getClient();
+        $search = new Search($client);
+
+        $index1 = $this->_createIndex();
+
+        $search->addIndex($index1);
+        $indices = $search->getIndices();
+
+        $this->assertCount(1, $indices);
+
+        $this->assertContains($index1->getName(), $indices);
+
+        $this->expectDeprecation('Since ruflin/elastica 7.2.0: Passing a string as 1st argument to "Elastica\Search::addIndex()" is deprecated, pass an Index instance or use "addIndexByName" instead. It will throw a TypeError in 8.0.');
+
+        $search->addIndex('test2');
+        $indices = $search->getIndices();
+
+        $this->assertCount(2, $indices);
+        $this->assertContains('test2', $indices);
+    }
+
+    /**
+     * @group functional
+     */
+    public function testHasIndex(): void
+    {
+        $client = $this->_getClient();
+        $search = new Search($client);
+
+        $index1 = $this->_createIndex();
+        $index2 = $this->_createIndex();
+
+        $this->assertFalse($search->hasIndex($index1));
+        $this->assertFalse($search->hasIndex($index2));
+
+        $search->addIndex($index1);
+        $search->addIndex($index2);
+
+        $this->assertTrue($search->hasIndex($index1));
+        $this->assertTrue($search->hasIndex($index2));
+    }
+
+    /**
+     * @group functional
+     */
+    public function testHasIndexByName(): void
+    {
+        $client = $this->_getClient();
+        $search = new Search($client);
+
+        $indexName1 = 'index1';
+        $indexName2 = 'index2';
+
+        $this->assertFalse($search->hasIndexByName($indexName1));
+        $this->assertFalse($search->hasIndexByName($indexName2));
+
+        $search->addIndexByName($indexName1);
+        $search->addIndexByName($indexName2);
+
+        $this->assertTrue($search->hasIndexByName($indexName1));
+        $this->assertTrue($search->hasIndexByName($indexName2));
+    }
+
+    /**
+     * @group functional
+     * @group legacy
+     */
+    public function testHasIndexTriggersDeprecationWithString(): void
+    {
+        $client = $this->_getClient();
+        $search = new Search($client);
+
+        $indexName = 'index1';
+
+        $this->expectDeprecation('Since ruflin/elastica 7.2.0: Passing a string as 1st argument to "Elastica\Search::hasIndex()" is deprecated, pass an Index instance or use "hasIndexByName" instead. It will throw a TypeError in 8.0.');
+
+        $this->assertFalse($search->hasIndex($indexName));
+
+        $search->addIndexByName($indexName);
+        $this->assertTrue($search->hasIndex($indexName));
     }
 
     /**
@@ -75,9 +174,53 @@ class SearchTest extends BaseTest
         $client = $this->_getClient();
         $search = new Search($client);
 
+        $indices = [
+            $client->getIndex('elastica_test1'),
+            $client->getIndex('elastica_test2'),
+        ];
+
+        $search->addIndices($indices);
+        $this->assertCount(2, $search->getIndices());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testAddIndicesWithInvalidParametersThrowsException(): void
+    {
+        $client = $this->_getClient();
+        $search = new Search($client);
+
+        $this->expectException(InvalidException::class);
+        $search->addIndices([new \stdClass()]);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testAddIndicesByName(): void
+    {
+        $client = $this->_getClient();
+        $search = new Search($client);
+        $search->addIndicesByName(['elastica_test1', 'elastica_test2']);
+
+        $this->assertCount(2, $search->getIndices());
+    }
+
+    /**
+     * @group unit
+     * @group legacy
+     */
+    public function testAddIndicesTriggersDeprecationWithIndexAsString(): void
+    {
+        $client = $this->_getClient();
+        $search = new Search($client);
+
         $indices = [];
         $indices[] = $client->getIndex('elastica_test1');
-        $indices[] = $client->getIndex('elastica_test2');
+        $indices[] = 'elastica_test2';
+
+        $this->expectDeprecation('Since ruflin/elastica 7.2.0: Passing a array of strings as 1st argument to "Elastica\Search::addIndices()" is deprecated, pass an array of Indexes or use "addIndicesByName" instead. It will throw a TypeError in 8.0.');
 
         $search->addIndices($indices);
 
@@ -87,6 +230,19 @@ class SearchTest extends BaseTest
     /**
      * @group unit
      */
+    public function testAddIndicesByNameWithInvalidParametersThrowsException(): void
+    {
+        $client = $this->_getClient();
+        $search = new Search($client);
+
+        $this->expectException(InvalidException::class);
+        $search->addIndicesByName([new \stdClass()]);
+    }
+
+    /**
+     * @group unit
+     * @group legacy
+     */
     public function testAddIndexInvalid(): void
     {
         $this->expectException(InvalidException::class);
@@ -95,6 +251,22 @@ class SearchTest extends BaseTest
         $search = new Search($client);
 
         $search->addIndex(new \stdClass());
+    }
+
+    /**
+     * @group unit
+     * @group legacy
+     */
+    public function testAddNumericIndex(): void
+    {
+        $client = $this->_getClient();
+        $search = new Search($client);
+
+        $this->expectDeprecation('Since ruflin/elastica 7.2.0: Passing a string as 1st argument to "Elastica\Search::addIndex()" is deprecated, pass an Index instance or use "addIndexByName" instead. It will throw a TypeError in 8.0.');
+
+        $search->addIndex(1);
+
+        $this->assertContains('1', $search->getIndices(), 'Make sure it has been added and converted to string');
     }
 
     /**

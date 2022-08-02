@@ -108,7 +108,7 @@ class ScrollTest extends Base
     public function testScrollWithIgnoreUnavailable(): void
     {
         $search = $this->_prepareSearch();
-        $search->addIndex('unavailable_index');
+        $search->addIndexByName('unavailable_index');
         $search->setOption($search::OPTION_SEARCH_IGNORE_UNAVAILABLE, 'true');
         $scroll = new Scroll($search);
         $count = 1;
