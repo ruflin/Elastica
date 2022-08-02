@@ -85,7 +85,7 @@ class Reindex extends Param
         if (\is_bool($value)) {
             $value = $value ? 'true' : 'false';
         } else {
-            \trigger_deprecation('ruflin/elastica', '7.1.6', 'Passing anything else than a boolean as 1st argument to "%s()" is deprecated, pass a boolean instead. It will be removed in 8.0.', __METHOD__);
+            \trigger_deprecation('ruflin/elastica', '7.2.0', 'Passing anything else than a boolean as 1st argument to "%s()" is deprecated, pass a boolean instead. It will be removed in 8.0.', __METHOD__);
         }
 
         $this->setParam(self::WAIT_FOR_COMPLETION, $value);
