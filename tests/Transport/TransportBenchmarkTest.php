@@ -45,7 +45,7 @@ class TransportBenchmarkTest extends BaseTest
 
         $times = [];
         for ($i = 0; $i < $this->_max; ++$i) {
-            $data = $this->getData($i);
+            $data = $this->getData((string) $i);
             $doc = new Document((string) $i, $data);
             $result = $index->addDocument($doc);
             $times[] = $result->getQueryTime();

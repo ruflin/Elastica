@@ -26,9 +26,24 @@ parameters:
 			path: src/QueryBuilder.php
 
 		-
+			message: "#^Function GuzzleHttp\\\\Psr7\\\\modify_request not found\\.$#"
+			count: 1
+			path: src/Transport/AwsAuthV4.php
+
+		-
 			message: "#^Function GuzzleHttp\\\\Psr7\\\\stream_for not found\\.$#"
 			count: 1
 			path: src/Transport/Guzzle.php
+
+		-
+			message: "#^Parameter \\#1 \\$precision of method Elastica\\\\Aggregation\\\\GeohashGrid\\:\\:setPrecision\\(\\) expects int\\|string, float given\\.$#"
+			count: 1
+			path: tests/Aggregation/GeohashGridTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$data of static method Elastica\\\\Bulk\\\\Action\\\\AbstractDocument\\:\\:create\\(\\) expects Elastica\\\\Document\\|Elastica\\\\Script\\\\AbstractScript, stdClass given\\.$#"
+			count: 1
+			path: tests/Bulk/Action/AbstractDocumentTest.php
 
 		-
 			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$counter\\.$#"
@@ -54,6 +69,16 @@ parameters:
 			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$age\\.$#"
 			count: 1
 			path: tests/ClientFunctionalTest.php
+
+		-
+			message: "#^Parameter \\#2 \\$data of method Elastica\\\\Client\\:\\:updateDocument\\(\\) expects array\\|Elastica\\\\Document\\|Elastica\\\\Script\\\\AbstractScript, stdClass given\\.$#"
+			count: 1
+			path: tests/ClientFunctionalTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$params of static method Elastica\\\\Connection\\:\\:create\\(\\) expects array\\|Elastica\\\\Connection, string given\\.$#"
+			count: 1
+			path: tests/ConnectionTest.php
 
 		-
 			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$field1\\.$#"
@@ -96,6 +121,11 @@ parameters:
 			path: tests/DocumentTest.php
 
 		-
+			message: "#^Parameter \\#2 \\$name of class Elastica\\\\IndexTemplate constructor expects string, null given\\.$#"
+			count: 1
+			path: tests/IndexTemplateTest.php
+
+		-
 			message: "#^Unreachable statement \\- code above always terminates\\.$#"
 			count: 1
 			path: tests/IndexTest.php
@@ -104,6 +134,36 @@ parameters:
 			message: "#^Unreachable statement \\- code above always terminates\\.$#"
 			count: 2
 			path: tests/Multi/SearchTest.php
+
+		-
+			message: "#^Parameter \\#3 \\$origin of method Elastica\\\\Query\\\\FunctionScore\\:\\:addDecayFunction\\(\\) expects string, int given\\.$#"
+			count: 4
+			path: tests/Query/FunctionScoreTest.php
+
+		-
+			message: "#^Parameter \\#4 \\$scale of method Elastica\\\\Query\\\\FunctionScore\\:\\:addDecayFunction\\(\\) expects string, float given\\.$#"
+			count: 2
+			path: tests/Query/FunctionScoreTest.php
+
+		-
+			message: "#^Parameter \\#4 \\$scale of method Elastica\\\\Query\\\\FunctionScore\\:\\:addDecayFunction\\(\\) expects string, int given\\.$#"
+			count: 2
+			path: tests/Query/FunctionScoreTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$clauses of class Elastica\\\\Query\\\\SpanNear constructor expects array\\<Elastica\\\\Query\\\\AbstractSpanQuery\\>, array\\<int, Elastica\\\\Query\\\\Term\\> given\\.$#"
+			count: 1
+			path: tests/Query/SpanNearTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$clauses of class Elastica\\\\Query\\\\SpanOr constructor expects array\\<Elastica\\\\Query\\\\AbstractSpanQuery\\>, array\\<int, Elastica\\\\Query\\\\Term\\> given\\.$#"
+			count: 1
+			path: tests/Query/SpanOrTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$term of method Elastica\\\\Query\\\\Terms\\:\\:addTerm\\(\\) expects bool\\|float\\|int\\|string, stdClass given\\.$#"
+			count: 1
+			path: tests/Query/TermsTest.php
 
 		-
 			message: "#^Call to an undefined method ReflectionType\\:\\:getName\\(\\)\\.$#"
@@ -126,9 +186,49 @@ parameters:
 			path: tests/QueryBuilderTest.php
 
 		-
+			message: "#^Parameter \\#1 \\$value of method Elastica\\\\Reindex\\:\\:setWaitForCompletion\\(\\) expects bool, string given\\.$#"
+			count: 1
+			path: tests/ReindexTest.php
+
+		-
 			message: "#^Expression \"\\$index\\-\\>search\\('elastica search'\\)\\[3\\]\" on a separate line does not do anything\\.$#"
 			count: 1
 			path: tests/ResultSetTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$index of method Elastica\\\\Search\\:\\:addIndex\\(\\) expects Elastica\\\\Index, int given\\.$#"
+			count: 1
+			path: tests/SearchTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$index of method Elastica\\\\Search\\:\\:addIndex\\(\\) expects Elastica\\\\Index, stdClass given\\.$#"
+			count: 1
+			path: tests/SearchTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$index of method Elastica\\\\Search\\:\\:addIndex\\(\\) expects Elastica\\\\Index, string given\\.$#"
+			count: 1
+			path: tests/SearchTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$index of method Elastica\\\\Search\\:\\:hasIndex\\(\\) expects Elastica\\\\Index, string given\\.$#"
+			count: 2
+			path: tests/SearchTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$indices of method Elastica\\\\Search\\:\\:addIndices\\(\\) expects array\\<Elastica\\\\Index\\>, array\\<int, Elastica\\\\Index\\|string\\> given\\.$#"
+			count: 1
+			path: tests/SearchTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$indices of method Elastica\\\\Search\\:\\:addIndices\\(\\) expects array\\<Elastica\\\\Index\\>, array\\<int, stdClass\\> given\\.$#"
+			count: 1
+			path: tests/SearchTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$indices of method Elastica\\\\Search\\:\\:addIndicesByName\\(\\) expects array\\<string\\>, array\\<int, stdClass\\> given\\.$#"
+			count: 1
+			path: tests/SearchTest.php
 
 		-
 			message: "#^Unreachable statement \\- code above always terminates\\.$#"
@@ -136,6 +236,7 @@ parameters:
 			path: tests/SnapshotTest.php
 
 		-
-			message: "#^Function GuzzleHttp\\\\Psr7\\\\modify_request not found\\.$#"
+			message: "#^Parameter \\#1 \\$suggestion of static method Elastica\\\\Suggest\\:\\:create\\(\\) expects Elastica\\\\Suggest\\|Elastica\\\\Suggest\\\\AbstractSuggest, Elastica\\\\Query\\\\BoolQuery given\\.$#"
 			count: 1
-			path: src/Transport/AwsAuthV4.php
+			path: tests/SuggestTest.php
+
