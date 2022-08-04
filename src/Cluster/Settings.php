@@ -33,7 +33,7 @@ class Settings
     /**
      * Returns settings data.
      *
-     * @return array Settings data (persistent and transient)
+     * @return array<string, mixed> Settings data (persistent and transient)
      */
     public function get(): array
     {
@@ -47,7 +47,7 @@ class Settings
      *
      * @param string $setting OPTIONAL Setting name to return
      *
-     * @return array|string|null Settings data
+     * @return array<string, mixed>|string|null Settings data
      */
     public function getPersistent(string $setting = '')
     {
@@ -68,7 +68,7 @@ class Settings
      *
      * @param string $setting OPTIONAL Setting name to return
      *
-     * @return array|string|null Settings data
+     * @return array<string, mixed>|string|null Settings data
      */
     public function getTransient(string $setting = '')
     {
@@ -153,7 +153,7 @@ class Settings
     /**
      * Set settings for cluster.
      *
-     * @param array $settings Raw settings (including persistent or transient)
+     * @param array<string, mixed> $settings Raw settings (including persistent or transient)
      */
     public function set(array $settings): Response
     {
@@ -168,6 +168,9 @@ class Settings
         return $this->_client;
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     public function request(array $data = [], string $method = Request::GET): Response
     {
         $path = '_cluster/settings';

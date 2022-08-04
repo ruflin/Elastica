@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Backward Compatibility Breaks
 ### Added
 ### Changed
+* Improved PHPDoc types in `Cluster` namespace by @franmomu [#2109](https://github.com/ruflin/Elastica/pull/2109)
 ### Deprecated
 ### Removed
 ### Fixed

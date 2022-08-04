@@ -8,6 +8,16 @@ namespace Elastica\Cluster\Health;
  * @author Ray Ward <ray.ward@bigcommerce.com>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html
+ *
+ * @phpstan-import-type HealthStatus from \Elastica\Cluster\Health
+ * @phpstan-type ShardData = array{
+ *   status: HealthStatus,
+ *   primary_active: bool,
+ *   active_shards: int,
+ *   relocating_shards: int,
+ *   initializing_shards: int,
+ *   unassigned_shards: int,
+ * }
  */
 class Shard
 {
@@ -17,13 +27,15 @@ class Shard
     protected $_shardNumber;
 
     /**
-     * @var array the shard health data
+     * @var array<string, mixed> the shard health data
+     * @phpstan-var ShardData
      */
     protected $_data;
 
     /**
-     * @param int   $shardNumber the shard index/number
-     * @param array $data        the shard health data
+     * @param int                  $shardNumber the shard index/number
+     * @param array<string, mixed> $data        the shard health data
+     * @phpstan-param ShardData $data
      */
     public function __construct(int $shardNumber, array $data)
     {

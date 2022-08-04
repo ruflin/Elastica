@@ -11,6 +11,26 @@ use Elastica\Cluster\Health\Index;
  * @author Ray Ward <ray.ward@bigcommerce.com>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html
+ *
+ * @phpstan-type HealthData = array{
+ *   cluster_name: string,
+ *   status: HealthStatus,
+ *   timed_out: bool,
+ *   number_of_nodes: int,
+ *   number_of_data_nodes: int,
+ *   active_primary_shards: int,
+ *   active_shards: int,
+ *   relocating_shards: int,
+ *   initializing_shards: int,
+ *   unassigned_shards: int,
+ *   delayed_unassigned_shards: int,
+ *   number_of_pending_tasks: int,
+ *   number_of_in_flight_fetch: int,
+ *   task_max_waiting_in_queue_millis: int,
+ *   active_shards_percent_as_number: float,
+ *   indices: array<string, array<string, mixed>>,
+ * }
+ * @phpstan-type HealthStatus = 'green'|'yellow'|'red'
  */
 class Health
 {
@@ -20,7 +40,8 @@ class Health
     protected $_client;
 
     /**
-     * @var array the cluster health data
+     * @var array<string, mixed>
+     * @phpstan-var HealthData
      */
     protected $_data;
 
@@ -32,6 +53,9 @@ class Health
 
     /**
      * Gets the health data.
+     *
+     * @return array<string, mixed>
+     * @phpstan-return HealthData
      */
     public function getData(): array
     {
@@ -60,6 +84,7 @@ class Health
      * Gets the status of the cluster.
      *
      * @return string green, yellow or red
+     * @phpstan-return HealthStatus
      */
     public function getStatus(): string
     {
@@ -153,15 +178,18 @@ class Health
         return $this->_data['task_max_waiting_in_queue_millis'];
     }
 
+    /**
+     * TODO: Change to float in version 8.0.
+     */
     public function getActiveShardsPercentAsNumber(): int
     {
-        return $this->_data['active_shards_percent_as_number'];
+        return (int) $this->_data['active_shards_percent_as_number'];
     }
 
     /**
      * Gets the status of the indices.
      *
-     * @return Index[]
+     * @return array<string, Index>
      */
     public function getIndices(): array
     {
@@ -175,6 +203,9 @@ class Health
 
     /**
      * Retrieves the health data from the cluster.
+     *
+     * @return array<string, mixed>
+     * @phpstan-return HealthData
      */
     protected function _retrieveHealthData(): array
     {
