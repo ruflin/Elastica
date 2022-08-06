@@ -91,21 +91,33 @@ class Reindex extends Param
         $this->setParam(self::WAIT_FOR_COMPLETION, $value);
     }
 
+    /**
+     * @param string $value
+     */
     public function setWaitForActiveShards($value): void
     {
         $this->setParam(self::WAIT_FOR_ACTIVE_SHARDS, $value);
     }
 
+    /**
+     * @param string $value
+     */
     public function setTimeout($value): void
     {
         $this->setParam(self::TIMEOUT, $value);
     }
 
+    /**
+     * @param string $value
+     */
     public function setScroll($value): void
     {
         $this->setParam(self::SCROLL, $value);
     }
 
+    /**
+     * @param int $value
+     */
     public function setRequestsPerSecond($value): void
     {
         $this->setParam(self::REQUESTS_PER_SECOND, $value);
@@ -131,6 +143,9 @@ class Reindex extends Param
         $this->setParam(self::REFRESH, $value);
     }
 
+    /**
+     * @return string|null
+     */
     public function getTaskId()
     {
         $taskId = null;

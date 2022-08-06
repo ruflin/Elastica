@@ -53,6 +53,8 @@ class Stats
      * Several arguments can be use
      * get('index', 'test', 'example')
      *
+     * @param mixed $args
+     *
      * @return array|null Node stats for the given field or null if not found
      */
     public function get(...$args)

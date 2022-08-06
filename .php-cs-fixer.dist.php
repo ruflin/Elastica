@@ -25,6 +25,7 @@ return (new PhpCsFixer\Config())
         'ordered_imports' => true,
         'php_unit_dedicate_assert' => ['target' => 'newest'],
         'php_unit_test_class_requires_covers' => false,
+        'phpdoc_no_empty_return' => false,
         'phpdoc_order' => true,
         'phpdoc_types_order' => ['null_adjustment' => 'always_last'],
         'static_lambda' => true,

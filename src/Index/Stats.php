@@ -58,6 +58,8 @@ class Stats
      * Returns the entry in the data array based on the params.
      * Various params possible.
      *
+     * @param mixed $args
+     *
      * @return mixed Data array entry or null if not found
      */
     public function get(...$args)

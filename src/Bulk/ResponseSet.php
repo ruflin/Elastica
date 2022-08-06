@@ -4,6 +4,9 @@ namespace Elastica\Bulk;
 
 use Elastica\Response as BaseResponse;
 
+/**
+ * @template-implements \Iterator<int, Response>
+ */
 class ResponseSet extends BaseResponse implements \Iterator, \Countable
 {
     /**

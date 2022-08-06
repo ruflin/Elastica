@@ -24,6 +24,8 @@ class Query extends Param
 {
     /**
      * If the current query has a suggest in it.
+     *
+     * @var bool
      */
     private $hasSuggest = false;
 

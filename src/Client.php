@@ -360,6 +360,8 @@ class Client
 
     /**
      * Establishes the client connections.
+     *
+     * @return void
      */
     public function connect()
     {

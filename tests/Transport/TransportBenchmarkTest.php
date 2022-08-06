@@ -18,8 +18,24 @@ use Elastica\Test\Base as BaseTest;
  */
 class TransportBenchmarkTest extends BaseTest
 {
+    /**
+     * @var int
+     */
     protected $_max = 1000;
+
+    /**
+     * @var int
+     */
     protected $_maxData = 20;
+
+    /**
+     * @var array<string, array<string, array{
+     *    count: int,
+     *    max: int,
+     *    min: int,
+     *    mean: float,
+     * }>>
+     */
     protected static $_results = [];
 
     public static function tearDownAfterClass(): void
@@ -176,6 +192,12 @@ class TransportBenchmarkTest extends BaseTest
         return $index;
     }
 
+    /**
+     * @return array{
+     *   test: string,
+     *   name: string[],
+     * }
+     */
     protected function getData(string $test): array
     {
         $data = [

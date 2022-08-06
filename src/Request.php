@@ -155,6 +155,8 @@ class Request extends Param
 
     /**
      * Set the Content-Type of this request.
+     *
+     * @return $this
      */
     public function setContentType(string $contentType)
     {
