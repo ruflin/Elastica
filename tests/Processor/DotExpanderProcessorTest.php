@@ -81,6 +81,6 @@ class DotExpanderProcessorTest extends BasePipelineTest
             ],
         ];
         $results = $result->getResults();
-        $this->assertEquals($expect, ($results[0]->getHit())['_source']);
+        $this->assertEquals($expect, $results[0]->getHit()['_source']);
     }
 }

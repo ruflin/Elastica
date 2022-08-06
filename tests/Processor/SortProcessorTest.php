@@ -74,6 +74,6 @@ class SortProcessorTest extends BasePipelineTest
         $this->assertCount(1, $result->getResults());
 
         $results = $result->getResults();
-        $this->assertSame([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], ($results[0]->getHit())['_source']['name']);
+        $this->assertSame([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], $results[0]->getHit()['_source']['name']);
     }
 }
