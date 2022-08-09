@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 ### Changed
 * Use `ramsey/composer-install` to simplify CI jobs and test with the lowest set of dependencies [#2113](https://github.com/ruflin/Elastica/pull/2113)
+* Bumped `elasticsearch/elasticsearch` to `7.10` to be able to use `OpenPointInTime` class [#2113](https://github.com/ruflin/Elastica/pull/2113)
 ### Deprecated
 ### Removed
 ### Fixed
