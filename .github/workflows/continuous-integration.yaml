@@ -36,8 +36,15 @@ jobs:
           - '7.4'
           - '8.0'
           - '8.1'
+        dependencies:
+          - 'highest'
         elasticsearch:
           - '7.15.2'
+        include:
+          # Test with the lowest set of dependencies
+          - dependencies: 'lowest'
+            php: '7.2'
+            elasticsearch: '7.15.2'
       fail-fast: false
     steps:
       - name: 'Checkout'
@@ -51,23 +58,11 @@ jobs:
           tools: 'pecl, composer:v2'
           extensions: 'curl, json, mbstring, openssl'
 
-      - name: 'Get composer cache directory'
-        id: 'composer_cache'
-        run: |
-          echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-      - name: 'Cache dependencies'
-        uses: 'actions/cache@v2'
+      - name: 'Install dependencies with Composer'
+        uses: 'ramsey/composer-install@v2'
         with:
-          path: '${{ steps.composer_cache.outputs.dir }}'
-          key: '${{ runner.os }}-composer-php${{ matrix.php }}-${{ hashFiles(''**/composer.json'') }}'
-          restore-keys: |
-            ${{ runner.os }}-composer-php${{ matrix.php }}-
-            ${{ runner.os }}-composer-
-
-      - name: 'Update dependencies'
-        run: |
-          composer update --prefer-dist --no-interaction --no-progress --ansi ${{ matrix.composer_flags }}
+          dependency-versions: '${{ matrix.dependencies }}'
+          composer-options: '--prefer-dist'
 
       - name: 'Run unit tests'
         run: |
@@ -115,23 +110,11 @@ jobs:
           tools: 'pecl, composer:v2'
           extensions: 'curl, json, mbstring, openssl'
 
-      - name: 'Get composer cache directory'
-        id: 'composer_cache'
-        run: |
-          echo "::set-output name=dir::$(composer config cache-files-dir)"
 
-      - name: 'Cache dependencies'
-        uses: 'actions/cache@v2'
+      - name: 'Install dependencies with Composer'
+        uses: 'ramsey/composer-install@v2'
         with:
-          path: '${{ steps.composer_cache.outputs.dir }}'
-          key: '${{ runner.os }}-composer-php${{ matrix.php }}-${{ hashFiles(''**/composer.json'') }}'
-          restore-keys: |
-            ${{ runner.os }}-composer-php${{ matrix.php }}-
-            ${{ runner.os }}-composer-
-
-      - name: 'Update dependencies'
-        run: |
-          composer update --prefer-dist --no-interaction --no-progress --ansi ${{ matrix.composer_flags }}
+          composer-options: '--prefer-dist'
 
       - name: 'Run phpstan'
         run: |
