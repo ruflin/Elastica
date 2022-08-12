@@ -78,6 +78,6 @@ class RenameProcessorTest extends BasePipelineTest
         $this->assertCount(1, $result->getResults());
 
         $results = $result->getResults();
-        $this->assertArrayHasKey('packages', ($results[0]->getHit())['_source']);
+        $this->assertArrayHasKey('packages', $results[0]->getHit()['_source']);
     }
 }

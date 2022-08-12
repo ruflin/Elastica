@@ -110,7 +110,7 @@ class ResultTest extends BaseTest
         $index->addDocument(new Document('3', ['username' => 'hans']));
         $index->refresh();
 
-        $query = (Query::create(null)->addSort(['_id' => 'desc']));
+        $query = Query::create(null)->addSort(['_id' => 'desc']);
         $resultSet = $index->search($query);
 
         $this->assertCount(1, $resultSet->getResults());
@@ -129,7 +129,7 @@ class ResultTest extends BaseTest
         $index->addDocument(new Document('3', ['username' => 'hans']));
         $index->refresh();
 
-        $query = (Query::create(null));
+        $query = Query::create(null);
         $resultSet = $index->search($query);
 
         $this->assertCount(1, $resultSet->getResults());

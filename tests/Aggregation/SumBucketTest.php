@@ -35,7 +35,7 @@ class SumBucketTest extends BaseAggregationTest
                     )
             )
             ->addAggregation(
-                (new SumBucket('sum_likes_by_page', 'pages>sum_likes'))
+                new SumBucket('sum_likes_by_page', 'pages>sum_likes')
             )
         ;
 

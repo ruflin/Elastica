@@ -77,7 +77,7 @@ class TrimProcessorTest extends BasePipelineTest
         $this->assertCount(2, $result->getResults());
 
         $results = $result->getResults();
-        $this->assertSame('ruflin', ($results[0]->getHit())['_source']['name']);
-        $this->assertSame('nicolas', ($results[1]->getHit())['_source']['name']);
+        $this->assertSame('ruflin', $results[0]->getHit()['_source']['name']);
+        $this->assertSame('nicolas', $results[1]->getHit()['_source']['name']);
     }
 }

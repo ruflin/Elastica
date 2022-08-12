@@ -74,6 +74,6 @@ class JoinProcessorTest extends BasePipelineTest
         $this->assertCount(1, $result->getResults());
 
         $results = $result->getResults();
-        $this->assertSame('abc-def-ghij', ($results[0]->getHit())['_source']['name']);
+        $this->assertSame('abc-def-ghij', $results[0]->getHit()['_source']['name']);
     }
 }

@@ -160,7 +160,7 @@ class ScriptFieldsTest extends BaseTest
         $resultSet = $index->search($query);
         $results = $resultSet->getResults();
 
-        $this->assertEquals(1, ($results[0]->getHit())['fields']['text'][0]);
-        $this->assertEquals(2, ($results[1]->getHit())['fields']['text'][0]);
+        $this->assertEquals(1, $results[0]->getHit()['fields']['text'][0]);
+        $this->assertEquals(2, $results[1]->getHit()['fields']['text'][0]);
     }
 }

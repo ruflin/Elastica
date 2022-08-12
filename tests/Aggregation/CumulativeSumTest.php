@@ -27,7 +27,7 @@ class CumulativeSumTest extends BaseAggregationTest
                             ->setField('price')
                     )
                     ->addAggregation(
-                        (new CumulativeSum('cumulative_sales', 'sales'))
+                        new CumulativeSum('cumulative_sales', 'sales')
                     )
             )
         ;

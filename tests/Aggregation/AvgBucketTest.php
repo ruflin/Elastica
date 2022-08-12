@@ -35,7 +35,7 @@ class AvgBucketTest extends BaseAggregationTest
                     )
             )
             ->addAggregation(
-                (new AvgBucket('avg_likes_by_page', 'pages>avg_likes'))
+                new AvgBucket('avg_likes_by_page', 'pages>avg_likes')
             )
         ;
 
