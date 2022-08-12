@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Updated `php-cs-fixer` to `3.9.5` [#2110](https://github.com/ruflin/Elastica/pull/2110)
 ### Deprecated
 ### Removed
+* Removed `CallbackStrategyTestHelper` and `ErrorsCollector` from `tests` [#2111](https://github.com/ruflin/Elastica/pull/2111)
 ### Fixed
 ### Security
 
