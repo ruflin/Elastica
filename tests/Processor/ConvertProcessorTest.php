@@ -98,7 +98,7 @@ class ConvertProcessorTest extends BasePipelineTest
             $this->assertIsFloat($value['foo']);
         }
 
-        $this->assertSame(5.290, ($results[0]->getHit())['_source']['foo']);
-        $this->assertSame(6.908, ($results[1]->getHit())['_source']['foo']);
+        $this->assertSame(5.290, $results[0]->getHit()['_source']['foo']);
+        $this->assertSame(6.908, $results[1]->getHit()['_source']['foo']);
     }
 }

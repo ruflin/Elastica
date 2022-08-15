@@ -28,7 +28,7 @@ class StatsTest extends BaseAggregationTest
         $this->assertEquals(1, $results['min']);
         $this->assertEquals(8, $results['max']);
         $this->assertEquals((5 + 8 + 1 + 3) / 4.0, $results['avg']);
-        $this->assertEquals((5 + 8 + 1 + 3), $results['sum']);
+        $this->assertEquals(5 + 8 + 1 + 3, $results['sum']);
     }
 
     /**
@@ -48,7 +48,7 @@ class StatsTest extends BaseAggregationTest
         $this->assertEquals(1, $results['min']);
         $this->assertEquals(10, $results['max']);
         $this->assertEquals((5 + 8 + 1 + 3 + 10) / 5.0, $results['avg']);
-        $this->assertEquals((5 + 8 + 1 + 3 + 10), $results['sum']);
+        $this->assertEquals(5 + 8 + 1 + 3 + 10, $results['sum']);
     }
 
     protected function _getIndexForTest(): Index

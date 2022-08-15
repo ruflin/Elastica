@@ -77,7 +77,7 @@ class UppercaseProcessorTest extends BasePipelineTest
         $this->assertCount(2, $result->getResults());
 
         $results = $result->getResults();
-        $this->assertSame('RUFLIN', ($results[0]->getHit())['_source']['name']);
-        $this->assertSame('NICOLAS', ($results[1]->getHit())['_source']['name']);
+        $this->assertSame('RUFLIN', $results[0]->getHit()['_source']['name']);
+        $this->assertSame('NICOLAS', $results[1]->getHit()['_source']['name']);
     }
 }

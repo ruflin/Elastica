@@ -78,6 +78,6 @@ class SplitProcessorTest extends BasePipelineTest
         $this->assertCount(1, $result->getResults());
 
         $results = $result->getResults();
-        $this->assertSame(['nicolas', 'ruflin'], ($results[0]->getHit())['_source']['name']);
+        $this->assertSame(['nicolas', 'ruflin'], $results[0]->getHit()['_source']['name']);
     }
 }
