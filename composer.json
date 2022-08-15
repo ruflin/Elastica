@@ -17,7 +17,7 @@
     "require": {
         "php": "^7.2 || ^8.0",
         "ext-json": "*",
-        "elasticsearch/elasticsearch": "^7.1.1",
+        "elasticsearch/elasticsearch": "^7.10",
         "nyholm/dsn": "^2.0.0",
         "psr/log": "^1.0 || ^2.0 || ^3.0",
         "symfony/deprecation-contracts": "^2.2 || ^3.0",
