@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Use `ramsey/composer-install` to simplify CI jobs and test with the lowest set of dependencies [#2113](https://github.com/ruflin/Elastica/pull/2113)
 * Bumped `elasticsearch/elasticsearch` to `7.10` to be able to use `OpenPointInTime` class [#2113](https://github.com/ruflin/Elastica/pull/2113)
 * Updated `php-cs-fixer` to `3.9.5` [#2110](https://github.com/ruflin/Elastica/pull/2110)
+* Changed `Elastica\Index\Settings::get` adding ability to get default settings by @krasilnikovm [#2115](https://github.com/ruflin/Elastica/pull/2115)
 ### Deprecated
 ### Removed
 * Removed `CallbackStrategyTestHelper` and `ErrorsCollector` from `tests` [#2111](https://github.com/ruflin/Elastica/pull/2111)
