@@ -30,7 +30,57 @@ class SettingsTest extends BaseTest
         $this->assertIsArray($settings->get());
         $this->assertNotNull($settings->get('number_of_replicas'));
         $this->assertNotNull($settings->get('number_of_shards'));
+        $this->assertNull($settings->get('max_result_window'));
         $this->assertNull($settings->get('kjqwerjlqwer'));
+
+        $index->delete();
+    }
+
+    /**
+     * @group functional
+     */
+    public function testGetWithDefaultValueIncluded(): void
+    {
+        $indexName = 'elasticatest';
+
+        $client = $this->_getClient();
+        $index = $client->getIndex($indexName);
+        $index->create([], [
+            'recreate' => true,
+        ]);
+        $index->refresh();
+        $settings = $index->getSettings();
+
+        $this->assertIsArray($settings->get());
+        $this->assertEquals(10000, $settings->get('max_result_window', true));
+        $this->assertNull($settings->get('kjqwerjlqwer', true));
+
+        $index->delete();
+    }
+
+    /**
+     * @group functional
+     */
+    public function testGetWithDefaultValueOverride(): void
+    {
+        $indexName = 'elasticatest';
+
+        $client = $this->_getClient();
+
+        $index = $client->getIndex($indexName);
+        $index->create([
+            'settings' => [
+                'max_result_window' => 100,
+            ],
+        ], [
+            'recreate' => true,
+        ]);
+
+        $index->refresh();
+        $settings = $index->getSettings();
+        $this->assertIsArray($settings->get());
+        $this->assertEquals(100, $settings->get('max_result_window', true));
+        $this->assertNull($settings->get('kjqwerjlqwer', true));
 
         $index->delete();
     }
