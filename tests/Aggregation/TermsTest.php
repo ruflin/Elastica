@@ -162,4 +162,15 @@ class TermsTest extends BaseAggregationTest
 
         return $index;
     }
+
+    /**
+     * @group functional
+     */
+    public function testTermsSetMissingBucket(): void
+    {
+        $agg = new Terms('terms');
+        $agg->setMissingBucket();
+
+        $this->assertTrue($agg->getParam('missing_bucket'));
+    }
 }
