@@ -2,11 +2,13 @@
 
 namespace Elastica\Test\Aggregation;
 
+use Elastica\Aggregation\Composite;
 use Elastica\Aggregation\Terms;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
+use Traversable;
 
 /**
  * @internal
@@ -141,12 +143,73 @@ class TermsTest extends BaseAggregationTest
         $this->assertSame('blue', $results['buckets'][2]['key']);
     }
 
+    /**
+     * @group unit
+     */
+    public function testTermsSetMissingBucketUnit(): void
+    {
+        $agg = new Terms('terms');
+        $agg->setMissingBucket();
+
+        $this->assertTrue($agg->getParam('missing_bucket'));
+    }
+
+    /**
+     * @dataProvider termsSetMissingBucketProvider
+     * @group functional
+     */
+    public function testTermsSetMissingBucketFunctional(
+        string $field,
+        int $expectedCountValues,
+        bool $isSetMissingBucket
+    ): void {
+        $terms = new Terms('terms');
+        $terms->setField($field);
+        if ($isSetMissingBucket) {
+            $terms->setMissingBucket();
+        }
+
+        $composite = new Composite('composite');
+        $composite->addSource($terms);
+
+        $query = new Query();
+        $query->addAggregation($composite);
+        $results = $this->getIndex()->search($query)->getAggregation('composite');
+
+        $this->assertCount($expectedCountValues, $results['buckets']);
+    }
+
+    public function termsSetMissingBucketProvider(): Traversable
+    {
+        yield [
+            'field' => 'color',
+            'expectedCountValues' => 4,
+            'isSetMissingBucket' => true,
+        ];
+        yield [
+            'field' => 'color',
+            'expectedCountValues' => 3,
+            'isSetMissingBucket' => false,
+        ];
+        yield [
+            'field' => 'anything',
+            'expectedCountValues' => 2,
+            'isSetMissingBucket' => true,
+        ];
+        yield [
+            'field' => 'anything',
+            'expectedCountValues' => 1,
+            'isSetMissingBucket' => false,
+        ];
+    }
+
     private function getIndex(): Index
     {
         $index = $this->_createIndex();
 
         $mapping = new Mapping([
             'color' => ['type' => 'keyword'],
+            'anything' => ['type' => 'keyword'],
         ]);
         $index->setMapping($mapping);
 
@@ -161,16 +224,5 @@ class TermsTest extends BaseAggregationTest
         $index->refresh();
 
         return $index;
-    }
-
-    /**
-     * @group functional
-     */
-    public function testTermsSetMissingBucket(): void
-    {
-        $agg = new Terms('terms');
-        $agg->setMissingBucket();
-
-        $this->assertTrue($agg->getParam('missing_bucket'));
     }
 }
