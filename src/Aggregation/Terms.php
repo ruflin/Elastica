@@ -35,4 +35,16 @@ class Terms extends AbstractTermsAggregation
     {
         return $this->setParam('order', $orders);
     }
+
+    /**
+     * For Composite Agg. Include in the response documents without a value for a given source.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/7.17/search-aggregations-bucket-composite-aggregation.html#_missing_bucket
+     *
+     * @return $this
+     */
+    public function setMissingBucket(): self
+    {
+        return $this->setParam('missing_bucket', true);
+    }
 }
