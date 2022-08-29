@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Updated `php-cs-fixer` to `3.9.5` [#2110](https://github.com/ruflin/Elastica/pull/2110)
 * Changed `Elastica\Index\Settings::get` adding ability to get default settings by @krasilnikovm [#2115](https://github.com/ruflin/Elastica/pull/2115)
 * Update `AWSAuthV4 transport` to sanitize host name for AWS requests before signing [#2090](https://github.com/ruflin/Elastica/pull/2090)
+* New method `Elastica\Aggregation\Terms::setMissingBucket`. For Composite Agg. Include in the response documents without a value for a given source. [#2117](https://github.com/ruflin/Elastica/pull/2117)
 ### Deprecated
 ### Removed
 * Removed `CallbackStrategyTestHelper` and `ErrorsCollector` from `tests` [#2111](https://github.com/ruflin/Elastica/pull/2111)
