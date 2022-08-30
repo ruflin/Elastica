@@ -205,4 +205,35 @@ class AwsAuthV4Test extends GuzzleTest
             );
         }
     }
+
+    /**
+     * @group unit
+     * @depends testSignsWithProvidedCredentials
+     */
+    public function testStripsTrailingDotInHost(): void
+    {
+        $host = $this->_getHost();
+        $hostWithTrailingDot = $host.'.';
+
+        $config = [
+            'persistent' => false,
+            'transport' => 'AwsAuthV4',
+            'aws_access_key_id' => 'foo',
+            'aws_secret_access_key' => 'bar',
+            'aws_session_token' => 'baz',
+            'aws_region' => 'us-east-1',
+            'host' => $hostWithTrailingDot,
+        ];
+        $client = $this->_getClient($config);
+
+        try {
+            $client->request('_stats');
+        } catch (GuzzleException $e) {
+            $guzzleException = $e->getGuzzleException();
+            $this->assertInstanceOf(ConnectException::class, $guzzleException);
+            $request = $guzzleException->getRequest();
+            $this->assertSame($host, $request->getHeader('host')[0]);
+            $this->assertSame($hostWithTrailingDot, $request->getUri()->getHost());
+        }
+    }
 }

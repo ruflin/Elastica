@@ -135,3 +135,7 @@ parameters:
 			count: 1
 			path: tests/SnapshotTest.php
 
+		-
+			message: "#^Function GuzzleHttp\\\\Psr7\\\\modify_request not found\\.$#"
+			count: 1
+			path: src/Transport/AwsAuthV4.php
