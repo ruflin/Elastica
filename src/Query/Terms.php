@@ -20,7 +20,7 @@ class Terms extends AbstractQuery
     private $field;
 
     /**
-     * @param array<bool|float|int|string> $terms Terms list, leave empty if building a terms-lookup query
+     * @param list<bool|float|int|string> $terms Terms list, leave empty if building a terms-lookup query
      */
     public function __construct(string $field, array $terms = [])
     {
@@ -35,7 +35,7 @@ class Terms extends AbstractQuery
     /**
      * Sets terms for the query.
      *
-     * @param array<bool|float|int|string> $terms
+     * @param list<bool|float|int|string> $terms
      */
     public function setTerms(array $terms): self
     {
