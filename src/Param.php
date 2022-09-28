@@ -140,7 +140,7 @@ class Param implements ArrayableInterface, \Countable
      *
      * @return int
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return \count($this->_params);
