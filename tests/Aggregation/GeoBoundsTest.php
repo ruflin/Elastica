@@ -24,10 +24,10 @@ class GeoBoundsTest extends BaseAggregationTest
         $query->addAggregation($agg);
         $results = $this->getIndexForTest()->search($query)->getAggregation('viewport');
 
-        $this->assertEquals(\round(37.782438984141,6), \round($results['bounds']['top_left']['lat'],6));
-        $this->assertEquals(\round(-122.39256000146,6), \round($results['bounds']['top_left']['lon'],6));
-        $this->assertEquals(\round(32.798319971189,6), \round($results['bounds']['bottom_right']['lat'],6));
-        $this->assertEquals(\round(-117.24664804526,6), \round($results['bounds']['bottom_right']['lon'],6));
+        $this->assertEquals(\round(37.782438984141, 6), \round($results['bounds']['top_left']['lat'], 6));
+        $this->assertEquals(\round(-122.39256000146, 6), \round($results['bounds']['top_left']['lon'], 6));
+        $this->assertEquals(\round(32.798319971189, 6), \round($results['bounds']['bottom_right']['lat'], 6));
+        $this->assertEquals(\round(-117.24664804526, 6), \round($results['bounds']['bottom_right']['lon'], 6));
     }
 
     private function getIndexForTest(): Index
