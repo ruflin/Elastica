@@ -111,6 +111,10 @@ class BoolQuery extends AbstractQuery
             throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Query\AbstractQuery');
         }
 
+        if (\is_array($args) && $this->isNotAssociativeArray($args)) {
+            throw new InvalidException('Invalid parameter. The array must be an associative array.');
+        }
+
         return $this->addParam($type, $args);
     }
 }

@@ -19,4 +19,13 @@ abstract class AbstractQuery extends Param
 
         return Util::toSnakeCase($shortName);
     }
+
+    public function isNotAssociativeArray(array $arr)
+    {
+        if ([] === $arr) {
+            return true;
+        }
+
+        return \array_keys($arr) === \range(0, \count($arr) - 1);
+    }
 }
