@@ -176,6 +176,23 @@ class IndexTest extends BaseTest
     }
 
     /**
+     * @group unit
+     */
+    public function testDeleteDocumentsSetsIndex(): void
+    {
+        $client = $this->createMock(Client::class);
+        $index = new Index($client, 'test');
+
+        $doc1 = new Document('1', ['name' => 'ruflin']);
+        $doc2 = new Document('2', ['name' => 'nicolas']);
+
+        $index->deleteDocuments([$doc1, $doc2]);
+
+        $this->assertEquals('test', $doc1->getIndex());
+        $this->assertEquals('test', $doc2->getIndex());
+    }
+
+    /**
      * @group functional
      */
     public function testDeleteByQueryWithQueryString(): void
@@ -328,6 +345,23 @@ class IndexTest extends BaseTest
 
         $response = $index->search('nicolas');
         $this->assertEquals(0, $response->count());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testUpdateDocumentsSetsIndex(): void
+    {
+        $client = $this->createMock(Client::class);
+        $index = new Index($client, 'test');
+
+        $doc1 = new Document('1', ['name' => 'ruflin']);
+        $doc2 = new Document('2', ['name' => 'nicolas']);
+
+        $index->updateDocuments([$doc1, $doc2]);
+
+        $this->assertEquals('test', $doc1->getIndex());
+        $this->assertEquals('test', $doc2->getIndex());
     }
 
     /**
