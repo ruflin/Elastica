@@ -166,15 +166,14 @@ class ClientFunctionalTest extends BaseTest
         $this->assertEquals('anoncoin', $index->getDocument(1)->get('name'));
         $this->assertEquals('ixcoin', $index->getDocument(2)->get('name'));
 
-        $index->updateDocuments([
-            new Document('1', ['name' => 'AnonCoin']),
-            new Document('2', ['name' => 'iXcoin']),
-        ]);
+        $anonCoin->set('name', 'AnonCoin');
+        $ixCoin->set('name', 'iXcoin');
+
+        $index->updateDocuments([$anonCoin, $ixCoin]);
 
         $this->assertEquals('AnonCoin', $index->getDocument(1)->get('name'));
         $this->assertEquals('iXcoin', $index->getDocument(2)->get('name'));
 
-        $ixCoin->setIndex(null);  // Make sure the index gets set properly if missing
         $index->deleteDocuments([$anonCoin, $ixCoin]);
 
         $this->expectException(NotFoundException::class);
