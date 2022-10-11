@@ -7,6 +7,7 @@ use Elastica\Exception\InvalidException;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
+use Elastica\Rescore\Query as QueryRescore;
 use Elastica\Script\AbstractScript;
 use Elastica\Script\ScriptFields;
 use Elastica\Suggest\AbstractSuggest;
@@ -19,18 +20,62 @@ use Elastica\Suggest\AbstractSuggest;
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
+ * @phpstan-type TCreateQueryArgs = TCreateQueryArgsMatching|AbstractSuggest|Collapse|Suggest
+ * @phpstan-type TCreateQueryArgsMatching = AbstractQuery|TRawQuery|self|string|null
+ * @phpstan-type TRawQuery = array{
+ *     _source?: TSourceArgs,
+ *     aggs?: list<AbstractAggregation>,
+ *     collapse?: Collapse,
+ *     docvalue_fields?: TDocValueFields,
+ *     explain?: bool,
+ *     from?: int,
+ *     highlight?: THighlightArgs,
+ *     indices_boost?: array<string, float>,
+ *     min_score?: float,
+ *     pit?: PointInTime,
+ *     post_filter?: AbstractQuery,
+ *     post_filter?: AbstractQuery,
+ *     query?: AbstractQuery|array<string, array<string, mixed>>,
+ *     rescore?: TRescoreArgs,
+ *     script_fields?: ScriptFields,
+ *     size?: int,
+ *     sort?: TSortArgs,
+ *     stored_fields?: TStoredFields,
+ *     suggest?: Suggest,
+ *     track_scores?: bool,
+ *     track_total_hits?: bool|int,
+ *     version?: bool,
+ * }
+ * @phpstan-type TSortArgs = list<non-empty-string|array<string, string>|array<string, array{
+ *     order?: non-empty-string,
+ *     mode?: non-empty-string,
+ *     numeric_type?: non-empty-string,
+ *     nested?: array{path: non-empty-string, filter?: array<mixed>, max_children?: int, nested?: array<mixed>},
+ *     missing?: non-empty-string,
+ *     unmapped_type?: non-empty-string,
+ * }>|array{_geo_distance: array<string, mixed>}>
+ * @todo: improve THighlightArgs https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html
+ * @phpstan-type THighlightArgs = array<mixed>
+ * @phpstan-type TStoredFields = list<string>
+ * @todo: improve TDocValueFields https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-docvalue-fields
+ * @phpstan-type TDocValueFields = array<mixed>
+ * @phpstan-type TRescoreArgs = QueryRescore|list<QueryRescore>
+ * @phpstan-type TSourceArgs = non-empty-string|list<non-empty-string>|array{includes?: list<non-empty-string>, excludes?: list<non-empty-string>}|false
  */
 class Query extends Param
 {
     /**
      * If the current query has a suggest in it.
+     *
+     * @var bool
      */
     private $hasSuggest = false;
 
     /**
      * Creates a query object.
      *
-     * @param AbstractQuery|array $query Query object (default = null)
+     * @param AbstractQuery|array|Collapse|Suggest $query Query object (default = null)
+     * @phpstan-param AbstractQuery|Suggest|Collapse|TRawQuery $query
      */
     public function __construct($query = null)
     {
@@ -51,6 +96,7 @@ class Query extends Param
      * For example, an empty argument will return a \Elastica\Query with a \Elastica\Query\MatchAll.
      *
      * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest|null $query
+     * @phpstan-param TCreateQueryArgs $query
      *
      * @throws InvalidException For an invalid argument
      */
@@ -79,6 +125,7 @@ class Query extends Param
      * Sets query as raw array. Will overwrite all already set arguments.
      *
      * @param array $query Query array
+     * @phpstan-param TRawQuery $query
      */
     public function setRawQuery(array $query): self
     {
@@ -95,7 +142,7 @@ class Query extends Param
     /**
      * Gets the query object.
      *
-     * @return AbstractQuery|array
+     * @return AbstractQuery|array<string, array<string, mixed>>
      */
     public function getQuery()
     {
@@ -117,6 +164,7 @@ class Query extends Param
      * Replaces existing values.
      *
      * @param array $sortArgs Sorting arguments
+     * @phpstan-param TSortArgs $sortArgs
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html
      */
@@ -151,6 +199,7 @@ class Query extends Param
      * Sets highlight arguments for the query.
      *
      * @param array $highlightArgs Set all highlight arguments
+     * @phpstan-param THighlightArgs $highlightArgs
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html
      */
@@ -213,6 +262,7 @@ class Query extends Param
      * so the fields array must a sequence(list) type of array.
      *
      * @param array $fields Fields to be returned
+     * @phpstan-param TStoredFields $fields
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-stored-fields
      */
@@ -225,6 +275,7 @@ class Query extends Param
      * Set the doc value representation of a fields to return for each hit.
      *
      * @param array $fieldDataFields Fields not stored to be returned
+     * @phpstan-param TDocValueFields $fieldDataFields
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-docvalue-fields
      */
@@ -236,7 +287,7 @@ class Query extends Param
     /**
      * Set script fields.
      *
-     * @param array|ScriptFields $scriptFields Script fields
+     * @param array<string, AbstractScript>|ScriptFields $scriptFields Script fields
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-script-fields
      */
@@ -328,6 +379,7 @@ class Query extends Param
      * Add a Rescore.
      *
      * @param mixed $rescore suggestion object
+     * @phpstan-param TRescoreArgs $rescore
      *
      * @see: https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-rescore
      */
@@ -350,6 +402,7 @@ class Query extends Param
      * Sets the _source field to be returned with every hit.
      *
      * @param array|bool $params Fields to be returned or false to disable source
+     * @phpstan-param TSourceArgs $params
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-source-filtering
      */
