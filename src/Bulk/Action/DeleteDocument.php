@@ -3,6 +3,8 @@
 namespace Elastica\Bulk\Action;
 
 use Elastica\AbstractUpdateAction;
+use Elastica\ApiVersion;
+use Elastica\Type;
 
 class DeleteDocument extends AbstractDocument
 {
@@ -16,7 +18,7 @@ class DeleteDocument extends AbstractDocument
      */
     protected function _getMetadata(AbstractUpdateAction $action): array
     {
-        return $action->getOptions([
+        $metadata = $action->getOptions([
             '_index',
             '_id',
             'if_seq_no',
@@ -25,5 +27,7 @@ class DeleteDocument extends AbstractDocument
             'routing',
             'parent',
         ]);
+
+        return $this->handleMetadataByApiVersion($metadata);
     }
 }

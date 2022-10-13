@@ -38,6 +38,8 @@ class Action
      */
     protected $_source = [];
 
+    protected int $apiVersion;
+
     public function __construct(string $opType = self::OP_TYPE_INDEX, array $metadata = [], array $source = [])
     {
         $this->setOpType($opType);
@@ -67,6 +69,23 @@ class Action
         }
 
         return $string;
+    }
+
+    /**
+     * @return int
+     */
+    public function getApiVersion(): int
+    {
+        return $this->apiVersion;
+    }
+
+
+    /**
+     * @param int $apiVersion
+     */
+    public function setApiVersion(int $apiVersion): void
+    {
+        $this->apiVersion = $apiVersion;
     }
 
     /**

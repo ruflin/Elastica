@@ -3,9 +3,11 @@
 namespace Elastica\Bulk\Action;
 
 use Elastica\AbstractUpdateAction;
+use Elastica\ApiVersion;
 use Elastica\Bulk\Action;
 use Elastica\Document;
 use Elastica\Script\AbstractScript;
+use Elastica\Type;
 
 abstract class AbstractDocument extends Action
 {
@@ -17,8 +19,9 @@ abstract class AbstractDocument extends Action
     /**
      * @param AbstractScript|Document $document
      */
-    public function __construct($document)
+    public function __construct($document, int $apiVersion)
     {
+        $this->apiVersion = $apiVersion;
         $this->setData($document);
     }
 
@@ -118,7 +121,7 @@ abstract class AbstractDocument extends Action
      *
      * @return AbstractDocument
      */
-    public static function create($data, ?string $opType = null): self
+    public static function create($data, ?string $opType = null, int $apiVersion): self
     {
         // Check type
         if (!$data instanceof Document && !$data instanceof AbstractScript) {
@@ -140,19 +143,36 @@ abstract class AbstractDocument extends Action
 
         switch ($opType) {
             case self::OP_TYPE_DELETE:
-                return new DeleteDocument($data);
+                return new DeleteDocument($data, $apiVersion);
 
             case self::OP_TYPE_CREATE:
-                return new CreateDocument($data);
+                return new CreateDocument($data, $apiVersion);
 
             case self::OP_TYPE_UPDATE:
-                return new UpdateDocument($data);
+                return new UpdateDocument($data, $apiVersion);
 
             case self::OP_TYPE_INDEX:
             default:
-                return new IndexDocument($data);
+                return new IndexDocument($data, $apiVersion);
         }
     }
 
     abstract protected function _getMetadata(AbstractUpdateAction $source): array;
+
+    protected function handleMetadataByApiVersion(array $metadata): array {
+        if ($this->apiVersion === ApiVersion::API_VERSION_6) {
+            // @see https://github.com/BrandEmbassy/platform-backend/blob/206169d2c8b69a48ce7b59dab1cf6f5159621df0/application/src/BE/ElasticSearch/Index/Index.php#L73-L80
+            $metadata['_type'] = in_array(
+                    $metadata['_index'],
+                    [
+                        'visitors',
+                        'visitor_events_full_history_read_only'
+                    ]
+                )
+                ? Type::DOC
+                : Type::DEFAULT;
+        }
+
+        return $metadata;
+    }
 }

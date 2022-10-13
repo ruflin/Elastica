@@ -540,11 +540,19 @@ class Client
         return $response;
     }
 
+    public function getApiVersion(): int {
+        return $this->getConfigValue('apiVersion');
+    }
+
     /**
      * Makes calls to the elasticsearch server with usage official client Endpoint.
      */
     public function requestEndpoint(AbstractEndpoint $endpoint): Response
     {
+        if ($this->getApiVersion() === ApiVersion::API_VERSION_6) {
+            $endpoint->setType(Type::DOC);
+        }
+
         return $this->request(
             \ltrim($endpoint->getURI(), '/'),
             $endpoint->getMethod(),
