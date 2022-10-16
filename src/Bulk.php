@@ -129,7 +129,12 @@ class Bulk
      */
     public function addDocument(Document $document, ?string $opType = null): self
     {
-        $action = AbstractDocumentAction::create($document, $opType, $this->_client->getConfigValue('apiVersion'));
+        $action = AbstractDocumentAction::create(
+            $document,
+            $opType,
+            $this->_client->getApiVersion(),
+            $this->_client->getDocumentTypeResolver(),
+        );
 
         return $this->addAction($action);
     }
@@ -153,7 +158,12 @@ class Bulk
      */
     public function addScript(AbstractScript $script, ?string $opType = null): self
     {
-        $action = AbstractDocumentAction::create($script, $opType, $this->_client->getConfigValue('apiVersion'));
+        $action = AbstractDocumentAction::create(
+            $script,
+            $opType,
+            $this->_client->getApiVersion(),
+            $this->_client->getDocumentTypeResolver(),
+        );
 
         return $this->addAction($action);
     }

@@ -2,6 +2,7 @@
 
 namespace Elastica\Bulk\Action;
 
+use Closure;
 use Elastica\AbstractUpdateAction;
 use Elastica\ApiVersion;
 use Elastica\Bulk\Action;
@@ -19,9 +20,10 @@ abstract class AbstractDocument extends Action
     /**
      * @param AbstractScript|Document $document
      */
-    public function __construct($document, int $apiVersion)
+    public function __construct($document, int $apiVersion, Closure $documentTypeResolver)
     {
         $this->apiVersion = $apiVersion;
+        $this->documentTypeResolver = $documentTypeResolver;
         $this->setData($document);
     }
 
@@ -121,7 +123,12 @@ abstract class AbstractDocument extends Action
      *
      * @return AbstractDocument
      */
-    public static function create($data, ?string $opType = null, int $apiVersion): self
+    public static function create(
+        $data,
+        ?string $opType = null,
+        int $apiVersion,
+        Closure $documentTypeResolver
+    ): self
     {
         // Check type
         if (!$data instanceof Document && !$data instanceof AbstractScript) {
@@ -143,17 +150,17 @@ abstract class AbstractDocument extends Action
 
         switch ($opType) {
             case self::OP_TYPE_DELETE:
-                return new DeleteDocument($data, $apiVersion);
+                return new DeleteDocument($data, $apiVersion, $documentTypeResolver);
 
             case self::OP_TYPE_CREATE:
-                return new CreateDocument($data, $apiVersion);
+                return new CreateDocument($data, $apiVersion, $documentTypeResolver);
 
             case self::OP_TYPE_UPDATE:
-                return new UpdateDocument($data, $apiVersion);
+                return new UpdateDocument($data, $apiVersion, $documentTypeResolver);
 
             case self::OP_TYPE_INDEX:
             default:
-                return new IndexDocument($data, $apiVersion);
+                return new IndexDocument($data, $apiVersion, $documentTypeResolver);
         }
     }
 
@@ -162,15 +169,7 @@ abstract class AbstractDocument extends Action
     protected function handleMetadataByApiVersion(array $metadata): array {
         if ($this->apiVersion === ApiVersion::API_VERSION_6) {
             // @see https://github.com/BrandEmbassy/platform-backend/blob/206169d2c8b69a48ce7b59dab1cf6f5159621df0/application/src/BE/ElasticSearch/Index/Index.php#L73-L80
-            $metadata['_type'] = in_array(
-                    $metadata['_index'],
-                    [
-                        'visitors',
-                        'visitor_events_full_history_read_only'
-                    ]
-                )
-                ? Type::DOC
-                : Type::DEFAULT;
+            $metadata['_type'] = ($this->documentTypeResolver)($metadata['_index']);
         }
 
         return $metadata;

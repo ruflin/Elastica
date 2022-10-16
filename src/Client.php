@@ -2,6 +2,7 @@
 
 namespace Elastica;
 
+use Closure;
 use Elastica\Bulk\Action;
 use Elastica\Bulk\ResponseSet;
 use Elastica\Exception\ClientException;
@@ -544,13 +545,20 @@ class Client
         return $this->getConfigValue('apiVersion');
     }
 
+    public function getDocumentTypeResolver(): Closure {
+        return $this->getConfigValue('documentTypeResolver', static fn() => Type::DOC);
+    }
+
     /**
      * Makes calls to the elasticsearch server with usage official client Endpoint.
      */
     public function requestEndpoint(AbstractEndpoint $endpoint): Response
     {
         if ($this->getApiVersion() === ApiVersion::API_VERSION_6) {
-            $endpoint->setType(Type::DOC);
+            $index = $endpoint->getIndex();
+            if ($index !== null) {
+                $endpoint->setType(($this->getDocumentTypeResolver())($endpoint->getIndex()));
+            }
         }
 
         return $this->request(

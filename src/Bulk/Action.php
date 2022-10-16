@@ -2,6 +2,7 @@
 
 namespace Elastica\Bulk;
 
+use Closure;
 use Elastica\Bulk;
 use Elastica\Index;
 use Elastica\JSON;
@@ -39,6 +40,8 @@ class Action
     protected $_source = [];
 
     protected int $apiVersion;
+
+    protected Closure $documentTypeResolver;
 
     public function __construct(string $opType = self::OP_TYPE_INDEX, array $metadata = [], array $source = [])
     {
