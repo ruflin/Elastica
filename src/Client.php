@@ -5,6 +5,7 @@ namespace Elastica;
 use Closure;
 use Elastica\Bulk\Action;
 use Elastica\Bulk\ResponseSet;
+use Elastica\Elasticsearch\Endpoints\Update;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
@@ -14,7 +15,6 @@ use Elasticsearch\Endpoints\AbstractEndpoint;
 use Elasticsearch\Endpoints\ClosePointInTime;
 use Elasticsearch\Endpoints\Indices\ForceMerge;
 use Elasticsearch\Endpoints\Indices\Refresh;
-use Elasticsearch\Endpoints\Update;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
@@ -277,17 +277,24 @@ class Client
                 $requestData['doc_as_upsert'] = true;
             }
 
+            $optionWhitelist = [
+                'consistency',
+                'parent',
+                'percolate',
+                'refresh',
+                'replication',
+                'retry_on_conflict',
+                'routing',
+                'timeout',
+            ];
+
+            if ($this->getApiVersion() === ApiVersion::API_VERSION_6) {
+                // @see https://github.com/ruflin/Elastica/pull/1803/files
+                $optionWhitelist[] = 'version';
+            }
+
             $docOptions = $data->getOptions(
-                [
-                    'consistency',
-                    'parent',
-                    'percolate',
-                    'refresh',
-                    'replication',
-                    'retry_on_conflict',
-                    'routing',
-                    'timeout',
-                ]
+                $optionWhitelist
             );
             $options += $docOptions;
         } else {
