@@ -42,14 +42,17 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     private $_results;
 
+    private int $apiVersion;
+
     /**
      * @param Result[] $results
      */
-    public function __construct(Response $response, Query $query, $results)
+    public function __construct(Response $response, Query $query, $results, int $apiVersion)
     {
         $this->_query = $query;
         $this->_response = $response;
         $this->_results = $results;
+        $this->apiVersion = $apiVersion;
     }
 
     /**
@@ -143,6 +146,10 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     public function getTotalHits(): int
     {
         $data = $this->_response->getData();
+
+        if ($this->apiVersion === ApiVersion::API_VERSION_6) {
+            return (int) ($data['hits']['total'] ?? 0);
+        }
 
         return (int) ($data['hits']['total']['value'] ?? 0);
     }

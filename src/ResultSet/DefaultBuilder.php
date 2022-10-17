@@ -12,11 +12,11 @@ class DefaultBuilder implements BuilderInterface
     /**
      * Builds a ResultSet for a given Response.
      */
-    public function buildResultSet(Response $response, Query $query): ResultSet
+    public function buildResultSet(Response $response, Query $query, int $apiVersion): ResultSet
     {
         $results = $this->buildResults($response);
 
-        return new ResultSet($response, $query, $results);
+        return new ResultSet($response, $query, $results, $apiVersion);
     }
 
     /**

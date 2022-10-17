@@ -342,7 +342,11 @@ class Search
 
         $response = $this->getClient()->request($path, $method, $data, $params);
 
-        return $this->builder->buildResultSet($response, $query);
+        return $this->builder->buildResultSet(
+            $response,
+            $query,
+            $this->getClient()->getApiVersion()
+        );
     }
 
     /**
@@ -368,7 +372,11 @@ class Search
             $query->toArray(),
             [self::OPTION_SEARCH_TYPE => self::OPTION_SEARCH_TYPE_QUERY_THEN_FETCH]
         );
-        $resultSet = $this->builder->buildResultSet($response, $query);
+        $resultSet = $this->builder->buildResultSet(
+            $response,
+            $query,
+            $this->getClient()->getApiVersion()
+        );
 
         return $fullResult ? $resultSet : $resultSet->getTotalHits();
     }

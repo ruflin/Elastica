@@ -10,5 +10,5 @@ interface MultiBuilderInterface
     /**
      * @param BaseSearch[] $searches
      */
-    public function buildMultiResultSet(Response $response, array $searches): ResultSet;
+    public function buildMultiResultSet(Response $response, array $searches, int $apiVersion): ResultSet;
 }

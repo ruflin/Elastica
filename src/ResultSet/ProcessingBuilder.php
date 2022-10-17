@@ -29,9 +29,9 @@ class ProcessingBuilder implements BuilderInterface
      * returning it, allowing the transformers to inject additional
      * data into each Result.
      */
-    public function buildResultSet(Response $response, Query $query): ResultSet
+    public function buildResultSet(Response $response, Query $query, int $apiVersion): ResultSet
     {
-        $resultSet = $this->builder->buildResultSet($response, $query);
+        $resultSet = $this->builder->buildResultSet($response, $query, $apiVersion);
 
         $this->processor->process($resultSet);
 

@@ -11,16 +11,24 @@ class MultiBuilder implements MultiBuilderInterface
     /**
      * @param BaseSearch[] $searches
      */
-    public function buildMultiResultSet(Response $response, array $searches): ResultSet
+    public function buildMultiResultSet(Response $response, array $searches, int $apiVersion): ResultSet
     {
-        $resultSets = $this->buildResultSets($response, $searches);
+        $resultSets = $this->buildResultSets($response, $searches, $apiVersion);
 
         return new ResultSet($response, $resultSets);
     }
 
-    private function buildResultSet(Response $childResponse, BaseSearch $search): BaseResultSet
+    private function buildResultSet(
+        Response $childResponse,
+        BaseSearch $search,
+        int $apiVersion
+    ): BaseResultSet
     {
-        return $search->getResultSetBuilder()->buildResultSet($childResponse, $search->getQuery());
+        return $search->getResultSetBuilder()->buildResultSet(
+            $childResponse,
+            $search->getQuery(),
+            $apiVersion
+        );
     }
 
     /**
@@ -28,7 +36,7 @@ class MultiBuilder implements MultiBuilderInterface
      *
      * @return BaseResultSet[]
      */
-    private function buildResultSets(Response $response, array $searches): array
+    private function buildResultSets(Response $response, array $searches, int $apiVersion): array
     {
         $data = $response->getData();
         if (!isset($data['responses']) || !\is_array($data['responses'])) {
@@ -43,7 +51,7 @@ class MultiBuilder implements MultiBuilderInterface
             $key = \key($searches);
             \next($searches);
 
-            $resultSets[$key] = $this->buildResultSet(new Response($responseData), $search);
+            $resultSets[$key] = $this->buildResultSet(new Response($responseData), $search, $apiVersion);
         }
 
         return $resultSets;

@@ -138,7 +138,11 @@ class Search
             Request::NDJSON_CONTENT_TYPE
         );
 
-        return $this->_builder->buildMultiResultSet($response, $this->getSearches());
+        return $this->_builder->buildMultiResultSet(
+            $response,
+            $this->getSearches(),
+            $this->_client->getApiVersion()
+        );
     }
 
     protected function _getData(): string
