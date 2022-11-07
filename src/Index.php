@@ -15,6 +15,7 @@ use Elastica\Script\AbstractScript;
 use Elasticsearch\Endpoints\AbstractEndpoint;
 use Elasticsearch\Endpoints\DeleteByQuery;
 use Elasticsearch\Endpoints\Get as DocumentGet;
+use Elasticsearch\Endpoints\Mget as DocumentMget;
 use Elasticsearch\Endpoints\Index as IndexEndpoint;
 use Elasticsearch\Endpoints\Indices\Alias;
 use Elasticsearch\Endpoints\Indices\Aliases\Update;
@@ -283,6 +284,83 @@ class Index implements SearchableInterface
         $doc->setVersionParams($result);
 
         return $doc;
+    }
+
+    /**
+     * Get the document from search index.
+     *
+     * @param string[]   $ids     Document ids
+     * @param array      $options options for the get request
+     *
+     * @return array<string, Document>
+     *
+     * @throws ResponseException
+     * @throws NotFoundException
+     */
+    public function getDocuments(array $ids, array $options = [], bool $throwOnNotFound = true): array
+    {
+        $endpoint = new DocumentMget();
+        $client = $this->getClient();
+        $isApiV6 = $client->getApiVersion() === ApiVersion::API_VERSION_6;
+        $documentType = ($client->getDocumentTypeResolver())($this->getName());
+
+        $docs = [];
+        foreach ($ids as $id) {
+            $identifiers = [
+                "_id" => $id
+            ];
+
+            if ($isApiV6) {
+                $identifiers["_type"] = $documentType;
+            }
+
+            $docs[] = $identifiers;
+        }
+
+        $body = [
+            "docs" => $docs
+        ];
+
+        $endpoint->setBody($body);
+        $endpoint->setParams($options);
+
+        $response = $this->requestEndpoint($endpoint);
+        $results = $response->getData();
+
+        $documents = [];
+        $notFoundIds = [];
+        foreach ($results['docs'] as $result) {
+            $id = $result['_id'] ?? '???';
+            if (!isset($result['found']) || false === $result['found']) {
+                $notFoundIds[] = $id;
+                $documents[$id] = null;
+                continue;
+            }
+
+            if (isset($result['fields'])) {
+                $data = $result['fields'];
+            } elseif (isset($result['_source'])) {
+                $data = $result['_source'];
+            } else {
+                $data = [];
+            }
+
+            $doc = new Document($id, $data, $this->getName());
+            $doc->setVersionParams($result);
+
+            $documents[$id] = $doc;
+        }
+
+        if ($notFoundIds !== [] && $throwOnNotFound) {
+            throw new NotFoundException(
+                sprintf('doc ids %s not found', implode(', ', $notFoundIds)),
+                0,
+                null,
+                $notFoundIds
+            );
+        }
+
+        return $documents;
     }
 
     /**
