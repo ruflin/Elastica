@@ -292,7 +292,7 @@ class Index implements SearchableInterface
      * @param string[]   $ids     Document ids
      * @param array      $options options for the get request
      *
-     * @return array<string, Document>
+     * @return array<array-key, Document>
      *
      * @throws ResponseException
      * @throws NotFoundException
