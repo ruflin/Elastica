@@ -92,6 +92,11 @@ jobs:
         with:
             files: build/coverage/unit-coverage.xml,build/coverage/functional-coverage.xml
 
+      - name: Elasticsearch Logs
+        if: always()
+        run: |
+          docker-compose logs es01 es02
+
   phpstan:
     runs-on: 'ubuntu-20.04'
     name: 'PHPStan'
