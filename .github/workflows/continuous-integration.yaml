@@ -74,14 +74,22 @@ jobs:
           vendor/bin/phpunit --group unit --coverage-clover=build/coverage/unit-coverage.xml
 
       - name: 'Setup Elasticsearch'
+        env:
+          ES_VERSION: "${{ matrix.elasticsearch }}"
         run: |
           sudo swapoff -a
           sudo sysctl -w vm.swappiness=1
           sudo sysctl -w fs.file-max=262144
           sudo sysctl -w vm.max_map_count=262144
-          ES_VERSION=${{ matrix.elasticsearch }} docker-compose --file=docker/docker-compose.proxy.yml --file=docker/docker-compose.es.yml up --detach
-          docker run --rm --network=docker_elastic curlimages/curl --max-time 120 --retry-max-time 120 --retry 120 --retry-delay 5 --retry-all-errors --show-error --silent http://es01:9200
-          docker run --rm --network=docker_elastic curlimages/curl --max-time 120 --retry-max-time 120 --retry 120 --retry-delay 5 --retry-all-errors --show-error --silent http://es02:9200
+          docker-compose --file=docker/docker-compose.proxy.yml --file=docker/docker-compose.es.yml up --detach
+
+          if [[ "$ES_VERSION" == "8.0.0" ]]; then
+            docker run --rm --network=docker_elastic curlimages/curl --max-time 120 --retry-max-time 120 --retry 120 --retry-delay 5 --retry-all-errors --show-error --silent -k https://es01:9200
+            docker run --rm --network=docker_elastic curlimages/curl --max-time 120 --retry-max-time 120 --retry 120 --retry-delay 5 --retry-all-errors --show-error --silent -k https://es02:9200
+          else
+            docker run --rm --network=docker_elastic curlimages/curl --max-time 120 --retry-max-time 120 --retry 120 --retry-delay 5 --retry-all-errors --show-error --silent http://es01:9200
+            docker run --rm --network=docker_elastic curlimages/curl --max-time 120 --retry-max-time 120 --retry 120 --retry-delay 5 --retry-all-errors --show-error --silent http://es02:9200
+          fi;
 
       - name: 'Run functional tests'
         run: |
