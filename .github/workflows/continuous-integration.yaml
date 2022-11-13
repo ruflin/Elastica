@@ -28,12 +28,15 @@ jobs:
     runs-on: 'ubuntu-20.04'
     name: 'PHPUnit (PHP ${{ matrix.php }}, ES ${{ matrix.elasticsearch }})'
     timeout-minutes: 10
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
         php:
           - '8.0'
           - '8.1'
           - '8.2'
+        experimental:
+          - false
         dependencies:
           - 'highest'
         elasticsearch:
@@ -43,6 +46,9 @@ jobs:
           - dependencies: 'lowest'
             php: '8.0'
             elasticsearch: '7.15.2'
+          - php: '8.1'
+            elasticsearch: '8.0'
+            experimental: true
       fail-fast: false
     steps:
       - name: 'Checkout'
