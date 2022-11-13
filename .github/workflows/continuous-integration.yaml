@@ -46,6 +46,7 @@ jobs:
           - dependencies: 'lowest'
             php: '8.0'
             elasticsearch: '7.15.2'
+            experimental: false
           - php: '8.1'
             elasticsearch: '8.0'
             experimental: true
