@@ -158,7 +158,7 @@ class QueryTest extends BaseTest
     {
         $query = new Query();
 
-        $params = ['query' => 'test'];
+        $params = ['query' => ['term' => ['title' => 'test']]];
         $query->setRawQuery($params);
 
         $this->assertEquals($params, $query->toArray());

@@ -216,11 +216,6 @@ parameters:
 			path: tests/SearchTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$indices of method Elastica\\\\Search\\:\\:addIndices\\(\\) expects array\\<Elastica\\\\Index\\>, array\\<int, Elastica\\\\Index\\|string\\> given\\.$#"
-			count: 1
-			path: tests/SearchTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$indices of method Elastica\\\\Search\\:\\:addIndices\\(\\) expects array\\<Elastica\\\\Index\\>, array\\<int, stdClass\\> given\\.$#"
 			count: 1
 			path: tests/SearchTest.php
