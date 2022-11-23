@@ -46,14 +46,16 @@ use Elastica\Suggest\AbstractSuggest;
  *     track_total_hits?: bool|int,
  *     version?: bool,
  * }
- * @phpstan-type TSortArgs = list<non-empty-string|array<string, string>|array<string, array{
+ * @phpstan-type TSortArgs = list<TSortArg>|TSortArrayArg
+ * @phpstan-type TSortArg = non-empty-string|TSortArrayArg
+ * @phpstan-type TSortArrayArg = array<string, string>|array<string, array{
  *     order?: non-empty-string,
  *     mode?: non-empty-string,
  *     numeric_type?: non-empty-string,
  *     nested?: array{path: non-empty-string, filter?: array<mixed>, max_children?: int, nested?: array<mixed>},
  *     missing?: non-empty-string,
  *     unmapped_type?: non-empty-string,
- * }>|array{_geo_distance: array<string, mixed>}>
+ * }>|array{_geo_distance: array<string, mixed>}
  * @todo: improve THighlightArgs https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html
  * @phpstan-type THighlightArgs = array<mixed>
  * @phpstan-type TStoredFields = list<string>
@@ -177,6 +179,7 @@ class Query extends Param
      * Adds a sort param to the query.
      *
      * @param mixed $sort Sort parameter
+     * @phpstan-param TSortArg $sort
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html
      */
