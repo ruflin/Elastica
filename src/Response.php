@@ -208,26 +208,7 @@ class Response
     public function getData()
     {
         if (null == $this->_response) {
-            $response = $this->_responseString;
-
-            try {
-                if ($this->getJsonBigintConversion()) {
-                    $response = JSON::parse($response, true, 512, \JSON_BIGINT_AS_STRING);
-                } else {
-                    $response = JSON::parse($response);
-                }
-            } catch (\JsonException $e) {
-                // leave response as is if parse fails
-            }
-
-            if (empty($response)) {
-                $response = [];
-            }
-
-            if (\is_string($response)) {
-                $response = ['message' => $response];
-            }
-
+            $response = $this->getResponseString();
             $this->_response = $response;
             $this->_responseString = '';
         }
@@ -356,5 +337,31 @@ class Response
     public function getJsonBigintConversion()
     {
         return $this->_jsonBigintConversion;
+    }
+
+    /**
+     * @return array|string[]
+     */
+    private function getResponseString()
+    {
+        $response = $this->_responseString;
+        if (empty($response)) {
+            return [];
+        }
+        try {
+            if ($this->getJsonBigintConversion()) {
+                $response = JSON::parse($response, true, 512, \JSON_BIGINT_AS_STRING);
+            } else {
+                $response = JSON::parse($response);
+            }
+        } catch (\JsonException $e) {
+            // leave response as is if parse fails
+        }
+
+        if (\is_string($response)) {
+            $response = ['message' => $response];
+        }
+
+        return $response;
     }
 }

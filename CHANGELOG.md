@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Removed `CallbackStrategyTestHelper` and `ErrorsCollector` from `tests` [#2111](https://github.com/ruflin/Elastica/pull/2111)
 ### Fixed
 * Fixed `Query/Terms` terms phpdoc from `array<bool|float|int|string>` to `list<bool|float|int|string>` [#2118](https://github.com/ruflin/Elastica/pull/2118)
+* Fixed `Response` to prevent throwing JSONParseException when the response is empty.
 ### Security
 
 ## [7.2.0](https://github.com/ruflin/Elastica/compare/7.2.0...7.1.5)
