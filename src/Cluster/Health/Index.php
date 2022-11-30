@@ -8,6 +8,20 @@ namespace Elastica\Cluster\Health;
  * @author Ray Ward <ray.ward@bigcommerce.com>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html
+ *
+ * @phpstan-import-type HealthStatus from \Elastica\Cluster\Health
+ * @phpstan-import-type ShardData from Shard
+ * @phpstan-type IndexData = array{
+ *   status: HealthStatus,
+ *   number_of_shards: int,
+ *   number_of_replicas: int,
+ *   active_primary_shards: int,
+ *   active_shards: int,
+ *   relocating_shards: int,
+ *   initializing_shards: int,
+ *   unassigned_shards: int,
+ *   shards: ShardData[],
+ * }
  */
 class Index
 {
@@ -17,13 +31,15 @@ class Index
     protected $_name;
 
     /**
-     * @var array the index health data
+     * @var array<string, mixed> the index health data
+     * @phpstan-var IndexData
      */
     protected $_data;
 
     /**
-     * @param string $name the name of the index
-     * @param array  $data the index health data
+     * @param string               $name the name of the index
+     * @param array<string, mixed> $data the index health data
+     * @phpstan-param IndexData $data
      */
     public function __construct(string $name, array $data)
     {
@@ -43,6 +59,7 @@ class Index
      * Gets the status of the index.
      *
      * @return string green, yellow or red
+     * @phpstan-return HealthStatus
      */
     public function getStatus(): string
     {
