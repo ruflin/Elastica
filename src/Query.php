@@ -39,7 +39,7 @@ use Elastica\Suggest\AbstractSuggest;
  * @phpstan-type TSortArgs = list<TSortArg>|TSortArrayArg
  * @phpstan-type TRawQuery = array{
  *     _source?: TSourceArgs,
- *     aggs?: list<AbstractAggregation>,
+ *     aggs?: list<AbstractAggregation>|array<string, array<string, array<string, mixed>>>,
  *     collapse?: Collapse,
  *     docvalue_fields?: TDocValueFields,
  *     explain?: bool,
