@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 ### Removed
 ### Fixed
+* Fix types order in `Elastica\Query` to work with psalm
 ### Security
 
 ## [7.3.0](https://github.com/ruflin/Elastica/compare/7.3.0...7.2.0)
