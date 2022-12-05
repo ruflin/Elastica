@@ -15,20 +15,19 @@
     ],
     "homepage": "http://elastica.io/",
     "require": {
-        "php": "^7.2 || ^8.0",
+        "php": "~8.0.0 || ~8.1.0",
         "ext-json": "*",
         "elasticsearch/elasticsearch": "^7.10",
         "nyholm/dsn": "^2.0.0",
         "psr/log": "^1.0 || ^2.0 || ^3.0",
-        "symfony/deprecation-contracts": "^2.2 || ^3.0",
-        "symfony/polyfill-php73": "^1.19"
+        "symfony/deprecation-contracts": "^3.0"
     },
     "require-dev": {
         "aws/aws-sdk-php": "^3.155",
-        "guzzlehttp/guzzle": "^6.3 || ^7.2",
+        "guzzlehttp/guzzle": "^7.2",
         "phpstan/phpstan": "^1.5",
         "phpstan/phpstan-phpunit": "^1.1",
-        "phpunit/phpunit": "^8.5.8 || ^9.4",
+        "phpunit/phpunit": "^9.5",
         "symfony/phpunit-bridge": "^6.0"
     },
     "suggest": {
