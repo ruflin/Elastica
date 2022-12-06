@@ -37,6 +37,11 @@ jobs:
           - 'highest'
         elasticsearch:
           - '7.15.2'
+        include:
+          # Test with the lowest set of dependencies
+          - dependencies: 'lowest'
+            php: '8.0'
+            elasticsearch: '7.15.2'
       fail-fast: false
     steps:
       - name: 'Checkout'
