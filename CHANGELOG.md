@@ -4,9 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/7.3.0...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/7.3.0...8.x)
 ### Backward Compatibility Breaks
 * Dropped support for PHP <8.0 [#2131](https://github.com/ruflin/Elastica/pull/2131)
+* Dropped `Elastica\JSON` and `Elastica\Exception\JSONParseException`. Catch native `\JsonException` instead. [#2133](https://github.com/ruflin/Elastica/pull/2133)
 ### Added
 ### Changed
 ### Deprecated
