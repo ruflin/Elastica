@@ -50,7 +50,7 @@ class Request extends Param
 
     public function __toString(): string
     {
-        return JSON::stringify($this->toArray());
+        return \json_encode($this->toArray(), \JSON_PRESERVE_ZERO_FRACTION | \JSON_THROW_ON_ERROR);
     }
 
     /**

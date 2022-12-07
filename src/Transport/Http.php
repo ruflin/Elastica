@@ -6,7 +6,6 @@ use Elastica\Exception\Connection\HttpException;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\PartialShardFailureException;
 use Elastica\Exception\ResponseException;
-use Elastica\JSON;
 use Elastica\Request;
 use Elastica\Response;
 use Elastica\Util;
@@ -128,7 +127,7 @@ class Http extends AbstractTransport
             }
 
             if (\is_array($data)) {
-                $content = JSON::stringify($data, \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES);
+                $content = \json_encode($data, \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_PRESERVE_ZERO_FRACTION | \JSON_THROW_ON_ERROR);
             } else {
                 $content = $data;
 

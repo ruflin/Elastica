@@ -4,7 +4,6 @@ namespace Elastica\Bulk;
 
 use Elastica\Bulk;
 use Elastica\Index;
-use Elastica\JSON;
 
 class Action
 {
@@ -47,7 +46,7 @@ class Action
 
     public function __toString(): string
     {
-        $string = JSON::stringify($this->getActionMetadata(), \JSON_FORCE_OBJECT).Bulk::DELIMITER;
+        $string = \json_encode($this->getActionMetadata(), \JSON_FORCE_OBJECT | \JSON_PRESERVE_ZERO_FRACTION | \JSON_THROW_ON_ERROR).Bulk::DELIMITER;
 
         if ($this->hasSource()) {
             $source = $this->getSource();
@@ -61,7 +60,7 @@ class Action
                 }
                 $string .= '{"doc": '.$source['doc'].$docAsUpsert.'}';
             } else {
-                $string .= JSON::stringify($source, \JSON_UNESCAPED_UNICODE);
+                $string .= \json_encode($source, \JSON_UNESCAPED_UNICODE | \JSON_PRESERVE_ZERO_FRACTION | \JSON_THROW_ON_ERROR);
             }
             $string .= Bulk::DELIMITER;
         }

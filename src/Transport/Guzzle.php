@@ -6,7 +6,6 @@ use Elastica\Connection;
 use Elastica\Exception\Connection\GuzzleException;
 use Elastica\Exception\PartialShardFailureException;
 use Elastica\Exception\ResponseException;
-use Elastica\JSON;
 use Elastica\Request;
 use Elastica\Response;
 use Elastica\Util;
@@ -201,7 +200,7 @@ class Guzzle extends AbstractTransport
     private function streamFor($data): StreamInterface
     {
         if (\is_array($data)) {
-            $data = JSON::stringify($data, \JSON_UNESCAPED_UNICODE);
+            $data = \json_encode($data, \JSON_UNESCAPED_UNICODE | \JSON_PRESERVE_ZERO_FRACTION | \JSON_THROW_ON_ERROR);
         }
 
         return \class_exists(Psr7\Utils::class)

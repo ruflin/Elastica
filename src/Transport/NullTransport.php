@@ -2,7 +2,6 @@
 
 namespace Elastica\Transport;
 
-use Elastica\JSON;
 use Elastica\Request;
 use Elastica\Response;
 
@@ -73,7 +72,7 @@ class NullTransport extends AbstractTransport
             'params' => $params,
         ];
 
-        return new Response(JSON::stringify($response));
+        return new Response(\json_encode($response, \JSON_PRESERVE_ZERO_FRACTION | \JSON_THROW_ON_ERROR));
     }
 
     /**

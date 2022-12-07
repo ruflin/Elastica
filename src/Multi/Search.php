@@ -3,7 +3,6 @@
 namespace Elastica\Multi;
 
 use Elastica\Client;
-use Elastica\JSON;
 use Elastica\Request;
 use Elastica\Search as BaseSearch;
 
@@ -161,8 +160,8 @@ class Search
         // Keep other query options as part of the search body
         $queryOptions = \array_diff_key($search->getOptions(), \array_flip(self::$HEADER_OPTIONS));
 
-        $data = JSON::stringify($header)."\n";
-        $data .= JSON::stringify($query->toArray() + $queryOptions)."\n";
+        $data = \json_encode($header, \JSON_PRESERVE_ZERO_FRACTION | \JSON_THROW_ON_ERROR)."\n";
+        $data .= \json_encode($query->toArray() + $queryOptions, \JSON_PRESERVE_ZERO_FRACTION | \JSON_THROW_ON_ERROR)."\n";
 
         return $data;
     }
