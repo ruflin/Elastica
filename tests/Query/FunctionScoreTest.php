@@ -16,6 +16,9 @@ use Elastica\Test\Base as BaseTest;
  */
 class FunctionScoreTest extends BaseTest
 {
+    /**
+     * @var string
+     */
     protected $locationOrigin = '32.804654, -117.242594';
 
     /**

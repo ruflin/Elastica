@@ -9,6 +9,9 @@ namespace Elastica\Query;
  */
 class DistanceFeature extends AbstractQuery
 {
+    /**
+     * @param array{float, float}|string $origin
+     */
     public function __construct(string $field, $origin, string $pivot)
     {
         $this->setField($field);
@@ -22,7 +25,7 @@ class DistanceFeature extends AbstractQuery
     }
 
     /**
-     * @param array|string $origin
+     * @param array{float, float}|string $origin
      */
     public function setOrigin($origin): self
     {

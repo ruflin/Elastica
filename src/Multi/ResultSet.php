@@ -10,6 +10,9 @@ use Elastica\ResultSet as BaseResultSet;
  * List of result sets for each search request.
  *
  * @author munkie
+ *
+ * @template-implements \Iterator<int, BaseResultSet>
+ * @template-implements \ArrayAccess<int|string, BaseResultSet>
  */
 class ResultSet implements \Iterator, \ArrayAccess, \Countable
 {

@@ -10,6 +10,8 @@ use Elastica\Exception\InvalidException;
  * @author Manuel Andreo Garcia <andreo.garcia@gmail.com>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html
+ *
+ * @template-implements \Iterator<string|null, ResultSet>
  */
 class Scroll implements \Iterator
 {
@@ -38,11 +40,18 @@ class Scroll implements \Iterator
      * 1: scroll id.
      * 2: ignore_unavailable.
      *
-     * @var array
+     * @var array{mixed, mixed, mixed}
      */
     protected $_options = [null, null, null];
 
+    /**
+     * @var int
+     */
     private $totalPages = 0;
+
+    /**
+     * @var int
+     */
     private $currentPage = 0;
 
     public function __construct(Search $search, string $expiryTime = '1m')

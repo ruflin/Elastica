@@ -70,6 +70,8 @@ class Info
      * node is running on
      * Example 2: get('os', 'mem') returns an array with all mem infos
      *
+     * @param mixed $args
+     *
      * @return mixed Data array entry or null if not found
      */
     public function get(...$args)

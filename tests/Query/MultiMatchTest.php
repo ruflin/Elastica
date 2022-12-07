@@ -15,6 +15,14 @@ use Elastica\Test\Base as BaseTest;
  */
 class MultiMatchTest extends BaseTest
 {
+    /**
+     * @var array<array{
+     *   id: int,
+     *   name: string,
+     *   last_name: string,
+     *   full_name: string,
+     * }>
+     */
     private static $data = [
         ['id' => 1, 'name' => 'Rodolfo', 'last_name' => 'Moraes',   'full_name' => 'Rodolfo Moraes'],
         ['id' => 2, 'name' => 'Tristan', 'last_name' => 'Maindron', 'full_name' => 'Tristan Maindron'],

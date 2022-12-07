@@ -11,6 +11,9 @@ use Elastica\Exception\InvalidException;
  * Result set implements iterator
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
+ *
+ * @template-implements \Iterator<int, Result>
+ * @template-implements \ArrayAccess<int, Result>
  */
 class ResultSet implements \Iterator, \Countable, \ArrayAccess
 {

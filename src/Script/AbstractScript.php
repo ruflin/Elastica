@@ -54,7 +54,7 @@ abstract class AbstractScript extends AbstractUpdateAction
     /**
      * Factory to create a script object from data structure (reverse toArray).
      *
-     * @param AbstractScript|array|string $data
+     * @param AbstractScript|array{script: array<string, mixed>}|string $data
      *
      * @throws InvalidException
      *
@@ -114,6 +114,11 @@ abstract class AbstractScript extends AbstractUpdateAction
      */
     abstract protected function getScriptTypeArray(): array;
 
+    /**
+     * @param array{script: array<string, mixed>} $data
+     *
+     * @return Script|ScriptId
+     */
     private static function _createFromArray(array $data)
     {
         $params = $data['script']['params'] ?? [];

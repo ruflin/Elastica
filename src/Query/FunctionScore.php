@@ -48,6 +48,9 @@ class FunctionScore extends AbstractQuery
     public const RANDOM_SCORE_FIELD_ID = '_id';
     public const RANDOM_SCORE_FIELD_SEQ_NO = '_seq_no';
 
+    /**
+     * @var array<string, mixed>
+     */
     protected $_functions = [];
 
     /**
