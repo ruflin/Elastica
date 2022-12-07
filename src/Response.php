@@ -350,9 +350,9 @@ class Response
         }
         try {
             if ($this->getJsonBigintConversion()) {
-                $response = JSON::parse($response, true, 512, \JSON_BIGINT_AS_STRING);
+                $response = \json_decode($response, true, flags: \JSON_BIGINT_AS_STRING | \JSON_THROW_ON_ERROR);
             } else {
-                $response = JSON::parse($response);
+                $response = $response = \json_decode($response, true, flags: \JSON_THROW_ON_ERROR);
             }
         } catch (\JsonException $e) {
             // leave response as is if parse fails

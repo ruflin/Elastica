@@ -5,7 +5,6 @@ namespace Elastica\Transport;
 use Elastica\Connection;
 use Elastica\Exception\PartialShardFailureException;
 use Elastica\Exception\ResponseException;
-use Elastica\JSON;
 use Elastica\Request as ElasticaRequest;
 use Elastica\Response;
 use Elastica\Response as ElasticaResponse;
@@ -109,7 +108,7 @@ class HttpAdapter extends AbstractTransport
             }
 
             if (\is_array($data)) {
-                $body = JSON::stringify($data, \JSON_UNESCAPED_UNICODE);
+                $body = \json_encode($data, \JSON_UNESCAPED_UNICODE | \JSON_PRESERVE_ZERO_FRACTION | \JSON_THROW_ON_ERROR);
             } else {
                 $body = $data;
             }

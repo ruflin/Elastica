@@ -4,7 +4,6 @@ namespace Elastica\Test\Exception;
 
 use Elastica\Document;
 use Elastica\Exception\PartialShardFailureException;
-use Elastica\JSON;
 use Elastica\Query;
 use Elastica\ResultSet\DefaultBuilder;
 
@@ -61,7 +60,7 @@ class PartialShardFailureExceptionTest extends AbstractExceptionTest
             $resultSet = $builder->buildResultSet($e->getResponse(), $query);
             $this->assertCount(0, $resultSet->getResults());
 
-            $message = JSON::parse($e->getMessage());
+            $message = \json_decode($e->getMessage(), true, flags: \JSON_THROW_ON_ERROR);
             $this->assertArrayHasKey('failures', $message, 'Failures are absent');
             $this->assertGreaterThan(0, \count($message['failures']), 'Failures are empty');
         }

@@ -245,7 +245,7 @@ class Util
 
         $data = $request->getData();
         if (!empty($data)) {
-            $message .= ' -d \''.JSON::stringify($data).'\'';
+            $message .= ' -d \''.\json_encode($data, \JSON_PRESERVE_ZERO_FRACTION | \JSON_THROW_ON_ERROR).'\'';
         }
 
         return $message;
