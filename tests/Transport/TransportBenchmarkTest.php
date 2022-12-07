@@ -173,7 +173,7 @@ class TransportBenchmarkTest extends BaseTest
     {
         $client = $this->_getClient($config);
         $index = $client->getIndex('benchmark'.self::buildUniqueId());
-        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
+        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], ['recreate' => true]);
 
         return $index;
     }

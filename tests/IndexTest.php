@@ -728,27 +728,6 @@ class IndexTest extends BaseTest
     }
 
     /**
-     * @group functional
-     * @group legacy
-     */
-    public function testLegacyCreate(): void
-    {
-        $client = $this->_getClient();
-        $indexName = 'test';
-        $index = $client->getIndex($indexName);
-
-        $this->expectDeprecation('Since ruflin/elastica 7.1.0: Passing null as 2nd argument to "Elastica\Index::create()" is deprecated, avoid passing this argument or pass an array instead. It will be removed in 8.0.');
-        $index->create([], null);
-        $status = new Status($client);
-        $this->assertTrue($status->indexExists($indexName));
-
-        $this->expectDeprecation('Since ruflin/elastica 7.1.0: Passing a bool as 2nd argument to "Elastica\Index::create()" is deprecated, pass an array with the key "recreate" instead. It will be removed in 8.0.');
-        $index->create([], true);
-        $status = new Status($client);
-        $this->assertTrue($status->indexExists($indexName));
-    }
-
-    /**
      * @group unit
      */
     public function testCreateWithInvalidOption(): void
