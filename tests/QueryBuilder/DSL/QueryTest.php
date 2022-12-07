@@ -47,8 +47,6 @@ class QueryTest extends AbstractDSLTest
 
         $this->_assertImplemented($queryDSL, 'bool', Query\BoolQuery::class, []);
         $this->_assertImplemented($queryDSL, 'boosting', Query\Boosting::class, []);
-        $this->expectDeprecation('Since ruflin/elastica 7.1.3: The "Elastica\QueryBuilder\DSL\Query::common_terms()" method is deprecated, use "match()" instead. It will be removed in 8.0.');
-        $this->_assertImplemented($queryDSL, 'common_terms', Query\Common::class, ['field', 'query', 0.001]);
         $this->_assertImplemented($queryDSL, 'dis_max', Query\DisMax::class, []);
         $this->_assertImplemented($queryDSL, 'distance_feature', Query\DistanceFeature::class, ['field', 'now', '7d']);
         $this->_assertImplemented($queryDSL, 'function_score', Query\FunctionScore::class, []);

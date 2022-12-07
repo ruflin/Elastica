@@ -7,7 +7,6 @@ use Elastica\Query\AbstractSpanQuery;
 use Elastica\Query as BaseQuery;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Boosting;
-use Elastica\Query\Common;
 use Elastica\Query\ConstantScore;
 use Elastica\Query\DisMax;
 use Elastica\Query\DistanceFeature;
@@ -107,21 +106,6 @@ class Query implements DSL
     public function boosting(): Boosting
     {
         return new Boosting();
-    }
-
-    /**
-     * common terms query.
-     *
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-common-terms-query.html
-     * @deprecated since version 7.1.3, use the "match()" method instead.
-     *
-     * @param float $cutoffFrequency percentage in decimal form (.001 == 0.1%)
-     */
-    public function common_terms(string $field, string $query, float $cutoffFrequency): Common
-    {
-        \trigger_deprecation('ruflin/elastica', '7.1.3', 'The "%s()" method is deprecated, use "match()" instead. It will be removed in 8.0.', __METHOD__);
-
-        return new Common($field, $query, $cutoffFrequency);
     }
 
     /**

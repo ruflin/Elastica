@@ -51,18 +51,4 @@ class ResponseException extends \RuntimeException implements ExceptionInterface
     {
         return $this->_response;
     }
-
-    /**
-     * Returns elasticsearch exception.
-     *
-     * @deprecated since version 7.1.0, use the "getResponse()::getFullError()" method instead.
-     */
-    public function getElasticsearchException(): ElasticsearchException
-    {
-        \trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s()" method is deprecated, use "getResponse()::getFullError()" instead. It will be removed in 8.0.', __METHOD__);
-
-        $response = $this->getResponse();
-
-        return new ElasticsearchException($response->getStatus(), $response->getErrorMessage());
-    }
 }

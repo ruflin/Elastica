@@ -16,7 +16,6 @@ class Version700 extends Version
     protected $queries = [
         'bool',
         'boosting',
-        'common_terms',
         'constant_score',
         'dis_max',
         'distance_feature',
