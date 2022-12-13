@@ -105,7 +105,6 @@ abstract class AbstractTransport extends Param
 
         if (\is_string($transport)) {
             $specialTransports = [
-                'httpadapter' => 'HttpAdapter',
                 'nulltransport' => 'NullTransport',
             ];
 

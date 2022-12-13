@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/7.3.0...master)
 ### Backward Compatibility Breaks
 * Dropped support for PHP <8.0 [#2131](https://github.com/ruflin/Elastica/pull/2131)
+* Removed deprecated classes in 7.x [#2132](https://github.com/ruflin/Elastica/pull/2132)
+  * `Elastica\Exception\ElasticsearchException` -> use `Elastica\Exception\ResponseException::getResponse()::getFullError()` instead
+  * `Elastica\Exception\ResponseException::getElasticsearchException()` -> use `Elastica\Exception\ResponseException::getResponse()::getFullError()` instead
+  * `Elastica\Processor\Append` -> use `Elastica\Processor\AppendProcessor` instead
+  * `Elastica\Processor\Attachment` -> use `Elastica\Processor\AttachmentProcessor` instead
+  * `Elastica\Processor\Convert` -> use `Elastica\Processor\ConvertProcessor` instead
+  * `Elastica\Processor\Date` -> use `Elastica\Processor\DateProcessor` instead
+  * `Elastica\Processor\DateIndexName` -> use `Elastica\Processor\DateIndexNameProcessor` instead
+  * `Elastica\Processor\DotExpander` -> use `Elastica\Processor\DotExpanderProcessor` instead
+  * `Elastica\Processor\Fail` -> use `Elastica\Processor\FailProcessor` instead
+  * `Elastica\Processor\Join` -> use `Elastica\Processor\JoinProcessor` instead
+  * `Elastica\Processor\Json` -> use `Elastica\Processor\JsonProcessor` instead
+  * `Elastica\Processor\Kv` -> use `Elastica\Processor\KvProcessor` instead
+  * `Elastica\Processor\Lowercase` -> use `Elastica\Processor\LowercaseProcessor` instead
+  * `Elastica\Processor\Remove` -> use `Elastica\Processor\RemoveProcessor` instead
+  * `Elastica\Processor\Rename` -> use `Elastica\Processor\RenameProcessor` instead
+  * `Elastica\Processor\Set` -> use `Elastica\Processor\SetProcessor` instead
+  * `Elastica\Processor\Sort` -> use `Elastica\Processor\SortProcessor` instead
+  * `Elastica\Processor\Split` -> use `Elastica\Processor\SplitProcessor` instead
+  * `Elastica\Processor\Trim` -> use `Elastica\Processor\AppendProcessor` instead
+  * `Elastica\Processor\Uppercase` -> use `Elastica\Processor\UppercaseProcessor` instead
+  * `Elastica\Query\Common` -> use `Elastica\Query\MatchQuery` instead
+  * `Elastica\QueryBuilder\DSL\Query::common_terms()` -> use `Elastica\QueryBuilder\DSL\Query::match()` instead
+  * `Elastica\Transport\HttpAdapter` -> use `Elastica\Transport\Http` instead
 ### Added
 ### Changed
 ### Deprecated
