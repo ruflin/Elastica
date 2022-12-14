@@ -31,6 +31,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   * `Elastica\Query\Common` -> use `Elastica\Query\MatchQuery` instead
   * `Elastica\QueryBuilder\DSL\Query::common_terms()` -> use `Elastica\QueryBuilder\DSL\Query::match()` instead
   * `Elastica\Transport\HttpAdapter` -> use `Elastica\Transport\Http` instead
+* Removed deprecated methods [#2135](https://github.com/ruflin/Elastica/pull/2135)
+  * `Elastica\Aggregation\Range::setKeyedResponse()` -> use `Elastica\Aggregation\Range::setKeyed()` instead
+  * `Elastica\Bulk::toString()` -> use `Elastica\Bulk::__toString()` or cast to string instead
+  * `Elastica\Query\MatchQuery::setFieldCutoffFrequency()`
+  * `Elastica\Query\MultiMatch::setCutoffFrequency()`
+  * `Elastica\QueryBuilder\DSL\Aggregation::global_agg()` -> use `Elastica\QueryBuilder\DSL\Aggregation::global()` instead
+  * `Elastica\Request::toString()` -> use `Elastica\Request::__toString()` or cast to string instead
+  * `Elastica\Result::getType()`
+  * `Elastica\Suggest\Phrase::addCandidateGenerator()` -> use `Elastica\Suggest\Phrase::addDirectGenerator()` instead
+  * `Elastica\Util::getParamName()`
 ### Added
 ### Changed
 ### Deprecated

@@ -73,16 +73,4 @@ class AggregationTest extends AbstractDSLTest
         $this->_assertImplemented($aggregationDSL, 'diversified_sampler', Aggregation\DiversifiedSampler::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'weighted_avg', Aggregation\WeightedAvg::class, ['name']);
     }
-
-    /**
-     * @group unit
-     * @group legacy
-     */
-    public function testLegacyInterface(): void
-    {
-        $aggregationDSL = new DSL\Aggregation();
-
-        $this->expectDeprecation('Since ruflin/elastica 7.1.0: The "Elastica\QueryBuilder\DSL\Aggregation::global_agg()" method is deprecated, use "global()" instead. It will be removed in 8.0.');
-        $this->_assertImplemented($aggregationDSL, 'global_agg', Aggregation\GlobalAggregation::class, ['name']);
-    }
 }

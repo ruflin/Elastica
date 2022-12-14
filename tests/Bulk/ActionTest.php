@@ -53,16 +53,4 @@ class ActionTest extends BaseTest
         $this->assertFalse(Action::isValidOpType('foo'));
         $this->assertTrue(Action::isValidOpType('delete'));
     }
-
-    /**
-     * @group unit
-     * @group legacy
-     */
-    public function testLegacyToString(): void
-    {
-        $action = new Action();
-
-        $this->expectDeprecation('Since ruflin/elastica 7.1.3: The "Elastica\Bulk\Action::toString()" method is deprecated, use "__toString()" or cast to string instead. It will be removed in 8.0.');
-        $this->assertIsString($action->toString());
-    }
 }

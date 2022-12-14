@@ -77,7 +77,6 @@ class Version700 extends Version
         'top_hits',
         'scripted_metric',
         'global',
-        'global_agg', // Deprecated
         'filter',
         'filters',
         'missing',

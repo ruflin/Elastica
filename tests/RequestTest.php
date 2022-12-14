@@ -96,16 +96,4 @@ class RequestTest extends BaseTest
 
         $this->assertIsString((string) $request);
     }
-
-    /**
-     * @group unit
-     * @group legacy
-     */
-    public function testLegacyToString(): void
-    {
-        $request = new Request('test');
-
-        $this->expectDeprecation('Since ruflin/elastica 7.1.3: The "Elastica\Request::toString()" method is deprecated, use "__toString()" or cast to string instead. It will be removed in 8.0.');
-        $this->assertIsString($request->toString());
-    }
 }

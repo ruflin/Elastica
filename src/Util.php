@@ -203,29 +203,6 @@ class Util
     }
 
     /**
-     * Tries to guess the name of the param, based on its class
-     * Example: \Elastica\Query\MatchAll => match_all.
-     *
-     * @param object|string $class Object or class name
-     *
-     * @return string parameter name
-     */
-    public static function getParamName($class)
-    {
-        \trigger_deprecation('ruflin/elastica', '7.1.0', 'The "%s()" method is deprecated. It will be removed in 8.0.', __METHOD__);
-
-        if (\is_object($class)) {
-            $class = \get_class($class);
-        }
-
-        $parts = \explode('\\', $class);
-        $last = \array_pop($parts);
-        $last = \preg_replace('/Query$/', '', $last); // for BoolQuery and MatchQuery
-
-        return self::toSnakeCase($last);
-    }
-
-    /**
      * Converts Request to Curl console command.
      *
      * @return string
