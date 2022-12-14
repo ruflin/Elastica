@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   * `Elastica\QueryBuilder\DSL\Query::common_terms()` -> use `Elastica\QueryBuilder\DSL\Query::match()` instead
   * `Elastica\Transport\HttpAdapter` -> use `Elastica\Transport\Http` instead
 ### Added
+* Added support for PHP 8.2 [#2136](https://github.com/ruflin/Elastica/pull/2136)
 ### Changed
 ### Deprecated
 ### Removed
