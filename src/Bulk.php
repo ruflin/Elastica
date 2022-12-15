@@ -262,16 +262,6 @@ class Bulk
         return $this->setRequestParam('timeout', $time);
     }
 
-    /**
-     * @deprecated since version 7.1.3, use the "__toString()" method or cast to string instead.
-     */
-    public function toString(): string
-    {
-        \trigger_deprecation('ruflin/elastica', '7.1.3', 'The "%s()" method is deprecated, use "__toString()" or cast to string instead. It will be removed in 8.0.', __METHOD__);
-
-        return (string) $this;
-    }
-
     public function toArray(): array
     {
         $data = [];

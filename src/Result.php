@@ -89,20 +89,6 @@ class Result
     }
 
     /**
-     * Returns the type of the result.
-     *
-     * @return string Result type
-     *
-     * @deprecated ES 7.x deprecated the use of types in the index
-     */
-    public function getType()
-    {
-        \trigger_deprecation('ruflin/elastica', '7.1.3', 'The "%s()" method is deprecated. It will be removed in 8.0.', __METHOD__);
-
-        return $this->getParam('_type');
-    }
-
-    /**
      * Returns list of fields.
      */
     public function getFields(): array

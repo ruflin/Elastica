@@ -2,7 +2,6 @@
 
 namespace Elastica\Suggest;
 
-use Elastica\Suggest\CandidateGenerator\AbstractCandidateGenerator;
 use Elastica\Suggest\CandidateGenerator\DirectGenerator;
 
 /**
@@ -142,18 +141,6 @@ class Phrase extends AbstractSuggest
      */
     public function addDirectGenerator(DirectGenerator $generator): self
     {
-        return $this->addParam('candidate_generator', $generator);
-    }
-
-    /**
-     * @deprecated since version 7.2.0, use the "addDirectGenerator()" method instead.
-     *
-     * @return $this
-     */
-    public function addCandidateGenerator(AbstractCandidateGenerator $generator): self
-    {
-        \trigger_deprecation('ruflin/elastica', '7.2.0', 'The "%s()" method is deprecated, use the "addDirectGenerator()" method instead. It will be removed in 8.0.', __METHOD__);
-
         return $this->addParam('candidate_generator', $generator);
     }
 
