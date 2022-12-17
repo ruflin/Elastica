@@ -99,7 +99,7 @@ class Aggregation implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-sum-bucket-aggregation.html
      */
-    public function sum_bucket(string $name, ?string $bucketsPath = null): SumBucket
+    public function sum_bucket(string $name, string $bucketsPath): SumBucket
     {
         return new SumBucket($name, $bucketsPath);
     }
@@ -119,7 +119,7 @@ class Aggregation implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-avg-bucket-aggregation.html
      */
-    public function avg_bucket(string $name, ?string $bucketsPath = null): AvgBucket
+    public function avg_bucket(string $name, string $bucketsPath): AvgBucket
     {
         return new AvgBucket($name, $bucketsPath);
     }
@@ -137,7 +137,7 @@ class Aggregation implements DSL
     /**
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-stats-bucket-aggregation.html
      */
-    public function stats_bucket(string $name, ?string $bucketsPath = null): StatsBucket
+    public function stats_bucket(string $name, string $bucketsPath): StatsBucket
     {
         return new StatsBucket($name, $bucketsPath);
     }
@@ -180,10 +180,10 @@ class Aggregation implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-percentiles-bucket-aggregation.html
      *
-     * @param string      $name        the name of this aggregation
-     * @param string|null $bucketsPath the field on which to perform this aggregation
+     * @param string $name        the name of this aggregation
+     * @param string $bucketsPath the field on which to perform this aggregation
      */
-    public function percentiles_bucket(string $name, ?string $bucketsPath = null): PercentilesBucket
+    public function percentiles_bucket(string $name, string $bucketsPath): PercentilesBucket
     {
         return new PercentilesBucket($name, $bucketsPath);
     }
@@ -431,7 +431,7 @@ class Aggregation implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-script-aggregation.html
      */
-    public function bucket_script(string $name, ?array $bucketsPath = null, ?string $script = null): BucketScript
+    public function bucket_script(string $name, array $bucketsPath, string $script): BucketScript
     {
         return new BucketScript($name, $bucketsPath, $script);
     }
@@ -441,7 +441,7 @@ class Aggregation implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-serialdiff-aggregation.html
      */
-    public function serial_diff(string $name, ?string $bucketsPath = null): SerialDiff
+    public function serial_diff(string $name, string $bucketsPath): SerialDiff
     {
         return new SerialDiff($name, $bucketsPath);
     }
@@ -469,7 +469,7 @@ class Aggregation implements DSL
     /**
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-derivative-aggregation.html
      */
-    public function derivative(string $name, ?string $bucketsPath = null): Derivative
+    public function derivative(string $name, string $bucketsPath): Derivative
     {
         return new Derivative($name, $bucketsPath);
     }
@@ -509,7 +509,7 @@ class Aggregation implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-normalize-aggregation.html
      */
-    public function normalize(string $name, ?string $bucketsPath = null, ?string $method = null): NormalizeAggregation
+    public function normalize(string $name, string $bucketsPath, string $method): NormalizeAggregation
     {
         return new NormalizeAggregation($name, $bucketsPath, $method);
     }

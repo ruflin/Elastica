@@ -2,8 +2,6 @@
 
 namespace Elastica\Aggregation;
 
-use Elastica\Exception\InvalidException;
-
 /**
  * Class SerialDiff.
  *
@@ -15,17 +13,11 @@ class SerialDiff extends AbstractAggregation implements GapPolicyInterface
 
     public const DEFAULT_GAP_POLICY_VALUE = GapPolicyInterface::INSERT_ZEROS;
 
-    public function __construct(string $name, ?string $bucketsPath = null)
+    public function __construct(string $name, string $bucketsPath)
     {
         parent::__construct($name);
 
-        if (null !== $bucketsPath) {
-            $this->setBucketsPath($bucketsPath);
-        } elseif (\func_num_args() >= 2) {
-            \trigger_deprecation('ruflin/elastica', '7.1.3', 'Passing null as 2nd argument to "%s()" is deprecated, pass a string instead. It will be removed in 8.0.', __METHOD__);
-        } else {
-            \trigger_deprecation('ruflin/elastica', '7.1.3', 'Not passing a 2nd argument to "%s()" is deprecated, pass a string instead. It will be removed in 8.0.', __METHOD__);
-        }
+        $this->setBucketsPath($bucketsPath);
     }
 
     /**
@@ -56,17 +48,5 @@ class SerialDiff extends AbstractAggregation implements GapPolicyInterface
     public function setFormat(?string $format = null): self
     {
         return $this->setParam('format', $format);
-    }
-
-    /**
-     * @throws InvalidException If buckets path is not set
-     */
-    public function toArray(): array
-    {
-        if (!$this->hasParam('buckets_path')) {
-            throw new InvalidException('Buckets path is required');
-        }
-
-        return parent::toArray();
     }
 }

@@ -7,18 +7,14 @@ use Elastica\Aggregation\Sum;
 use Elastica\Aggregation\SumBucket;
 use Elastica\Aggregation\Terms;
 use Elastica\Document;
-use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Query;
-use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 
 /**
  * @internal
  */
 class SumBucketTest extends BaseAggregationTest
 {
-    use ExpectDeprecationTrait;
-
     /**
      * @group functional
      */
@@ -65,40 +61,6 @@ class SumBucketTest extends BaseAggregationTest
         ];
 
         $this->assertEquals($expected, $aggregation->toArray());
-    }
-
-    /**
-     * @group unit
-     * @group legacy
-     */
-    public function testLegacyConstructWithNoBucketsPath(): void
-    {
-        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Not passing a 2nd argument to "Elastica\Aggregation\SumBucket::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
-
-        new SumBucket('sum_bucket');
-    }
-
-    /**
-     * @group unit
-     * @group legacy
-     */
-    public function testLegacyConstructWithNullBucketsPath(): void
-    {
-        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Passing null as 2nd argument to "Elastica\Aggregation\SumBucket::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
-
-        new SumBucket('sum_bucket', null);
-    }
-
-    /**
-     * @group unit
-     * @group legacy
-     */
-    public function testLegacyToArrayWithNoBucketsPath(): void
-    {
-        $this->expectException(InvalidException::class);
-        $this->expectExceptionMessage('Buckets path is required');
-
-        (new SumBucket('sum_bucket'))->toArray();
     }
 
     private function getIndexForTest(): Index

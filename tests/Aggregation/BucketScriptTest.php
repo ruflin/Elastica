@@ -7,7 +7,6 @@ use Elastica\Aggregation\GapPolicyInterface;
 use Elastica\Aggregation\Histogram;
 use Elastica\Aggregation\Max;
 use Elastica\Document;
-use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Query;
 
@@ -52,15 +51,13 @@ class BucketScriptTest extends BaseAggregationTest
      */
     public function testConstructThroughSetters(): void
     {
-        $serialDiffAgg = new BucketScript('bucket_scripted');
+        $serialDiffAgg = new BucketScript('bucket_scripted', [
+            'x' => 'agg_max',
+            'y' => 'agg_sum',
+            'z' => 'agg_min',
+        ], 'x / y * z');
 
         $serialDiffAgg
-            ->setScript('x / y * z')
-            ->setBucketsPath([
-                'x' => 'agg_max',
-                'y' => 'agg_sum',
-                'z' => 'agg_min',
-            ])
             ->setFormat('test_format')
             ->setGapPolicy(GapPolicyInterface::INSERT_ZEROS)
         ;
@@ -79,28 +76,6 @@ class BucketScriptTest extends BaseAggregationTest
         ];
 
         $this->assertEquals($expected, $serialDiffAgg->toArray());
-    }
-
-    /**
-     * @group unit
-     */
-    public function testToArrayInvalidBucketsPath(): void
-    {
-        $this->expectException(InvalidException::class);
-
-        $serialDiffAgg = new BucketScript('bucket_scripted');
-        $serialDiffAgg->toArray();
-    }
-
-    /**
-     * @group unit
-     */
-    public function testToArrayInvalidScript(): void
-    {
-        $this->expectException(InvalidException::class);
-
-        $serialDiffAgg = new BucketScript('bucket_scripted', ['path' => 'agg']);
-        $serialDiffAgg->toArray();
     }
 
     protected function _getIndexForTest(): Index

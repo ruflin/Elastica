@@ -7,18 +7,14 @@ use Elastica\Aggregation\AvgBucket;
 use Elastica\Aggregation\GapPolicyInterface;
 use Elastica\Aggregation\Terms;
 use Elastica\Document;
-use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Query;
-use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 
 /**
  * @internal
  */
 class AvgBucketTest extends BaseAggregationTest
 {
-    use ExpectDeprecationTrait;
-
     /**
      * @group functional
      */
@@ -65,40 +61,6 @@ class AvgBucketTest extends BaseAggregationTest
         ];
 
         $this->assertEquals($expected, $aggregation->toArray());
-    }
-
-    /**
-     * @group unit
-     * @group legacy
-     */
-    public function testLegacyConstructWithNoBucketsPath(): void
-    {
-        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Not passing a 2nd argument to "Elastica\Aggregation\AvgBucket::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
-
-        new AvgBucket('avg_bucket');
-    }
-
-    /**
-     * @group unit
-     * @group legacy
-     */
-    public function testLegacyConstructWithNullBucketsPath(): void
-    {
-        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Passing null as 2nd argument to "Elastica\Aggregation\AvgBucket::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
-
-        new AvgBucket('avg_bucket', null);
-    }
-
-    /**
-     * @group unit
-     * @group legacy
-     */
-    public function testLegacyToArrayWithNoBucketsPath(): void
-    {
-        $this->expectException(InvalidException::class);
-        $this->expectExceptionMessage('Buckets path is required');
-
-        (new AvgBucket('avg_bucket'))->toArray();
     }
 
     private function getIndexForTest(): Index
