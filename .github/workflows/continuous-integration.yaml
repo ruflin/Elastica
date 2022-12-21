@@ -87,15 +87,8 @@ jobs:
 
   phpstan:
     runs-on: 'ubuntu-20.04'
-    name: 'PHPStan (PHP ${{ matrix.php }}, ES ${{ matrix.elasticsearch }})'
+    name: 'PHPStan'
     timeout-minutes: 10
-    strategy:
-      matrix:
-        php:
-          - '8.1'
-        elasticsearch:
-          - '7.15.2'
-      fail-fast: false
     steps:
       - name: 'Checkout'
         uses: 'actions/checkout@v3'
@@ -103,11 +96,10 @@ jobs:
       - name: 'Setup PHP'
         uses: 'shivammathur/setup-php@v2'
         with:
-          php-version: '${{ matrix.php }}'
+          php-version: '8.1'
           coverage: 'none'
-          tools: 'pecl, composer:v2'
+          tools: 'composer:v2'
           extensions: 'curl, json, mbstring, openssl'
-
 
       - name: 'Install dependencies with Composer'
         uses: 'ramsey/composer-install@v2'
