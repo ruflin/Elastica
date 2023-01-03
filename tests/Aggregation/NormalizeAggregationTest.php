@@ -6,18 +6,14 @@ use Elastica\Aggregation\DateHistogram;
 use Elastica\Aggregation\NormalizeAggregation;
 use Elastica\Aggregation\Sum;
 use Elastica\Document;
-use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Query;
-use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 
 /**
  * @internal
  */
 class NormalizeAggregationTest extends BaseAggregationTest
 {
-    use ExpectDeprecationTrait;
-
     /**
      * @group unit
      */
@@ -58,64 +54,6 @@ class NormalizeAggregationTest extends BaseAggregationTest
         ;
 
         $this->assertEquals($expected, $dateHistogramAgg->toArray());
-    }
-
-    /**
-     * @group unit
-     * @group legacy
-     */
-    public function testLegacyConstructWithNoBucketsPathAndNoMethod(): void
-    {
-        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Not passing a 2nd argument to "Elastica\Aggregation\NormalizeAggregation::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
-        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Not passing a 3rd argument to "Elastica\Aggregation\NormalizeAggregation::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
-
-        new NormalizeAggregation('normalize_agg');
-    }
-
-    /**
-     * @group unit
-     * @group legacy
-     */
-    public function testLegacyConstructWithNullBucketsPath(): void
-    {
-        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Passing null as 2nd argument to "Elastica\Aggregation\NormalizeAggregation::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
-
-        new NormalizeAggregation('normalize_agg', null, 'method');
-    }
-
-    /**
-     * @group unit
-     * @group legacy
-     */
-    public function testLegacyConstructWithNullMethod(): void
-    {
-        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Passing null as 3rd argument to "Elastica\Aggregation\NormalizeAggregation::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
-
-        new NormalizeAggregation('normalize_agg', 'buckets_path', null);
-    }
-
-    /**
-     * @group unit
-     * @group legacy
-     */
-    public function testLegacyToArrayWithNoBucketsPath(): void
-    {
-        $this->expectException(InvalidException::class);
-        $this->expectExceptionMessage('Buckets path is required');
-
-        (new NormalizeAggregation('normalize_agg'))->toArray();
-    }
-
-    /**
-     * @group unit
-     * @group legacy
-     */
-    public function testToArrayInvalidMethod(): void
-    {
-        $this->expectException(InvalidException::class);
-        $this->expectExceptionMessage('Method parameter is required');
-
-        (new NormalizeAggregation('normalize_agg', 'buckets_path'))->toArray();
     }
 
     /**

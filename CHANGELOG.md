@@ -41,6 +41,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   * `Elastica\Result::getType()`
   * `Elastica\Suggest\Phrase::addCandidateGenerator()` -> use `Elastica\Suggest\Phrase::addDirectGenerator()` instead
   * `Elastica\Util::getParamName()`
+* Changed following aggregation constructors [#2138](https://github.com/ruflin/Elastica/pull/2138)
+  * `Elastica\Aggregation\AvgBucket`: The second argument `$bucketsPath` is now mandatory
+  * `Elastica\Aggregation\BucketScript`: The second (`array $bucketsPath`) and the third (`string $script`) argument are now mandatory
+  * `Elastica\Aggregation\BucketSelector`: The second (`array $bucketsPath`) and the third (`string $script`) argument are now mandatory
+  * `Elastica\Aggregation\Derivative`: The second argument (`string $bucketsPath`) is now mandatory
+  * `Elastica\Aggregation\NormalizeAggregation`: The second (`string $bucketsPath`) and the third (`string $method`) argument are now mandatory
+  * `Elastica\Aggregation\PercentilesBucket`: The second argument (`string $bucketsPath`) is now mandatory
+  * `Elastica\Aggregation\SerialDiff`: The second argument (`string $bucketsPath`) is now mandatory
+  * `Elastica\Aggregation\StatsBucket`: The second argument (`string $bucketsPath`) is now mandatory
+  * `Elastica\Aggregation\SumBucket`: The second argument (`string $bucketsPath`) is now mandatory
+
 ### Added
 * Added support for PHP 8.2 [#2136](https://github.com/ruflin/Elastica/pull/2136)
 ### Changed

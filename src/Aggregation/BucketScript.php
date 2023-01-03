@@ -2,8 +2,6 @@
 
 namespace Elastica\Aggregation;
 
-use Elastica\Exception\InvalidException;
-
 /**
  * Class BucketScript.
  *
@@ -13,17 +11,12 @@ class BucketScript extends AbstractAggregation implements GapPolicyInterface
 {
     use Traits\GapPolicyTrait;
 
-    public function __construct(string $name, ?array $bucketsPath = null, ?string $script = null)
+    public function __construct(string $name, array $bucketsPath, string $script)
     {
         parent::__construct($name);
 
-        if (null !== $bucketsPath) {
-            $this->setBucketsPath($bucketsPath);
-        }
-
-        if (null !== $script) {
-            $this->setScript($script);
-        }
+        $this->setBucketsPath($bucketsPath);
+        $this->setScript($script);
     }
 
     /**
@@ -54,20 +47,5 @@ class BucketScript extends AbstractAggregation implements GapPolicyInterface
     public function setFormat(?string $format = null): self
     {
         return $this->setParam('format', $format);
-    }
-
-    /**
-     * @throws InvalidException If buckets path or script is not set
-     */
-    public function toArray(): array
-    {
-        if (!$this->hasParam('buckets_path')) {
-            throw new InvalidException('Buckets path is required');
-        }
-        if (!$this->hasParam('script')) {
-            throw new InvalidException('Script parameter is required');
-        }
-
-        return parent::toArray();
     }
 }

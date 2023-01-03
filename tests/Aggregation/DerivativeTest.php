@@ -8,37 +8,12 @@ use Elastica\Aggregation\Max;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
-use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 
 /**
  * @internal
  */
 class DerivativeTest extends BaseAggregationTest
 {
-    use ExpectDeprecationTrait;
-
-    /**
-     * @group unit
-     * @group legacy
-     */
-    public function testLegacyConstructWithNoBucketsPath(): void
-    {
-        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Not passing a 2nd argument to "Elastica\Aggregation\Derivative::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
-
-        new Derivative('derivative');
-    }
-
-    /**
-     * @group unit
-     * @group legacy
-     */
-    public function testLegacyConstructWithNullBucketsPath(): void
-    {
-        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Passing null as 2nd argument to "Elastica\Aggregation\Derivative::__construct()" is deprecated, pass a string instead. It will be removed in 8.0.');
-
-        new Derivative('derivative', null);
-    }
-
     /**
      * @group unit
      */

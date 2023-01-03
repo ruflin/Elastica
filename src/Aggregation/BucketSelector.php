@@ -11,17 +11,12 @@ class BucketSelector extends AbstractSimpleAggregation implements GapPolicyInter
 {
     use Traits\GapPolicyTrait;
 
-    public function __construct(string $name, ?array $bucketsPath = null, ?string $script = null)
+    public function __construct(string $name, array $bucketsPath, string $script)
     {
         parent::__construct($name);
 
-        if (null !== $bucketsPath) {
-            $this->setBucketsPath($bucketsPath);
-        }
-
-        if (null !== $script) {
-            $this->setScript($script);
-        }
+        $this->setBucketsPath($bucketsPath);
+        $this->setScript($script);
     }
 
     /**
