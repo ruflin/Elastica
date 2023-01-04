@@ -19,10 +19,18 @@ class BucketScript extends AbstractAggregation implements GapPolicyInterface
 
         if (null !== $bucketsPath) {
             $this->setBucketsPath($bucketsPath);
+        } elseif (\func_num_args() >= 2) {
+            \trigger_deprecation('ruflin/elastica', '7.4.0', 'Passing null as 2nd argument to "%s()" is deprecated, pass an array instead. It will be mandatory in 8.0.', __METHOD__);
+        } else {
+            \trigger_deprecation('ruflin/elastica', '7.4.0', 'Not passing a 2nd argument to "%s()" is deprecated, pass an array instead. It will be mandatory in 8.0.', __METHOD__);
         }
 
         if (null !== $script) {
             $this->setScript($script);
+        } elseif (\func_num_args() >= 3) {
+            \trigger_deprecation('ruflin/elastica', '7.4.0', 'Passing null as 3rd argument to "%s()" is deprecated, pass a string instead. It will be mandatory in 8.0.', __METHOD__);
+        } else {
+            \trigger_deprecation('ruflin/elastica', '7.4.0', 'Not passing a 3rd argument to "%s()" is deprecated, pass a string instead. It will be mandatory in 8.0.', __METHOD__);
         }
     }
 

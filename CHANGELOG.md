@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 ### Changed
 ### Deprecated
+* Deprecated not passing a `buckets_path` and `script` when constructing `Elastica\Aggregation\BucketScript` and `Elastica\Aggregation\BucketSelector`
 ### Removed
 ### Fixed
 * Fix types order in `Elastica\Query` to work with psalm & expand the `aggs` type to include raw arrays
