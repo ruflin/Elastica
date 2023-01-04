@@ -49,6 +49,7 @@ class BucketScriptTest extends BaseAggregationTest
 
     /**
      * @group unit
+     * @group legacy
      */
     public function testConstructThroughSetters(): void
     {
@@ -83,6 +84,7 @@ class BucketScriptTest extends BaseAggregationTest
 
     /**
      * @group unit
+     * @group legacy
      */
     public function testToArrayInvalidBucketsPath(): void
     {
@@ -94,6 +96,7 @@ class BucketScriptTest extends BaseAggregationTest
 
     /**
      * @group unit
+     * @group legacy
      */
     public function testToArrayInvalidScript(): void
     {
