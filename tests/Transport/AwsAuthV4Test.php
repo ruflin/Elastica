@@ -208,6 +208,7 @@ class AwsAuthV4Test extends GuzzleTest
 
     /**
      * @group unit
+     *
      * @depends testSignsWithProvidedCredentials
      */
     public function testStripsTrailingDotInHost(): void

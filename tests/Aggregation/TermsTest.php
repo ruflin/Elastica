@@ -8,7 +8,6 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
-use Traversable;
 
 /**
  * @internal
@@ -156,6 +155,7 @@ class TermsTest extends BaseAggregationTest
 
     /**
      * @dataProvider termsSetMissingBucketProvider
+     *
      * @group functional
      */
     public function testTermsSetMissingBucketFunctional(
@@ -179,7 +179,7 @@ class TermsTest extends BaseAggregationTest
         $this->assertCount($expectedCountValues, $results['buckets']);
     }
 
-    public function termsSetMissingBucketProvider(): Traversable
+    public function termsSetMissingBucketProvider(): \Traversable
     {
         yield [
             'field' => 'color',

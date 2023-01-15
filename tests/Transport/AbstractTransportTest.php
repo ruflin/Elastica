@@ -51,6 +51,7 @@ class AbstractTransportTest extends BaseTest
 
     /**
      * @group unit
+     *
      * @dataProvider getValidDefinitions
      *
      * @param mixed $transport
@@ -73,6 +74,7 @@ class AbstractTransportTest extends BaseTest
 
     /**
      * @group unit
+     *
      * @dataProvider getInvalidDefinitions
      *
      * @param mixed $transport
@@ -113,6 +115,7 @@ class AbstractTransportTest extends BaseTest
      * due to boolean strict type in ES.
      *
      * @group functional
+     *
      * @dataProvider getTransport
      *
      * @param mixed $transport

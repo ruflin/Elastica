@@ -14,6 +14,7 @@ use Elastica\Suggest\AbstractSuggest;
  * Elastica search object.
  *
  * @author   Nicolas Ruflin <spam@ruflin.com>
+ *
  * @phpstan-import-type TCreateQueryArgs from Query
  */
 class Search
@@ -165,6 +166,7 @@ class Search
 
     /**
      * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest|null $query
+     *
      * @phpstan-param TCreateQueryArgs $query
      */
     public function setQuery($query): self
@@ -321,6 +323,7 @@ class Search
      * Search in the set indices.
      *
      * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest|null $query
+     *
      * @phpstan-param TCreateQueryArgs $query
      *
      * @param array|int $options Limit or associative array of options (option=>value)
@@ -381,6 +384,7 @@ class Search
     /**
      * @param array|int                                                              $options
      * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest|null $query
+     *
      * @phpstan-param TCreateQueryArgs $query
      */
     public function setOptionsAndQuery($options = null, $query = ''): self

@@ -45,8 +45,6 @@ class ClientConfiguration
      * Create configuration.
      *
      * @param array $config Additional config
-     *
-     * @return ClientConfiguration
      */
     public static function fromArray(array $config): self
     {
@@ -63,8 +61,6 @@ class ClientConfiguration
      * - http://localhost
      * - http://foo:bar@localhost:1234?timeout=4&persistant=false
      * - pool(http://127.0.0.1 http://127.0.0.2/bar?timeout=4).
-     *
-     * @return ClientConfiguration
      */
     public static function fromDsn(string $dsnString): self
     {

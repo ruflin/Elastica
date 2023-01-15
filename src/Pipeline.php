@@ -35,6 +35,7 @@ class Pipeline extends Param
 
     /**
      * @var AbstractProcessor[]
+     *
      * @phpstan-var array{processors?: AbstractProcessor[]}
      */
     protected $_processors = [];

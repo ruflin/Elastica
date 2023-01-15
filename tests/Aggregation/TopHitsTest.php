@@ -251,6 +251,7 @@ class TopHitsTest extends BaseAggregationTest
 
     /**
      * @group functional
+     *
      * @dataProvider limitedSourceProvider
      *
      * @param mixed $source

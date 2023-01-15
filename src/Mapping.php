@@ -178,8 +178,6 @@ class Mapping
      * @param array|Mapping $mapping Mapping object or properties array
      *
      * @throws InvalidException If invalid type
-     *
-     * @return self
      */
     public static function create($mapping): Mapping
     {

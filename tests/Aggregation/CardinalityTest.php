@@ -56,6 +56,7 @@ class CardinalityTest extends BaseAggregationTest
 
     /**
      * @dataProvider validPrecisionThresholdProvider
+     *
      * @group unit
      */
     public function testPrecisionThreshold(int $threshold): void
@@ -69,6 +70,7 @@ class CardinalityTest extends BaseAggregationTest
 
     /**
      * @dataProvider validRehashProvider
+     *
      * @group unit
      */
     public function testRehash(bool $rehash): void

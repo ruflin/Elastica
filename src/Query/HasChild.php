@@ -10,12 +10,14 @@ use Elastica\Query as BaseQuery;
  * @author Fabian Vogler <fabian@equivalence.ch>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html
+ *
  * @phpstan-import-type TCreateQueryArgsMatching from BaseQuery
  */
 class HasChild extends AbstractQuery
 {
     /**
      * @param AbstractQuery|array|BaseQuery|string|null $query
+     *
      * @phpstan-param TCreateQueryArgsMatching $query
      *
      * @param string|null $type Parent document type
@@ -30,6 +32,7 @@ class HasChild extends AbstractQuery
      * Sets query object.
      *
      * @param AbstractQuery|array|BaseQuery|string|null $query
+     *
      * @phpstan-param TCreateQueryArgsMatching $query
      *
      * @return $this

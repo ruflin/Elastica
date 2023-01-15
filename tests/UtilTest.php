@@ -14,6 +14,7 @@ class UtilTest extends BaseTest
 {
     /**
      * @group unit
+     *
      * @dataProvider getIsDateMathEscapedPairs
      *
      * @param mixed $requestUri
@@ -39,6 +40,7 @@ class UtilTest extends BaseTest
 
     /**
      * @group unit
+     *
      * @dataProvider getEscapeDateMathPairs
      *
      * @param mixed $requestUri
@@ -73,6 +75,7 @@ class UtilTest extends BaseTest
 
     /**
      * @group unit
+     *
      * @dataProvider getEscapeTermPairs
      *
      * @param mixed $unescaped
@@ -97,6 +100,7 @@ class UtilTest extends BaseTest
 
     /**
      * @group unit
+     *
      * @dataProvider getReplaceBooleanWordsPairs
      *
      * @param mixed $before
