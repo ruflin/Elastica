@@ -43,24 +43,16 @@ class HttpException extends ConnectionException
      */
     public function getErrorMessage(int $error): string
     {
-        switch ($error) {
-            case \CURLE_UNSUPPORTED_PROTOCOL:
-                return 'Unsupported protocol';
-            case \CURLE_FAILED_INIT:
-                return 'Internal cUrl error?';
-            case \CURLE_URL_MALFORMAT:
-                return 'Malformed URL';
-            case \CURLE_COULDNT_RESOLVE_PROXY:
-                return "Couldn't resolve proxy";
-            case \CURLE_COULDNT_RESOLVE_HOST:
-                return "Couldn't resolve host";
-            case \CURLE_COULDNT_CONNECT:
-                return "Couldn't connect to host, Elasticsearch down?";
-            case \CURLE_OPERATION_TIMEOUTED:
-                return 'Operation timed out';
-        }
-
-        return 'Unknown error:'.$error;
+        return match ($error) {
+            \CURLE_UNSUPPORTED_PROTOCOL => 'Unsupported protocol',
+            \CURLE_FAILED_INIT => 'Internal cUrl error?',
+            \CURLE_URL_MALFORMAT => 'Malformed URL',
+            \CURLE_COULDNT_RESOLVE_PROXY => "Couldn't resolve proxy",
+            \CURLE_COULDNT_RESOLVE_HOST => "Couldn't resolve host",
+            \CURLE_COULDNT_CONNECT => "Couldn't connect to host, Elasticsearch down?",
+            \CURLE_OPERATION_TIMEOUTED => 'Operation timed out',
+            default => 'Unknown error:'.$error,
+        };
     }
 
     /**

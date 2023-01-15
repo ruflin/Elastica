@@ -42,13 +42,11 @@ class Suggest extends Param
      */
     public static function create($suggestion): self
     {
-        switch (true) {
-            case $suggestion instanceof self:
-                return $suggestion;
-            case $suggestion instanceof AbstractSuggest:
-                return new static($suggestion);
-        }
-        throw new NotImplementedException();
+        return match (true) {
+            $suggestion instanceof self => $suggestion,
+            $suggestion instanceof AbstractSuggest => new static($suggestion),
+            default => throw new NotImplementedException(),
+        };
     }
 
     /**
