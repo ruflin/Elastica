@@ -110,12 +110,10 @@ class FunctionScore extends AbstractQuery
     /**
      * Add a decay function to the query.
      *
-     * TODO: Change "$origin" and "$scale" parameter types to allow "float|int|string".
-     *
      * @param string             $function       see DECAY_* constants for valid options
      * @param string             $field          the document field on which to perform the decay function
-     * @param string             $origin         the origin value for this decay function
-     * @param string             $scale          a scale to define the rate of decay for this function
+     * @param float|int|string   $origin         the origin value for this decay function
+     * @param float|int|string   $scale          a scale to define the rate of decay for this function
      * @param string|null        $offset         If defined, this function will only be computed for documents with a distance from the origin greater than this value
      * @param float|null         $decay          optionally defines how documents are scored at the distance given by the $scale parameter
      * @param float|null         $weight         optional factor by which to multiply the score at the value provided by the $scale parameter
@@ -127,8 +125,8 @@ class FunctionScore extends AbstractQuery
     public function addDecayFunction(
         string $function,
         string $field,
-        string $origin,
-        string $scale,
+        float|int|string $origin,
+        float|int|string $scale,
         ?string $offset = null,
         ?float $decay = null,
         ?float $weight = null,
