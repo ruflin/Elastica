@@ -138,20 +138,13 @@ abstract class AbstractDocument extends Action
             }
         }
 
-        switch ($opType) {
-            case self::OP_TYPE_DELETE:
-                return new DeleteDocument($data);
-
-            case self::OP_TYPE_CREATE:
-                return new CreateDocument($data);
-
-            case self::OP_TYPE_UPDATE:
-                return new UpdateDocument($data);
-
-            case self::OP_TYPE_INDEX:
-            default:
-                return new IndexDocument($data);
-        }
+        return match ($opType) {
+            self::OP_TYPE_DELETE => new DeleteDocument($data),
+            self::OP_TYPE_CREATE => new CreateDocument($data),
+            self::OP_TYPE_UPDATE => new UpdateDocument($data),
+            self::OP_TYPE_INDEX => new IndexDocument($data),
+            default => new IndexDocument($data),
+        };
     }
 
     abstract protected function _getMetadata(AbstractUpdateAction $source): array;

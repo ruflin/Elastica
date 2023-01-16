@@ -49,19 +49,13 @@ abstract class Version
      */
     public function supports(string $name, string $type): bool
     {
-        switch ($type) {
-            case DSL::TYPE_QUERY:
-                return \in_array($name, $this->queries, true);
-            case DSL::TYPE_AGGREGATION:
-                return \in_array($name, $this->aggregations, true);
-            case DSL::TYPE_SUGGEST:
-                return \in_array($name, $this->suggesters, true);
-            case DSL::TYPE_COLLAPSE:
-                return \in_array($name, $this->collapsers, true);
-        }
-
-        // disables version check in Facade for custom DSL objects
-        return true;
+        return match ($type) {
+            DSL::TYPE_QUERY => \in_array($name, $this->queries, true),
+            DSL::TYPE_AGGREGATION => \in_array($name, $this->aggregations, true),
+            DSL::TYPE_SUGGEST => \in_array($name, $this->suggesters, true),
+            DSL::TYPE_COLLAPSE => \in_array($name, $this->collapsers, true),
+            default => true,
+        };
     }
 
     /**
