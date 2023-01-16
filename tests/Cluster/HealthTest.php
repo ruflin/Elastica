@@ -180,7 +180,7 @@ class HealthTest extends BaseTest
      */
     public function testActiveShardsPercentAsNumber(): void
     {
-        $this->assertEquals(50, $this->_health->getActiveShardsPercentAsNumber());
+        $this->assertEquals(50.0, $this->_health->getActiveShardsPercentAsNumber());
     }
 
     /**

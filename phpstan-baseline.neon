@@ -136,21 +136,6 @@ parameters:
 			path: tests/Multi/SearchTest.php
 
 		-
-			message: "#^Parameter \\#3 \\$origin of method Elastica\\\\Query\\\\FunctionScore\\:\\:addDecayFunction\\(\\) expects string, int given\\.$#"
-			count: 4
-			path: tests/Query/FunctionScoreTest.php
-
-		-
-			message: "#^Parameter \\#4 \\$scale of method Elastica\\\\Query\\\\FunctionScore\\:\\:addDecayFunction\\(\\) expects string, float given\\.$#"
-			count: 2
-			path: tests/Query/FunctionScoreTest.php
-
-		-
-			message: "#^Parameter \\#4 \\$scale of method Elastica\\\\Query\\\\FunctionScore\\:\\:addDecayFunction\\(\\) expects string, int given\\.$#"
-			count: 2
-			path: tests/Query/FunctionScoreTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$clauses of class Elastica\\\\Query\\\\SpanNear constructor expects array\\<Elastica\\\\Query\\\\AbstractSpanQuery\\>, array\\<int, Elastica\\\\Query\\\\Term\\> given\\.$#"
 			count: 1
 			path: tests/Query/SpanNearTest.php

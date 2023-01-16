@@ -153,7 +153,7 @@ class Health
         return $this->_data['task_max_waiting_in_queue_millis'];
     }
 
-    public function getActiveShardsPercentAsNumber(): int
+    public function getActiveShardsPercentAsNumber(): float
     {
         return $this->_data['active_shards_percent_as_number'];
     }

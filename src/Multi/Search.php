@@ -70,7 +70,7 @@ class Search
     /**
      * @return $this
      */
-    public function addSearch(BaseSearch $search, ?string $key = null): self
+    public function addSearch(BaseSearch $search, int|string|null $key = null): self
     {
         if ($key) {
             $this->_searches[$key] = $search;
