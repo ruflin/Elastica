@@ -224,17 +224,12 @@ class Http extends AbstractTransport
      */
     protected function _getAuthType()
     {
-        switch ($this->_connection->getAuthType()) {
-            case 'digest':
-                return \CURLAUTH_DIGEST;
-            case 'gssnegotiate':
-                return \CURLAUTH_GSSNEGOTIATE;
-            case 'ntlm':
-                return \CURLAUTH_NTLM;
-            case 'basic':
-                return \CURLAUTH_BASIC;
-            default:
-                return \CURLAUTH_ANY;
-        }
+        return match ($this->_connection->getAuthType()) {
+            'digest' => \CURLAUTH_DIGEST,
+            'gssnegotiate' => \CURLAUTH_GSSNEGOTIATE,
+            'ntlm' => \CURLAUTH_NTLM,
+            'basic' => \CURLAUTH_BASIC,
+            default => \CURLAUTH_ANY,
+        };
     }
 }

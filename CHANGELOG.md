@@ -56,6 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added support for PHP 8.2 [#2136](https://github.com/ruflin/Elastica/pull/2136)
 ### Changed
 * Updated `php-cs-fixer` to `3.13.2` [#2143](https://github.com/ruflin/Elastica/pull/2143)
+* Modernize code using `match` expression [#2141](https://github.com/ruflin/Elastica/pull/2141)
 ### Deprecated
 ### Removed
 ### Fixed
