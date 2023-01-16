@@ -20,10 +20,14 @@ use Elastica\Suggest\AbstractSuggest;
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
+ *
  * @todo: improve THighlightArgs https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html
+ *
  * @phpstan-type THighlightArgs = array<mixed>
  * @phpstan-type TStoredFields = list<string>
+ *
  * @todo: improve TDocValueFields https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-docvalue-fields
+ *
  * @phpstan-type TDocValueFields = array<mixed>
  * @phpstan-type TRescoreArgs = QueryRescore|list<QueryRescore>
  * @phpstan-type TSourceArgs = non-empty-string|list<non-empty-string>|array{includes?: list<non-empty-string>, excludes?: list<non-empty-string>}|false
@@ -77,6 +81,7 @@ class Query extends Param
      * Creates a query object.
      *
      * @param AbstractQuery|array|Collapse|Suggest $query Query object (default = null)
+     *
      * @phpstan-param AbstractQuery|Suggest|Collapse|TRawQuery $query
      */
     public function __construct($query = null)
@@ -98,6 +103,7 @@ class Query extends Param
      * For example, an empty argument will return a \Elastica\Query with a \Elastica\Query\MatchAll.
      *
      * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest|null $query
+     *
      * @phpstan-param TCreateQueryArgs $query
      *
      * @throws InvalidException For an invalid argument
@@ -118,6 +124,7 @@ class Query extends Param
      * Sets query as raw array. Will overwrite all already set arguments.
      *
      * @param array $query Query array
+     *
      * @phpstan-param TRawQuery $query
      */
     public function setRawQuery(array $query): self
@@ -157,6 +164,7 @@ class Query extends Param
      * Replaces existing values.
      *
      * @param array $sortArgs Sorting arguments
+     *
      * @phpstan-param TSortArgs $sortArgs
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html
@@ -170,6 +178,7 @@ class Query extends Param
      * Adds a sort param to the query.
      *
      * @param mixed $sort Sort parameter
+     *
      * @phpstan-param TSortArg $sort
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html
@@ -193,6 +202,7 @@ class Query extends Param
      * Sets highlight arguments for the query.
      *
      * @param array $highlightArgs Set all highlight arguments
+     *
      * @phpstan-param THighlightArgs $highlightArgs
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html
@@ -256,6 +266,7 @@ class Query extends Param
      * so the fields array must a sequence(list) type of array.
      *
      * @param array $fields Fields to be returned
+     *
      * @phpstan-param TStoredFields $fields
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-stored-fields
@@ -269,6 +280,7 @@ class Query extends Param
      * Set the doc value representation of a fields to return for each hit.
      *
      * @param array $fieldDataFields Fields not stored to be returned
+     *
      * @phpstan-param TDocValueFields $fieldDataFields
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-docvalue-fields
@@ -373,6 +385,7 @@ class Query extends Param
      * Add a Rescore.
      *
      * @param mixed $rescore suggestion object
+     *
      * @phpstan-param TRescoreArgs $rescore
      *
      * @see: https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-rescore
@@ -396,6 +409,7 @@ class Query extends Param
      * Sets the _source field to be returned with every hit.
      *
      * @param array|bool $params Fields to be returned or false to disable source
+     *
      * @phpstan-param TSourceArgs $params
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-source-filtering

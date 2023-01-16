@@ -52,6 +52,7 @@ class DiversifiedSamplerTest extends BaseAggregationTest
 
     /**
      * @dataProvider shardSizeAndMaxDocPerValueProvider
+     *
      * @group functional
      */
     public function testSamplerAggregation(int $shardSize, int $maxDocPerValue, int $docCount): void

@@ -59,6 +59,7 @@ class TransportBenchmarkTest extends BaseTest
 
     /**
      * @depends testAddDocument
+     *
      * @dataProvider providerTransport
      *
      * @param mixed $transport
@@ -83,6 +84,7 @@ class TransportBenchmarkTest extends BaseTest
 
     /**
      * @depends testAddDocument
+     *
      * @dataProvider providerTransport
      *
      * @param mixed $transport

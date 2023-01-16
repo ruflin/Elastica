@@ -45,6 +45,7 @@ use Elasticsearch\Endpoints\UpdateByQuery;
  * Handles reads, deletes and configurations of an index
  *
  * @author   Nicolas Ruflin <spam@ruflin.com>
+ *
  * @phpstan-import-type TCreateQueryArgsMatching from Query
  */
 class Index implements SearchableInterface
@@ -166,6 +167,7 @@ class Index implements SearchableInterface
      * Update entries in the db based on a query.
      *
      * @param AbstractQuery|array|Query|string|null $query Query object or array
+     *
      * @phpstan-param TCreateQueryArgsMatching $query
      *
      * @param AbstractScript $script  Script
@@ -310,6 +312,7 @@ class Index implements SearchableInterface
      * Deletes documents matching the given query.
      *
      * @param AbstractQuery|array|Query|string|null $query Query object or array
+     *
      * @phpstan-param TCreateQueryArgsMatching $query
      *
      * @param array $options Optional params

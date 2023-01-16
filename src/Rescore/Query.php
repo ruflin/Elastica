@@ -11,12 +11,14 @@ use Elastica\Query as BaseQuery;
  * @author Jason Hu <mjhu91@gmail.com>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html
+ *
  * @phpstan-import-type TCreateQueryArgsMatching from BaseQuery
  */
 class Query extends AbstractRescore
 {
     /**
      * @param AbstractQuery|array|BaseQuery|string|null $query
+     *
      * @phpstan-param TCreateQueryArgsMatching $query
      */
     public function __construct($query = null)
@@ -52,6 +54,7 @@ class Query extends AbstractRescore
      * Sets rescoreQuery object.
      *
      * @param AbstractQuery|array|BaseQuery|string|null $rescoreQuery
+     *
      * @phpstan-param TCreateQueryArgsMatching $rescoreQuery
      *
      * @return $this

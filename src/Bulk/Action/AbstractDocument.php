@@ -115,8 +115,6 @@ abstract class AbstractDocument extends Action
      * The action can be index, update, create or delete based on the $opType param (by default index).
      *
      * @param AbstractScript|Document $data
-     *
-     * @return AbstractDocument
      */
     public static function create($data, ?string $opType = null): self
     {

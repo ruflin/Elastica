@@ -6,7 +6,6 @@ use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Connection\Strategy\StrategyInterface;
 use Elastica\Exception\ClientException;
-use Exception;
 
 /**
  * Description of ConnectionPool.
@@ -86,7 +85,7 @@ class ConnectionPool
         return $this->_strategy->getConnection($this->getConnections());
     }
 
-    public function onFail(Connection $connection, Exception $e, Client $client): void
+    public function onFail(Connection $connection, \Exception $e, Client $client): void
     {
         $connection->setEnabled(false);
 

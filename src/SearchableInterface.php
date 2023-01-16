@@ -9,6 +9,7 @@ use Elastica\Suggest\AbstractSuggest;
  * Elastica searchable interface.
  *
  * @author Thibault Duplessis <thibault.duplessis@gmail.com>
+ *
  * @phpstan-import-type TCreateQueryArgs from Query
  * @phpstan-import-type TCreateQueryArgsMatching from Query
  */
@@ -31,6 +32,7 @@ interface SearchableInterface
      * }
      *
      * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest|null $query Array with all query data inside or a Elastica\Query object
+     *
      * @phpstan-param TCreateQueryArgs $query
      *
      * @param array|int|null $options Limit or associative array of options (option=>value)
@@ -44,6 +46,7 @@ interface SearchableInterface
      * If no query is set, matchall query is created
      *
      * @param AbstractQuery|array|Query|string|null $query Array with all query data inside or a Elastica\Query object
+     *
      * @phpstan-param TCreateQueryArgsMatching $query
      *
      * @param string $method Request method, see Request's constants
@@ -54,6 +57,7 @@ interface SearchableInterface
 
     /**
      * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest|null $query
+     *
      * @phpstan-param TCreateQueryArgs $query
      *
      * @param array|int|null $options

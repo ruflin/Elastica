@@ -630,6 +630,7 @@ class QueryTest extends BaseTest
 
     /**
      * @group functional
+     *
      * @dataProvider provideSetTrackTotalHitsInvalidValue
      *
      * @param mixed $value

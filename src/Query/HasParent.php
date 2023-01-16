@@ -8,12 +8,14 @@ use Elastica\Query as BaseQuery;
  * Returns child documents having parent docs matching the query.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-parent-query.html
+ *
  * @phpstan-import-type TCreateQueryArgsMatching from BaseQuery
  */
 class HasParent extends AbstractQuery
 {
     /**
      * @param AbstractQuery|array|BaseQuery|string|null $query
+     *
      * @phpstan-param TCreateQueryArgsMatching $query
      *
      * @param string $type Parent document type
@@ -28,6 +30,7 @@ class HasParent extends AbstractQuery
      * Sets query object.
      *
      * @param AbstractQuery|array|BaseQuery|string|null $query
+     *
      * @phpstan-param TCreateQueryArgsMatching $query
      *
      * @return $this
