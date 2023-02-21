@@ -61,6 +61,12 @@ class Client
     protected $_version;
 
     /**
+     * @var null|RequestCounterInterface
+     */
+    private $requestCounter;
+
+
+    /**
      * Creates a new Elastica client.
      *
      * @param array|string  $config   OPTIONAL Additional config or DSN of options
@@ -68,8 +74,12 @@ class Client
      *
      * @throws InvalidException
      */
-    public function __construct($config = [], ?callable $callback = null, ?LoggerInterface $logger = null)
-    {
+    public function __construct(
+        array $config = [],
+        $callback = null,
+        LoggerInterface $logger = null,
+        RequestCounterInterface $requestCounter = null
+    ) {
         if (\is_string($config)) {
             $configuration = ClientConfiguration::fromDsn($config);
         } elseif (\is_array($config)) {
@@ -81,6 +91,7 @@ class Client
         $this->_config = $configuration;
         $this->_callback = $callback;
         $this->_logger = $logger ?? new NullLogger();
+        $this->requestCounter = $requestCounter;
 
         $this->_initConnections();
     }
@@ -520,6 +531,10 @@ class Client
         $connection = $this->getConnection();
         $request = $this->_lastRequest = new Request($path, $method, $data, $query, $connection, $contentType);
         $this->_lastResponse = null;
+
+        if ($this->requestCounter !== null) {
+            $this->requestCounter->incrementCount();
+        }
 
         try {
             $response = $this->_lastResponse = $request->send();
