@@ -744,20 +744,6 @@ class IndexTest extends BaseTest
 
     /**
      * @group unit
-     * @group legacy
-     */
-    public function testLegacyCreateSearch(): void
-    {
-        $client = $this->createMock(Client::class);
-        $index = new Index($client, 'test');
-        $query = new QueryString('test');
-
-        $this->expectDeprecation('Since ruflin/elastica 7.1.3: Passing an int as 1st argument to "Elastica\Search::setOptionsAndQuery()" is deprecated, pass an array with the key "size" instead. It will be removed in 8.0.');
-        $index->createSearch($query, 5);
-    }
-
-    /**
-     * @group unit
      */
     public function testCreateSearch(): void
     {

@@ -39,7 +39,6 @@ class QueryTest extends AbstractDSLTest
 
     /**
      * @group unit
-     * @group legacy
      */
     public function testInterface(): void
     {

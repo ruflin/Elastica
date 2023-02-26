@@ -35,10 +35,10 @@ interface SearchableInterface
      *
      * @phpstan-param TCreateQueryArgs $query
      *
-     * @param array|int|null $options Limit or associative array of options (option=>value)
-     * @param string         $method  Request method, see Request's constants
+     * @param array<string, mixed>|null $options associative array of options (option=>value)
+     * @param string                    $method  Request method, see Request's constants
      */
-    public function search($query = '', $options = null, string $method = Request::POST): ResultSet;
+    public function search($query = '', ?array $options = null, string $method = Request::POST): ResultSet;
 
     /**
      * Counts results for a query.
@@ -60,7 +60,7 @@ interface SearchableInterface
      *
      * @phpstan-param TCreateQueryArgs $query
      *
-     * @param array|int|null $options
+     * @param array<string, mixed>|null $options
      */
-    public function createSearch($query = '', $options = null): Search;
+    public function createSearch($query = '', ?array $options = null): Search;
 }
