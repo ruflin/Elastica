@@ -55,6 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Changed `$origin` and `$scale` parameter types of `Elastica\Query\FunctionScore::addDecayFunction()` to allow `float|int|string` [#2144](https://github.com/ruflin/Elastica/pull/2144)
 * Changed `$key` parameter type of `Elastica\Multi\Search::addSearch()` to allow `int|string|null` [#2144](https://github.com/ruflin/Elastica/pull/2144)
 * Changed `$options` parameter type of `Elastica\Index::create()` to only allow `array<string, mixed>` [#2147](https://github.com/ruflin/Elastica/pull/2147)
+* Changed `Elastica\Reindex::setWaitForCompletion()` to only allow `bool` [#2151](https://github.com/ruflin/Elastica/pull/2151)
 ### Added
 * Added support for PHP 8.2 [#2136](https://github.com/ruflin/Elastica/pull/2136)
 ### Changed
