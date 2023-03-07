@@ -278,12 +278,12 @@ class Search
      *
      * @phpstan-param TCreateQueryArgs $query
      *
-     * @param array|int $options Limit or associative array of options (option=>value)
+     * @param array<string, mixed>|null $options associative array of options (option=>value)
      *
      * @throws InvalidException
      * @throws ResponseException
      */
-    public function search($query = '', $options = null, string $method = Request::POST): ResultSet
+    public function search($query = '', ?array $options = null, string $method = Request::POST): ResultSet
     {
         $this->setOptionsAndQuery($options, $query);
 
@@ -334,29 +334,28 @@ class Search
     }
 
     /**
-     * @param array|int                                                              $options
+     * @param array<string, mixed>|null                                              $options
      * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest|null $query
      *
      * @phpstan-param TCreateQueryArgs $query
      */
-    public function setOptionsAndQuery($options = null, $query = ''): self
+    public function setOptionsAndQuery(?array $options = null, $query = ''): self
     {
         if ('' !== $query) {
             $this->setQuery($query);
         }
 
-        if (\is_int($options)) {
-            \trigger_deprecation('ruflin/elastica', '7.1.3', 'Passing an int as 1st argument to "%s()" is deprecated, pass an array with the key "size" instead. It will be removed in 8.0.', __METHOD__);
-            $this->getQuery()->setSize($options);
-        } elseif (\is_array($options)) {
+        if (null !== $options) {
             if (isset($options['limit'])) {
                 $this->getQuery()->setSize($options['limit']);
                 unset($options['limit']);
             }
+
             if (isset($options['explain'])) {
                 $this->getQuery()->setExplain($options['explain']);
                 unset($options['explain']);
             }
+
             $this->setOptions($options);
         }
 
