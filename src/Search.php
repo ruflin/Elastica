@@ -82,30 +82,10 @@ class Search
 
     /**
      * Adds a index to the list.
-     *
-     * @param Index $index Index object or string
-     *
-     * @throws InvalidException
      */
-    public function addIndex($index): self
+    public function addIndex(Index $index): self
     {
-        if ($index instanceof Index) {
-            $index = $index->getName();
-        } else {
-            \trigger_deprecation(
-                'ruflin/elastica',
-                '7.2.0',
-                'Passing a string as 1st argument to "%s()" is deprecated, pass an Index instance or use "addIndexByName" instead. It will throw a %s in 8.0.',
-                __METHOD__,
-                \TypeError::class
-            );
-        }
-
-        if (!\is_scalar($index)) {
-            throw new InvalidException('Invalid param type');
-        }
-
-        return $this->addIndexByName((string) $index);
+        return $this->addIndexByName($index->getName());
     }
 
     /**
@@ -126,19 +106,6 @@ class Search
     public function addIndices(array $indices = []): self
     {
         foreach ($indices as $index) {
-            if (\is_string($index)) {
-                \trigger_deprecation(
-                    'ruflin/elastica',
-                    '7.2.0',
-                    'Passing a array of strings as 1st argument to "%s()" is deprecated, pass an array of Indexes or use "addIndicesByName" instead. It will throw a %s in 8.0.',
-                    __METHOD__,
-                    \TypeError::class
-                );
-                $this->addIndexByName($index);
-
-                continue;
-            }
-
             if (!$index instanceof Index) {
                 throw new InvalidException('Invalid param type for addIndices(), expected Index[]');
             }
@@ -265,24 +232,9 @@ class Search
         return \count($this->_indices) > 0;
     }
 
-    /**
-     * @param Index $index
-     */
-    public function hasIndex($index): bool
+    public function hasIndex(Index $index): bool
     {
-        if ($index instanceof Index) {
-            $index = $index->getName();
-        } else {
-            \trigger_deprecation(
-                'ruflin/elastica',
-                '7.2.0',
-                'Passing a string as 1st argument to "%s()" is deprecated, pass an Index instance or use "hasIndexByName" instead. It will throw a %s in 8.0.',
-                __METHOD__,
-                \TypeError::class
-            );
-        }
-
-        return $this->hasIndexByName($index);
+        return $this->hasIndexByName($index->getName());
     }
 
     public function hasIndexByName(string $index): bool
