@@ -77,18 +77,9 @@ class Reindex extends Param
         return $this->_lastResponse;
     }
 
-    /**
-     * @param bool $value
-     */
-    public function setWaitForCompletion($value): void
+    public function setWaitForCompletion(bool $value): void
     {
-        if (\is_bool($value)) {
-            $value = $value ? 'true' : 'false';
-        } else {
-            \trigger_deprecation('ruflin/elastica', '7.2.0', 'Passing anything else than a boolean as 1st argument to "%s()" is deprecated, pass a boolean instead. It will be removed in 8.0.', __METHOD__);
-        }
-
-        $this->setParam(self::WAIT_FOR_COMPLETION, $value);
+        $this->setParam(self::WAIT_FOR_COMPLETION, $value ? 'true' : 'false');
     }
 
     public function setWaitForActiveShards($value): void

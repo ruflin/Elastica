@@ -171,11 +171,6 @@ parameters:
 			path: tests/QueryBuilderTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$value of method Elastica\\\\Reindex\\:\\:setWaitForCompletion\\(\\) expects bool, string given\\.$#"
-			count: 1
-			path: tests/ReindexTest.php
-
-		-
 			message: "#^Expression \"\\$index\\-\\>search\\('elastica search'\\)\\[3\\]\" on a separate line does not do anything\\.$#"
 			count: 1
 			path: tests/ResultSetTest.php
