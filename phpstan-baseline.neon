@@ -176,26 +176,6 @@ parameters:
 			path: tests/ResultSetTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$index of method Elastica\\\\Search\\:\\:addIndex\\(\\) expects Elastica\\\\Index, int given\\.$#"
-			count: 1
-			path: tests/SearchTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$index of method Elastica\\\\Search\\:\\:addIndex\\(\\) expects Elastica\\\\Index, stdClass given\\.$#"
-			count: 1
-			path: tests/SearchTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$index of method Elastica\\\\Search\\:\\:addIndex\\(\\) expects Elastica\\\\Index, string given\\.$#"
-			count: 1
-			path: tests/SearchTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$index of method Elastica\\\\Search\\:\\:hasIndex\\(\\) expects Elastica\\\\Index, string given\\.$#"
-			count: 2
-			path: tests/SearchTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$indices of method Elastica\\\\Search\\:\\:addIndices\\(\\) expects array\\<Elastica\\\\Index\\>, array\\<int, stdClass\\> given\\.$#"
 			count: 1
 			path: tests/SearchTest.php

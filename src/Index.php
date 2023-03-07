@@ -451,7 +451,7 @@ class Index implements SearchableInterface
     /**
      * {@inheritdoc}
      */
-    public function createSearch($query = '', $options = null, ?BuilderInterface $builder = null): Search
+    public function createSearch($query = '', ?array $options = null, ?BuilderInterface $builder = null): Search
     {
         $search = new Search($this->getClient(), $builder);
         $search->addIndex($this);
@@ -463,7 +463,7 @@ class Index implements SearchableInterface
     /**
      * {@inheritdoc}
      */
-    public function search($query = '', $options = null, string $method = Request::POST): ResultSet
+    public function search($query = '', ?array $options = null, string $method = Request::POST): ResultSet
     {
         $search = $this->createSearch($query, $options);
 

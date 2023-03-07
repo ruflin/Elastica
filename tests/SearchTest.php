@@ -18,15 +18,12 @@ use Elastica\Script\Script;
 use Elastica\Search;
 use Elastica\Suggest;
 use Elastica\Test\Base as BaseTest;
-use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 
 /**
  * @internal
  */
 class SearchTest extends BaseTest
 {
-    use ExpectDeprecationTrait;
-
     /**
      * @group unit
      */
@@ -80,33 +77,6 @@ class SearchTest extends BaseTest
 
     /**
      * @group functional
-     * @group legacy
-     */
-    public function testAddIndexTriggersDeprecationWithString(): void
-    {
-        $client = $this->_getClient();
-        $search = new Search($client);
-
-        $index1 = $this->_createIndex();
-
-        $search->addIndex($index1);
-        $indices = $search->getIndices();
-
-        $this->assertCount(1, $indices);
-
-        $this->assertContains($index1->getName(), $indices);
-
-        $this->expectDeprecation('Since ruflin/elastica 7.2.0: Passing a string as 1st argument to "Elastica\Search::addIndex()" is deprecated, pass an Index instance or use "addIndexByName" instead. It will throw a TypeError in 8.0.');
-
-        $search->addIndex('test2');
-        $indices = $search->getIndices();
-
-        $this->assertCount(2, $indices);
-        $this->assertContains('test2', $indices);
-    }
-
-    /**
-     * @group functional
      */
     public function testHasIndex(): void
     {
@@ -145,25 +115,6 @@ class SearchTest extends BaseTest
 
         $this->assertTrue($search->hasIndexByName($indexName1));
         $this->assertTrue($search->hasIndexByName($indexName2));
-    }
-
-    /**
-     * @group functional
-     * @group legacy
-     */
-    public function testHasIndexTriggersDeprecationWithString(): void
-    {
-        $client = $this->_getClient();
-        $search = new Search($client);
-
-        $indexName = 'index1';
-
-        $this->expectDeprecation('Since ruflin/elastica 7.2.0: Passing a string as 1st argument to "Elastica\Search::hasIndex()" is deprecated, pass an Index instance or use "hasIndexByName" instead. It will throw a TypeError in 8.0.');
-
-        $this->assertFalse($search->hasIndex($indexName));
-
-        $search->addIndexByName($indexName);
-        $this->assertTrue($search->hasIndex($indexName));
     }
 
     /**
@@ -209,26 +160,6 @@ class SearchTest extends BaseTest
 
     /**
      * @group unit
-     * @group legacy
-     */
-    public function testAddIndicesTriggersDeprecationWithIndexAsString(): void
-    {
-        $client = $this->_getClient();
-        $search = new Search($client);
-
-        $indices = [];
-        $indices[] = $client->getIndex('elastica_test1');
-        $indices[] = 'elastica_test2';
-
-        $this->expectDeprecation('Since ruflin/elastica 7.2.0: Passing a array of strings as 1st argument to "Elastica\Search::addIndices()" is deprecated, pass an array of Indexes or use "addIndicesByName" instead. It will throw a TypeError in 8.0.');
-
-        $search->addIndices($indices);
-
-        $this->assertCount(2, $search->getIndices());
-    }
-
-    /**
-     * @group unit
      */
     public function testAddIndicesByNameWithInvalidParametersThrowsException(): void
     {
@@ -237,36 +168,6 @@ class SearchTest extends BaseTest
 
         $this->expectException(InvalidException::class);
         $search->addIndicesByName([new \stdClass()]);
-    }
-
-    /**
-     * @group unit
-     * @group legacy
-     */
-    public function testAddIndexInvalid(): void
-    {
-        $this->expectException(InvalidException::class);
-
-        $client = $this->_getClient();
-        $search = new Search($client);
-
-        $search->addIndex(new \stdClass());
-    }
-
-    /**
-     * @group unit
-     * @group legacy
-     */
-    public function testAddNumericIndex(): void
-    {
-        $client = $this->_getClient();
-        $search = new Search($client);
-
-        $this->expectDeprecation('Since ruflin/elastica 7.2.0: Passing a string as 1st argument to "Elastica\Search::addIndex()" is deprecated, pass an Index instance or use "addIndexByName" instead. It will throw a TypeError in 8.0.');
-
-        $search->addIndex(1);
-
-        $this->assertContains('1', $search->getIndices(), 'Make sure it has been added and converted to string');
     }
 
     /**
