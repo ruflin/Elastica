@@ -17,7 +17,7 @@ class SettingsTest extends BaseTest
      */
     public function testSetTransient(): void
     {
-        if (version_compare($_SERVER['ES_VERSION'], '7.0.0', '>=')) {
+        if (\version_compare($_SERVER['ES_VERSION'], '7.0.0', '>=')) {
             $this->markTestSkipped('discovery.zen.minimum_master_nodes is deprecated, ignored in 7.x and removed in 8.x, see: https://www.elastic.co/guide/en/elasticsearch/reference/master/migrating-8.0.html#breaking-changes-8.0');
         }
 
@@ -43,7 +43,7 @@ class SettingsTest extends BaseTest
      */
     public function testSetPersistent(): void
     {
-        if (version_compare($_SERVER['ES_VERSION'], '7.0.0', '>=')) {
+        if (\version_compare($_SERVER['ES_VERSION'], '7.0.0', '>=')) {
             $this->markTestSkipped('discovery.zen.minimum_master_nodes is deprecated, ignored in 7.x and removed in 8.x, see: https://www.elastic.co/guide/en/elasticsearch/reference/master/migrating-8.0.html#breaking-changes-8.0');
         }
 
