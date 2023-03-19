@@ -48,7 +48,7 @@ jobs:
             elasticsearch: '7.15.2'
             experimental: false
           - php: '8.1'
-            elasticsearch: '8.0'
+            elasticsearch: '8.0.0'
             experimental: true
       fail-fast: false
     steps:
