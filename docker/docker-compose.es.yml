@@ -15,6 +15,7 @@ services:
             discovery.seed_hosts: es01
             bootstrap.memory_lock: 'true'
             xpack.security.enabled: 'false'
+            action.destructive_requires_name: 'false'
             ES_JAVA_OPTS: -Xms512m -Xmx512m
             path.repo: /usr/share/elasticsearch/repository
         ulimits: &ulimits
