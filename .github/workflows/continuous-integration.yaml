@@ -87,6 +87,8 @@ jobs:
           docker run --rm --network=docker_elastic curlimages/curl --max-time 120 --retry-max-time 120 --retry 120 --retry-delay 5 --retry-all-errors --show-error --silent http://es02:9200
 
       - name: 'Run functional tests'
+        env:
+          ES_VERSION: "${{ matrix.elasticsearch }}"
         run: |
           vendor/bin/phpunit --group functional --coverage-clover=build/coverage/functional-coverage.xml
 
