@@ -118,7 +118,7 @@ class GuzzleTest extends BaseTest
 
         $this->assertEquals(0, $resultSet->getTotalHits());
 
-        $response = $index->request('/_search', 'POST');
+        $response = $index->request('_search', 'POST');
 
         $builder = new DefaultBuilder();
         $resultSet = $builder->buildResultSet($response, Query::create([]));

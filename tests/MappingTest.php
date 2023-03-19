@@ -196,12 +196,16 @@ class MappingTest extends BaseTest
     {
         $index = $this->_createIndex();
 
+        // The boost parameter on field mappings has been removed.
+        // @see https://www.elastic.co/guide/en/elasticsearch/reference/master/migrating-8.0.html#breaking-changes-8.0
+        $isEs8 = \version_compare($_SERVER['ES_VERSION'], '8.0.0', '>=');
+
         $mapping = new Mapping([
             'note' => [
                 'properties' => [
-                    'titulo' => ['type' => 'text', 'copy_to' => 'testall', 'boost' => 1.0],
-                    'contenido' => ['type' => 'text', 'copy_to' => 'testall', 'boost' => 1.0],
-                    'testall' => ['type' => 'text',  'boost' => 1.0],
+                    'titulo' => ['type' => 'text', 'copy_to' => 'testall'] + (!$isEs8 ? ['boost' => 1.0] : []),
+                    'contenido' => ['type' => 'text', 'copy_to' => 'testall'] + (!$isEs8 ? ['boost' => 1.0] : []),
+                    'testall' => ['type' => 'text'] + (!$isEs8 ? ['boost' => 1.0] : []),
                 ],
             ],
         ]);
