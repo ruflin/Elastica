@@ -6,8 +6,6 @@ services:
         command: &command >
             /bin/sh -c "
               (./bin/elasticsearch-plugin list | grep -q ingest-attachment || ./bin/elasticsearch-plugin install --batch ingest-attachment) \
-              && mkdir -p /usr/share/elasticsearch/repository \
-              && chown -R elasticsearch: /usr/share/elasticsearch/repository \
               && /usr/local/bin/docker-entrypoint.sh
             "
         environment: &environment
