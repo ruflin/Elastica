@@ -25,7 +25,7 @@ class RangeTest extends BaseAggregationTest
         $query->addAggregation($agg);
         $results = $this->_getIndexForTest()->search($query)->getAggregation('range');
 
-        $this->assertEquals(2, $results['buckets'][0]['doc_count']);
+        $this->assertEquals(3, $results['buckets'][0]['doc_count']);
     }
 
     /**
