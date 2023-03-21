@@ -1,13 +1,10 @@
-version: '3.4'
+version: '3.8'
 
 services:
     es01:
         image: &image docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION:-7.15.2}
         command: &command >
-            /bin/sh -c "
-              (./bin/elasticsearch-plugin list | grep -q ingest-attachment || ./bin/elasticsearch-plugin install --batch ingest-attachment) \
-              && /usr/local/bin/docker-entrypoint.sh
-            "
+            /bin/sh -c "(./bin/elasticsearch-plugin list | grep -q ingest-attachment || ./bin/elasticsearch-plugin install --batch ingest-attachment) && /usr/local/bin/docker-entrypoint.sh"
         environment: &environment
             node.name: es01
             cluster.name: es-docker-cluster
@@ -45,6 +42,10 @@ volumes:
     data01:
     data02:
     esrepo:
+      driver_opts:
+        type: tmpfs
+        device: tmpfs
+        o: "uid=1000,gid=0"
 
 networks:
     elastic:
