@@ -4,6 +4,9 @@ namespace Elastica\Cluster;
 
 use Elastica\Client;
 use Elastica\Cluster\Health\Index;
+use Elastica\Exception\ClientException;
+use Elastica\Exception\ConnectionException;
+use Elastica\Exception\ResponseException;
 
 /**
  * Elastic cluster health.
@@ -175,6 +178,10 @@ class Health
 
     /**
      * Retrieves the health data from the cluster.
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     protected function _retrieveHealthData(): array
     {

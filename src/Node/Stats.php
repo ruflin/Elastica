@@ -2,6 +2,9 @@
 
 namespace Elastica\Node;
 
+use Elastica\Exception\ClientException;
+use Elastica\Exception\ConnectionException;
+use Elastica\Exception\ResponseException;
 use Elastica\Node as BaseNode;
 use Elastica\Response;
 use Elasticsearch\Endpoints\Nodes\Stats as NodesStats;
@@ -104,6 +107,10 @@ class Stats
      * Reloads all nodes information. Has to be called if informations changed.
      *
      * @return Response Response object
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function refresh(): Response
     {

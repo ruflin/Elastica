@@ -4,6 +4,9 @@ namespace Elastica;
 
 use Elastica\Cluster\Health;
 use Elastica\Cluster\Settings;
+use Elastica\Exception\ClientException;
+use Elastica\Exception\ConnectionException;
+use Elastica\Exception\ResponseException;
 use Elasticsearch\Endpoints\Cluster\State;
 
 /**
@@ -47,6 +50,10 @@ class Cluster
 
     /**
      * Refreshes all cluster information (state).
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function refresh(): void
     {

@@ -86,6 +86,10 @@ class Client
 
     /**
      * Get current version.
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function getVersion(): string
     {
@@ -260,6 +264,10 @@ class Client
      * @param array                         $options array of query params to use for query. For possible options check es api
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function updateDocument($id, $data, $index, array $options = []): Response
     {
@@ -542,6 +550,10 @@ class Client
 
     /**
      * Makes calls to the elasticsearch server with usage official client Endpoint.
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function requestEndpoint(AbstractEndpoint $endpoint): Response
     {
@@ -559,6 +571,10 @@ class Client
      * @param array $args OPTIONAL Optional arguments
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-forcemerge.html
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function forcemergeAll($args = []): Response
     {
@@ -572,6 +588,10 @@ class Client
      * Closes the given PointInTime.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/point-in-time-api.html#close-point-in-time-api
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function closePointInTime(string $pointInTimeId): Response
     {
@@ -585,6 +605,10 @@ class Client
      * Refreshes all search indices.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-refresh.html
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function refreshAll(): Response
     {
