@@ -280,6 +280,8 @@ class Bulk
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
+     * @throws BulkResponseException
+     * @throws InvalidException
      */
     public function send(): ResponseSet
     {
