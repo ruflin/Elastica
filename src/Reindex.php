@@ -2,6 +2,9 @@
 
 namespace Elastica;
 
+use Elastica\Exception\ClientException;
+use Elastica\Exception\ConnectionException;
+use Elastica\Exception\ResponseException;
 use Elastica\Query\AbstractQuery;
 use Elastica\Script\AbstractScript;
 use Elastica\Script\Script;
@@ -63,6 +66,11 @@ class Reindex extends Param
         $this->setParams($params);
     }
 
+    /**
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
+     */
     public function run(): Response
     {
         $body = $this->_getBody($this->_oldIndex, $this->_newIndex, $this->getParams());

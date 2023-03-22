@@ -2,6 +2,10 @@
 
 namespace Elastica;
 
+use Elastica\Exception\ClientException;
+use Elastica\Exception\ConnectionException;
+use Elastica\Exception\InvalidException;
+use Elastica\Exception\ResponseException;
 use Elastica\Query\AbstractQuery;
 use Elastica\Suggest\AbstractSuggest;
 
@@ -37,6 +41,11 @@ interface SearchableInterface
      *
      * @param array<string, mixed>|null $options associative array of options (option=>value)
      * @param string                    $method  Request method, see Request's constants
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws InvalidException
+     * @throws ResponseException
      */
     public function search($query = '', ?array $options = null, string $method = Request::POST): ResultSet;
 
@@ -52,6 +61,10 @@ interface SearchableInterface
      * @param string $method Request method, see Request's constants
      *
      * @return int number of documents matching the query
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function count($query = '', string $method = Request::POST);
 

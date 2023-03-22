@@ -2,6 +2,9 @@
 
 namespace Elastica\Node;
 
+use Elastica\Exception\ClientException;
+use Elastica\Exception\ConnectionException;
+use Elastica\Exception\ResponseException;
 use Elastica\Node as BaseNode;
 use Elastica\Response;
 use Elasticsearch\Endpoints\Nodes\Info as NodesInfo;
@@ -205,6 +208,10 @@ class Info
      * @param array $params Params to return (default none). Possible options: settings, os, process, jvm, thread_pool, network, transport, http, plugin
      *
      * @return Response Response object
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function refresh(array $params = []): Response
     {

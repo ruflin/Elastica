@@ -2,6 +2,8 @@
 
 namespace Elastica\Index;
 
+use Elastica\Exception\ClientException;
+use Elastica\Exception\ConnectionException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Exception\ResponseException;
 use Elastica\Index as BaseIndex;
@@ -70,6 +72,10 @@ class Settings
      * @return array|int|string|null Settings data
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function get(string $setting = '', bool $includeDefaults = false)
     {
@@ -303,6 +309,10 @@ class Settings
      * @param array $data Arguments
      *
      * @return Response Response object
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function set(array $data): Response
     {
@@ -336,6 +346,10 @@ class Settings
      * @param string $method OPTIONAL Transfer method (default = \Elastica\Request::GET)
      *
      * @return Response Response object
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function request(array $data = [], string $method = Request::GET, array $queryParameters = []): Response
     {
