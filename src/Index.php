@@ -3,6 +3,7 @@
 namespace Elastica;
 
 use Elastica\Bulk\ResponseSet;
+use Elastica\Exception\Bulk\ResponseException as BulkResponseException;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
@@ -157,6 +158,12 @@ class Index implements SearchableInterface
      * @param Document[] $docs    Array of Elastica\Document
      * @param array      $options Array of query params to use for query. For possible options check es api
      *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
+     * @throws BulkResponseException
+     * @throws InvalidException
+     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
     public function updateDocuments(array $docs, array $options = []): ResponseSet
@@ -254,6 +261,12 @@ class Index implements SearchableInterface
      * @param array            $options Array of query params to use for query. For possible options check es api
      *
      * @return ResponseSet
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
+     * @throws BulkResponseException
+     * @throws InvalidException
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
@@ -384,6 +397,12 @@ class Index implements SearchableInterface
      * Uses the "_bulk" endpoint to delete documents from the server.
      *
      * @param Document[] $docs Array of documents
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
+     * @throws BulkResponseException
+     * @throws InvalidException
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
