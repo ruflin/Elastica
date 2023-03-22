@@ -260,13 +260,13 @@ class Index implements SearchableInterface
      * @param array|Document[] $docs    Array of Elastica\Document
      * @param array            $options Array of query params to use for query. For possible options check es api
      *
-     * @return ResponseSet
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
      * @throws BulkResponseException
      * @throws InvalidException
+     *
+     * @return ResponseSet
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
