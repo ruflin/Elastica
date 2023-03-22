@@ -208,7 +208,7 @@ class Client
      *
      * @param array|Document[] $docs Array of Elastica\Document
      *
-     * @throws InvalidException If docs is empty
+     * @throws InvalidException      If docs is empty
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
@@ -241,7 +241,7 @@ class Client
      *
      * @param array|Document[] $docs Array of Elastica\Document
      *
-     * @throws InvalidException If docs is empty
+     * @throws InvalidException      If docs is empty
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
