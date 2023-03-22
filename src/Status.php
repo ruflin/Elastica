@@ -93,11 +93,11 @@ class Status
     /**
      * Returns an array with all indices that the given alias name points to.
      *
-     * @return Index[]
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
+     *
+     * @return Index[]
      */
     public function getIndicesWithAlias(string $alias)
     {

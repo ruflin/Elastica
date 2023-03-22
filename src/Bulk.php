@@ -10,8 +10,8 @@ use Elastica\Exception\Bulk\ResponseException as BulkResponseException;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
-use Elastica\Exception\ResponseException;
 use Elastica\Exception\RequestEntityTooLargeException;
+use Elastica\Exception\ResponseException;
 use Elastica\Script\AbstractScript;
 
 class Bulk

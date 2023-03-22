@@ -60,11 +60,11 @@ interface SearchableInterface
      *
      * @param string $method Request method, see Request's constants
      *
-     * @return int number of documents matching the query
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
+     *
+     * @return int number of documents matching the query
      */
     public function count($query = '', string $method = Request::POST);
 

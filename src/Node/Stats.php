@@ -106,11 +106,11 @@ class Stats
     /**
      * Reloads all nodes information. Has to be called if informations changed.
      *
-     * @return Response Response object
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
+     *
+     * @return Response Response object
      */
     public function refresh(): Response
     {

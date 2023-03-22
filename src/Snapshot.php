@@ -32,11 +32,11 @@ class Snapshot
      * @param string $type     the repository type ("fs" for file system)
      * @param array  $settings Additional repository settings. If type "fs" is used, the "location" setting must be provided.
      *
-     * @return Response
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
+     *
+     * @return Response
      */
     public function registerRepository($name, $type, $settings = [])
     {
@@ -53,12 +53,12 @@ class Snapshot
      *
      * @param string $name the name of the desired repository
      *
-     * @return array
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws NotFoundException
      * @throws ResponseException
+     *
+     * @return array
      */
     public function getRepository($name)
     {
@@ -78,11 +78,11 @@ class Snapshot
     /**
      * Retrieve all repository records.
      *
-     * @return array
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
+     *
+     * @return array
      */
     public function getAllRepositories()
     {
@@ -97,11 +97,11 @@ class Snapshot
      * @param array  $options           optional settings for this snapshot
      * @param bool   $waitForCompletion if true, the request will not return until the snapshot operation is complete
      *
-     * @return Response
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
+     *
+     * @return Response
      */
     public function createSnapshot($repository, $name, $options = [], $waitForCompletion = false)
     {
@@ -114,12 +114,12 @@ class Snapshot
      * @param string $repository the name of the repository from which to retrieve the snapshot
      * @param string $name       the name of the desired snapshot
      *
-     * @return array
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws NotFoundException
      * @throws ResponseException
+     *
+     * @return array
      */
     public function getSnapshot($repository, $name)
     {
@@ -141,11 +141,11 @@ class Snapshot
      *
      * @param string $repository the repository name
      *
-     * @return array
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
+     *
+     * @return array
      */
     public function getAllSnapshots($repository)
     {
@@ -158,11 +158,11 @@ class Snapshot
      * @param string $repository the repository in which the snapshot resides
      * @param string $name       the name of the snapshot to be deleted
      *
-     * @return Response
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
+     *
+     * @return Response
      */
     public function deleteSnapshot($repository, $name)
     {
@@ -177,11 +177,11 @@ class Snapshot
      * @param array  $options           options for the restore operation
      * @param bool   $waitForCompletion if true, the request will not return until the restore operation is complete
      *
-     * @return Response
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
+     *
+     * @return Response
      */
     public function restoreSnapshot($repository, $name, $options = [], $waitForCompletion = false)
     {
@@ -205,11 +205,11 @@ class Snapshot
      * @param array  $data   request body data
      * @param array  $query  query string parameters
      *
-     * @return Response
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
+     *
+     * @return Response
      */
     public function request($path, $method = Request::GET, $data = [], array $query = [])
     {
