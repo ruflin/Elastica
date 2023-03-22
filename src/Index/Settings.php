@@ -69,13 +69,13 @@ class Settings
      *
      * @param string $setting OPTIONAL Setting name to return
      *
-     * @return array|int|string|null Settings data
-     *
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
+     *
+     * @return array|int|string|null Settings data
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html
      */
     public function get(string $setting = '', bool $includeDefaults = false)
     {
@@ -308,11 +308,11 @@ class Settings
      *
      * @param array $data Arguments
      *
-     * @return Response Response object
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
+     *
+     * @return Response Response object
      */
     public function set(array $data): Response
     {
@@ -345,11 +345,11 @@ class Settings
      * @param array  $data   OPTIONAL Data array
      * @param string $method OPTIONAL Transfer method (default = \Elastica\Request::GET)
      *
-     * @return Response Response object
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
+     *
+     * @return Response Response object
      */
     public function request(array $data = [], string $method = Request::GET, array $queryParameters = []): Response
     {

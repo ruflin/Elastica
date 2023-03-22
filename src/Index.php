@@ -633,11 +633,11 @@ class Index implements SearchableInterface
     /**
      * Returns all index aliases.
      *
-     * @return string[]
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
+     *
+     * @return string[]
      */
     public function getAliases(): array
     {

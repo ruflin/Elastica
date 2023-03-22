@@ -358,11 +358,11 @@ class Search
      * @param array|Query|Query\AbstractQuery|string $query
      * @param bool                                   $fullResult By default only the total hit count is returned. If set to true, the full ResultSet including aggregations is returned
      *
-     * @return int|ResultSet
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
+     *
+     * @return int|ResultSet
      */
     public function count($query = '', bool $fullResult = false, string $method = Request::POST)
     {

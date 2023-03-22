@@ -48,11 +48,11 @@ class IndexTemplate
     /**
      * Deletes the index template.
      *
-     * @return Response
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
+     *
+     * @return Response
      */
     public function delete()
     {
@@ -66,11 +66,11 @@ class IndexTemplate
      *
      * @param array $args OPTIONAL Arguments to use
      *
-     * @return Response
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
+     *
+     * @return Response
      */
     public function create(array $args = [])
     {
@@ -80,11 +80,11 @@ class IndexTemplate
     /**
      * Checks if the given index template is already created.
      *
-     * @return bool
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
+     *
+     * @return bool
      */
     public function exists()
     {
@@ -119,11 +119,11 @@ class IndexTemplate
      * @param string $method Rest method to use (GET, POST, DELETE, PUT)
      * @param array  $data   OPTIONAL Arguments as array
      *
-     * @return Response
-     *
      * @throws ClientException
      * @throws ConnectionException
      * @throws ResponseException
+     *
+     * @return Response
      */
     public function request($method, $data = [])
     {
