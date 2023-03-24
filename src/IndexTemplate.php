@@ -2,7 +2,10 @@
 
 namespace Elastica;
 
+use Elastica\Exception\ClientException;
+use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
+use Elastica\Exception\ResponseException;
 
 /**
  * Elastica index template object.
@@ -45,6 +48,10 @@ class IndexTemplate
     /**
      * Deletes the index template.
      *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
+     *
      * @return Response
      */
     public function delete()
@@ -59,6 +66,10 @@ class IndexTemplate
      *
      * @param array $args OPTIONAL Arguments to use
      *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
+     *
      * @return Response
      */
     public function create(array $args = [])
@@ -68,6 +79,10 @@ class IndexTemplate
 
     /**
      * Checks if the given index template is already created.
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      *
      * @return bool
      */
@@ -103,6 +118,10 @@ class IndexTemplate
      *
      * @param string $method Rest method to use (GET, POST, DELETE, PUT)
      * @param array  $data   OPTIONAL Arguments as array
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      *
      * @return Response
      */

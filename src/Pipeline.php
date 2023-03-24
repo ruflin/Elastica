@@ -2,7 +2,10 @@
 
 namespace Elastica;
 
+use Elastica\Exception\ClientException;
+use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
+use Elastica\Exception\ResponseException;
 use Elastica\Processor\AbstractProcessor;
 use Elasticsearch\Endpoints\AbstractEndpoint;
 use Elasticsearch\Endpoints\Ingest\DeletePipeline;
@@ -172,6 +175,10 @@ class Pipeline extends Param
 
     /**
      * Makes calls to the elasticsearch server with usage official client Endpoint based on this index.
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function requestEndpoint(AbstractEndpoint $endpoint): Response
     {

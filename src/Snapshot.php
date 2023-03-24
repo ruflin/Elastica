@@ -2,6 +2,8 @@
 
 namespace Elastica;
 
+use Elastica\Exception\ClientException;
+use Elastica\Exception\ConnectionException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Exception\ResponseException;
 use Elasticsearch\Endpoints\Snapshot\Restore;
@@ -30,6 +32,10 @@ class Snapshot
      * @param string $type     the repository type ("fs" for file system)
      * @param array  $settings Additional repository settings. If type "fs" is used, the "location" setting must be provided.
      *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
+     *
      * @return Response
      */
     public function registerRepository($name, $type, $settings = [])
@@ -47,8 +53,10 @@ class Snapshot
      *
      * @param string $name the name of the desired repository
      *
-     * @throws Exception\ResponseException
-     * @throws Exception\NotFoundException
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws NotFoundException
+     * @throws ResponseException
      *
      * @return array
      */
@@ -70,6 +78,10 @@ class Snapshot
     /**
      * Retrieve all repository records.
      *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
+     *
      * @return array
      */
     public function getAllRepositories()
@@ -85,6 +97,10 @@ class Snapshot
      * @param array  $options           optional settings for this snapshot
      * @param bool   $waitForCompletion if true, the request will not return until the snapshot operation is complete
      *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
+     *
      * @return Response
      */
     public function createSnapshot($repository, $name, $options = [], $waitForCompletion = false)
@@ -98,8 +114,10 @@ class Snapshot
      * @param string $repository the name of the repository from which to retrieve the snapshot
      * @param string $name       the name of the desired snapshot
      *
-     * @throws Exception\ResponseException
-     * @throws Exception\NotFoundException
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws NotFoundException
+     * @throws ResponseException
      *
      * @return array
      */
@@ -123,6 +141,10 @@ class Snapshot
      *
      * @param string $repository the repository name
      *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
+     *
      * @return array
      */
     public function getAllSnapshots($repository)
@@ -135,6 +157,10 @@ class Snapshot
      *
      * @param string $repository the repository in which the snapshot resides
      * @param string $name       the name of the snapshot to be deleted
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      *
      * @return Response
      */
@@ -150,6 +176,10 @@ class Snapshot
      * @param string $name              the name of the snapshot
      * @param array  $options           options for the restore operation
      * @param bool   $waitForCompletion if true, the request will not return until the restore operation is complete
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      *
      * @return Response
      */
@@ -174,6 +204,10 @@ class Snapshot
      * @param string $method the HTTP method
      * @param array  $data   request body data
      * @param array  $query  query string parameters
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      *
      * @return Response
      */

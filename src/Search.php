@@ -2,6 +2,8 @@
 
 namespace Elastica;
 
+use Elastica\Exception\ClientException;
+use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\ResponseException;
 use Elastica\Query\AbstractQuery;
@@ -281,6 +283,8 @@ class Search
      * @param array<string, mixed>|null $options associative array of options (option=>value)
      *
      * @throws InvalidException
+     * @throws ClientException
+     * @throws ConnectionException
      * @throws ResponseException
      */
     public function search($query = '', ?array $options = null, string $method = Request::POST): ResultSet
@@ -308,6 +312,10 @@ class Search
     /**
      * @param array|Query|Query\AbstractQuery|string $query
      * @param bool                                   $fullResult By default only the total hit count is returned. If set to true, the full ResultSet including aggregations is returned
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      *
      * @return int|ResultSet
      */

@@ -2,6 +2,8 @@
 
 namespace Elastica;
 
+use Elastica\Exception\ClientException;
+use Elastica\Exception\ConnectionException;
 use Elastica\Exception\ResponseException;
 use Elasticsearch\Endpoints\Indices\Alias\Get;
 use Elasticsearch\Endpoints\Indices\GetAlias;
@@ -91,6 +93,10 @@ class Status
     /**
      * Returns an array with all indices that the given alias name points to.
      *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
+     *
      * @return Index[]
      */
     public function getIndicesWithAlias(string $alias)
@@ -147,6 +153,10 @@ class Status
 
     /**
      * Refresh status object.
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function refresh(): void
     {
