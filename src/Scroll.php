@@ -2,7 +2,10 @@
 
 namespace Elastica;
 
+use Elastica\Exception\ClientException;
+use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
+use Elastica\Exception\ResponseException;
 
 /**
  * Scroll Iterator.
@@ -69,6 +72,10 @@ class Scroll implements \Iterator
      * Next scroll search.
      *
      * @see http://php.net/manual/en/iterator.next.php
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function next(): void
     {
@@ -112,6 +119,10 @@ class Scroll implements \Iterator
      * Initial scroll search.
      *
      * @see http://php.net/manual/en/iterator.rewind.php
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function rewind(): void
     {
@@ -132,6 +143,10 @@ class Scroll implements \Iterator
 
     /**
      * Cleares the search context on ES and marks this Scroll instance as finished.
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function clear(): void
     {
@@ -149,6 +164,10 @@ class Scroll implements \Iterator
 
     /**
      * Prepares Scroll for next request.
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     protected function _setScrollId(ResultSet $resultSet): void
     {

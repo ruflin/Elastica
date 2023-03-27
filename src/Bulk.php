@@ -6,10 +6,12 @@ use Elastica\Bulk\Action;
 use Elastica\Bulk\Action\AbstractDocument as AbstractDocumentAction;
 use Elastica\Bulk\Response as BulkResponse;
 use Elastica\Bulk\ResponseSet;
-use Elastica\Exception\Bulk\ResponseException;
 use Elastica\Exception\Bulk\ResponseException as BulkResponseException;
+use Elastica\Exception\ClientException;
+use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\RequestEntityTooLargeException;
+use Elastica\Exception\ResponseException;
 use Elastica\Script\AbstractScript;
 
 class Bulk
@@ -284,6 +286,13 @@ class Bulk
         return $data;
     }
 
+    /**
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
+     * @throws BulkResponseException
+     * @throws InvalidException
+     */
     public function send(): ResponseSet
     {
         $response = $this->_client->request($this->getPath(), Request::POST, (string) $this, $this->_requestParams, Request::NDJSON_CONTENT_TYPE);
@@ -292,7 +301,7 @@ class Bulk
     }
 
     /**
-     * @throws ResponseException
+     * @throws BulkResponseException
      * @throws InvalidException
      */
     protected function _processResponse(Response $response): ResponseSet

@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/7.3.0...master)
 ### Backward Compatibility Breaks
 ### Added
+* Added missing `@throws` annotations to Client::request and related methods [#2153](https://github.com/ruflin/Elastica/pull/2153)
 ### Changed
 ### Deprecated
 * Deprecated not passing a `buckets_path` and `script` when constructing `Elastica\Aggregation\BucketScript` and `Elastica\Aggregation\BucketSelector`

@@ -2,6 +2,8 @@
 
 namespace Elastica\Index;
 
+use Elastica\Exception\ClientException;
+use Elastica\Exception\ConnectionException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Exception\ResponseException;
 use Elastica\Index as BaseIndex;
@@ -66,6 +68,10 @@ class Settings
      * 'index.' is added in front of $setting.
      *
      * @param string $setting OPTIONAL Setting name to return
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      *
      * @return array|int|string|null Settings data
      *
@@ -302,6 +308,10 @@ class Settings
      *
      * @param array $data Arguments
      *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
+     *
      * @return Response Response object
      */
     public function set(array $data): Response
@@ -334,6 +344,10 @@ class Settings
      *
      * @param array  $data   OPTIONAL Data array
      * @param string $method OPTIONAL Transfer method (default = \Elastica\Request::GET)
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      *
      * @return Response Response object
      */

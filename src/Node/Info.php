@@ -2,6 +2,9 @@
 
 namespace Elastica\Node;
 
+use Elastica\Exception\ClientException;
+use Elastica\Exception\ConnectionException;
+use Elastica\Exception\ResponseException;
 use Elastica\Node as BaseNode;
 use Elastica\Response;
 use Elasticsearch\Endpoints\Nodes\Info as NodesInfo;
@@ -203,6 +206,10 @@ class Info
      * Reloads all nodes information. Has to be called if informations changed.
      *
      * @param array $params Params to return (default none). Possible options: settings, os, process, jvm, thread_pool, network, transport, http, plugin
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      *
      * @return Response Response object
      */
