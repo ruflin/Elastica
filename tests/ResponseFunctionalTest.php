@@ -74,6 +74,12 @@ class ResponseFunctionalTest extends BaseTest
         $index = $this->_createIndex();
         $gotException = false;
 
+        // @see https://www.elastic.co/guide/en/elasticsearch/reference/master/migrating-8.0.html#breaking-changes-8.0
+        $isEs8 = \version_compare($_SERVER['ES_VERSION'], '8.0.0', '>=');
+        if ($isEs8) {
+            $this->markTestSkipped('REST API endpoints containing mapping types have been removed.');
+        }
+
         try {
             $index->request(
                 'non-existent-type/_mapping',

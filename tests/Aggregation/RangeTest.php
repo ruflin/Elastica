@@ -25,7 +25,7 @@ class RangeTest extends BaseAggregationTest
         $query->addAggregation($agg);
         $results = $this->_getIndexForTest()->search($query)->getAggregation('range');
 
-        $this->assertEquals(2, $results['buckets'][0]['doc_count']);
+        $this->assertEquals(3, $results['buckets'][0]['doc_count']);
     }
 
     /**
@@ -88,11 +88,13 @@ class RangeTest extends BaseAggregationTest
         $index = $this->_createIndex();
 
         $index->addDocuments([
+            // this is not a mistake, dynamic mapping will take first type
+            // and if we want to have decimal as type, it should go first
+            new Document('5', ['price' => 1.5]),
             new Document('1', ['price' => 5]),
             new Document('2', ['price' => 8]),
             new Document('3', ['price' => 1]),
             new Document('4', ['price' => 3]),
-            new Document('5', ['price' => 1.5]),
             new Document('6', ['price' => 2]),
         ]);
 
