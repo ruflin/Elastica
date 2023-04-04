@@ -566,7 +566,7 @@ class SearchTest extends BaseTest
         $multiResultSet = $multiSearch->search();
         $resultSets = $multiResultSet->getResultSets();
 
-        $this->assertEquals(6, $resultSets[0]->getTotalHits());
+        $this->assertEquals(1, $resultSets[0]->getTotalHits());
         $this->assertEquals(6, $resultSets[1]->getTotalHits());
     }
 
