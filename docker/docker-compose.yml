@@ -14,6 +14,7 @@ services:
         environment:
             - ES_HOST=es01
             - PROXY_HOST=proxy
+            - ES_VERSION=${ES_VERSION}
 
 networks:
     elastic:
