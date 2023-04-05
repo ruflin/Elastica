@@ -325,6 +325,9 @@ class Search
      */
     public function search($query = '', $options = null, string $method = Request::POST): ResultSet
     {
+        $tags = $options[CustomOptions::REQUEST_TAGS] ?? [];
+        unset($options[CustomOptions::REQUEST_TAGS]);
+
         $this->setOptionsAndQuery($options, $query);
 
         $query = $this->getQuery();
@@ -340,7 +343,14 @@ class Search
             $data = $query->toArray();
         }
 
-        $response = $this->getClient()->request($path, $method, $data, $params);
+        $response = $this->getClient()->request(
+            $path,
+            $method,
+            $data,
+            $params,
+            Request::DEFAULT_CONTENT_TYPE,
+            $tags
+        );
 
         return $this->builder->buildResultSet(
             $response,
@@ -451,6 +461,7 @@ class Search
             case self::OPTION_SHARD_REQUEST_CACHE:
             case self::OPTION_FILTER_PATH:
             case self::OPTION_TYPED_KEYS:
+            case CustomOptions::REQUEST_TAGS:
                 return;
         }
 

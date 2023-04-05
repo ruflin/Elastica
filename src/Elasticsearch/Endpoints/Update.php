@@ -2,6 +2,7 @@
 
 namespace Elastica\Elasticsearch\Endpoints;
 
+use Elastica\CustomOptions;
 use Elasticsearch\Endpoints\Update as BaseUpdate;
 
 class Update extends BaseUpdate
@@ -13,6 +14,7 @@ class Update extends BaseUpdate
             parent::getParamWhitelist(),
             [
                 'version',
+                CustomOptions::REQUEST_TAGS,
             ]
         );
     }

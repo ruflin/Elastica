@@ -261,11 +261,14 @@ class Index implements SearchableInterface
      */
     public function getDocument($id, array $options = []): Document
     {
+        $tags = $options[CustomOptions::REQUEST_TAGS] ?? [];
+        unset($options[CustomOptions::REQUEST_TAGS]);
+
         $endpoint = new DocumentGet();
         $endpoint->setId($id);
         $endpoint->setParams($options);
 
-        $response = $this->requestEndpoint($endpoint);
+        $response = $this->requestEndpoint($endpoint, $tags);
         $result = $response->getData();
 
         if (!isset($result['found']) || false === $result['found']) {
@@ -493,6 +496,9 @@ class Index implements SearchableInterface
             throw new \TypeError(\sprintf('Argument 2 passed to "%s()" must be of type array|bool|null, %s given.', __METHOD__, \is_object($options) ? \get_class($options) : \gettype($options)));
         }
 
+        $tags = $options[CustomOptions::REQUEST_TAGS] ?? [];
+        unset($options[CustomOptions::REQUEST_TAGS]);
+
         $endpoint = new Create();
         $invalidOptions = \array_diff(\array_keys($options), $allowedOptions = \array_merge($endpoint->getParamWhitelist(), [
             'recreate',
@@ -519,7 +525,7 @@ class Index implements SearchableInterface
         $endpoint->setParams($options);
         $endpoint->setBody($args);
 
-        return $this->requestEndpoint($endpoint);
+        return $this->requestEndpoint($endpoint, $tags);
     }
 
     /**
@@ -547,11 +553,11 @@ class Index implements SearchableInterface
     /**
      * {@inheritdoc}
      */
-    public function search($query = '', $options = null, string $method = Request::POST): ResultSet
+    public function search($query = '', $options = [], string $method = Request::POST): ResultSet
     {
         $search = $this->createSearch($query, $options);
 
-        return $search->search('', null, $method);
+        return $search->search('', $options, $method);
     }
 
     /**
@@ -733,13 +739,15 @@ class Index implements SearchableInterface
 
     /**
      * Makes calls to the elasticsearch server with usage official client Endpoint based on this index.
+     *
+     * @param string[] $tags
      */
-    public function requestEndpoint(AbstractEndpoint $endpoint): Response
+    public function requestEndpoint(AbstractEndpoint $endpoint, array $tags = []): Response
     {
         $cloned = clone $endpoint;
         $cloned->setIndex($this->getName());
 
-        return $this->getClient()->requestEndpoint($cloned);
+        return $this->getClient()->requestEndpoint($cloned, $tags);
     }
 
     /**
