@@ -69,6 +69,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 * Added support for PHP 8.2 [#2136](https://github.com/ruflin/Elastica/pull/2136)
 * Added missing `@throws` annotations to Client::request and related methods [#2152](https://github.com/ruflin/Elastica/pull/2152)
+* Added ElasticSearch 8.x to CI [#2123](https://github.com/ruflin/Elastica/pull/2123)
+* Added more versions of ElasticSearch to CI [#2155](https://github.com/ruflin/Elastica/pull/2155)
 ### Changed
 * Updated `php-cs-fixer` to `3.13.2` [#2143](https://github.com/ruflin/Elastica/pull/2143)
 * Modernize code using `match` expression [#2141](https://github.com/ruflin/Elastica/pull/2141)

@@ -40,12 +40,12 @@ jobs:
         dependencies:
           - 'highest'
         elasticsearch:
-          - '7.15.2'
+          - '7.17.9'
         include:
           # Test with the lowest set of dependencies
           - dependencies: 'lowest'
             php: '8.0'
-            elasticsearch: '7.15.2'
+            elasticsearch: '7.17.9'
             experimental: false
           - php: '8.1'
             elasticsearch: '8.0.1'
