@@ -25,6 +25,14 @@ use Psr\Log\NullLogger;
  */
 class Client
 {
+    public const LOG_DISABLED = 0b0000;
+
+    public const LOG_BASIC = 0b0001;
+
+    public const LOG_REQUEST_BODY = 0b0010;
+
+    public const LOG_RESPONSE_BODY = 0b0100;
+
     /**
      * @var ClientConfiguration
      */
@@ -66,6 +74,9 @@ class Client
     private $requestCounter;
 
 
+    private int $loggingMode = self::LOG_BASIC;
+
+
     /**
      * Creates a new Elastica client.
      *
@@ -94,6 +105,26 @@ class Client
         $this->requestCounter = $requestCounter;
 
         $this->_initConnections();
+    }
+
+    public function setLoggingMode(int $loggingMode): void
+    {
+        $this->loggingMode = $loggingMode;
+    }
+
+    public function shouldLog(): bool
+    {
+        return $this->loggingMode & self::LOG_BASIC;
+    }
+
+    public function shouldLogRequestBody(): bool
+    {
+        return $this->loggingMode & self::LOG_REQUEST_BODY;
+    }
+
+    public function shouldLogResponseBody(): bool
+    {
+        return $this->loggingMode & self::LOG_RESPONSE_BODY;
     }
 
     /**
@@ -275,6 +306,9 @@ class Client
      */
     public function updateDocument($id, $data, $index, array $options = []): Response
     {
+        $tags = $options[CustomOptions::REQUEST_TAGS] ?? [];
+        unset($options[CustomOptions::REQUEST_TAGS]);
+
         $endpoint = new Update();
         $endpoint->setId($id);
         $endpoint->setIndex($index);
@@ -322,7 +356,7 @@ class Client
         $endpoint->setBody($requestData);
         $endpoint->setParams($options);
 
-        $response = $this->requestEndpoint($endpoint);
+        $response = $this->requestEndpoint($endpoint, $tags);
 
         if ($response->isOk()
             && $data instanceof Document
@@ -526,21 +560,25 @@ class Client
      * @throws ConnectionException
      * @throws ResponseException
      */
-    public function request(string $path, string $method = Request::GET, $data = [], array $query = [], string $contentType = Request::DEFAULT_CONTENT_TYPE): Response
+    public function request(string $path, string $method = Request::GET, $data = [], array $query = [], string $contentType = Request::DEFAULT_CONTENT_TYPE, array $tags = []): Response
     {
         $connection = $this->getConnection();
         $request = $this->_lastRequest = new Request($path, $method, $data, $query, $connection, $contentType);
         $this->_lastResponse = null;
 
+        $requestName = sprintf('[%s]', $tags === [] ? 'untagged' : implode('.', $tags));
+
         if ($this->requestCounter !== null) {
             $this->requestCounter->incrementCount();
+            $requestName = sprintf('#%02d %s', $this->requestCounter->getCount(), $requestName);
         }
 
         try {
             $response = $this->_lastResponse = $request->send();
         } catch (ConnectionException $e) {
             $this->_connectionPool->onFail($connection, $e, $this);
-            $this->_logger->error('Elastica Request Failure', [
+            $this->_logger->error(sprintf('Elastica Request Failure %s', $requestName), [
+                'tags' => $tags,
                 'exception' => $e,
                 'request' => $e->getRequest()->toArray(),
                 'retry' => $this->hasConnection(),
@@ -554,11 +592,27 @@ class Client
             return $this->request($path, $method, $data, $query);
         }
 
-        $this->_logger->debug('Elastica Request', [
-            'request' => $request->toArray(),
-            'response' => $response->getData(),
-            'responseStatus' => $response->getStatus(),
-        ]);
+        if ($this->shouldLog()) {
+            $elapsedTimeMs = (int)(round($response->getQueryTime() * 1000));
+            $context = [
+                'tags' => $tags,
+                'responseStatus' => $response->getStatus(),
+                'ctxt_execution_time' => $elapsedTimeMs,
+            ];
+
+            if ($this->shouldLogRequestBody()) {
+                $context['request'] = $request->toArray();
+            }
+
+            if ($this->shouldLogResponseBody()) {
+                $context['response'] = $response->getData();
+            }
+
+            $this->_logger->debug(
+                sprintf('Elastica Request %s %s %s took %d ms', $method, $path, $requestName, $elapsedTimeMs),
+                $context
+            );
+        }
 
         return $response;
     }
@@ -573,8 +627,10 @@ class Client
 
     /**
      * Makes calls to the elasticsearch server with usage official client Endpoint.
+     *
+     * @param string[] $tags
      */
-    public function requestEndpoint(AbstractEndpoint $endpoint): Response
+    public function requestEndpoint(AbstractEndpoint $endpoint, array $tags = []): Response
     {
         if ($this->getApiVersion() === ApiVersion::API_VERSION_6) {
             $index = $endpoint->getIndex();
@@ -587,7 +643,9 @@ class Client
             \ltrim($endpoint->getURI(), '/'),
             $endpoint->getMethod(),
             $endpoint->getBody() ?? [],
-            $endpoint->getParams()
+            $endpoint->getParams(),
+            Request::DEFAULT_CONTENT_TYPE,
+            $tags
         );
     }
 

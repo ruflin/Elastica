@@ -28,6 +28,11 @@ class Query extends Param
     private $hasSuggest = false;
 
     /**
+     * @var string[]
+     */
+    private array $tags = [];
+
+    /**
      * Creates a query object.
      *
      * @param AbstractQuery|array $query Query object (default = null)
@@ -43,6 +48,27 @@ class Query extends Param
         } elseif ($query instanceof Collapse) {
             $this->setCollapse($query);
         }
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getTags(): array
+    {
+        return $this->tags;
+    }
+
+    public function addTag(string $tag): void
+    {
+        $this->tags[] = $tag;
+    }
+
+    /**
+     * @param string[] $tags
+     */
+    public function setTags(array $tags): void
+    {
+        $this->tags = $tags;
     }
 
     /**
@@ -291,6 +317,8 @@ class Query extends Param
         if (isset($array['suggest'])) {
             $array['suggest'] = $array['suggest']['suggest'];
         }
+
+        unset($array[CustomOptions::REQUEST_TAGS]);
 
         return $array;
     }
