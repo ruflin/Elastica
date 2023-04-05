@@ -597,7 +597,7 @@ class Client
             $context = [
                 'tags' => $tags,
                 'responseStatus' => $response->getStatus(),
-                'ctxt_execution_time' => $elapsedTimeMs,
+                'execution_time' => $elapsedTimeMs,
             ];
 
             if ($this->shouldLogRequestBody()) {
