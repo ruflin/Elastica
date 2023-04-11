@@ -526,6 +526,10 @@ class SearchTest extends BaseTest
      */
     public function testSearchWithSearchOptions(): void
     {
+        if (\version_compare($_SERVER['ES_VERSION'], '8.8.0', '>=')) {
+            $this->markTestSkipped('This test was not working as expected initially, `terminate_after` is not appended to `multisearch` also total-hits does not reflect real result https://www.elastic.co/guide/en/elasticsearch/reference/8.7/search-your-data.html#quickly-check-for-matching-docs');
+        }
+
         $index = $this->_createIndex();
         $client = $index->getClient();
 
@@ -555,8 +559,13 @@ class SearchTest extends BaseTest
         $search2->setQuery($query2);
 
         $multiSearch->addSearch($search2);
+
+        $this->assertCount(2, $multiSearch->getSearches());
+
+        // assert
         $multiResultSet = $multiSearch->search();
         $resultSets = $multiResultSet->getResultSets();
+
         $this->assertEquals(1, $resultSets[0]->getTotalHits());
         $this->assertEquals(6, $resultSets[1]->getTotalHits());
     }

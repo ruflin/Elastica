@@ -46,7 +46,12 @@ class InfoTest extends BaseTest
         $info = $node->getInfo();
 
         $this->assertFalse($info->hasPlugin('foo'));
-        $this->assertTrue($info->hasPlugin('ingest-attachment'));
+
+        if (\version_compare($_SERVER['ES_VERSION'], '8.4.0', '>=')) {
+            $this->markTestIncomplete('The Ingest Attachment plugin is now included in Elasticsearch. https://www.elastic.co/guide/en/elasticsearch/plugins/8.4/ingest-attachment.html');
+        } else {
+            $this->assertTrue($info->hasPlugin('ingest-attachment'));
+        }
     }
 
     /**
