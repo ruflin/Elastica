@@ -300,9 +300,12 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      *
      * @param int $offset
      *
+     * @return Result
+     *
      * @throws Exception\InvalidException If offset doesn't exist
      */
-    public function offsetGet($offset): Result
+    #[\ReturnTypeWillChange]
+    public function offsetGet($offset)
     {
         if ($this->offsetExists($offset)) {
             return $this->_results[$offset];
