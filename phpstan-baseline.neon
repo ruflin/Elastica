@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
-			count: 1
-			path: src/Client.php
-
-		-
 			message: "#^Method Elastica\\\\QueryBuilder\\:\\:aggregation\\(\\) should return Elastica\\\\QueryBuilder\\\\DSL\\\\Aggregation but returns Elastica\\\\QueryBuilder\\\\Facade\\.$#"
 			count: 1
 			path: src/QueryBuilder.php
