@@ -53,7 +53,6 @@ use Elastica\Suggest\AbstractSuggest;
  *     min_score?: float,
  *     pit?: PointInTime,
  *     post_filter?: AbstractQuery,
- *     post_filter?: AbstractQuery,
  *     query?: AbstractQuery|array<string, array<string, mixed>>,
  *     rescore?: TRescoreArgs,
  *     script_fields?: ScriptFields,
