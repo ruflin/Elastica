@@ -125,7 +125,7 @@ abstract class AbstractDocument extends Action
      */
     public static function create(
         $data,
-        ?string $opType = null,
+        ?string $opType,
         int $apiVersion,
         Closure $documentTypeResolver
     ): self

@@ -19,7 +19,7 @@ class AbstractDocumentTest extends BaseTest
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The data needs to be a Document or a Script.');
 
-        AbstractDocument::create(new \stdClass());
+        AbstractDocument::create(new \stdClass(), null);
     }
 
     /**
