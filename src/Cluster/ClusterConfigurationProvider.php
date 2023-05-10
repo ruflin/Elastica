@@ -3,7 +3,7 @@
 namespace Elastica\Cluster;
 
 use Elastica\ClusterConfiguration;
-use PHPUnit\Framework\Assert;
+use LogicException;
 use RuntimeException;
 use function assert;
 use function current;
@@ -23,7 +23,10 @@ class ClusterConfigurationProvider
     public function __construct(array $clusterConfigurations)
     {
         foreach ($clusterConfigurations as $clusterConfiguration) {
-            Assert::assertInstanceOf(ClusterConfiguration::class, $clusterConfiguration);
+            if (!$clusterConfiguration instanceof ClusterConfiguration::class) {
+                $message = sprintf('Cluster configuration is not instance of %s', ClusterConfiguration::class);
+                throw new LogicException($message);
+            }
         }
         $this->clusterConfigurations = $clusterConfigurations;
     }
