@@ -23,7 +23,7 @@ class ClusterConfigurationProvider
     public function __construct(array $clusterConfigurations)
     {
         foreach ($clusterConfigurations as $clusterConfiguration) {
-            if (!$clusterConfiguration instanceof ClusterConfiguration::class) {
+            if (!$clusterConfiguration instanceof ClusterConfiguration) {
                 $message = sprintf('Cluster configuration is not instance of %s', ClusterConfiguration::class);
                 throw new LogicException($message);
             }
