@@ -2,6 +2,8 @@
 
 namespace Elastica;
 
+use Elastica\Cluster\ClusterConfiguration;
+
 class ServerConfiguration
 {
     private int $timeout;

@@ -2,6 +2,7 @@
 
 namespace Elastica;
 
+use Elastica\Cluster\ClusterConfiguration;
 use Psr\Log\LoggerInterface;
 
 class ClientFactory

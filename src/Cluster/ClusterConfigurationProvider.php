@@ -2,7 +2,6 @@
 
 namespace Elastica\Cluster;
 
-use Elastica\ClusterConfiguration;
 use LogicException;
 use RuntimeException;
 use function assert;

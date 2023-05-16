@@ -1,6 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace Elastica;
+namespace Elastica\Cluster;
+
+use Elastica\ElasticSearchVersion;
 
 class ClusterConfiguration
 {
