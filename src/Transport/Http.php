@@ -65,7 +65,10 @@ class Http extends AbstractTransport
             $requestPath = Util::escapeDateMath($requestPath);
         }
 
-        $baseUri .= $requestPath;
+        if ($requestPath !== '') {
+            $baseUri = rtrim('/', '');
+            $baseUri .= '/' . $requestPath;
+        }
 
         $query = $request->getQuery();
 
