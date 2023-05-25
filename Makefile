@@ -2,7 +2,7 @@
 
 SOURCE = "./lib"
 TARGET?=70
-DOCKER_COMPOSE_CMD := $(shell if [ ! -z "`docker compose version`" ]; then echo "docker compose"; else echo "docker-compose"; fi)
+DOCKER_COMPOSE_CMD := $(shell if [ ! -z "`docker compose version`" ]; then echo "docker compose"; else echo "docker-compose"; fi 2>/dev/null)
 
 # By default docker environment is used to run commands. To run without the predefined environment, set RUN_ENV=" " either as parameter or as environment variable
 ifndef RUN_ENV
