@@ -2,6 +2,7 @@
 
 SOURCE = "./lib"
 TARGET?=70
+DOCKER_COMPOSE_CMD := $(shell if [ ! -z "`docker compose version`" ]; then echo "docker compose"; else echo "docker-compose"; fi 2>/dev/null)
 
 # By default docker environment is used to run commands. To run without the predefined environment, set RUN_ENV=" " either as parameter or as environment variable
 ifndef RUN_ENV
@@ -11,7 +12,7 @@ endif
 
 .PHONY: clean
 clean:
-	docker-compose down -v
+	${DOCKER_COMPOSE_CMD} down -v
 	rm -r -f ./build
 	rm -r -f ./vendor
 	rm -r -f ./composer.lock
@@ -71,7 +72,7 @@ test:
 	make elastica-image
 	make start
 	mkdir -p build
-	docker-compose run -e "ES_HOST=elasticsearch" elastica phpunit -c test/ ${TEST}
+	${DOCKER_COMPOSE_CMD} run -e "ES_HOST=elasticsearch" elastica phpunit -c test/ ${TEST}
 
 .PHONY: doc
 doc:
@@ -100,20 +101,20 @@ phploc:
 # VIRTUAL ENVIRONMENT
 .PHONY: build
 build:
-	docker-compose build
+	${DOCKER_COMPOSE_CMD} build
 
 .PHONY: start
 start:
-	docker-compose up -d --build
+	${DOCKER_COMPOSE_CMD} up -d --build
 
 .PHONY: stop
 stop:
-	docker-compose stop
+	${DOCKER_COMPOSE_CMD} stop
 
 .PHONY: destroy
 destroy: clean
-	docker-compose kill
-	docker-compose rm
+	${DOCKER_COMPOSE_CMD} kill
+	${DOCKER_COMPOSE_CMD} rm
 
 # Stops and removes all containers and removes all images
 .PHONY: destroy-environment
@@ -134,7 +135,7 @@ shell:
 # Starts a shell inside the elastica image with the full environment running
 .PHONY: env-shell
 env-shell:
-	docker-compose run elastica /bin/bash
+	${DOCKER_COMPOSE_CMD} run elastica /bin/bash
 
 # Visualise repo
 .PHONY: gource
