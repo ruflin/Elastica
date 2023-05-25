@@ -1,5 +1,5 @@
 DOCKER_COMPOSE_OPTIONS	= --project-name=elastica --file=docker/docker-compose.yml --file=docker/docker-compose.proxy.yml --file=docker/docker-compose.es.yml
-DOCKER_COMPOSE_CMD = $(shell if [ ! -z "`docker compose version`" ]; then echo "docker compose"; else echo "docker-compose"; fi)
+DOCKER_COMPOSE_CMD := $(shell if [ ! -z "`docker compose version`" ]; then echo "docker compose"; else echo "docker-compose"; fi 2>/dev/null)
 
 .PHONY: clean
 clean:
