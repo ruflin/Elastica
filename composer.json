@@ -17,7 +17,7 @@
     "require": {
         "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
         "ext-json": "*",
-        "elasticsearch/elasticsearch": "^7.10",
+        "elasticsearch/elasticsearch": "^8.8",
         "nyholm/dsn": "^2.0.0",
         "psr/log": "^1.0 || ^2.0 || ^3.0",
         "symfony/deprecation-contracts": "^3.0"
@@ -48,6 +48,11 @@
     "extra": {
         "branch-alias": {
             "dev-master": "7.0.x-dev"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
         }
     }
 }
