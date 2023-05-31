@@ -60,7 +60,10 @@ jobs:
             elasticsearch: '8.7.0'
             experimental: false
           - php: '8.1'
-            elasticsearch: '8.8.0-SNAPSHOT' # future version, allow to fail https://www.elastic.co/guide/en/elasticsearch///reference/master/release-notes-8.8.0.html
+            elasticsearch: '8.8.0'
+            experimental: false
+          - php: '8.1'
+            elasticsearch: '8.9.0-SNAPSHOT' # future version, allow to fail https://www.elastic.co/guide/en/elasticsearch/reference/master/release-notes-8.9.0.html
             experimental: true
       fail-fast: false
     steps:
