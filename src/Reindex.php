@@ -12,8 +12,6 @@ use Elastica\Script\Script;
 class Reindex extends Param
 {
     public const VERSION_TYPE = 'version_type';
-    public const VERSION_TYPE_INTERNAL = 'internal';
-    public const VERSION_TYPE_EXTERNAL = 'external';
     public const OPERATION_TYPE = 'op_type';
     public const OPERATION_TYPE_CREATE = 'create';
     public const CONFLICTS = 'conflicts';
@@ -31,10 +29,6 @@ class Reindex extends Param
     public const REFRESH_WAIT_FOR = 'wait_for';
     public const WAIT_FOR_COMPLETION = 'wait_for_completion';
 
-    /**
-     * @deprecated since version 7.2.0, use a boolean as parameter instead.
-     */
-    public const WAIT_FOR_COMPLETION_FALSE = 'false';
     public const WAIT_FOR_ACTIVE_SHARDS = 'wait_for_active_shards';
     public const TIMEOUT = 'timeout';
     public const SCROLL = 'scroll';
