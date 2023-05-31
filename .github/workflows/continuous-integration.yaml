@@ -57,7 +57,7 @@ jobs:
             elasticsearch: '8.5.3' # there are some bc in minor version https://www.elastic.co/guide/en/elasticsearch/reference/current/migrating-8.5.html
             experimental: false
           - php: '8.1'
-            elasticsearch: '8.6.2' # there are some bc in minor version https://www.elastic.co/guide/en/elasticsearch/reference/current/migrating-8.6.html
+            elasticsearch: '8.6.2' # there are no bc in minor version https://www.elastic.co/guide/en/elasticsearch/reference/current/migrating-8.6.html
             experimental: false
           - php: '8.1'
             elasticsearch: '8.7.1' # there are no bc in minor version https://www.elastic.co/guide/en/elasticsearch/reference/current/migrating-8.7.html
