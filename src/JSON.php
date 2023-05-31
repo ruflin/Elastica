@@ -2,7 +2,7 @@
 
 namespace Elastica;
 
-use Elastica\Exception\JSONParseException;
+use JsonException;
 
 /**
  * Elastica JSON tools.
@@ -17,7 +17,7 @@ class JSON
      *
      * @param mixed $args,... JSON string to parse
      *
-     * @throws JSONParseException
+     * @throws JsonException
      *
      * @return array PHP array representation of JSON string
      */
@@ -33,7 +33,7 @@ class JSON
 
         // turn errors into exceptions for easier catching
         if ($error = self::getJsonLastErrorMsg()) {
-            throw new JSONParseException($error);
+            throw new JsonException($error);
         }
 
         // output
@@ -48,7 +48,7 @@ class JSON
      *
      * @param mixed $args,... Target to stringify
      *
-     * @throws JSONParseException
+     * @throws JsonException
      *
      * @return string Valid JSON representation of $input
      */
@@ -62,7 +62,7 @@ class JSON
 
         // turn errors into exceptions for easier catching
         if ($error = self::getJsonLastErrorMsg()) {
-            throw new JSONParseException($error);
+            throw new JsonException($error);
         }
 
         // output

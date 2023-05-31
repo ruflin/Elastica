@@ -2,8 +2,8 @@
 
 namespace Elastica\Test;
 
-use Elastica\Exception\JSONParseException;
 use Elastica\JSON;
+use JsonException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -23,7 +23,7 @@ class JSONTest extends TestCase
 
     public function testStringifyMustThrowExceptionNanOrInf(): void
     {
-        $this->expectException(JSONParseException::class);
+        $this->expectException(JsonException::class);
         $this->expectExceptionMessage('Inf and NaN cannot be JSON encoded');
 
         $arr = [\NAN, \INF];
@@ -33,7 +33,7 @@ class JSONTest extends TestCase
 
     public function testStringifyMustThrowExceptionMaximumDepth(): void
     {
-        $this->expectException(JSONParseException::class);
+        $this->expectException(JsonException::class);
         $this->expectExceptionMessage('Maximum stack depth exceeded');
 
         $arr = [[[]]];
