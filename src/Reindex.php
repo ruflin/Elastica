@@ -34,6 +34,8 @@ class Reindex extends Param
     public const SCROLL = 'scroll';
     public const REQUESTS_PER_SECOND = 'requests_per_second';
     public const PIPELINE = 'pipeline';
+    public const SLICES = 'slices';
+    public const SLICES_AUTO = 'auto';
 
     /**
      * @var Index
