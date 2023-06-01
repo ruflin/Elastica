@@ -76,6 +76,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Modernize code using `match` expression [#2141](https://github.com/ruflin/Elastica/pull/2141)
 ### Deprecated
 ### Removed
+* Removed the JSONParseException class, which is replaced by \JsonException
+* Removed the JSONParseException test class
 ### Fixed
 * Fix types order in `Elastica\Query` to work with psalm & expand the `aggs` type to include raw arrays
 ### Security
