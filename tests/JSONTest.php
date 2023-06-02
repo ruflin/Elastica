@@ -23,7 +23,7 @@ class JSONTest extends TestCase
 
     public function testStringifyMustThrowExceptionNanOrInf(): void
     {
-        $this->expectException(JsonException::class);
+        $this->expectException(\JsonException::class);
         $this->expectExceptionMessage('Inf and NaN cannot be JSON encoded');
 
         $arr = [\NAN, \INF];
@@ -33,7 +33,7 @@ class JSONTest extends TestCase
 
     public function testStringifyMustThrowExceptionMaximumDepth(): void
     {
-        $this->expectException(JsonException::class);
+        $this->expectException(\JsonException::class);
         $this->expectExceptionMessage('Maximum stack depth exceeded');
 
         $arr = [[[]]];
