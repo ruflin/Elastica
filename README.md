@@ -19,7 +19,7 @@ Compatibility
 -------------
 This release is compatible with all Elasticsearch 7.0 releases and onwards.
 
-The testsuite is run against the most recent minor version of Elasticsearch, currently 7.14.1.
+The testsuite is run against the most recent minor version of Elasticsearch, currently 8.8.0 and 8.9.0-SNAPSHOT
 
 
 Contributing
