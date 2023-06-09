@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
 /**
- * Client to connect the the elasticsearch server.
+ * Client to connect the elasticsearch server.
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
