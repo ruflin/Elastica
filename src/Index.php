@@ -2,6 +2,7 @@
 
 namespace Elastica;
 
+use Elastic\Elasticsearch\Endpoints\Indices;
 use Elastica\Bulk\ResponseSet;
 use Elastica\Exception\Bulk\ResponseException as BulkResponseException;
 use Elastica\Exception\ClientException;
@@ -470,7 +471,8 @@ class Index implements SearchableInterface
      */
     public function create(array $args = [], array $options = []): Response
     {
-        $endpoint = new Create();
+        // Leaving this here to easily compare the 7.x compatible elasticsearch-php library
+        /*$endpoint = new Create();
         $invalidOptions = \array_diff(\array_keys($options), $allowedOptions = \array_merge($endpoint->getParamWhitelist(), [
             'recreate',
         ]));
@@ -496,11 +498,27 @@ class Index implements SearchableInterface
         $endpoint->setParams($options);
         $endpoint->setBody($args);
 
-        return $this->requestEndpoint($endpoint);
+        return $this->requestEndpoint($endpoint);*/
+
+        // (Pseudo) Code using the 8.x elasticsearch-php library
+        // NOTE: do we really need to validate the arguments on the Elastica side, or do we leave that up to the elasticsearch-php / ElasticSearch engine to take care of?
+        // NOTE: not taking into account the recreate option for this refactor example
+
+        // The Indices::create() function only takes in 1 $params parameter, containing:
+        // - the index
+        // - the body
+        // - the url query parameters
+        $params = $options;
+        $params['body'] = $args;
+        $params['index'] = $this->_name;
+
+        $elasticSearchResponse = (new Indices)->create($params);
+
+        return transformElasticSearchResponseToElasticaResponse($elasticSearchPPHPLibraryResponse);
     }
 
     /**
-     * Checks if the given index exists ans is created.
+     * Checks if the given index exists and is created.
      *
      * @throws ClientException
      * @throws ConnectionException
@@ -508,9 +526,15 @@ class Index implements SearchableInterface
      */
     public function exists(): bool
     {
-        $response = $this->requestEndpoint(new Exists());
+        // Leaving this here to easily compare the 7.x compatible elasticsearch-php library
+        /*$response = $this->requestEndpoint(new Exists());
 
-        return 200 === $response->getStatus();
+        return 200 === $response->getStatus();*/
+
+        // This would elasticsearch-php 8.x compatible code
+        $elasticSearchResponse = (new Indices)->exists(['index' => $this->_name]);
+
+        return 200 === $elasticSearchResponse->getStatusCode();
     }
 
     /**
