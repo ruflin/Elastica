@@ -131,6 +131,10 @@ class Settings
      * whichever string representation is used like 'true', '1', 'on', 'yes'.
      *
      * @param string $setting Setting name to return
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function getBool(string $setting): bool
     {
@@ -144,6 +148,10 @@ class Settings
      *
      * @param int $replicas Number of replicas
      *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
+     *
      * @return Response Response object
      */
     public function setNumberOfReplicas(int $replicas): Response
@@ -155,6 +163,10 @@ class Settings
      * Returns the number of replicas.
      *
      * If no number of replicas is set, the default number is returned
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      *
      * @return int The number of replicas
      */
@@ -168,6 +180,10 @@ class Settings
      *
      * If no number of shards is set, the default number is returned
      *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
+     *
      * @return int The number of shards
      */
     public function getNumberOfShards(): int
@@ -179,17 +195,31 @@ class Settings
      * Sets the index to read only.
      *
      * @param bool $readOnly (default = true)
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function setReadOnly(bool $readOnly = true): Response
     {
         return $this->set(['blocks.read_only' => $readOnly]);
     }
 
+    /**
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
+     */
     public function getReadOnly(): bool
     {
         return $this->getBool('blocks.read_only');
     }
 
+    /**
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
+     */
     public function getBlocksRead(): bool
     {
         return $this->getBool('blocks.read');
@@ -197,12 +227,21 @@ class Settings
 
     /**
      * @param bool $state OPTIONAL (default = true)
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function setBlocksRead(bool $state = true): Response
     {
         return $this->set(['blocks.read' => $state]);
     }
 
+    /**
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
+     */
     public function getBlocksWrite(): bool
     {
         return $this->getBool('blocks.write');
@@ -210,12 +249,21 @@ class Settings
 
     /**
      * @param bool $state OPTIONAL (default = true)
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function setBlocksWrite(bool $state = true): Response
     {
         return $this->set(['blocks.write' => $state]);
     }
 
+    /**
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
+     */
     public function getBlocksMetadata(): bool
     {
         // When blocks.metadata is enabled, reading the settings is not possible anymore.
@@ -235,6 +283,10 @@ class Settings
      * Set to true to disable index metadata reads and writes.
      *
      * @param bool $state OPTIONAL (default = true)
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      */
     public function setBlocksMetadata(bool $state = true): Response
     {
@@ -249,6 +301,10 @@ class Settings
      *
      * @param string $interval Duration of the refresh interval
      *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
+     *
      * @return Response Response object
      */
     public function setRefreshInterval(string $interval): Response
@@ -260,6 +316,10 @@ class Settings
      * Returns the refresh interval.
      *
      * If no interval is set, the default interval is returned
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      *
      * @return string Refresh interval
      */
@@ -276,6 +336,10 @@ class Settings
      * @param string     $key   Merge policy key (for ex. expunge_deletes_allowed)
      * @param int|string $value
      *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
+     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
      */
     public function setMergePolicy(string $key, $value): Response
@@ -291,6 +355,10 @@ class Settings
      * Returns the specific merge policy value.
      *
      * @param string $key Merge policy key (for ex. expunge_deletes_allowed)
+     *
+     * @throws ClientException
+     * @throws ConnectionException
+     * @throws ResponseException
      *
      * @return int|string
      *
