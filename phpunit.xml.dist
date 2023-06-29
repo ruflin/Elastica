@@ -8,6 +8,10 @@
         verbose="true"
         bootstrap="tests/bootstrap.php"
 >
+  <php>
+    <env name="ES_HOST" value="https://localhost"/>
+    <env name="ES_PASSWORD" value=""/>
+  </php>
   <coverage>
     <include>
       <directory>src/</directory>

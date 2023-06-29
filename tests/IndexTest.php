@@ -706,7 +706,7 @@ class IndexTest extends BaseTest
     /**
      * @group functional
      */
-    public function testCreate(): void
+    public function testCreateNewIndex(): void
     {
         $client = $this->_getClient();
         $indexName = 'test';

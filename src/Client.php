@@ -2,6 +2,8 @@
 
 namespace Elastica;
 
+use Elastic\Elasticsearch\ClientBuilder;
+use Elastic\Elasticsearch\Exception\AuthenticationException;
 use Elastica\Bulk\Action;
 use Elastica\Bulk\ResponseSet;
 use Elastica\Exception\Bulk\ResponseException as BulkResponseException;
@@ -115,6 +117,24 @@ class Client
         }
 
         return $this;
+    }
+
+    /**
+     * @throws AuthenticationException
+     */
+    public function getElasticSearchClient(): \Elastic\Elasticsearch\Client
+    {
+        $clientBuilder = ClientBuilder::create();
+
+        // TODO: make sure the entire list of configuration properties is passed onto the ElasticSearch Client
+        $clientBuilder->setHosts([$this->getConfig('host') . ':' . $this->getConfig('port')]);
+        $clientBuilder->setCABundle('path/to/elasticsearch/folder/config/certs/http_ca.crt');
+        // TODO: check if the alternative is just to default the ClientConfiguration::username/password to empty strings
+        if (!empty($this->getConfig('username')) && !empty($this->getConfig('password'))) {
+            $clientBuilder->setBasicAuthentication($this->getConfig('username'), $this->getConfig('password'));
+        }
+
+        return $clientBuilder->build();
     }
 
     /**

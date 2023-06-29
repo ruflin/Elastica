@@ -57,6 +57,11 @@ class Base extends TestCase
 
         $config = \array_merge($config, $params);
 
+        // TODO: either find a way to automatically fetch username/pw for ES, or find a way to disable the security
+        // In ES8, security is enabled by default
+        $config['username'] = 'elastic';
+        $config['password'] = \getenv('ES_PASSWORD');
+
         return new Client($config, $callback, $logger);
     }
 

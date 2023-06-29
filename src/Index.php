@@ -469,7 +469,7 @@ class Index implements SearchableInterface
      *
      * @return Response Server response
      */
-    public function create(array $args = [], array $options = []): Response
+    public function create(array $args = [], array $options = [])
     {
         // Leaving this here to easily compare the 7.x compatible elasticsearch-php library
         /*$endpoint = new Create();
@@ -512,9 +512,9 @@ class Index implements SearchableInterface
         $params['body'] = $args;
         $params['index'] = $this->_name;
 
-        $elasticSearchResponse = (new Indices)->create($params);
+        $elasticSearchResponse = (new Indices($this->_client->getElasticSearchClient()))->create($params);
 
-        return transformElasticSearchResponseToElasticaResponse($elasticSearchPPHPLibraryResponse);
+        //return transformElasticSearchResponseToElasticaResponse($elasticSearchPPHPLibraryResponse);
     }
 
     /**
