@@ -122,7 +122,7 @@ class Client
     /**
      * @throws AuthenticationException
      */
-    public function getElasticSearchClient(): \Elastic\Elasticsearch\Client
+    public function getElasticsearchClient(): \Elastic\Elasticsearch\Client
     {
         $clientBuilder = ClientBuilder::create();
 
