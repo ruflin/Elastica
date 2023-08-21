@@ -1,0 +1,29 @@
+name: blackduck
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    # Execute at 00:00 on 1st day of every month
+    - cron: '0 0 1 * *'
+
+jobs:
+  # A job to execute a blackduck scan
+  blackduck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run Synopsys Detect
+        uses: synopsys-sig/detect-action@v0.3.0
+        env:
+          DETECT_TOOLS: DETECTOR
+          DETECT_PROJECT_NAME: ${{ github.repository }}
+          NODE_EXTRA_CA_CERTS: ${{ secrets.LOCAL_CA_CERT_PATH }}
+        with:
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+            detect-version: 7.9.0
+            blackduck-url: https://nice2.app.blackduck.com/
+            blackduck-api-token: ${{ secrets.BLACKDUCK_API_TOKEN }}
+            scan-mode: INTELLIGENT
