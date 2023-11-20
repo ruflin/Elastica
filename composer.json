@@ -11,20 +11,23 @@
             "homepage": "http://ruflin.com/"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:elastic/elasticsearch-php.git"
+        }
+    ],
     "require": {
         "php": "^7.0||^8.0",
         "ext-json": "*",
-        "psr/log": "~1.0",
-        "elasticsearch/elasticsearch": "^6.0"
+        "psr/log": "^1|^2",
+        "elasticsearch/elasticsearch": "6.8.x-dev as 6.8.3"
     },
     "require-dev": {
         "aws/aws-sdk-php": "~3.0",
         "guzzlehttp/guzzle": "~6.0",
         "phpunit/phpunit": "^6.0||^8.5.20",
         "yoast/phpunit-polyfills": "1.0.1"
-    },
-    "conflict": {
-        "elasticsearch/elasticsearch": "6.8.0 || 6.8.1"
     },
     "suggest": {
         "aws/aws-sdk-php": "Allow using IAM authentication with Amazon ElasticSearch Service",
@@ -40,11 +43,6 @@
     "autoload-dev": {
         "psr-4": {
             "Elastica\\Test\\": "test/Elastica/"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "6.0.x-dev"
         }
     }
 }
