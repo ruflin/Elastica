@@ -5,9 +5,6 @@ namespace Elastica;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\ResponseException;
-use Elasticsearch\Endpoints\Indices\Alias\Get;
-use Elasticsearch\Endpoints\Indices\GetAlias;
-use Elasticsearch\Endpoints\Indices\Stats;
 
 /**
  * Elastica general status.
@@ -101,14 +98,11 @@ class Status
      */
     public function getIndicesWithAlias(string $alias)
     {
-        // TODO: Use only GetAlias when dropping support for elasticsearch/elasticsearch 7.x
-        $endpoint = \class_exists(GetAlias::class) ? new GetAlias() : new Get();
-        $endpoint->setName($alias);
-
         $response = null;
 
         try {
-            $response = $this->_client->requestEndpoint($endpoint);
+            /** @var Response $response */
+            $response = $this->_client->indices()->getAlias(['name' => $alias]);
         } catch (ResponseException $e) {
             // 404 means the index alias doesn't exist which means no indexes have it.
             if (404 === $e->getResponse()->getStatus()) {
@@ -160,7 +154,7 @@ class Status
      */
     public function refresh(): void
     {
-        $this->_response = $this->_client->requestEndpoint(new Stats());
+        $this->_response = $this->_client->indices()->stats();
         $this->_data = $this->getResponse()->getData();
     }
 }

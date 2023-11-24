@@ -253,7 +253,7 @@ class DocumentTest extends BaseTest
         }
 
         $this->assertEquals('changed1', $document->field1);
-        $this->assertObjectNotHasAttribute('field3', $document);
+        $this->assertObjectNotHasProperty('field3', $document);
 
         $newData = $document->getData();
 

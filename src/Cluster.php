@@ -7,7 +7,6 @@ use Elastica\Cluster\Settings;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\ResponseException;
-use Elasticsearch\Endpoints\Cluster\State;
 
 /**
  * Cluster information for elasticsearch.

@@ -15,11 +15,6 @@ use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\ResponseException;
 use Elastica\Script\AbstractScript;
-use Elasticsearch\Endpoints\AbstractEndpoint;
-use Elasticsearch\Endpoints\ClosePointInTime;
-use Elasticsearch\Endpoints\Indices\ForceMerge;
-use Elasticsearch\Endpoints\Indices\Refresh;
-use Elasticsearch\Endpoints\Update;
 use Psr\Http\Message\RequestInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -363,9 +358,10 @@ class Client implements ClientInterface
      */
     public function updateDocument($id, $data, $index, array $options = []): Response
     {
-        $endpoint = new Update();
-        $endpoint->setId($id);
-        $endpoint->setIndex($index);
+        $params = [
+            'id' => $id,
+            'index' => $index,
+        ];
 
         if ($data instanceof AbstractScript) {
             $requestData = $data->toArray();
@@ -400,10 +396,10 @@ class Client implements ClientInterface
             }
         }
 
-        $endpoint->setBody($requestData);
-        $endpoint->setParams($options);
+        $params['body'] = $requestData;
 
-        $response = $this->requestEndpoint($endpoint);
+        /** @var Response $response */
+        $response = $this->update(array_merge($params, $options));
 
         if ($response->isOk()
             && $data instanceof Document
@@ -667,23 +663,6 @@ class Client implements ClientInterface
         return $response;
     }
 
-    /**
-     * Makes calls to the elasticsearch server with usage official client Endpoint.
-     *
-     * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
-     */
-    public function requestEndpoint(AbstractEndpoint $endpoint): Response
-    {
-        return $this->request(
-            \ltrim($endpoint->getURI(), '/'),
-            $endpoint->getMethod(),
-            $endpoint->getBody() ?? [],
-            $endpoint->getParams()
-        );
-    }
-
     public function sendRequest(RequestInterface $request): Response
     {   
         return $this->request(
@@ -709,10 +688,7 @@ class Client implements ClientInterface
      */
     public function forcemergeAll($args = []): Response
     {
-        $endpoint = new ForceMerge();
-        $endpoint->setParams($args);
-
-        return $this->requestEndpoint($endpoint);
+        return $this->indices()->forcemerge($args);
     }
 
     /**
@@ -724,13 +700,11 @@ class Client implements ClientInterface
      * @throws ConnectionException
      * @throws ResponseException
      */
-    public function closePointInTime(string $pointInTimeId): Response
-    {
-        $endpoint = new ClosePointInTime();
-        $endpoint->setBody(['id' => $pointInTimeId]);
 
-        return $this->requestEndpoint($endpoint);
-    }
+     public function closePointInTime(string $pointInTimeId): Response
+     {
+         return $this->elasticClientClosePointInTime(['body' => ['id' => $pointInTimeId]]);
+     }
 
     /**
      * Refreshes all search indices.
@@ -743,7 +717,7 @@ class Client implements ClientInterface
      */
     public function refreshAll(): Response
     {
-        return $this->requestEndpoint(new Refresh());
+        return $this->indices()->refresh();
     }
 
     public function getLastRequest(): ?Request

@@ -7,7 +7,6 @@ use Elastica\Exception\ConnectionException;
 use Elastica\Exception\ResponseException;
 use Elastica\Node as BaseNode;
 use Elastica\Response;
-use Elasticsearch\Endpoints\Nodes\Stats as NodesStats;
 
 /**
  * Elastica cluster node object.
@@ -114,11 +113,7 @@ class Stats
      */
     public function refresh(): Response
     {
-        // TODO: Use only NodesStats when dropping support for elasticsearch/elasticsearch 7.x
-        $endpoint = \class_exists(NodesStats::class) ? new NodesStats() : new \Elasticsearch\Endpoints\Cluster\Nodes\Stats();
-        $endpoint->setNodeId($this->getNode()->getName());
-
-        $this->_response = $this->getNode()->getClient()->requestEndpoint($endpoint);
+        $this->_response = $this->getNode()->getClient()->nodes()->stats(['node_id' => $this->getNode()->getName()]);
         $data = $this->getResponse()->getData();
         $this->_data = \reset($data['nodes']);
 

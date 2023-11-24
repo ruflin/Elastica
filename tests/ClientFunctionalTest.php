@@ -977,10 +977,8 @@ class ClientFunctionalTest extends BaseTest
 
         $index->refresh();
 
-        $endpoint = new Stats();
-        $endpoint->setIndex($index->getName());
-        $endpoint->setMetric('indexing');
-        $response = $client->requestEndpoint($endpoint);
+        /** @var Response $response */
+        $response = $client->indices()->stats(['index' => $index->getName(), 'metric' => ['indexing']]);
 
         $this->assertArrayHasKey('index_total', $response->getData()['indices'][$index->getName()]['total']['indexing']);
 
@@ -1015,11 +1013,8 @@ class ClientFunctionalTest extends BaseTest
             ],
         ];
 
-        $endpoint = new Search();
-        $endpoint->setIndex($index->getName());
-        $endpoint->setBody($query);
-
-        $response = $client->requestEndpoint($endpoint);
+        $response = $client->search(['index' => $index->getName(), 'body' => $query]);
+        /** @var Response $response */
         $responseArray = $response->getData();
 
         $this->assertEquals($totalHits, $responseArray['hits']['total']['value']);

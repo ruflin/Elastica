@@ -3,8 +3,6 @@
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
-use Elasticsearch\Endpoints\Indices\Mapping\Put;
-use Elasticsearch\Endpoints\Indices\PutMapping;
 
 /**
  * Elastica Mapping object.

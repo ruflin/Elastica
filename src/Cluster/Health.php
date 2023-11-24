@@ -7,6 +7,7 @@ use Elastica\Cluster\Health\Index;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\ResponseException;
+use Elastica\Response;
 
 /**
  * Elastic cluster health.
@@ -185,10 +186,8 @@ class Health
      */
     protected function _retrieveHealthData(): array
     {
-        $endpoint = new \Elasticsearch\Endpoints\Cluster\Health();
-        $endpoint->setParams(['level' => 'shards']);
-
-        $response = $this->_client->requestEndpoint($endpoint);
+        /** @var Response $response */
+        $response = $this->_client->cluster()->health(['level' => 'shards']);
 
         return $response->getData();
     }

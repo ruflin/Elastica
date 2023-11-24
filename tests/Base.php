@@ -107,10 +107,7 @@ class Base extends TestCase
     {
         $client = $this->_getClient();
 
-        // TODO: Use only PutPipeline when dropping support for elasticsearch/elasticsearch 7.x
-        $endpoint = \class_exists(PutPipeline::class) ? new PutPipeline() : new Put();
-        $endpoint->setID('renaming');
-        $endpoint->setBody([
+        $body = [
             'description' => 'Rename field',
             'processors' => [
                 [
@@ -120,9 +117,9 @@ class Base extends TestCase
                     ],
                 ],
             ],
-        ]);
+        ];
 
-        $client->requestEndpoint($endpoint);
+        $client->ingest()->putPipeline(['id' => 'renaming', 'body' => $body]);
     }
 
     protected function _checkPlugin($plugin): void

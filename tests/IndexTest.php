@@ -4,7 +4,6 @@ namespace Elastica\Test;
 
 use Elastica\Client;
 use Elastica\Document;
-use Elastica\Exception\InvalidException;
 use Elastica\Exception\ResponseException;
 use Elastica\Index;
 use Elastica\Mapping;
@@ -12,10 +11,10 @@ use Elastica\Query\QueryString;
 use Elastica\Query\SimpleQueryString;
 use Elastica\Query\Term;
 use Elastica\Request;
+use Elastica\Response;
 use Elastica\Script\Script;
 use Elastica\Status;
 use Elastica\Test\Base as BaseTest;
-use Elasticsearch\Endpoints\Indices\Analyze;
 use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 
 /**
@@ -878,10 +877,10 @@ class IndexTest extends BaseTest
     {
         $index = $this->_createIndex();
         $index->refresh();
-        $endpoint = new Analyze();
-        $endpoint->setIndex('fooIndex');
-        $endpoint->setBody(['text' => 'foo']);
-        $returnedTokens = $index->requestEndpoint($endpoint)->getData()['tokens'];
+
+        /** @var Response $response */
+        $response = $index->getClient()->indices()->analyze(['body' => ['text' => 'foo']]);
+        $returnedTokens = $response->getData()['tokens'];
 
         $tokens = [
             [

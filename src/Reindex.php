@@ -69,12 +69,7 @@ class Reindex extends Param
     {
         $body = $this->_getBody($this->_oldIndex, $this->_newIndex, $this->getParams());
 
-        $reindexEndpoint = new \Elasticsearch\Endpoints\Reindex();
-        $params = \array_intersect_key($this->getParams(), \array_fill_keys($reindexEndpoint->getParamWhitelist(), null));
-        $reindexEndpoint->setParams($params);
-        $reindexEndpoint->setBody($body);
-
-        $this->_lastResponse = $this->_oldIndex->getClient()->requestEndpoint($reindexEndpoint);
+        $this->_lastResponse = $this->_oldIndex->getClient()->reindex(array_merge(['body' => $body], $this->getParams()));
 
         return $this->_lastResponse;
     }

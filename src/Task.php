@@ -5,7 +5,6 @@ namespace Elastica;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\ResponseException;
-use Elasticsearch\Endpoints\Tasks;
 
 /**
  * Represents elasticsearch task.
@@ -93,12 +92,7 @@ class Task extends Param
      */
     public function refresh(array $options = []): void
     {
-        $endpoint = (new Tasks\Get())
-            ->setTaskId($this->_id)
-            ->setParams($options)
-        ;
-
-        $this->_response = $this->_client->requestEndpoint($endpoint);
+        $this->_response = $this->_client->tasks()->get(array_merge(['task_id' => $this->_id], $options));
         $this->_data = $this->getResponse()->getData();
     }
 
@@ -118,10 +112,6 @@ class Task extends Param
             throw new \Exception('No task id given');
         }
 
-        $endpoint = (new Tasks\Cancel())
-            ->setTaskId($this->_id)
-        ;
-
-        return $this->_client->requestEndpoint($endpoint);
+        return $this->_client->tasks()->cancel(['task_id' => $this->_id]);
     }
 }

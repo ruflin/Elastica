@@ -15,8 +15,6 @@ use Elastica\Index\Stats as IndexStats;
 use Elastica\Query\AbstractQuery;
 use Elastica\ResultSet\BuilderInterface;
 use Elastica\Script\AbstractScript;
-use Elasticsearch\Endpoints\AbstractEndpoint;
-use Elasticsearch\Endpoints\UpdateByQuery;
 
 /**
  * Elastica index object.
@@ -168,17 +166,16 @@ class Index implements SearchableInterface
      */
     public function updateByQuery($query, AbstractScript $script, array $options = []): Response
     {
-        $endpoint = new UpdateByQuery();
         $q = Query::create($query)->getQuery();
-        $body = [
-            'query' => \is_array($q) ? $q : $q->toArray(),
-            'script' => $script->toArray()['script'],
+        $params = [
+            'index' => $this->getName(),
+            'body' => [
+                'query' => \is_array($q) ? $q : $q->toArray(),
+                'script' => $script->toArray()['script'],
+            ]
         ];
 
-        $endpoint->setBody($body);
-        $endpoint->setParams($options);
-
-        return $this->requestEndpoint($endpoint);
+        return $this->getClient()->updateByQuery(array_merge($params, $options));
     }
 
     /**
@@ -311,11 +308,12 @@ class Index implements SearchableInterface
             throw new NotFoundException('Doc id "'.$id.'" not found and can not be deleted');
         }
 
-        $endpoint = new \Elasticsearch\Endpoints\Delete();
-        $endpoint->setId(\trim($id));
-        $endpoint->setParams($options);
+        $params = [
+            'id' => \trim($id),
+            'index' => $this->getName()
+        ];
 
-        return $this->requestEndpoint($endpoint);
+        return $this->getClient()->delete(array_merge($params, $options));
     }
 
     /**
@@ -339,7 +337,7 @@ class Index implements SearchableInterface
 
         $params = array_merge([
             'index' => $this->getName(),
-            'body' => \is_array($query) ? $query : $query->toArray()
+            'body' => ['query' => \is_array($query) ? $query : $query->toArray()]
         ], $options);
 
         return $this->getClient()->deleteByQuery($params);
@@ -369,7 +367,6 @@ class Index implements SearchableInterface
     public function delete(): Response
     {
         return $this->getClient()->indices()->delete(['index' => $this->getName()]);
-        // return $this->requestEndpoint(new Delete());
     }
 
     /**
@@ -693,21 +690,6 @@ class Index implements SearchableInterface
         $path = $this->getName().'/'.$path;
 
         return $this->getClient()->request($path, $method, $data, $queryParameters);
-    }
-
-    /**
-     * Makes calls to the elasticsearch server with usage official client Endpoint based on this index.
-     *
-     * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
-     */
-    public function requestEndpoint(AbstractEndpoint $endpoint): Response
-    {
-        $cloned = clone $endpoint;
-        $cloned->setIndex($this->getName());
-
-        return $this->getClient()->requestEndpoint($cloned);
     }
 
     /**
