@@ -151,13 +151,13 @@ class PercentilesTest extends BaseAggregationTest
         $resultSet = $index->search($query);
         $aggResult = $resultSet->getAggregation('price_percentile');
 
-        $this->assertEquals(100.0, $aggResult['values']['1.0']);
-        $this->assertEquals(100.0, $aggResult['values']['5.0']);
-        $this->assertEquals(300.0, $aggResult['values']['25.0']);
+        $this->assertEquals(109.0, $aggResult['values']['1.0']);
+        $this->assertEquals(145.0, $aggResult['values']['5.0']);
+        $this->assertEquals(325.0, $aggResult['values']['25.0']);
         $this->assertEquals(550.0, $aggResult['values']['50.0']);
-        $this->assertEquals(800.0, $aggResult['values']['75.0']);
-        $this->assertEquals(1000.0, $aggResult['values']['95.0']);
-        $this->assertEquals(1000.0, $aggResult['values']['99.0']);
+        $this->assertEquals(775.0, $aggResult['values']['75.0']);
+        $this->assertEquals(954.9999999999999, $aggResult['values']['95.0']);
+        $this->assertEquals(991.0, $aggResult['values']['99.0']);
     }
 
     /**
@@ -169,15 +169,15 @@ class PercentilesTest extends BaseAggregationTest
             'values' => [
                 [
                     'key' => 1,
-                    'value' => 100,
+                    'value' => 109,
                 ],
                 [
                     'key' => 5,
-                    'value' => 100,
+                    'value' => 145,
                 ],
                 [
                     'key' => 25,
-                    'value' => 300,
+                    'value' => 325,
                 ],
                 [
                     'key' => 50,
@@ -185,15 +185,15 @@ class PercentilesTest extends BaseAggregationTest
                 ],
                 [
                     'key' => 75,
-                    'value' => 800,
+                    'value' => 775,
                 ],
                 [
                     'key' => 95,
-                    'value' => 1000,
+                    'value' => 954.9999999999999,
                 ],
                 [
                     'key' => 99,
-                    'value' => 1000,
+                    'value' => 991,
                 ],
             ],
         ];

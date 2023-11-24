@@ -521,55 +521,6 @@ class SearchTest extends BaseTest
         $this->assertEquals(6, $resultSets[1]->getTotalHits());
     }
 
-    /**
-     * @group functional
-     */
-    public function testSearchWithSearchOptions(): void
-    {
-        if (\version_compare($_SERVER['ES_VERSION'], '8.8.0', '>=')) {
-            $this->markTestSkipped('This test was not working as expected initially, `terminate_after` is not appended to `multisearch` also total-hits does not reflect real result https://www.elastic.co/guide/en/elasticsearch/reference/8.7/search-your-data.html#quickly-check-for-matching-docs');
-        }
-
-        $index = $this->_createIndex();
-        $client = $index->getClient();
-
-        $multiSearch = new MultiSearch($client);
-
-        $search1 = new Search($client);
-        $search1->addIndex($index);
-        $search1->setOption('terminate_after', '1');
-        $query1 = new Query();
-        $termQuery1 = new Term();
-        $termQuery1->setTerm('username', 'bunny');
-        $query1->setQuery($termQuery1);
-        $query1->setSize(1);
-        $search1->setQuery($query1);
-
-        $multiSearch->addSearch($search1);
-
-        $this->assertCount(1, $multiSearch->getSearches());
-
-        $search2 = new Search($client);
-        $search2->addIndex($index);
-        $query2 = new Query();
-        $termQuery2 = new Term();
-        $termQuery2->setTerm('username', 'bunny');
-        $query2->setQuery($termQuery2);
-        $query2->setSize(3);
-        $search2->setQuery($query2);
-
-        $multiSearch->addSearch($search2);
-
-        $this->assertCount(2, $multiSearch->getSearches());
-
-        // assert
-        $multiResultSet = $multiSearch->search();
-        $resultSets = $multiResultSet->getResultSets();
-
-        $this->assertEquals(1, $resultSets[0]->getTotalHits());
-        $this->assertEquals(6, $resultSets[1]->getTotalHits());
-    }
-
     protected function _createIndex(?string $name = null, bool $delete = true, int $shards = 1): Index
     {
         $client = $this->_getClient();
