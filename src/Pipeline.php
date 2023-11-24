@@ -2,18 +2,8 @@
 
 namespace Elastica;
 
-use Elastica\Exception\ClientException;
-use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
-use Elastica\Exception\ResponseException;
 use Elastica\Processor\AbstractProcessor;
-use Elasticsearch\Endpoints\AbstractEndpoint;
-use Elasticsearch\Endpoints\Ingest\DeletePipeline;
-use Elasticsearch\Endpoints\Ingest\GetPipeline;
-use Elasticsearch\Endpoints\Ingest\Pipeline\Delete;
-use Elasticsearch\Endpoints\Ingest\Pipeline\Get;
-use Elasticsearch\Endpoints\Ingest\Pipeline\Put;
-use Elasticsearch\Endpoints\Ingest\PutPipeline;
 
 /**
  * Elastica Pipeline object.
@@ -67,12 +57,7 @@ class Pipeline extends Param
             throw new InvalidException('You should set a valid processor of type Elastica\Processor\AbstractProcessor.');
         }
 
-        // TODO: Use only PutPipeline when dropping support for elasticsearch/elasticsearch 7.x
-        $endpoint = \class_exists(PutPipeline::class) ? new PutPipeline() : new Put();
-        $endpoint->setId($this->id);
-        $endpoint->setBody($this->toArray());
-
-        return $this->requestEndpoint($endpoint);
+        return $this->getClient()->ingest()->putPipeline(['id' => $this->id, 'body' => $this->toArray()]);
     }
 
     /**
@@ -82,11 +67,7 @@ class Pipeline extends Param
      */
     public function getPipeline(string $id): Response
     {
-        // TODO: Use only GetPipeline when dropping support for elasticsearch/elasticsearch 7.x
-        $endpoint = \class_exists(GetPipeline::class) ? new GetPipeline() : new Get();
-        $endpoint->setId($id);
-
-        return $this->requestEndpoint($endpoint);
+        return $this->getClient()->ingest()->getPipeline(['id' => $id]);
     }
 
     /**
@@ -96,11 +77,7 @@ class Pipeline extends Param
      */
     public function deletePipeline(string $id): Response
     {
-        // TODO: Use only DeletePipeline when dropping support for elasticsearch/elasticsearch 7.x
-        $endpoint = \class_exists(DeletePipeline::class) ? new DeletePipeline() : new Delete();
-        $endpoint->setId($id);
-
-        return $this->requestEndpoint($endpoint);
+        return $this->getClient()->ingest()->deletePipeline(['id' => $id]);
     }
 
     /**
@@ -171,19 +148,5 @@ class Pipeline extends Param
     public function getClient(): Client
     {
         return $this->_client;
-    }
-
-    /**
-     * Makes calls to the elasticsearch server with usage official client Endpoint based on this index.
-     *
-     * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
-     */
-    public function requestEndpoint(AbstractEndpoint $endpoint): Response
-    {
-        $cloned = clone $endpoint;
-
-        return $this->getClient()->requestEndpoint($cloned);
     }
 }

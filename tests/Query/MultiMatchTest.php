@@ -186,6 +186,12 @@ class MultiMatchTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('test');
 
+        $mapping = new Mapping([
+            'name' => ['type' => 'text', 'analyzer' => 'noStops'],
+            'last_name' => ['type' => 'text', 'analyzer' => 'noStops'],
+            'full_name' => ['type' => 'text', 'analyzer' => 'noStops'],
+        ]);
+
         $index->create(
             [
                 'settings' => [
@@ -202,19 +208,12 @@ class MultiMatchTest extends BaseTest
                         ],
                     ],
                 ],
+                'mappings' => $mapping->toArray()
             ],
             [
                 'recreate' => true,
             ]
         );
-
-        $mapping = new Mapping([
-            'name' => ['type' => 'text', 'analyzer' => 'noStops'],
-            'last_name' => ['type' => 'text', 'analyzer' => 'noStops'],
-            'full_name' => ['type' => 'text', 'analyzer' => 'noStops'],
-        ]);
-
-        $index->setMapping($mapping);
 
         foreach (self::$data as $key => $docData) {
             $index->addDocument(new Document($key, $docData));

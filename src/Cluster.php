@@ -57,7 +57,7 @@ class Cluster
      */
     public function refresh(): void
     {
-        $this->_response = $this->_client->requestEndpoint(new State());
+        $this->_response = $this->_client->cluster()->state();
         $this->_data = $this->getResponse()->getData();
     }
 

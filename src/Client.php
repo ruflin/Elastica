@@ -2,6 +2,11 @@
 
 namespace Elastica;
 
+use Elastic\Elasticsearch\Client as ElasticsearchClient;
+use Elastic\Elasticsearch\ClientInterface;
+use Elastic\Elasticsearch\Traits\ClientEndpointsTrait;
+use Elastic\Elasticsearch\Traits\EndpointTrait;
+use Elastic\Elasticsearch\Traits\NamespaceTrait;
 use Elastica\Bulk\Action;
 use Elastica\Bulk\ResponseSet;
 use Elastica\Exception\Bulk\ResponseException as BulkResponseException;
@@ -15,16 +20,25 @@ use Elasticsearch\Endpoints\ClosePointInTime;
 use Elasticsearch\Endpoints\Indices\ForceMerge;
 use Elasticsearch\Endpoints\Indices\Refresh;
 use Elasticsearch\Endpoints\Update;
+use Psr\Http\Message\RequestInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Elastic\Transport\Transport;
 
 /**
  * Client to connect the elasticsearch server.
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Client
+class Client implements ClientInterface
 {
+    use EndpointTrait;
+    use NamespaceTrait;
+    use ClientEndpointsTrait {
+        closePointInTime as protected elasticClientClosePointInTime;
+        bulk as protected elasticClientBulk;
+    }
+
     /**
      * @var ClientConfiguration
      */
@@ -60,6 +74,11 @@ class Client
      */
     protected $_version;
 
+     /**
+     * The endpoint namespace storage 
+     */
+    protected array $namespace;
+
     /**
      * Creates a new Elastica client.
      *
@@ -83,6 +102,70 @@ class Client
         $this->_logger = $logger ?? new NullLogger();
 
         $this->_initConnections();
+    }
+
+     /**
+     * @inheritdoc
+     */
+    public function getLogger(): LoggerInterface
+    {
+        return $this->_logger;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getTransport(): Transport
+    {
+        throw new \Exception('Not supported');
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setAsync(bool $async): self
+    {
+        throw new \Exception('Not supported');
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getAsync(): bool
+    {
+        throw new \Exception('Not supported');
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setElasticMetaHeader(bool $active): self
+    {
+        throw new \Exception('Not supported');
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getElasticMetaHeader(): bool
+    {
+        throw new \Exception('Not supported');
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setResponseException(bool $active): self
+    {
+        throw new \Exception('Not supported');
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getResponseException(): bool
+    {
+        throw new \Exception('Not supported');
     }
 
     /**
@@ -538,6 +621,22 @@ class Client
     public function request(string $path, string $method = Request::GET, $data = [], array $query = [], string $contentType = Request::DEFAULT_CONTENT_TYPE): Response
     {
         $connection = $this->getConnection();
+
+        if(str_contains($contentType, 'compatible-with')) {
+            preg_match('/(application|text)\/([^,]+)/', 'application/json', $matches);
+            $value = sprintf(ElasticsearchClient::API_COMPATIBILITY_HEADER, $matches[1], $matches[2]);
+        } else {
+            $value = 'application/json';
+        }
+
+        if ($connection->hasConfig('headers')) {
+            $headers = $connection->getconfig('headers');
+        } else {
+            $headers = [];
+        }
+        $headers['Accept'] = $value;
+        $connection->addConfig('headers', $headers);
+
         $request = $this->_lastRequest = new Request($path, $method, $data, $query, $connection, $contentType);
         $this->_lastResponse = null;
 
@@ -582,6 +681,18 @@ class Client
             $endpoint->getMethod(),
             $endpoint->getBody() ?? [],
             $endpoint->getParams()
+        );
+    }
+
+    public function sendRequest(RequestInterface $request): Response
+    {   
+        return $this->request(
+            trim($request->getUri()->__toString(), '/'),
+            $request->getMethod(),
+            
+            $request->getBody()->__toString(),
+            [],
+            $request->getHeader('Content-Type')[0] ?? Request::DEFAULT_CONTENT_TYPE
         );
     }
 

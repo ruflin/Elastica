@@ -50,7 +50,7 @@ class ResponseExceptionTest extends AbstractExceptionTest
             $this->fail('Indexing with wrong type should fail');
         } catch (ResponseException $ex) {
             $error = $ex->getResponse()->getFullError();
-            if (\version_compare($_SERVER['ES_VERSION'], '8.8.0', '>=')) {
+            if (isset($_SERVER['ES_VERSION']) && \version_compare($_SERVER['ES_VERSION'], '8.8.0', '>=')) {
                 $this->assertEquals('document_parsing_exception', $error['type']);
             } else {
                 $this->assertEquals('mapper_parsing_exception', $error['type']);

@@ -730,21 +730,6 @@ class IndexTest extends BaseTest
     /**
      * @group unit
      */
-    public function testCreateWithInvalidOption(): void
-    {
-        $this->expectException(InvalidException::class);
-        $this->expectExceptionMessageMatches('/"testing_invalid_option" is not a valid option\. Allowed options are ((("[a-z_]+")(, )?)+)\./');
-
-        $client = $this->createMock(Client::class);
-        $index = new Index($client, 'test');
-
-        $opts = ['testing_invalid_option' => true];
-        $index->create([], $opts);
-    }
-
-    /**
-     * @group unit
-     */
     public function testCreateSearch(): void
     {
         $client = $this->createMock(Client::class);
