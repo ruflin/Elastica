@@ -16,7 +16,7 @@ class Reindex extends Param
     public const OPERATION_TYPE_CREATE = 'create';
     public const CONFLICTS = 'conflicts';
     public const CONFLICTS_PROCEED = 'proceed';
-    public const SIZE = 'size';
+    public const SIZE = 'max_docs';
     public const QUERY = 'query';
     public const SORT = 'sort';
     public const SCRIPT = 'script';

@@ -68,33 +68,4 @@ class ResponseFunctionalTest extends BaseTest
 
         $this->assertTrue($response->isOk());
     }
-
-    public function testGetDataEmpty(): void
-    {
-        $index = $this->_createIndex();
-        $gotException = false;
-
-        // @see https://www.elastic.co/guide/en/elasticsearch/reference/master/migrating-8.0.html#breaking-changes-8.0
-        $isEs8 = \version_compare($_SERVER['ES_VERSION'], '8.0.0', '>=');
-        if ($isEs8) {
-            $this->markTestSkipped('REST API endpoints containing mapping types have been removed.');
-        }
-
-        try {
-            $index->request(
-                'non-existent-type/_mapping',
-                Request::GET,
-                [],
-                ['include_type_name' => true]
-            );
-        } catch (ResponseException $e) {
-            $error = $e->getResponse()->getFullError();
-            $this->assertEquals('type_missing_exception', $error['type']);
-            $this->assertStringContainsString('non-existent-type', $error['reason']);
-
-            $gotException = true;
-        }
-
-        $this->assertTrue($gotException);
-    }
 }

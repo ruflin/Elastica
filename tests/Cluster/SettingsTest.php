@@ -15,58 +15,6 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetTransient(): void
-    {
-        if (isset($_SERVER['ES_VERSION']) && \version_compare($_SERVER['ES_VERSION'], '7.0.0', '>=')) {
-            $this->markTestSkipped('discovery.zen.minimum_master_nodes is deprecated, ignored in 7.x and removed in 8.x, see: https://www.elastic.co/guide/en/elasticsearch/reference/master/migrating-8.0.html#breaking-changes-8.0');
-        }
-
-        $index = $this->_createIndex();
-
-        if (\count($index->getClient()->getCluster()->getNodes()) < 2) {
-            $this->markTestSkipped('At least two master nodes have to be running for this test');
-        }
-
-        $settings = new Settings($index->getClient());
-
-        $settings->setTransient('discovery.zen.minimum_master_nodes', 2);
-        $data = $settings->get();
-        $this->assertEquals(2, $data['transient']['discovery']['zen']['minimum_master_nodes']);
-
-        $settings->setTransient('discovery.zen.minimum_master_nodes', 1);
-        $data = $settings->get();
-        $this->assertEquals(1, $data['transient']['discovery']['zen']['minimum_master_nodes']);
-    }
-
-    /**
-     * @group functional
-     */
-    public function testSetPersistent(): void
-    {
-        if (isset($_SERVER['ES_VERSION']) && \version_compare($_SERVER['ES_VERSION'], '7.0.0', '>=')) {
-            $this->markTestSkipped('discovery.zen.minimum_master_nodes is deprecated, ignored in 7.x and removed in 8.x, see: https://www.elastic.co/guide/en/elasticsearch/reference/master/migrating-8.0.html#breaking-changes-8.0');
-        }
-
-        $index = $this->_createIndex();
-
-        if (\count($index->getClient()->getCluster()->getNodes()) < 2) {
-            $this->markTestSkipped('At least two master nodes have to be running for this test');
-        }
-
-        $settings = new Settings($index->getClient());
-
-        $settings->setPersistent('discovery.zen.minimum_master_nodes', 2);
-        $data = $settings->get();
-        $this->assertEquals(2, $data['persistent']['discovery']['zen']['minimum_master_nodes']);
-
-        $settings->setPersistent('discovery.zen.minimum_master_nodes', 1);
-        $data = $settings->get();
-        $this->assertEquals(1, $data['persistent']['discovery']['zen']['minimum_master_nodes']);
-    }
-
-    /**
-     * @group functional
-     */
     public function testSetReadOnly(): void
     {
         // Create two indices to check that the complete cluster is read only
