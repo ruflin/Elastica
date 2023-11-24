@@ -208,7 +208,7 @@ class MultiMatchTest extends BaseTest
                         ],
                     ],
                 ],
-                'mappings' => $mapping->toArray()
+                'mappings' => $mapping->toArray(),
             ],
             [
                 'recreate' => true,

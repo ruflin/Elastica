@@ -172,10 +172,10 @@ class Index implements SearchableInterface
             'body' => [
                 'query' => \is_array($q) ? $q : $q->toArray(),
                 'script' => $script->toArray()['script'],
-            ]
+            ],
         ];
 
-        return $this->getClient()->updateByQuery(array_merge($params, $options));
+        return $this->getClient()->updateByQuery(\array_merge($params, $options));
     }
 
     /**
@@ -209,7 +209,7 @@ class Index implements SearchableInterface
         );
 
         $params['body'] = $doc->getData();
-        $params = array_merge($params, $options);
+        $params = \array_merge($params, $options);
 
         /** @var Response $response */
         $response = $this->getClient()->index($params);
@@ -266,9 +266,9 @@ class Index implements SearchableInterface
      */
     public function getDocument($id, array $options = []): Document
     {
-        $params = array_merge([
+        $params = \array_merge([
             'id' => $id,
-            'index' => $this->getName()
+            'index' => $this->getName(),
         ], $options);
 
         /** @var Response $response */
@@ -310,10 +310,10 @@ class Index implements SearchableInterface
 
         $params = [
             'id' => \trim($id),
-            'index' => $this->getName()
+            'index' => $this->getName(),
         ];
 
-        return $this->getClient()->delete(array_merge($params, $options));
+        return $this->getClient()->delete(\array_merge($params, $options));
     }
 
     /**
@@ -335,9 +335,9 @@ class Index implements SearchableInterface
     {
         $query = Query::create($query)->getQuery();
 
-        $params = array_merge([
+        $params = \array_merge([
             'index' => $this->getName(),
-            'body' => ['query' => \is_array($query) ? $query : $query->toArray()]
+            'body' => ['query' => \is_array($query) ? $query : $query->toArray()],
         ], $options);
 
         return $this->getClient()->deleteByQuery($params);
@@ -406,7 +406,7 @@ class Index implements SearchableInterface
      */
     public function forcemerge($args = []): Response
     {
-        return $this->getClient()->indices()->forcemerge(array_merge(['index' => $this->getName(), $args]));
+        return $this->getClient()->indices()->forcemerge(\array_merge(['index' => $this->getName(), $args]));
     }
 
     /**
@@ -450,9 +450,9 @@ class Index implements SearchableInterface
 
         unset($options['recreate']);
 
-        $params = array_merge([
+        $params = \array_merge([
             'index' => $this->getName(),
-            'body' => $args
+            'body' => $args,
         ], $options);
 
         return $this->getClient()->indices()->create($params);
@@ -606,7 +606,7 @@ class Index implements SearchableInterface
     public function getAliases(): array
     {
         /** @var Response $response */
-        $response = ($this->getClient()->indices()->getAlias(['name' => '*']));
+        $response = $this->getClient()->indices()->getAlias(['name' => '*']);
         $responseData = $response->getData();
 
         if (!isset($responseData[$this->getName()])) {
@@ -706,9 +706,9 @@ class Index implements SearchableInterface
      */
     public function analyze(array $body, $args = []): array
     {
-        $params = array_merge([
+        $params = \array_merge([
             'index' => $this->getName(),
-            'body' => $body
+            'body' => $body,
         ], $args);
 
         /** @var Response $response */

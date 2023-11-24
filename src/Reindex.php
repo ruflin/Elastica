@@ -69,7 +69,7 @@ class Reindex extends Param
     {
         $body = $this->_getBody($this->_oldIndex, $this->_newIndex, $this->getParams());
 
-        $this->_lastResponse = $this->_oldIndex->getClient()->reindex(array_merge(['body' => $body], $this->getParams()));
+        $this->_lastResponse = $this->_oldIndex->getClient()->reindex(\array_merge(['body' => $body], $this->getParams()));
 
         return $this->_lastResponse;
     }

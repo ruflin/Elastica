@@ -2,8 +2,8 @@
 
 namespace Elastica;
 
-use Elastica\Exception\NotFoundException;
 use Elastic\Elasticsearch\Response\Elasticsearch;
+use Elastica\Exception\NotFoundException;
 
 /**
  * Elastica Response object.

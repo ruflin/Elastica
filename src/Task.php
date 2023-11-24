@@ -92,7 +92,7 @@ class Task extends Param
      */
     public function refresh(array $options = []): void
     {
-        $this->_response = $this->_client->tasks()->get(array_merge(['task_id' => $this->_id], $options));
+        $this->_response = $this->_client->tasks()->get(\array_merge(['task_id' => $this->_id], $options));
         $this->_data = $this->getResponse()->getData();
     }
 

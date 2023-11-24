@@ -163,7 +163,7 @@ class Mapping
     public function send(Index $index, array $query = []): Response
     {
         return $index->getClient()->indices()->putMapping(
-            array_merge(['index' => $index->getName(), 'body' => $this->toArray()], $query)
+            \array_merge(['index' => $index->getName(), 'body' => $this->toArray()], $query)
         );
     }
 

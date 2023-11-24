@@ -7,6 +7,7 @@ use Elastic\Elasticsearch\ClientInterface;
 use Elastic\Elasticsearch\Traits\ClientEndpointsTrait;
 use Elastic\Elasticsearch\Traits\EndpointTrait;
 use Elastic\Elasticsearch\Traits\NamespaceTrait;
+use Elastic\Transport\Transport;
 use Elastica\Bulk\Action;
 use Elastica\Bulk\ResponseSet;
 use Elastica\Exception\Bulk\ResponseException as BulkResponseException;
@@ -18,7 +19,6 @@ use Elastica\Script\AbstractScript;
 use Psr\Http\Message\RequestInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Elastic\Transport\Transport;
 
 /**
  * Client to connect the elasticsearch server.
@@ -69,8 +69,8 @@ class Client implements ClientInterface
      */
     protected $_version;
 
-     /**
-     * The endpoint namespace storage 
+    /**
+     * The endpoint namespace storage.
      */
     protected array $namespace;
 
@@ -99,8 +99,8 @@ class Client implements ClientInterface
         $this->_initConnections();
     }
 
-     /**
-     * @inheritdoc
+    /**
+     * {@inheritdoc}
      */
     public function getLogger(): LoggerInterface
     {
@@ -108,7 +108,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getTransport(): Transport
     {
@@ -116,7 +116,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setAsync(bool $async): self
     {
@@ -124,7 +124,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAsync(): bool
     {
@@ -132,7 +132,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setElasticMetaHeader(bool $active): self
     {
@@ -140,7 +140,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getElasticMetaHeader(): bool
     {
@@ -148,7 +148,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setResponseException(bool $active): self
     {
@@ -156,7 +156,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getResponseException(): bool
     {
@@ -399,7 +399,7 @@ class Client implements ClientInterface
         $params['body'] = $requestData;
 
         /** @var Response $response */
-        $response = $this->update(array_merge($params, $options));
+        $response = $this->update(\array_merge($params, $options));
 
         if ($response->isOk()
             && $data instanceof Document
@@ -618,9 +618,9 @@ class Client implements ClientInterface
     {
         $connection = $this->getConnection();
 
-        if(str_contains($contentType, 'compatible-with')) {
-            preg_match('/(application|text)\/([^,]+)/', 'application/json', $matches);
-            $value = sprintf(ElasticsearchClient::API_COMPATIBILITY_HEADER, $matches[1], $matches[2]);
+        if (\str_contains($contentType, 'compatible-with')) {
+            \preg_match('/(application|text)\/([^,]+)/', 'application/json', $matches);
+            $value = \sprintf(ElasticsearchClient::API_COMPATIBILITY_HEADER, $matches[1], $matches[2]);
         } else {
             $value = 'application/json';
         }
@@ -664,11 +664,10 @@ class Client implements ClientInterface
     }
 
     public function sendRequest(RequestInterface $request): Response
-    {   
+    {
         return $this->request(
-            trim($request->getUri()->__toString(), '/'),
+            \trim($request->getUri()->__toString(), '/'),
             $request->getMethod(),
-            
             $request->getBody()->__toString(),
             [],
             $request->getHeader('Content-Type')[0] ?? Request::DEFAULT_CONTENT_TYPE
@@ -700,11 +699,10 @@ class Client implements ClientInterface
      * @throws ConnectionException
      * @throws ResponseException
      */
-
-     public function closePointInTime(string $pointInTimeId): Response
-     {
-         return $this->elasticClientClosePointInTime(['body' => ['id' => $pointInTimeId]]);
-     }
+    public function closePointInTime(string $pointInTimeId): Response
+    {
+        return $this->elasticClientClosePointInTime(['body' => ['id' => $pointInTimeId]]);
+    }
 
     /**
      * Refreshes all search indices.

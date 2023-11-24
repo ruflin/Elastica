@@ -14,7 +14,6 @@ use Elastica\Request;
 use Elastica\Response;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
-use Elasticsearch\Endpoints\Indices\Stats;
 use Elasticsearch\Endpoints\Search;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\LoggerInterface;

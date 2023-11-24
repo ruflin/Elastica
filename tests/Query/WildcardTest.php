@@ -71,7 +71,7 @@ class WildcardTest extends BaseTest
                     ],
                 ],
             ],
-            'mappings' => $mapping->toArray()
+            'mappings' => $mapping->toArray(),
         ];
 
         $index->create($indexParams, ['recreate' => true]);

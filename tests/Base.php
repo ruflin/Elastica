@@ -5,8 +5,6 @@ namespace Elastica\Test;
 use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Index;
-use Elasticsearch\Endpoints\Ingest\Pipeline\Put;
-use Elasticsearch\Endpoints\Ingest\PutPipeline;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Util\Test as TestUtil;
 use Psr\Log\LoggerInterface;
