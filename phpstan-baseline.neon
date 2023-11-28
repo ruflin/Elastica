@@ -21,16 +21,6 @@ parameters:
 			path: src/QueryBuilder.php
 
 		-
-			message: "#^Function GuzzleHttp\\\\Psr7\\\\modify_request not found\\.$#"
-			count: 1
-			path: src/Transport/AwsAuthV4.php
-
-		-
-			message: "#^Function GuzzleHttp\\\\Psr7\\\\stream_for not found\\.$#"
-			count: 1
-			path: src/Transport/Guzzle.php
-
-		-
 			message: "#^Parameter \\#1 \\$precision of method Elastica\\\\Aggregation\\\\GeohashGrid\\:\\:setPrecision\\(\\) expects int\\|string, float given\\.$#"
 			count: 1
 			path: tests/Aggregation/GeohashGridTest.php
