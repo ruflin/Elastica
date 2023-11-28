@@ -2,7 +2,7 @@
 
 namespace Elastica\Multi;
 
-use Elastic\Elasticsearch\Response\Elasticsearch;
+use Elastica\Response;
 use Elastica\Search as BaseSearch;
 
 interface MultiBuilderInterface
@@ -10,5 +10,5 @@ interface MultiBuilderInterface
     /**
      * @param BaseSearch[] $searches
      */
-    public function buildMultiResultSet(Elasticsearch $response, array $searches): ResultSet;
+    public function buildMultiResultSet(Response $response, array $searches): ResultSet;
 }

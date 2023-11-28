@@ -185,8 +185,8 @@ class Scroll implements \Iterator
         $this->_nextScrollId = null;
         $response = $resultSet->getResponse();
 
-        if (ResponseChecker::isOk($response)) {
-            $data = $response->asArray();
+        if ($response->isOk()) {
+            $data = $response->getData();
 
             if (!isset($data['_scroll_id'])) {
                 throw new NotFoundException('Unable to find the field [_scroll_id] from the response');

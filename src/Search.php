@@ -313,7 +313,7 @@ class Search
             $response = $this->getClient()->search($params);
         }
 
-        return $this->builder->buildResultSet($response, $query);
+        return $this->builder->buildResultSet(new Response($response->asArray(), $response->getStatusCode()), $query);
     }
 
     /**
@@ -347,7 +347,7 @@ class Search
 
         $response = $this->getClient()->search($params);
 
-        $resultSet = $this->builder->buildResultSet($response, $query);
+        $resultSet = $this->builder->buildResultSet(new Response($response->asArray(), $response->getStatusCode()), $query);
 
         return $fullResult ? $resultSet : $resultSet->getTotalHits();
     }

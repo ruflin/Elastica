@@ -2,7 +2,6 @@
 
 namespace Elastica;
 
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastica\Exception\NotFoundException;
 
 /**
@@ -12,7 +11,7 @@ use Elastica\Exception\NotFoundException;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Response extends Elasticsearch
+class Response
 {
     /**
      * Query time.

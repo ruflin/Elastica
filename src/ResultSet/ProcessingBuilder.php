@@ -4,6 +4,7 @@ namespace Elastica\ResultSet;
 
 use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastica\Query;
+use Elastica\Response;
 use Elastica\ResultSet;
 
 class ProcessingBuilder implements BuilderInterface
@@ -29,7 +30,7 @@ class ProcessingBuilder implements BuilderInterface
      * returning it, allowing the transformers to inject additional
      * data into each Result.
      */
-    public function buildResultSet(Elasticsearch $response, Query $query): ResultSet
+    public function buildResultSet(Response $response, Query $query): ResultSet
     {
         $resultSet = $this->builder->buildResultSet($response, $query);
 

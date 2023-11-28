@@ -2,8 +2,8 @@
 
 namespace Elastica\ResultSet;
 
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastica\Query;
+use Elastica\Response;
 use Elastica\Result;
 use Elastica\ResultSet;
 
@@ -12,7 +12,7 @@ class DefaultBuilder implements BuilderInterface
     /**
      * Builds a ResultSet for a given Response.
      */
-    public function buildResultSet(Elasticsearch $response, Query $query): ResultSet
+    public function buildResultSet(Response $response, Query $query): ResultSet
     {
         $results = $this->buildResults($response);
 
@@ -24,9 +24,9 @@ class DefaultBuilder implements BuilderInterface
      *
      * @return Result[]
      */
-    private function buildResults(Elasticsearch $response): array
+    private function buildResults(Response $response): array
     {
-        $data = $response->asArray();
+        $data = $response->getData();
         $results = [];
 
         if (!isset($data['hits']['hits'])) {

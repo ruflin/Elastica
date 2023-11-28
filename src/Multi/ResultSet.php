@@ -2,9 +2,7 @@
 
 namespace Elastica\Multi;
 
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastica\Response;
-use Elastica\ResponseParser;
 use Elastica\ResultSet as BaseResultSet;
 
 /**
@@ -30,14 +28,14 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     protected $_position = 0;
 
     /**
-     * @var Elasticsearch
+     * @var Response
      */
     protected $_response;
 
     /**
      * @param BaseResultSet[] $resultSets
      */
-    public function __construct(Elasticsearch $response, array $resultSets)
+    public function __construct(Response $response, array $resultSets)
     {
         $this->_response = $response;
         $this->_resultSets = $resultSets;
@@ -54,9 +52,9 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     /**
      * Returns response object.
      *
-     * @return Elasticsearch Response object
+     * @return Response Response object
      */
-    public function getResponse(): Elasticsearch
+    public function getResponse(): Response
     {
         return $this->_response;
     }
@@ -67,7 +65,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     public function hasError(): bool
     {
         foreach ($this->getResultSets() as $resultSet) {
-            if (ResponseParser::hasError($resultSet->getResponse())) {
+            if ($resultSet->getResponse()->hasError()) {
                 return true;
             }
         }
