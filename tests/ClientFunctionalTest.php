@@ -967,7 +967,6 @@ class ClientFunctionalTest extends BaseTest
 
         $index->refresh();
 
-        /** @var Response $response */
         $response = $client->indices()->stats(['index' => $index->getName(), 'metric' => ['indexing']]);
 
         $this->assertArrayHasKey('index_total', $response->asArray()['indices'][$index->getName()]['total']['indexing']);
@@ -1004,7 +1003,7 @@ class ClientFunctionalTest extends BaseTest
         ];
 
         $response = $client->search(['index' => $index->getName(), 'body' => $query]);
-        /** @var Response $response */
+
         $responseArray = $response->asArray();
 
         $this->assertEquals($totalHits, $responseArray['hits']['total']['value']);

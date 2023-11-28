@@ -206,15 +206,15 @@ class SearchTest extends BaseTest
         $index1 = $this->_createIndex();
 
         $result = $search1->search([]);
-        $this->assertFalse(ResponseChecker::hasError($result->getResponse()));
+        $this->assertFalse($result->getResponse()->hasError());
 
         $search1->addIndex($index1);
 
         $result = $search1->search([]);
-        $this->assertFalse(ResponseChecker::hasError($result->getResponse()));
+        $this->assertFalse($result->getResponse()->hasError());
 
         $result = $search1->search([]);
-        $this->assertFalse(ResponseChecker::hasError($result->getResponse()));
+        $this->assertFalse($result->getResponse()->hasError());
     }
 
     /**
@@ -241,9 +241,9 @@ class SearchTest extends BaseTest
             Search::OPTION_SCROLL => '5m',
             Search::OPTION_SIZE => 5,
         ]);
-        $this->assertFalse($result->getResponse()->offsetExists('error'));
+        $this->assertFalse($result->getResponse()->hasError());
 
-        $scrollId = $result->getResponse()->offsetGet('_scroll_id');
+        $scrollId = $result->getResponse()->getScrollId();
         $this->assertNotEmpty($scrollId);
         $this->assertCount(5, $result->getResults());
 
@@ -259,7 +259,7 @@ class SearchTest extends BaseTest
         \parse_str($search->getClient()->getLastRequest()->getUri()->getQuery(), $lastRequestQuery);
         $lastRequestData = \json_decode($search->getClient()->getLastRequest()->getBody(), true);
 
-        $this->assertFalse($result->getResponse()->offsetExists('error'));
+        $this->assertFalse($result->getResponse()->hasError());
         $this->assertCount(5, $result->getResults());
         $this->assertArrayNotHasKey(Search::OPTION_SCROLL_ID, $lastRequestQuery);
         $this->assertEquals([Search::OPTION_SCROLL_ID => $scrollId], $lastRequestData);
@@ -272,7 +272,7 @@ class SearchTest extends BaseTest
         \parse_str($search->getClient()->getLastRequest()->getUri()->getQuery(), $lastRequestQuery);
         $lastRequestData = \json_decode($search->getClient()->getLastRequest()->getBody(), true);
 
-        $this->assertFalse($result->getResponse()->offsetExists('error'));
+        $this->assertFalse($result->getResponse()->hasError());
         $this->assertCount(0, $result->getResults());
         $this->assertArrayNotHasKey(Search::OPTION_SCROLL_ID, $lastRequestQuery);
         $this->assertEquals([Search::OPTION_SCROLL_ID => $scrollId], $lastRequestData);
@@ -395,7 +395,7 @@ class SearchTest extends BaseTest
 
         // test with filter_path
         $resultSet = $search->search('test', [Search::OPTION_FILTER_PATH => 'hits.hits._source']);
-        $filteredData = $resultSet->getResponse()->asArray();
+        $filteredData = $resultSet->getResponse()->getData();
         $this->assertArrayNotHasKey('took', $filteredData);
         $this->assertArrayNotHasKey('max_score', $filteredData['hits']);
 
@@ -479,7 +479,7 @@ class SearchTest extends BaseTest
         $search1 = new Search($client);
 
         $result = $search1->search([], [], 'GET');
-        $this->assertFalse(ResponseParser::hasError($result->getResponse()));
+        $this->assertFalse($result->getResponse()->hasError());
     }
 
     /**

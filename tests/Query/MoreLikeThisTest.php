@@ -56,7 +56,7 @@ class MoreLikeThisTest extends BaseTest
         $query->setQuery($mltQuery);
 
         $resultSet = $index->search($query);
-        $resultSet->getResponse()->asArray();
+        $resultSet->getResponse()->getData();
         $this->assertEquals(2, $resultSet->count());
     }
 

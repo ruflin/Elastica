@@ -210,7 +210,7 @@ class RescoreTest extends BaseTest
         $results = $index->search($query);
         $response = $results->getResponse();
 
-        $this->assertEquals(true, ResponseChecker::isOk($response));
+        $this->assertEquals(true, $response->isOk());
         $this->assertEquals(0, $results->getTotalHits());
     }
 
@@ -242,7 +242,7 @@ class RescoreTest extends BaseTest
         $results = $index->search($query);
         $response = $results->getResponse();
 
-        $this->assertEquals(true, ResponseChecker::isOk($response));
+        $this->assertEquals(true, $response->isOk());
         $this->assertEquals(0, $results->getTotalHits());
     }
 }

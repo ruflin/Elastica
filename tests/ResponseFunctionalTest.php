@@ -38,8 +38,8 @@ class ResponseFunctionalTest extends BaseTest
 
         $resultSet = $index->search($query);
 
-        $engineTime = ResponseParser::getEngineTime($resultSet->getResponse());
-        $shardsStats = ResponseParser::getShardsStatistics($resultSet->getResponse());
+        $engineTime = $resultSet->getResponse()->getEngineTime();
+        $shardsStats = $resultSet->getResponse()->getShardsStatistics();
 
         $this->assertIsInt($engineTime);
         $this->assertIsArray($shardsStats);

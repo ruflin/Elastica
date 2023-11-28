@@ -2,11 +2,10 @@
 
 namespace Elastica\Test\ResultSet;
 
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastica\Query;
+use Elastica\Response;
 use Elastica\ResultSet\DefaultBuilder;
 use Elastica\Test\Base as BaseTest;
-use GuzzleHttp\Psr7\Response;
 
 /**
  * @group unit
@@ -29,16 +28,7 @@ class BuilderTest extends BaseTest
 
     public function testEmptyResponse(): void
     {
-        $response = new Elasticsearch();
-        $response->setResponse(new Response(
-            200,
-            [
-                Elasticsearch::HEADER_CHECK => Elasticsearch::PRODUCT_NAME,
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-            ],
-            \json_encode([])
-        ));
+        $response = new Response('');
         $query = new Query();
 
         $resultSet = $this->builder->buildResultSet($response, $query);
@@ -50,24 +40,15 @@ class BuilderTest extends BaseTest
 
     public function testResponse(): void
     {
-        $response = new Elasticsearch();
-        $response->setResponse(new Response(
-            200,
-            [
-                Elasticsearch::HEADER_CHECK => Elasticsearch::PRODUCT_NAME,
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-            ],
-            \json_encode([
+        $response = new Response([
+            'hits' => [
                 'hits' => [
-                    'hits' => [
-                        ['test' => 1],
-                        ['test' => 2],
-                        ['test' => 3],
-                    ],
+                    ['test' => 1],
+                    ['test' => 2],
+                    ['test' => 3],
                 ],
-            ])
-        ));
+            ],
+        ]);
         $query = new Query();
 
         $resultSet = $this->builder->buildResultSet($response, $query);
