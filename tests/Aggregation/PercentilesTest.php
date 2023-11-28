@@ -145,19 +145,26 @@ class PercentilesTest extends BaseAggregationTest
         $index->refresh();
 
         // execute
+        $agg = (new Percentiles('price_percentile', 'price'));
+
+        if (isset($_SERVER['ES_VERSION']) && \version_compare($_SERVER['ES_VERSION'], '8.9.0', '>=')) {
+            $agg->setParam('tdigest', ['execution_hint' => 'high_accuracy']);
+        }
+
+        // execute
         $query = new Query();
-        $query->addAggregation(new Percentiles('price_percentile', 'price'));
+        $query->addAggregation($agg);
 
         $resultSet = $index->search($query);
         $aggResult = $resultSet->getAggregation('price_percentile');
 
-        $this->assertEquals(109.0, $aggResult['values']['1.0']);
-        $this->assertEquals(145.0, $aggResult['values']['5.0']);
-        $this->assertEquals(325.0, $aggResult['values']['25.0']);
+        $this->assertEquals(100.0, $aggResult['values']['1.0']);
+        $this->assertEquals(100.0, $aggResult['values']['5.0']);
+        $this->assertEquals(300.0, $aggResult['values']['25.0']);
         $this->assertEquals(550.0, $aggResult['values']['50.0']);
-        $this->assertEquals(775.0, $aggResult['values']['75.0']);
-        $this->assertEquals(954.9999999999999, $aggResult['values']['95.0']);
-        $this->assertEquals(991.0, $aggResult['values']['99.0']);
+        $this->assertEquals(800.0, $aggResult['values']['75.0']);
+        $this->assertEquals(1000.0, $aggResult['values']['95.0']);
+        $this->assertEquals(1000.0, $aggResult['values']['99.0']);
     }
 
     /**
@@ -169,15 +176,15 @@ class PercentilesTest extends BaseAggregationTest
             'values' => [
                 [
                     'key' => 1,
-                    'value' => 109,
+                    'value' => 100,
                 ],
                 [
                     'key' => 5,
-                    'value' => 145,
+                    'value' => 100,
                 ],
                 [
                     'key' => 25,
-                    'value' => 325,
+                    'value' => 300,
                 ],
                 [
                     'key' => 50,
@@ -185,15 +192,15 @@ class PercentilesTest extends BaseAggregationTest
                 ],
                 [
                     'key' => 75,
-                    'value' => 775,
+                    'value' => 800,
                 ],
                 [
                     'key' => 95,
-                    'value' => 954.9999999999999,
+                    'value' => 1000,
                 ],
                 [
                     'key' => 99,
-                    'value' => 991,
+                    'value' => 1000,
                 ],
             ],
         ];
@@ -218,6 +225,10 @@ class PercentilesTest extends BaseAggregationTest
         $agg = (new Percentiles('price_percentile', 'price'))
             ->setKeyed(false)
         ;
+
+        if (isset($_SERVER['ES_VERSION']) && \version_compare($_SERVER['ES_VERSION'], '8.9.0', '>=')) {
+            $agg->setParam('tdigest', ['execution_hint' => 'high_accuracy']);
+        }
 
         $query = new Query();
         $query->addAggregation($agg);
