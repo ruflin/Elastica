@@ -2,6 +2,7 @@
 
 namespace Elastica;
 
+use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastica\Exception\InvalidException;
 use Elastica\Processor\AbstractProcessor;
 
@@ -43,7 +44,7 @@ class Pipeline extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/put-pipeline-api.html
      */
-    public function create(): Response
+    public function create(): Elasticsearch
     {
         if (empty($this->id)) {
             throw new InvalidException('You should set a valid pipeline id');
@@ -65,7 +66,7 @@ class Pipeline extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/get-pipeline-api.html
      */
-    public function getPipeline(string $id): Response
+    public function getPipeline(string $id): Elasticsearch
     {
         return $this->getClient()->ingest()->getPipeline(['id' => $id]);
     }
@@ -75,7 +76,7 @@ class Pipeline extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-pipeline-api.html
      */
-    public function deletePipeline(string $id): Response
+    public function deletePipeline(string $id): Elasticsearch
     {
         return $this->getClient()->ingest()->deletePipeline(['id' => $id]);
     }

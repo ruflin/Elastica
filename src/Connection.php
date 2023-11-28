@@ -2,8 +2,8 @@
 
 namespace Elastica;
 
+use Elastic\Transport\Transport;
 use Elastica\Exception\InvalidException;
-use Elastica\Transport\AbstractTransport;
 
 /**
  * Elastica connection instance to an elasticasearch node.
@@ -37,22 +37,9 @@ class Connection extends Param
     public const DEFAULT_COMPRESSION = false;
 
     /**
-     * Number of seconds after a timeout occurs for every request
-     * If using indexing of file large value necessary.
-     */
-    public const TIMEOUT = 300;
-
-    /**
-     * Number of seconds after a connection timeout occurs for every request during the connection phase.
-     *
-     * @see Connection::setConnectTimeout();
-     */
-    public const CONNECT_TIMEOUT = 0;
-
-    /**
      * Creates a new connection object. A connection is enabled by default.
      *
-     * @param array $params OPTIONAL Connection params: host, port, transport, timeout. All are optional
+     * @param array $params OPTIONAL Connection params: host, port. All are optional
      */
     public function __construct(array $params = [])
     {
@@ -101,43 +88,15 @@ class Connection extends Param
         return $this->setParam('host', $host);
     }
 
-    /**
-     * @return string|null Host
-     */
-    public function getProxy()
+    public function getTransport(): Transport
     {
-        return $this->hasParam('proxy') ? $this->getParam('proxy') : null;
+        return $this->getParam('transport');
     }
 
     /**
-     * Set proxy for http connections. Null is for environmental proxy,
-     * empty string to disable proxy and proxy string to set actual http proxy.
-     *
-     * @see http://curl.haxx.se/libcurl/c/curl_easy_setopt.html#CURLOPTPROXY
-     *
-     * @param string|null $proxy
-     *
      * @return $this
      */
-    public function setProxy($proxy)
-    {
-        return $this->setParam('proxy', $proxy);
-    }
-
-    /**
-     * @return array|string
-     */
-    public function getTransport()
-    {
-        return $this->hasParam('transport') ? $this->getParam('transport') : self::DEFAULT_TRANSPORT;
-    }
-
-    /**
-     * @param array|string $transport
-     *
-     * @return $this
-     */
-    public function setTransport($transport)
+    public function setTransport(Transport $transport)
     {
         return $this->setParam('transport', $transport);
     }
@@ -179,49 +138,6 @@ class Connection extends Param
     }
 
     /**
-     * @param int $timeout Timeout in seconds
-     *
-     * @return $this
-     */
-    public function setTimeout($timeout)
-    {
-        return $this->setParam('timeout', $timeout);
-    }
-
-    /**
-     * @return int Connection timeout in seconds
-     */
-    public function getTimeout()
-    {
-        return (int) $this->hasParam('timeout') ? $this->getParam('timeout') : self::TIMEOUT;
-    }
-
-    /**
-     * Number of seconds after a connection timeout occurs for every request during the connection phase.
-     * Use a small value if you need a fast fail in case of dead, unresponsive or unreachable servers (~5 sec).
-     *
-     * Set to zero to switch to the default built-in connection timeout (300 seconds in curl).
-     *
-     * @see http://curl.haxx.se/libcurl/c/CURLOPT_CONNECTTIMEOUT.html
-     *
-     * @param int $timeout Connect timeout in seconds
-     *
-     * @return $this
-     */
-    public function setConnectTimeout($timeout)
-    {
-        return $this->setParam('connectTimeout', $timeout);
-    }
-
-    /**
-     * @return int Connection timeout in seconds
-     */
-    public function getConnectTimeout()
-    {
-        return (int) $this->hasParam('connectTimeout') ? $this->getParam('connectTimeout') : self::CONNECT_TIMEOUT;
-    }
-
-    /**
      * Enables a connection.
      *
      * @param bool $enabled OPTIONAL (default = true)
@@ -244,15 +160,11 @@ class Connection extends Param
     /**
      * Returns an instance of the transport type.
      *
-     * @throws InvalidException If invalid transport type
-     *
-     * @return AbstractTransport Transport object
+     * @return Transport Transport object
      */
-    public function getTransportObject()
+    public function getTransportObject(): Transport
     {
-        $transport = $this->getTransport();
-
-        return AbstractTransport::create($transport, $this);
+        return $this->getTransport();
     }
 
     /**

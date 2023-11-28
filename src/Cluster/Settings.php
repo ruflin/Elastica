@@ -2,9 +2,8 @@
 
 namespace Elastica\Cluster;
 
+use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastica\Client;
-use Elastica\Request;
-use Elastica\Response;
 
 /**
  * Cluster settings.
@@ -37,7 +36,7 @@ class Settings
      */
     public function get(): array
     {
-        return $this->request()->getData();
+        return $this->getClient()->cluster()->getSettings()->asArray();
     }
 
     /**
@@ -105,7 +104,7 @@ class Settings
      *
      * @param mixed $value
      */
-    public function setPersistent(string $key, $value): Response
+    public function setPersistent(string $key, $value): Elasticsearch
     {
         return $this->set(
             [
@@ -121,7 +120,7 @@ class Settings
      *
      * @param mixed $value
      */
-    public function setTransient(string $key, $value): Response
+    public function setTransient(string $key, $value): Elasticsearch
     {
         return $this->set(
             [
@@ -137,9 +136,9 @@ class Settings
      *
      * Second param can be used to set it persistent
      *
-     * @return Response $response
+     * @return Elasticsearch $response
      */
-    public function setReadOnly(bool $readOnly = true, bool $persistent = false): Response
+    public function setReadOnly(bool $readOnly = true, bool $persistent = false): Elasticsearch
     {
         $key = 'cluster.blocks.read_only';
 
@@ -155,9 +154,9 @@ class Settings
      *
      * @param array $settings Raw settings (including persistent or transient)
      */
-    public function set(array $settings): Response
+    public function set(array $settings): Elasticsearch
     {
-        return $this->request($settings, Request::PUT);
+        return $this->getClient()->cluster()->putSettings(['body' => $settings]);
     }
 
     /**
@@ -166,12 +165,5 @@ class Settings
     public function getClient(): Client
     {
         return $this->_client;
-    }
-
-    public function request(array $data = [], string $method = Request::GET): Response
-    {
-        $path = '_cluster/settings';
-
-        return $this->getClient()->request($path, $method, $data);
     }
 }

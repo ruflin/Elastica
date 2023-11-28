@@ -4,7 +4,6 @@ namespace Elastica\Multi;
 
 use Elastica\Client;
 use Elastica\JSON;
-use Elastica\Request;
 use Elastica\Search as BaseSearch;
 
 /**
@@ -130,13 +129,7 @@ class Search
     {
         $data = $this->_getData();
 
-        $response = $this->getClient()->request(
-            '_msearch',
-            Request::POST,
-            $data,
-            $this->_options,
-            Request::NDJSON_CONTENT_TYPE
-        );
+        $response = $this->getClient()->msearch(\array_merge(['body' => $data], $this->_options));
 
         return $this->_builder->buildMultiResultSet($response, $this->getSearches());
     }

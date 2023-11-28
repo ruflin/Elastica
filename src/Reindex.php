@@ -2,12 +2,16 @@
 
 namespace Elastica;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Elastic\Elasticsearch\Exception\MissingParameterException;
+use Elastic\Elasticsearch\Exception\ServerResponseException;
+use Elastic\Elasticsearch\Response\Elasticsearch;
+use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Exception\ClientException;
-use Elastica\Exception\ConnectionException;
-use Elastica\Exception\ResponseException;
 use Elastica\Query\AbstractQuery;
 use Elastica\Script\AbstractScript;
 use Elastica\Script\Script;
+use Http\Promise\Promise;
 
 class Reindex extends Param
 {
@@ -48,7 +52,7 @@ class Reindex extends Param
     protected $_newIndex;
 
     /**
-     * @var Response|null
+     * @var Elasticsearch|null
      */
     protected $_lastResponse;
 
@@ -61,11 +65,13 @@ class Reindex extends Param
     }
 
     /**
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
-    public function run(): Response
+    public function run(): Elasticsearch|Promise
     {
         $body = $this->_getBody($this->_oldIndex, $this->_newIndex, $this->getParams());
 
@@ -122,8 +128,8 @@ class Reindex extends Param
     public function getTaskId()
     {
         $taskId = null;
-        if ($this->_lastResponse instanceof Response) {
-            $taskId = $this->_lastResponse->getData()['task'] ?: null;
+        if ($this->_lastResponse instanceof Elasticsearch) {
+            $taskId = $this->_lastResponse->asArray()['task'] ?: null;
         }
 
         return $taskId;

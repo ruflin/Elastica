@@ -2,6 +2,7 @@
 
 namespace Elastica;
 
+use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastica\Exception\InvalidException;
 
 /**
@@ -158,9 +159,9 @@ class Mapping
      * @param Index $index the index to send the mappings to
      * @param array $query Query string parameters to send with mapping
      *
-     * @return Response Response object
+     * @return Elasticsearch Response object
      */
-    public function send(Index $index, array $query = []): Response
+    public function send(Index $index, array $query = []): Elasticsearch
     {
         return $index->getClient()->indices()->putMapping(
             \array_merge(['index' => $index->getName(), 'body' => $this->toArray()], $query)

@@ -2,19 +2,23 @@
 
 namespace Elastica;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Elastic\Elasticsearch\Exception\MissingParameterException;
+use Elastic\Elasticsearch\Exception\ServerResponseException;
+use Elastic\Elasticsearch\Response\Elasticsearch;
+use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Bulk\ResponseSet;
 use Elastica\Exception\Bulk\ResponseException as BulkResponseException;
 use Elastica\Exception\ClientException;
-use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotFoundException;
-use Elastica\Exception\ResponseException;
 use Elastica\Index\Recovery as IndexRecovery;
 use Elastica\Index\Settings as IndexSettings;
 use Elastica\Index\Stats as IndexStats;
 use Elastica\Query\AbstractQuery;
 use Elastica\ResultSet\BuilderInterface;
 use Elastica\Script\AbstractScript;
+use Http\Promise\Promise;
 
 /**
  * Elastica index object.
@@ -81,7 +85,7 @@ class Index implements SearchableInterface
      * @param Mapping $mapping MappingType object
      * @param array   $query   querystring when put mapping (for example update_all_types)
      */
-    public function setMapping(Mapping $mapping, array $query = []): Response
+    public function setMapping(Mapping $mapping, array $query = []): Elasticsearch|Promise
     {
         return $mapping->send($this, $query);
     }
@@ -89,15 +93,16 @@ class Index implements SearchableInterface
     /**
      * Gets all mappings for the current index.
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function getMapping(): array
     {
-        /** @var Response $response */
         $response = $this->getClient()->indices()->getMapping(['index' => $this->getName()]);
-        $data = $response->getData();
+        $data = $response->asArray();
 
         // Get first entry as if index is an Alias, the name of the mapping is the real name and not alias name
         $mapping = \array_shift($data);
@@ -131,11 +136,12 @@ class Index implements SearchableInterface
      * @param Document[] $docs    Array of Elastica\Document
      * @param array      $options Array of query params to use for query. For possible options check es api
      *
-     * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws BulkResponseException
-     * @throws InvalidException
+     * @throws ClientException
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
@@ -160,11 +166,13 @@ class Index implements SearchableInterface
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
-    public function updateByQuery($query, AbstractScript $script, array $options = []): Response
+    public function updateByQuery($query, AbstractScript $script, array $options = []): Elasticsearch|Promise
     {
         $q = Query::create($query)->getQuery();
         $params = [
@@ -181,11 +189,13 @@ class Index implements SearchableInterface
     /**
      * Adds the given document to the search index.
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
-    public function addDocument(Document $doc): Response
+    public function addDocument(Document $doc): Elasticsearch|Promise
     {
         $params = ['index' => $this->getName()];
 
@@ -211,12 +221,11 @@ class Index implements SearchableInterface
         $params['body'] = $doc->getData();
         $params = \array_merge($params, $options);
 
-        /** @var Response $response */
         $response = $this->getClient()->index($params);
 
-        $data = $response->getData();
+        $data = $response->asArray();
         // set autogenerated id to document
-        if ($response->isOk() && (
+        if (ResponseChecker::isOk($response) && (
             $doc->isAutoPopulate() || $this->getClient()->getConfigValue(['document', 'autoPopulate'], false)
         )) {
             if (isset($data['_id']) && !$doc->hasId()) {
@@ -234,11 +243,12 @@ class Index implements SearchableInterface
      * @param array|Document[] $docs    Array of Elastica\Document
      * @param array            $options Array of query params to use for query. For possible options check es api
      *
-     * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws BulkResponseException
-     * @throws InvalidException
+     * @throws ClientException
      *
      * @return ResponseSet
      *
@@ -259,10 +269,12 @@ class Index implements SearchableInterface
      * @param int|string $id      Document id
      * @param array      $options options for the get request
      *
-     * @throws NotFoundException
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
+     * @throws NotFoundException
      */
     public function getDocument($id, array $options = []): Document
     {
@@ -271,26 +283,30 @@ class Index implements SearchableInterface
             'index' => $this->getName(),
         ], $options);
 
-        /** @var Response $response */
-        $response = $this->getClient()->get($params);
-        $result = $response->getData();
+        try {
+            $response = $this->getClient()->get($params);
+            $result = $response->asArray();
 
-        if (!isset($result['found']) || false === $result['found']) {
-            throw new NotFoundException('doc id '.$id.' not found');
+            if (isset($result['fields'])) {
+                $data = $result['fields'];
+            } elseif (isset($result['_source'])) {
+                $data = $result['_source'];
+            } else {
+                $data = [];
+            }
+
+            $doc = new Document($id, $data, $this->getName());
+            $doc->setVersionParams($result);
+
+            return $doc;
+        } catch (ClientResponseException $e) {
+            // 404 means the index alias doesn't exist which means no indexes have it.
+            if (404 === $e->getResponse()->getStatusCode()) {
+                throw new NotFoundException('doc id '.$id.' not found');
+            }
+            // If we don't have a 404 then this is still unexpected so rethrow the exception.
+            throw $e;
         }
-
-        if (isset($result['fields'])) {
-            $data = $result['fields'];
-        } elseif (isset($result['_source'])) {
-            $data = $result['_source'];
-        } else {
-            $data = [];
-        }
-
-        $doc = new Document($id, $data, $this->getName());
-        $doc->setVersionParams($result);
-
-        return $doc;
     }
 
     /**
@@ -298,11 +314,13 @@ class Index implements SearchableInterface
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete.html
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
-    public function deleteById(string $id, array $options = []): Response
+    public function deleteById(string $id, array $options = []): Elasticsearch|Promise
     {
         if (!\trim($id)) {
             throw new NotFoundException('Doc id "'.$id.'" not found and can not be deleted');
@@ -327,11 +345,13 @@ class Index implements SearchableInterface
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
-    public function deleteByQuery($query, array $options = []): Response
+    public function deleteByQuery($query, array $options = []): Elasticsearch
     {
         $query = Query::create($query)->getQuery();
 
@@ -348,11 +368,13 @@ class Index implements SearchableInterface
      *
      * @see: https://www.elastic.co/guide/en/elasticsearch/reference/current/point-in-time-api.html
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
-    public function openPointInTime(string $keepAlive): Response
+    public function openPointInTime(string $keepAlive): Elasticsearch|Promise
     {
         return $this->getClient()->openPointInTime(['index' => $this->getName(), 'keep_alive' => $keepAlive]);
     }
@@ -360,11 +382,13 @@ class Index implements SearchableInterface
     /**
      * Deletes the index.
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
-    public function delete(): Response
+    public function delete(): Elasticsearch|Promise
     {
         return $this->getClient()->indices()->delete(['index' => $this->getName()]);
     }
@@ -374,11 +398,12 @@ class Index implements SearchableInterface
      *
      * @param Document[] $docs Array of documents
      *
-     * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws BulkResponseException
-     * @throws InvalidException
+     * @throws ClientException
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
@@ -400,11 +425,13 @@ class Index implements SearchableInterface
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-forcemerge.html
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
-    public function forcemerge($args = []): Response
+    public function forcemerge($args = []): Elasticsearch|Promise
     {
         return $this->getClient()->indices()->forcemerge(\array_merge(['index' => $this->getName(), $args]));
     }
@@ -414,11 +441,13 @@ class Index implements SearchableInterface
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-refresh.html
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
-    public function refresh(): Response
+    public function refresh(): Elasticsearch|Promise
     {
         return $this->getClient()->indices()->refresh();
     }
@@ -431,19 +460,20 @@ class Index implements SearchableInterface
      * @param array $args    Additional arguments to pass to the Create endpoint
      * @param array $options Associative array of options (option=>value)
      *
-     * @throws InvalidException
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      *
-     * @return Response Server response
+     * @return Elasticsearch Server response
      */
-    public function create(array $args = [], array $options = []): Response
+    public function create(array $args = [], array $options = []): Elasticsearch
     {
         if ($options['recreate'] ?? false) {
             try {
                 $this->delete();
-            } catch (ResponseException $e) {
+            } catch (ClientResponseException $e) {
                 // Index can't be deleted, because it doesn't exist
             }
         }
@@ -461,16 +491,17 @@ class Index implements SearchableInterface
     /**
      * Checks if the given index exists ans is created.
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function exists(): bool
     {
-        /** @var Response $response */
         $response = $this->getClient()->indices()->exists(['index' => $this->getName()]);
 
-        return 200 === $response->getStatus();
+        return 200 === $response->getStatusCode();
     }
 
     /**
@@ -510,11 +541,13 @@ class Index implements SearchableInterface
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-open-close.html
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
-    public function open(): Response
+    public function open(): Elasticsearch|Promise
     {
         return $this->getClient()->indices()->open(['index' => $this->getName()]);
     }
@@ -524,11 +557,13 @@ class Index implements SearchableInterface
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-open-close.html
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
-    public function close(): Response
+    public function close(): Elasticsearch|Promise
     {
         return $this->getClient()->indices()->close(['index' => $this->getName()]);
     }
@@ -556,11 +591,13 @@ class Index implements SearchableInterface
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
-    public function addAlias(string $name, bool $replace = false): Response
+    public function addAlias(string $name, bool $replace = false): Elasticsearch|Promise
     {
         $data = ['actions' => []];
 
@@ -585,11 +622,13 @@ class Index implements SearchableInterface
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
-    public function removeAlias(string $name): Response
+    public function removeAlias(string $name): Elasticsearch|Promise
     {
         return $this->getClient()->indices()->deleteAlias(['index' => $this->getName(), 'name' => $name]);
     }
@@ -597,17 +636,18 @@ class Index implements SearchableInterface
     /**
      * Returns all index aliases.
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      *
      * @return string[]
      */
     public function getAliases(): array
     {
-        /** @var Response $response */
         $response = $this->getClient()->indices()->getAlias(['name' => '*']);
-        $responseData = $response->getData();
+        $responseData = $response->asArray();
 
         if (!isset($responseData[$this->getName()])) {
             return [];
@@ -634,11 +674,13 @@ class Index implements SearchableInterface
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-clearcache.html
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
-    public function clearCache(): Response
+    public function clearCache(): Elasticsearch|Promise
     {
         // TODO: add additional cache clean arguments
         return $this->getClient()->indices()->clearCache();
@@ -649,11 +691,13 @@ class Index implements SearchableInterface
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-flush.html
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
-    public function flush(array $options = []): Response
+    public function flush(array $options = []): Elasticsearch|Promise
     {
         return $this->getClient()->indices()->flush($options);
     }
@@ -665,31 +709,15 @@ class Index implements SearchableInterface
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
-    public function setSettings(array $data): Response
+    public function setSettings(array $data): Elasticsearch|Promise
     {
         return $this->getClient()->indices()->putSettings(['index' => $this->getName(), 'body' => $data]);
-    }
-
-    /**
-     * Makes calls to the elasticsearch server based on this index.
-     *
-     * @param string       $path   Path to call
-     * @param string       $method Rest method to use (GET, POST, DELETE, PUT)
-     * @param array|string $data   Arguments as array or encoded string
-     *
-     * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
-     */
-    public function request(string $path, string $method, $data = [], array $queryParameters = []): Response
-    {
-        $path = $this->getName().'/'.$path;
-
-        return $this->getClient()->request($path, $method, $data, $queryParameters);
     }
 
     /**
@@ -700,9 +728,11 @@ class Index implements SearchableInterface
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-analyze.html
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function analyze(array $body, $args = []): array
     {
@@ -711,9 +741,8 @@ class Index implements SearchableInterface
             'body' => $body,
         ], $args);
 
-        /** @var Response $response */
         $response = $this->getClient()->indices()->analyze($params);
-        $data = $response->getData();
+        $data = $response->asArray();
 
         // Support for "Explain" parameter, that returns a different response structure from Elastic
         // @see: https://www.elastic.co/guide/en/elasticsearch/reference/current/_explain_analyze.html
@@ -732,7 +761,7 @@ class Index implements SearchableInterface
      * @param AbstractScript|Document $data    Document or Script with update data
      * @param array                   $options array of query params to use for query
      */
-    public function updateDocument($data, array $options = []): Response
+    public function updateDocument($data, array $options = []): Elasticsearch|Promise
     {
         if (!($data instanceof Document) && !($data instanceof AbstractScript)) {
             throw new \InvalidArgumentException('Data should be a Document or Script');

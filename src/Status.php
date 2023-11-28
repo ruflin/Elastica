@@ -2,9 +2,11 @@
 
 namespace Elastica;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Elastic\Elasticsearch\Exception\ServerResponseException;
+use Elastic\Elasticsearch\Response\Elasticsearch;
+use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Exception\ClientException;
-use Elastica\Exception\ConnectionException;
-use Elastica\Exception\ResponseException;
 
 /**
  * Elastica general status.
@@ -18,7 +20,7 @@ class Status
     /**
      * Contains all status infos.
      *
-     * @var Response
+     * @var Elasticsearch
      */
     protected $_response;
 
@@ -90,9 +92,10 @@ class Status
     /**
      * Returns an array with all indices that the given alias name points to.
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      *
      * @return Index[]
      */
@@ -101,18 +104,17 @@ class Status
         $response = null;
 
         try {
-            /** @var Response $response */
             $response = $this->_client->indices()->getAlias(['name' => $alias]);
-        } catch (ResponseException $e) {
+        } catch (ClientResponseException $e) {
             // 404 means the index alias doesn't exist which means no indexes have it.
-            if (404 === $e->getResponse()->getStatus()) {
+            if (404 === $e->getResponse()->getStatusCode()) {
                 return [];
             }
             // If we don't have a 404 then this is still unexpected so rethrow the exception.
             throw $e;
         }
         $indices = [];
-        foreach ($response->getData() as $name => $unused) {
+        foreach ($response->asArray() as $name => $unused) {
             $indices[] = new Index($this->_client, $name);
         }
 
@@ -122,7 +124,7 @@ class Status
     /**
      * Returns response object.
      *
-     * @return Response Response object
+     * @return Elasticsearch Response object
      */
     public function getResponse()
     {
@@ -148,13 +150,14 @@ class Status
     /**
      * Refresh status object.
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function refresh(): void
     {
         $this->_response = $this->_client->indices()->stats();
-        $this->_data = $this->getResponse()->getData();
+        $this->_data = $this->getResponse()->asArray();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Elastica;
 
+use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastica\Exception\InvalidException;
 
 /**
@@ -31,7 +32,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Response.
      *
-     * @var Response Response object
+     * @var Elasticsearch Response object
      */
     private $_response;
 
@@ -45,7 +46,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * @param Result[] $results
      */
-    public function __construct(Response $response, Query $query, $results)
+    public function __construct(Elasticsearch $response, Query $query, $results)
     {
         $this->_query = $query;
         $this->_response = $response;
@@ -82,7 +83,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function hasSuggests(): bool
     {
-        $data = $this->_response->getData();
+        $data = $this->_response->asArray();
 
         return isset($data['suggest']);
     }
@@ -94,7 +95,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function getSuggests(): array
     {
-        $data = $this->_response->getData();
+        $data = $this->_response->asArray();
 
         return $data['suggest'] ?? [];
     }
@@ -104,7 +105,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function hasAggregations(): bool
     {
-        $data = $this->_response->getData();
+        $data = $this->_response->asArray();
 
         return isset($data['aggregations']);
     }
@@ -114,7 +115,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function getAggregations(): array
     {
-        $data = $this->_response->getData();
+        $data = $this->_response->asArray();
 
         return $data['aggregations'] ?? [];
     }
@@ -128,7 +129,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function getAggregation(string $name): array
     {
-        $data = $this->_response->getData();
+        $data = $this->_response->asArray();
 
         if (isset($data['aggregations'][$name])) {
             return $data['aggregations'][$name];
@@ -142,7 +143,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function getTotalHits(): int
     {
-        $data = $this->_response->getData();
+        $data = $this->_response->asArray();
 
         return (int) ($data['hits']['total']['value'] ?? 0);
     }
@@ -152,7 +153,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function getTotalHitsRelation(): string
     {
-        $data = $this->_response->getData();
+        $data = $this->_response->asArray();
 
         return $data['hits']['total']['relation'] ?? 'eq';
     }
@@ -162,7 +163,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function getMaxScore(): float
     {
-        $data = $this->_response->getData();
+        $data = $this->_response->asArray();
 
         return (float) ($data['hits']['max_score'] ?? 0);
     }
@@ -172,7 +173,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function getTotalTime(): int
     {
-        $data = $this->_response->getData();
+        $data = $this->_response->asArray();
 
         return $data['took'] ?? 0;
     }
@@ -184,7 +185,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function getPointInTimeId(): ?string
     {
-        $data = $this->_response->getData();
+        $data = $this->_response->asArray();
 
         return $data['pit_id'] ?? null;
     }
@@ -194,7 +195,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function hasTimedOut(): bool
     {
-        $data = $this->_response->getData();
+        $data = $this->_response->asArray();
 
         return !empty($data['timed_out']);
     }
@@ -202,7 +203,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Returns response object.
      */
-    public function getResponse(): Response
+    public function getResponse(): Elasticsearch
     {
         return $this->_response;
     }

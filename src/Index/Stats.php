@@ -2,8 +2,8 @@
 
 namespace Elastica\Index;
 
+use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastica\Index;
-use Elastica\Response;
 
 /**
  * Elastica index stats object.
@@ -17,7 +17,7 @@ class Stats
     /**
      * Response.
      *
-     * @var Response Response object
+     * @var Elasticsearch Response object
      */
     protected $_response;
 
@@ -86,9 +86,9 @@ class Stats
     /**
      * Returns response object.
      *
-     * @return Response Response object
+     * @return Elasticsearch Response object
      */
-    public function getResponse(): Response
+    public function getResponse(): Elasticsearch
     {
         return $this->_response;
     }
@@ -101,6 +101,6 @@ class Stats
         $this->_response = $this->getIndex()->getClient()->indices()->stats(
             ['index' => $this->getIndex()->getName()]
         );
-        $this->_data = $this->getResponse()->getData();
+        $this->_data = $this->getResponse()->asArray();
     }
 }

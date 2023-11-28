@@ -2,8 +2,8 @@
 
 namespace Elastica\Index;
 
+use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastica\Index as BaseIndex;
-use Elastica\Response;
 
 /**
  * Elastica index recovery object.
@@ -17,7 +17,7 @@ class Recovery
     /**
      * Response.
      *
-     * @var Response Response object
+     * @var Elasticsearch Response object
      */
     protected $_response;
 
@@ -59,9 +59,9 @@ class Recovery
     /**
      * Returns response object.
      *
-     * @return Response Response object
+     * @return Elasticsearch Response object
      */
-    public function getResponse(): Response
+    public function getResponse(): Elasticsearch
     {
         return $this->_response;
     }
@@ -95,6 +95,6 @@ class Recovery
     {
         $this->_response = $this->getIndex()->getClient()->indices()->recovery(['index' => $this->getIndex()->getName()]);
 
-        return $this->getResponse()->getData();
+        return $this->getResponse()->asArray();
     }
 }

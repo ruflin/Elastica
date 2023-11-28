@@ -218,55 +218,6 @@ class Response extends Elasticsearch
     }
 
     /**
-     * Gets the transfer information.
-     *
-     * @return array information about the curl request
-     */
-    public function getTransferInfo()
-    {
-        return $this->_transferInfo;
-    }
-
-    /**
-     * Sets the transfer info of the curl request. This function is called
-     * from the \Elastica\Client::_callService .
-     *
-     * @param array $transferInfo the curl transfer information
-     *
-     * @return $this
-     */
-    public function setTransferInfo(array $transferInfo)
-    {
-        $this->_transferInfo = $transferInfo;
-
-        return $this;
-    }
-
-    /**
-     * Returns query execution time.
-     *
-     * @return float Query time
-     */
-    public function getQueryTime()
-    {
-        return $this->_queryTime;
-    }
-
-    /**
-     * Sets the query time.
-     *
-     * @param float $queryTime Query time
-     *
-     * @return $this
-     */
-    public function setQueryTime($queryTime)
-    {
-        $this->_queryTime = $queryTime;
-
-        return $this;
-    }
-
-    /**
      * Time request took.
      *
      * @throws NotFoundException

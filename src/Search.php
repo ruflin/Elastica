@@ -2,10 +2,11 @@
 
 namespace Elastica;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Elastic\Elasticsearch\Exception\ServerResponseException;
+use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Exception\ClientException;
-use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
-use Elastica\Exception\ResponseException;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\MatchAll;
 use Elastica\ResultSet\BuilderInterface;
@@ -283,9 +284,10 @@ class Search
      * @param array<string, mixed>|null $options associative array of options (option=>value)
      *
      * @throws InvalidException
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function search($query = '', ?array $options = null, string $method = Request::POST): ResultSet
     {
@@ -298,13 +300,18 @@ class Search
 
         // Send scroll_id via raw HTTP body to handle cases of very large (> 4kb) ids.
         if ('_search/scroll' === $path) {
-            $data = [self::OPTION_SCROLL_ID => $params[self::OPTION_SCROLL_ID]];
+            $params['body'] = [self::OPTION_SCROLL_ID => $params[self::OPTION_SCROLL_ID]];
             unset($params[self::OPTION_SCROLL_ID]);
-        } else {
-            $data = $query->toArray();
-        }
 
-        $response = $this->getClient()->request($path, $method, $data, $params);
+            $response = $this->getClient()->scroll($params);
+        } else {
+            if ($indices = $this->getIndices()) {
+                $params['index'] = \implode(',', $indices);
+            }
+            $params['body'] = $query->toArray();
+
+            $response = $this->getClient()->search($params);
+        }
 
         return $this->builder->buildResultSet($response, $query);
     }
@@ -313,9 +320,10 @@ class Search
      * @param array|Query|Query\AbstractQuery|string $query
      * @param bool                                   $fullResult By default only the total hit count is returned. If set to true, the full ResultSet including aggregations is returned
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      *
      * @return int|ResultSet
      */
@@ -328,14 +336,17 @@ class Search
         $query->setSize(0);
         $query->setTrackTotalHits(true);
 
-        $path = $this->getPath();
+        $params = [
+            'body' => $query->toArray(),
+            [self::OPTION_SEARCH_TYPE => self::OPTION_SEARCH_TYPE_QUERY_THEN_FETCH],
+        ];
 
-        $response = $this->getClient()->request(
-            $path,
-            $method,
-            $query->toArray(),
-            [self::OPTION_SEARCH_TYPE => self::OPTION_SEARCH_TYPE_QUERY_THEN_FETCH]
-        );
+        if ($indices = $this->getIndices()) {
+            $params['index'] = \implode(',', $indices);
+        }
+
+        $response = $this->getClient()->search($params);
+
         $resultSet = $this->builder->buildResultSet($response, $query);
 
         return $fullResult ? $resultSet : $resultSet->getTotalHits();
