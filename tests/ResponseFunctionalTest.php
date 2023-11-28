@@ -3,11 +3,11 @@
 namespace Elastica\Test;
 
 use Elastica\Document;
-use Elastica\Exception\ResponseException;
 use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
-use Elastica\Request;
+use Elastica\ResponseChecker;
+use Elastica\ResponseParser;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -38,8 +38,8 @@ class ResponseFunctionalTest extends BaseTest
 
         $resultSet = $index->search($query);
 
-        $engineTime = $resultSet->getResponse()->getEngineTime();
-        $shardsStats = $resultSet->getResponse()->getShardsStatistics();
+        $engineTime = ResponseParser::getEngineTime($resultSet->getResponse());
+        $shardsStats = ResponseParser::getShardsStatistics($resultSet->getResponse());
 
         $this->assertIsInt($engineTime);
         $this->assertIsArray($shardsStats);
@@ -54,7 +54,7 @@ class ResponseFunctionalTest extends BaseTest
         $doc = new Document('1', ['name' => 'ruflin']);
         $response = $index->addDocument($doc);
 
-        $this->assertTrue($response->isOk());
+        $this->assertTrue(ResponseChecker::isOk($response));
     }
 
     public function testIsOkMultiple(): void

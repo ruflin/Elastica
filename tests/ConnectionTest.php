@@ -2,14 +2,12 @@
 
 namespace Elastica\Test;
 
+use Elastic\Transport\Transport;
+use Elastic\Transport\TransportBuilder;
 use Elastica\Client;
 use Elastica\Connection;
-use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
-use Elastica\Request;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Transport\AbstractTransport;
-use Elastica\Transport\Http;
 
 /**
  * @internal
@@ -24,10 +22,6 @@ class ConnectionTest extends BaseTest
         $connection = new Connection();
         $this->assertEquals(Connection::DEFAULT_HOST, $connection->getHost());
         $this->assertEquals(Connection::DEFAULT_PORT, $connection->getPort());
-        $this->assertEquals(Connection::DEFAULT_TRANSPORT, $connection->getTransport());
-        $this->assertInstanceOf(AbstractTransport::class, $connection->getTransportObject());
-        $this->assertEquals(Connection::TIMEOUT, $connection->getTimeout());
-        $this->assertEquals(Connection::CONNECT_TIMEOUT, $connection->getConnectTimeout());
         $this->assertEquals([], $connection->getConfig());
         $this->assertTrue($connection->isEnabled());
     }
@@ -43,22 +37,6 @@ class ConnectionTest extends BaseTest
         $this->assertFalse($connection->isEnabled());
         $connection->setEnabled(true);
         $this->assertTrue($connection->isEnabled());
-    }
-
-    /**
-     * @group unit
-     */
-    public function testInvalidConnection(): void
-    {
-        $this->expectException(ConnectionException::class);
-
-        $connection = new Connection(['port' => 9999]);
-
-        $request = new Request('_stats', Request::GET);
-        $request->setConnection($connection);
-
-        // Throws exception because no valid connection
-        $request->send();
     }
 
     /**
@@ -104,20 +82,11 @@ class ConnectionTest extends BaseTest
      */
     public function testGetConfigWithArrayUsedForTransport(): void
     {
-        $connection = new Connection(['transport' => ['type' => 'Http']]);
-        $this->assertInstanceOf(Http::class, $connection->getTransportObject());
-    }
+        $transportConnectionBuilder = TransportBuilder::create();
+        $transportConnectionBuilder->setHosts([$this->_getHost().':9101']);
 
-    /**
-     * @group unit
-     */
-    public function testGetInvalidConfigWithArrayUsedForTransport(): void
-    {
-        $this->expectException(InvalidException::class);
-        $this->expectExceptionMessage('Invalid transport');
-
-        $connection = new Connection(['transport' => ['type' => 'invalidtransport']]);
-        $connection->getTransportObject();
+        $connection = new Connection(['transport' => $transportConnectionBuilder->build()]);
+        $this->assertInstanceOf(Transport::class, $connection->getTransportObject());
     }
 
     /**

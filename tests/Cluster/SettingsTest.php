@@ -2,9 +2,10 @@
 
 namespace Elastica\Test\Cluster;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Cluster\Settings;
 use Elastica\Document;
-use Elastica\Exception\ResponseException;
+use Elastica\ResponseChecker;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -29,7 +30,7 @@ class SettingsTest extends BaseTest
         $index->addDocument($doc1);
 
         $response = $settings->setReadOnly(true);
-        $this->assertFalse($response->hasError());
+        $this->assertFalse(ResponseChecker::hasError($response));
         $setting = $settings->getTransient('cluster.blocks.read_only');
         $this->assertEquals('true', $setting);
 
@@ -37,14 +38,15 @@ class SettingsTest extends BaseTest
         try {
             $index->addDocument($doc2);
             $this->fail('should throw read only exception');
-        } catch (ResponseException $e) {
-            $error = $e->getResponse()->getFullError();
+        } catch (ClientResponseException $e) {
+            $error = \json_decode($e->getResponse()->getBody(), true)['error'] ?? null;
+
             $this->assertSame('cluster_block_exception', $error['type']);
             $this->assertStringContainsString('cluster read-only', $error['reason']);
         }
 
         $response = $settings->setReadOnly(false);
-        $this->assertFalse($response->hasError());
+        $this->assertFalse(ResponseChecker::hasError($response));
         $setting = $settings->getTransient('cluster.blocks.read_only');
         $this->assertEquals('false', $setting);
 

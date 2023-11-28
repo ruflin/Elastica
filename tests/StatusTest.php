@@ -2,8 +2,8 @@
 
 namespace Elastica\Test;
 
-use Elastica\Exception\ResponseException;
-use Elastica\Response;
+use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastica\Status;
 use Elastica\Test\Base as BaseTest;
 
@@ -19,7 +19,7 @@ class StatusTest extends BaseTest
     {
         $index = $this->_createIndex();
         $status = new Status($index->getClient());
-        $this->assertInstanceOf(Response::class, $status->getResponse());
+        $this->assertInstanceOf(Elasticsearch::class, $status->getResponse());
     }
 
     /**
@@ -60,7 +60,7 @@ class StatusTest extends BaseTest
         try {
             // Make sure index is deleted first
             $index->delete();
-        } catch (ResponseException $e) {
+        } catch (ClientResponseException $e) {
         }
 
         $status = new Status($client);

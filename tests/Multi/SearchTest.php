@@ -292,7 +292,7 @@ class SearchTest extends BaseTest
 
         $multiSearch->addSearch($searchBad);
 
-        $this->markTestSkipped('Elastica\Exception\ResponseException: [size] parameter cannot be negative, found [-2]');
+        $this->markTestSkipped('Elastic\Elasticsearch\Exception\ClientResponseException: [size] parameter cannot be negative, found [-2]');
         $multiResultSet = $multiSearch->search();
         $resultSets = $multiResultSet->getResultSets();
         $this->assertIsArray($resultSets);
@@ -337,7 +337,7 @@ class SearchTest extends BaseTest
 
         $multiSearch->addSearch($searchBad);
 
-        $this->markTestSkipped('Elastica\Exception\ResponseException: [size] parameter cannot be negative, found [-2]');
+        $this->markTestSkipped('Elastic\Elasticsearch\Exception\ClientResponseException: [size] parameter cannot be negative, found [-2]');
         $multiResultSet = $multiSearch->search();
         $resultSets = $multiResultSet->getResultSets();
         $this->assertIsArray($resultSets);

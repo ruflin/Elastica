@@ -2,8 +2,6 @@
 
 namespace Elastica\Test;
 
-use Elastica\Connection;
-use Elastica\Request;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Util;
 
@@ -154,28 +152,6 @@ class UtilTest extends BaseTest
         $this->assertSame('foo_bar', Util::toSnakeCase('fooBar'));
         $this->assertSame('hello_world', Util::toSnakeCase('HelloWorld'));
         $this->assertSame('how_are_you_today', Util::toSnakeCase('HowAreYouToday'));
-    }
-
-    /**
-     * @group unit
-     */
-    public function testConvertRequestToCurlCommand(): void
-    {
-        $path = 'test';
-        $method = Request::POST;
-        $query = ['no' => 'params'];
-        $data = ['key' => 'value'];
-
-        $connection = new Connection();
-        $connection->setHost($this->_getHost());
-        $connection->setPort(9200);
-
-        $request = new Request($path, $method, $data, $query, $connection);
-
-        $curlCommand = Util::convertRequestToCurlCommand($request);
-
-        $expected = 'curl -XPOST \'http://'.$this->_getHost().':9200/test?no=params\' -d \'{"key":"value"}\'';
-        $this->assertEquals($expected, $curlCommand);
     }
 
     /**

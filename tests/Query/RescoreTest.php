@@ -6,6 +6,7 @@ use Elastica\Query;
 use Elastica\Query\MatchQuery;
 use Elastica\Query\Term;
 use Elastica\Rescore\Query as QueryRescore;
+use Elastica\ResponseChecker;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -209,7 +210,7 @@ class RescoreTest extends BaseTest
         $results = $index->search($query);
         $response = $results->getResponse();
 
-        $this->assertEquals(true, $response->isOk());
+        $this->assertEquals(true, ResponseChecker::isOk($response));
         $this->assertEquals(0, $results->getTotalHits());
     }
 
@@ -241,7 +242,7 @@ class RescoreTest extends BaseTest
         $results = $index->search($query);
         $response = $results->getResponse();
 
-        $this->assertEquals(true, $response->isOk());
+        $this->assertEquals(true, ResponseChecker::isOk($response));
         $this->assertEquals(0, $results->getTotalHits());
     }
 }

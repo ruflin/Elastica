@@ -2,9 +2,10 @@
 
 namespace Elastica\Test\Query;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Document;
-use Elastica\Exception\ResponseException;
 use Elastica\Query\QueryString;
+use Elastica\ResponseParser;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -103,14 +104,14 @@ class QueryStringTest extends BaseTest
 
         try {
             $index->search($query);
-        } catch (ResponseException $ex) {
-            $error = $ex->getResponse()->getFullError();
+        } catch (ClientResponseException $ex) {
+            $error = ResponseParser::getFullError($ex->getResponse());
 
             $this->assertSame('query_shard_exception', $error['root_cause'][0]['type']);
             $this->assertStringContainsString('failed to create query', $error['root_cause'][0]['reason']);
             $this->assertStringContainsString('[fields] parameter in conjunction with [default_field]', $error['failed_shards'][0]['reason']['caused_by']['reason']);
 
-            $this->assertEquals(400, $ex->getResponse()->getStatus());
+            $this->assertEquals(400, $ex->getResponse()->getStatusCode());
         }
     }
 

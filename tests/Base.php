@@ -130,14 +130,14 @@ class Base extends TestCase
 
     protected function _getVersion()
     {
-        $data = $this->_getClient()->request('/')->getData();
+        $data = $this->_getClient()->info()->asArray();
 
         return \substr($data['version']['number'], 0, 1);
     }
 
     protected function _checkVersion($version): void
     {
-        $data = $this->_getClient()->request('/')->getData();
+        $data = $this->_getClient()->info()->asArray();
         $installedVersion = $data['version']['number'];
 
         if (\version_compare($installedVersion, $version) < 0) {

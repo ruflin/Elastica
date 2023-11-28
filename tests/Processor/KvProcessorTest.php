@@ -70,11 +70,11 @@ class KvProcessorTest extends BasePipelineTest
 
         $result = $pipeline->create();
 
-        $this->assertArrayHasKey('acknowledged', $result->getData());
-        $this->assertTrue($result->getData()['acknowledged']);
+        $this->assertArrayHasKey('acknowledged', $result->asArray());
+        $this->assertTrue($result->asArray()['acknowledged']);
 
         $pipelineGet = $pipeline->getPipeline('my_custom_pipeline');
-        $result = $pipelineGet->getData();
+        $result = $pipelineGet->asArray();
 
         $this->assertSame('field1', $result['my_custom_pipeline']['processors'][0]['kv']['field']);
         $this->assertSame('&', $result['my_custom_pipeline']['processors'][0]['kv']['field_split']);

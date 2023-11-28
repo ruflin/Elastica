@@ -2,12 +2,13 @@
 
 namespace Elastica\Test\Multi;
 
+use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastica\Multi\MultiBuilder;
-use Elastica\Response;
 use Elastica\ResultSet;
 use Elastica\ResultSet\BuilderInterface;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
+use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -41,7 +42,17 @@ class MultiBuilderTest extends BaseTest
             ->method('buildResultSet')
         ;
 
-        $response = new Response([]);
+        $response = new Elasticsearch();
+        $response->setResponse(new Response(
+            200,
+            [
+                Elasticsearch::HEADER_CHECK => Elasticsearch::PRODUCT_NAME,
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ],
+            \json_encode([])
+        ));
+
         $searches = [];
 
         $result = $this->multiBuilder->buildMultiResultSet($response, $searches);
@@ -51,24 +62,57 @@ class MultiBuilderTest extends BaseTest
 
     public function testBuildMultiResultSet(): void
     {
-        $response = new Response([
-            'responses' => [
-                [],
-                [],
+        $response = new Elasticsearch();
+        $response->setResponse(new Response(
+            200,
+            [
+                Elasticsearch::HEADER_CHECK => Elasticsearch::PRODUCT_NAME,
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
             ],
-        ]);
+            \json_encode([
+                'responses' => [
+                    [],
+                    [],
+                ],
+            ])
+        ));
+
         $searches = [
             $s1 = new Search($this->_getClient(), $this->builder),
             $s2 = new Search($this->_getClient(), $this->builder),
         ];
-        $resultSet1 = new ResultSet(new Response([]), $s1->getQuery(), []);
-        $resultSet2 = new ResultSet(new Response([]), $s2->getQuery(), []);
+
+        $responseResultSet1 = new Elasticsearch();
+        $responseResultSet1->setResponse(new Response(
+            200,
+            [
+                Elasticsearch::HEADER_CHECK => Elasticsearch::PRODUCT_NAME,
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ],
+            \json_encode([])
+        ));
+
+        $responseResultSet2 = new Elasticsearch();
+        $responseResultSet2->setResponse(new Response(
+            200,
+            [
+                Elasticsearch::HEADER_CHECK => Elasticsearch::PRODUCT_NAME,
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ],
+            \json_encode([])
+        ));
+
+        $resultSet1 = new ResultSet($responseResultSet1, $s1->getQuery(), []);
+        $resultSet2 = new ResultSet($responseResultSet2, $s2->getQuery(), []);
 
         $this->builder->expects($this->exactly(2))
             ->method('buildResultSet')
             ->withConsecutive(
-                [$this->isInstanceOf(Response::class), $s1->getQuery()],
-                [$this->isInstanceOf(Response::class), $s2->getQuery()]
+                [$this->isInstanceOf(Elasticsearch::class), $s1->getQuery()],
+                [$this->isInstanceOf(Elasticsearch::class), $s2->getQuery()]
             )
             ->willReturnOnConsecutiveCalls($resultSet1, $resultSet2)
         ;

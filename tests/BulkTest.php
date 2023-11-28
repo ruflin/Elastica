@@ -2,6 +2,7 @@
 
 namespace Elastica\Test;
 
+use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastica\Bulk;
 use Elastica\Bulk\Action;
 use Elastica\Bulk\Action\AbstractDocument;
@@ -15,9 +16,9 @@ use Elastica\Exception\Bulk\ResponseException;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Exception\RequestEntityTooLargeException;
-use Elastica\Response as ElasticaResponse;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
+use GuzzleHttp\Psr7\Response as Psr7Response;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -776,12 +777,21 @@ JSON;
      */
     public function testSendRequestEntityTooLargeExceptionIf413Response(): void
     {
-        $response = new ElasticaResponse('', 413);
+        $response = new Elasticsearch();
+        $response->setResponse(new Psr7Response(
+            413,
+            [
+                Elasticsearch::HEADER_CHECK => Elasticsearch::PRODUCT_NAME,
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ],
+            \json_encode([])
+        ), false);
 
         /** @var Client|MockObject $clientMock */
         $clientMock = $this->createMock(Client::class);
         $clientMock
-            ->method('request')
+            ->method('baseBulk')
             ->willReturn($response)
         ;
 

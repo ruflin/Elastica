@@ -22,7 +22,7 @@ class ClientTest extends BaseTest
 
     public function testConstructWithDsn(): void
     {
-        $client = new Client('https://user:p4ss@foo.com:9200?persistent=false&retryOnConflict=2');
+        $client = new Client('https://user:p4ss@foo.com:9200?retryOnConflict=2');
         $this->assertCount(1, $client->getConnections());
 
         $expected = [
@@ -30,18 +30,13 @@ class ClientTest extends BaseTest
             'port' => 9200,
             'path' => null,
             'url' => null,
-            'proxy' => null,
-            'transport' => 'https',
-            'persistent' => false,
-            'timeout' => null,
             'connections' => [],
             'roundRobin' => false,
             'retryOnConflict' => 2,
-            'bigintConversion' => false,
             'username' => 'user',
             'password' => 'p4ss',
-            'auth_type' => 'basic',
             'connectionStrategy' => 'Simple',
+            'transport_config' => [],
         ];
 
         $this->assertEquals($expected, $client->getConfig());

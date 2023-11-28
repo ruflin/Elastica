@@ -2,21 +2,24 @@
 
 namespace Elastica\Test;
 
+use Elastic\Elasticsearch\Response\Elasticsearch;
+use Elastic\Elasticsearch\Transport\Adapter\AdapterOptions;
+use Elastic\Transport\Exception\NoNodeAvailableException;
+use Elastic\Transport\TransportBuilder;
 use Elastica\Bulk;
 use Elastica\Bulk\ResponseSet;
 use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Document;
-use Elastica\Exception\Connection\HttpException;
-use Elastica\Exception\ConnectionException;
 use Elastica\Exception\NotFoundException;
-use Elastica\Request;
 use Elastica\Response;
+use Elastica\ResponseChecker;
+use Elastica\ResponseParser;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
-use Elasticsearch\Endpoints\Search;
-use PHPUnit\Framework\MockObject\MockObject;
-use Psr\Log\LoggerInterface;
+use GuzzleHttp\RequestOptions;
+use Psr\Http\Client\ClientInterface as HttpClientInterface;
+use Psr\Http\Message\RequestInterface;
 
 /**
  * @group functional
@@ -27,7 +30,7 @@ class ClientFunctionalTest extends BaseTest
 {
     public function testConnectionErrors(): void
     {
-        $this->expectException(HttpException::class);
+        $this->expectException(NoNodeAvailableException::class);
 
         $client = $this->_getClient(['host' => 'foo.bar', 'port' => '9201']);
         $client->getVersion();
@@ -35,7 +38,7 @@ class ClientFunctionalTest extends BaseTest
 
     public function testClientBadHost(): void
     {
-        $this->expectException(HttpException::class);
+        $this->expectException(NoNodeAvailableException::class);
 
         $client = $this->_getClient(['host' => 'localhost', 'port' => '9201']);
         $client->getVersion();
@@ -43,7 +46,7 @@ class ClientFunctionalTest extends BaseTest
 
     public function testClientBadHostWithTimeout(): void
     {
-        $this->expectException(HttpException::class);
+        $this->expectException(NoNodeAvailableException::class);
 
         $client = $this->_getClient(['host' => 'foo.bar', 'timeout' => 10]);
         $client->getVersion();
@@ -145,7 +148,7 @@ class ClientFunctionalTest extends BaseTest
         $client = $this->_getClient();
         $response = $client->forcemergeAll();
 
-        $this->assertFalse($response->hasError());
+        $this->assertFalse(ResponseParser::hasError($response));
     }
 
     /**
@@ -276,7 +279,7 @@ class ClientFunctionalTest extends BaseTest
         // Refresh index
         $index->refresh();
 
-        $resultData = $result->getData();
+        $resultData = $result->asArray();
         $ids = [$resultData['_id']];
 
         // Check to make sure the document is in the index
@@ -337,7 +340,7 @@ class ClientFunctionalTest extends BaseTest
         // Refresh index
         $index->refresh();
 
-        $resultData = $result->getData();
+        $resultData = $result->asArray();
         $ids = [$resultData['_id']];
 
         // Check to make sure the document is in the index
@@ -361,13 +364,30 @@ class ClientFunctionalTest extends BaseTest
     {
         $client = $this->_getClient();
 
+        $httpClientOptions = [
+            RequestOptions::TIMEOUT => 1,
+            RequestOptions::CONNECT_TIMEOUT => 1,
+        ];
+
+        $transportConnectionBuilder1 = TransportBuilder::create();
+        $transportConnectionBuilder1->setHosts([$this->_getHost().':9100']);
+        $transportConnectionBuilder1->setClient(
+            $this->setHttpClientOptions($transportConnectionBuilder1->getClient(), [], $httpClientOptions)
+        );
+
+        $transportConnectionBuilder2 = TransportBuilder::create();
+        $transportConnectionBuilder2->setHosts([$this->_getHost().':9200']);
+        $transportConnectionBuilder2->setClient(
+            $this->setHttpClientOptions($transportConnectionBuilder1->getClient(), [], $httpClientOptions)
+        );
+
         // First connection work, second should not work
-        $connection1 = new Connection(['port' => '9100', 'timeout' => 2, 'host' => $this->_getHost()]);
-        $connection2 = new Connection(['port' => '9200', 'timeout' => 2, 'host' => $this->_getHost()]);
+        $connection1 = new Connection(['port' => '9100', 'timeout' => 2, 'host' => $this->_getHost(), 'transport' => $transportConnectionBuilder1->build()]);
+        $connection2 = new Connection(['port' => '9200', 'timeout' => 2, 'host' => $this->_getHost(), 'transport' => $transportConnectionBuilder2->build()]);
 
         $client->setConnections([$connection1, $connection2]);
 
-        $client->request('_stats');
+        $client->indices()->stats();
 
         $connections = $client->getConnections();
 
@@ -382,16 +402,33 @@ class ClientFunctionalTest extends BaseTest
     {
         $client = $this->_getClient();
 
+        $httpClientOptions = [
+            RequestOptions::TIMEOUT => 1,
+            RequestOptions::CONNECT_TIMEOUT => 1,
+        ];
+
+        $transportConnectionBuilder1 = TransportBuilder::create();
+        $transportConnectionBuilder1->setHosts([$this->_getHost().':9101']);
+        $transportConnectionBuilder1->setClient(
+            $this->setHttpClientOptions($transportConnectionBuilder1->getClient(), [], $httpClientOptions)
+        );
+
+        $transportConnectionBuilder2 = TransportBuilder::create();
+        $transportConnectionBuilder2->setHosts([$this->_getHost().':9102']);
+        $transportConnectionBuilder2->setClient(
+            $this->setHttpClientOptions($transportConnectionBuilder1->getClient(), [], $httpClientOptions)
+        );
+
         // First connection work, second should not work
-        $connection1 = new Connection(['port' => '9101', 'timeout' => 2]);
-        $connection2 = new Connection(['port' => '9102', 'timeout' => 2]);
+        $connection1 = new Connection(['host' => $this->_getHost(), 'port' => '9101', 'timeout' => 2, 'transport' => $transportConnectionBuilder1->build()]);
+        $connection2 = new Connection(['host' => $this->_getHost(), 'port' => '9102', 'timeout' => 2, 'transport' => $transportConnectionBuilder2->build()]);
 
         $client->setConnections([$connection1, $connection2]);
 
         try {
-            $client->request('_stats');
+            $client->indices()->stats();
             $this->fail('Should throw exception as no connection valid');
-        } catch (HttpException $e) {
+        } catch (NoNodeAvailableException $e) {
         }
 
         $connections = $client->getConnections();
@@ -400,7 +437,7 @@ class ClientFunctionalTest extends BaseTest
         $this->assertCount(2, $connections);
 
         // One connection has to be disabled
-        $this->assertTrue(false === $connections[0]->isEnabled() || false === $connections[1]->isEnabled());
+        $this->assertTrue(false === $connections[0]->isEnabled() && false === $connections[1]->isEnabled());
     }
 
     /**
@@ -410,10 +447,27 @@ class ClientFunctionalTest extends BaseTest
     {
         $count = 0;
 
+        $httpClientOptions = [
+            RequestOptions::TIMEOUT => 1,
+            RequestOptions::CONNECT_TIMEOUT => 1,
+        ];
+
+        $transportConnectionBuilder1 = TransportBuilder::create();
+        $transportConnectionBuilder1->setHosts([$this->_getHost().':9101']);
+        $transportConnectionBuilder1->setClient(
+            $this->setHttpClientOptions($transportConnectionBuilder1->getClient(), [], $httpClientOptions)
+        );
+
+        $transportConnectionBuilder2 = TransportBuilder::create();
+        $transportConnectionBuilder2->setHosts([$this->_getHost().':9102']);
+        $transportConnectionBuilder2->setClient(
+            $this->setHttpClientOptions($transportConnectionBuilder1->getClient(), [], $httpClientOptions)
+        );
+
         // Callback function which verifies that disabled connection objects are returned
         $callback = function (Connection $connection, \Exception $exception, Client $client) use (&$count): void {
             $this->assertInstanceOf(Connection::class, $connection);
-            $this->assertInstanceOf(ConnectionException::class, $exception);
+            $this->assertInstanceOf(NoNodeAvailableException::class, $exception);
             $this->assertInstanceOf(Client::class, $client);
             $this->assertFalse($connection->isEnabled());
             ++$count;
@@ -422,17 +476,17 @@ class ClientFunctionalTest extends BaseTest
         $client = $this->_getClient([], $callback);
 
         // First connection work, second should not work
-        $connection1 = new Connection(['port' => '9101', 'timeout' => 2]);
-        $connection2 = new Connection(['port' => '9102', 'timeout' => 2]);
+        $connection1 = new Connection(['port' => '9101', 'timeout' => 2, 'transport' => $transportConnectionBuilder1->build()]);
+        $connection2 = new Connection(['port' => '9102', 'timeout' => 2, 'transport' => $transportConnectionBuilder2->build()]);
 
         $client->setConnections([$connection1, $connection2]);
 
         $this->assertEquals(0, $count);
 
         try {
-            $client->request('_stats');
+            $client->indices()->stats();
             $this->fail('Should throw exception as no connection valid');
-        } catch (HttpException $e) {
+        } catch (NoNodeAvailableException $e) {
             $this->assertTrue(true);
         }
 
@@ -447,9 +501,9 @@ class ClientFunctionalTest extends BaseTest
         // Url should overwrite invalid host
         $client = $this->_getClient(['url' => $url, 'port' => '9101', 'timeout' => 2]);
 
-        $response = $client->request('_stats');
+        $response = $client->indices()->stats();
 
-        $this->assertTrue($response->isOk());
+        $this->assertTrue(ResponseChecker::isOk($response));
     }
 
     public function testUpdateDocumentByDocument(): void
@@ -553,7 +607,7 @@ class ClientFunctionalTest extends BaseTest
         ];
 
         $response = $client->updateDocument(1, $rawData, $index->getName(), ['retry_on_conflict' => 1]);
-        $this->assertTrue($response->isOk());
+        $this->assertTrue(ResponseChecker::isOk($response));
 
         $document = $index->getDocument(1);
 
@@ -718,15 +772,15 @@ class ClientFunctionalTest extends BaseTest
     public function testLastRequestResponse(): void
     {
         $client = $this->_getClient();
-        $response = $client->request('_stats');
+        $response = $client->indices()->stats();
 
         $lastRequest = $client->getLastRequest();
 
-        $this->assertInstanceOf(Request::class, $lastRequest);
-        $this->assertEquals('_stats', $lastRequest->getPath());
+        $this->assertInstanceOf(RequestInterface::class, $lastRequest);
+        $this->assertEquals('/_stats', $lastRequest->getUri()->getPath());
 
         $lastResponse = $client->getLastResponse();
-        $this->assertInstanceOf(Response::class, $lastResponse);
+        $this->assertInstanceOf(Elasticsearch::class, $lastResponse);
         $this->assertSame($response, $lastResponse);
     }
 
@@ -848,10 +902,8 @@ class ClientFunctionalTest extends BaseTest
             ],
         ];
 
-        $path = $index->getName().'/_search';
-
-        $response = $client->request($path, Request::GET, $query);
-        $responseArray = $response->getData();
+        $response = $client->search(['body' => $query]);
+        $responseArray = $response->asArray();
 
         $this->assertEquals(1, $responseArray['hits']['total']['value']);
     }
@@ -871,57 +923,10 @@ class ClientFunctionalTest extends BaseTest
 
         $path = $index->getName().'/_search';
 
-        $response = $client->request($path, Request::GET, $query);
-        $responseArray = $response->getData();
+        $response = $client->search(['body' => $query]);
+        $responseArray = $response->asArray();
 
         $this->assertEquals(1, $responseArray['hits']['total']['value']);
-    }
-
-    public function testLogger(): void
-    {
-        /** @var LoggerInterface&MockObject $logger */
-        $logger = $this->createMock(LoggerInterface::class);
-        $client = $this->_getClient([], null, $logger);
-
-        $logger->expects($this->once())
-            ->method('debug')
-            ->with(
-                'Elastica Request',
-                $this->logicalAnd(
-                    $this->arrayHasKey('request'),
-                    $this->arrayHasKey('response'),
-                    $this->arrayHasKey('responseStatus')
-                )
-            )
-        ;
-
-        $client->request('_stats');
-    }
-
-    public function testLoggerOnFailure(): void
-    {
-        $this->expectException(HttpException::class);
-
-        /** @var LoggerInterface&MockObject $logger */
-        $logger = $this->createMock(LoggerInterface::class);
-        $client = $this->_getClient(['connections' => [
-            ['host' => $this->_getHost(), 'port' => 9201],
-        ]], null, $logger);
-
-        $logger->expects($this->once())
-            ->method('error')
-            ->with(
-                'Elastica Request Failure',
-                $this->logicalAnd(
-                    $this->arrayHasKey('exception'),
-                    $this->arrayHasKey('request'),
-                    $this->arrayHasKey('retry'),
-                    $this->logicalNot($this->arrayHasKey('response'))
-                )
-            )
-        ;
-
-        $client->request('_stats');
     }
 
     public function testDateMathEscapingWithMixedRequestTypes(): void
@@ -951,20 +956,6 @@ class ClientFunctionalTest extends BaseTest
         $bulk->send();
     }
 
-    public function testDateMathEscapingWithEscapedPath(): void
-    {
-        $client = $this->_getClient();
-
-        $now = new \DateTime();
-
-        // e.g. test-2018.01.01
-        $staticIndex = $client->getIndex('test-'.$now->format('Y.m.d'));
-        $staticIndex->create();
-
-        // It should not double escape the index name, since it came already escaped.
-        $client->request('<test-{now%2Fd}>/_refresh');
-    }
-
     public function testEndpointParamsRequest(): void
     {
         $index = $this->_createIndex();
@@ -979,11 +970,11 @@ class ClientFunctionalTest extends BaseTest
         /** @var Response $response */
         $response = $client->indices()->stats(['index' => $index->getName(), 'metric' => ['indexing']]);
 
-        $this->assertArrayHasKey('index_total', $response->getData()['indices'][$index->getName()]['total']['indexing']);
+        $this->assertArrayHasKey('index_total', $response->asArray()['indices'][$index->getName()]['total']['indexing']);
 
         $this->assertSame(
             2,
-            $response->getData()['indices'][$index->getName()]['total']['indexing']['index_total']
+            $response->asArray()['indices'][$index->getName()]['total']['indexing']['index_total']
         );
     }
 
@@ -1014,7 +1005,7 @@ class ClientFunctionalTest extends BaseTest
 
         $response = $client->search(['index' => $index->getName(), 'body' => $query]);
         /** @var Response $response */
-        $responseArray = $response->getData();
+        $responseArray = $response->asArray();
 
         $this->assertEquals($totalHits, $responseArray['hits']['total']['value']);
     }
@@ -1025,5 +1016,18 @@ class ClientFunctionalTest extends BaseTest
             ['ruflin', 1],
             ['ruflin2', 0],
         ];
+    }
+
+    protected function setHttpClientOptions(HttpClientInterface $client, array $config, array $clientOptions = []): HttpClientInterface
+    {
+        if (empty($config) && empty($clientOptions)) {
+            return $client;
+        }
+        $class = \get_class($client);
+        $adapterClass = AdapterOptions::HTTP_ADAPTERS[$class];
+
+        $adapter = new $adapterClass();
+
+        return $adapter->setConfig($client, $config, $clientOptions);
     }
 }

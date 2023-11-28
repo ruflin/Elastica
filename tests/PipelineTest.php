@@ -2,14 +2,15 @@
 
 namespace Elastica\Test;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Bulk;
 use Elastica\Client;
 use Elastica\Document;
-use Elastica\Exception\ResponseException;
 use Elastica\Pipeline;
 use Elastica\Processor\RenameProcessor;
 use Elastica\Processor\SetProcessor;
 use Elastica\Processor\TrimProcessor;
+use Elastica\ResponseParser;
 
 /**
  * @internal
@@ -68,11 +69,11 @@ class PipelineTest extends BasePipeline
 
         $result = $pipeline->create();
 
-        $this->assertArrayHasKey('acknowledged', $result->getData());
-        $this->assertTrue($result->getData()['acknowledged']);
+        $this->assertArrayHasKey('acknowledged', $result->asArray());
+        $this->assertTrue($result->asArray()['acknowledged']);
 
         $pipeGet = $pipeline->getPipeline('my_custom_pipeline');
-        $result = $pipeGet->getData();
+        $result = $pipeGet->asArray();
 
         $this->assertSame('pipeline for Set', $result['my_custom_pipeline']['description']);
         $this->assertSame('field4', $result['my_custom_pipeline']['processors'][0]['set']['field']);
@@ -92,8 +93,8 @@ class PipelineTest extends BasePipeline
 
         $result = $pipeline->create();
 
-        $this->assertArrayHasKey('acknowledged', $result->getData());
-        $this->assertTrue($result->getData()['acknowledged']);
+        $this->assertArrayHasKey('acknowledged', $result->asArray());
+        $this->assertTrue($result->asArray()['acknowledged']);
 
         $index = $this->_createIndex('testpipelinecreation');
 
@@ -131,8 +132,8 @@ class PipelineTest extends BasePipeline
         try {
             $pipeline->deletePipeline('non_existent_pipeline');
             $this->fail('an exception should be raised!');
-        } catch (ResponseException $e) {
-            $result = $e->getResponse()->getFullError();
+        } catch (ClientResponseException $e) {
+            $result = ResponseParser::getFullError($e->getResponse());
 
             $this->assertEquals('resource_not_found_exception', $result['type']);
             $this->assertEquals('pipeline [non_existent_pipeline] is missing', $result['reason']);

@@ -66,7 +66,7 @@ class NodeTest extends BaseTest
         // At least 1 instance must exist
         $this->assertGreaterThan(0, $nodes);
 
-        $data = $client->request('_nodes')->getData();
+        $data = $client->nodes()->info()->asArray();
         $rawNodes = $data['nodes'];
 
         foreach ($nodes as $node) {

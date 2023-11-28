@@ -2,9 +2,9 @@
 
 namespace Elastica\Test\Aggregation;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Aggregation\DateRange;
 use Elastica\Document;
-use Elastica\Exception\ResponseException;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
@@ -133,8 +133,8 @@ class DateRangeTest extends BaseAggregationTest
         try {
             $this->_getIndexForTest()->search($query)->getAggregation('date');
             $this->fail('Should throw exception to and from parameters in date_range aggregation are interpreted according of the target field');
-        } catch (ResponseException $e) {
-            $error = $e->getResponse()->getFullError();
+        } catch (ClientResponseException $e) {
+            $error = \json_decode($e->getResponse()->getBody(), true)['error'] ?? null;
 
             $this->assertSame('search_phase_execution_exception', $error['type']);
             $this->assertStringStartsWith('failed to parse date field', $error['root_cause'][0]['reason']);

@@ -2,14 +2,15 @@
 
 namespace Elastica\Test\Bulk;
 
+use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastica\Bulk;
 use Elastica\Bulk\Action;
 use Elastica\Bulk\ResponseSet;
 use Elastica\Client;
 use Elastica\Exception\Bulk\Response\ActionException;
 use Elastica\Exception\Bulk\ResponseException;
-use Elastica\Response;
 use Elastica\Test\Base as BaseTest;
+use GuzzleHttp\Psr7\Response;
 
 /**
  * @internal
@@ -26,11 +27,6 @@ class ResponseSetTest extends BaseTest
         $responseSet = $this->_createResponseSet($responseData, $actions);
 
         $this->assertEquals(200, $responseSet->getStatus());
-        $this->assertEquals(12.3, $responseSet->getQueryTime());
-        $this->assertEquals([
-            'url' => 'http://127.0.0.1:9200/_bulk',
-            'http_code' => 200,
-        ], $responseSet->getTransferInfo());
     }
 
     /**
@@ -146,15 +142,19 @@ class ResponseSetTest extends BaseTest
     {
         $client = $this->createMock(Client::class);
 
-        $response = new Response($responseData, 200);
-        $response->setQueryTime(12.3);
-        $response->setTransferInfo([
-            'url' => 'http://127.0.0.1:9200/_bulk',
-            'http_code' => 200,
-        ]);
+        $response = new Elasticsearch();
+        $response->setResponse(new Response(
+            200,
+            [
+                Elasticsearch::HEADER_CHECK => Elasticsearch::PRODUCT_NAME,
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ],
+            \json_encode($responseData)
+        ));
 
         $client->expects($this->once())
-            ->method('request')
+            ->method('baseBulk')
             ->withAnyParameters()
             ->willReturn($response)
         ;

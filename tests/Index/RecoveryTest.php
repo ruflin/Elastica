@@ -3,6 +3,7 @@
 namespace Elastica\Test\Index;
 
 use Elastica\Index\Recovery;
+use Elastica\ResponseChecker;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -25,6 +26,6 @@ class RecoveryTest extends BaseTest
         $recovery = $index->getRecovery();
         $this->assertInstanceOf(Recovery::class, $recovery);
 
-        $this->assertTrue($recovery->getResponse()->isOk());
+        $this->assertTrue(ResponseChecker::isOk($recovery->getResponse()));
     }
 }

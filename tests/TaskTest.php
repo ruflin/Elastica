@@ -99,7 +99,7 @@ class TaskTest extends Base
 
         // Create delete-by-query task
         $response = $index->deleteByQuery('ruflin', ['wait_for_completion' => 'false']);
-        $id = $response->getData()['task'];
+        $id = $response->asArray()['task'];
 
         $this->assertNotEmpty($id, 'Failed to create task');
 

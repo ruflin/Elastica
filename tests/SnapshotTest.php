@@ -5,6 +5,7 @@ namespace Elastica\Test;
 use Elastica\Document;
 use Elastica\Exception\NotFoundException;
 use Elastica\Index;
+use Elastica\ResponseChecker;
 use Elastica\Snapshot;
 
 /**
@@ -68,9 +69,9 @@ class SnapshotTest extends Base
         $response = $this->snapshot->createSnapshot(self::REPOSITORY_NAME, $snapshotName, ['indices' => $this->index->getName()], true);
 
         // ensure that the snapshot was created properly
-        $this->assertTrue($response->isOk());
-        $this->assertArrayHasKey('snapshot', $response->getData());
-        $data = $response->getData();
+        $this->assertTrue(ResponseChecker::isOk($response));
+        $this->assertArrayHasKey('snapshot', $response->asArray());
+        $data = $response->asArray();
         $this->assertContains($this->index->getName(), $data['snapshot']['indices']);
 
         $this->markTestSkipped('Failed asserting that actual size 2 matches expected size 1.');
@@ -86,7 +87,7 @@ class SnapshotTest extends Base
 
         // restore the index from our snapshot
         $response = $this->snapshot->restoreSnapshot(self::REPOSITORY_NAME, $snapshotName, [], true);
-        $this->assertTrue($response->isOk());
+        $this->assertTrue(ResponseChecker::isOk($response));
 
         $this->index->refresh();
         $this->index->forcemerge();
@@ -97,7 +98,7 @@ class SnapshotTest extends Base
 
         // delete the snapshot
         $response = $this->snapshot->deleteSnapshot(self::REPOSITORY_NAME, $snapshotName);
-        $this->assertTrue($response->isOk());
+        $this->assertTrue(ResponseChecker::isOk($response));
 
         // ensure that the snapshot has been deleted
         $this->expectException(NotFoundException::class);
@@ -109,7 +110,7 @@ class SnapshotTest extends Base
         $location = self::SNAPSHOT_PATH.'/'.$name;
 
         $response = $this->snapshot->registerRepository(self::REPOSITORY_NAME, 'fs', ['location' => $location]);
-        $this->assertTrue($response->isOk());
+        $this->assertTrue(ResponseChecker::isOk($response));
 
         return $location;
     }

@@ -2,8 +2,8 @@
 
 namespace Elastica\Test;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Document;
-use Elastica\Exception\ResponseException;
 use Elastica\Index;
 use Elastica\Pipeline;
 use Elastica\Processor\RenameProcessor;
@@ -32,7 +32,7 @@ class ReindexTest extends Base
         $newIndex->refresh();
 
         $this->assertEquals($oldIndex->count(), $newIndex->count());
-        $this->assertEquals($oldIndex->count(), $response->getData()['created']);
+        $this->assertEquals($oldIndex->count(), $response->asArray()['created']);
     }
 
     /**
@@ -82,10 +82,15 @@ class ReindexTest extends Base
             Reindex::OPERATION_TYPE => Reindex::OPERATION_TYPE_CREATE,
         ]);
 
-        $response = $reindex->run();
-        $newIndex->refresh();
+        try {
+            $reindex->run();
 
-        $this->assertEquals(5, $response->getData()['version_conflicts']);
+            $this->fail('Elasticsearch should have thrown an Exception.');
+        } catch (ClientResponseException $e) {
+            $newIndex->refresh();
+
+            $this->assertEquals(5, \json_decode($e->getResponse()->getBody()->__toString(), true)['version_conflicts']);
+        }
     }
 
     /**
@@ -198,7 +203,7 @@ class ReindexTest extends Base
             $reindex->run();
 
             $this->fail('Elasticsearch should have thrown an Exception, maybe the remote option has not been sent.');
-        } catch (ResponseException $exception) {
+        } catch (ClientResponseException $exception) {
             $this->assertStringContainsString('reindex.remote.whitelist', $exception->getMessage());
         }
     }
