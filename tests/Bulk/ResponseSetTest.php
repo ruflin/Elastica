@@ -10,7 +10,7 @@ use Elastica\Client;
 use Elastica\Exception\Bulk\Response\ActionException;
 use Elastica\Exception\Bulk\ResponseException;
 use Elastica\Test\Base as BaseTest;
-use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Response as Psr7Response;
 
 /**
  * @internal
@@ -143,7 +143,7 @@ class ResponseSetTest extends BaseTest
         $client = $this->createMock(Client::class);
 
         $response = new Elasticsearch();
-        $response->setResponse(new Response(
+        $response->setResponse(new Psr7Response(
             200,
             [
                 Elasticsearch::HEADER_CHECK => Elasticsearch::PRODUCT_NAME,

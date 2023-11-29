@@ -13,7 +13,6 @@ use Elastica\Query\FunctionScore;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
 use Elastica\Request;
-use Elastica\ResponseChecker;
 use Elastica\ResponseParser;
 use Elastica\ResultSet;
 use Elastica\Script\Script;
