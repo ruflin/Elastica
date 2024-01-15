@@ -253,7 +253,7 @@ class DocumentTest extends BaseTest
         }
 
         $this->assertEquals('changed1', $document->field1);
-        $this->assertFalse(property_exists($document, 'field3'));
+        $this->assertFalse(\property_exists($document, 'field3'));
 
         $newData = $document->getData();
 

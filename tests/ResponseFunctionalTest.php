@@ -7,7 +7,6 @@ use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\ResponseChecker;
-use Elastica\ResponseParser;
 use Elastica\Test\Base as BaseTest;
 
 /**

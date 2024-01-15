@@ -2,7 +2,6 @@
 
 namespace Elastica\ResultSet;
 
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastica\Query;
 use Elastica\Response;
 use Elastica\ResultSet;

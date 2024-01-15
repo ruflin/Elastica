@@ -12,7 +12,6 @@ use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Document;
 use Elastica\Exception\NotFoundException;
-use Elastica\Response;
 use Elastica\ResponseChecker;
 use Elastica\ResponseParser;
 use Elastica\Script\Script;

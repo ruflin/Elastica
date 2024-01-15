@@ -16,7 +16,7 @@ class MultiBuilder implements MultiBuilderInterface
         $resultSets = $this->buildResultSets($response, $searches);
 
         return new ResultSet($response, $resultSets);
-    } 
+    }
 
     private function buildResultSet(Response $childResponse, BaseSearch $search): BaseResultSet
     {

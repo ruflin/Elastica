@@ -6,7 +6,6 @@ use Elastica\Query;
 use Elastica\Query\MatchQuery;
 use Elastica\Query\Term;
 use Elastica\Rescore\Query as QueryRescore;
-use Elastica\ResponseChecker;
 use Elastica\Test\Base as BaseTest;
 
 /**
