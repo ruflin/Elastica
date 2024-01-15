@@ -171,11 +171,6 @@ parameters:
 			path: tests/SearchTest.php
 
 		-
-			message: "#^Unreachable statement \\- code above always terminates\\.$#"
-			count: 1
-			path: tests/SnapshotTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$suggestion of static method Elastica\\\\Suggest\\:\\:create\\(\\) expects Elastica\\\\Suggest\\|Elastica\\\\Suggest\\\\AbstractSuggest, Elastica\\\\Query\\\\BoolQuery given\\.$#"
 			count: 1
 			path: tests/SuggestTest.php
