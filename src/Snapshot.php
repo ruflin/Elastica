@@ -155,6 +155,25 @@ class Snapshot
     }
 
     /**
+     * Delete a repository.
+     *
+     * @param string $repository the name of the repository from which to retrieve the snapshot
+     *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
+     * @throws NotFoundException
+     * @throws ClientException
+     */
+    public function deleteRepository($repository): Response
+    {
+        return $this->_client->toElasticaResponse(
+            $this->_client->snapshot()->deleteRepository(['repository' => $repository])
+        );
+    }
+
+    /**
      * Retrieve data regarding all snapshots in the given repository.
      *
      * @param string $repository the repository name
@@ -168,7 +187,9 @@ class Snapshot
      */
     public function getAllSnapshots($repository)
     {
-        return $this->_client->snapshot()->getRepository()->asArray();
+        $data = $this->_client->snapshot()->get(['repository' => $repository, 'snapshot' => '*'])->asArray();
+
+        return $data['snapshots'] ?? [];
     }
 
     /**
