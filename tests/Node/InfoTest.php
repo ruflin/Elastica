@@ -38,6 +38,25 @@ class InfoTest extends BaseTest
     /**
      * @group functional
      */
+    public function testHasPlugin(): void
+    {
+        $client = $this->_getClient();
+        $nodes = $client->getCluster()->getNodes();
+        $node = $nodes[0];
+        $info = $node->getInfo();
+
+        $this->assertFalse($info->hasPlugin('foo'));
+
+        if (\version_compare($_SERVER['ES_VERSION'], '8.4.0', '>=')) {
+            $this->markTestIncomplete('The Ingest Attachment plugin is now included in Elasticsearch. https://www.elastic.co/guide/en/elasticsearch/plugins/8.4/ingest-attachment.html');
+        } else {
+            $this->assertTrue($info->hasPlugin('ingest-attachment'));
+        }
+    }
+
+    /**
+     * @group functional
+     */
     public function testGetId(): void
     {
         $client = $this->_getClient();
