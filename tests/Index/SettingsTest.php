@@ -5,7 +5,6 @@ namespace Elastica\Test\Index;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Document;
 use Elastica\Index\Settings as IndexSettings;
-use Elastica\ResponseChecker;
 use Elastica\ResponseParser;
 use Elastica\Test\Base as BaseTest;
 
@@ -314,7 +313,7 @@ class SettingsTest extends BaseTest
 
         $response = $settings->setMergePolicy('max_merge_at_once', 15);
         $this->assertEquals(15, $settings->getMergePolicy('max_merge_at_once'));
-        $this->assertTrue(ResponseChecker::isOk($response));
+        $this->assertTrue($response->isOk());
 
         $settings->setMergePolicy('max_merge_at_once', 10);
         $this->assertEquals(10, $settings->getMergePolicy('max_merge_at_once'));
@@ -357,7 +356,7 @@ class SettingsTest extends BaseTest
 
         // Remove read only, add document
         $response = $index->getSettings()->setReadOnly(false);
-        $this->assertTrue(ResponseChecker::isOk($response));
+        $this->assertTrue($response->isOk());
 
         $index->addDocument($doc3);
         $index->refresh();

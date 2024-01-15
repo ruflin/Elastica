@@ -2,7 +2,6 @@
 
 namespace Elastica\Bulk;
 
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastica\Response as BaseResponse;
 
 class ResponseSet extends BaseResponse implements \Iterator, \Countable
@@ -20,9 +19,9 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     /**
      * @param Response[] $bulkResponses
      */
-    public function __construct(Elasticsearch $response, array $bulkResponses)
+    public function __construct(BaseResponse $response, array $bulkResponses)
     {
-        parent::__construct($response->asArray(), $response->getStatusCode());
+        parent::__construct($response->getData(), $response->getStatus());
 
         $this->_bulkResponses = $bulkResponses;
     }

@@ -11,7 +11,6 @@ use Elastica\Query\QueryString;
 use Elastica\Query\SimpleQueryString;
 use Elastica\Query\Term;
 use Elastica\Request;
-use Elastica\ResponseChecker;
 use Elastica\Script\Script;
 use Elastica\Status;
 use Elastica\Test\Base as BaseTest;
@@ -113,10 +112,10 @@ class IndexTest extends BaseTest
         $resultSet = $index->search('ruflin');
         $this->assertEquals(1, $resultSet->count());
 
-        $data = $index->addAlias($aliasName, true)->asArray();
+        $data = $index->addAlias($aliasName, true)->getData();
         $this->assertTrue($data['acknowledged']);
 
-        $response = $index->removeAlias($aliasName)->asArray();
+        $response = $index->removeAlias($aliasName)->getData();
         $this->assertTrue($response['acknowledged']);
 
         $client->getIndex($aliasName)->search('ruflin');
@@ -211,7 +210,7 @@ class IndexTest extends BaseTest
 
         // Delete first document
         $response = $index->deleteByQuery('nicolas');
-        $this->assertTrue(ResponseChecker::isOk($response));
+        $this->assertTrue($response->isOk());
 
         $index->refresh();
 
@@ -243,7 +242,7 @@ class IndexTest extends BaseTest
 
         // Delete first document
         $response = $index->deleteByQuery(new SimpleQueryString('nicolas'));
-        $this->assertTrue(ResponseChecker::isOk($response));
+        $this->assertTrue($response->isOk());
 
         $index->refresh();
 
@@ -275,7 +274,7 @@ class IndexTest extends BaseTest
 
         // Delete first document
         $response = $index->deleteByQuery(['query' => ['query_string' => ['query' => 'nicolas']]]);
-        $this->assertTrue(ResponseChecker::isOk($response));
+        $this->assertTrue($response->isOk());
 
         $index->refresh();
 
@@ -322,7 +321,7 @@ class IndexTest extends BaseTest
 
         // Route to the wrong document id; should not delete
         $response = $index->deleteByQuery(new SimpleQueryString('nicolas'), ['routing' => $routing2]);
-        $this->assertTrue(ResponseChecker::isOk($response));
+        $this->assertTrue($response->isOk());
 
         $index->refresh();
 
@@ -334,7 +333,7 @@ class IndexTest extends BaseTest
 
         // Delete first document
         $response = $index->deleteByQuery(new SimpleQueryString('nicolas'), ['routing' => $routing1]);
-        $this->assertTrue(ResponseChecker::isOk($response));
+        $this->assertTrue($response->isOk());
 
         $index->refresh();
 
@@ -383,7 +382,7 @@ class IndexTest extends BaseTest
 
         // Update the element, searched by specific word. Should match first one
         $response = $index->updateByQuery('nicolas', new Script('ctx._source.name = "marc"'));
-        $this->assertTrue(ResponseChecker::isOk($response));
+        $this->assertTrue($response->isOk());
 
         $index->refresh();
 
@@ -418,7 +417,7 @@ class IndexTest extends BaseTest
 
         // Update all elements to name "marc"
         $response = $index->updateByQuery('*', new Script('ctx._source.name = "marc"'));
-        $this->assertTrue(ResponseChecker::isOk($response));
+        $this->assertTrue($response->isOk());
 
         $index->refresh();
 
@@ -469,9 +468,9 @@ class IndexTest extends BaseTest
         $index = $this->_createIndex();
         $response = $index->openPointInTime('10s');
 
-        $this->assertTrue($response->getStatusCode() >= 200 && $response->getStatusCode() < 300);
+        $this->assertTrue($response->getStatus() >= 200 && $response->getStatus() < 300);
 
-        $data = $response->asArray();
+        $data = $response->getData();
         $this->assertIsArray($data);
         $this->assertArrayHasKey('id', $data);
     }
@@ -544,11 +543,11 @@ class IndexTest extends BaseTest
         $doc1->set('title', 'Hello world');
 
         $return = $index->addDocument($doc1);
-        $data = $return->asArray();
+        $data = $return->getData();
         $this->assertEquals(1, $data['_version']);
 
         $return = $index->addDocument($doc1);
-        $data = $return->asArray();
+        $data = $return->getData();
         $this->assertEquals(2, $data['_version']);
     }
 
@@ -581,7 +580,7 @@ class IndexTest extends BaseTest
     {
         $index = $this->_createIndex();
         $response = $index->clearCache();
-        $this->assertFalse(ResponseChecker::hasError($response));
+        $this->assertFalse($response->hasError());
     }
 
     /**
@@ -591,7 +590,7 @@ class IndexTest extends BaseTest
     {
         $index = $this->_createIndex();
         $response = $index->flush();
-        $this->assertFalse(ResponseChecker::hasError($response));
+        $this->assertFalse($response->hasError());
     }
 
     /**

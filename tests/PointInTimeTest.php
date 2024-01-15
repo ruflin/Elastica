@@ -2,7 +2,6 @@
 
 namespace Elastica\Test;
 
-use Elastica\ResponseChecker;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -17,14 +16,14 @@ class PointInTimeTest extends BaseTest
     {
         $index = $this->_createIndex();
         $pitOpenResponse = $index->openPointInTime('10s');
-        $this->assertTrue(ResponseChecker::isOk($pitOpenResponse));
+        $this->assertTrue($pitOpenResponse->isOk());
 
-        $pitId = $pitOpenResponse->asArray()['id'];
+        $pitId = $pitOpenResponse->getData()['id'];
 
         $client = $index->getClient();
         $pitCloseResponse = $client->closePointInTime($pitId);
-        $this->assertTrue(ResponseChecker::isOk($pitCloseResponse));
+        $this->assertTrue($pitCloseResponse->isOk());
 
-        $this->assertArrayHasKey('num_freed', $pitCloseResponse->asArray());
+        $this->assertArrayHasKey('num_freed', $pitCloseResponse->getData());
     }
 }

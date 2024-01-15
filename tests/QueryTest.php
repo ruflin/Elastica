@@ -601,7 +601,7 @@ class QueryTest extends BaseTest
     public function testPointInTimeQueryExecution(): void
     {
         $index = $this->_createIndex();
-        $pitId = $index->openPointInTime('20s')->asArray()['id'];
+        $pitId = $index->openPointInTime('20s')->getData()['id'];
 
         $query = (new Query())->setPointInTime(new PointInTime($pitId, '20s'));
         $search = (new Search($index->getClient()))->setQuery($query);

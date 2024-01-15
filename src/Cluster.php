@@ -4,7 +4,6 @@ namespace Elastica;
 
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\ServerResponseException;
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Cluster\Health;
 use Elastica\Cluster\Settings;
@@ -29,7 +28,7 @@ class Cluster
     /**
      * Cluster state response.
      *
-     * @var Elasticsearch
+     * @var Response
      */
     protected $_response;
 
@@ -59,14 +58,14 @@ class Cluster
      */
     public function refresh(): void
     {
-        $this->_response = $this->_client->cluster()->state();
-        $this->_data = $this->getResponse()->asArray();
+        $this->_response = $this->_client->toElasticaResponse($this->_client->cluster()->state());
+        $this->_data = $this->getResponse()->getData();
     }
 
     /**
      * Returns the response object.
      */
-    public function getResponse(): Elasticsearch
+    public function getResponse(): Response
     {
         return $this->_response;
     }

@@ -5,7 +5,6 @@ namespace Elastica;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\MissingParameterException;
 use Elastic\Elasticsearch\Exception\ServerResponseException;
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\InvalidException;
@@ -56,12 +55,12 @@ class IndexTemplate
      * @throws ClientResponseException   if the status code of response is 4xx
      * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     *
-     * @return Elasticsearch
      */
-    public function delete()
+    public function delete(): Response
     {
-        return $this->_client->indices()->deleteTemplate(['name' => $this->getName()]);
+        return $this->_client->toElasticaResponse(
+            $this->_client->indices()->deleteTemplate(['name' => $this->getName()])
+        );
     }
 
     /**
@@ -76,12 +75,12 @@ class IndexTemplate
      * @throws ClientResponseException   if the status code of response is 4xx
      * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     *
-     * @return Elasticsearch
      */
-    public function create(array $args = [])
+    public function create(array $args = []): Response
     {
-        return $this->_client->indices()->putTemplate(['name' => $this->getName(), 'body' => $args]);
+        return $this->_client->toElasticaResponse(
+            $this->_client->indices()->putTemplate(['name' => $this->getName(), 'body' => $args])
+        );
     }
 
     /**
@@ -92,10 +91,8 @@ class IndexTemplate
      * @throws ClientResponseException   if the status code of response is 4xx
      * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     *
-     * @return bool
      */
-    public function exists()
+    public function exists(): bool
     {
         $response = $this->_client->indices()->existsTemplate(['name' => $this->getName()]);
 
@@ -104,20 +101,16 @@ class IndexTemplate
 
     /**
      * Returns the index template name.
-     *
-     * @return string Index name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->_name;
     }
 
     /**
      * Returns index template client.
-     *
-     * @return Client
      */
-    public function getClient()
+    public function getClient(): Client
     {
         return $this->_client;
     }

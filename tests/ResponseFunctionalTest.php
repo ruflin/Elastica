@@ -6,7 +6,6 @@ use Elastica\Document;
 use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
-use Elastica\ResponseChecker;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -53,7 +52,7 @@ class ResponseFunctionalTest extends BaseTest
         $doc = new Document('1', ['name' => 'ruflin']);
         $response = $index->addDocument($doc);
 
-        $this->assertTrue(ResponseChecker::isOk($response));
+        $this->assertTrue($response->isOk());
     }
 
     public function testIsOkMultiple(): void

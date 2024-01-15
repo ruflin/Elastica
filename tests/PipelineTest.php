@@ -69,11 +69,11 @@ class PipelineTest extends BasePipeline
 
         $result = $pipeline->create();
 
-        $this->assertArrayHasKey('acknowledged', $result->asArray());
-        $this->assertTrue($result->asArray()['acknowledged']);
+        $this->assertArrayHasKey('acknowledged', $result->getData());
+        $this->assertTrue($result->getData()['acknowledged']);
 
         $pipeGet = $pipeline->getPipeline('my_custom_pipeline');
-        $result = $pipeGet->asArray();
+        $result = $pipeGet->getData();
 
         $this->assertSame('pipeline for Set', $result['my_custom_pipeline']['description']);
         $this->assertSame('field4', $result['my_custom_pipeline']['processors'][0]['set']['field']);
@@ -93,8 +93,8 @@ class PipelineTest extends BasePipeline
 
         $result = $pipeline->create();
 
-        $this->assertArrayHasKey('acknowledged', $result->asArray());
-        $this->assertTrue($result->asArray()['acknowledged']);
+        $this->assertArrayHasKey('acknowledged', $result->getData());
+        $this->assertTrue($result->getData()['acknowledged']);
 
         $index = $this->_createIndex('testpipelinecreation');
 

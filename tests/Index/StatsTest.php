@@ -3,7 +3,6 @@
 namespace Elastica\Test\Index;
 
 use Elastica\Index\Stats;
-use Elastica\ResponseChecker;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -26,7 +25,7 @@ class StatsTest extends BaseTest
         $stats = $index->getStats();
         $this->assertInstanceOf(Stats::class, $stats);
 
-        $this->assertTrue(ResponseChecker::isOk($stats->getResponse()));
+        $this->assertTrue($stats->getResponse()->isOk());
         $this->assertEquals(0, $stats->get('_all', 'indices', 'test', 'primaries', 'docs', 'count'));
     }
 }

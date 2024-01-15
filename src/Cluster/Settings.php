@@ -2,8 +2,8 @@
 
 namespace Elastica\Cluster;
 
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastica\Client;
+use Elastica\Response;
 
 /**
  * Cluster settings.
@@ -36,7 +36,7 @@ class Settings
      */
     public function get(): array
     {
-        return $this->getClient()->cluster()->getSettings()->asArray();
+        return $this->_client->cluster()->getSettings()->asArray();
     }
 
     /**
@@ -104,7 +104,7 @@ class Settings
      *
      * @param mixed $value
      */
-    public function setPersistent(string $key, $value): Elasticsearch
+    public function setPersistent(string $key, $value): Response
     {
         return $this->set(
             [
@@ -120,7 +120,7 @@ class Settings
      *
      * @param mixed $value
      */
-    public function setTransient(string $key, $value): Elasticsearch
+    public function setTransient(string $key, $value): Response
     {
         return $this->set(
             [
@@ -136,9 +136,9 @@ class Settings
      *
      * Second param can be used to set it persistent
      *
-     * @return Elasticsearch $response
+     * @return Response $response
      */
-    public function setReadOnly(bool $readOnly = true, bool $persistent = false): Elasticsearch
+    public function setReadOnly(bool $readOnly = true, bool $persistent = false): Response
     {
         $key = 'cluster.blocks.read_only';
 
@@ -154,9 +154,11 @@ class Settings
      *
      * @param array $settings Raw settings (including persistent or transient)
      */
-    public function set(array $settings): Elasticsearch
+    public function set(array $settings): Response
     {
-        return $this->getClient()->cluster()->putSettings(['body' => $settings]);
+        return $this->_client->toElasticaResponse(
+            $this->_client->cluster()->putSettings(['body' => $settings])
+        );
     }
 
     /**

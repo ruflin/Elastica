@@ -32,7 +32,7 @@ class ReindexTest extends Base
         $newIndex->refresh();
 
         $this->assertEquals($oldIndex->count(), $newIndex->count());
-        $this->assertEquals($oldIndex->count(), $response->asArray()['created']);
+        $this->assertEquals($oldIndex->count(), $response->getData()['created']);
     }
 
     /**

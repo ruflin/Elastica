@@ -5,7 +5,6 @@ namespace Elastica;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\MissingParameterException;
 use Elastic\Elasticsearch\Exception\ServerResponseException;
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Bulk\Action;
 use Elastica\Bulk\Action\AbstractDocument as AbstractDocumentAction;
@@ -304,13 +303,13 @@ class Bulk
      * @throws BulkResponseException
      * @throws InvalidException
      */
-    protected function _processResponse(Elasticsearch $response): ResponseSet
+    protected function _processResponse(Response $response): ResponseSet
     {
-        switch ($response->getStatusCode()) {
+        switch ($response->getStatus()) {
             case 413: throw new RequestEntityTooLargeException();
         }
 
-        $responseData = $response->asArray();
+        $responseData = $response->getData();
 
         $actions = $this->getActions();
 

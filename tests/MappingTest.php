@@ -6,7 +6,6 @@ use Elastica\Document;
 use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\QueryString;
-use Elastica\ResponseChecker;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -90,7 +89,7 @@ class MappingTest extends BaseTest
         ]);
 
         $response = $index->setMapping($mapping);
-        $this->assertFalse(ResponseChecker::hasError($response));
+        $this->assertFalse($response->hasError());
 
         $doc = new Document('1', [
             'user' => [

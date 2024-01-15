@@ -13,7 +13,6 @@ use Elastica\Connection;
 use Elastica\Document;
 use Elastica\Exception\NotFoundException;
 use Elastica\ResponseChecker;
-use Elastica\ResponseParser;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
 use GuzzleHttp\RequestOptions;
@@ -147,7 +146,7 @@ class ClientFunctionalTest extends BaseTest
         $client = $this->_getClient();
         $response = $client->forcemergeAll();
 
-        $this->assertFalse(ResponseParser::hasError($response));
+        $this->assertFalse($response->hasError());
     }
 
     /**
@@ -278,7 +277,7 @@ class ClientFunctionalTest extends BaseTest
         // Refresh index
         $index->refresh();
 
-        $resultData = $result->asArray();
+        $resultData = $result->getData();
         $ids = [$resultData['_id']];
 
         // Check to make sure the document is in the index
@@ -339,7 +338,7 @@ class ClientFunctionalTest extends BaseTest
         // Refresh index
         $index->refresh();
 
-        $resultData = $result->asArray();
+        $resultData = $result->getData();
         $ids = [$resultData['_id']];
 
         // Check to make sure the document is in the index
@@ -606,7 +605,7 @@ class ClientFunctionalTest extends BaseTest
         ];
 
         $response = $client->updateDocument(1, $rawData, $index->getName(), ['retry_on_conflict' => 1]);
-        $this->assertTrue(ResponseChecker::isOk($response));
+        $this->assertTrue($response->isOk());
 
         $document = $index->getDocument(1);
 

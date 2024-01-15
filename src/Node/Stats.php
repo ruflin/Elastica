@@ -4,10 +4,10 @@ namespace Elastica\Node;
 
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\ServerResponseException;
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Exception\ClientException;
 use Elastica\Node as BaseNode;
+use Elastica\Response;
 
 /**
  * Elastica cluster node object.
@@ -21,7 +21,7 @@ class Stats
     /**
      * Response.
      *
-     * @var Elasticsearch Response object
+     * @var Response Response object
      */
     protected $_response;
 
@@ -95,10 +95,8 @@ class Stats
 
     /**
      * Returns response object.
-     *
-     * @return Elasticsearch Response object
      */
-    public function getResponse(): Elasticsearch
+    public function getResponse(): Response
     {
         return $this->_response;
     }
@@ -110,13 +108,14 @@ class Stats
      * @throws ClientResponseException  if the status code of response is 4xx
      * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     *
-     * @return Elasticsearch Response object
      */
-    public function refresh(): Elasticsearch
+    public function refresh(): Response
     {
-        $this->_response = $this->getNode()->getClient()->nodes()->stats(['node_id' => $this->getNode()->getName()]);
-        $data = $this->getResponse()->asArray();
+        $client = $this->getNode()->getClient();
+        $this->_response = $client->toElasticaResponse(
+            $client->nodes()->stats(['node_id' => $this->getNode()->getName()])
+        );
+        $data = $this->getResponse()->getData();
         $this->_data = \reset($data['nodes']);
 
         return $this->_response;

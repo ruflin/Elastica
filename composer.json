@@ -17,15 +17,14 @@
     "require": {
         "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
         "ext-json": "*",
-        "elasticsearch/elasticsearch": "^8.11",
         "elastic/transport": "^8.8",
+        "elasticsearch/elasticsearch": "^8.11",
+        "guzzlehttp/psr7": "^2.0",
         "nyholm/dsn": "^2.0.0",
         "psr/log": "^1.0 || ^2.0 || ^3.0",
-        "symfony/deprecation-contracts": "^3.0",
-        "guzzlehttp/psr7": "^2.0"
+        "symfony/deprecation-contracts": "^3.0"
     },
     "require-dev": {
-        "aws/aws-sdk-php": "^3.155",
         "guzzlehttp/guzzle": "^7.2",
         "phpstan/phpstan": "^1.5",
         "phpstan/phpstan-phpunit": "^1.1",
@@ -47,14 +46,14 @@
             "Elastica\\Test\\": "tests/"
         }
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "7.0.x-dev"
-        }
-    },
     "config": {
         "allow-plugins": {
             "php-http/discovery": true
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "7.0.x-dev"
         }
     }
 }

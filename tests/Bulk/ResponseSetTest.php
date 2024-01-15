@@ -2,15 +2,14 @@
 
 namespace Elastica\Test\Bulk;
 
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastica\Bulk;
 use Elastica\Bulk\Action;
 use Elastica\Bulk\ResponseSet;
 use Elastica\Client;
 use Elastica\Exception\Bulk\Response\ActionException;
 use Elastica\Exception\Bulk\ResponseException;
+use Elastica\Response;
 use Elastica\Test\Base as BaseTest;
-use GuzzleHttp\Psr7\Response as Psr7Response;
 
 /**
  * @internal
@@ -142,16 +141,7 @@ class ResponseSetTest extends BaseTest
     {
         $client = $this->createMock(Client::class);
 
-        $response = new Elasticsearch();
-        $response->setResponse(new Psr7Response(
-            200,
-            [
-                Elasticsearch::HEADER_CHECK => Elasticsearch::PRODUCT_NAME,
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-            ],
-            \json_encode($responseData)
-        ));
+        $response = new Response($responseData, 200);
 
         $client->expects($this->once())
             ->method('baseBulk')

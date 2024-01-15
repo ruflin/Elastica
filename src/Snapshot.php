@@ -5,7 +5,6 @@ namespace Elastica;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\MissingParameterException;
 use Elastic\Elasticsearch\Exception\ServerResponseException;
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\NotFoundException;
@@ -40,7 +39,7 @@ class Snapshot
      * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
      */
-    public function registerRepository($name, $type, $settings = []): Elasticsearch
+    public function registerRepository($name, $type, $settings = []): Response
     {
         $params = [
             'repository' => $name,
@@ -50,7 +49,9 @@ class Snapshot
             ],
         ];
 
-        return $this->_client->snapshot()->createRepository($params);
+        return $this->_client->toElasticaResponse(
+            $this->_client->snapshot()->createRepository($params)
+        );
     }
 
     /**
@@ -109,10 +110,8 @@ class Snapshot
      * @throws ClientResponseException   if the status code of response is 4xx
      * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     *
-     * @return Elasticsearch
      */
-    public function createSnapshot($repository, $name, $options = [], $waitForCompletion = false)
+    public function createSnapshot($repository, $name, $options = [], $waitForCompletion = false): Response
     {
         $params = [
             'repository' => $repository,
@@ -120,7 +119,9 @@ class Snapshot
             'wait_for_completion' => $waitForCompletion,
         ];
 
-        return $this->_client->snapshot()->create(\array_merge($params, $options));
+        return $this->_client->toElasticaResponse(
+            $this->_client->snapshot()->create(\array_merge($params, $options))
+        );
     }
 
     /**
@@ -182,9 +183,11 @@ class Snapshot
      * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
      */
-    public function deleteSnapshot($repository, $name): Elasticsearch
+    public function deleteSnapshot($repository, $name): Response
     {
-        return $this->_client->snapshot()->delete(['repository' => $repository, 'snapshot' => $name]);
+        return $this->_client->toElasticaResponse(
+            $this->_client->snapshot()->delete(['repository' => $repository, 'snapshot' => $name])
+        );
     }
 
     /**
@@ -200,10 +203,8 @@ class Snapshot
      * @throws ClientResponseException   if the status code of response is 4xx
      * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     *
-     * @return Elasticsearch
      */
-    public function restoreSnapshot($repository, $name, $options = [], $waitForCompletion = false)
+    public function restoreSnapshot($repository, $name, $options = [], $waitForCompletion = false): Response
     {
         $params = [
             'repository' => $repository,
@@ -212,6 +213,8 @@ class Snapshot
             'wait_for_completion' => $waitForCompletion ? 'true' : 'false',
         ];
 
-        return $this->_client->snapshot()->restore($params);
+        return $this->_client->toElasticaResponse(
+            $this->_client->snapshot()->restore($params)
+        );
     }
 }

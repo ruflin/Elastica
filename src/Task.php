@@ -5,7 +5,6 @@ namespace Elastica;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\MissingParameterException;
 use Elastic\Elasticsearch\Exception\ServerResponseException;
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Exception\ClientException;
 
@@ -28,7 +27,7 @@ class Task extends Param
     protected $_id;
 
     /**
-     * @var Elasticsearch
+     * @var Response
      */
     protected $_response;
 
@@ -75,7 +74,7 @@ class Task extends Param
     /**
      * Returns response object.
      */
-    public function getResponse(): Elasticsearch
+    public function getResponse(): Response
     {
         if (null === $this->_response) {
             $this->refresh();
@@ -97,8 +96,10 @@ class Task extends Param
      */
     public function refresh(array $options = []): void
     {
-        $this->_response = $this->_client->tasks()->get(\array_merge(['task_id' => $this->_id], $options));
-        $this->_data = $this->getResponse()->asArray();
+        $this->_response = $this->_client->toElasticaResponse(
+            $this->_client->tasks()->get(\array_merge(['task_id' => $this->_id], $options))
+        );
+        $this->_data = $this->getResponse()->getData();
     }
 
     public function isCompleted(): bool
@@ -111,12 +112,14 @@ class Task extends Param
     /**
      * @throws \Exception
      */
-    public function cancel(): Elasticsearch
+    public function cancel(): Response
     {
         if ('' === $this->_id) {
             throw new \Exception('No task id given');
         }
 
-        return $this->_client->tasks()->cancel(['task_id' => $this->_id]);
+        return $this->_client->toElasticaResponse(
+            $this->_client->tasks()->cancel(['task_id' => $this->_id])
+        );
     }
 }

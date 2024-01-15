@@ -378,7 +378,7 @@ class Client implements ClientInterface
      * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
      */
-    public function updateDocument($id, $data, $index, array $options = []): Elasticsearch|Promise
+    public function updateDocument($id, $data, $index, array $options = []): Response
     {
         $params = [
             'id' => $id,
@@ -429,7 +429,7 @@ class Client implements ClientInterface
             $data->setVersionParams($response->asArray());
         }
 
-        return $response;
+        return $this->toElasticaResponse($response);
     }
 
     /**
@@ -628,7 +628,7 @@ class Client implements ClientInterface
 
     public function baseBulk(array $params)
     {
-        return $this->elasticClientBulk($params);
+        return $this->toElasticaResponse($this->elasticClientBulk($params));
     }
 
     public function sendRequest(RequestInterface $sentRequest): Elasticsearch|Promise
@@ -685,9 +685,9 @@ class Client implements ClientInterface
      * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
      */
-    public function forcemergeAll($args = []): Elasticsearch|Promise
+    public function forcemergeAll($args = []): Response
     {
-        return $this->indices()->forcemerge($args);
+        return $this->toElasticaResponse($this->indices()->forcemerge($args));
     }
 
     /**
@@ -700,9 +700,9 @@ class Client implements ClientInterface
      * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
      */
-    public function closePointInTime(string $pointInTimeId): Elasticsearch|Promise
+    public function closePointInTime(string $pointInTimeId): Response
     {
-        return $this->elasticClientClosePointInTime(['body' => ['id' => $pointInTimeId]]);
+        return $this->toElasticaResponse($this->elasticClientClosePointInTime(['body' => ['id' => $pointInTimeId]]));
     }
 
     /**
@@ -715,9 +715,9 @@ class Client implements ClientInterface
      * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
      */
-    public function refreshAll(): Elasticsearch
+    public function refreshAll(): Response
     {
-        return $this->indices()->refresh();
+        return $this->toElasticaResponse($this->indices()->refresh());
     }
 
     public function getLastRequest(): ?RequestInterface
@@ -740,6 +740,11 @@ class Client implements ClientInterface
         $this->_logger = $logger;
 
         return $this;
+    }
+
+    public function toElasticaResponse(Elasticsearch $elasticsearchResponse): Response
+    {
+        return ResponseConverter::toElastica($elasticsearchResponse);
     }
 
     /**

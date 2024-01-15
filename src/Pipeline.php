@@ -2,7 +2,6 @@
 
 namespace Elastica;
 
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastica\Exception\InvalidException;
 use Elastica\Processor\AbstractProcessor;
 
@@ -44,7 +43,7 @@ class Pipeline extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/put-pipeline-api.html
      */
-    public function create(): Elasticsearch
+    public function create(): Response
     {
         if (empty($this->id)) {
             throw new InvalidException('You should set a valid pipeline id');
@@ -58,7 +57,9 @@ class Pipeline extends Param
             throw new InvalidException('You should set a valid processor of type Elastica\Processor\AbstractProcessor.');
         }
 
-        return $this->getClient()->ingest()->putPipeline(['id' => $this->id, 'body' => $this->toArray()]);
+        return $this->_client->toElasticaResponse(
+            $this->_client->ingest()->putPipeline(['id' => $this->id, 'body' => $this->toArray()])
+        );
     }
 
     /**
@@ -66,9 +67,11 @@ class Pipeline extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/get-pipeline-api.html
      */
-    public function getPipeline(string $id): Elasticsearch
+    public function getPipeline(string $id): Response
     {
-        return $this->getClient()->ingest()->getPipeline(['id' => $id]);
+        return $this->_client->toElasticaResponse(
+            $this->_client->ingest()->getPipeline(['id' => $id])
+        );
     }
 
     /**
@@ -76,9 +79,11 @@ class Pipeline extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-pipeline-api.html
      */
-    public function deletePipeline(string $id): Elasticsearch
+    public function deletePipeline(string $id): Response
     {
-        return $this->getClient()->ingest()->deletePipeline(['id' => $id]);
+        return $this->_client->toElasticaResponse(
+            $this->_client->ingest()->deletePipeline(['id' => $id])
+        );
     }
 
     /**

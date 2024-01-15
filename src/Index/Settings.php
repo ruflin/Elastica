@@ -4,11 +4,11 @@ namespace Elastica\Index;
 
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\ServerResponseException;
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Index as BaseIndex;
+use Elastica\Response;
 use Elastica\ResponseParser;
 
 /**
@@ -34,7 +34,7 @@ class Settings
     /**
      * Response.
      *
-     * @var Elasticsearch Response object
+     * @var Response Response object
      */
     protected $_response;
 
@@ -158,10 +158,8 @@ class Settings
      * @throws ClientResponseException  if the status code of response is 4xx
      * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     *
-     * @return Elasticsearch Response object
      */
-    public function setNumberOfReplicas(int $replicas): Elasticsearch
+    public function setNumberOfReplicas(int $replicas): Response
     {
         return $this->set(['number_of_replicas' => $replicas]);
     }
@@ -210,7 +208,7 @@ class Settings
      * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
      */
-    public function setReadOnly(bool $readOnly = true): Elasticsearch
+    public function setReadOnly(bool $readOnly = true): Response
     {
         return $this->set(['blocks.read_only' => $readOnly]);
     }
@@ -245,7 +243,7 @@ class Settings
      * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
      */
-    public function setBlocksRead(bool $state = true): Elasticsearch
+    public function setBlocksRead(bool $state = true): Response
     {
         return $this->set(['blocks.read' => $state]);
     }
@@ -269,7 +267,7 @@ class Settings
      * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
      */
-    public function setBlocksWrite(bool $state = true): Elasticsearch
+    public function setBlocksWrite(bool $state = true): Response
     {
         return $this->set(['blocks.write' => $state]);
     }
@@ -305,7 +303,7 @@ class Settings
      * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
      */
-    public function setBlocksMetadata(bool $state = true): Elasticsearch
+    public function setBlocksMetadata(bool $state = true): Response
     {
         return $this->set(['blocks.metadata' => $state]);
     }
@@ -322,10 +320,8 @@ class Settings
      * @throws ClientResponseException  if the status code of response is 4xx
      * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     *
-     * @return Elasticsearch Response object
      */
-    public function setRefreshInterval(string $interval): Elasticsearch
+    public function setRefreshInterval(string $interval): Response
     {
         return $this->set(['refresh_interval' => $interval]);
     }
@@ -362,7 +358,7 @@ class Settings
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
      */
-    public function setMergePolicy(string $key, $value): Elasticsearch
+    public function setMergePolicy(string $key, $value): Response
     {
         $this->_index->close();
         $response = $this->set(['merge.policy.'.$key => $value]);
@@ -401,17 +397,19 @@ class Settings
      * @throws ClientResponseException  if the status code of response is 4xx
      * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     *
-     * @return Elasticsearch Response object
      */
-    public function set(array $data): Elasticsearch
+    public function set(array $data): Response
     {
+        $client = $this->getIndex()->getClient();
+
         if ($data) {
             $data = ['index' => $data];
         }
 
-        return $this->getIndex()->getClient()->indices()->putSettings(
-            \array_merge(['index' => $this->getIndex()->getName(), 'body' => $data])
+        return $client->toElasticaResponse(
+            $client->indices()->putSettings(
+                \array_merge(['index' => $this->getIndex()->getName(), 'body' => $data])
+            )
         );
     }
 

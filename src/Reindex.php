@@ -5,13 +5,11 @@ namespace Elastica;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\MissingParameterException;
 use Elastic\Elasticsearch\Exception\ServerResponseException;
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Exception\ClientException;
 use Elastica\Query\AbstractQuery;
 use Elastica\Script\AbstractScript;
 use Elastica\Script\Script;
-use Http\Promise\Promise;
 
 class Reindex extends Param
 {
@@ -52,7 +50,7 @@ class Reindex extends Param
     protected $_newIndex;
 
     /**
-     * @var Elasticsearch|null
+     * @var Response|null
      */
     protected $_lastResponse;
 
@@ -71,11 +69,13 @@ class Reindex extends Param
      * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
      */
-    public function run(): Elasticsearch|Promise
+    public function run(): Response
     {
         $body = $this->_getBody($this->_oldIndex, $this->_newIndex, $this->getParams());
 
-        $this->_lastResponse = $this->_oldIndex->getClient()->reindex(\array_merge(['body' => $body], $this->getParams()));
+        $this->_lastResponse = $this->_oldIndex->getClient()->toElasticaResponse(
+            $this->_oldIndex->getClient()->reindex(\array_merge(['body' => $body], $this->getParams()))
+        );
 
         return $this->_lastResponse;
     }
@@ -128,8 +128,8 @@ class Reindex extends Param
     public function getTaskId()
     {
         $taskId = null;
-        if ($this->_lastResponse instanceof Elasticsearch) {
-            $taskId = $this->_lastResponse->asArray()['task'] ?: null;
+        if ($this->_lastResponse instanceof Response) {
+            $taskId = $this->_lastResponse->getData()['task'] ?: null;
         }
 
         return $taskId;

@@ -4,7 +4,6 @@ namespace Elastica;
 
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\ServerResponseException;
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Exception\ClientException;
 
@@ -20,7 +19,7 @@ class Status
     /**
      * Contains all status infos.
      *
-     * @var Elasticsearch
+     * @var Response
      */
     protected $_response;
 
@@ -123,10 +122,8 @@ class Status
 
     /**
      * Returns response object.
-     *
-     * @return Elasticsearch Response object
      */
-    public function getResponse()
+    public function getResponse(): Response
     {
         if (null === $this->_response) {
             $this->refresh();
@@ -157,7 +154,10 @@ class Status
      */
     public function refresh(): void
     {
-        $this->_response = $this->_client->indices()->stats();
-        $this->_data = $this->getResponse()->asArray();
+        $this->_response = $this->_client->toElasticaResponse(
+            $this->_client->indices()->stats()
+        );
+
+        $this->_data = $this->getResponse()->getData();
     }
 }
