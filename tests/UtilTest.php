@@ -183,4 +183,32 @@ class UtilTest extends BaseTest
 
         $this->assertEquals($convertedString, $date);
     }
+
+    /**
+     * @group unit
+     */
+    public function testConvertDateWithInt(): void
+    {
+        $dateInt = 1705361024;
+
+        $convertedString = Util::convertDate($dateInt);
+
+        $date = \date('Y-m-d\TH:i:s\Z', $dateInt);
+
+        $this->assertEquals($convertedString, $date);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testConvertDateWithString(): void
+    {
+        $dateString = 'Mon, 15 Jan 2024 23:23:44 GMT';
+
+        $convertedString = Util::convertDate($dateString);
+
+        $date = \date('Y-m-d\TH:i:s\Z', strtotime($dateString));
+
+        $this->assertEquals($convertedString, $date);
+    }
 }
