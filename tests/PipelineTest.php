@@ -10,7 +10,7 @@ use Elastica\Pipeline;
 use Elastica\Processor\RenameProcessor;
 use Elastica\Processor\SetProcessor;
 use Elastica\Processor\TrimProcessor;
-use Elastica\ResponseParser;
+use Elastica\ResponseConverter;
 
 /**
  * @internal
@@ -133,7 +133,8 @@ class PipelineTest extends BasePipeline
             $pipeline->deletePipeline('non_existent_pipeline');
             $this->fail('an exception should be raised!');
         } catch (ClientResponseException $e) {
-            $result = ResponseParser::getFullError($e->getResponse());
+            $response = ResponseConverter::toElastica($e->getResponse());
+            $result = $response->getFullError();
 
             $this->assertEquals('resource_not_found_exception', $result['type']);
             $this->assertEquals('pipeline [non_existent_pipeline] is missing', $result['reason']);

@@ -4,7 +4,6 @@ namespace Elastica\Test\Connection\Strategy;
 
 use Elastica\Connection;
 use Elastica\Connection\Strategy\CallbackStrategy;
-use Elastica\ResponseChecker;
 use Elastica\Test\Base;
 
 /**
@@ -50,11 +49,11 @@ class CallbackStrategyTest extends Base
         }];
 
         $client = $this->_getClient($config);
-        $response = $client->indices()->getAlias();
+        $response = $client->toElasticaResponse($client->indices()->getAlias());
 
         $this->assertEquals(1, $count);
 
-        $this->assertTrue(ResponseChecker::isOk($response));
+        $this->assertTrue($response->isOk());
 
         $strategy = $client->getConnectionStrategy();
 

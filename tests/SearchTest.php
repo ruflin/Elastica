@@ -13,7 +13,7 @@ use Elastica\Query\FunctionScore;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
 use Elastica\Request;
-use Elastica\ResponseParser;
+use Elastica\ResponseConverter;
 use Elastica\ResultSet;
 use Elastica\Script\Script;
 use Elastica\Search;
@@ -682,12 +682,12 @@ class SearchTest extends BaseTest
         $search = new Search($client);
         $search->addIndex($index);
 
-        $exception = null;
         try {
             $search->search($query);
             $this->fail('Should raise an Index not found exception');
         } catch (ClientResponseException $e) {
-            $error = ResponseParser::getFullError($e->getResponse());
+            $response = ResponseConverter::toElastica($e->getResponse());
+            $error = $response->getFullError();
 
             $this->assertEquals('index_not_found_exception', $error['type']);
             $this->assertEquals('no such index [elastica_7086b4c2ee585bbb6740ece5ed7ece01]', $error['reason']);

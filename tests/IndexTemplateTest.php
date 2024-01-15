@@ -5,7 +5,7 @@ namespace Elastica\Test;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Exception\InvalidException;
 use Elastica\IndexTemplate;
-use Elastica\ResponseParser;
+use Elastica\ResponseConverter;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -77,7 +77,8 @@ class IndexTemplateTest extends BaseTest
         try {
             $indexTemplate->create($template);
         } catch (ClientResponseException $ex) {
-            $error = ResponseParser::getFullError($ex->getResponse());
+            $response = ResponseConverter::toElastica($ex->getResponse());
+            $error = $response->getFullError();
 
             $this->assertNotEquals('index_template_already_exists_exception', $error['type']);
             $this->assertEquals('resource_already_exists_exception', $error['type']);

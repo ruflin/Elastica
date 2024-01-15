@@ -9,7 +9,7 @@ use Elastica\Exception\ClientException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Index as BaseIndex;
 use Elastica\Response;
-use Elastica\ResponseParser;
+use Elastica\ResponseConverter;
 
 /**
  * Elastica index settings object.
@@ -285,7 +285,8 @@ class Settings
         try {
             return $this->getBool('blocks.metadata');
         } catch (ClientResponseException $e) {
-            if ('cluster_block_exception' === ResponseParser::getFullError($e->getResponse())['type']) {
+            $response = ResponseConverter::toElastica($e->getResponse());
+            if ('cluster_block_exception' === $response->getFullError()['type']) {
                 return true;
             }
 

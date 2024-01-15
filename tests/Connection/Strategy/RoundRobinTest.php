@@ -9,7 +9,7 @@ use Elastic\Transport\TransportBuilder;
 use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Connection\Strategy\RoundRobin;
-use Elastica\ResponseChecker;
+use Elastica\ResponseConverter;
 use Elastica\Test\Base;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Client\ClientInterface as HttpClientInterface;
@@ -194,7 +194,9 @@ class RoundRobinTest extends Base
 
     protected function _checkResponse(Elasticsearch $response): void
     {
-        $this->assertTrue(ResponseChecker::isOk($response));
+        $responseElastica = ResponseConverter::toElastica($response);
+
+        $this->assertTrue($responseElastica->isOk());
     }
 
     protected function setHttpClientOptions(HttpClientInterface $client, array $config, array $clientOptions = []): HttpClientInterface

@@ -12,7 +12,6 @@ use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Document;
 use Elastica\Exception\NotFoundException;
-use Elastica\ResponseChecker;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
 use GuzzleHttp\RequestOptions;
@@ -499,9 +498,9 @@ class ClientFunctionalTest extends BaseTest
         // Url should overwrite invalid host
         $client = $this->_getClient(['url' => $url, 'port' => '9101', 'timeout' => 2]);
 
-        $response = $client->indices()->stats();
+        $response = $client->toElasticaResponse($client->indices()->stats());
 
-        $this->assertTrue(ResponseChecker::isOk($response));
+        $this->assertTrue($response->isOk());
     }
 
     public function testUpdateDocumentByDocument(): void
