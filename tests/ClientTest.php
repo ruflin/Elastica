@@ -2,11 +2,11 @@
 
 namespace Elastica\Test;
 
+use Elastic\Transport\Transport;
 use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Exception\InvalidException;
 use Elastica\Test\Base as BaseTest;
-use Elastic\Transport\Transport;
 
 /**
  * @group unit
