@@ -131,6 +131,10 @@ class Bulk
      */
     public function addDocument(Document $document, ?string $opType = null): self
     {
+        if ($this->_client->getConnection()->hasParam('retryOnConflict')) {
+            $document->setRetryOnConflict($this->_client->getConnection()->getParam('retryOnConflict'));
+        }
+
         $action = AbstractDocumentAction::create($document, $opType);
 
         return $this->addAction($action);
