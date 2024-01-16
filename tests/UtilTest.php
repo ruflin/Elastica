@@ -207,7 +207,7 @@ class UtilTest extends BaseTest
 
         $convertedString = Util::convertDate($dateString);
 
-        $date = \date('Y-m-d\TH:i:s\Z', strtotime($dateString));
+        $date = \date('Y-m-d\TH:i:s\Z', \strtotime($dateString));
 
         $this->assertEquals($convertedString, $date);
     }

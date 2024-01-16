@@ -868,11 +868,6 @@ class Client implements ClientInterface
             $transport->setRetries(\count($hosts));
         }
 
-        // // Async client
-        // if (!empty($this->asyncHttpClient)) {
-        //     $transport->setAsyncClient($this->asyncHttpClient);
-        // }
-
         // Basic authentication
         if (isset($config['username'], $config['password'])) {
             $transport->setUserInfo($config['username'], $config['password']);
