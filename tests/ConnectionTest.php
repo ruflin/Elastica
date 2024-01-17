@@ -75,6 +75,13 @@ class ConnectionTest extends BaseTest
         $connection = new Connection(['config' => ['url' => $url]]);
         $this->assertTrue($connection->hasConfig('url'));
         $this->assertEquals($url, $connection->getConfig('url'));
+
+        $connection->setConfig([]);
+        $this->assertFalse($connection->hasConfig('url'));
+
+        $connection->addConfig('url', $url);
+        $this->assertTrue($connection->hasConfig('url'));
+        $this->assertEquals($url, $connection->getConfig('url'));
     }
 
     /**
@@ -153,5 +160,56 @@ class ConnectionTest extends BaseTest
         $client = new Client(['password' => $password]);
 
         $this->assertEquals($password, $client->getConnection()->getPassword());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testPathFromClient(): void
+    {
+        $path = 'test';
+        $client = new Client(['path' => $path]);
+
+        $this->assertEquals($path, $client->getConnection()->getPath());
+
+        $changedPath = 'test2';
+
+        $client->getConnection()->setPath($changedPath);
+
+        $this->assertEquals($changedPath, $client->getConnection()->getPath());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testPortFromClient(): void
+    {
+        $port = 9000;
+        $client = new Client(['port' => $port]);
+
+        $this->assertEquals($port, $client->getConnection()->getPort());
+
+        $changedPort = 9001;
+
+        $client->getConnection()->setPort($changedPort);
+
+        $this->assertEquals($changedPort, $client->getConnection()->getPort());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testHostFromClient(): void
+    {
+        $host = 'localhost';
+        $client = new Client(['host' => $host]);
+
+        $this->assertEquals($host, $client->getConnection()->getHost());
+
+        $changedHost = 'localhostChanged';
+
+        $client->getConnection()->setHost($changedHost);
+
+        $this->assertEquals($changedHost, $client->getConnection()->getHost());
     }
 }

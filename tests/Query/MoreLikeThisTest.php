@@ -65,7 +65,7 @@ class MoreLikeThisTest extends BaseTest
      */
     public function testSearchByDocument(): void
     {
-        $client = $this->_getClient(['persistent' => false]);
+        $client = $this->_getClient();
         $index = $client->getIndex('elastica_test');
         $index->create(
             [
