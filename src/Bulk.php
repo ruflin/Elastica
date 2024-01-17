@@ -131,8 +131,8 @@ class Bulk
      */
     public function addDocument(Document $document, ?string $opType = null): self
     {
-        if ($this->_client->getConnection()->hasParam('retryOnConflict')) {
-            $document->setRetryOnConflict($this->_client->getConnection()->getParam('retryOnConflict'));
+        if (!$document->hasRetryOnConflict() && $this->_client->hasConnection() && ($retry = $this->_client->getConnection()->getParam('retryOnConflict')) > 0) {
+            $document->setRetryOnConflict($retry);
         }
 
         $action = AbstractDocumentAction::create($document, $opType);
@@ -159,6 +159,10 @@ class Bulk
      */
     public function addScript(AbstractScript $script, ?string $opType = null): self
     {
+        if (!$script->hasRetryOnConflict() && $this->_client->hasConnection() && ($retry = $this->_client->getConnection()->getParam('retryOnConflict')) > 0) {
+            $script->setRetryOnConflict($retry);
+        }
+
         $action = AbstractDocumentAction::create($script, $opType);
 
         return $this->addAction($action);

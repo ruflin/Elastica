@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Backward Compatibility Breaks
 ### Added
+* If not expicitly set, use `retry_on_conflict` from Client configuration in Bulk updates [#2184](https://github.com/ruflin/Elastica/pull/2184)
 ### Changed
 ### Deprecated
 ### Removed
