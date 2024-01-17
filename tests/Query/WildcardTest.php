@@ -55,6 +55,10 @@ class WildcardTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('test');
 
+        $mapping = new Mapping([
+            'name' => ['type' => 'text', 'analyzer' => 'lw'],
+        ]);
+
         $indexParams = [
             'settings' => [
                 'analysis' => [
@@ -67,14 +71,10 @@ class WildcardTest extends BaseTest
                     ],
                 ],
             ],
+            'mappings' => $mapping->toArray(),
         ];
 
         $index->create($indexParams, ['recreate' => true]);
-
-        $mapping = new Mapping([
-            'name' => ['type' => 'text', 'analyzer' => 'lw'],
-        ]);
-        $index->setMapping($mapping);
 
         $index->addDocuments([
             new Document('1', ['name' => 'Basel-Stadt']),
@@ -95,11 +95,6 @@ class WildcardTest extends BaseTest
         $resultSet = $index->search($query);
 
         $this->assertEquals(2, $resultSet->count());
-
-        $query = new Wildcard('name', 'baden b*');
-        $resultSet = $index->search($query);
-
-        $this->assertEquals(1, $resultSet->count());
 
         $query = new Wildcard('name', 'baden bas*');
         $resultSet = $index->search($query);

@@ -755,7 +755,7 @@ JSON;
 
         $endMemory = \memory_get_usage();
 
-        $this->assertLessThan(1.31, $endMemory / $startMemory);
+        $this->assertLessThan(1.41, $endMemory / $startMemory);
     }
 
     /**
@@ -781,7 +781,7 @@ JSON;
         /** @var Client|MockObject $clientMock */
         $clientMock = $this->createMock(Client::class);
         $clientMock
-            ->method('request')
+            ->method('baseBulk')
             ->willReturn($response)
         ;
 

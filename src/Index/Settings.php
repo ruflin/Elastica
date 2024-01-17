@@ -2,13 +2,14 @@
 
 namespace Elastica\Index;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Elastic\Elasticsearch\Exception\ServerResponseException;
+use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Exception\ClientException;
-use Elastica\Exception\ConnectionException;
 use Elastica\Exception\NotFoundException;
-use Elastica\Exception\ResponseException;
 use Elastica\Index as BaseIndex;
-use Elastica\Request;
 use Elastica\Response;
+use Elastica\ResponseConverter;
 
 /**
  * Elastica index settings object.
@@ -69,9 +70,10 @@ class Settings
      *
      * @param string $setting OPTIONAL Setting name to return
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      *
      * @return array|int|string|null Settings data
      *
@@ -83,11 +85,14 @@ class Settings
             'include_defaults' => $includeDefaults,
         ];
 
-        $requestData = $this->request([], Request::GET, $queryParameters)->getData();
+        $requestData = $this->getIndex()->getClient()->indices()->getSettings(
+            \array_merge(['index' => $this->getIndex()->getName()], $queryParameters)
+        )->asArray();
+
         $data = \reset($requestData);
 
         if (empty($data['settings']) || empty($data['settings']['index'])) {
-            // should not append, the request should throw a ResponseException
+            // should not append, the request should throw a ClientResponseException
             throw new NotFoundException('Index '.$this->getIndex()->getName().' not found');
         }
 
@@ -132,9 +137,10 @@ class Settings
      *
      * @param string $setting Setting name to return
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function getBool(string $setting): bool
     {
@@ -148,11 +154,10 @@ class Settings
      *
      * @param int $replicas Number of replicas
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
-     *
-     * @return Response Response object
      */
     public function setNumberOfReplicas(int $replicas): Response
     {
@@ -164,9 +169,10 @@ class Settings
      *
      * If no number of replicas is set, the default number is returned
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      *
      * @return int The number of replicas
      */
@@ -180,9 +186,10 @@ class Settings
      *
      * If no number of shards is set, the default number is returned
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      *
      * @return int The number of shards
      */
@@ -196,9 +203,10 @@ class Settings
      *
      * @param bool $readOnly (default = true)
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function setReadOnly(bool $readOnly = true): Response
     {
@@ -206,9 +214,10 @@ class Settings
     }
 
     /**
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function getReadOnly(): bool
     {
@@ -216,9 +225,10 @@ class Settings
     }
 
     /**
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function getBlocksRead(): bool
     {
@@ -228,9 +238,10 @@ class Settings
     /**
      * @param bool $state OPTIONAL (default = true)
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function setBlocksRead(bool $state = true): Response
     {
@@ -238,9 +249,10 @@ class Settings
     }
 
     /**
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function getBlocksWrite(): bool
     {
@@ -250,9 +262,10 @@ class Settings
     /**
      * @param bool $state OPTIONAL (default = true)
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function setBlocksWrite(bool $state = true): Response
     {
@@ -260,9 +273,10 @@ class Settings
     }
 
     /**
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function getBlocksMetadata(): bool
     {
@@ -270,8 +284,9 @@ class Settings
         // So when a cluster_block_exception happened it must be enabled.
         try {
             return $this->getBool('blocks.metadata');
-        } catch (ResponseException $e) {
-            if ('cluster_block_exception' === $e->getResponse()->getFullError()['type']) {
+        } catch (ClientResponseException $e) {
+            $response = ResponseConverter::toElastica($e->getResponse());
+            if ('cluster_block_exception' === $response->getFullError()['type']) {
                 return true;
             }
 
@@ -284,9 +299,10 @@ class Settings
      *
      * @param bool $state OPTIONAL (default = true)
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function setBlocksMetadata(bool $state = true): Response
     {
@@ -301,11 +317,10 @@ class Settings
      *
      * @param string $interval Duration of the refresh interval
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
-     *
-     * @return Response Response object
      */
     public function setRefreshInterval(string $interval): Response
     {
@@ -317,9 +332,10 @@ class Settings
      *
      * If no interval is set, the default interval is returned
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      *
      * @return string Refresh interval
      */
@@ -336,9 +352,10 @@ class Settings
      * @param string     $key   Merge policy key (for ex. expunge_deletes_allowed)
      * @param int|string $value
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
      */
@@ -356,9 +373,10 @@ class Settings
      *
      * @param string $key Merge policy key (for ex. expunge_deletes_allowed)
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      *
      * @return int|string
      *
@@ -376,15 +394,24 @@ class Settings
      *
      * @param array $data Arguments
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
-     *
-     * @return Response Response object
      */
     public function set(array $data): Response
     {
-        return $this->request($data, Request::PUT);
+        $client = $this->getIndex()->getClient();
+
+        if ($data) {
+            $data = ['index' => $data];
+        }
+
+        return $client->toElasticaResponse(
+            $client->indices()->putSettings(
+                \array_merge(['index' => $this->getIndex()->getName(), 'body' => $data])
+            )
+        );
     }
 
     /**
@@ -395,38 +422,5 @@ class Settings
     public function getIndex(): BaseIndex
     {
         return $this->_index;
-    }
-
-    /**
-     * Updates the given settings for the index.
-     *
-     * With elasticsearch 0.16 the following settings are supported
-     * - index.term_index_interval
-     * - index.term_index_divisor
-     * - index.translog.flush_threshold_ops
-     * - index.translog.flush_threshold_size
-     * - index.translog.flush_threshold_period
-     * - index.refresh_interval
-     * - index.merge.policy
-     * - index.auto_expand_replicas
-     *
-     * @param array  $data   OPTIONAL Data array
-     * @param string $method OPTIONAL Transfer method (default = \Elastica\Request::GET)
-     *
-     * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
-     *
-     * @return Response Response object
-     */
-    public function request(array $data = [], string $method = Request::GET, array $queryParameters = []): Response
-    {
-        $path = '_settings';
-
-        if ($data) {
-            $data = ['index' => $data];
-        }
-
-        return $this->getIndex()->request($path, $method, $data, $queryParameters);
     }
 }

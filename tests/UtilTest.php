@@ -2,8 +2,6 @@
 
 namespace Elastica\Test;
 
-use Elastica\Connection;
-use Elastica\Request;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Util;
 
@@ -159,28 +157,6 @@ class UtilTest extends BaseTest
     /**
      * @group unit
      */
-    public function testConvertRequestToCurlCommand(): void
-    {
-        $path = 'test';
-        $method = Request::POST;
-        $query = ['no' => 'params'];
-        $data = ['key' => 'value'];
-
-        $connection = new Connection();
-        $connection->setHost($this->_getHost());
-        $connection->setPort(9200);
-
-        $request = new Request($path, $method, $data, $query, $connection);
-
-        $curlCommand = Util::convertRequestToCurlCommand($request);
-
-        $expected = 'curl -XPOST \'http://'.$this->_getHost().':9200/test?no=params\' -d \'{"key":"value"}\'';
-        $this->assertEquals($expected, $curlCommand);
-    }
-
-    /**
-     * @group unit
-     */
     public function testConvertDateTimeObjectWithTimezone(): void
     {
         $dateTimeObject = new \DateTime();
@@ -204,6 +180,34 @@ class UtilTest extends BaseTest
         $convertedString = Util::convertDateTimeObject($dateTimeObject, false);
 
         $date = \date('Y-m-d\TH:i:s\Z', $timestamp);
+
+        $this->assertEquals($convertedString, $date);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testConvertDateWithInt(): void
+    {
+        $dateInt = 1705361024;
+
+        $convertedString = Util::convertDate($dateInt);
+
+        $date = \date('Y-m-d\TH:i:s\Z', $dateInt);
+
+        $this->assertEquals($convertedString, $date);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testConvertDateWithString(): void
+    {
+        $dateString = 'Mon, 15 Jan 2024 23:23:44 GMT';
+
+        $convertedString = Util::convertDate($dateString);
+
+        $date = \date('Y-m-d\TH:i:s\Z', \strtotime($dateString));
 
         $this->assertEquals($convertedString, $date);
     }

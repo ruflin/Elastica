@@ -2,16 +2,18 @@
 
 namespace Elastica;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Elastic\Elasticsearch\Exception\MissingParameterException;
+use Elastic\Elasticsearch\Exception\ServerResponseException;
+use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Bulk\Action;
 use Elastica\Bulk\Action\AbstractDocument as AbstractDocumentAction;
 use Elastica\Bulk\Response as BulkResponse;
 use Elastica\Bulk\ResponseSet;
 use Elastica\Exception\Bulk\ResponseException as BulkResponseException;
 use Elastica\Exception\ClientException;
-use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\RequestEntityTooLargeException;
-use Elastica\Exception\ResponseException;
 use Elastica\Script\AbstractScript;
 
 class Bulk
@@ -277,15 +279,22 @@ class Bulk
     }
 
     /**
-     * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws BulkResponseException
-     * @throws InvalidException
+     * @throws ClientException
      */
     public function send(): ResponseSet
     {
-        $response = $this->_client->request($this->getPath(), Request::POST, (string) $this, $this->_requestParams, Request::NDJSON_CONTENT_TYPE);
+        $params = ['body' => (string) $this];
+
+        if ($this->hasIndex()) {
+            $params['index'] = $this->getIndex();
+        }
+
+        $response = $this->_client->baseBulk(\array_merge($params, $this->_requestParams));
 
         return $this->_processResponse($response);
     }

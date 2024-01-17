@@ -21,24 +21,30 @@ class ClientConfiguration
      * retryOnConflict: Use in \Elastica\Client::updateDocument
      * bigintConversion: Set to true to enable the JSON bigint to string conversion option (see issue #717)
      *
-     * @var array
+     * @var array{
+     *        host: string|null,
+     *        port: string|null,
+     *        path: string|null,
+     *        url:string|null,
+     *        connections: array<array-key, mixed>,
+     *        roundRobin: bool,
+     *        retryOnConflict: int,
+     *        username: string|null,
+     *        password: string|null,
+     *        transport_config: array<array-key, mixed>,
+     * }
      */
     protected $configuration = [
         'host' => null,
         'port' => null,
         'path' => null,
         'url' => null,
-        'proxy' => null,
-        'transport' => null,
-        'persistent' => true,
-        'timeout' => null,
-        'connections' => [], // host, port, path, transport, compression, persistent, timeout, username, password, auth_type, config -> (curl, headers, url)
+        'connections' => [], // host, port, path, transport_config -> [http_client, http_client_config, http_client_options, node_pool], username, password
         'roundRobin' => false,
         'retryOnConflict' => 0,
-        'bigintConversion' => false,
         'username' => null,
         'password' => null,
-        'auth_type' => null, // basic, digest, gssnegotiate, ntlm
+        'transport_config' => [], // http_client, http_client_config, http_client_options, node_pool
     ];
 
     /**
@@ -169,20 +175,12 @@ class ClientConfiguration
     {
         $data = ['host' => $dsn->getHost()];
 
-        if (null !== $dsn->getScheme()) {
-            $data['transport'] = $dsn->getScheme();
-        }
-
         if (null !== $dsn->getUser()) {
             $data['username'] = $dsn->getUser();
         }
 
         if (null !== $dsn->getPassword()) {
             $data['password'] = $dsn->getPassword();
-        }
-
-        if (null !== $dsn->getUser() && null !== $dsn->getPassword()) {
-            $data['auth_type'] = 'basic';
         }
 
         if (null !== $dsn->getPort()) {

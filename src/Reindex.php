@@ -2,9 +2,11 @@
 
 namespace Elastica;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Elastic\Elasticsearch\Exception\MissingParameterException;
+use Elastic\Elasticsearch\Exception\ServerResponseException;
+use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Exception\ClientException;
-use Elastica\Exception\ConnectionException;
-use Elastica\Exception\ResponseException;
 use Elastica\Query\AbstractQuery;
 use Elastica\Script\AbstractScript;
 use Elastica\Script\Script;
@@ -16,7 +18,7 @@ class Reindex extends Param
     public const OPERATION_TYPE_CREATE = 'create';
     public const CONFLICTS = 'conflicts';
     public const CONFLICTS_PROCEED = 'proceed';
-    public const SIZE = 'size';
+    public const SIZE = 'max_docs';
     public const QUERY = 'query';
     public const SORT = 'sort';
     public const SCRIPT = 'script';
@@ -61,20 +63,19 @@ class Reindex extends Param
     }
 
     /**
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function run(): Response
     {
         $body = $this->_getBody($this->_oldIndex, $this->_newIndex, $this->getParams());
 
-        $reindexEndpoint = new \Elasticsearch\Endpoints\Reindex();
-        $params = \array_intersect_key($this->getParams(), \array_fill_keys($reindexEndpoint->getParamWhitelist(), null));
-        $reindexEndpoint->setParams($params);
-        $reindexEndpoint->setBody($body);
-
-        $this->_lastResponse = $this->_oldIndex->getClient()->requestEndpoint($reindexEndpoint);
+        $this->_lastResponse = $this->_oldIndex->getClient()->toElasticaResponse(
+            $this->_oldIndex->getClient()->reindex(\array_merge(['body' => $body], $this->getParams()))
+        );
 
         return $this->_lastResponse;
     }

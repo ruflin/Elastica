@@ -2,12 +2,12 @@
 
 namespace Elastica;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Elastic\Elasticsearch\Exception\ServerResponseException;
+use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Cluster\Health;
 use Elastica\Cluster\Settings;
 use Elastica\Exception\ClientException;
-use Elastica\Exception\ConnectionException;
-use Elastica\Exception\ResponseException;
-use Elasticsearch\Endpoints\Cluster\State;
 
 /**
  * Cluster information for elasticsearch.
@@ -51,13 +51,14 @@ class Cluster
     /**
      * Refreshes all cluster information (state).
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function refresh(): void
     {
-        $this->_response = $this->_client->requestEndpoint(new State());
+        $this->_response = $this->_client->toElasticaResponse($this->_client->cluster()->state());
         $this->_data = $this->getResponse()->getData();
     }
 

@@ -2,11 +2,12 @@
 
 namespace Elastica;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Elastic\Elasticsearch\Exception\MissingParameterException;
+use Elastic\Elasticsearch\Exception\ServerResponseException;
+use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Exception\ClientException;
-use Elastica\Exception\ConnectionException;
 use Elastica\Exception\NotFoundException;
-use Elastica\Exception\ResponseException;
-use Elasticsearch\Endpoints\Snapshot\Restore;
 
 /**
  * Class Snapshot.
@@ -32,20 +33,25 @@ class Snapshot
      * @param string $type     the repository type ("fs" for file system)
      * @param array  $settings Additional repository settings. If type "fs" is used, the "location" setting must be provided.
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
-     *
-     * @return Response
      */
-    public function registerRepository($name, $type, $settings = [])
+    public function registerRepository($name, $type, $settings = []): Response
     {
-        $data = [
-            'type' => $type,
-            'settings' => $settings,
+        $params = [
+            'repository' => $name,
+            'body' => [
+                'type' => $type,
+                'settings' => $settings,
+            ],
         ];
 
-        return $this->request($name, Request::PUT, $data);
+        return $this->_client->toElasticaResponse(
+            $this->_client->snapshot()->createRepository($params)
+        );
     }
 
     /**
@@ -53,24 +59,25 @@ class Snapshot
      *
      * @param string $name the name of the desired repository
      *
-     * @throws ClientException
-     * @throws ConnectionException
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws NotFoundException
-     * @throws ResponseException
+     * @throws ClientException
      *
      * @return array
      */
     public function getRepository($name)
     {
         try {
-            $response = $this->request($name);
-        } catch (ResponseException $e) {
-            if (404 === $e->getResponse()->getStatus()) {
+            $response = $this->_client->snapshot()->getRepository(['repository' => $name]);
+        } catch (ClientResponseException $e) {
+            if (404 === $e->getResponse()->getStatusCode()) {
                 throw new NotFoundException("Repository '".$name."' does not exist.");
             }
             throw $e;
         }
-        $data = $response->getData();
+        $data = $response->asArray();
 
         return $data[$name];
     }
@@ -78,15 +85,16 @@ class Snapshot
     /**
      * Retrieve all repository records.
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      *
      * @return array
      */
     public function getAllRepositories()
     {
-        return $this->request('_all')->getData();
+        return $this->_client->snapshot()->getRepository()->asArray();
     }
 
     /**
@@ -97,15 +105,23 @@ class Snapshot
      * @param array  $options           optional settings for this snapshot
      * @param bool   $waitForCompletion if true, the request will not return until the snapshot operation is complete
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
-     *
-     * @return Response
      */
-    public function createSnapshot($repository, $name, $options = [], $waitForCompletion = false)
+    public function createSnapshot($repository, $name, $options = [], $waitForCompletion = false): Response
     {
-        return $this->request($repository.'/'.$name, Request::PUT, $options, ['wait_for_completion' => $waitForCompletion]);
+        $params = [
+            'repository' => $repository,
+            'snapshot' => $name,
+            'wait_for_completion' => $waitForCompletion,
+        ];
+
+        return $this->_client->toElasticaResponse(
+            $this->_client->snapshot()->create(\array_merge($params, $options))
+        );
     }
 
     /**
@@ -114,26 +130,47 @@ class Snapshot
      * @param string $repository the name of the repository from which to retrieve the snapshot
      * @param string $name       the name of the desired snapshot
      *
-     * @throws ClientException
-     * @throws ConnectionException
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws NotFoundException
-     * @throws ResponseException
+     * @throws ClientException
      *
      * @return array
      */
     public function getSnapshot($repository, $name)
     {
         try {
-            $response = $this->request($repository.'/'.$name);
-        } catch (ResponseException $e) {
-            if (404 === $e->getResponse()->getStatus()) {
+            $response = $this->_client->snapshot()->get(['repository' => $repository, 'snapshot' => $name]);
+        } catch (ClientResponseException $e) {
+            if (404 === $e->getResponse()->getStatusCode()) {
                 throw new NotFoundException("Snapshot '".$name."' does not exist in repository '".$repository."'.");
             }
             throw $e;
         }
-        $data = $response->getData();
+        $data = $response->asArray();
 
         return $data['snapshots'][0];
+    }
+
+    /**
+     * Delete a repository.
+     *
+     * @param string $repository the name of the repository from which to retrieve the snapshot
+     *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
+     * @throws NotFoundException
+     * @throws ClientException
+     */
+    public function deleteRepository($repository): Response
+    {
+        return $this->_client->toElasticaResponse(
+            $this->_client->snapshot()->deleteRepository(['repository' => $repository])
+        );
     }
 
     /**
@@ -141,15 +178,18 @@ class Snapshot
      *
      * @param string $repository the repository name
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      *
      * @return array
      */
     public function getAllSnapshots($repository)
     {
-        return $this->request($repository.'/_all')->getData();
+        $data = $this->_client->snapshot()->get(['repository' => $repository, 'snapshot' => '*'])->asArray();
+
+        return $data['snapshots'] ?? [];
     }
 
     /**
@@ -158,15 +198,17 @@ class Snapshot
      * @param string $repository the repository in which the snapshot resides
      * @param string $name       the name of the snapshot to be deleted
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
-     *
-     * @return Response
      */
-    public function deleteSnapshot($repository, $name)
+    public function deleteSnapshot($repository, $name): Response
     {
-        return $this->request($repository.'/'.$name, Request::DELETE);
+        return $this->_client->toElasticaResponse(
+            $this->_client->snapshot()->delete(['repository' => $repository, 'snapshot' => $name])
+        );
     }
 
     /**
@@ -177,42 +219,23 @@ class Snapshot
      * @param array  $options           options for the restore operation
      * @param bool   $waitForCompletion if true, the request will not return until the restore operation is complete
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
-     *
-     * @return Response
      */
-    public function restoreSnapshot($repository, $name, $options = [], $waitForCompletion = false)
+    public function restoreSnapshot($repository, $name, $options = [], $waitForCompletion = false): Response
     {
-        $endpoint = (new Restore())
-            ->setRepository($repository)
-            ->setSnapshot($name)
-            ->setBody($options)
-            ->setParams([
-                'wait_for_completion' => $waitForCompletion ? 'true' : 'false',
-            ])
-        ;
+        $params = [
+            'repository' => $repository,
+            'snapshot' => $name,
+            'body' => $options,
+            'wait_for_completion' => $waitForCompletion ? 'true' : 'false',
+        ];
 
-        return $this->_client->requestEndpoint($endpoint);
-    }
-
-    /**
-     * Perform a snapshot request.
-     *
-     * @param string $path   the URL
-     * @param string $method the HTTP method
-     * @param array  $data   request body data
-     * @param array  $query  query string parameters
-     *
-     * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
-     *
-     * @return Response
-     */
-    public function request($path, $method = Request::GET, $data = [], array $query = [])
-    {
-        return $this->_client->request('_snapshot/'.$path, $method, $data, $query);
+        return $this->_client->toElasticaResponse(
+            $this->_client->snapshot()->restore($params)
+        );
     }
 }

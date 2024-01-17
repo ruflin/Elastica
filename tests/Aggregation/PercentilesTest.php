@@ -145,8 +145,15 @@ class PercentilesTest extends BaseAggregationTest
         $index->refresh();
 
         // execute
+        $agg = (new Percentiles('price_percentile', 'price'));
+
+        if (isset($_SERVER['ES_VERSION']) && \version_compare($_SERVER['ES_VERSION'], '8.9.0', '>=')) {
+            $agg->setParam('tdigest', ['execution_hint' => 'high_accuracy']);
+        }
+
+        // execute
         $query = new Query();
-        $query->addAggregation(new Percentiles('price_percentile', 'price'));
+        $query->addAggregation($agg);
 
         $resultSet = $index->search($query);
         $aggResult = $resultSet->getAggregation('price_percentile');
@@ -218,6 +225,10 @@ class PercentilesTest extends BaseAggregationTest
         $agg = (new Percentiles('price_percentile', 'price'))
             ->setKeyed(false)
         ;
+
+        if (isset($_SERVER['ES_VERSION']) && \version_compare($_SERVER['ES_VERSION'], '8.9.0', '>=')) {
+            $agg->setParam('tdigest', ['execution_hint' => 'high_accuracy']);
+        }
 
         $query = new Query();
         $query->addAggregation($agg);

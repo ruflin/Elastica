@@ -2,10 +2,9 @@
 
 namespace Elastica\Test;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Client;
 use Elastica\Document;
-use Elastica\Exception\InvalidException;
-use Elastica\Exception\ResponseException;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query\QueryString;
@@ -15,7 +14,6 @@ use Elastica\Request;
 use Elastica\Script\Script;
 use Elastica\Status;
 use Elastica\Test\Base as BaseTest;
-use Elasticsearch\Endpoints\Indices\Analyze;
 use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 
 /**
@@ -87,7 +85,7 @@ class IndexTest extends BaseTest
      */
     public function testAddRemoveAlias(): void
     {
-        $this->expectException(ResponseException::class);
+        $this->expectException(ClientResponseException::class);
 
         $client = $this->_getClient();
 
@@ -470,7 +468,7 @@ class IndexTest extends BaseTest
         $index = $this->_createIndex();
         $response = $index->openPointInTime('10s');
 
-        $this->assertTrue($response->isOk());
+        $this->assertTrue($response->getStatus() >= 200 && $response->getStatus() < 300);
 
         $data = $response->getData();
         $this->assertIsArray($data);
@@ -626,8 +624,8 @@ class IndexTest extends BaseTest
         try {
             $index->delete();
             $this->fail('This should never be reached. Deleting an unknown index will throw an exception');
-        } catch (ResponseException $error) {
-            $this->assertTrue($error->getResponse()->hasError());
+        } catch (ClientResponseException $error) {
+            $this->assertTrue(404 === $error->getCode());
         }
     }
 
@@ -725,21 +723,6 @@ class IndexTest extends BaseTest
         ]);
         $status = new Status($client);
         $this->assertTrue($status->indexExists($indexName));
-    }
-
-    /**
-     * @group unit
-     */
-    public function testCreateWithInvalidOption(): void
-    {
-        $this->expectException(InvalidException::class);
-        $this->expectExceptionMessageMatches('/"testing_invalid_option" is not a valid option\. Allowed options are ((("[a-z_]+")(, )?)+)\./');
-
-        $client = $this->createMock(Client::class);
-        $index = new Index($client, 'test');
-
-        $opts = ['testing_invalid_option' => true];
-        $index->create([], $opts);
     }
 
     /**
@@ -893,10 +876,9 @@ class IndexTest extends BaseTest
     {
         $index = $this->_createIndex();
         $index->refresh();
-        $endpoint = new Analyze();
-        $endpoint->setIndex('fooIndex');
-        $endpoint->setBody(['text' => 'foo']);
-        $returnedTokens = $index->requestEndpoint($endpoint)->getData()['tokens'];
+
+        $response = $index->getClient()->indices()->analyze(['body' => ['text' => 'foo']]);
+        $returnedTokens = $response->asArray()['tokens'];
 
         $tokens = [
             [

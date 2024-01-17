@@ -21,16 +21,6 @@ parameters:
 			path: src/QueryBuilder.php
 
 		-
-			message: "#^Function GuzzleHttp\\\\Psr7\\\\modify_request not found\\.$#"
-			count: 1
-			path: src/Transport/AwsAuthV4.php
-
-		-
-			message: "#^Function GuzzleHttp\\\\Psr7\\\\stream_for not found\\.$#"
-			count: 1
-			path: src/Transport/Guzzle.php
-
-		-
 			message: "#^Parameter \\#1 \\$precision of method Elastica\\\\Aggregation\\\\GeohashGrid\\:\\:setPrecision\\(\\) expects int\\|string, float given\\.$#"
 			count: 1
 			path: tests/Aggregation/GeohashGridTest.php
@@ -179,11 +169,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$indices of method Elastica\\\\Search\\:\\:addIndicesByName\\(\\) expects array\\<string\\>, array\\<int, stdClass\\> given\\.$#"
 			count: 1
 			path: tests/SearchTest.php
-
-		-
-			message: "#^Unreachable statement \\- code above always terminates\\.$#"
-			count: 1
-			path: tests/SnapshotTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$suggestion of static method Elastica\\\\Suggest\\:\\:create\\(\\) expects Elastica\\\\Suggest\\|Elastica\\\\Suggest\\\\AbstractSuggest, Elastica\\\\Query\\\\BoolQuery given\\.$#"

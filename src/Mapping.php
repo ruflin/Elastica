@@ -3,8 +3,6 @@
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
-use Elasticsearch\Endpoints\Indices\Mapping\Put;
-use Elasticsearch\Endpoints\Indices\PutMapping;
 
 /**
  * Elastica Mapping object.
@@ -164,12 +162,11 @@ class Mapping
      */
     public function send(Index $index, array $query = []): Response
     {
-        // TODO: Use only PutMapping when dropping support for elasticsearch/elasticsearch 7.x
-        $endpoint = \class_exists(PutMapping::class) ? new PutMapping() : new Put();
-        $endpoint->setBody($this->toArray());
-        $endpoint->setParams($query);
-
-        return $index->requestEndpoint($endpoint);
+        return $index->getClient()->toElasticaResponse(
+            $index->getClient()->indices()->putMapping(
+                \array_merge(['index' => $index->getName(), 'body' => $this->toArray()], $query)
+            )
+        );
     }
 
     /**

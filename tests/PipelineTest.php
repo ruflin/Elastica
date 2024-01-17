@@ -2,14 +2,15 @@
 
 namespace Elastica\Test;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Bulk;
 use Elastica\Client;
 use Elastica\Document;
-use Elastica\Exception\ResponseException;
 use Elastica\Pipeline;
 use Elastica\Processor\RenameProcessor;
 use Elastica\Processor\SetProcessor;
 use Elastica\Processor\TrimProcessor;
+use Elastica\ResponseConverter;
 
 /**
  * @internal
@@ -131,8 +132,9 @@ class PipelineTest extends BasePipeline
         try {
             $pipeline->deletePipeline('non_existent_pipeline');
             $this->fail('an exception should be raised!');
-        } catch (ResponseException $e) {
-            $result = $e->getResponse()->getFullError();
+        } catch (ClientResponseException $e) {
+            $response = ResponseConverter::toElastica($e->getResponse());
+            $result = $response->getFullError();
 
             $this->assertEquals('resource_not_found_exception', $result['type']);
             $this->assertEquals('pipeline [non_existent_pipeline] is missing', $result['reason']);

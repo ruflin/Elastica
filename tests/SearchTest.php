@@ -2,22 +2,24 @@
 
 namespace Elastica\Test;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastica\Aggregation\Cardinality;
 use Elastica\Client;
 use Elastica\Document;
 use Elastica\Exception\InvalidException;
-use Elastica\Exception\ResponseException;
 use Elastica\Query;
 use Elastica\Query\FunctionScore;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
 use Elastica\Request;
-use Elastica\Response;
+use Elastica\ResponseConverter;
 use Elastica\ResultSet;
 use Elastica\Script\Script;
 use Elastica\Search;
 use Elastica\Suggest;
 use Elastica\Test\Base as BaseTest;
+use GuzzleHttp\Psr7\Response as Psr7Response;
 
 /**
  * @internal
@@ -252,19 +254,27 @@ class SearchTest extends BaseTest
             Search::OPTION_SCROLL => '5m',
             Search::OPTION_SCROLL_ID => $scrollId,
         ]);
+
+        \parse_str($search->getClient()->getLastRequest()->getUri()->getQuery(), $lastRequestQuery);
+        $lastRequestData = \json_decode($search->getClient()->getLastRequest()->getBody(), true);
+
         $this->assertFalse($result->getResponse()->hasError());
         $this->assertCount(5, $result->getResults());
-        $this->assertArrayNotHasKey(Search::OPTION_SCROLL_ID, $search->getClient()->getLastRequest()->getQuery());
-        $this->assertEquals([Search::OPTION_SCROLL_ID => $scrollId], $search->getClient()->getLastRequest()->getData());
+        $this->assertArrayNotHasKey(Search::OPTION_SCROLL_ID, $lastRequestQuery);
+        $this->assertEquals([Search::OPTION_SCROLL_ID => $scrollId], $lastRequestData);
 
         $result = $search->search([], [
             Search::OPTION_SCROLL => '5m',
             Search::OPTION_SCROLL_ID => $scrollId,
         ]);
+
+        \parse_str($search->getClient()->getLastRequest()->getUri()->getQuery(), $lastRequestQuery);
+        $lastRequestData = \json_decode($search->getClient()->getLastRequest()->getBody(), true);
+
         $this->assertFalse($result->getResponse()->hasError());
         $this->assertCount(0, $result->getResults());
-        $this->assertArrayNotHasKey(Search::OPTION_SCROLL_ID, $search->getClient()->getLastRequest()->getQuery());
-        $this->assertEquals([Search::OPTION_SCROLL_ID => $scrollId], $search->getClient()->getLastRequest()->getData());
+        $this->assertArrayNotHasKey(Search::OPTION_SCROLL_ID, $lastRequestQuery);
+        $this->assertEquals([Search::OPTION_SCROLL_ID => $scrollId], $lastRequestData);
     }
 
     /**
@@ -400,9 +410,19 @@ class SearchTest extends BaseTest
         $this->assertNotEmpty($resultSet->getSuggests(), 'term#name_suggest');
 
         // Timeout - this one is a bit more tricky to test
-        $mockResponse = new Response(\json_encode(['timed_out' => true]));
+        $mockResponse = new Elasticsearch();
+        $mockResponse->setResponse(new Psr7Response(
+            200,
+            [
+                Elasticsearch::HEADER_CHECK => Elasticsearch::PRODUCT_NAME,
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ],
+            \json_encode(['timed_out' => true])
+        ));
+
         $client = $this->createMock(Client::class);
-        $client->method('request')
+        $client->method('search')
             ->willReturn($mockResponse)
         ;
         $search = new Search($client);
@@ -662,12 +682,12 @@ class SearchTest extends BaseTest
         $search = new Search($client);
         $search->addIndex($index);
 
-        $exception = null;
         try {
             $search->search($query);
             $this->fail('Should raise an Index not found exception');
-        } catch (ResponseException $e) {
-            $error = $e->getResponse()->getFullError();
+        } catch (ClientResponseException $e) {
+            $response = ResponseConverter::toElastica($e->getResponse());
+            $error = $response->getFullError();
 
             $this->assertEquals('index_not_found_exception', $error['type']);
             $this->assertEquals('no such index [elastica_7086b4c2ee585bbb6740ece5ed7ece01]', $error['reason']);

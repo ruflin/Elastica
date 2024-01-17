@@ -49,7 +49,7 @@ class CallbackStrategyTest extends Base
         }];
 
         $client = $this->_getClient($config);
-        $response = $client->request('_aliases');
+        $response = $client->toElasticaResponse($client->indices()->getAlias());
 
         $this->assertEquals(1, $count);
 

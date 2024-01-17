@@ -6,7 +6,9 @@ version: '3.4'
 
 services:
     php:
-        build: php/
+        container_name: php
+        build: 
+            dockerfile: php/Dockerfile
         volumes:
             - ../:/var/www/html
         networks:
@@ -15,6 +17,8 @@ services:
             - ES_HOST=es01
             - PROXY_HOST=proxy
             - ES_VERSION=${ES_VERSION}
+        stdin_open: true 
+        tty: true
 
 networks:
     elastic:

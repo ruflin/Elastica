@@ -38,17 +38,12 @@ class ClientConfigurationTest extends TestCase
             'port' => 9201,
             'path' => null,
             'url' => null,
-            'proxy' => null,
-            'transport' => null,
-            'persistent' => true,
-            'timeout' => null,
             'connections' => [],
             'roundRobin' => false,
             'retryOnConflict' => 0,
-            'bigintConversion' => false,
             'username' => null,
             'password' => null,
-            'auth_type' => null,
+            'transport_config' => [],
         ];
 
         $this->assertEquals($expected, $configuration->getAll());
@@ -56,24 +51,19 @@ class ClientConfigurationTest extends TestCase
 
     public function testFromDsnWithParameters(): void
     {
-        $configuration = ClientConfiguration::fromDsn('https://user:p4ss@foo.com:9201/my-path?proxy=https://proxy.com&persistent=false&timeout=45&roundRobin=true&retryOnConflict=2&bigintConversion=true&extra=abc');
+        $configuration = ClientConfiguration::fromDsn('https://user:p4ss@foo.com:9201/my-path?roundRobin=true&retryOnConflict=2&extra=abc');
         $expected = [
             'host' => 'foo.com',
             'port' => 9201,
             'path' => '/my-path',
             'url' => null,
-            'proxy' => 'https://proxy.com',
-            'transport' => 'https',
-            'persistent' => false,
-            'timeout' => 45,
             'connections' => [],
             'roundRobin' => true,
             'retryOnConflict' => 2,
-            'bigintConversion' => true,
             'username' => 'user',
             'password' => 'p4ss',
-            'auth_type' => 'basic',
             'extra' => 'abc',
+            'transport_config' => [],
         ];
 
         $this->assertEquals($expected, $configuration->getAll());
@@ -87,21 +77,16 @@ class ClientConfigurationTest extends TestCase
             'port' => null,
             'path' => null,
             'url' => null,
-            'proxy' => null,
-            'transport' => null,
-            'persistent' => true,
-            'timeout' => null,
             'connections' => [
-                ['host' => '127.0.0.1', 'transport' => 'http', 'username' => 'nicolas'],
-                ['host' => '127.0.0.2', 'path' => '/bar', 'transport' => 'http', 'timeout' => 4],
+                ['host' => '127.0.0.1', 'username' => 'nicolas'],
+                ['host' => '127.0.0.2', 'path' => '/bar', 'timeout' => 4],
             ],
             'roundRobin' => false,
             'retryOnConflict' => 0,
-            'bigintConversion' => false,
             'username' => 'tobias',
             'password' => null,
-            'auth_type' => null,
             'extra' => 'abc',
+            'transport_config' => [],
         ];
 
         $this->assertEquals($expected, $configuration->getAll());
@@ -116,17 +101,12 @@ class ClientConfigurationTest extends TestCase
             'port' => null,
             'path' => null,
             'url' => null,
-            'proxy' => null,
-            'transport' => null,
-            'persistent' => true,
-            'timeout' => null,
             'connections' => [], // host, port, path, timeout, transport, compression, persistent, timeout, username, password, config -> (curl, headers, url)
             'roundRobin' => false,
             'retryOnConflict' => 0,
-            'bigintConversion' => false,
             'username' => null,
             'password' => null,
-            'auth_type' => null,
+            'transport_config' => [],
         ];
 
         $this->assertEquals($expected, $configuration->getAll());
@@ -144,17 +124,12 @@ class ClientConfigurationTest extends TestCase
             'port' => null,
             'path' => null,
             'url' => null,
-            'proxy' => null,
-            'transport' => null,
-            'persistent' => true,
-            'timeout' => null,
             'connections' => [], // host, port, path, timeout, transport, compression, persistent, timeout, username, password, config -> (curl, headers, url)
             'roundRobin' => false,
             'retryOnConflict' => 0,
-            'bigintConversion' => false,
             'username' => 'Jdoe',
             'password' => null,
-            'auth_type' => null,
+            'transport_config' => [],
             'extra' => 'abc',
         ];
 
@@ -171,24 +146,18 @@ class ClientConfigurationTest extends TestCase
     public function testGet(): void
     {
         $configuration = new ClientConfiguration();
-        $this->assertTrue($configuration->get('persistent'));
 
         $expected = [
             'host' => null,
             'port' => null,
             'path' => null,
             'url' => null,
-            'proxy' => null,
-            'transport' => null,
-            'persistent' => true,
-            'timeout' => null,
             'connections' => [],
             'roundRobin' => false,
             'retryOnConflict' => 0,
-            'bigintConversion' => false,
             'username' => null,
             'password' => null,
-            'auth_type' => null,
+            'transport_config' => [],
         ];
 
         $this->assertEquals($expected, $configuration->get(''));

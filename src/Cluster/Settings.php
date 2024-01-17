@@ -3,7 +3,6 @@
 namespace Elastica\Cluster;
 
 use Elastica\Client;
-use Elastica\Request;
 use Elastica\Response;
 
 /**
@@ -37,7 +36,7 @@ class Settings
      */
     public function get(): array
     {
-        return $this->request()->getData();
+        return $this->_client->cluster()->getSettings()->asArray();
     }
 
     /**
@@ -157,7 +156,9 @@ class Settings
      */
     public function set(array $settings): Response
     {
-        return $this->request($settings, Request::PUT);
+        return $this->_client->toElasticaResponse(
+            $this->_client->cluster()->putSettings(['body' => $settings])
+        );
     }
 
     /**
@@ -166,12 +167,5 @@ class Settings
     public function getClient(): Client
     {
         return $this->_client;
-    }
-
-    public function request(array $data = [], string $method = Request::GET): Response
-    {
-        $path = '_cluster/settings';
-
-        return $this->getClient()->request($path, $method, $data);
     }
 }

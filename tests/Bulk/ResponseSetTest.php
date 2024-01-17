@@ -26,11 +26,6 @@ class ResponseSetTest extends BaseTest
         $responseSet = $this->_createResponseSet($responseData, $actions);
 
         $this->assertEquals(200, $responseSet->getStatus());
-        $this->assertEquals(12.3, $responseSet->getQueryTime());
-        $this->assertEquals([
-            'url' => 'http://127.0.0.1:9200/_bulk',
-            'http_code' => 200,
-        ], $responseSet->getTransferInfo());
     }
 
     /**
@@ -147,14 +142,9 @@ class ResponseSetTest extends BaseTest
         $client = $this->createMock(Client::class);
 
         $response = new Response($responseData, 200);
-        $response->setQueryTime(12.3);
-        $response->setTransferInfo([
-            'url' => 'http://127.0.0.1:9200/_bulk',
-            'http_code' => 200,
-        ]);
 
         $client->expects($this->once())
-            ->method('request')
+            ->method('baseBulk')
             ->withAnyParameters()
             ->willReturn($response)
         ;

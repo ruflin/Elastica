@@ -2,10 +2,12 @@
 
 namespace Elastica;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Elastic\Elasticsearch\Exception\MissingParameterException;
+use Elastic\Elasticsearch\Exception\ServerResponseException;
+use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Exception\ClientException;
-use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
-use Elastica\Exception\ResponseException;
 
 /**
  * Elastica index template object.
@@ -48,15 +50,17 @@ class IndexTemplate
     /**
      * Deletes the index template.
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
-     *
-     * @return Response
      */
-    public function delete()
+    public function delete(): Response
     {
-        return $this->request(Request::DELETE);
+        return $this->_client->toElasticaResponse(
+            $this->_client->indices()->deleteTemplate(['name' => $this->getName()])
+        );
     }
 
     /**
@@ -66,69 +70,48 @@ class IndexTemplate
      *
      * @param array $args OPTIONAL Arguments to use
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
-     *
-     * @return Response
      */
-    public function create(array $args = [])
+    public function create(array $args = []): Response
     {
-        return $this->request(Request::PUT, $args);
+        return $this->_client->toElasticaResponse(
+            $this->_client->indices()->putTemplate(['name' => $this->getName(), 'body' => $args])
+        );
     }
 
     /**
      * Checks if the given index template is already created.
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
-     *
-     * @return bool
      */
-    public function exists()
+    public function exists(): bool
     {
-        $response = $this->request(Request::HEAD);
+        $response = $this->_client->indices()->existsTemplate(['name' => $this->getName()]);
 
-        return 200 === $response->getStatus();
+        return 200 === $response->getStatusCode();
     }
 
     /**
      * Returns the index template name.
-     *
-     * @return string Index name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->_name;
     }
 
     /**
      * Returns index template client.
-     *
-     * @return Client
      */
-    public function getClient()
+    public function getClient(): Client
     {
         return $this->_client;
-    }
-
-    /**
-     * Makes calls to the elasticsearch server based on this index template name.
-     *
-     * @param string $method Rest method to use (GET, POST, DELETE, PUT)
-     * @param array  $data   OPTIONAL Arguments as array
-     *
-     * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
-     *
-     * @return Response
-     */
-    public function request($method, $data = [])
-    {
-        $path = '_template/'.$this->getName();
-
-        return $this->getClient()->request($path, $method, $data);
     }
 }

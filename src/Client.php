@@ -2,19 +2,32 @@
 
 namespace Elastica;
 
+use Elastic\Elasticsearch\ClientInterface;
+use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Elastic\Elasticsearch\Exception\HttpClientException;
+use Elastic\Elasticsearch\Exception\MissingParameterException;
+use Elastic\Elasticsearch\Exception\ServerResponseException;
+use Elastic\Elasticsearch\Response\Elasticsearch;
+use Elastic\Elasticsearch\Traits\ClientEndpointsTrait;
+use Elastic\Elasticsearch\Traits\EndpointTrait;
+use Elastic\Elasticsearch\Traits\NamespaceTrait;
+use Elastic\Elasticsearch\Transport\Adapter\AdapterInterface;
+use Elastic\Elasticsearch\Transport\Adapter\AdapterOptions;
+use Elastic\Transport\Exception\NoAsyncClientException;
+use Elastic\Transport\Exception\NoNodeAvailableException;
+use Elastic\Transport\Transport;
+use Elastic\Transport\TransportBuilder;
 use Elastica\Bulk\Action;
 use Elastica\Bulk\ResponseSet;
 use Elastica\Exception\Bulk\ResponseException as BulkResponseException;
 use Elastica\Exception\ClientException;
-use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
-use Elastica\Exception\ResponseException;
 use Elastica\Script\AbstractScript;
-use Elasticsearch\Endpoints\AbstractEndpoint;
-use Elasticsearch\Endpoints\ClosePointInTime;
-use Elasticsearch\Endpoints\Indices\ForceMerge;
-use Elasticsearch\Endpoints\Indices\Refresh;
-use Elasticsearch\Endpoints\Update;
+use GuzzleHttp\Psr7\Uri;
+use Http\Promise\Promise;
+use Psr\Http\Client\ClientInterface as HttpClientInterface;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
@@ -23,8 +36,17 @@ use Psr\Log\NullLogger;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Client
+class Client implements ClientInterface
 {
+    use EndpointTrait;
+    use NamespaceTrait;
+    use ClientEndpointsTrait {
+        closePointInTime as protected elasticClientClosePointInTime;
+        bulk as protected elasticClientBulk;
+    }
+
+    private bool $elasticMetaHeader = true;
+
     /**
      * @var ClientConfiguration
      */
@@ -41,12 +63,12 @@ class Client
     protected $_connectionPool;
 
     /**
-     * @var Request|null
+     * @var RequestInterface|null
      */
     protected $_lastRequest;
 
     /**
-     * @var Response|null
+     * @var Elasticsearch|null
      */
     protected $_lastResponse;
 
@@ -59,6 +81,11 @@ class Client
      * @var string
      */
     protected $_version;
+
+    /**
+     * The endpoint namespace storage.
+     */
+    protected array $namespace;
 
     /**
      * Creates a new Elastica client.
@@ -86,11 +113,79 @@ class Client
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getLogger(): LoggerInterface
+    {
+        return $this->_logger;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTransport(): Transport
+    {
+        throw new \Exception('Not supported');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAsync(bool $async): self
+    {
+        throw new \Exception('Not supported');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAsync(): bool
+    {
+        throw new \Exception('Not supported');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setElasticMetaHeader(bool $active): self
+    {
+        $this->elasticMetaHeader = $active;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getElasticMetaHeader(): bool
+    {
+        return $this->elasticMetaHeader;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setResponseException(bool $active): self
+    {
+        throw new \Exception('Not supported');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getResponseException(): bool
+    {
+        throw new \Exception('Not supported');
+    }
+
+    /**
      * Get current version.
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function getVersion(): string
     {
@@ -98,7 +193,7 @@ class Client
             return $this->_version;
         }
 
-        $data = $this->request('/')->getData();
+        $data = $this->info()->asArray();
 
         return $this->_version = $data['version']['number'];
     }
@@ -208,11 +303,13 @@ class Client
      *
      * @param array|Document[] $docs Array of Elastica\Document
      *
-     * @throws InvalidException      If docs is empty
-     * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
+     * @throws InvalidException          If docs is empty
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws BulkResponseException
+     * @throws ClientException
      */
     public function updateDocuments(array $docs, array $requestParams = []): ResponseSet
     {
@@ -241,11 +338,13 @@ class Client
      *
      * @param array|Document[] $docs Array of Elastica\Document
      *
-     * @throws InvalidException      If docs is empty
-     * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
+     * @throws InvalidException          If docs is empty
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws BulkResponseException
+     * @throws ClientException
      */
     public function addDocuments(array $docs, array $requestParams = []): ResponseSet
     {
@@ -274,15 +373,18 @@ class Client
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function updateDocument($id, $data, $index, array $options = []): Response
     {
-        $endpoint = new Update();
-        $endpoint->setId($id);
-        $endpoint->setIndex($index);
+        $params = [
+            'id' => $id,
+            'index' => $index,
+        ];
 
         if ($data instanceof AbstractScript) {
             $requestData = $data->toArray();
@@ -317,19 +419,18 @@ class Client
             }
         }
 
-        $endpoint->setBody($requestData);
-        $endpoint->setParams($options);
+        $params['body'] = $requestData;
 
-        $response = $this->requestEndpoint($endpoint);
+        $response = $this->update(\array_merge($params, $options));
 
-        if ($response->isOk()
+        if ($response->getStatusCode() >= 200 && $response->getStatusCode() < 300
             && $data instanceof Document
             && ($data->isAutoPopulate() || $this->getConfigValue(['document', 'autoPopulate'], false))
         ) {
-            $data->setVersionParams($response->getData());
+            $data->setVersionParams($response->asArray());
         }
 
-        return $response;
+        return $this->toElasticaResponse($response);
     }
 
     /**
@@ -338,10 +439,12 @@ class Client
      * @param array|Document[] $docs
      *
      * @throws InvalidException
-     * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws BulkResponseException
+     * @throws ClientException
      */
     public function deleteDocuments(array $docs, array $requestParams = []): ResponseSet
     {
@@ -455,10 +558,12 @@ class Client
      * @param bool|string  $routing Optional routing key for all ids
      *
      * @throws InvalidException
-     * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws BulkResponseException
+     * @throws ClientException
      */
     public function deleteIds(array $ids, $index, $routing = false): ResponseSet
     {
@@ -501,11 +606,13 @@ class Client
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
-     * @throws ResponseException
      * @throws InvalidException
-     * @throws ClientException
-     * @throws ConnectionException
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws BulkResponseException
+     * @throws ClientException
      */
     public function bulk(array $params): ResponseSet
     {
@@ -520,34 +627,32 @@ class Client
         return $bulk->send();
     }
 
-    /**
-     * Makes calls to the elasticsearch server based on this index.
-     *
-     * It's possible to make any REST query directly over this method
-     *
-     * @param string       $path        Path to call
-     * @param string       $method      Rest method to use (GET, POST, DELETE, PUT)
-     * @param array|string $data        OPTIONAL Arguments as array or pre-encoded string
-     * @param array        $query       OPTIONAL Query params
-     * @param string       $contentType Content-Type sent with this request
-     *
-     * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
-     */
-    public function request(string $path, string $method = Request::GET, $data = [], array $query = [], string $contentType = Request::DEFAULT_CONTENT_TYPE): Response
+    public function baseBulk(array $params)
+    {
+        return $this->toElasticaResponse($this->elasticClientBulk($params));
+    }
+
+    public function sendRequest(RequestInterface $sentRequest): Elasticsearch|Promise
     {
         $connection = $this->getConnection();
-        $request = $this->_lastRequest = new Request($path, $method, $data, $query, $connection, $contentType);
+        $transport = $connection->getTransportObject();
+
+        $this->_lastRequest = $sentRequest;
         $this->_lastResponse = null;
 
         try {
-            $response = $this->_lastResponse = $request->send();
-        } catch (ConnectionException $e) {
+            $response = $transport->sendRequest($sentRequest);
+
+            $result = new Elasticsearch();
+            $result->setResponse($response, 'HEAD' === $sentRequest->getMethod() ? false : true);
+
+            $this->_lastResponse = $result;
+        } catch (ServerResponseException|NoNodeAvailableException $e) {
             $this->_connectionPool->onFail($connection, $e, $this);
             $this->_logger->error('Elastica Request Failure', [
                 'exception' => $e,
-                'request' => $e->getRequest()->toArray(),
+                'request' => $sentRequest,
+                'request_content' => \json_decode($sentRequest->getBody()->__toString(), true),
                 'retry' => $this->hasConnection(),
             ]);
 
@@ -556,33 +661,16 @@ class Client
                 throw $e;
             }
 
-            return $this->request($path, $method, $data, $query);
+            return $this->sendRequest($sentRequest);
         }
 
         $this->_logger->debug('Elastica Request', [
-            'request' => $request->toArray(),
-            'response' => $response->getData(),
-            'responseStatus' => $response->getStatus(),
+            'request' => \json_decode($sentRequest->getBody()->__toString(), true),
+            'response' => 'HEAD' !== $sentRequest->getMethod() ? $result->asArray() : $result->asString(),
+            'responseStatus' => $response->getStatusCode(),
         ]);
 
-        return $response;
-    }
-
-    /**
-     * Makes calls to the elasticsearch server with usage official client Endpoint.
-     *
-     * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
-     */
-    public function requestEndpoint(AbstractEndpoint $endpoint): Response
-    {
-        return $this->request(
-            \ltrim($endpoint->getURI(), '/'),
-            $endpoint->getMethod(),
-            $endpoint->getBody() ?? [],
-            $endpoint->getParams()
-        );
+        return $result;
     }
 
     /**
@@ -592,16 +680,15 @@ class Client
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-forcemerge.html
      *
+     * @throws MissingParameterException if a required parameter is missing
+     * @throws NoNodeAvailableException  if all the hosts are offline
+     * @throws ClientResponseException   if the status code of response is 4xx
+     * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function forcemergeAll($args = []): Response
     {
-        $endpoint = new ForceMerge();
-        $endpoint->setParams($args);
-
-        return $this->requestEndpoint($endpoint);
+        return $this->toElasticaResponse($this->indices()->forcemerge($args));
     }
 
     /**
@@ -609,16 +696,14 @@ class Client
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/point-in-time-api.html#close-point-in-time-api
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function closePointInTime(string $pointInTimeId): Response
     {
-        $endpoint = new ClosePointInTime();
-        $endpoint->setBody(['id' => $pointInTimeId]);
-
-        return $this->requestEndpoint($endpoint);
+        return $this->toElasticaResponse($this->elasticClientClosePointInTime(['body' => ['id' => $pointInTimeId]]));
     }
 
     /**
@@ -626,21 +711,22 @@ class Client
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-refresh.html
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function refreshAll(): Response
     {
-        return $this->requestEndpoint(new Refresh());
+        return $this->toElasticaResponse($this->indices()->refresh());
     }
 
-    public function getLastRequest(): ?Request
+    public function getLastRequest(): ?RequestInterface
     {
         return $this->_lastRequest;
     }
 
-    public function getLastResponse(): ?Response
+    public function getLastResponse(): ?Elasticsearch
     {
         return $this->_lastResponse;
     }
@@ -655,6 +741,11 @@ class Client
         $this->_logger = $logger;
 
         return $this;
+    }
+
+    public function toElasticaResponse(Elasticsearch|ResponseInterface $elasticsearchResponse): Response
+    {
+        return ResponseConverter::toElastica($elasticsearchResponse);
     }
 
     /**
@@ -708,6 +799,133 @@ class Client
             }
         }
 
+        $params['transport'] = $this->_buildTransport($config);
+
         return $params;
+    }
+
+    protected function _buildTransport(array $config): Transport
+    {
+        $transportConfig = $config['transport_config'] ?? [];
+        $hosts = [];
+
+        if (isset($config['url'])) {
+            $hosts = [$config['url']];
+        } else {
+            if (isset($config['hosts'])) {
+                $hosts = $config['hosts'];
+            } else {
+                $hosts = [(string) Uri::fromParts([
+                    'scheme' => $config['schema'] ?? 'http',
+                    'host' => $config['host'] ?? Connection::DEFAULT_HOST,
+                    'port' => $config['port'] ?? Connection::DEFAULT_PORT,
+                    'path' => isset($config['path']) ? \ltrim($config['path'], '/') : '',
+                ]),
+                ];
+            }
+        }
+
+        // Transport builder
+        $builder = TransportBuilder::create();
+
+        $builder->setHosts($hosts);
+
+        // Logger
+        if (null !== $this->_logger) {
+            $builder->setLogger($this->_logger);
+        }
+
+        // Http client
+        if (isset($transportConfig['http_client'])) {
+            $builder->setClient($config['http_client']);
+        }
+
+        // Set HTTP client options
+        $builder->setClient(
+            $this->setTransportClientOptions(
+                $builder->getClient(),
+                $transportConfig['http_client_config'] ?? [],
+                $transportConfig['http_client_options'] ?? []
+            )
+        );
+
+        // Cloud id
+        if (isset($config['cloud_id'])) {
+            $builder->setCloudId($config['cloud_id']);
+        }
+
+        // Node Pool
+        if (isset($transportConfig['node_pool'])) {
+            $builder->setNodePool($config['node_pool']);
+        }
+
+        $transport = $builder->build();
+
+        // The default retries is equal to the number of hosts
+        if (isset($config['retries']) && (int) $config['retries'] > 0) {
+            $transport->setRetries($config['retries']);
+        } else {
+            $transport->setRetries(\count($hosts));
+        }
+
+        // Basic authentication
+        if (isset($config['username'], $config['password'])) {
+            $transport->setUserInfo($config['username'], $config['password']);
+        }
+
+        // API key
+        if (isset($config['api_key']) && !empty($config['api_key'])) {
+            if (isset($config['username']) && !empty($config['username'])) {
+                throw new InvalidException('You cannot use APIKey and Basic Authenication together');
+            }
+            $transport->setHeader('Authorization', \sprintf('ApiKey %s', $config['api_key']));
+        }
+
+        /*
+         * Elastic cloud optimized with gzip
+         * @see https://github.com/elastic/elasticsearch-php/issues/1241 omit for Symfony HTTP Client
+         */
+        if (isset($config['cloud_id']) && !$this->isSymfonyHttpClient($transport)) {
+            $transport->setHeader('Accept-Encoding', 'gzip');
+        }
+
+        return $transport;
+    }
+
+    /**
+     * Returns true if the transport HTTP client is Symfony.
+     */
+    protected function isSymfonyHttpClient(Transport $transport): bool
+    {
+        if (false !== \strpos(\get_class($transport->getClient()), 'Symfony\Component\HttpClient')) {
+            return true;
+        }
+        try {
+            if (false !== \strpos(\get_class($transport->getAsyncClient()), 'Symfony\Component\HttpClient')) {
+                return true;
+            }
+        } catch (NoAsyncClientException $e) {
+            return false;
+        }
+
+        return false;
+    }
+
+    protected function setTransportClientOptions(HttpClientInterface $client, array $config, array $clientOptions = []): HttpClientInterface
+    {
+        if (empty($config) && empty($clientOptions)) {
+            return $client;
+        }
+        $class = \get_class($client);
+        if (!isset(AdapterOptions::HTTP_ADAPTERS[$class])) {
+            throw new HttpClientException(\sprintf('The HTTP client %s is not supported for custom options', $class));
+        }
+        $adapterClass = AdapterOptions::HTTP_ADAPTERS[$class];
+        if (!\class_exists($adapterClass) || !\in_array(AdapterInterface::class, \class_implements($adapterClass))) {
+            throw new HttpClientException(\sprintf('The class %s does not exists or does not implement %s', $adapterClass, AdapterInterface::class));
+        }
+        $adapter = new $adapterClass();
+
+        return $adapter->setConfig($client, $config, $clientOptions);
     }
 }

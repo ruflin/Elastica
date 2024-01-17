@@ -85,8 +85,6 @@ class Stats
 
     /**
      * Returns response object.
-     *
-     * @return Response Response object
      */
     public function getResponse(): Response
     {
@@ -98,7 +96,14 @@ class Stats
      */
     public function refresh(): void
     {
-        $this->_response = $this->getIndex()->requestEndpoint(new \Elasticsearch\Endpoints\Indices\Stats());
+        $client = $this->getIndex()->getClient();
+
+        $this->_response = $client->toElasticaResponse(
+            $client->indices()->stats(
+                ['index' => $this->getIndex()->getName()]
+            )
+        );
+
         $this->_data = $this->getResponse()->getData();
     }
 }

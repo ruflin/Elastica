@@ -2,10 +2,12 @@
 
 namespace Elastica;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Elastic\Elasticsearch\Exception\ServerResponseException;
+use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Exception\ClientException;
-use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
-use Elastica\Exception\ResponseException;
+use Elastica\Exception\NotFoundException;
 
 /**
  * Scroll Iterator.
@@ -73,9 +75,10 @@ class Scroll implements \Iterator
      *
      * @see http://php.net/manual/en/iterator.next.php
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function next(): void
     {
@@ -120,9 +123,10 @@ class Scroll implements \Iterator
      *
      * @see http://php.net/manual/en/iterator.rewind.php
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function rewind(): void
     {
@@ -144,16 +148,15 @@ class Scroll implements \Iterator
     /**
      * Cleares the search context on ES and marks this Scroll instance as finished.
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     public function clear(): void
     {
         if (null !== $this->_nextScrollId) {
-            $this->_search->getClient()->request(
-                '_search/scroll',
-                Request::DELETE,
+            $this->_search->getClient()->clearScroll(
                 [Search::OPTION_SCROLL_ID => [$this->_nextScrollId]]
             );
 
@@ -165,9 +168,11 @@ class Scroll implements \Iterator
     /**
      * Prepares Scroll for next request.
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
+     * @throws NotFoundException
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     protected function _setScrollId(ResultSet $resultSet): void
     {
@@ -178,8 +183,17 @@ class Scroll implements \Iterator
         $this->_currentResultSet = $resultSet;
         ++$this->currentPage;
         $this->_nextScrollId = null;
-        if ($resultSet->getResponse()->isOk()) {
-            $this->_nextScrollId = $resultSet->getResponse()->getScrollId();
+        $response = $resultSet->getResponse();
+
+        if ($response->isOk()) {
+            $data = $response->getData();
+
+            if (!isset($data['_scroll_id'])) {
+                throw new NotFoundException('Unable to find the field [_scroll_id] from the response');
+            }
+
+            $this->_nextScrollId = $data['_scroll_id'];
+
             if (0 === $resultSet->count()) {
                 $this->clear();
             }

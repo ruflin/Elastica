@@ -2,6 +2,7 @@
 
 namespace Elastica\Test;
 
+use Elastic\Transport\Transport;
 use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Exception\InvalidException;
@@ -22,7 +23,7 @@ class ClientTest extends BaseTest
 
     public function testConstructWithDsn(): void
     {
-        $client = new Client('https://user:p4ss@foo.com:9200?persistent=false&retryOnConflict=2');
+        $client = new Client('https://user:p4ss@foo.com:9200?retryOnConflict=2');
         $this->assertCount(1, $client->getConnections());
 
         $expected = [
@@ -30,18 +31,13 @@ class ClientTest extends BaseTest
             'port' => 9200,
             'path' => null,
             'url' => null,
-            'proxy' => null,
-            'transport' => 'https',
-            'persistent' => false,
-            'timeout' => null,
             'connections' => [],
             'roundRobin' => false,
             'retryOnConflict' => 2,
-            'bigintConversion' => false,
             'username' => 'user',
             'password' => 'p4ss',
-            'auth_type' => 'basic',
             'connectionStrategy' => 'Simple',
+            'transport_config' => [],
         ];
 
         $this->assertEquals($expected, $client->getConfig());
@@ -147,5 +143,81 @@ class ClientTest extends BaseTest
         $this->assertInstanceOf(Connection::class, $connection);
         $this->assertEquals($this->_getHost(), $connection->getHost());
         $this->assertEquals($this->_getPort(), $connection->getPort());
+    }
+
+    public function testGetAsync(): void
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Not supported');
+
+        $client = $this->_getClient();
+        $client->getAsync();
+    }
+
+    public function testSetElasticMetaHeader(): void
+    {
+        $client = $this->_getClient();
+        $client->setElasticMetaHeader(true);
+
+        $this->assertTrue($client->getElasticMetaHeader());
+    }
+
+    public function testGetTransport(): void
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Not supported');
+
+        $client = $this->_getClient();
+        $client->getTransport();
+    }
+
+    public function testSetAsync(): void
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Not supported');
+
+        $client = $this->_getClient();
+        $client->setAsync(true);
+    }
+
+    public function testSetResponseException(): void
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Not supported');
+
+        $client = $this->_getClient();
+        $client->setResponseException(true);
+    }
+
+    public function testGetResponseException(): void
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Not supported');
+
+        $client = $this->_getClient();
+        $client->getResponseException();
+    }
+
+    public function testClientConnectionWithCloudId(): void
+    {
+        $client = new Client([
+            'host' => 'foo.com',
+            'port' => 9200,
+            'path' => null,
+            'url' => null,
+            'cloud_id' => 'Test:ZXUtY2VudHJhbC0xLmF3cy5jbG91ZC5lcy5pbyQ0ZGU0NmNlZDhkOGQ0NTk2OTZlNTQ0ZmU1ZjMyYjk5OSRlY2I0YTJlZmY0OTA0ZDliOTE5NzMzMmQwOWNjOTY5Ng==',
+            'connections' => [],
+            'roundRobin' => false,
+            'retryOnConflict' => 2,
+            'username' => 'user',
+            'password' => 'p4ss',
+            'connectionStrategy' => 'Simple',
+            'transport_config' => [],
+        ]);
+        $transport = $client->getConnection()->getTransportObject();
+        $node = $transport->getNodePool()->nextNode();
+
+        $this->assertInstanceOf(Transport::class, $transport);
+        $this->assertEquals('4de46ced8d8d459696e544fe5f32b999.eu-central-1.aws.cloud.es.io', $node->getUri()->getHost());
     }
 }

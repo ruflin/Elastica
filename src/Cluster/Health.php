@@ -2,11 +2,12 @@
 
 namespace Elastica\Cluster;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Elastic\Elasticsearch\Exception\ServerResponseException;
+use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Client;
 use Elastica\Cluster\Health\Index;
 use Elastica\Exception\ClientException;
-use Elastica\Exception\ConnectionException;
-use Elastica\Exception\ResponseException;
 
 /**
  * Elastic cluster health.
@@ -179,17 +180,15 @@ class Health
     /**
      * Retrieves the health data from the cluster.
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
      */
     protected function _retrieveHealthData(): array
     {
-        $endpoint = new \Elasticsearch\Endpoints\Cluster\Health();
-        $endpoint->setParams(['level' => 'shards']);
+        $response = $this->_client->cluster()->health(['level' => 'shards']);
 
-        $response = $this->_client->requestEndpoint($endpoint);
-
-        return $response->getData();
+        return $response->asArray();
     }
 }

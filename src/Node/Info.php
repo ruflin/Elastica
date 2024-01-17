@@ -2,12 +2,12 @@
 
 namespace Elastica\Node;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Elastic\Elasticsearch\Exception\ServerResponseException;
+use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Exception\ClientException;
-use Elastica\Exception\ConnectionException;
-use Elastica\Exception\ResponseException;
 use Elastica\Node as BaseNode;
 use Elastica\Response;
-use Elasticsearch\Endpoints\Nodes\Info as NodesInfo;
 
 /**
  * Elastica cluster node object.
@@ -194,8 +194,6 @@ class Info
 
     /**
      * Returns response object.
-     *
-     * @return Response Response object
      */
     public function getResponse(): Response
     {
@@ -207,25 +205,23 @@ class Info
      *
      * @param array $params Params to return (default none). Possible options: settings, os, process, jvm, thread_pool, network, transport, http, plugin
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
-     *
-     * @return Response Response object
      */
     public function refresh(array $params = []): Response
     {
         $this->_params = $params;
+        $client = $this->getNode()->getClient();
 
-        // TODO: Use only NodesInfo when dropping support for elasticsearch/elasticsearch 7.x
-        $endpoint = \class_exists(NodesInfo::class) ? new NodesInfo() : new \Elasticsearch\Endpoints\Cluster\Nodes\Info();
-        $endpoint->setNodeId($this->getNode()->getId());
+        $paramsRequest['node_id'] = $this->getNode()->getId();
 
         if ($params) {
-            $endpoint->setMetric($params);
+            $paramsRequest['metric'] = $params;
         }
 
-        $this->_response = $this->getNode()->getClient()->requestEndpoint($endpoint);
+        $this->_response = $client->toElasticaResponse($client->nodes()->info($paramsRequest));
         $data = $this->getResponse()->getData();
 
         $this->_data = \reset($data['nodes']);

@@ -57,10 +57,12 @@ class MultiBuilderTest extends BaseTest
                 [],
             ],
         ]);
+
         $searches = [
             $s1 = new Search($this->_getClient(), $this->builder),
             $s2 = new Search($this->_getClient(), $this->builder),
         ];
+
         $resultSet1 = new ResultSet(new Response([]), $s1->getQuery(), []);
         $resultSet2 = new ResultSet(new Response([]), $s2->getQuery(), []);
 

@@ -2,12 +2,12 @@
 
 namespace Elastica\Node;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Elastic\Elasticsearch\Exception\ServerResponseException;
+use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Exception\ClientException;
-use Elastica\Exception\ConnectionException;
-use Elastica\Exception\ResponseException;
 use Elastica\Node as BaseNode;
 use Elastica\Response;
-use Elasticsearch\Endpoints\Nodes\Stats as NodesStats;
 
 /**
  * Elastica cluster node object.
@@ -95,8 +95,6 @@ class Stats
 
     /**
      * Returns response object.
-     *
-     * @return Response Response object
      */
     public function getResponse(): Response
     {
@@ -106,19 +104,17 @@ class Stats
     /**
      * Reloads all nodes information. Has to be called if informations changed.
      *
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
-     * @throws ConnectionException
-     * @throws ResponseException
-     *
-     * @return Response Response object
      */
     public function refresh(): Response
     {
-        // TODO: Use only NodesStats when dropping support for elasticsearch/elasticsearch 7.x
-        $endpoint = \class_exists(NodesStats::class) ? new NodesStats() : new \Elasticsearch\Endpoints\Cluster\Nodes\Stats();
-        $endpoint->setNodeId($this->getNode()->getName());
-
-        $this->_response = $this->getNode()->getClient()->requestEndpoint($endpoint);
+        $client = $this->getNode()->getClient();
+        $this->_response = $client->toElasticaResponse(
+            $client->nodes()->stats(['node_id' => $this->getNode()->getName()])
+        );
         $data = $this->getResponse()->getData();
         $this->_data = \reset($data['nodes']);
 

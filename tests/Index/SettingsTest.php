@@ -2,9 +2,10 @@
 
 namespace Elastica\Test\Index;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Document;
-use Elastica\Exception\ResponseException;
 use Elastica\Index\Settings as IndexSettings;
+use Elastica\ResponseConverter;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -134,8 +135,9 @@ class SettingsTest extends BaseTest
         try {
             $indexAlias->delete();
             $this->fail('Should throw exception because you should delete the concrete index and not the alias');
-        } catch (ResponseException $e) {
-            $error = $e->getResponse()->getFullError();
+        } catch (ClientResponseException $e) {
+            $response = ResponseConverter::toElastica($e->getResponse());
+            $error = $response->getFullError();
 
             $this->assertSame('illegal_argument_exception', $error['type']);
             $this->assertStringContainsString('specify the corresponding concrete indices instead.', $error['reason']);
@@ -346,8 +348,9 @@ class SettingsTest extends BaseTest
         try {
             $index->addDocument($doc2);
             $this->fail('Should throw exception because of read only');
-        } catch (ResponseException $e) {
-            $error = $e->getResponse()->getFullError();
+        } catch (ClientResponseException $e) {
+            $response = ResponseConverter::toElastica($e->getResponse());
+            $error = $response->getFullError();
 
             $this->assertSame('cluster_block_exception', $error['type']);
             $this->assertStringContainsString('read-only', $error['reason']);
@@ -447,8 +450,10 @@ class SettingsTest extends BaseTest
         try {
             $index->getSettings()->get();
             $this->fail('Should throw exception because of index not found');
-        } catch (ResponseException $e) {
-            $error = $e->getResponse()->getFullError();
+        } catch (ClientResponseException $e) {
+            $response = ResponseConverter::toElastica($e->getResponse());
+            $error = $response->getFullError();
+
             $this->assertSame('index_not_found_exception', $error['type']);
         }
     }

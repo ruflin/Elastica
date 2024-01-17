@@ -47,6 +47,9 @@ class SnapshotTest extends Base
         $this->index->refresh();
     }
 
+    /**
+     * @group functional
+     */
     public function testRegisterRepository(): void
     {
         $location = $this->registerRepository('backup1');
@@ -57,8 +60,15 @@ class SnapshotTest extends Base
         // attempt to retrieve a repository which does not exist
         $this->expectException(NotFoundException::class);
         $this->snapshot->getRepository('foobar');
+
+        // delete repository
+        $response = $this->snapshot->deleteRepository(self::REPOSITORY_NAME);
+        $this->assertTrue($response->isOk());
     }
 
+    /**
+     * @group functional
+     */
     public function testSnapshotAndRestore(): void
     {
         $this->registerRepository('backup2');
@@ -73,8 +83,7 @@ class SnapshotTest extends Base
         $data = $response->getData();
         $this->assertContains($this->index->getName(), $data['snapshot']['indices']);
 
-        $this->markTestSkipped('Failed asserting that actual size 2 matches expected size 1.');
-        $this->assertCount(1, $data['snapshot']['indices']); // only the specified index should be present
+        $this->assertEquals(\in_array($this->index->getName(), $data['snapshot']['indices']), 1);
         $this->assertEquals($snapshotName, $data['snapshot']['snapshot']);
 
         // retrieve data regarding the snapshot
@@ -82,10 +91,14 @@ class SnapshotTest extends Base
         $this->assertContains($this->index->getName(), $response['indices']);
 
         // delete our test index
+        $this->index->close();
         $this->index->delete();
 
         // restore the index from our snapshot
-        $response = $this->snapshot->restoreSnapshot(self::REPOSITORY_NAME, $snapshotName, [], true);
+        $response = $this->snapshot->restoreSnapshot(self::REPOSITORY_NAME, $snapshotName, [
+            'indices' => ['logs-*', $this->index->getName()],
+            'include_global_state' => true,
+        ], true);
         $this->assertTrue($response->isOk());
 
         $this->index->refresh();
@@ -100,8 +113,34 @@ class SnapshotTest extends Base
         $this->assertTrue($response->isOk());
 
         // ensure that the snapshot has been deleted
-        $this->expectException(NotFoundException::class);
-        $this->snapshot->getSnapshot(self::REPOSITORY_NAME, $snapshotName);
+        $expectedExceptionDeleteSnapshot = null;
+        try {
+            $this->snapshot->getSnapshot(self::REPOSITORY_NAME, $snapshotName);
+        } catch (NotFoundException $e) {
+            $expectedExceptionDeleteSnapshot = $e;
+        }
+        $this->assertInstanceOf(NotFoundException::class, $expectedExceptionDeleteSnapshot);
+
+        // check all snapshots
+        $allSnapshots = $this->snapshot->getAllSnapshots(self::REPOSITORY_NAME);
+        $this->assertCount(0, $allSnapshots);
+
+        // delete repository
+        $response = $this->snapshot->deleteRepository(self::REPOSITORY_NAME);
+        $this->assertTrue($response->isOk());
+
+        // check all repositories
+        $allRepositories = $this->snapshot->getAllRepositories();
+        $this->assertCount(0, $allRepositories);
+
+        // ensure that the repository has been deleted
+        $expectedExceptionDeleteRepository = null;
+        try {
+            $this->snapshot->getRepository(self::REPOSITORY_NAME);
+        } catch (NotFoundException $e) {
+            $expectedExceptionDeleteRepository = $e;
+        }
+        $this->assertInstanceOf(NotFoundException::class, $expectedExceptionDeleteRepository);
     }
 
     private function registerRepository(string $name): string
