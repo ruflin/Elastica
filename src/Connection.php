@@ -168,14 +168,6 @@ class Connection extends Param
     }
 
     /**
-     * @return bool Returns true if connection is persistent. True by default
-     */
-    public function isPersistent()
-    {
-        return (bool) $this->hasParam('persistent') ? $this->getParam('persistent') : true;
-    }
-
-    /**
      * @return $this
      */
     public function setConfig(array $config)
@@ -266,13 +258,5 @@ class Connection extends Param
     public function getPassword()
     {
         return $this->hasParam('password') ? $this->getParam('password') : null;
-    }
-
-    /**
-     * @return string AuthType
-     */
-    public function getAuthType()
-    {
-        return $this->hasParam('auth_type') ? \strtolower($this->getParam('auth_type')) : null;
     }
 }
