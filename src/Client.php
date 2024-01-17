@@ -819,7 +819,7 @@ class Client implements ClientInterface
                     'scheme' => $config['schema'] ?? 'http',
                     'host' => $config['host'] ?? Connection::DEFAULT_HOST,
                     'port' => $config['port'] ?? Connection::DEFAULT_PORT,
-                    'path' => isset($config['path']) ? \ltrim($config['path'], '/') : '',
+                    'path' => isset($config['path']) ? '/'.\ltrim($config['path'], '/') : '',
                 ]),
                 ];
             }

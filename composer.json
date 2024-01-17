@@ -17,8 +17,8 @@
     "require": {
         "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
         "ext-json": "*",
-        "elastic/transport": "^8.8",
-        "elasticsearch/elasticsearch": "^8.11",
+        "elastic/transport": "^8.4",
+        "elasticsearch/elasticsearch": "^8.4.1",
         "guzzlehttp/psr7": "^2.0",
         "nyholm/dsn": "^2.0.0",
         "psr/log": "^1.0 || ^2.0 || ^3.0",

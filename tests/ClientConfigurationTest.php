@@ -101,7 +101,7 @@ class ClientConfigurationTest extends TestCase
             'port' => null,
             'path' => null,
             'url' => null,
-            'connections' => [], // host, port, path, timeout, transport, compression, persistent, timeout, username, password, config -> (curl, headers, url)
+            'connections' => [], // host, port, path, timeout, transport, compression, timeout, username, password, config -> (curl, headers, url)
             'roundRobin' => false,
             'retryOnConflict' => 0,
             'username' => null,
@@ -124,7 +124,7 @@ class ClientConfigurationTest extends TestCase
             'port' => null,
             'path' => null,
             'url' => null,
-            'connections' => [], // host, port, path, timeout, transport, compression, persistent, timeout, username, password, config -> (curl, headers, url)
+            'connections' => [], // host, port, path, timeout, transport, compression, timeout, username, password, config -> (curl, headers, url)
             'roundRobin' => false,
             'retryOnConflict' => 0,
             'username' => 'Jdoe',
