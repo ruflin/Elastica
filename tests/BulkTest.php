@@ -725,7 +725,6 @@ JSON;
 
         $metadata = $actions[0]->getMetadata();
         $this->assertEquals(5, $metadata['retry_on_conflict']);
-
     }
 
     /**
