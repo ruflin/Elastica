@@ -702,6 +702,29 @@ JSON;
 
         $metadata = $actions[0]->getMetadata();
         $this->assertEquals(5, $metadata['retry_on_conflict']);
+
+        // Test retry via client
+        $client->getConnection()->setParam('retryOnConflict', 5);
+        $doc2 = new Document('2', ['name' => 'Invisible Woman']);
+        $doc2->setOpType(Action::OP_TYPE_UPDATE);
+
+        $bulk = new Bulk($client);
+        $bulk->addDocument($doc2);
+
+        $actions = $bulk->getActions();
+
+        $metadata = $actions[0]->getMetadata();
+        $this->assertEquals(5, $metadata['retry_on_conflict']);
+
+        $script = new Script('');
+
+        $bulk = new Bulk($client);
+        $bulk->addScript($script);
+
+        $actions = $bulk->getActions();
+
+        $metadata = $actions[0]->getMetadata();
+        $this->assertEquals(5, $metadata['retry_on_conflict']);
     }
 
     /**
