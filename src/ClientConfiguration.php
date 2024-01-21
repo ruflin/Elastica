@@ -3,10 +3,6 @@
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
-use Nyholm\Dsn\Configuration\Url;
-use Nyholm\Dsn\DsnParser;
-use Nyholm\Dsn\Exception\ExceptionInterface as DsnException;
-use Nyholm\Dsn\Exception\FunctionNotSupportedException;
 
 /**
  * Elastica client configuration.
@@ -15,6 +11,8 @@ use Nyholm\Dsn\Exception\FunctionNotSupportedException;
  */
 class ClientConfiguration
 {
+    public const DEFAULT_HOST = 'localhost:9200';
+
     /**
      * Config with defaults.
      *
@@ -22,25 +20,15 @@ class ClientConfiguration
      * bigintConversion: Set to true to enable the JSON bigint to string conversion option (see issue #717)
      *
      * @var array{
-     *        host: string|null,
-     *        port: string|null,
-     *        path: string|null,
-     *        url:string|null,
-     *        connections: array<array-key, mixed>,
-     *        roundRobin: bool,
-     *        retryOnConflict: int,
-     *        username: string|null,
-     *        password: string|null,
-     *        transport_config: array<array-key, mixed>,
+     *     hosts: list<string>,
+     *     retryOnConflict: int,
+     *     username: string|null,
+     *     password: string|null,
+     *     transport_config: array<array-key, mixed>,
      * }
      */
-    protected $configuration = [
-        'host' => null,
-        'port' => null,
-        'path' => null,
-        'url' => null,
-        'connections' => [], // host, port, path, transport_config -> [http_client, http_client_config, http_client_options, node_pool], username, password
-        'roundRobin' => false,
+    protected array $configuration = [
+        'hosts' => [self::DEFAULT_HOST],
         'retryOnConflict' => 0,
         'username' => null,
         'password' => null,
@@ -57,51 +45,6 @@ class ClientConfiguration
         $clientConfiguration = new static();
         foreach ($config as $key => $value) {
             $clientConfiguration->set($key, $value);
-        }
-
-        return $clientConfiguration;
-    }
-
-    /**
-     * Create configuration from Dsn string. Example of valid DSN strings:
-     * - http://localhost
-     * - http://foo:bar@localhost:1234?timeout=4&persistant=false
-     * - pool(http://127.0.0.1 http://127.0.0.2/bar?timeout=4).
-     */
-    public static function fromDsn(string $dsnString): self
-    {
-        try {
-            $func = DsnParser::parseFunc($dsnString);
-        } catch (DsnException $e) {
-            throw new InvalidException(\sprintf('DSN "%s" is invalid.', $dsnString), 0, $e);
-        }
-
-        if ('dsn' === $func->getName()) {
-            /** @var Url $dsn */
-            $dsn = $func->first();
-            $clientConfiguration = self::fromArray(self::parseDsn($dsn));
-        } elseif ('pool' === $func->getName()) {
-            $connections = [];
-            $clientConfiguration = new static();
-            /** @var Url $arg */
-            foreach ($func->getArguments() as $arg) {
-                $connections[] = self::parseDsn($arg);
-            }
-            $clientConfiguration->set('connections', $connections);
-        } else {
-            throw new FunctionNotSupportedException($dsnString, $func->getName());
-        }
-
-        foreach ($func->getParameters() as $optionName => $optionValue) {
-            if ('false' === $optionValue) {
-                $optionValue = false;
-            } elseif ('true' === $optionValue) {
-                $optionValue = true;
-            } elseif (\is_numeric($optionValue)) {
-                $optionValue = (int) $optionValue;
-            }
-
-            $clientConfiguration->set($optionName, $optionValue);
         }
 
         return $clientConfiguration;
@@ -169,40 +112,5 @@ class ClientConfiguration
                 $this->configuration[$key] = [$this->configuration[$key], $value];
             }
         }
-    }
-
-    private static function parseDsn(Url $dsn): array
-    {
-        $data = ['host' => $dsn->getHost()];
-
-        if (null !== $dsn->getUser()) {
-            $data['username'] = $dsn->getUser();
-        }
-
-        if (null !== $dsn->getPassword()) {
-            $data['password'] = $dsn->getPassword();
-        }
-
-        if (null !== $dsn->getPort()) {
-            $data['port'] = $dsn->getPort();
-        }
-
-        if (null !== $dsn->getPath()) {
-            $data['path'] = $dsn->getPath();
-        }
-
-        foreach ($dsn->getParameters() as $optionName => $optionValue) {
-            if ('false' === $optionValue) {
-                $optionValue = false;
-            } elseif ('true' === $optionValue) {
-                $optionValue = true;
-            } elseif (\is_numeric($optionValue)) {
-                $optionValue = (int) $optionValue;
-            }
-
-            $data[$optionName] = $optionValue;
-        }
-
-        return $data;
     }
 }

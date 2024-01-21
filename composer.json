@@ -17,12 +17,9 @@
     "require": {
         "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
         "ext-json": "*",
-        "elastic/transport": "^8.4",
+        "elastic/transport": "^8.8",
         "elasticsearch/elasticsearch": "^8.4.1",
-        "guzzlehttp/psr7": "^2.0",
-        "nyholm/dsn": "^2.0.0",
-        "psr/log": "^1.0 || ^2.0 || ^3.0",
-        "symfony/deprecation-contracts": "^3.0"
+        "psr/log": "^1.0 || ^2.0 || ^3.0"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^7.2",
@@ -33,7 +30,6 @@
     },
     "suggest": {
         "aws/aws-sdk-php": "Allow using IAM authentication with Amazon ElasticSearch Service",
-        "guzzlehttp/guzzle": "Allow using guzzle as transport",
         "monolog/monolog": "Logging request"
     },
     "autoload": {
@@ -49,11 +45,12 @@
     "config": {
         "allow-plugins": {
             "php-http/discovery": true
-        }
+        },
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "7.0.x-dev"
+            "dev-master": "8.0.x-dev"
         }
     }
 }

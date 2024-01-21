@@ -2,9 +2,8 @@
 
 namespace Elastica\Test;
 
-use Elastic\Transport\Transport;
 use Elastica\Client;
-use Elastica\Connection;
+use Elastica\ClientConfiguration;
 use Elastica\Exception\InvalidException;
 use Elastica\Test\Base as BaseTest;
 
@@ -15,59 +14,44 @@ use Elastica\Test\Base as BaseTest;
  */
 class ClientTest extends BaseTest
 {
-    public function testConstruct(): void
+    public function testItConstruct(): void
     {
-        $client = $this->_getClient();
-        $this->assertCount(1, $client->getConnections());
-    }
-
-    public function testConstructWithDsn(): void
-    {
-        $client = new Client('https://user:p4ss@foo.com:9200?retryOnConflict=2');
-        $this->assertCount(1, $client->getConnections());
+        $client = new Client();
 
         $expected = [
-            'host' => 'foo.com',
-            'port' => 9200,
-            'path' => null,
-            'url' => null,
-            'connections' => [],
-            'roundRobin' => false,
-            'retryOnConflict' => 2,
-            'username' => 'user',
-            'password' => 'p4ss',
-            'connectionStrategy' => 'Simple',
+            'hosts' => [ClientConfiguration::DEFAULT_HOST],
+            'retryOnConflict' => 0,
+            'username' => null,
+            'password' => null,
             'transport_config' => [],
         ];
 
         $this->assertEquals($expected, $client->getConfig());
     }
 
-    public function testConnectionParamsArePreparedForConnectionsOption(): void
+    public function testItConstructWithStringAsConfig(): void
     {
-        $url = 'https://'.$this->_getHost().':9200';
-        $client = $this->_getClient(['connections' => [['url' => $url]]]);
-        $connection = $client->getConnection();
+        $client = new Client('https://user:p4ss@foo.com:9200?retryOnConflict=2');
 
-        $this->assertEquals($url, $connection->getConfig('url'));
+        $expected = [
+            'hosts' => ['https://user:p4ss@foo.com:9200?retryOnConflict=2'],
+            'retryOnConflict' => 0,
+            'username' => null,
+            'password' => null,
+            'transport_config' => [],
+        ];
+
+        $this->assertEquals($expected, $client->getConfig());
     }
 
-    public function testConnectionParamsArePreparedForServersOption(): void
+    public function testItAddsHosts(): void
     {
-        $url = 'https://'.$this->_getHost().':9200';
-        $client = $this->_getClient(['servers' => [['url' => $url]]]);
-        $connection = $client->getConnection();
+        $hosts = ['https://my-host.com:9300'];
 
-        $this->assertEquals($url, $connection->getConfig('url'));
-    }
+        $client = new Client(['hosts' => $hosts]);
 
-    public function testConnectionParamsArePreparedForDefaultOptions(): void
-    {
-        $url = 'https://'.$this->_getHost().':9200';
-        $client = $this->_getClient(['url' => $url]);
-        $connection = $client->getConnection();
-
-        $this->assertEquals($url, $connection->getConfig('url'));
+        $this->assertEquals($hosts, $client->getConfig('hosts'));
+        $this->assertEquals('https://my-host.com:9300', $client->getTransport()->getNodePool()->nextNode()->getUri());
     }
 
     public function testAddDocumentsEmpty(): void
@@ -89,7 +73,7 @@ class ClientTest extends BaseTest
             ],
             'level11' => 'value11',
         ];
-        $client = $this->_getClient($config);
+        $client = new Client($config);
 
         $this->assertNull($client->getConfigValue('level12'));
         $this->assertFalse($client->getConfigValue('level12', false));
@@ -104,45 +88,11 @@ class ClientTest extends BaseTest
         $this->assertIsArray($client->getConfigValue(['level1', 'level2']));
     }
 
-    public function testAddHeader(): void
-    {
-        $client = $this->_getClient();
-
-        $client->addHeader('foo', 'bar');
-        $this->assertEquals(['foo' => 'bar'], $client->getConfigValue('headers'));
-    }
-
-    public function testRemoveHeader(): void
-    {
-        $client = $this->_getClient();
-
-        $client->addHeader('first', 'first value');
-        $client->addHeader('second', 'second value');
-
-        $client->removeHeader('second');
-        $this->assertEquals(['first' => 'first value'], $client->getConfigValue('headers'));
-    }
-
     public function testPassBigIntSettingsToConnectionConfig(): void
     {
         $client = new Client(['bigintConversion' => true]);
 
-        $this->assertTrue($client->getConnection()->getConfig('bigintConversion'));
-    }
-
-    public function testClientConnectWithConfigSetByMethod(): void
-    {
-        $client = new Client();
-        $client->setConfigValue('host', $this->_getHost());
-        $client->setConfigValue('port', $this->_getPort());
-
-        $client->connect();
-        $this->assertTrue($client->hasConnection());
-
-        $connection = $client->getConnection();
-        $this->assertInstanceOf(Connection::class, $connection);
-        $this->assertEquals($this->_getHost(), $connection->getHost());
-        $this->assertEquals($this->_getPort(), $connection->getPort());
+        $this->assertTrue($client->getConfig('bigintConversion'));
     }
 
     public function testGetAsync(): void
@@ -150,25 +100,16 @@ class ClientTest extends BaseTest
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Not supported');
 
-        $client = $this->_getClient();
+        $client = new Client();
         $client->getAsync();
     }
 
     public function testSetElasticMetaHeader(): void
     {
-        $client = $this->_getClient();
+        $client = new Client();
         $client->setElasticMetaHeader(true);
 
         $this->assertTrue($client->getElasticMetaHeader());
-    }
-
-    public function testGetTransport(): void
-    {
-        $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('Not supported');
-
-        $client = $this->_getClient();
-        $client->getTransport();
     }
 
     public function testSetAsync(): void
@@ -176,7 +117,7 @@ class ClientTest extends BaseTest
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Not supported');
 
-        $client = $this->_getClient();
+        $client = new Client();
         $client->setAsync(true);
     }
 
@@ -185,7 +126,7 @@ class ClientTest extends BaseTest
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Not supported');
 
-        $client = $this->_getClient();
+        $client = new Client();
         $client->setResponseException(true);
     }
 
@@ -194,30 +135,23 @@ class ClientTest extends BaseTest
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Not supported');
 
-        $client = $this->_getClient();
+        $client = new Client();
         $client->getResponseException();
     }
 
     public function testClientConnectionWithCloudId(): void
     {
         $client = new Client([
-            'host' => 'foo.com',
-            'port' => 9200,
-            'path' => null,
-            'url' => null,
+            'hosts' => ['foo.com:9200'],
             'cloud_id' => 'Test:ZXUtY2VudHJhbC0xLmF3cy5jbG91ZC5lcy5pbyQ0ZGU0NmNlZDhkOGQ0NTk2OTZlNTQ0ZmU1ZjMyYjk5OSRlY2I0YTJlZmY0OTA0ZDliOTE5NzMzMmQwOWNjOTY5Ng==',
-            'connections' => [],
-            'roundRobin' => false,
             'retryOnConflict' => 2,
             'username' => 'user',
             'password' => 'p4ss',
-            'connectionStrategy' => 'Simple',
             'transport_config' => [],
         ]);
-        $transport = $client->getConnection()->getTransportObject();
-        $node = $transport->getNodePool()->nextNode();
 
-        $this->assertInstanceOf(Transport::class, $transport);
+        $node = $client->getTransport()->getNodePool()->nextNode();
+
         $this->assertEquals('4de46ced8d8d459696e544fe5f32b999.eu-central-1.aws.cloud.es.io', $node->getUri()->getHost());
     }
 }

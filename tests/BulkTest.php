@@ -705,7 +705,7 @@ JSON;
         $this->assertEquals(5, $metadata['retry_on_conflict']);
 
         // Test retry via client
-        $client->getConnection()->setParam('retryOnConflict', 5);
+        $client->setConfigValue('retryOnConflict', 5);
         $doc2 = new Document('2', ['name' => 'Invisible Woman']);
         $doc2->setOpType(Action::OP_TYPE_UPDATE);
 

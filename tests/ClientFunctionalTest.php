@@ -5,15 +5,13 @@ namespace Elastica\Test;
 use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastic\Elasticsearch\Transport\Adapter\AdapterOptions;
 use Elastic\Transport\Exception\NoNodeAvailableException;
-use Elastic\Transport\TransportBuilder;
 use Elastica\Bulk;
 use Elastica\Bulk\ResponseSet;
-use Elastica\Client;
-use Elastica\Connection;
 use Elastica\Document;
 use Elastica\Exception\NotFoundException;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Test\Transport\NodePool\TraceableSimpleNodePool;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Client\ClientInterface as HttpClientInterface;
 use Psr\Http\Message\RequestInterface;
@@ -29,7 +27,7 @@ class ClientFunctionalTest extends BaseTest
     {
         $this->expectException(NoNodeAvailableException::class);
 
-        $client = $this->_getClient(['host' => 'foo.bar', 'port' => '9201']);
+        $client = $this->_getClient(['hosts' => ['foo.bar:9201']]);
         $client->getVersion();
     }
 
@@ -37,15 +35,7 @@ class ClientFunctionalTest extends BaseTest
     {
         $this->expectException(NoNodeAvailableException::class);
 
-        $client = $this->_getClient(['host' => 'localhost', 'port' => '9201']);
-        $client->getVersion();
-    }
-
-    public function testClientBadHostWithTimeout(): void
-    {
-        $this->expectException(NoNodeAvailableException::class);
-
-        $client = $this->_getClient(['host' => 'foo.bar', 'timeout' => 10]);
+        $client = $this->_getClient(['hosts' => ['localhost:9201']]);
         $client->getVersion();
     }
 
@@ -58,7 +48,7 @@ class ClientFunctionalTest extends BaseTest
     public function testConnectionsArray(): void
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index
-        $client = $this->_getClient(['connections' => [['host' => $this->_getHost(), 'port' => 9200]]]);
+        $client = $this->_getClient(['hosts' => [$this->_getHost().':9200']]);
         $index = $client->getIndex('elastica_test1');
         $index->create([], [
             'recreate' => true,
@@ -92,10 +82,12 @@ class ClientFunctionalTest extends BaseTest
     public function testTwoServersSame(): void
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index
-        $client = $this->_getClient(['connections' => [
-            ['host' => $this->_getHost(), 'port' => 9200],
-            ['host' => $this->_getHost(), 'port' => 9200],
-        ]]);
+        $client = $this->_getClient([
+            'hosts' => [
+                $this->_getHost().':9200',
+                $this->_getHost().':9200',
+            ],
+        ]);
         $index = $client->getIndex('elastica_test1');
         $index->create([], [
             'recreate' => true,
@@ -359,148 +351,63 @@ class ClientFunctionalTest extends BaseTest
 
     public function testOneInvalidConnection(): void
     {
-        $client = $this->_getClient();
-
-        $httpClientOptions = [
-            RequestOptions::TIMEOUT => 1,
-            RequestOptions::CONNECT_TIMEOUT => 1,
-        ];
-
-        $transportConnectionBuilder1 = TransportBuilder::create();
-        $transportConnectionBuilder1->setHosts([$this->_getHost().':9100']);
-        $transportConnectionBuilder1->setClient(
-            $this->setHttpClientOptions($transportConnectionBuilder1->getClient(), [], $httpClientOptions)
-        );
-
-        $transportConnectionBuilder2 = TransportBuilder::create();
-        $transportConnectionBuilder2->setHosts([$this->_getHost().':9200']);
-        $transportConnectionBuilder2->setClient(
-            $this->setHttpClientOptions($transportConnectionBuilder1->getClient(), [], $httpClientOptions)
-        );
-
-        // First connection work, second should not work
-        $connection1 = new Connection(['port' => '9100', 'timeout' => 2, 'host' => $this->_getHost(), 'transport' => $transportConnectionBuilder1->build()]);
-        $connection2 = new Connection(['port' => '9200', 'timeout' => 2, 'host' => $this->_getHost(), 'transport' => $transportConnectionBuilder2->build()]);
-
-        $client->setConnections([$connection1, $connection2]);
+        $client = $this->_getClient([
+            'hosts' => [
+                // First connection is invalid and second should work
+                $this->_getHost().':9999',
+                $this->_getHost().':9200',
+            ],
+            'transport_config' => [
+                'http_client_options' => [
+                    RequestOptions::TIMEOUT => 1,
+                    RequestOptions::CONNECT_TIMEOUT => 1,
+                ],
+            ],
+        ]);
 
         $client->indices()->stats();
 
-        $connections = $client->getConnections();
-
+        /** @var TraceableSimpleNodePool $nodePool */
+        $nodePool = $client->getTransport()->getNodePool();
+        $nodes = $nodePool->getNodes();
         // two connections are setup
-        $this->assertCount(2, $connections);
+        $this->assertCount(2, $nodes);
 
         // One connection has to be disabled
-        $this->assertTrue(false === $connections[0]->isEnabled() || false === $connections[1]->isEnabled());
+        $this->assertTrue(false === $nodes[0]->isAlive() || false === $nodes[1]->isAlive());
     }
 
     public function testTwoInvalidConnection(): void
     {
-        $client = $this->_getClient();
-
-        $httpClientOptions = [
-            RequestOptions::TIMEOUT => 1,
-            RequestOptions::CONNECT_TIMEOUT => 1,
-        ];
-
-        $transportConnectionBuilder1 = TransportBuilder::create();
-        $transportConnectionBuilder1->setHosts([$this->_getHost().':9101']);
-        $transportConnectionBuilder1->setClient(
-            $this->setHttpClientOptions($transportConnectionBuilder1->getClient(), [], $httpClientOptions)
-        );
-
-        $transportConnectionBuilder2 = TransportBuilder::create();
-        $transportConnectionBuilder2->setHosts([$this->_getHost().':9102']);
-        $transportConnectionBuilder2->setClient(
-            $this->setHttpClientOptions($transportConnectionBuilder1->getClient(), [], $httpClientOptions)
-        );
-
-        // First connection work, second should not work
-        $connection1 = new Connection(['host' => $this->_getHost(), 'port' => '9101', 'timeout' => 2, 'transport' => $transportConnectionBuilder1->build()]);
-        $connection2 = new Connection(['host' => $this->_getHost(), 'port' => '9102', 'timeout' => 2, 'transport' => $transportConnectionBuilder2->build()]);
-
-        $client->setConnections([$connection1, $connection2]);
+        $client = $this->_getClient([
+            'hosts' => [
+                // First connection works, second should not work
+                $this->_getHost().':9101',
+                $this->_getHost().':9102',
+            ],
+            'transport_config' => [
+                'http_client_options' => [
+                    RequestOptions::TIMEOUT => 1,
+                    RequestOptions::CONNECT_TIMEOUT => 1,
+                ],
+            ],
+        ]);
 
         try {
             $client->indices()->stats();
             $this->fail('Should throw exception as no connection valid');
-        } catch (NoNodeAvailableException $e) {
+        } catch (NoNodeAvailableException) {
         }
 
-        $connections = $client->getConnections();
+        /** @var TraceableSimpleNodePool $nodePool */
+        $nodePool = $client->getTransport()->getNodePool();
+        $nodes = $nodePool->getNodes();
 
         // two connections are setup
-        $this->assertCount(2, $connections);
+        $this->assertCount(2, $nodes);
 
         // One connection has to be disabled
-        $this->assertTrue(false === $connections[0]->isEnabled() && false === $connections[1]->isEnabled());
-    }
-
-    /**
-     * Tests if the callback works in case a connection is down.
-     */
-    public function testCallback(): void
-    {
-        $count = 0;
-
-        $httpClientOptions = [
-            RequestOptions::TIMEOUT => 1,
-            RequestOptions::CONNECT_TIMEOUT => 1,
-        ];
-
-        $transportConnectionBuilder1 = TransportBuilder::create();
-        $transportConnectionBuilder1->setHosts([$this->_getHost().':9101']);
-        $transportConnectionBuilder1->setClient(
-            $this->setHttpClientOptions($transportConnectionBuilder1->getClient(), [], $httpClientOptions)
-        );
-
-        $transportConnectionBuilder2 = TransportBuilder::create();
-        $transportConnectionBuilder2->setHosts([$this->_getHost().':9102']);
-        $transportConnectionBuilder2->setClient(
-            $this->setHttpClientOptions($transportConnectionBuilder1->getClient(), [], $httpClientOptions)
-        );
-
-        // Callback function which verifies that disabled connection objects are returned
-        $callback = function (Connection $connection, \Exception $exception, Client $client) use (&$count): void {
-            $this->assertInstanceOf(Connection::class, $connection);
-            $this->assertInstanceOf(NoNodeAvailableException::class, $exception);
-            $this->assertInstanceOf(Client::class, $client);
-            $this->assertFalse($connection->isEnabled());
-            ++$count;
-        };
-
-        $client = $this->_getClient([], $callback);
-
-        // First connection work, second should not work
-        $connection1 = new Connection(['port' => '9101', 'timeout' => 2, 'transport' => $transportConnectionBuilder1->build()]);
-        $connection2 = new Connection(['port' => '9102', 'timeout' => 2, 'transport' => $transportConnectionBuilder2->build()]);
-
-        $client->setConnections([$connection1, $connection2]);
-
-        $this->assertEquals(0, $count);
-
-        try {
-            $client->indices()->stats();
-            $this->fail('Should throw exception as no connection valid');
-        } catch (NoNodeAvailableException $e) {
-            $this->assertTrue(true);
-        }
-
-        // Two disabled connections (from closure call)
-        $this->assertEquals(2, $count);
-    }
-
-    public function testUrlConstructor(): void
-    {
-        $url = 'http://'.$this->_getHost().':9200/';
-
-        // Url should overwrite invalid host
-        $client = $this->_getClient(['url' => $url, 'port' => '9101', 'timeout' => 2]);
-
-        $response = $client->toElasticaResponse($client->indices()->stats());
-
-        $this->assertTrue($response->isOk());
+        $this->assertTrue(false === $nodes[0]->isAlive() && false === $nodes[1]->isAlive());
     }
 
     public function testUpdateDocumentByDocument(): void
