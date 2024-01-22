@@ -71,7 +71,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added missing `@throws` annotations to Client::request and related methods [#2152](https://github.com/ruflin/Elastica/pull/2152)
 * Added ElasticSearch 8.x to CI [#2123](https://github.com/ruflin/Elastica/pull/2123)
 * Added more versions of ElasticSearch to CI [#2155](https://github.com/ruflin/Elastica/pull/2155)
-* * If not expicitly set, use `retry_on_conflict` from Client configuration in Bulk updates (ported from 7.x [#2184](https://github.com/ruflin/Elastica/pull/2184))
+* If not expicitly set, use `retry_on_conflict` from Client configuration in Bulk updates (ported from 7.x [#2184](https://github.com/ruflin/Elastica/pull/2184))
 ### Changed
 * Updated `php-cs-fixer` to `3.13.2` [#2143](https://github.com/ruflin/Elastica/pull/2143)
 * Modernize code using `match` expression [#2141](https://github.com/ruflin/Elastica/pull/2141)
