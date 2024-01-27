@@ -154,4 +154,24 @@ class ClientTest extends BaseTest
 
         $this->assertEquals('4de46ced8d8d459696e544fe5f32b999.eu-central-1.aws.cloud.es.io', $node->getUri()->getHost());
     }
+
+    public function testItThrowsAnExceptionWhenApiKeyAndUserNameInConfigAtTheSameTime(): void
+    {
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessage('You cannot use APIKey and Basic Authentication together.');
+
+        new Client([
+            'username' => 'user',
+            'api_key' => 'key',
+        ]);
+    }
+
+    public function testItSetsAuthorizationHeaderIfApiKeyPassed(): void
+    {
+        $apiKey = 'key';
+
+        $client = new Client(['api_key' => $apiKey]);
+
+        self::assertSame(['Authorization' => \sprintf('ApiKey %s', $apiKey)], $client->getTransport()->getHeaders());
+    }
 }

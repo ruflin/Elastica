@@ -637,7 +637,7 @@ class Client implements ClientInterface
         // API key
         if (!empty($config['api_key'])) {
             if (!empty($config['username'])) {
-                throw new InvalidException('You cannot use APIKey and Basic Authentication together');
+                throw new InvalidException('You cannot use APIKey and Basic Authentication together.');
             }
 
             $transport->setHeader('Authorization', \sprintf('ApiKey %s', $config['api_key']));
