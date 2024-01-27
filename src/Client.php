@@ -571,16 +571,6 @@ class Client implements ClientInterface
         return $this->_lastResponse;
     }
 
-    /**
-     * Replace the existing logger.
-     */
-    public function setLogger(LoggerInterface $logger): self
-    {
-        $this->_logger = $logger;
-
-        return $this;
-    }
-
     public function toElasticaResponse(Elasticsearch|ResponseInterface $elasticsearchResponse): Response
     {
         return ResponseConverter::toElastica($elasticsearchResponse);
