@@ -63,11 +63,20 @@ jobs:
             elasticsearch: '8.7.1' # there are no bc in minor version https://www.elastic.co/guide/en/elasticsearch/reference/current/migrating-8.7.html
             experimental: false
           - php: '8.1'
-            elasticsearch: '8.8.0' # there are no bc in minor version https://www.elastic.co/guide/en/elasticsearch/reference/current/migrating-8.8.html
+            elasticsearch: '8.8.2' # there are no bc in minor version https://www.elastic.co/guide/en/elasticsearch/reference/current/migrating-8.8.html
             experimental: false
           - php: '8.1'
-            elasticsearch: '8.9.0-SNAPSHOT' # future version, allow to fail https://www.elastic.co/guide/en/elasticsearch/reference/master/release-notes-8.9.0.html
-            experimental: true
+            elasticsearch: '8.9.2' # there are no bc in minor version https://www.elastic.co/guide/en/elasticsearch/reference/current/migrating-8.9.html
+            experimental: false
+          - php: '8.1'
+            elasticsearch: '8.10.4' # there are no bc in minor version https://www.elastic.co/guide/en/elasticsearch/reference/current/migrating-8.10.html
+            experimental: false
+          - php: '8.1'
+            elasticsearch: '8.11.4' # there are some bc in minor version https://www.elastic.co/guide/en/elasticsearch/reference/current/migrating-8.10.html
+            experimental: false
+          - php: '8.1'
+            elasticsearch: '8.12.0' # there are some bc in minor version https://www.elastic.co/guide/en/elasticsearch/reference/current/migrating-8.12.html
+            experimental: false
       fail-fast: false
     steps:
       - name: 'Checkout'
