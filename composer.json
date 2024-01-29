@@ -15,7 +15,7 @@
     ],
     "homepage": "http://elastica.io/",
     "require": {
-        "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
+        "php": "~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0",
         "ext-json": "*",
         "elastic/transport": "^8.4",
         "elasticsearch/elasticsearch": "^8.4.1",
