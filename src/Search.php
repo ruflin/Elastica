@@ -326,6 +326,8 @@ class Search
      * @throws ClientException
      *
      * @return int|ResultSet
+     *
+     * @phpstan-return ($fullResult is false ? int : ResultSet)
      */
     public function count($query = '', bool $fullResult = false, string $method = Request::POST)
     {
