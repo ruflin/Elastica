@@ -837,7 +837,7 @@ class Client implements ClientInterface
 
         // Http client
         if (isset($transportConfig['http_client'])) {
-            $builder->setClient($config['http_client']);
+            $builder->setClient($transportConfig['http_client']);
         }
 
         // Set HTTP client options
