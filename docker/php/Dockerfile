@@ -11,5 +11,5 @@ RUN apk add make gnupg ncurses
 RUN adduser phpuser -u 1000 -D -g ""
 USER phpuser
 
-# Allo phpuser config allow-plugin.symfony.F
-RUN composer global config allow-plugins.symfony/flex true
+# Config allow-plugin.symfony.Flex onPHPUser
+RUN composer global config allow-plugins.symfony/flex false
