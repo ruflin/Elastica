@@ -65,6 +65,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   * `Elastica\Search::setOptionsAndQuery()`
   * `Elastica\Index::search()`
   * `Elastica\Index::createSearch()`
+* Updated docker/php/Dockerfile added AllowSymfonyFlexPlugin (false) on docker phpuser context [#2194](https://github.com/ruflin/Elastica/pull/2194)
+
+  
 
 ### Added
 * Added support for PHP 8.2 [#2136](https://github.com/ruflin/Elastica/pull/2136)
