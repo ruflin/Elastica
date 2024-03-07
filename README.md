@@ -35,7 +35,7 @@ It is generally recommended to use the latest point release of the relevant bran
 
 | Elastica branch                                       | ElasticSearch | elasticsearch-php | PHP            |
 | ----------------------------------------------------- | ------------- | ----------------- | -------------- |
-| [8.x](https://github.com/ruflin/Elastica/tree/master) | 8.x           | ^8.4              | >=8.0 <8.2
+| [8.x](https://github.com/ruflin/Elastica/tree/8.x)    | 8.x           | ^8.4              | >=8.0 <8.2
 | [7.x](https://github.com/ruflin/Elastica/tree/7.x)    | 7.x           | ^7.0              | ^7.2 \|\| ^8.0 |
 | [6.x](https://github.com/ruflin/Elastica/tree/6.x)    | 6.x           | ^6.0              | ^7.0 \|\| ^8.0 |
 
