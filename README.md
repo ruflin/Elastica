@@ -17,7 +17,7 @@ All library issues should go to the [issue tracker from GitHub](https://github.c
 
 Compatibility
 -------------
-This release is compatible with all Elasticsearch 7.0 releases and onwards.
+This release is compatible with all Elasticsearch 8.0 releases and onwards.
 
 The testsuite is run against the most recent minor version of Elasticsearch, currently 8.8.0 and 8.9.0-SNAPSHOT
 
@@ -35,7 +35,8 @@ It is generally recommended to use the latest point release of the relevant bran
 
 | Elastica branch                                       | ElasticSearch | elasticsearch-php | PHP            |
 | ----------------------------------------------------- | ------------- | ----------------- | -------------- |
-| [7.x](https://github.com/ruflin/Elastica/tree/master) | 7.x           | ^7.0              | ^7.2 \|\| ^8.0 |
+| [8.x](https://github.com/ruflin/Elastica/tree/8.x)    | 8.x           | ^8.4              | >=8.0 <8.2
+| [7.x](https://github.com/ruflin/Elastica/tree/7.x)    | 7.x           | ^7.0              | ^7.2 \|\| ^8.0 |
 | [6.x](https://github.com/ruflin/Elastica/tree/6.x)    | 6.x           | ^6.0              | ^7.0 \|\| ^8.0 |
 
 Unmaintained versions:
