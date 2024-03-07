@@ -10,3 +10,6 @@ RUN apk add make gnupg ncurses
 # Allow php to run with an
 RUN adduser phpuser -u 1000 -D -g ""
 USER phpuser
+
+# Config allow-plugin.symfony.Flex on PHPUser context
+RUN composer global config allow-plugins.symfony/flex false

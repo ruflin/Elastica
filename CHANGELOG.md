@@ -66,6 +66,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   * `Elastica\Index::search()`
   * `Elastica\Index::createSearch()`
 
+
+  
+
 ### Added
 * Added support for PHP 8.2 [#2136](https://github.com/ruflin/Elastica/pull/2136)
 * Added missing `@throws` annotations to Client::request and related methods [#2152](https://github.com/ruflin/Elastica/pull/2152)
@@ -75,12 +78,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 * Updated `php-cs-fixer` to `3.13.2` [#2143](https://github.com/ruflin/Elastica/pull/2143)
 * Modernize code using `match` expression [#2141](https://github.com/ruflin/Elastica/pull/2141)
+* Updated docker/php/Dockerfile added AllowSymfonyFlexPlugin (false) on docker phpuser context [#2194](https://github.com/ruflin/Elastica/pull/2194)
+
 ### Deprecated
 ### Removed
 * Removed the JSONParseException class, which is replaced by \JsonException
 * Removed the JSONParseException test class
 ### Fixed
 * Fix types order in `Elastica\Query` to work with psalm & expand the `aggs` type to include raw arrays
+
 ### Security
 
 ## [7.3.0](https://github.com/ruflin/Elastica/compare/7.3.0...7.2.0)
