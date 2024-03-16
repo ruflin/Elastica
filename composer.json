@@ -24,6 +24,9 @@
         "psr/log": "^1.0 || ^2.0 || ^3.0",
         "symfony/deprecation-contracts": "^3.0"
     },
+    "conflict": {
+        "guzzlehttp/guzzle": "<6.3 || >=7.0,<7.2"
+    },
     "require-dev": {
         "guzzlehttp/guzzle": "^7.2",
         "phpstan/phpstan": "^1.5",
