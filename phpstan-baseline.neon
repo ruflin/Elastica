@@ -61,11 +61,6 @@ parameters:
 			path: tests/ClientFunctionalTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$params of static method Elastica\\\\Connection\\:\\:create\\(\\) expects array\\|Elastica\\\\Connection, string given\\.$#"
-			count: 1
-			path: tests/ConnectionTest.php
-
-		-
 			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$field1\\.$#"
 			count: 1
 			path: tests/DocumentTest.php

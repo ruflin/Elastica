@@ -23,8 +23,6 @@ use Elastica\Exception\Bulk\ResponseException as BulkResponseException;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\InvalidException;
 use Elastica\Script\AbstractScript;
-use GuzzleHttp\Psr7\Uri;
-use Http\Promise\Promise;
 use Psr\Http\Client\ClientInterface as HttpClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -47,69 +45,25 @@ class Client implements ClientInterface
 
     private bool $elasticMetaHeader = true;
 
-    /**
-     * @var ClientConfiguration
-     */
-    protected $_config;
+    protected ClientConfiguration $_config;
 
-    /**
-     * @var callable
-     */
-    protected $_callback;
+    protected ?RequestInterface $_lastRequest = null;
 
-    /**
-     * @var Connection\ConnectionPool
-     */
-    protected $_connectionPool;
+    protected ?Elasticsearch $_lastResponse = null;
 
-    /**
-     * @var RequestInterface|null
-     */
-    protected $_lastRequest;
+    protected LoggerInterface $_logger;
 
-    /**
-     * @var Elasticsearch|null
-     */
-    protected $_lastResponse;
+    protected ?string $_version = null;
 
-    /**
-     * @var LoggerInterface
-     */
-    protected $_logger;
+    private Transport $_transport;
 
-    /**
-     * @var string
-     */
-    protected $_version;
-
-    /**
-     * The endpoint namespace storage.
-     */
-    protected array $namespace;
-
-    /**
-     * Creates a new Elastica client.
-     *
-     * @param array|string  $config   OPTIONAL Additional config or DSN of options
-     * @param callable|null $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
-     *
-     * @throws InvalidException
-     */
-    public function __construct($config = [], ?callable $callback = null, ?LoggerInterface $logger = null)
+    public function __construct(string|array $config = [], ?LoggerInterface $logger = null)
     {
-        if (\is_string($config)) {
-            $configuration = ClientConfiguration::fromDsn($config);
-        } elseif (\is_array($config)) {
-            $configuration = ClientConfiguration::fromArray($config);
-        } else {
-            throw new InvalidException('Config parameter must be an array or a string.');
-        }
+        $config = \is_string($config) ? ['hosts' => [$config]] : $config;
 
-        $this->_config = $configuration;
-        $this->_callback = $callback;
+        $this->_config = ClientConfiguration::fromArray($config);
         $this->_logger = $logger ?? new NullLogger();
-
-        $this->_initConnections();
+        $this->_transport = $this->_buildTransport($this->getConfig());
     }
 
     /**
@@ -125,7 +79,7 @@ class Client implements ClientInterface
      */
     public function getTransport(): Transport
     {
-        throw new \Exception('Not supported');
+        return $this->_transport;
     }
 
     /**
@@ -181,10 +135,9 @@ class Client implements ClientInterface
     /**
      * Get current version.
      *
-     * @throws MissingParameterException if a required parameter is missing
-     * @throws NoNodeAvailableException  if all the hosts are offline
-     * @throws ClientResponseException   if the status code of response is 4xx
-     * @throws ServerResponseException   if the status code of response is 5xx
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
      */
     public function getVersion(): string
@@ -260,36 +213,6 @@ class Client implements ClientInterface
     public function getIndex(string $name): Index
     {
         return new Index($this, $name);
-    }
-
-    /**
-     * Adds a HTTP Header.
-     */
-    public function addHeader(string $header, string $value): self
-    {
-        if ($this->_config->has('headers')) {
-            $headers = $this->_config->get('headers');
-        } else {
-            $headers = [];
-        }
-        $headers[$header] = $value;
-        $this->_config->set('headers', $headers);
-
-        return $this;
-    }
-
-    /**
-     * Remove a HTTP Header.
-     */
-    public function removeHeader(string $header): self
-    {
-        if ($this->_config->has('headers')) {
-            $headers = $this->_config->get('headers');
-            unset($headers[$header]);
-            $this->_config->set('headers', $headers);
-        }
-
-        return $this;
     }
 
     /**
@@ -464,88 +387,18 @@ class Client implements ClientInterface
 
     /**
      * Returns the status object for all indices.
-     *
-     * @return Status
      */
-    public function getStatus()
+    public function getStatus(): Status
     {
         return new Status($this);
     }
 
     /**
      * Returns the current cluster.
-     *
-     * @return Cluster
      */
-    public function getCluster()
+    public function getCluster(): Cluster
     {
         return new Cluster($this);
-    }
-
-    /**
-     * Establishes the client connections.
-     */
-    public function connect()
-    {
-        $this->_initConnections();
-    }
-
-    /**
-     * @return $this
-     */
-    public function addConnection(Connection $connection)
-    {
-        $this->_connectionPool->addConnection($connection);
-
-        return $this;
-    }
-
-    /**
-     * Determines whether a valid connection is available for use.
-     *
-     * @return bool
-     */
-    public function hasConnection()
-    {
-        return $this->_connectionPool->hasConnection();
-    }
-
-    /**
-     * @throws ClientException
-     *
-     * @return Connection
-     */
-    public function getConnection()
-    {
-        return $this->_connectionPool->getConnection();
-    }
-
-    /**
-     * @return Connection[]
-     */
-    public function getConnections()
-    {
-        return $this->_connectionPool->getConnections();
-    }
-
-    /**
-     * @return \Elastica\Connection\Strategy\StrategyInterface
-     */
-    public function getConnectionStrategy()
-    {
-        return $this->_connectionPool->getStrategy();
-    }
-
-    /**
-     * @param array|Connection[] $connections
-     *
-     * @return $this
-     */
-    public function setConnections(array $connections)
-    {
-        $this->_connectionPool->setConnections($connections);
-
-        return $this;
     }
 
     /**
@@ -627,46 +480,36 @@ class Client implements ClientInterface
         return $bulk->send();
     }
 
-    public function baseBulk(array $params)
+    public function baseBulk(array $params): Response
     {
         return $this->toElasticaResponse($this->elasticClientBulk($params));
     }
 
-    public function sendRequest(RequestInterface $sentRequest): Elasticsearch|Promise
+    public function sendRequest(RequestInterface $request): Elasticsearch
     {
-        $connection = $this->getConnection();
-        $transport = $connection->getTransportObject();
-
-        $this->_lastRequest = $sentRequest;
+        $this->_lastRequest = $request;
         $this->_lastResponse = null;
 
         try {
-            $response = $transport->sendRequest($sentRequest);
+            $response = $this->_transport->sendRequest($request);
 
             $result = new Elasticsearch();
-            $result->setResponse($response, 'HEAD' === $sentRequest->getMethod() ? false : true);
+            $result->setResponse($response, 'HEAD' !== $request->getMethod());
 
             $this->_lastResponse = $result;
         } catch (ServerResponseException|NoNodeAvailableException $e) {
-            $this->_connectionPool->onFail($connection, $e, $this);
             $this->_logger->error('Elastica Request Failure', [
                 'exception' => $e,
-                'request' => $sentRequest,
-                'request_content' => \json_decode($sentRequest->getBody()->__toString(), true),
-                'retry' => $this->hasConnection(),
+                'request' => $request,
+                'request_content' => \json_decode($request->getBody()->__toString(), true),
             ]);
 
-            // In case there is no valid connection left, throw exception which caused the disabling of the connection.
-            if (!$this->hasConnection()) {
-                throw $e;
-            }
-
-            return $this->sendRequest($sentRequest);
+            throw $e;
         }
 
         $this->_logger->debug('Elastica Request', [
-            'request' => \json_decode($sentRequest->getBody()->__toString(), true),
-            'response' => 'HEAD' !== $sentRequest->getMethod() ? $result->asArray() : $result->asString(),
+            'request' => \json_decode($request->getBody()->__toString(), true),
+            'response' => 'HEAD' !== $request->getMethod() ? $result->asArray() : $result->asString(),
             'responseStatus' => $response->getStatusCode(),
         ]);
 
@@ -676,17 +519,14 @@ class Client implements ClientInterface
     /**
      * Force merges all search indices.
      *
-     * @param array $args OPTIONAL Optional arguments
-     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-forcemerge.html
      *
-     * @throws MissingParameterException if a required parameter is missing
-     * @throws NoNodeAvailableException  if all the hosts are offline
-     * @throws ClientResponseException   if the status code of response is 4xx
-     * @throws ServerResponseException   if the status code of response is 5xx
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
      */
-    public function forcemergeAll($args = []): Response
+    public function forcemergeAll(array $args = []): Response
     {
         return $this->toElasticaResponse($this->indices()->forcemerge($args));
     }
@@ -731,109 +571,20 @@ class Client implements ClientInterface
         return $this->_lastResponse;
     }
 
-    /**
-     * Replace the existing logger.
-     *
-     * @return $this
-     */
-    public function setLogger(LoggerInterface $logger)
-    {
-        $this->_logger = $logger;
-
-        return $this;
-    }
-
     public function toElasticaResponse(Elasticsearch|ResponseInterface $elasticsearchResponse): Response
     {
         return ResponseConverter::toElastica($elasticsearchResponse);
     }
 
-    /**
-     * Inits the client connections.
-     */
-    protected function _initConnections(): void
-    {
-        $connections = [];
-
-        foreach ($this->getConfig('connections') as $connection) {
-            $connections[] = Connection::create($this->_prepareConnectionParams($connection));
-        }
-
-        if ($this->_config->has('servers')) {
-            $servers = $this->_config->get('servers');
-            foreach ($servers as $server) {
-                $connections[] = Connection::create($this->_prepareConnectionParams($server));
-            }
-        }
-
-        // If no connections set, create default connection
-        if (!$connections) {
-            $connections[] = Connection::create($this->_prepareConnectionParams($this->getConfig()));
-        }
-
-        if (!$this->_config->has('connectionStrategy')) {
-            if (true === $this->getConfig('roundRobin')) {
-                $this->setConfigValue('connectionStrategy', 'RoundRobin');
-            } else {
-                $this->setConfigValue('connectionStrategy', 'Simple');
-            }
-        }
-
-        $strategy = Connection\Strategy\StrategyFactory::create($this->getConfig('connectionStrategy'));
-
-        $this->_connectionPool = new Connection\ConnectionPool($connections, $strategy, $this->_callback);
-    }
-
-    /**
-     * Creates a Connection params array from a Client or server config array.
-     */
-    protected function _prepareConnectionParams(array $config): array
-    {
-        $params = [];
-        $params['config'] = [];
-        foreach ($config as $key => $value) {
-            if (\in_array($key, ['bigintConversion', 'curl', 'headers', 'url'])) {
-                $params['config'][$key] = $value;
-            } else {
-                $params[$key] = $value;
-            }
-        }
-
-        $params['transport'] = $this->_buildTransport($config);
-
-        return $params;
-    }
-
     protected function _buildTransport(array $config): Transport
     {
+        $hosts = isset($config['hosts']) && \is_array($config['hosts']) ? $config['hosts'] : [ClientConfiguration::DEFAULT_HOST];
         $transportConfig = $config['transport_config'] ?? [];
-        $hosts = [];
 
-        if (isset($config['url'])) {
-            $hosts = [$config['url']];
-        } else {
-            if (isset($config['hosts'])) {
-                $hosts = $config['hosts'];
-            } else {
-                $hosts = [(string) Uri::fromParts([
-                    'scheme' => $config['schema'] ?? 'http',
-                    'host' => $config['host'] ?? Connection::DEFAULT_HOST,
-                    'port' => $config['port'] ?? Connection::DEFAULT_PORT,
-                    'path' => isset($config['path']) ? '/'.\ltrim($config['path'], '/') : '',
-                ]),
-                ];
-            }
-        }
-
-        // Transport builder
         $builder = TransportBuilder::create();
 
         $builder->setHosts($hosts);
-
-        // Logger
-        if (null !== $this->_logger) {
-            $builder->setLogger($this->_logger);
-        }
+        $builder->setLogger($this->_logger);
 
         // Http client
         if (isset($transportConfig['http_client'])) {
@@ -856,7 +607,7 @@ class Client implements ClientInterface
 
         // Node Pool
         if (isset($transportConfig['node_pool'])) {
-            $builder->setNodePool($config['node_pool']);
+            $builder->setNodePool($transportConfig['node_pool']);
         }
 
         $transport = $builder->build();
@@ -874,10 +625,11 @@ class Client implements ClientInterface
         }
 
         // API key
-        if (isset($config['api_key']) && !empty($config['api_key'])) {
-            if (isset($config['username']) && !empty($config['username'])) {
-                throw new InvalidException('You cannot use APIKey and Basic Authenication together');
+        if (!empty($config['api_key'])) {
+            if (!empty($config['username'])) {
+                throw new InvalidException('You cannot use APIKey and Basic Authentication together.');
             }
+
             $transport->setHeader('Authorization', \sprintf('ApiKey %s', $config['api_key']));
         }
 
@@ -897,18 +649,15 @@ class Client implements ClientInterface
      */
     protected function isSymfonyHttpClient(Transport $transport): bool
     {
-        if (false !== \strpos(\get_class($transport->getClient()), 'Symfony\Component\HttpClient')) {
+        if (\str_contains($transport->getClient()::class, 'Symfony\Component\HttpClient')) {
             return true;
         }
+
         try {
-            if (false !== \strpos(\get_class($transport->getAsyncClient()), 'Symfony\Component\HttpClient')) {
-                return true;
-            }
+            return \str_contains($transport->getAsyncClient()::class, 'Symfony\Component\HttpClient');
         } catch (NoAsyncClientException $e) {
             return false;
         }
-
-        return false;
     }
 
     protected function setTransportClientOptions(HttpClientInterface $client, array $config, array $clientOptions = []): HttpClientInterface
@@ -916,16 +665,13 @@ class Client implements ClientInterface
         if (empty($config) && empty($clientOptions)) {
             return $client;
         }
-        $class = \get_class($client);
-        if (!isset(AdapterOptions::HTTP_ADAPTERS[$class])) {
-            throw new HttpClientException(\sprintf('The HTTP client %s is not supported for custom options', $class));
-        }
-        $adapterClass = AdapterOptions::HTTP_ADAPTERS[$class];
-        if (!\class_exists($adapterClass) || !\in_array(AdapterInterface::class, \class_implements($adapterClass))) {
+
+        $adapterClass = AdapterOptions::HTTP_ADAPTERS[$client::class] ?? throw new HttpClientException(\sprintf('The HTTP client %s is not supported for custom options', $client::class));
+
+        if (!\class_exists($adapterClass) || !\in_array(AdapterInterface::class, \class_implements($adapterClass), true)) {
             throw new HttpClientException(\sprintf('The class %s does not exists or does not implement %s', $adapterClass, AdapterInterface::class));
         }
-        $adapter = new $adapterClass();
 
-        return $adapter->setConfig($client, $config, $clientOptions);
+        return (new $adapterClass())->setConfig($client, $config, $clientOptions);
     }
 }

@@ -2,9 +2,11 @@
 
 namespace Elastica\Test;
 
+use Elastic\Transport\NodePool\Resurrect\NoResurrect;
+use Elastic\Transport\NodePool\Selector\RoundRobin;
 use Elastica\Client;
-use Elastica\Connection;
 use Elastica\Index;
+use Elastica\Test\Transport\NodePool\TraceableSimpleNodePool;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Util\Test as TestUtil;
 use Psr\Log\LoggerInterface;
@@ -46,38 +48,38 @@ class Base extends TestCase
     /**
      * @param array $params Additional configuration params. Host and Port are already set
      */
-    protected function _getClient(array $params = [], ?callable $callback = null, ?LoggerInterface $logger = null): Client
+    protected function _getClient(array $params = [], ?LoggerInterface $logger = null): Client
     {
-        $config = [
-            'host' => $this->_getHost(),
-            'port' => $this->_getPort(),
-        ];
+        $config = $params ?: [$this->_getHost().':'.$this->_getPort()];
 
-        $config = \array_merge($config, $params);
+        $config['transport_config']['node_pool'] = $config['transport_config']['node_pool'] ?? new TraceableSimpleNodePool(
+            new RoundRobin(),
+            new NoResurrect()
+        );
 
-        return new Client($config, $callback, $logger);
+        return new Client($config, $logger);
     }
 
     protected function _getHost(): string
     {
-        return \getenv('ES_HOST') ?: Connection::DEFAULT_HOST;
+        return \getenv('ES_HOST') ?: 'localhost';
     }
 
     protected function _getPort(): int
     {
-        return \getenv('ES_PORT') ?: Connection::DEFAULT_PORT;
+        return \getenv('ES_PORT') ?: 9200;
     }
 
     protected function _getProxyUrl(): string
     {
-        $proxyHost = \getenv('PROXY_HOST') ?: Connection::DEFAULT_HOST;
+        $proxyHost = \getenv('PROXY_HOST') ?: 'localhost';
 
         return 'http://'.$proxyHost.':8000';
     }
 
     protected function _getProxyUrl403(): string
     {
-        $proxyHost = \getenv('PROXY_HOST') ?: Connection::DEFAULT_HOST;
+        $proxyHost = \getenv('PROXY_HOST') ?: 'localhost';
 
         return 'http://'.$proxyHost.':8001';
     }

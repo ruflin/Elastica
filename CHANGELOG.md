@@ -65,6 +65,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   * `Elastica\Search::setOptionsAndQuery()`
   * `Elastica\Index::search()`
   * `Elastica\Index::createSearch()`
+* Removed classes [#2188](https://github.com/ruflin/Elastica/pull/2188)
+  * `Elastica\Connection`
+  * `Elastica\Connection\ConnectionPool`
+  * `Elastica\Connection\Strategy\CallbackStrategy`
+  * `Elastica\Connection\Strategy\RoundRobin`
+  * `Elastica\Connection\Strategy\Simple`
+  * `Elastica\Connection\Strategy\StrategyFactory`
+  * `Elastica\Connection\Strategy\StrategyInterface`
+* Removed `Elastica\Client::setLogger()` method [#2148](https://github.com/ruflin/Elastica/pull/2148)
 
 
   
@@ -84,6 +93,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 * Removed the JSONParseException class, which is replaced by \JsonException
 * Removed the JSONParseException test class
+* Removed `nyholm/dsn` as no longer needed.
+* Removed `symfony/deprecation-contracts` as no longer needed.
 ### Fixed
 * Fix types order in `Elastica\Query` to work with psalm & expand the `aggs` type to include raw arrays
 
