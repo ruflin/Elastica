@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica;
 
 /**
@@ -28,7 +30,7 @@ class Util
     public static function isDateMathEscaped($requestUri)
     {
         // In practice, the only symbol that really needs to be escaped in URI is '/' => '%2F'
-        return false !== \strpos(\strtoupper($requestUri), '%2F');
+        return \str_contains(\strtoupper($requestUri), '%2F');
     }
 
     /**
@@ -64,7 +66,7 @@ class Util
         $escapedUriSegment = \str_replace(static::$dateMathSymbols, static::$escapedDateMathSymbols, $uriSegment);
 
         // '\\{' and '\\}' should not be escaped
-        if (false !== \strpos($uriSegment, '\\\\')) {
+        if (\str_contains($uriSegment, '\\\\')) {
             $escapedUriSegment = \str_replace(['\\\\%7B', '\\\\%7D'], ['\\\\{', '\\\\}'], $escapedUriSegment);
         }
 
