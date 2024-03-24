@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica\Test;
 
 use Elastic\Elasticsearch\Response\Elasticsearch;
@@ -926,7 +928,7 @@ class ClientFunctionalTest extends BaseTest
         if (empty($config) && empty($clientOptions)) {
             return $client;
         }
-        $class = \get_class($client);
+        $class = $client::class;
         $adapterClass = AdapterOptions::HTTP_ADAPTERS[$class];
 
         $adapter = new $adapterClass();

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica\Test\QueryBuilder\DSL;
 
 use Elastica\Exception\NotImplementedException;
@@ -20,7 +22,7 @@ abstract class AbstractDSLTest extends BaseTest
 
         // Check method signature
         $class = new \ReflectionClass($className);
-        $method = new \ReflectionMethod(\get_class($dsl), $methodName);
+        $method = new \ReflectionMethod($dsl::class, $methodName);
         if (!$class->hasMethod('__construct')) {
             $this->assertEmpty($method->getParameters(), 'Constructor is not defined, but method has some parameters');
         } else {

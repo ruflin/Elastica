@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica\Test\Bulk\Action;
 
 use Elastica\Bulk\Action\UpdateDocument;
@@ -67,9 +69,9 @@ class UpdateDocumentTest extends BaseTest
         $this->assertTrue($action->hasSource());
 
         $expected = <<<'JSON'
-{"update":{"_id":"1","_index":"index"}}
-{"doc":{"foo":"bar"},"doc_as_upsert":true}
-JSON;
+            {"update":{"_id":"1","_index":"index"}}
+            {"doc":{"foo":"bar"},"doc_as_upsert":true}
+            JSON;
 
         $this->assertSame($expected, \trim((string) $action));
 
@@ -81,9 +83,9 @@ JSON;
         $action->setDocument($document);
 
         $expected = <<<'JSON'
-{"update":{"_id":"1","_index":"index"}}
-{"doc":{"foo":"bar"}}
-JSON;
+            {"update":{"_id":"1","_index":"index"}}
+            {"doc":{"foo":"bar"}}
+            JSON;
 
         $this->assertSame($expected, \trim((string) $action));
 

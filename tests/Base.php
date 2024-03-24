@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica\Test;
 
 use Elastic\Transport\NodePool\Resurrect\NoResurrect;
@@ -52,7 +54,7 @@ class Base extends TestCase
     {
         $config['hosts'] ??= [$this->_getHost().':'.$this->_getPort()];
 
-        $config['transport_config']['node_pool'] = $config['transport_config']['node_pool'] ?? new TraceableSimpleNodePool(
+        $config['transport_config']['node_pool'] ??= new TraceableSimpleNodePool(
             new RoundRobin(),
             new NoResurrect()
         );

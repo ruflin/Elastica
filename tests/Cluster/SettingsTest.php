@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica\Test\Cluster;
 
 use Elastic\Elasticsearch\Exception\ClientResponseException;

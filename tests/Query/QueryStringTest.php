@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica\Test\Query;
 
 use Elastic\Elasticsearch\Exception\ClientResponseException;
@@ -28,7 +30,7 @@ class QueryStringTest extends BaseTest
         $this->assertEquals(['query_string' => $expected], $query->toArray());
 
         $fields = [];
-        $max = \mt_rand(1, 10);
+        $max = \random_int(1, 10);
         for ($i = 0; $i < $max; ++$i) {
             $fields[] = \uniqid();
         }

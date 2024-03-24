@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica\Test;
 
 use Elastica\Bulk;
@@ -385,13 +387,13 @@ class BulkTest extends BaseTest
         ;
 
         $expectedJson = <<<'JSON'
-{"index":{}}
-{"name":"Mister Fantastic"}
-{"index":{}}
-{"name":"Invisible Woman"}
-{"index":{}}
-{"name":"The Human Torch"}
-JSON;
+            {"index":{}}
+            {"name":"Mister Fantastic"}
+            {"index":{}}
+            {"name":"Invisible Woman"}
+            {"index":{}}
+            {"name":"The Human Torch"}
+            JSON;
 
         $expectedJson = \str_replace(\PHP_EOL, "\n", $expectedJson);
         $this->assertSame($expectedJson, \trim((string) $bulk));
