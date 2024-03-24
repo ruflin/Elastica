@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica\Query;
 
 use Elastica\Exception\InvalidException;
@@ -33,7 +35,7 @@ class TermsSet extends AbstractQuery
         } elseif ($minimumShouldMatch instanceof AbstractScript) {
             $this->setMinimumShouldMatchScript($minimumShouldMatch);
         } else {
-            throw new \TypeError(\sprintf('Argument 3 passed to "%s()" must be of type %s|string, %s given.', __METHOD__, AbstractScript::class, \is_object($minimumShouldMatch) ? \get_class($minimumShouldMatch) : \gettype($minimumShouldMatch)));
+            throw new \TypeError(\sprintf('Argument 3 passed to "%s()" must be of type %s|string, %s given.', __METHOD__, AbstractScript::class, \is_object($minimumShouldMatch) ? $minimumShouldMatch::class : \gettype($minimumShouldMatch)));
         }
     }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica\Query;
 
 use Elastica\Exception\InvalidException;
@@ -50,7 +52,7 @@ class Terms extends AbstractQuery
     public function addTerm($term): self
     {
         if (!\is_scalar($term)) {
-            throw new \TypeError(\sprintf('Argument 1 passed to "%s()" must be a scalar, %s given.', __METHOD__, \is_object($term) ? \get_class($term) : \gettype($term)));
+            throw new \TypeError(\sprintf('Argument 1 passed to "%s()" must be a scalar, %s given.', __METHOD__, \is_object($term) ? $term::class : \gettype($term)));
         }
 
         $terms = $this->getParam($this->field);
