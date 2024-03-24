@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica\QueryBuilder\DSL;
 
 use Elastica\Query\AbstractQuery;
@@ -299,7 +301,7 @@ class Query implements DSL
      */
     public function parent_id(string $type, $id, bool $ignoreUnmapped = false): ParentId
     {
-        return new ParentId($type, $id, $ignoreUnmapped);
+        return new ParentId($type, (string) $id, $ignoreUnmapped);
     }
 
     /**

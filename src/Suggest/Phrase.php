@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica\Suggest;
 
 use Elastica\Suggest\CandidateGenerator\DirectGenerator;
