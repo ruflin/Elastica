@@ -7,7 +7,6 @@ namespace Elastica\Test\Query;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Document;
 use Elastica\Query\QueryString;
-use Elastica\ResponseConverter;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -107,7 +106,7 @@ class QueryStringTest extends BaseTest
         try {
             $index->search($query);
         } catch (ClientResponseException $e) {
-            $error = json_decode((string) $e->getResponse()->getBody(), true)['error'] ?? null;
+            $error = \json_decode((string) $e->getResponse()->getBody(), true)['error'] ?? null;
 
             $this->assertSame('query_shard_exception', $error['root_cause'][0]['type']);
             $this->assertStringContainsString('failed to create query', $error['root_cause'][0]['reason']);

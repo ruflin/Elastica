@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 $finder = (new PhpCsFixer\Finder())
     ->in(__DIR__.'/src')
     ->in(__DIR__.'/tests')
@@ -8,7 +10,8 @@ $finder = (new PhpCsFixer\Finder())
 return (new PhpCsFixer\Config())
     ->setFinder($finder)
     ->setRules([
-        '@PHP71Migration' => true,
+        '@PHP80Migration' => true,
+        '@PHP80Migration:risky' => true,
         '@PhpCsFixer' => true,
         '@PHPUnit75Migration:risky' => true,
         '@PSR2' => true,

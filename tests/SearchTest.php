@@ -15,7 +15,6 @@ use Elastica\Query\FunctionScore;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
 use Elastica\Request;
-use Elastica\ResponseConverter;
 use Elastica\ResultSet;
 use Elastica\Script\Script;
 use Elastica\Search;
@@ -688,7 +687,7 @@ class SearchTest extends BaseTest
             $search->search($query);
             $this->fail('Should raise an Index not found exception');
         } catch (ClientResponseException $e) {
-            $error = json_decode((string) $e->getResponse()->getBody(), true)['error']['root_cause'][0] ?? null;
+            $error = \json_decode((string) $e->getResponse()->getBody(), true)['error']['root_cause'][0] ?? null;
 
             $this->assertEquals('index_not_found_exception', $error['type']);
             $this->assertEquals('no such index [elastica_7086b4c2ee585bbb6740ece5ed7ece01]', $error['reason']);
