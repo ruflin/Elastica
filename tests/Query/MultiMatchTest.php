@@ -18,10 +18,10 @@ use Elastica\Test\Base as BaseTest;
 class MultiMatchTest extends BaseTest
 {
     private static $data = [
-        ['id' => 1, 'name' => 'Rodolfo', 'last_name' => 'Moraes',   'full_name' => 'Rodolfo Moraes'],
-        ['id' => 2, 'name' => 'Tristan', 'last_name' => 'Maindron', 'full_name' => 'Tristan Maindron'],
-        ['id' => 3, 'name' => 'Monique', 'last_name' => 'Maindron', 'full_name' => 'Monique Maindron'],
-        ['id' => 4, 'name' => 'John',    'last_name' => 'not Doe',  'full_name' => 'John not Doe'],
+        ['id' => '1', 'name' => 'Rodolfo', 'last_name' => 'Moraes',   'full_name' => 'Rodolfo Moraes'],
+        ['id' => '2', 'name' => 'Tristan', 'last_name' => 'Maindron', 'full_name' => 'Tristan Maindron'],
+        ['id' => '3', 'name' => 'Monique', 'last_name' => 'Maindron', 'full_name' => 'Monique Maindron'],
+        ['id' => '4', 'name' => 'John',    'last_name' => 'not Doe',  'full_name' => 'John not Doe'],
     ];
 
     /**
@@ -218,7 +218,7 @@ class MultiMatchTest extends BaseTest
         );
 
         foreach (self::$data as $key => $docData) {
-            $index->addDocument(new Document($key, $docData));
+            $index->addDocument(new Document((string) $key, $docData));
         }
 
         // Refresh index

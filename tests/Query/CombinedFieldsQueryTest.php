@@ -18,10 +18,10 @@ use Elastica\Test\Base as BaseTest;
 class CombinedFieldsQueryTest extends BaseTest
 {
     private static $data = [
-        ['id' => 1, 'title' => 'Rodolfo', 'body' => 'Moraes',   'abstract' => 'Lorem'],
-        ['id' => 2, 'title' => 'Tristan', 'body' => 'Maindron', 'abstract' => 'Dolor'],
-        ['id' => 3, 'title' => 'Monique', 'body' => 'Maindron', 'abstract' => 'Ipsum'],
-        ['id' => 4, 'title' => 'John',    'body' => 'not Doe',  'abstract' => 'Consectetur'],
+        ['id' => '1', 'title' => 'Rodolfo', 'body' => 'Moraes',   'abstract' => 'Lorem'],
+        ['id' => '2', 'title' => 'Tristan', 'body' => 'Maindron', 'abstract' => 'Dolor'],
+        ['id' => '3', 'title' => 'Monique', 'body' => 'Maindron', 'abstract' => 'Ipsum'],
+        ['id' => '4', 'title' => 'John',    'body' => 'not Doe',  'abstract' => 'Consectetur'],
     ];
 
     /**
@@ -145,7 +145,7 @@ class CombinedFieldsQueryTest extends BaseTest
         );
 
         foreach (self::$data as $key => $docData) {
-            $index->addDocument(new Document($key, $docData));
+            $index->addDocument(new Document((string) $key, $docData));
         }
 
         // Refresh index

@@ -78,13 +78,12 @@ class IndexTemplateTest extends BaseTest
         $indexTemplate->create($template);
         try {
             $indexTemplate->create($template);
-        } catch (ClientResponseException $ex) {
-            $response = ResponseConverter::toElastica($ex->getResponse());
-            $error = $response->getFullError();
+        } catch (ClientResponseException $e) {
+            $error = json_decode((string) $e->getResponse()->getBody(), true)['error']['root_cause'][0] ?? null;
 
             $this->assertNotEquals('index_template_already_exists_exception', $error['type']);
             $this->assertEquals('resource_already_exists_exception', $error['type']);
-            $this->assertEquals(400, $ex->getResponse()->getStatusCode());
+            $this->assertEquals(400, $e->getResponse()->getStatusCode());
         }
     }
 }

@@ -107,14 +107,13 @@ class QueryStringTest extends BaseTest
         try {
             $index->search($query);
         } catch (ClientResponseException $e) {
-            $response = ResponseConverter::toElastica($e->getResponse());
-            $error = $response->getFullError();
+            $error = json_decode((string) $e->getResponse()->getBody(), true)['error'] ?? null;
 
             $this->assertSame('query_shard_exception', $error['root_cause'][0]['type']);
             $this->assertStringContainsString('failed to create query', $error['root_cause'][0]['reason']);
             $this->assertStringContainsString('[fields] parameter in conjunction with [default_field]', $error['failed_shards'][0]['reason']['caused_by']['reason']);
 
-            $this->assertEquals(400, $response->getStatus());
+            $this->assertEquals(400, $e->getResponse()->getStatusCode());
         }
     }
 

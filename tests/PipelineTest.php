@@ -135,11 +135,10 @@ class PipelineTest extends BasePipeline
             $pipeline->deletePipeline('non_existent_pipeline');
             $this->fail('an exception should be raised!');
         } catch (ClientResponseException $e) {
-            $response = ResponseConverter::toElastica($e->getResponse());
-            $result = $response->getFullError();
+            $error = json_decode((string) $e->getResponse()->getBody(), true)['error']['root_cause'][0] ?? null;
 
-            $this->assertEquals('resource_not_found_exception', $result['type']);
-            $this->assertEquals('pipeline [non_existent_pipeline] is missing', $result['reason']);
+            $this->assertEquals('resource_not_found_exception', $error['type']);
+            $this->assertEquals('pipeline [non_existent_pipeline] is missing', $error['reason']);
         }
     }
 }
