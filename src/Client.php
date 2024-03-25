@@ -27,7 +27,6 @@ use Elastica\Exception\InvalidException;
 use Elastica\Script\AbstractScript;
 use Psr\Http\Client\ClientInterface as HttpClientInterface;
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
@@ -573,7 +572,7 @@ class Client implements ClientInterface
         return $this->_lastResponse;
     }
 
-    public function toElasticaResponse(Elasticsearch|ResponseInterface $elasticsearchResponse): Response
+    public function toElasticaResponse(Elasticsearch $elasticsearchResponse): Response
     {
         return ResponseConverter::toElastica($elasticsearchResponse);
     }
