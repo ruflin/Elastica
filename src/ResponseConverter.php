@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica;
 
 use Elastic\Elasticsearch\Response\Elasticsearch;
@@ -16,6 +18,6 @@ class ResponseConverter
             return new Response($response->asString(), $response->getStatusCode());
         }
 
-        return new Response($response->getBody(), $response->getStatusCode());
+        return new Response((string) $response->getBody(), $response->getStatusCode());
     }
 }

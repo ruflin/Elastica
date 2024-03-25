@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica\Exception;
 
 class RequestEntityTooLargeException extends \RuntimeException implements ExceptionInterface

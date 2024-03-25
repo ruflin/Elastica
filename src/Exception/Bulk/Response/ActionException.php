@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica\Exception\Bulk\Response;
 
 use Elastica\Bulk\Action;

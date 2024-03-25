@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica\Index;
 
 use Elastic\Elasticsearch\Exception\ClientResponseException;
@@ -110,7 +112,7 @@ class Settings
             return $settings[$setting];
         }
 
-        if (false !== \strpos($setting, '.')) {
+        if (\str_contains($setting, '.')) {
             // translate old dot-notation settings to nested arrays
             $keys = \explode('.', $setting);
             foreach ($keys as $key) {
@@ -178,7 +180,7 @@ class Settings
      */
     public function getNumberOfReplicas(): int
     {
-        return $this->get('number_of_replicas') ?? self::DEFAULT_NUMBER_OF_REPLICAS;
+        return (int) ($this->get('number_of_replicas') ?? self::DEFAULT_NUMBER_OF_REPLICAS);
     }
 
     /**
@@ -195,7 +197,7 @@ class Settings
      */
     public function getNumberOfShards(): int
     {
-        return $this->get('number_of_shards') ?? self::DEFAULT_NUMBER_OF_SHARDS;
+        return (int) ($this->get('number_of_shards') ?? self::DEFAULT_NUMBER_OF_SHARDS);
     }
 
     /**

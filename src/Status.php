@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica;
 
 use Elastic\Elasticsearch\Exception\ClientResponseException;
@@ -63,9 +65,7 @@ class Status
     {
         $data = $this->getData();
 
-        return \array_map(static function ($name): string {
-            return (string) $name;
-        }, \array_keys($data['indices']));
+        return \array_map(static fn ($name): string => (string) $name, \array_keys($data['indices']));
     }
 
     /**

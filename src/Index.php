@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica;
 
 use Elastic\Elasticsearch\Exception\ClientResponseException;
@@ -295,7 +297,7 @@ class Index implements SearchableInterface
                 $data = [];
             }
 
-            $doc = new Document($id, $data, $this->getName());
+            $doc = new Document((string) $id, $data, $this->getName());
             $doc->setVersionParams($result);
 
             return $doc;

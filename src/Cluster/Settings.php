@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica\Cluster;
 
 use Elastica\Client;
@@ -79,7 +81,7 @@ class Settings
                 return $settings[$setting];
             }
 
-            if (false !== \strpos($setting, '.')) {
+            if (\str_contains($setting, '.')) {
                 // convert dot notation to nested arrays
                 $keys = \explode('.', $setting);
                 foreach ($keys as $key) {

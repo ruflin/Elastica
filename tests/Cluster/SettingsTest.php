@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica\Test\Cluster;
 
 use Elastic\Elasticsearch\Exception\ClientResponseException;
@@ -38,7 +40,7 @@ class SettingsTest extends BaseTest
             $index->addDocument($doc2);
             $this->fail('should throw read only exception');
         } catch (ClientResponseException $e) {
-            $error = \json_decode($e->getResponse()->getBody(), true)['error'] ?? null;
+            $error = \json_decode((string) $e->getResponse()->getBody(), true)['error']['root_cause'][0] ?? null;
 
             $this->assertSame('cluster_block_exception', $error['type']);
             $this->assertStringContainsString('cluster read-only', $error['reason']);

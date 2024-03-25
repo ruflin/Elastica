@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica\Test\Bulk\Action;
 
 use Elastica\Bulk\Action\AbstractDocument;

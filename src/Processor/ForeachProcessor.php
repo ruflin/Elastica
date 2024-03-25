@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica\Processor;
 
 /**
@@ -30,7 +32,7 @@ class ForeachProcessor extends AbstractProcessor
         } elseif (\is_array($processor)) {
             $this->setRawProcessor($processor);
         } else {
-            throw new \TypeError(\sprintf('Argument 2 passed to %s::__construct() must be of type %s|array, %s given.', self::class, AbstractProcessor::class, \is_object($processor) ? \get_class($processor) : \gettype($processor)));
+            throw new \TypeError(\sprintf('Argument 2 passed to %s::__construct() must be of type %s|array, %s given.', self::class, AbstractProcessor::class, \is_object($processor) ? $processor::class : \gettype($processor)));
         }
     }
 

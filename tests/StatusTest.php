@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Elastica\Test;
 
 use Elastic\Elasticsearch\Exception\ClientResponseException;
@@ -96,9 +98,7 @@ class StatusTest extends BaseTest
 
         $indicesWithAlias = $status->getIndicesWithAlias($aliasName);
         $this->assertEquals([$indexName], \array_map(
-            static function ($index) {
-                return $index->getName();
-            },
+            static fn ($index) => $index->getName(),
             $indicesWithAlias
         ));
     }
