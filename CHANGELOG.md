@@ -74,9 +74,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   * `Elastica\Connection\Strategy\StrategyFactory`
   * `Elastica\Connection\Strategy\StrategyInterface`
 * Removed `Elastica\Client::setLogger()` method [#2148](https://github.com/ruflin/Elastica/pull/2148)
+* Enabled `strict_types` on all classes [#2190](https://github.com/ruflin/Elastica/pull/2190)
 
-
-  
 
 ### Added
 * Added support for PHP 8.2 [#2136](https://github.com/ruflin/Elastica/pull/2136)
