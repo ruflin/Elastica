@@ -41,14 +41,15 @@ jobs:
         dependencies:
           - 'highest'
         elasticsearch:
-          - '7.17.9'
+          - '8.0.1'
         include:
+          # Test with previous version to support backward compatibility
+          - php: '8.0'
+            elasticsearch: '7.17.18'
+            experimental: false
           # Test with the lowest set of dependencies
           - dependencies: 'lowest'
             php: '8.0'
-            elasticsearch: '7.17.9'
-            experimental: false
-          - php: '8.1'
             elasticsearch: '8.0.1'
             experimental: false
           - php: '8.1'
