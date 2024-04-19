@@ -75,6 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   * `Elastica\Connection\Strategy\StrategyInterface`
 * Removed `Elastica\Client::setLogger()` method [#2148](https://github.com/ruflin/Elastica/pull/2148)
 * Enabled `strict_types` on all classes [#2190](https://github.com/ruflin/Elastica/pull/2190)
+* Changed `Elastica\Scroll:clear` to use `scroll_id` body parameter instead of url parameter [#2211](https://github.com/ruflin/Elastica/pull/2211)
 
 
 ### Added
