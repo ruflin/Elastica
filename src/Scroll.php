@@ -159,7 +159,7 @@ class Scroll implements \Iterator
     {
         if (null !== $this->_nextScrollId) {
             $this->_search->getClient()->clearScroll(
-                [Search::OPTION_SCROLL_ID => [$this->_nextScrollId]]
+                ['body' => [Search::OPTION_SCROLL_ID => [$this->_nextScrollId]]]
             );
 
             // Reset scroll ID so valid() returns false.
