@@ -4,7 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/7.3.0...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/8.0.0-alpha1...8.x)
+
+### Backward Compatibility Breaks
+
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [Unreleased](https://github.com/ruflin/Elastica/compare/7.3.0...8.0.0-alpha1)
 ### Backward Compatibility Breaks
 * Dropped support for PHP <8.0 [#2131](https://github.com/ruflin/Elastica/pull/2131)
 * Removed deprecated classes in 7.x [#2132](https://github.com/ruflin/Elastica/pull/2132)
@@ -90,7 +106,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Modernize code using `match` expression [#2141](https://github.com/ruflin/Elastica/pull/2141)
 * Updated docker/php/Dockerfile added AllowSymfonyFlexPlugin (false) on docker phpuser context [#2194](https://github.com/ruflin/Elastica/pull/2194)
 
-### Deprecated
 ### Removed
 * Removed the JSONParseException class, which is replaced by \JsonException
 * Removed the JSONParseException test class
