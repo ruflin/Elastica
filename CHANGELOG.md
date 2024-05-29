@@ -22,7 +22,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [8.0.0](https://github.com/ruflin/Elastica/compare/8.0.0-alpha1...8.0.0)
 
-This a major release with breaking changes. Have a look at the [Upgrade guide](https://github.com/ruflin/Elastica/blob/8.x/UPGRADE-8.0.md).
+This a major release with breaking changes.
+Have a look at the [Upgrade guide](https://github.com/ruflin/Elastica/blob/8.x/UPGRADE-8.0.md).
 
 ### Backward Compatibility Breaks
 * Dropped support for PHP <8.0 [#2131](https://github.com/ruflin/Elastica/pull/2131)
