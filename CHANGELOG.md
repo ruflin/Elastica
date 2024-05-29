@@ -96,7 +96,7 @@ Have a look at the [Upgrade guide](https://github.com/ruflin/Elastica/blob/8.x/U
 * Removed `Elastica\Client::setLogger()` method [#2148](https://github.com/ruflin/Elastica/pull/2148)
 * Enabled `strict_types` on all classes [#2190](https://github.com/ruflin/Elastica/pull/2190)
 * Changed `Elastica\Scroll:clear` to use `scroll_id` body parameter instead of url parameter [#2211](https://github.com/ruflin/Elastica/pull/2211)
-
+* Remove branch alias for dev-master from composer file
 
 ### Added
 * Added support for PHP 8.2 [#2136](https://github.com/ruflin/Elastica/pull/2136)
@@ -117,8 +117,6 @@ Have a look at the [Upgrade guide](https://github.com/ruflin/Elastica/blob/8.x/U
 * Removed `symfony/deprecation-contracts` as no longer needed.
 ### Fixed
 * Fix types order in `Elastica\Query` to work with psalm & expand the `aggs` type to include raw arrays
-
-### Security
 
 ## [8.0.0-alpha1](https://github.com/ruflin/Elastica/compare/7.3.0...8.0.0-alpha1)
 ### Backward Compatibility Breaks

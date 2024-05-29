@@ -50,10 +50,5 @@
             "php-http/discovery": true
         },
         "sort-packages": true
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "8.0.x-dev"
-        }
     }
 }
