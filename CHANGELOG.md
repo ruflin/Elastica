@@ -192,7 +192,6 @@ This a major release with breaking changes. Have a look at the [Upgrade guide](h
 * Enabled `strict_types` on all classes [#2190](https://github.com/ruflin/Elastica/pull/2190)
 * Changed `Elastica\Scroll:clear` to use `scroll_id` body parameter instead of url parameter [#2211](https://github.com/ruflin/Elastica/pull/2211)
 
-
 ### Added
 * Added support for PHP 8.2 [#2136](https://github.com/ruflin/Elastica/pull/2136)
 * Added missing `@throws` annotations to Client::request and related methods [#2152](https://github.com/ruflin/Elastica/pull/2152)
