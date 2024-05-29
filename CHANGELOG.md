@@ -96,7 +96,7 @@ Have a look at the [Upgrade guide](https://github.com/ruflin/Elastica/blob/8.x/U
 * Removed `Elastica\Client::setLogger()` method [#2148](https://github.com/ruflin/Elastica/pull/2148)
 * Enabled `strict_types` on all classes [#2190](https://github.com/ruflin/Elastica/pull/2190)
 * Changed `Elastica\Scroll:clear` to use `scroll_id` body parameter instead of url parameter [#2211](https://github.com/ruflin/Elastica/pull/2211)
-* Remove branch alias for dev-master from composer file
+* Remove branch alias for dev-master from composer file [#2215](https://github.com/ruflin/Elastica/pull/2215)
 
 ### Added
 * Added support for PHP 8.2 [#2136](https://github.com/ruflin/Elastica/pull/2136)
