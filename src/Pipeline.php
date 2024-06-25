@@ -28,16 +28,10 @@ class Pipeline extends Param
      */
     protected $_client;
 
-    /**
-     * @var AbstractProcessor[]
-     *
-     * @phpstan-var array{processors?: AbstractProcessor[]}
-     */
-    protected $_processors = [];
-
     public function __construct(Client $client)
     {
         $this->_client = $client;
+        $this->setParam('processors', []);
     }
 
     /**
@@ -55,7 +49,7 @@ class Pipeline extends Param
             throw new InvalidException('You should set a valid processor description.');
         }
 
-        if (empty($this->_processors['processors'])) {
+        if (empty($this->_params['processors'])) {
             throw new InvalidException('You should set a valid processor of type Elastica\Processor\AbstractProcessor.');
         }
 
@@ -95,19 +89,14 @@ class Pipeline extends Param
      */
     public function setRawProcessors(array $processors): self
     {
-        $this->_processors = $processors;
+        $this->setParam('processors', $processors);
 
         return $this;
     }
 
     public function addProcessor(AbstractProcessor $processor): self
     {
-        if (!$this->_processors) {
-            $this->_processors['processors'] = $processor->toArray();
-            $this->_params['processors'] = [];
-        } else {
-            $this->_processors['processors'] = \array_merge($this->_processors['processors'], $processor->toArray());
-        }
+        $this->setParam('processors', \array_merge($this->getParam('processors'), [$processor->toArray()]));
 
         return $this;
     }
@@ -129,7 +118,9 @@ class Pipeline extends Param
      */
     public function setProcessors(array $processors): self
     {
-        $this->setParam('processors', [$processors]);
+        foreach ($processors as $processor) {
+            $this->addProcessor($processor);
+        }
 
         return $this;
     }
@@ -148,8 +139,6 @@ class Pipeline extends Param
      */
     public function toArray(): array
     {
-        $this->_params['processors'] = [$this->_processors['processors']];
-
         return $this->getParams();
     }
 

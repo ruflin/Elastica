@@ -36,19 +36,25 @@ class PipelineTest extends BasePipeline
 
         $expected = [
             'description' => 'this is a new pipeline',
-            'processors' => [[
-                'trim' => [
-                    'field' => 'field1',
+            'processors' => [
+                [
+                    'trim' => [
+                        'field' => 'field1',
+                    ]
                 ],
-                'rename' => [
-                    'field' => 'foo',
-                    'target_field' => 'target.field',
+                [
+                    'rename' => [
+                        'field' => 'foo',
+                        'target_field' => 'target.field',
+                    ]
                 ],
-                'set' => [
-                    'field' => 'field4',
-                    'value' => 324,
-                ],
-            ]],
+                [
+                    'set' => [
+                        'field' => 'field4',
+                        'value' => 324,
+                    ]
+                ]
+            ],
         ];
 
         $this->assertEquals($expected, $processors->toArray());
@@ -79,7 +85,8 @@ class PipelineTest extends BasePipeline
         $this->assertSame('pipeline for Set', $result['my_custom_pipeline']['description']);
         $this->assertSame('field4', $result['my_custom_pipeline']['processors'][0]['set']['field']);
         $this->assertSame(333, $result['my_custom_pipeline']['processors'][0]['set']['value']);
-        $this->assertSame('field1', $result['my_custom_pipeline']['processors'][0]['trim']['field']);
+        $this->assertSame('field1', $result['my_custom_pipeline']['processors'][1]['trim']['field']);
+        $this->assertSame('foo', $result['my_custom_pipeline']['processors'][2]['rename']['field']);
     }
 
     /**
