@@ -40,20 +40,20 @@ class PipelineTest extends BasePipeline
                 [
                     'trim' => [
                         'field' => 'field1',
-                    ]
+                    ],
                 ],
                 [
                     'rename' => [
                         'field' => 'foo',
                         'target_field' => 'target.field',
-                    ]
+                    ],
                 ],
                 [
                     'set' => [
                         'field' => 'field4',
                         'value' => 324,
-                    ]
-                ]
+                    ],
+                ],
             ],
         ];
 
