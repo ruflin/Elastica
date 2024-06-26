@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 ### Fixed
+* Fixed Pipeline Processor handling to allow for multiple processors of the same type [#2218](https://github.com/ruflin/Elastica/pull/2218)
 
 ### Security
 
