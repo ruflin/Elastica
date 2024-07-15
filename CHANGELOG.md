@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Backward Compatibility Breaks
 
 ### Added
+* Added support for the multi-match query type `bool_prefix` [#2220](https://github.com/ruflin/Elastica/pull/2220)
 
 ### Changed
 
