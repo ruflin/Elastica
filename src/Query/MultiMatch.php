@@ -20,6 +20,7 @@ class MultiMatch extends AbstractQuery
     public const TYPE_CROSS_FIELDS = 'cross_fields';
     public const TYPE_PHRASE = 'phrase';
     public const TYPE_PHRASE_PREFIX = 'phrase_prefix';
+    public const TYPE_BOOL_PREFIX = 'bool_prefix';
 
     public const OPERATOR_OR = 'or';
     public const OPERATOR_AND = 'and';

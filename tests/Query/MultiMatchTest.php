@@ -55,7 +55,7 @@ class MultiMatchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testType(): void
+    public function testTypePhrasePrefix(): void
     {
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery('Trist');
@@ -64,6 +64,20 @@ class MultiMatchTest extends BaseTest
         $resultSet = $this->_getResults($multiMatch);
 
         $this->assertEquals(1, $resultSet->count());
+    }
+
+    /**
+     * @group functional
+     */
+    public function testTypeBoolPrefix(): void
+    {
+        $multiMatch = new MultiMatch();
+        $multiMatch->setQuery('Main');
+        $multiMatch->setFields(['full_name', 'name']);
+        $multiMatch->setType(MultiMatch::TYPE_BOOL_PREFIX);
+        $resultSet = $this->_getResults($multiMatch);
+
+        $this->assertEquals(2, $resultSet->count());
     }
 
     /**
