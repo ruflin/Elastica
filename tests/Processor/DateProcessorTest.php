@@ -8,15 +8,14 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\DateProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class DateProcessorTest extends BasePipelineTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testDate(): void
     {
         $processor = new DateProcessor('initial_date', ['dd/MM/yyyy hh:mm:ss']);
@@ -42,9 +41,7 @@ class DateProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testDateWithNonDefaultOptions(): void
     {
         $processor = (new DateProcessor('initial_date', ['dd/MM/yyyy hh:mm:ss', 'ISO8601', 'UNIX', 'UNIX_MS']))
@@ -68,9 +65,7 @@ class DateProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testDateField(): void
     {
         $date = new DateProcessor('date_field', ['yyyy dd MM hh:mm:ss']);

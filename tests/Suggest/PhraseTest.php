@@ -10,18 +10,14 @@ use Elastica\Suggest;
 use Elastica\Suggest\CandidateGenerator\DirectGenerator;
 use Elastica\Suggest\Phrase;
 use Elastica\Test\Base as BaseTest;
-use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class PhraseTest extends BaseTest
 {
-    use ExpectDeprecationTrait;
-
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $phraseSuggest = (new Phrase('suggest1', 'text'))
@@ -50,9 +46,7 @@ class PhraseTest extends BaseTest
         $this->assertEquals($expected, $suggest->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testPhraseSuggest(): void
     {
         $phraseSuggest = (new Phrase('suggest1', 'text'))

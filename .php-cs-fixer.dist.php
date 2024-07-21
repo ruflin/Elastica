@@ -14,7 +14,7 @@ return (new PhpCsFixer\Config())
         '@PHP80Migration' => true,
         '@PHP80Migration:risky' => true,
         '@PhpCsFixer' => true,
-        '@PHPUnit75Migration:risky' => true,
+        '@PHPUnit100Migration:risky' => true,
         '@PSR2' => true,
         '@Symfony' => true,
         'is_null' => true,

@@ -9,15 +9,14 @@ use Elastica\Exception\InvalidException;
 use Elastica\Query\TermsSet;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class TermsSetTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testMinimumShouldMatchField(): void
     {
         $expected = [
@@ -34,9 +33,7 @@ class TermsSetTest extends BaseTest
         $this->assertSame($expected, $query->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testEmptyField(): void
     {
         $this->expectException(InvalidException::class);
@@ -45,9 +42,7 @@ class TermsSetTest extends BaseTest
         new TermsSet('', ['foo', 'bar'], 'match_field');
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testMinimumShouldMatchScriptSearch(): void
     {
         $index = $this->_createIndex();
@@ -81,9 +76,7 @@ class TermsSetTest extends BaseTest
         $this->assertEquals(0, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testMinimumShouldMatchFieldSearch(): void
     {
         $index = $this->_createIndex();
@@ -117,9 +110,7 @@ class TermsSetTest extends BaseTest
         $this->assertEquals(0, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testVariousDataTypesViaConstructor(): void
     {
         $index = $this->_createIndex();

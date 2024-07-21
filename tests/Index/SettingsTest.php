@@ -8,15 +8,14 @@ use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Document;
 use Elastica\Index\Settings as IndexSettings;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class SettingsTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGet(): void
     {
         $indexName = 'elasticatest';
@@ -38,9 +37,7 @@ class SettingsTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetWithDefaultValueIncluded(): void
     {
         $indexName = 'elasticatest';
@@ -60,9 +57,7 @@ class SettingsTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetWithDefaultValueOverride(): void
     {
         $indexName = 'elasticatest';
@@ -87,9 +82,7 @@ class SettingsTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetWithAlias(): void
     {
         $indexName = 'elasticatest';
@@ -115,9 +108,7 @@ class SettingsTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testDeleteAliasWithException(): void
     {
         $indexName = 'deletetestaliasexception';
@@ -144,9 +135,7 @@ class SettingsTest extends BaseTest
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetGetNumberOfReplicas(): void
     {
         $index = $this->_createIndex();
@@ -170,9 +159,7 @@ class SettingsTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetNumberOfReplicas(): void
     {
         $index = $this->_createIndex();
@@ -189,9 +176,7 @@ class SettingsTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetNumberOfShards(): void
     {
         $index = $this->_createIndex();
@@ -208,9 +193,7 @@ class SettingsTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetDefaultNumberOfShards(): void
     {
         $index = $this->_createIndex();
@@ -228,9 +211,7 @@ class SettingsTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetRefreshInterval(): void
     {
         $index = $this->_createIndex();
@@ -251,9 +232,7 @@ class SettingsTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetRefreshInterval(): void
     {
         $index = $this->_createIndex();
@@ -274,9 +253,7 @@ class SettingsTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetMergePolicy(): void
     {
         $index = $this->_createIndex();
@@ -297,9 +274,7 @@ class SettingsTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetMaxMergeAtOnce(): void
     {
         $index = $this->_createIndex();
@@ -322,9 +297,7 @@ class SettingsTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetReadOnly(): void
     {
         $index = $this->_createIndex();
@@ -367,9 +340,7 @@ class SettingsTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetSetBlocksRead(): void
     {
         $index = $this->_createIndex();
@@ -390,9 +361,7 @@ class SettingsTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetSetBlocksWrite(): void
     {
         $index = $this->_createIndex();
@@ -413,9 +382,7 @@ class SettingsTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetSetBlocksMetadata(): void
     {
         $index = $this->_createIndex();
@@ -438,9 +405,7 @@ class SettingsTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testNotFoundIndex(): void
     {
         $client = $this->_getClient();
@@ -456,9 +421,7 @@ class SettingsTest extends BaseTest
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetMultiple(): void
     {
         $index = $this->_createIndex();

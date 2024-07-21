@@ -9,15 +9,14 @@ use Elastica\Document;
 use Elastica\Processor\ForeachProcessor;
 use Elastica\Processor\UppercaseProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class ForeachProcessorTest extends BasePipelineTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testForeachProcessorDefault(): void
     {
         $subprocessor = new UppercaseProcessor('field2');
@@ -37,9 +36,7 @@ class ForeachProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testForeachRawProcessorDefault(): void
     {
         $subprocessor = [
@@ -63,9 +60,7 @@ class ForeachProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testForeachProcessorIgnoreMissing(): void
     {
         $subprocessor = new UppercaseProcessor('field2');
@@ -87,9 +82,7 @@ class ForeachProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testForeachProcessor(): void
     {
         $subprocessor = new UppercaseProcessor('_ingest._value');

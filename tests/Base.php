@@ -10,7 +10,6 @@ use Elastica\Client;
 use Elastica\Index;
 use Elastica\Test\Transport\NodePool\TraceableSimpleNodePool;
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Util\Test as TestUtil;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -24,7 +23,6 @@ class Base extends TestCase
 
         $hasGroup = $this->_isUnitGroup() || $this->_isFunctionalGroup() || $this->_isBenchmarkGroup();
         $this->assertTrue($hasGroup, 'Every test must have one of "unit", "functional", "benchmark" group');
-        $this->showDeprecated();
     }
 
     protected function tearDown(): void
@@ -35,16 +33,6 @@ class Base extends TestCase
         }
 
         parent::tearDown();
-    }
-
-    protected static function hideDeprecated(): void
-    {
-        \error_reporting(\error_reporting() & ~\E_USER_DEPRECATED);
-    }
-
-    protected static function showDeprecated(): void
-    {
-        \error_reporting(\error_reporting() | \E_USER_DEPRECATED);
     }
 
     /**
@@ -168,22 +156,16 @@ class Base extends TestCase
 
     protected function _isUnitGroup(): bool
     {
-        $groups = TestUtil::getGroups(\get_class($this), $this->getName(false));
-
-        return \in_array('unit', $groups, true);
+        return \in_array('unit', $this->groups(), true);
     }
 
     protected function _isFunctionalGroup(): bool
     {
-        $groups = TestUtil::getGroups(\get_class($this), $this->getName(false));
-
-        return \in_array('functional', $groups, true);
+        return \in_array('functional', $this->groups(), true);
     }
 
     protected function _isBenchmarkGroup(): bool
     {
-        $groups = TestUtil::getGroups(\get_class($this), $this->getName(false));
-
-        return \in_array('benchmark', $groups, true);
+        return \in_array('benchmark', $this->groups(), true);
     }
 }

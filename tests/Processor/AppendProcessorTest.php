@@ -8,15 +8,14 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\AppendProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class AppendProcessorTest extends BasePipelineTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAppendSingleValue(): void
     {
         $processor = new AppendProcessor('field1', 'item2');
@@ -31,9 +30,7 @@ class AppendProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAppendArray(): void
     {
         $processor = new AppendProcessor('field1', ['item2', 'item3', 'item4']);
@@ -48,9 +45,7 @@ class AppendProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testAppend(): void
     {
         $append = new AppendProcessor('foo', ['item2', 'item3', 'item4']);

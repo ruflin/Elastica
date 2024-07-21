@@ -6,15 +6,14 @@ namespace Elastica\Test\Query;
 
 use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class TermTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $query = new Term();
@@ -31,9 +30,7 @@ class TermTest extends BaseTest
         $this->assertEquals($data['term'][$key]['boost'], $boost);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testDiacriticsValueToArray(): void
     {
         $query = new Term();

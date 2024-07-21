@@ -13,15 +13,14 @@ use Elastica\Query\Term;
 use Elastica\ResultSet;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class SearchTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstruct(): void
     {
         $client = $this->_getClient();
@@ -30,9 +29,7 @@ class SearchTest extends BaseTest
         $this->assertSame($client, $multiSearch->getClient());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetSearches(): void
     {
         $client = $this->_getClient();
@@ -62,9 +59,7 @@ class SearchTest extends BaseTest
         $this->assertCount(0, $searches);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetSearchesByKeys(): void
     {
         $client = $this->_getClient();
@@ -94,9 +89,7 @@ class SearchTest extends BaseTest
         $this->assertCount(0, $searches);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSearch(): void
     {
         $index = $this->_createIndex();
@@ -182,9 +175,7 @@ class SearchTest extends BaseTest
         $this->assertEquals(6, $resultSets[1]->getTotalHits());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSearchWithKeys(): void
     {
         $index = $this->_createIndex();
@@ -272,9 +263,7 @@ class SearchTest extends BaseTest
         $this->assertEquals(6, $resultSets['search2']->getTotalHits());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSearchWithError(): void
     {
         $index = $this->_createIndex();
@@ -317,9 +306,7 @@ class SearchTest extends BaseTest
         $this->assertTrue($multiResultSet->hasError());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSearchWithErrorWithKeys(): void
     {
         $index = $this->_createIndex();
@@ -362,9 +349,7 @@ class SearchTest extends BaseTest
         $this->assertTrue($multiResultSet->hasError());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGlobalSearchTypeSearch(): void
     {
         $index = $this->_createIndex();
@@ -442,9 +427,7 @@ class SearchTest extends BaseTest
         $this->assertEquals(6, $resultSets[1]->getTotalHits());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGlobalSearchTypeSearchWithKeys(): void
     {
         $index = $this->_createIndex();

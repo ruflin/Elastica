@@ -21,15 +21,14 @@ use Elastica\Search;
 use Elastica\Suggest;
 use Elastica\Test\Base as BaseTest;
 use GuzzleHttp\Psr7\Response as Psr7Response;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class SearchTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstruct(): void
     {
         $client = $this->_getClient();
@@ -38,9 +37,7 @@ class SearchTest extends BaseTest
         $this->assertSame($client, $search->getClient());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testAddIndex(): void
     {
         $client = $this->_getClient();
@@ -63,9 +60,7 @@ class SearchTest extends BaseTest
         $this->assertContains($index2->getName(), $indices);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testAddIndexByName(): void
     {
         $client = $this->_getClient();
@@ -78,9 +73,7 @@ class SearchTest extends BaseTest
         $this->assertContains('index1', $indices);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testHasIndex(): void
     {
         $client = $this->_getClient();
@@ -99,9 +92,7 @@ class SearchTest extends BaseTest
         $this->assertTrue($search->hasIndex($index2));
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testHasIndexByName(): void
     {
         $client = $this->_getClient();
@@ -120,9 +111,7 @@ class SearchTest extends BaseTest
         $this->assertTrue($search->hasIndexByName($indexName2));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAddIndices(): void
     {
         $client = $this->_getClient();
@@ -137,9 +126,7 @@ class SearchTest extends BaseTest
         $this->assertCount(2, $search->getIndices());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAddIndicesWithInvalidParametersThrowsException(): void
     {
         $client = $this->_getClient();
@@ -149,9 +136,7 @@ class SearchTest extends BaseTest
         $search->addIndices([new \stdClass()]);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAddIndicesByName(): void
     {
         $client = $this->_getClient();
@@ -161,9 +146,7 @@ class SearchTest extends BaseTest
         $this->assertCount(2, $search->getIndices());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAddIndicesByNameWithInvalidParametersThrowsException(): void
     {
         $client = $this->_getClient();
@@ -173,9 +156,7 @@ class SearchTest extends BaseTest
         $search->addIndicesByName([new \stdClass()]);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetPath(): void
     {
         $client = $this->_getClient();
@@ -196,9 +177,7 @@ class SearchTest extends BaseTest
         $this->assertEquals($index1->getName().','.$index2->getName().'/_search', $search1->getPath());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSearchRequest(): void
     {
         $client = $this->_getClient();
@@ -217,9 +196,7 @@ class SearchTest extends BaseTest
         $this->assertFalse($result->getResponse()->hasError());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSearchScrollRequest(): void
     {
         $client = $this->_getClient();
@@ -280,9 +257,8 @@ class SearchTest extends BaseTest
 
     /**
      * Default Limit tests for \Elastica\Search.
-     *
-     * @group functional
      */
+    #[Group('functional')]
     public function testLimitDefaultSearch(): void
     {
         $client = $this->_getClient();
@@ -329,9 +305,7 @@ class SearchTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testArrayConfigSearch(): void
     {
         $client = $this->_getClient();
@@ -434,9 +408,7 @@ class SearchTest extends BaseTest
         $this->assertTrue($resultSet->hasTimedOut());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testInvalidConfigSearch(): void
     {
         $this->expectException(InvalidException::class);
@@ -446,9 +418,7 @@ class SearchTest extends BaseTest
         $search->search('test', ['invalid_option' => 'invalid_option_value']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSearchWithVersionOption(): void
     {
         $index = $this->_createIndex();
@@ -470,9 +440,7 @@ class SearchTest extends BaseTest
         $this->assertEquals(1, $hit->getParam('_version'));
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSearchGet(): void
     {
         $client = $this->_getClient();
@@ -482,9 +450,7 @@ class SearchTest extends BaseTest
         $this->assertFalse($result->getResponse()->hasError());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testCountRequest(): void
     {
         $client = $this->_getClient();
@@ -538,9 +504,7 @@ class SearchTest extends BaseTest
         $this->assertEquals(0, $count);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testCountRequestGet(): void
     {
         $client = $this->_getClient();
@@ -594,9 +558,7 @@ class SearchTest extends BaseTest
         $this->assertEquals(0, $count);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testEmptySearch(): void
     {
         $client = $this->_getClient();
@@ -648,9 +610,7 @@ class SearchTest extends BaseTest
         $this->assertEquals('bunny', $source['username']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testCount(): void
     {
         $index = $this->_createIndex();
@@ -671,9 +631,7 @@ class SearchTest extends BaseTest
         $this->assertEquals(1, $result2->getTotalHits());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testIgnoreUnavailableOption(): void
     {
         $client = $this->_getClient();
@@ -696,9 +654,7 @@ class SearchTest extends BaseTest
         $search->search($query, [Search::OPTION_SEARCH_IGNORE_UNAVAILABLE => true]);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testQuerySizeAfterCount(): void
     {
         $client = $this->_getClient();

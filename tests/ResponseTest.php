@@ -6,12 +6,12 @@ namespace Elastica\Test;
 
 use Elastica\Response;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
- * @group unit
- *
  * @internal
  */
+#[Group('unit')]
 class ResponseTest extends BaseTest
 {
     public function testIsOkBulkWithErrorsField(): void

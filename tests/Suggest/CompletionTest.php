@@ -11,15 +11,14 @@ use Elastica\Query;
 use Elastica\Suggest;
 use Elastica\Suggest\Completion;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class CompletionTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $suggest = new Completion('suggestName', 'fieldName');
@@ -35,9 +34,7 @@ class CompletionTest extends BaseTest
         $this->assertEquals($expected, $suggest->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSuggestWorks(): void
     {
         $suggest = new Completion('suggestName', 'fieldName');
@@ -55,9 +52,7 @@ class CompletionTest extends BaseTest
         $this->assertEquals('Nevermind', $options[0]['text']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testFuzzySuggestWorks(): void
     {
         $suggest = new Completion('suggestName', 'fieldName');
@@ -76,9 +71,7 @@ class CompletionTest extends BaseTest
         $this->assertEquals('Nevermind', $options[0]['text']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testCompletion(): void
     {
         $suggest = new Completion('suggestName1', 'fieldName');
@@ -118,9 +111,7 @@ class CompletionTest extends BaseTest
         $this->assertEquals($expectedSuggestions, $resultSet->getSuggests());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetFuzzy(): void
     {
         $suggest = new Completion('suggestName', 'fieldName');
@@ -135,9 +126,7 @@ class CompletionTest extends BaseTest
         $this->assertSame($fuzzy, $suggest->getParam('fuzzy'));
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testRegexSuggestWorks(): void
     {
         $suggest = new Completion('suggestName', 'fieldName');

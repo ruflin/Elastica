@@ -12,15 +12,14 @@ use Elastica\Pipeline;
 use Elastica\Processor\RenameProcessor;
 use Elastica\Processor\SetProcessor;
 use Elastica\Processor\TrimProcessor;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class PipelineTest extends BasePipeline
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testProcessor(): void
     {
         $trim = new TrimProcessor('field1');
@@ -60,9 +59,7 @@ class PipelineTest extends BasePipeline
         $this->assertEquals($expected, $processors->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testPipelineCreate(): void
     {
         $set = new SetProcessor('field4', 333);
@@ -89,9 +86,7 @@ class PipelineTest extends BasePipeline
         $this->assertSame('foo', $result['my_custom_pipeline']['processors'][2]['rename']['field']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testPipelineonIndex(): void
     {
         $set = new SetProcessor('foo', 333);
@@ -131,9 +126,7 @@ class PipelineTest extends BasePipeline
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testDeletePipeline(): void
     {
         $pipeline = $this->_createPipeline();

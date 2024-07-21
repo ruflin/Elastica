@@ -10,15 +10,14 @@ use Elastica\Exception\QueryBuilderException;
 use Elastica\Query\AbstractQuery;
 use Elastica\QueryBuilder;
 use Elastica\Suggest\AbstractSuggest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class QueryBuilderTest extends Base
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testCustomDSL(): void
     {
         $qb = new QueryBuilder();
@@ -39,9 +38,7 @@ class QueryBuilderTest extends Base
         $this->assertEquals('DSL "invalid" not supported', $exceptionMessage);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testFacade(): void
     {
         $qb = new QueryBuilder();

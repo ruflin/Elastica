@@ -8,15 +8,14 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\JoinProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class JoinProcessorTest extends BasePipelineTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testJoin(): void
     {
         $processor = new JoinProcessor('joined_array_field', '-');
@@ -31,9 +30,7 @@ class JoinProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testJoinWithNonDefaultOptions(): void
     {
         $processor = (new JoinProcessor('joined_array_field', '-'))
@@ -51,9 +48,7 @@ class JoinProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testJoinField(): void
     {
         $join = new JoinProcessor('name', '-');

@@ -10,15 +10,14 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\Ids;
 use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class BoolQueryTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $query = new BoolQuery();
@@ -67,9 +66,8 @@ class BoolQueryTest extends BaseTest
      * Test to resolve the following issue.
      *
      * @see https://groups.google.com/forum/?fromgroups#!topic/elastica-php-client/zK_W_hClfvU
-     *
-     * @group unit
      */
+    #[Group('unit')]
     public function testToArrayStructure(): void
     {
         $boolQuery = new BoolQuery();
@@ -86,9 +84,7 @@ class BoolQueryTest extends BaseTest
         $this->assertEquals($jsonString, \json_encode($boolQuery->toArray()));
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSearch(): void
     {
         $client = $this->_getClient();
@@ -141,9 +137,7 @@ class BoolQueryTest extends BaseTest
         $this->assertEquals(0, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testEmptyBoolQuery(): void
     {
         $index = $this->_createIndex();

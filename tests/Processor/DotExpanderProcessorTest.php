@@ -8,15 +8,14 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\DotExpanderProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class DotExpanderProcessorTest extends BasePipelineTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testDotExpander(): void
     {
         $processor = new DotExpanderProcessor('foo.bar');
@@ -30,9 +29,7 @@ class DotExpanderProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testDotExpanderWithNonDefaultOptions(): void
     {
         $processor = (new DotExpanderProcessor('foo.bar'))
@@ -49,9 +46,7 @@ class DotExpanderProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testDotExpanderField(): void
     {
         $dotExpander = new DotExpanderProcessor('foo.bar');

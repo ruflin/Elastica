@@ -7,15 +7,14 @@ namespace Elastica\Test\Query;
 use Elastica\Document;
 use Elastica\Query\MatchQuery;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class MatchQueryTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $field = 'test';
@@ -31,8 +30,6 @@ class MatchQueryTest extends BaseTest
 
         $query = new MatchQuery();
         $query->setFieldQuery($field, $testQuery);
-        $this->hideDeprecated();
-        $this->showDeprecated();
         $query->setFieldOperator($field, $operator);
         $query->setFieldAnalyzer($field, $analyzer);
         $query->setFieldBoost($field, $boost);
@@ -61,9 +58,7 @@ class MatchQueryTest extends BaseTest
         $this->assertEquals($expectedArray, $query->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testMatch(): void
     {
         $client = $this->_getClient();
@@ -93,9 +88,7 @@ class MatchQueryTest extends BaseTest
         $this->assertEquals(4, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testMatchSetFieldBoost(): void
     {
         $client = $this->_getClient();
@@ -126,9 +119,7 @@ class MatchQueryTest extends BaseTest
         $this->assertEquals(4, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testMatchZeroTerm(): void
     {
         $client = $this->_getClient();
@@ -153,9 +144,7 @@ class MatchQueryTest extends BaseTest
         $this->assertEquals(2, $resultSet->count());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testMatchFuzzinessType(): void
     {
         $field = 'test';
@@ -174,9 +163,7 @@ class MatchQueryTest extends BaseTest
         $this->assertEquals($fuzziness, $parameters['fuzziness']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstruct(): void
     {
         $match = new MatchQuery(null, 'values');

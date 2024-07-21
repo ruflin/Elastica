@@ -6,15 +6,14 @@ namespace Elastica\Test\Index;
 
 use Elastica\Index\Stats;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class StatsTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetSettings(): void
     {
         $indexName = 'test';

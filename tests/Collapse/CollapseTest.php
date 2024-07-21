@@ -12,15 +12,14 @@ use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\ResultSet;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class CollapseTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetFieldName(): void
     {
         $collapse = (new Collapse())
@@ -30,9 +29,7 @@ class CollapseTest extends BaseTest
         $this->assertSame('some_name', $collapse->getParam('field'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetInnerHits(): void
     {
         $collapse = (new Collapse())
@@ -42,9 +39,7 @@ class CollapseTest extends BaseTest
         $this->assertSame($innerHits, $collapse->getParam('inner_hits'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetMaxConcurrentGroupSearches(): void
     {
         $collapse = (new Collapse())
@@ -54,9 +49,7 @@ class CollapseTest extends BaseTest
         $this->assertSame(5, $collapse->getParam('max_concurrent_group_searches'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAddInnerHits(): void
     {
         $collapse = new Collapse();
@@ -76,9 +69,7 @@ class CollapseTest extends BaseTest
         $this->assertEquals($innerHits2, $collapse->getParam('inner_hits')[1]);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetThenAddInnerHits(): void
     {
         $collapse = new Collapse();
@@ -98,9 +89,7 @@ class CollapseTest extends BaseTest
         $this->assertEquals($innerHits2, $collapse->getParam('inner_hits')[1]);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetInnerHitsOverridesExistingValue(): void
     {
         $collapse = new Collapse();
@@ -130,9 +119,7 @@ class CollapseTest extends BaseTest
         $this->assertEquals($innerHitsOverride, $collapse->getParam('inner_hits'));
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testCollapseField(): void
     {
         $query = new Query();
@@ -161,9 +148,7 @@ class CollapseTest extends BaseTest
         $this->assertEquals('Keith', $results->getResults()[3]->getData()['user'][0]);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testCollapseWithInnerHits(): void
     {
         $query = new Query();
@@ -197,9 +182,7 @@ class CollapseTest extends BaseTest
         );
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testCollapseWithMultipleInnerHits(): void
     {
         $query = new Query();
@@ -250,9 +233,7 @@ class CollapseTest extends BaseTest
         );
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSecondLevelCollapsing(): void
     {
         $query = new Query();

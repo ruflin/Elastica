@@ -7,15 +7,14 @@ namespace Elastica\Test;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Task;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class TaskTest extends Base
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetData(): void
     {
         $task = $this->_createTask();
@@ -25,9 +24,7 @@ class TaskTest extends Base
         $this->assertNotEmpty($data);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetId(): void
     {
         $task = $this->_createTask();
@@ -37,9 +34,7 @@ class TaskTest extends Base
         $this->assertEquals($task->getId(), \sprintf('%s:%s', $data['task']['node'], $data['task']['id']));
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testIsComplete(): void
     {
         $task = $this->_createTask();
@@ -55,9 +50,7 @@ class TaskTest extends Base
         $this->assertTrue($task->isCompleted());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testRefreshWithOptionsContainingOnWaitForResponseTrue(): void
     {
         $task = $this->_createTask();
@@ -65,9 +58,7 @@ class TaskTest extends Base
         $this->assertTrue($task->isCompleted());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testCancelThrowsExceptionWithEmptyTaskId(): void
     {
         $this->expectException(\Exception::class);
@@ -77,9 +68,7 @@ class TaskTest extends Base
         $task->cancel();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testCancelDoesntCancelCompletedTasks(): void
     {
         $task = $this->_createTask();

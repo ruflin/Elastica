@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace Elastica\Test;
 
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class PointInTimeTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testOpenClosePointInTime(): void
     {
         $index = $this->_createIndex();

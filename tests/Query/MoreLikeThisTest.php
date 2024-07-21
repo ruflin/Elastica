@@ -12,15 +12,14 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\MoreLikeThis;
 use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class MoreLikeThisTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSearch(): void
     {
         $client = $this->_getClient();
@@ -62,9 +61,7 @@ class MoreLikeThisTest extends BaseTest
         $this->assertEquals(2, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSearchByDocument(): void
     {
         $client = $this->_getClient();
@@ -131,9 +128,7 @@ class MoreLikeThisTest extends BaseTest
         $this->assertEquals(1, $index->count($mltQuery));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetFields(): void
     {
         $query = new MoreLikeThis();
@@ -145,9 +140,7 @@ class MoreLikeThisTest extends BaseTest
         $this->assertEquals($fields, $data['more_like_this']['fields']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetLike(): void
     {
         $query = new MoreLikeThis();
@@ -157,9 +150,7 @@ class MoreLikeThisTest extends BaseTest
         $this->assertEquals(' hello world', $data['more_like_this']['like']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetBoost(): void
     {
         $query = new MoreLikeThis();
@@ -170,9 +161,7 @@ class MoreLikeThisTest extends BaseTest
         $this->assertEquals($boost, $query->getParam('boost'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetMaxQueryTerms(): void
     {
         $query = new MoreLikeThis();
@@ -183,9 +172,7 @@ class MoreLikeThisTest extends BaseTest
         $this->assertEquals($max, $query->getParam('max_query_terms'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetMinimumShouldMatch(): void
     {
         $query = new MoreLikeThis();
@@ -196,9 +183,7 @@ class MoreLikeThisTest extends BaseTest
         $this->assertEquals($match, $query->getParam('minimum_should_match'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetMinDocFrequency(): void
     {
         $query = new MoreLikeThis();
@@ -209,9 +194,7 @@ class MoreLikeThisTest extends BaseTest
         $this->assertEquals($freq, $query->getParam('min_doc_freq'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetMaxDocFrequency(): void
     {
         $query = new MoreLikeThis();
@@ -222,9 +205,7 @@ class MoreLikeThisTest extends BaseTest
         $this->assertEquals($freq, $query->getParam('max_doc_freq'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetMinWordLength(): void
     {
         $query = new MoreLikeThis();
@@ -235,9 +216,7 @@ class MoreLikeThisTest extends BaseTest
         $this->assertEquals($length, $query->getParam('min_word_length'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetMaxWordLength(): void
     {
         $query = new MoreLikeThis();
@@ -248,9 +227,7 @@ class MoreLikeThisTest extends BaseTest
         $this->assertEquals($length, $query->getParam('max_word_length'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetBoostTerms(): void
     {
         $query = new MoreLikeThis();
@@ -261,9 +238,7 @@ class MoreLikeThisTest extends BaseTest
         $this->assertEquals($boost, $query->getParam('boost_terms'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetAnalyzer(): void
     {
         $query = new MoreLikeThis();
@@ -274,9 +249,7 @@ class MoreLikeThisTest extends BaseTest
         $this->assertEquals($analyzer, $query->getParam('analyzer'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetStopWords(): void
     {
         $query = new MoreLikeThis();
@@ -287,9 +260,7 @@ class MoreLikeThisTest extends BaseTest
         $this->assertEquals($stopWords, $query->getParam('stop_words'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArrayForId(): void
     {
         $query = new MoreLikeThis();
@@ -309,9 +280,7 @@ class MoreLikeThisTest extends BaseTest
         );
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArrayForSource(): void
     {
         $query = new MoreLikeThis();

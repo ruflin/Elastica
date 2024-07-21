@@ -6,13 +6,13 @@ namespace Elastica\Test;
 
 use Elastica\ClientConfiguration;
 use Elastica\Exception\InvalidException;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @group unit
- *
  * @internal
  */
+#[Group('unit')]
 class ClientConfigurationTest extends TestCase
 {
     public function testFromEmptyArray(): void

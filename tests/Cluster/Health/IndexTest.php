@@ -7,6 +7,7 @@ namespace Elastica\Test\Cluster\Health;
 use Elastica\Cluster\Health\Index;
 use Elastica\Cluster\Health\Shard;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
@@ -62,81 +63,61 @@ class IndexTest extends BaseTest
         $this->_index = new Index('test', $data);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetName(): void
     {
         $this->assertEquals('test', $this->_index->getName());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetStatus(): void
     {
         $this->assertEquals('yellow', $this->_index->getStatus());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetNumberOfShards(): void
     {
         $this->assertEquals(1, $this->_index->getNumberOfShards());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetNumberOfReplicas(): void
     {
         $this->assertEquals(2, $this->_index->getNumberOfReplicas());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetActivePrimaryShards(): void
     {
         $this->assertEquals(3, $this->_index->getActivePrimaryShards());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetActiveShards(): void
     {
         $this->assertEquals(4, $this->_index->getActiveShards());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetRelocatingShards(): void
     {
         $this->assertEquals(5, $this->_index->getRelocatingShards());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetInitializingShards(): void
     {
         $this->assertEquals(6, $this->_index->getInitializingShards());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetUnassignedShards(): void
     {
         $this->assertEquals(7, $this->_index->getUnassignedShards());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetShards(): void
     {
         $shards = $this->_index->getShards();

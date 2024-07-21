@@ -9,15 +9,14 @@ use Elastica\Query\SpanContaining;
 use Elastica\Query\SpanNear;
 use Elastica\Query\SpanTerm;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class SpanContainingTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $field = 'name';
@@ -62,9 +61,7 @@ class SpanContainingTest extends BaseTest
         $this->assertEquals($expected, $spanContainingQuery->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSpanContaining(): void
     {
         $field = 'lorem';

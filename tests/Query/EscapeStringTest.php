@@ -8,15 +8,14 @@ use Elastica\Document;
 use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Util;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class EscapeStringTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSearch(): void
     {
         $index = $this->_createIndex();

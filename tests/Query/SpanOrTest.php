@@ -10,15 +10,14 @@ use Elastica\Query\SpanOr;
 use Elastica\Query\SpanTerm;
 use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class SpanOrTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstructWrongTypeInvalid(): void
     {
         $this->expectException(InvalidException::class);
@@ -29,9 +28,7 @@ class SpanOrTest extends BaseTest
         new SpanOr([$term1, $term2]);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstructValid(): void
     {
         $field = 'name';
@@ -63,9 +60,7 @@ class SpanOrTest extends BaseTest
         $this->assertEquals($expected, $spanOrQuery->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSpanOrTerm(): void
     {
         $field = 'lorem';

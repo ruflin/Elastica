@@ -8,15 +8,14 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\UppercaseProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class UppercaseProcessorTest extends BasePipelineTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testUppercase(): void
     {
         $processor = new UppercaseProcessor('foo');
@@ -30,9 +29,7 @@ class UppercaseProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testUppercaseWithNonDefaultOptions(): void
     {
         $processor = (new UppercaseProcessor('foo'))
@@ -51,9 +48,7 @@ class UppercaseProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testUppercaseField(): void
     {
         $ucase = new UppercaseProcessor('name');

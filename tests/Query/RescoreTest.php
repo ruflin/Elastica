@@ -9,15 +9,14 @@ use Elastica\Query\MatchQuery;
 use Elastica\Query\Term;
 use Elastica\Rescore\Query as QueryRescore;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class RescoreTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $query = new Query();
@@ -55,9 +54,7 @@ class RescoreTest extends BaseTest
         $this->assertEquals($expected, $data);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetSize(): void
     {
         $query = new Query();
@@ -97,9 +94,7 @@ class RescoreTest extends BaseTest
         $this->assertEquals($expected, $data);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetWeights(): void
     {
         $query = new Query();
@@ -143,9 +138,7 @@ class RescoreTest extends BaseTest
         $this->assertEquals($expected, $data);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testMultipleQueries(): void
     {
         $query = new Query();
@@ -215,9 +208,7 @@ class RescoreTest extends BaseTest
         $this->assertEquals(0, $results->getTotalHits());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testQuery(): void
     {
         $mainQuery = (new MatchQuery())

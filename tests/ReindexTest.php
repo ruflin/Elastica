@@ -13,15 +13,14 @@ use Elastica\Processor\UppercaseProcessor;
 use Elastica\Query\MatchQuery;
 use Elastica\Reindex;
 use Elastica\Script\Script;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class ReindexTest extends Base
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testReindex(): void
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);
@@ -37,9 +36,7 @@ class ReindexTest extends Base
         $this->assertEquals($oldIndex->count(), $response->getData()['created']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testReindexOpTypeOptionWithProceedSetOnConflicts(): void
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);
@@ -64,9 +61,7 @@ class ReindexTest extends Base
         $this->assertEquals($oldIndex->count(), $newIndex->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testReindexOpTypeOptionWithProceedSetOnConflictStop(): void
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);
@@ -95,9 +90,7 @@ class ReindexTest extends Base
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testReindexWithQueryOption(): void
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);
@@ -120,9 +113,7 @@ class ReindexTest extends Base
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testReindexWithSizeOption(): void
     {
         // @see https://www.elastic.co/guide/en/elasticsearch/reference/master/migrating-8.0.html#breaking-changes-8.0
@@ -145,9 +136,7 @@ class ReindexTest extends Base
         $this->assertEquals(5, $newIndex->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testReindexWithFalseSetOnWaitForCompletion(): void
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);
@@ -162,9 +151,7 @@ class ReindexTest extends Base
         $this->assertNotEmpty($reindex->getTaskId());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testReindexWithScript(): void
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);
@@ -188,9 +175,7 @@ class ReindexTest extends Base
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testReindexWithRemote(): void
     {
         $oldIndex = $this->_createIndex('idx1', true, 1);
@@ -210,9 +195,7 @@ class ReindexTest extends Base
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testReindexWithPipeline(): void
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);
@@ -243,9 +226,7 @@ class ReindexTest extends Base
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testReindexWithRefresh(): void
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);

@@ -6,15 +6,14 @@ namespace Elastica\Test\Query;
 
 use Elastica\Query\Regexp;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class RegexpTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $field = 'name';

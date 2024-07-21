@@ -6,6 +6,7 @@ namespace Elastica\Test;
 
 use Elastica\Document;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests the example code.
@@ -14,9 +15,7 @@ use Elastica\Test\Base as BaseTest;
  */
 class ExampleTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testBasicGettingStarted(): void
     {
         $client = $this->_getClient();
@@ -29,9 +28,7 @@ class ExampleTest extends BaseTest
         $index->addDocument($doc);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testExample(): void
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index

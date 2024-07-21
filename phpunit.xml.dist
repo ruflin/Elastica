@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- https://phpunit.de/manual/current/en/appendixes.configuration.html -->
 <phpunit
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+        xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
         colors="true"
         beStrictAboutOutputDuringTests="true"
-        verbose="true"
         bootstrap="tests/bootstrap.php"
+        executionOrder="random"
+        failOnWarning="true"
+        failOnRisky="true"
+        failOnIncomplete="true"
+        cacheDirectory="./build/cache/phpunit"
 >
-  <coverage>
-    <include>
-      <directory>src/</directory>
-    </include>
-    <exclude>
-      <file>src/Query/Match.php</file>
-    </exclude>
-  </coverage>
-  <listeners>
-    <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>
-  </listeners>
-  <testsuites>
-    <testsuite name="default">
-      <directory>tests/</directory>
-    </testsuite>
-  </testsuites>
+    <source>
+        <include>
+            <directory>src</directory>
+        </include>
+    </source>
+
+    <testsuites>
+        <testsuite name="default">
+            <directory>tests/</directory>
+        </testsuite>
+    </testsuites>
+
 </phpunit>

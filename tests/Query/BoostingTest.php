@@ -7,15 +7,14 @@ namespace Elastica\Test\Query;
 use Elastica\Query\Boosting;
 use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class BoostingTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $keyword = 'vital';
@@ -38,9 +37,7 @@ class BoostingTest extends BaseTest
         $this->assertEquals($expected, $query->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testNegativeBoost(): void
     {
         $keyword = 'vital';

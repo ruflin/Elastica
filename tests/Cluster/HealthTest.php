@@ -7,6 +7,7 @@ namespace Elastica\Test\Cluster;
 use Elastica\Cluster\Health;
 use Elastica\Cluster\Health\Index;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
@@ -50,7 +51,7 @@ class HealthTest extends BaseTest
         $health = $this
             ->getMockBuilder(Health::class)
             ->setConstructorArgs([$this->_getClient()])
-            ->setMethods(['_retrieveHealthData'])
+            ->onlyMethods(['_retrieveHealthData'])
             ->getMock()
         ;
 
@@ -65,129 +66,97 @@ class HealthTest extends BaseTest
         $this->_health = $health;
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetClusterName(): void
     {
         $this->assertEquals('test_cluster', $this->_health->getClusterName());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetStatus(): void
     {
         $this->assertEquals('green', $this->_health->getStatus());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetTimedOut(): void
     {
         $this->assertFalse($this->_health->getTimedOut());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetNumberOfNodes(): void
     {
         $this->assertEquals(10, $this->_health->getNumberOfNodes());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetNumberOfDataNodes(): void
     {
         $this->assertEquals(8, $this->_health->getNumberOfDataNodes());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetActivePrimaryShards(): void
     {
         $this->assertEquals(3, $this->_health->getActivePrimaryShards());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetActiveShards(): void
     {
         $this->assertEquals(4, $this->_health->getActiveShards());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetRelocatingShards(): void
     {
         $this->assertEquals(2, $this->_health->getRelocatingShards());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetInitializingShards(): void
     {
         $this->assertEquals(7, $this->_health->getInitializingShards());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetUnassignedShards(): void
     {
         $this->assertEquals(5, $this->_health->getUnassignedShards());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetDelayedUnassignedShards(): void
     {
         $this->assertEquals(4, $this->_health->getDelayedUnassignedShards());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testNumberOfPendingTasks(): void
     {
         $this->assertEquals(1, $this->_health->getNumberOfPendingTasks());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testNumberOfInFlightFetch(): void
     {
         $this->assertEquals(2, $this->_health->getNumberOfInFlightFetch());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testTaskMaxWaitingInQueueMillis(): void
     {
         $this->assertEquals(634, $this->_health->getTaskMaxWaitingInQueueMillis());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testActiveShardsPercentAsNumber(): void
     {
         $this->assertEquals(50.0, $this->_health->getActiveShardsPercentAsNumber());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetIndices(): void
     {
         $indices = $this->_health->getIndices();

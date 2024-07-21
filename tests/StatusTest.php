@@ -8,15 +8,14 @@ use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Response;
 use Elastica\Status;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class StatusTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetResponse(): void
     {
         $index = $this->_createIndex();
@@ -24,9 +23,7 @@ class StatusTest extends BaseTest
         $this->assertInstanceOf(Response::class, $status->getResponse());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetIndexNames(): void
     {
         $client = $this->_getClient();
@@ -49,9 +46,7 @@ class StatusTest extends BaseTest
         $this->assertSame($indexes, \array_intersect($indexes, $indexNames));
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testIndexExists(): void
     {
         $indexName = 'elastica_test';
@@ -74,9 +69,7 @@ class StatusTest extends BaseTest
         $this->assertTrue($status->indexExists($indexName));
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testAliasExists(): void
     {
         $aliasName = 'elastica_test-alias';

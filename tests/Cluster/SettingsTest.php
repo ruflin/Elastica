@@ -8,15 +8,14 @@ use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Cluster\Settings;
 use Elastica\Document;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class SettingsTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetReadOnly(): void
     {
         // Create two indices to check that the complete cluster is read only

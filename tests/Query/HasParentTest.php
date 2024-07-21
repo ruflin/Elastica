@@ -9,15 +9,14 @@ use Elastica\Query\HasParent;
 use Elastica\Query\MatchAll;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class HasParentTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $q = new MatchAll();
@@ -36,9 +35,7 @@ class HasParentTest extends BaseTest
         $this->assertEquals($expectedArray, $query->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetScope(): void
     {
         $q = new MatchAll();
@@ -61,9 +58,7 @@ class HasParentTest extends BaseTest
         $this->assertEquals($expectedArray, $query->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testHasParent(): void
     {
         $client = $this->_getClient();

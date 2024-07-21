@@ -10,24 +10,22 @@ use Elastica\ResultSet;
 use Elastica\ResultSet\BuilderInterface;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Test\WithConsecutive;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
- * @group unit
- *
  * @internal
  */
+#[Group('unit')]
 class MultiBuilderTest extends BaseTest
 {
     /**
      * @var BuilderInterface&MockObject
      */
-    private $builder;
+    private MockObject $builder;
 
-    /**
-     * @var MultiBuilder
-     */
-    private $multiBuilder;
+    private MultiBuilder $multiBuilder;
 
     protected function setUp(): void
     {
@@ -70,10 +68,10 @@ class MultiBuilderTest extends BaseTest
 
         $this->builder->expects($this->exactly(2))
             ->method('buildResultSet')
-            ->withConsecutive(
+            ->with(...WithConsecutive::create(
                 [$this->isInstanceOf(Response::class), $s1->getQuery()],
                 [$this->isInstanceOf(Response::class), $s2->getQuery()]
-            )
+            ))
             ->willReturnOnConsecutiveCalls($resultSet1, $resultSet2)
         ;
 

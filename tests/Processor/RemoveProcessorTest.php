@@ -8,15 +8,14 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\RemoveProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class RemoveProcessorTest extends BasePipelineTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testRemove(): void
     {
         $processor = new RemoveProcessor('foo');
@@ -30,9 +29,7 @@ class RemoveProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testRemoveWithNonDefaultOptions(): void
     {
         $processor = (new RemoveProcessor('foo'))
@@ -51,9 +48,7 @@ class RemoveProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testRemoveArray(): void
     {
         $processor = new RemoveProcessor(['foo', 'bar']);
@@ -67,9 +62,7 @@ class RemoveProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testRemoveField(): void
     {
         $remove = new RemoveProcessor(['es_version', 'package']);

@@ -10,15 +10,14 @@ use Elastica\Query;
 use Elastica\Query\MatchQuery;
 use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class PostFilterTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $query = new Query();
@@ -32,9 +31,7 @@ class PostFilterTest extends BaseTest
         $this->assertEquals(['term' => ['color' => 'green']], $data['post_filter']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testQuery(): void
     {
         $query = new Query();

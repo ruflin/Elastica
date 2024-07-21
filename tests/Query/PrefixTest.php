@@ -6,15 +6,14 @@ namespace Elastica\Test\Query;
 
 use Elastica\Query\Prefix;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class PrefixTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $query = new Prefix();

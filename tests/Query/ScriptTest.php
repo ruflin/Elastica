@@ -7,15 +7,14 @@ namespace Elastica\Test\Query;
 use Elastica\Query\Script as ScriptQuery;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class ScriptTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $string = '_score * 2.0';
@@ -35,9 +34,7 @@ class ScriptTest extends BaseTest
         $this->assertEquals($expected, $array);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetScript(): void
     {
         $string = '_score * 2.0';

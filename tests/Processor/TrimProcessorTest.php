@@ -8,15 +8,14 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\TrimProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class TrimProcessorTest extends BasePipelineTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testTrim(): void
     {
         $processor = new TrimProcessor('foo');
@@ -30,9 +29,7 @@ class TrimProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testTrimWithNonDefaultOptions(): void
     {
         $processor = (new TrimProcessor('foo'))
@@ -51,9 +48,7 @@ class TrimProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testTrimField(): void
     {
         $trim = new TrimProcessor('name');

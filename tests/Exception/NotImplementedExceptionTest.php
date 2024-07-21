@@ -9,7 +9,7 @@ use Elastica\Exception\NotImplementedException;
 /**
  * @internal
  */
-class NotImplementedExceptionTest extends AbstractExceptionTest
+class NotImplementedExceptionTest extends AbstractExceptionTestCase
 {
     /**
      * @group unit

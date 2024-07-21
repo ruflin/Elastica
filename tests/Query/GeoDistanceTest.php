@@ -9,15 +9,14 @@ use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\GeoDistance;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class GeoDistanceTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGeoPoint(): void
     {
         $index = $this->_createIndex();
@@ -51,9 +50,7 @@ class GeoDistanceTest extends BaseTest
         $this->assertEquals(2, $index->count($query));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstructLatlon(): void
     {
         $key = 'location';
@@ -77,9 +74,7 @@ class GeoDistanceTest extends BaseTest
         $this->assertEquals($expected, $data);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstructGeohash(): void
     {
         $key = 'location';
@@ -100,9 +95,7 @@ class GeoDistanceTest extends BaseTest
         $this->assertEquals($expected, $data);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetDistanceType(): void
     {
         $query = new GeoDistance('location', ['lat' => 48.86, 'lon' => 2.35], '10km');

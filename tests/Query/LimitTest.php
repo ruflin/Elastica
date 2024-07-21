@@ -6,15 +6,14 @@ namespace Elastica\Test\Query;
 
 use Elastica\Query\Limit;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class LimitTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetType(): void
     {
         $query = new Limit(10);
@@ -24,9 +23,7 @@ class LimitTest extends BaseTest
         $this->assertSame(20, $query->getParam('value'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $query = new Limit(15);

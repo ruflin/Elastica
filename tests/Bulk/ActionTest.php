@@ -7,18 +7,14 @@ namespace Elastica\Test\Bulk;
 use Elastica\Bulk\Action;
 use Elastica\Index;
 use Elastica\Test\Base as BaseTest;
-use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class ActionTest extends BaseTest
 {
-    use ExpectDeprecationTrait;
-
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAction(): void
     {
         $action = new Action();

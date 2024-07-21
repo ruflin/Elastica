@@ -7,15 +7,14 @@ namespace Elastica\Test\Query;
 use Elastica\Query\ConstantScore;
 use Elastica\Query\Ids;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class ConstantScoreTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $query = new ConstantScore();
@@ -36,9 +35,7 @@ class ConstantScoreTest extends BaseTest
         $this->assertEquals($expectedArray, $query->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstruct(): void
     {
         $filter = new Ids();
@@ -55,9 +52,7 @@ class ConstantScoreTest extends BaseTest
         $this->assertEquals($expectedArray, $query->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstructEmpty(): void
     {
         $query = new ConstantScore();

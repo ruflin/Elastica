@@ -8,6 +8,7 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query\Ids;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
@@ -30,9 +31,7 @@ class IdsTest extends BaseTest
         $this->index->refresh();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetIdsSearchSingle(): void
     {
         $query = new Ids();
@@ -43,9 +42,7 @@ class IdsTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetIdsSearchArray(): void
     {
         $query = new Ids();
@@ -56,9 +53,7 @@ class IdsTest extends BaseTest
         $this->assertEquals(2, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testAddIdsSearchSingle(): void
     {
         $query = new Ids();
@@ -69,9 +64,7 @@ class IdsTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testComboIdsSearchArray(): void
     {
         $query = new Ids();
@@ -84,9 +77,7 @@ class IdsTest extends BaseTest
         $this->assertEquals(3, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetTypeSingleSearchSingle(): void
     {
         $query = new Ids();
@@ -96,9 +87,7 @@ class IdsTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetTypeSingleSearchArray(): void
     {
         $query = new Ids();
@@ -109,9 +98,7 @@ class IdsTest extends BaseTest
         $this->assertEquals(2, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetTypeSingleSearchSingleDocInOtherType(): void
     {
         $query = new Ids();
@@ -125,9 +112,7 @@ class IdsTest extends BaseTest
         $this->assertEquals(0, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetTypeSingleSearchArrayDocInOtherType(): void
     {
         $query = new Ids();

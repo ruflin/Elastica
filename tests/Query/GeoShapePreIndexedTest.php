@@ -10,15 +10,14 @@ use Elastica\Query\AbstractGeoShape;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\GeoShapePreIndexed;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class GeoShapePreIndexedTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSearch(): void
     {
         $index = $this->_createIndex();
@@ -60,9 +59,7 @@ class GeoShapePreIndexedTest extends BaseTest
         $this->assertEquals(0, $index->count($query), 'Changing the relation should take effect');
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstruct(): void
     {
         $gsp = new GeoShapePreIndexed(
@@ -88,9 +85,7 @@ class GeoShapePreIndexedTest extends BaseTest
         $this->assertEquals($expected, $gsp->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetRelation(): void
     {
         $gsp = new GeoShapePreIndexed('location', '1', 'indexName', 'location');

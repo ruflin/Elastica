@@ -8,6 +8,7 @@ use Elastica\Client;
 use Elastica\Document;
 use Elastica\Scroll;
 use Elastica\Search;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
@@ -16,9 +17,8 @@ class ScrollTest extends Base
 {
     /**
      * Full foreach test.
-     *
-     * @group functional
      */
+    #[Group('functional')]
     public function testForeach(): void
     {
         $search = $this->_prepareSearch();
@@ -62,9 +62,8 @@ class ScrollTest extends Base
 
     /**
      * Scroll must not overwrite options.
-     *
-     * @group functional
      */
+    #[Group('functional')]
     public function testSearchRevert(): void
     {
         $search = $this->_prepareSearch();
@@ -84,9 +83,8 @@ class ScrollTest extends Base
 
     /**
      * Empty scroll (no results) must not run foreach.
-     *
-     * @group functional
      */
+    #[Group('functional')]
     public function testEmptyScroll(): void
     {
         $search = $this->_prepareSearch(0);
@@ -104,9 +102,8 @@ class ScrollTest extends Base
 
     /**
      * Test with ignore_unavailable search option.
-     *
-     * @group functional
      */
+    #[Group('functional')]
     public function testScrollWithIgnoreUnavailable(): void
     {
         $search = $this->_prepareSearch();

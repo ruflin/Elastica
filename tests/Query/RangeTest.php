@@ -7,15 +7,14 @@ namespace Elastica\Test\Query;
 use Elastica\Document;
 use Elastica\Query\Range;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class RangeTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testQuery(): void
     {
         $client = $this->_getClient();
@@ -45,9 +44,7 @@ class RangeTest extends BaseTest
         $this->assertEquals(2, $result);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $range = new Range();
@@ -64,9 +61,7 @@ class RangeTest extends BaseTest
         $this->assertEquals($expectedArray, $range->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstruct(): void
     {
         $ranges = ['from' => 20, 'to' => 40];

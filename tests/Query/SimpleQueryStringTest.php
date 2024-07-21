@@ -7,15 +7,14 @@ namespace Elastica\Test\Query;
 use Elastica\Document;
 use Elastica\Query\SimpleQueryString;
 use Elastica\Test\Base;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class SimpleQueryStringTest extends Base
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $string = 'this is a test';
@@ -36,9 +35,7 @@ class SimpleQueryStringTest extends Base
         $this->assertEquals($expected, $query->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testQuery(): void
     {
         $index = $this->_createIndex();
@@ -64,9 +61,7 @@ class SimpleQueryStringTest extends Base
         $this->assertEquals(0, $results->getTotalHits());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetMinimumShouldMatch(): void
     {
         $expected = [
@@ -83,9 +78,7 @@ class SimpleQueryStringTest extends Base
         $this->assertEquals($expected, $query->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetMinimumShouldMatchWorks(): void
     {
         $index = $this->_createIndex();
