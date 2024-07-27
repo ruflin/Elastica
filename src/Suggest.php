@@ -40,7 +40,7 @@ class Suggest extends Param
     /**
      * @param AbstractSuggest|Suggest $suggestion
      *
-     * @throws Exception\NotImplementedException
+     * @throws NotImplementedException
      */
     public static function create($suggestion): self
     {
@@ -51,9 +51,6 @@ class Suggest extends Param
         };
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $array = parent::toArray();

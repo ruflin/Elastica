@@ -78,9 +78,6 @@ class HasChild extends AbstractQuery
         return $this->setParam('inner_hits', $innerHits);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $array = parent::toArray();

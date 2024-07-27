@@ -43,9 +43,6 @@ class Script extends AbstractScript
         return $this->_scriptCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getScriptTypeArray(): array
     {
         return ['source' => $this->_scriptCode];

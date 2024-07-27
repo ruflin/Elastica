@@ -8,6 +8,7 @@ $finder = (new PhpCsFixer\Finder())
 ;
 
 return (new PhpCsFixer\Config())
+    ->setParallelConfig(PhpCsFixer\Runner\Parallel\ParallelConfigFactory::detect())
     ->setFinder($finder)
     ->setRules([
         '@PHP80Migration' => true,
@@ -33,5 +34,9 @@ return (new PhpCsFixer\Config())
         'static_lambda' => true,
         'ternary_to_null_coalescing' => true,
         'visibility_required' => ['elements' => ['property', 'method', 'const']],
+        'fully_qualified_strict_types' => [
+            'import_symbols' => true,
+        ],
+        'string_implicit_backslashes' => false,
     ])
 ;

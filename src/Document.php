@@ -49,17 +49,11 @@ class Document extends AbstractUpdateAction
         $this->setIndex($index);
     }
 
-    /**
-     * @return mixed
-     */
     public function __get(string $key)
     {
         return $this->get($key);
     }
 
-    /**
-     * @param mixed $value
-     */
     public function __set(string $key, $value): void
     {
         $this->set($key, $value);
@@ -78,11 +72,7 @@ class Document extends AbstractUpdateAction
     /**
      * Get the value of the given field.
      *
-     * @param mixed $key
-     *
      * @throws InvalidException If the given field does not exist
-     *
-     * @return mixed
      */
     public function get($key)
     {
@@ -95,8 +85,6 @@ class Document extends AbstractUpdateAction
 
     /**
      * Set the value of the given field.
-     *
-     * @param mixed $value
      *
      * @throws InvalidException if the current document is a serialized data
      */

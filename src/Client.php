@@ -68,41 +68,26 @@ class Client implements ClientInterface
         $this->_transport = $this->_buildTransport($this->getConfig());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLogger(): LoggerInterface
     {
         return $this->_logger;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTransport(): Transport
     {
         return $this->_transport;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setAsync(bool $async): self
     {
         throw new \Exception('Not supported');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAsync(): bool
     {
         throw new \Exception('Not supported');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setElasticMetaHeader(bool $active): self
     {
         $this->elasticMetaHeader = $active;
@@ -110,25 +95,16 @@ class Client implements ClientInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getElasticMetaHeader(): bool
     {
         return $this->elasticMetaHeader;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setResponseException(bool $active): self
     {
         throw new \Exception('Not supported');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getResponseException(): bool
     {
         throw new \Exception('Not supported');
@@ -192,8 +168,6 @@ class Client implements ClientInterface
     /**
      * @param array|string $keys    config key or path of config keys
      * @param mixed        $default default value will be returned if key was not found
-     *
-     * @return mixed
      */
     public function getConfigValue($keys, $default = null)
     {

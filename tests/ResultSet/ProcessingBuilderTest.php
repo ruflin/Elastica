@@ -11,6 +11,7 @@ use Elastica\ResultSet\BuilderInterface;
 use Elastica\ResultSet\ProcessingBuilder;
 use Elastica\ResultSet\ProcessorInterface;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @group unit
@@ -25,12 +26,12 @@ class ProcessingBuilderTest extends BaseTest
     private $builder;
 
     /**
-     * @var BuilderInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var BuilderInterface|MockObject
      */
     private $innerBuilder;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|ProcessorInterface
+     * @var MockObject|ProcessorInterface
      */
     private $processor;
 

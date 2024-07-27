@@ -138,8 +138,6 @@ class Param implements ArrayableInterface, \Countable
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return int
      */
     #[\ReturnTypeWillChange]
@@ -186,7 +184,6 @@ class Param implements ArrayableInterface, \Countable
      * Sets params not inside params array.
      *
      * @param string $key
-     * @param mixed  $value
      *
      * @return $this
      */

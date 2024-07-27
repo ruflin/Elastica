@@ -294,9 +294,6 @@ class FunctionScore extends AbstractQuery
         return $this->setParam('min_score', $minScore);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         if (0 < \count($this->_functions)) {

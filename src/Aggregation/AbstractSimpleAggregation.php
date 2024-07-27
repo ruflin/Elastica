@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Elastica\Aggregation;
 
 use Elastica\Exception\InvalidException;
+use Elastica\Script\AbstractScript;
 
 abstract class AbstractSimpleAggregation extends AbstractAggregation
 {
@@ -23,7 +24,7 @@ abstract class AbstractSimpleAggregation extends AbstractAggregation
     /**
      * Set a script for this aggregation.
      *
-     * @param \Elastica\Script\AbstractScript|string $script
+     * @param AbstractScript|string $script
      *
      * @return $this
      */
@@ -32,9 +33,6 @@ abstract class AbstractSimpleAggregation extends AbstractAggregation
         return $this->setParam('script', $script);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         if (!$this->hasParam('field') && !$this->hasParam('script')) {

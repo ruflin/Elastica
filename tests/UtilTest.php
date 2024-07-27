@@ -16,9 +16,6 @@ class UtilTest extends BaseTest
      * @group unit
      *
      * @dataProvider getIsDateMathEscapedPairs
-     *
-     * @param mixed $requestUri
-     * @param mixed $expectedIsEscaped
      */
     public function testIsDateMathEscaped($requestUri, $expectedIsEscaped): void
     {
@@ -42,9 +39,6 @@ class UtilTest extends BaseTest
      * @group unit
      *
      * @dataProvider getEscapeDateMathPairs
-     *
-     * @param mixed $requestUri
-     * @param mixed $expectedEscapedRequestUri
      */
     public function testEscapeDateMath($requestUri, $expectedEscapedRequestUri): void
     {
@@ -77,9 +71,6 @@ class UtilTest extends BaseTest
      * @group unit
      *
      * @dataProvider getEscapeTermPairs
-     *
-     * @param mixed $unescaped
-     * @param mixed $escaped
      */
     public function testEscapeTerm($unescaped, $escaped): void
     {
@@ -102,9 +93,6 @@ class UtilTest extends BaseTest
      * @group unit
      *
      * @dataProvider getReplaceBooleanWordsPairs
-     *
-     * @param mixed $before
-     * @param mixed $after
      */
     public function testReplaceBooleanWords($before, $after): void
     {
