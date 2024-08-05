@@ -52,9 +52,6 @@ class GeoShapeProvided extends AbstractGeoShape
         $this->_coordinates = $coordinates;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         return [

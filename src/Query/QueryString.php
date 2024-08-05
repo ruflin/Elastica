@@ -225,9 +225,6 @@ class QueryString extends AbstractQuery
         return $this->setParam('time_zone', $timezone);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         return ['query_string' => \array_merge(['query' => $this->_queryString], $this->getParams())];

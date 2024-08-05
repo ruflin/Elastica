@@ -885,9 +885,6 @@ class ClientFunctionalTest extends BaseTest
 
     /**
      * @dataProvider endpointQueryRequestDataProvider
-     *
-     * @param mixed $query
-     * @param mixed $totalHits
      */
     public function testEndpointQueryRequest($query, $totalHits): void
     {

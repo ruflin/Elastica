@@ -37,11 +37,11 @@ install-tools: install-phpcs
 
 .PHONY: run-phpcs
 run-phpcs: install-phpcs
-	tools/php-cs-fixer.phar fix --diff --dry-run --allow-risky=yes -v
+	tools/php-cs-fixer.phar fix --diff --dry-run --allow-risky=yes -v --show-progress=dots
 
 .PHONY: fix-phpcs
 fix-phpcs: install-phpcs
-	tools/php-cs-fixer.phar fix --allow-risky=yes -v
+	tools/php-cs-fixer.phar fix --allow-risky=yes -v --show-progress=dots
 
 .PHONY: run-phpunit
 run-phpunit: composer-install

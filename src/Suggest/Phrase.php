@@ -146,9 +146,6 @@ class Phrase extends AbstractSuggest
         return $this->addParam('candidate_generator', $generator);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function toArray(): array
     {
         $array = parent::toArray();

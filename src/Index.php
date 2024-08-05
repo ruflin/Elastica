@@ -518,9 +518,6 @@ class Index implements SearchableInterface
         return 200 === $response->getStatusCode();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createSearch($query = '', ?array $options = null, ?BuilderInterface $builder = null): Search
     {
         $search = new Search($this->getClient(), $builder);
@@ -530,9 +527,6 @@ class Index implements SearchableInterface
         return $search;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function search($query = '', ?array $options = null, string $method = Request::POST): ResultSet
     {
         $search = $this->createSearch($query, $options);
@@ -540,9 +534,6 @@ class Index implements SearchableInterface
         return $search->search('', null, $method);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function count($query = '', string $method = Request::POST): int
     {
         $search = $this->createSearch($query);

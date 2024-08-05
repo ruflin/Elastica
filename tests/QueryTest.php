@@ -634,8 +634,6 @@ class QueryTest extends BaseTest
      * @group functional
      *
      * @dataProvider provideSetTrackTotalHitsInvalidValue
-     *
-     * @param mixed $value
      */
     public function testSetTrackTotalHitsInvalidValue($value): void
     {

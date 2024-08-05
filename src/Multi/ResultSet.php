@@ -75,79 +75,48 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @return mixed
-     */
     #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->_resultSets[$this->key()];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function next(): void
     {
         ++$this->_position;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function key(): int
     {
         return $this->_position;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function valid(): bool
     {
         return isset($this->_resultSets[$this->key()]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rewind(): void
     {
         $this->_position = 0;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function count(): int
     {
         return \count($this->_resultSets);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function offsetExists($offset): bool
     {
         return isset($this->_resultSets[$offset]);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @return mixed
-     */
     #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->_resultSets[$offset] ?? null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function offsetSet($offset, $value): void
     {
         if (null === $offset) {
@@ -157,9 +126,6 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function offsetUnset($offset): void
     {
         unset($this->_resultSets[$offset]);

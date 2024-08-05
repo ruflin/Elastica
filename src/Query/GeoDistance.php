@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Elastica\Query;
 
+use Elastica\Exception\InvalidException;
+
 /**
  * Geo distance query.
  *
@@ -23,7 +25,7 @@ class GeoDistance extends AbstractGeoDistance
      * @param array|string $location Location as array or geohash: array('lat' => 48.86, 'lon' => 2.35) OR 'drm3btev3e86'
      * @param string       $distance Distance
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      */
     public function __construct(string $key, $location, string $distance)
     {

@@ -36,8 +36,6 @@ class Facade
      * Executes DSL methods.
      *
      * @throws QueryBuilderException
-     *
-     * @return mixed
      */
     public function __call(string $name, array $arguments)
     {

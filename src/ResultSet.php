@@ -126,7 +126,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      *
      * @param string $name the name of the desired aggregation
      *
-     * @throws Exception\InvalidException if an aggregation by the given name cannot be found
+     * @throws InvalidException if an aggregation by the given name cannot be found
      */
     public function getAggregation(string $name): array
     {
@@ -295,7 +295,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      *
      * @param int $offset
      *
-     * @throws Exception\InvalidException If offset doesn't exist
+     * @throws InvalidException If offset doesn't exist
      */
     public function offsetGet($offset): Result
     {
@@ -314,7 +314,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      * @param int    $offset
      * @param Result $value
      *
-     * @throws Exception\InvalidException
+     * @throws InvalidException
      */
     public function offsetSet($offset, $value): void
     {

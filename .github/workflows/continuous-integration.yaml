@@ -14,11 +14,11 @@ jobs:
           php-version: '8.0'
           coverage: 'none'
           extensions: 'json, mbstring, tokenizer'
-          tools: 'composer-normalize:2.28.0, php-cs-fixer:3.13.2'
+          tools: 'composer-normalize:2.28.0, php-cs-fixer:3.59.3'
 
       - name: 'Check PHP code'
         run: |
-          php-cs-fixer fix --diff --dry-run --allow-risky=yes --using-cache=no
+          php-cs-fixer fix --diff --dry-run --allow-risky=yes --using-cache=no --show-progress=dots
 
       - name: 'Check composer.json'
         run: |
