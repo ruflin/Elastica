@@ -50,7 +50,7 @@ class InfoTest extends BaseTest
         $this->assertFalse($info->hasPlugin('foo'));
 
         if (\version_compare($_SERVER['ES_VERSION'], '8.4.0', '>=')) {
-            $this->markTestIncomplete('The Ingest Attachment plugin is now included in Elasticsearch. https://www.elastic.co/guide/en/elasticsearch/plugins/8.4/ingest-attachment.html');
+            $this->markTestSkipped('The Ingest Attachment plugin is now included in Elasticsearch. https://www.elastic.co/guide/en/elasticsearch/plugins/8.4/ingest-attachment.html');
         } else {
             $this->assertTrue($info->hasPlugin('ingest-attachment'));
         }
