@@ -67,6 +67,39 @@ class IpRangeTest extends BaseAggregationTest
         $this->assertSame($expected, \array_keys($results['buckets']));
     }
 
+    /**
+     * @group unit
+     */
+    public function testIpRangeAggregationWithKey(): void
+    {
+        $agg = new IpRange('ip', 'address');
+        $agg->addRange('192.168.1.101', null, 'first');
+        $agg->addRange(null, '192.168.1.200', 'second');
+        $agg->addMaskRange('192.168.1.0/24', 'mask');
+
+        $expected = [
+            'ip_range' => [
+                'field' => 'address',
+                'ranges' => [
+                    [
+                        'from' => '192.168.1.101',
+                        'key' => 'first',
+                    ],
+                    [
+                        'to' => '192.168.1.200',
+                        'key' => 'second',
+                    ],
+                    [
+                        'mask' => '192.168.1.0/24',
+                        'key' => 'mask',
+                    ],
+                ],
+            ],
+        ];
+
+        $this->assertEquals($expected, $agg->toArray());
+    }
+
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();

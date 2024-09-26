@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Elastica\Aggregation;
 
-use Elastica\Exception\InvalidException;
-
 /**
  * Class IpRange.
  *
@@ -14,6 +12,7 @@ use Elastica\Exception\InvalidException;
 class IpRange extends AbstractAggregation
 {
     use Traits\KeyedTrait;
+    use Traits\RangeTrait;
 
     /**
      * @param string $name  the name of this aggregation
@@ -38,42 +37,21 @@ class IpRange extends AbstractAggregation
     }
 
     /**
-     * Add an ip range to this aggregation.
+     * Add an ip range in the form of a CIDR mask.
      *
-     * @param string|null $fromValue a valid ipv4 address. Low end of this range, exclusive (greater than)
-     * @param string|null $toValue   a valid ipv4 address. High end of this range, exclusive (less than)
-     *
-     * @throws InvalidException
+     * @param string      $mask a valid CIDR mask
+     * @param string|null $key  customized key value
      *
      * @return $this
      */
-    public function addRange(?string $fromValue = null, ?string $toValue = null): self
+    public function addMaskRange(string $mask, ?string $key = null): self
     {
-        if (null === $fromValue && null === $toValue) {
-            throw new InvalidException('Either fromValue or toValue must be set. Both cannot be null.');
-        }
+        $range = ['mask' => $mask];
 
-        $range = [];
-        if (null !== $fromValue) {
-            $range['from'] = $fromValue;
-        }
-
-        if (null !== $toValue) {
-            $range['to'] = $toValue;
+        if (null !== $key) {
+            $range['key'] = $key;
         }
 
         return $this->addParam('ranges', $range);
-    }
-
-    /**
-     * Add an ip range in the form of a CIDR mask.
-     *
-     * @param string $mask a valid CIDR mask
-     *
-     * @return $this
-     */
-    public function addMaskRange(string $mask): self
-    {
-        return $this->addParam('ranges', ['mask' => $mask]);
     }
 }
