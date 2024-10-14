@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Elastica\Multi;
 
 use Elastica\Client;
+use Elastica\Exception\InvalidException;
 use Elastica\JSON;
 use Elastica\Search as BaseSearch;
 
@@ -51,6 +52,113 @@ class Search
     {
         $this->_builder = $builder ?? new MultiBuilder();
         $this->_client = $client;
+    }
+    
+    /**
+     * @param string $key
+     * @param mixed  $value
+     *
+     * @return $this
+     */
+    public function setOption($key, $value)
+    {
+        $this->_validateOption($key);
+
+        $this->_options[$key] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param array $options
+     *
+     * @return $this
+     */
+    public function setOptions(array $options)
+    {
+        $this->clearOptions();
+
+        foreach ($options as $key => $value) {
+            $this->setOption($key, $value);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function clearOptions()
+    {
+        $this->_options = [];
+
+        return $this;
+    }
+
+    /**
+     * @param string $key
+     * @param mixed  $value
+     *
+     * @return $this
+     */
+    public function addOption($key, $value)
+    {
+        $this->_validateOption($key);
+
+        $this->_options[$key][] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return bool
+     */
+    public function hasOption($key)
+    {
+        return isset($this->_options[$key]);
+    }
+
+    /**
+     * @param string $key
+     *
+     * @throws \Elastica\Exception\InvalidException
+     *
+     * @return mixed
+     */
+    public function getOption($key)
+    {
+        if (!$this->hasOption($key)) {
+            throw new InvalidException('Option '.$key.' does not exist');
+        }
+
+        return $this->_options[$key];
+    }
+
+    /**
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->_options;
+    }
+
+    /**
+     * @param string $key
+     *
+     * @throws \Elastica\Exception\InvalidException
+     *
+     * @return bool
+     */
+    protected function _validateOption($key)
+    {
+        switch ($key) {
+            case BaseSearch::OPTION_FILTER_PATH:
+                return true;
+        }
+
+        throw new InvalidException('Invalid option '.$key);
     }
 
     public function getClient(): Client
