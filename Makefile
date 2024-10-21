@@ -59,12 +59,12 @@ run-coveralls:
 	tools/php-coveralls.phar -v
 
 tools/phpdocumentor.phar:
-	curl https://gitreleases.dev/gh/phpDocumentor/phpDocumentor/latest/phpDocumentor.phar -o tools/phpdocumentor.phar --silent -L; \
+	curl http://www.phpdoc.org/phpDocumentor.phar -o tools/phpdocumentor.phar --silent -L; \
 	chmod +x tools/phpdocumentor.phar
 
 .PHONY: run-phpdoc
 run-phpdoc: tools/phpdocumentor.phar
-	tools/phpdocumentor.phar --directory=lib --target=build/docs --template=clean
+	tools/phpdocumentor.phar --directory=src --target=build/docs
 
 ##
 ## Docker commands
