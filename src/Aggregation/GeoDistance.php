@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Elastica\Aggregation;
 
-use Elastica\Exception\InvalidException;
-
 /**
  * Class GeoDistance.
  *
@@ -14,6 +12,7 @@ use Elastica\Exception\InvalidException;
 class GeoDistance extends AbstractAggregation
 {
     use Traits\KeyedTrait;
+    use Traits\RangeTrait;
 
     public const DISTANCE_TYPE_ARC = 'arc';
     public const DISTANCE_TYPE_PLANE = 'plane';
@@ -54,35 +53,6 @@ class GeoDistance extends AbstractAggregation
     public function setOrigin($origin): self
     {
         return $this->setParam('origin', $origin);
-    }
-
-    /**
-     * Add a distance range to this aggregation.
-     *
-     * @param int|null $fromValue a distance
-     * @param int|null $toValue   a distance
-     *
-     * @throws InvalidException
-     *
-     * @return $this
-     */
-    public function addRange(?int $fromValue = null, ?int $toValue = null): self
-    {
-        if (null === $fromValue && null === $toValue) {
-            throw new InvalidException('Either fromValue or toValue must be set. Both cannot be null.');
-        }
-
-        $range = [];
-
-        if (null !== $fromValue) {
-            $range['from'] = $fromValue;
-        }
-
-        if (null !== $toValue) {
-            $range['to'] = $toValue;
-        }
-
-        return $this->addParam('ranges', $range);
     }
 
     /**
