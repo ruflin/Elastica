@@ -4,26 +4,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/8.0.0...8.x)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/8.1.0...8.x)
 
 ### Backward Compatibility Breaks
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [8.1.0](https://github.com/ruflin/Elastica/compare/8.0.0...8.1.0)
 
 ### Added
 * Added support for the multi-match query type `bool_prefix` [#2220](https://github.com/ruflin/Elastica/pull/2220)
-* Supported PHP 8.4 [#2221](https://github.com/ruflin/Elastica/pull/2221)
+* Added support for PHP 8.4 [#2221](https://github.com/ruflin/Elastica/pull/2221)
 * Added support for custom key to IpRange and GeoDistance `addRange` using a common trait [#2227](https://github.com/ruflin/Elastica/pull/2227)
 * Added bucket sort aggregation [#2229](https://github.com/ruflin/Elastica/pull/2229)
 
-### Changed
-
-### Deprecated
-
-### Removed
-
 ### Fixed
 * Fixed Pipeline Processor handling to allow for multiple processors of the same type [#2218](https://github.com/ruflin/Elastica/pull/2218)
-
-### Security
 
 ## [8.0.0](https://github.com/ruflin/Elastica/compare/8.0.0-alpha1...8.0.0)
 
