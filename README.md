@@ -1,12 +1,10 @@
 Elastica: elasticsearch PHP Client
 ==================================
 
-[![Latest Stable Version](https://poser.pugx.org/ruflin/Elastica/v/stable.png)](https://packagist.org/packages/ruflin/elastica)
-[![Build Status](https://github.com/ruflin/elastica/workflows/Continuous%20integration/badge.svg?branch=master)](https://github.com/ruflin/Elastica/actions?query=workflow%3A%22Continuous%20integration%22%20branch%3Amaster)
-[![codecov.io](http://codecov.io/github/ruflin/Elastica/coverage.svg?branch=master)](http://codecov.io/github/ruflin/Elastica?branch=master)
-[![Dependency Status](https://www.versioneye.com/php/ruflin:elastica/dev-master/badge.svg)](https://www.versioneye.com/php/ruflin:elastica/dev-master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ruflin/Elastica/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ruflin/Elastica/?branch=master)
-[![Total Downloads](https://poser.pugx.org/ruflin/Elastica/downloads.png)](https://packagist.org/packages/ruflin/elastica)
+[![Latest Stable Version](https://poser.pugx.org/ruflin/Elastica/v/stable)](https://packagist.org/packages/ruflin/elastica)
+[![Build Status](https://github.com/ruflin/elastica/actions/workflows/continuous-integration.yaml/badge.svg?branch=7.x)](https://github.com/ruflin/Elastica/actions/workflows/continuous-integration.yaml?query=branch%3A7.x)
+[![codecov.io](https://codecov.io/gh/ruflin/Elastica/branch/7.x/graph/badge.svg)](https://app.codecov.io/github/ruflin/Elastica/tree/7.x)
+[![Total Downloads](https://poser.pugx.org/ruflin/Elastica/downloads)](https://packagist.org/packages/ruflin/elastica)
 [![Join the chat at https://gitter.im/ruflin/Elastica](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ruflin/Elastica?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 All documentation for Elastica can be found under [Elastica.io](http://Elastica.io/).
