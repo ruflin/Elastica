@@ -87,11 +87,15 @@ class BoolQuery extends AbstractQuery
 
     public function toArray(): array
     {
-        if (!$this->_params) {
-            $this->_params = new \stdClass();
+        $data = parent::toArray();
+
+        // When the query has no params, ensure that the query
+        // serializes into a JSON object instead of an empty array.
+        if (!$data[$this->_getBaseName()]) {
+            $data[$this->_getBaseName()] = new \stdClass();
         }
 
-        return parent::toArray();
+        return $data;
     }
 
     /**
