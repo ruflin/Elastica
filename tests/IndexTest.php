@@ -569,7 +569,14 @@ class IndexTest extends BaseTest
 
         $index1Doc = $index1->getDocument(1);
 
-        $index2->addDocument($index1Doc);
+        // Since if_primary_term and if_seq_no are automatically set in getDocument,
+        // it is an error to add them to another Index as is.
+        // Therefore, convert the acquired document to an Array before calling
+        $doc = new Document('1');
+        $arr = $index1Doc->toArray();
+        $doc->setData($arr['_source']);
+
+        $index2->addDocument($doc);
         $index2Doc = $index1->getDocument(1);
 
         $this->assertEquals('Hello world', $index2Doc->get('title'));
