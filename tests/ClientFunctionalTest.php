@@ -375,7 +375,7 @@ class ClientFunctionalTest extends BaseTest
         // two connections are setup
         $this->assertCount(2, $nodes);
 
-        var_dump($nodes);
+        \var_dump($nodes);
         // One connection has to be disabled
         // This returns an false in the most recent tests and as skipped for now
         $this->assertTrue(false === $nodes[0]->isAlive() || false === $nodes[1]->isAlive());
