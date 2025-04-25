@@ -379,7 +379,7 @@ class ClientFunctionalTest extends BaseTest
 
         // One connection has to be disabled
         // This returns an false in the most recent tests and as skipped for now
-        //$this->assertTrue(false === $nodes[0]->isAlive() || false === $nodes[1]->isAlive());
+        // $this->assertTrue(false === $nodes[0]->isAlive() || false === $nodes[1]->isAlive());
     }
 
     public function testTwoInvalidConnection(): void
