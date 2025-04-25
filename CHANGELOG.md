@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/8.1.0...8.x)
 
 ### Backward Compatibility Breaks
+* Removed 3rd `$method` argument from the `Elastica\SearchableInterface::search` and `Elastica\SearchableInterface::count` as they are not unused anymore. The following classes are affected: `Elastica\Search` and `Elastica\Index`
+* Removed `Elastica\Request` class as constants are not used anymore and no longer needed.
+
 ### Added
 ### Changed
 ### Deprecated
