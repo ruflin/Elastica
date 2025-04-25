@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file based on the
 ### Backward Compatibility Breaks
 ### Bugfixes
 ### Added
+* Added support for `psr/log` 2.0 and 3.0 [#2244](https://github.com/ruflin/Elastica/pull/2244)
 ### Improvements
 * Solve PHP 8.1 deprecations for every class implementing Countable, Iterator or ArrayAccess [#2061](https://github.com/ruflin/Elastica/pull/2061)
 ### Deprecated
