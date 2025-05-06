@@ -34,7 +34,7 @@ class RangeTest extends BaseTest
         $index->forcemerge();
         $index->refresh();
 
-        $query = new Range('age', ['from' => 10, 'to' => 20]);
+        $query = new Range('age', ['gte' => 10, 'lte' => 20]);
         $result = $index->search($query)->count();
         $this->assertEquals(1, $result);
 

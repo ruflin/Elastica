@@ -110,6 +110,16 @@ class Client implements ClientInterface
         throw new \Exception('Not supported');
     }
 
+    public function setServerless(bool $value): ClientInterface
+    {
+        throw new \Exception('Not supported');
+    }
+
+    public function getServerless(): bool
+    {
+        return false;
+    }
+
     /**
      * Get current version.
      *
