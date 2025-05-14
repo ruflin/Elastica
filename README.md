@@ -1,7 +1,7 @@
 # Elastica: elasticsearch PHP Client
 
 [![Latest Stable Version](https://poser.pugx.org/ruflin/Elastica/v/stable)](https://packagist.org/packages/ruflin/elastica)
-[![Build Status](https://github.com/ruflin/elastica/actions/workflows/continuous-integration.yaml/badge.svg?branch=9.x)](https://github.com/ruflin/Elastica/actions/workflows/continuous-integration.yaml?query=branch%9.x)
+[![Build Status](https://github.com/ruflin/elastica/actions/workflows/continuous-integration.yaml/badge.svg?branch=9.x)](https://github.com/ruflin/Elastica/actions/workflows/continuous-integration.yaml?query=branch=9.x)
 [![codecov.io](https://codecov.io/gh/ruflin/Elastica/branch/9.x/graph/badge.svg)](https://app.codecov.io/github/ruflin/Elastica/tree/9.x)
 [![Total Downloads](https://poser.pugx.org/ruflin/Elastica/downloads)](https://packagist.org/packages/ruflin/elastica)
 [![Join the chat at https://gitter.im/ruflin/Elastica](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ruflin/Elastica?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)

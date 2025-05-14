@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/8.1.0...8.x)
 
 ### Backward Compatibility Breaks
+* Dropped support for PHP <8.1 [#2246](https://github.com/ruflin/Elastica/pull/2246)
 ### Added
 ### Changed
 ### Deprecated
