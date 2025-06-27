@@ -82,7 +82,7 @@ jobs:
           sudo sysctl -w vm.swappiness=1
           sudo sysctl -w fs.file-max=262144
           sudo sysctl -w vm.max_map_count=262144
-          ES_VERSION=${{ matrix.elasticsearch }} docker-compose --file=docker/docker-compose.proxy.yaml --file=docker/docker-compose.es.yaml up --detach
+          ES_VERSION=${{ matrix.elasticsearch }} docker compose --file=docker/docker-compose.proxy.yaml --file=docker/docker-compose.es.yaml up --detach
           docker run --rm --network=docker_elastic curlimages/curl --max-time 120 --retry-max-time 120 --retry 120 --retry-delay 5 --retry-all-errors --show-error --silent http://es01:9200
           docker run --rm --network=docker_elastic curlimages/curl --max-time 120 --retry-max-time 120 --retry 120 --retry-delay 5 --retry-all-errors --show-error --silent http://es02:9200
 
