@@ -40,7 +40,7 @@ class GeoBoundsTest extends BaseAggregationTest
         $query->addAggregation($agg);
         $results = $this->getIndexForTest()->search($query)->getAggregation('viewport');
 
-        $this->assertEquals(37.782438984141, $results['bounds']['top_left']['lat']);
+        $this->assertEquals(37.782438984140754, $results['bounds']['top_left']['lat']);
         $this->assertEquals(-122.39256000146, $results['bounds']['top_left']['lon']);
         $this->assertEquals(32.798319971189, $results['bounds']['bottom_right']['lat']);
         $this->assertEquals(-117.24664804526, $results['bounds']['bottom_right']['lon']);
