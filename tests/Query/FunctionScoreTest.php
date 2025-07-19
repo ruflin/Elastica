@@ -552,6 +552,41 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals(2, $results[0]->getId());
     }
 
+    /**
+     * @group unit
+     */
+    public function testDecayExponential(): void
+    {
+        $query = new FunctionScore();
+        $query->addDecayFunction(FunctionScore::DECAY_EXPONENTIAL, 'location', $this->locationOrigin, '4mi');
+        $query->addDecayFunction(FunctionScore::DECAY_EXPONENTIAL, 'price', 0, 10);
+
+        $expected = [
+            'function_score' => [
+                'functions' => [
+                    [
+                        'exp' => [
+                            'location' => [
+                                'origin' => $this->locationOrigin,
+                                'scale' => '4mi',
+                            ],
+                        ],
+                    ],
+                    [
+                        'exp' => [
+                            'price' => [
+                                'origin' => 0,
+                                'scale' => 10,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        $this->assertEquals($expected, $query->toArray());
+    }
+
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
