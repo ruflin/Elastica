@@ -11,7 +11,7 @@ This file contains custom instructions for GitHub Copilot. It is used to provide
 - The project uses phpstan for static analysis.
 - The project uses a Makefile for common tasks.
 - The project uses composer for dependencies
-- The code is compatible with Elastisearch 9.0 or newer
+- The code is compatible with Elasticsearch 9.0 or newer
 - Each code change has an entry in the `CHANGELOG.md` file. Exceptions are changes to tests.
 
 
