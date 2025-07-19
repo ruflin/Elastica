@@ -587,6 +587,26 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals($expected, $query->toArray());
     }
 
+    /**
+     * @group functional
+     */
+    public function testDecayExponentialFunctional(): void
+    {
+        $query = new FunctionScore();
+        $query->addDecayFunction(FunctionScore::DECAY_EXPONENTIAL, 'location', $this->locationOrigin, '4mi');
+        $query->addDecayFunction(FunctionScore::DECAY_EXPONENTIAL, 'price', 0, 10);
+        $response = $this->_getIndexForTest()->search($query);
+        $results = $response->getResults();
+
+        // the document with the closest location and lowest price should be scored highest
+        $result0 = $results[0]->getData();
+        $this->assertEquals("Mr. Frostie's", $result0['name']);
+        
+        // Verify that we got results and they are properly scored
+        $this->assertGreaterThan(0, $results[0]->getScore());
+        $this->assertCount(2, $results);
+    }
+
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
