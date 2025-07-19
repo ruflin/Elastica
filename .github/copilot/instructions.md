@@ -28,7 +28,7 @@ This file contains custom instructions for GitHub Copilot. It is used to provide
 - All classes must have a docblock.
 - All properties must have a docblock.
 - All methods must have a docblock.
-- All docs for a method that calls an Elasticsearch API, a link to the Elasticsearch API docs must exist
+- For all methods that call an Elasticsearch API, a link to the Elasticsearch API docs must exist in the documentation.
 
 ## Testing instructions
 
