@@ -601,7 +601,7 @@ class FunctionScoreTest extends BaseTest
         // the document with the closest location and lowest price should be scored highest
         $result0 = $results[0]->getData();
         $this->assertEquals("Mr. Frostie's", $result0['name']);
-        
+
         // Verify that we got results and they are properly scored
         $this->assertGreaterThan(0, $results[0]->getScore());
         $this->assertCount(2, $results);
