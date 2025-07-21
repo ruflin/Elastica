@@ -8,12 +8,12 @@ use Elastica\Document;
 use Elastica\Exception\NotFoundException;
 use Elastica\Index;
 use Elastica\Snapshot;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
- * @group functional
- *
  * @internal
  */
+#[Group('functional')]
 class SnapshotTest extends Base
 {
     private const SNAPSHOT_PATH = '/usr/share/elasticsearch/repository/';
@@ -49,9 +49,7 @@ class SnapshotTest extends Base
         $this->index->refresh();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testRegisterRepository(): void
     {
         $location = $this->registerRepository('backup1');
@@ -68,9 +66,7 @@ class SnapshotTest extends Base
         $this->assertTrue($response->isOk());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSnapshotAndRestore(): void
     {
         $this->registerRepository('backup2');

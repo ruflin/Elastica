@@ -12,15 +12,14 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class SerialDiffTest extends BaseAggregationTest
+class SerialDiffTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSerialDiffAggregation(): void
     {
         $dateHistogramAggregation = new DateHistogram('measurements', 'measured_at', 'hour');
@@ -40,9 +39,7 @@ class SerialDiffTest extends BaseAggregationTest
         $this->assertEquals(121, $results['buckets'][3]['result']['value']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstructThroughSetters(): void
     {
         $aggregation = (new SerialDiff('difference', 'nested_agg'))

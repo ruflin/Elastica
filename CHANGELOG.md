@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Dropped support for PHP <8.1 [#2246](https://github.com/ruflin/Elastica/pull/2246)
 ### Added
 ### Changed
+* Upgrade PHPUnit from 9.5 to 10.5 [#2251](https://github.com/ruflin/Elastica/pull/2251)
 ### Deprecated
 ### Removed
 ### Fixed

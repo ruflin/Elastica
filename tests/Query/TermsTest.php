@@ -8,15 +8,14 @@ use Elastica\Document;
 use Elastica\Exception\InvalidException;
 use Elastica\Query\Terms;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class TermsTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetTermsLookup(): void
     {
         $expected = [
@@ -36,9 +35,7 @@ class TermsTest extends BaseTest
         $this->assertSame($expected, $query->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetBoost(): void
     {
         $expected = [
@@ -55,9 +52,7 @@ class TermsTest extends BaseTest
         $this->assertSame($expected, $query->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testInvalidParams(): void
     {
         $this->expectException(InvalidException::class);
@@ -69,9 +64,7 @@ class TermsTest extends BaseTest
         ;
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testEmptyField(): void
     {
         $this->expectException(InvalidException::class);
@@ -80,9 +73,7 @@ class TermsTest extends BaseTest
         new Terms('');
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testFilteredSearch(): void
     {
         $index = $this->_createIndex();
@@ -106,9 +97,7 @@ class TermsTest extends BaseTest
         $this->assertEquals(3, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testFilteredSearchWithLookup(): void
     {
         $index = $this->_createIndex();
@@ -134,9 +123,7 @@ class TermsTest extends BaseTest
         $this->assertEquals(2, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testVariousDataTypesViaConstructor(): void
     {
         $index = $this->_createIndex();
@@ -162,9 +149,7 @@ class TermsTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testVariousMixedDataTypesViaConstructor(): void
     {
         $index = $this->_createIndex();
@@ -182,9 +167,7 @@ class TermsTest extends BaseTest
         $this->assertEquals(3, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testVariousDataTypesViaAddTerm(): void
     {
         $index = $this->_createIndex();
@@ -213,9 +196,7 @@ class TermsTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAddTermTypeError(): void
     {
         $this->expectException(\TypeError::class);

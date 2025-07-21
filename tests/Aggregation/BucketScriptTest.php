@@ -11,15 +11,14 @@ use Elastica\Aggregation\Max;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class BucketScriptTest extends BaseAggregationTest
+class BucketScriptTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testBucketScriptAggregation(): void
     {
         $bucketScriptAggregation = new BucketScript(
@@ -48,9 +47,7 @@ class BucketScriptTest extends BaseAggregationTest
         $this->assertEquals(3.1, $results['buckets'][2]['result']['value']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstructThroughSetters(): void
     {
         $serialDiffAgg = new BucketScript('bucket_scripted', [

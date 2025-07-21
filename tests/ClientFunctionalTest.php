@@ -15,14 +15,15 @@ use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Test\Transport\NodePool\TraceableSimpleNodePool;
 use GuzzleHttp\RequestOptions;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use Psr\Http\Client\ClientInterface as HttpClientInterface;
 use Psr\Http\Message\RequestInterface;
 
 /**
- * @group functional
- *
  * @internal
  */
+#[Group('functional')]
 class ClientFunctionalTest extends BaseTest
 {
     public function testConnectionErrors(): void
@@ -144,9 +145,8 @@ class ClientFunctionalTest extends BaseTest
 
     /**
      * Test bulk operations on Index.
-     *
-     * @group functional
      */
+    #[Group('functional')]
     public function testBulkIndex(): void
     {
         $index = $this->_getClient()->getIndex('cryptocurrencies');
@@ -248,9 +248,8 @@ class ClientFunctionalTest extends BaseTest
      * It will add a document, search for it, then delete it
      * using the parameter types we are interested in, and then
      * re-search to verify that they have been deleted
-     *
-     * @group functional
      */
+    #[Group('functional')]
     public function testDeleteIdsIdxString(): void
     {
         $data = ['username' => 'hans'];
@@ -309,9 +308,8 @@ class ClientFunctionalTest extends BaseTest
      * It will add a document, search for it, then delete it
      * using the parameter types we are interested in, and then
      * re-search to verify that they have been deleted
-     *
-     * @group functional
      */
+    #[Group('functional')]
     public function testDeleteIdsIdxObjectTypeObject(): void
     {
         $data = ['username' => 'hans'];
@@ -886,9 +884,7 @@ class ClientFunctionalTest extends BaseTest
         );
     }
 
-    /**
-     * @dataProvider endpointQueryRequestDataProvider
-     */
+    #[DataProvider('endpointQueryRequestDataProvider')]
     public function testEndpointQueryRequest($query, $totalHits): void
     {
         $client = $this->_getClient();
@@ -915,7 +911,7 @@ class ClientFunctionalTest extends BaseTest
         $this->assertEquals($totalHits, $responseArray['hits']['total']['value']);
     }
 
-    public function endpointQueryRequestDataProvider(): array
+    public static function endpointQueryRequestDataProvider(): array
     {
         return [
             ['ruflin', 1],

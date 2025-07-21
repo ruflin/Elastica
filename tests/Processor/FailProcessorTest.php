@@ -9,15 +9,14 @@ use Elastica\Document;
 use Elastica\Processor\FailProcessor;
 use Elastica\Processor\JsonProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class FailProcessorTest extends BasePipelineTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testFail(): void
     {
         $processor = new FailProcessor('This is a custom fail message for processor');
@@ -31,9 +30,7 @@ class FailProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testFailWithNonDefaultOptions(): void
     {
         $processor = (new FailProcessor('This is a custom fail message for processor'))
@@ -50,9 +47,7 @@ class FailProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testFailField(): void
     {
         $fail = new FailProcessor('custom error fail message');

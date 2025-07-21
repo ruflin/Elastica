@@ -6,15 +6,14 @@ namespace Elastica\Test\QueryBuilder\DSL;
 
 use Elastica\Collapse;
 use Elastica\QueryBuilder\DSL;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class CollapseTest extends AbstractDSLTest
+class CollapseTest extends AbstractDSLTestCase
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testType(): void
     {
         $collapseDSL = new DSL\Collapse();
@@ -23,9 +22,7 @@ class CollapseTest extends AbstractDSLTest
         $this->assertEquals(DSL::TYPE_COLLAPSE, $collapseDSL->getType());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testInterface(): void
     {
         $collapseDSL = new DSL\Collapse();

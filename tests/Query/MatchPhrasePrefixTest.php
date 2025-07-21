@@ -7,15 +7,14 @@ namespace Elastica\Test\Query;
 use Elastica\Document;
 use Elastica\Query\MatchPhrasePrefix;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class MatchPhrasePrefixTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $field = 'test';
@@ -44,9 +43,7 @@ class MatchPhrasePrefixTest extends BaseTest
         $this->assertEquals($expectedArray, $query->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testMatchPhrasePrefix(): void
     {
         $client = $this->_getClient();

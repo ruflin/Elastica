@@ -133,12 +133,12 @@ parameters:
 		-
 			message: "#^Call to an undefined method ReflectionType\\:\\:getName\\(\\)\\.$#"
 			count: 2
-			path: tests/QueryBuilder/DSL/AbstractDSLTest.php
+			path: tests/QueryBuilder/DSL/AbstractDSLTestCase.php
 
 		-
 			message: "#^Call to an undefined method ReflectionType\\:\\:isBuiltin\\(\\)\\.$#"
 			count: 1
-			path: tests/QueryBuilder/DSL/AbstractDSLTest.php
+			path: tests/QueryBuilder/DSL/AbstractDSLTestCase.php
 
 		-
 			message: "#^Call to an undefined method Elastica\\\\QueryBuilder\\:\\:custom\\(\\)\\.$#"

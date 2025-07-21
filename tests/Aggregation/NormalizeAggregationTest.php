@@ -10,15 +10,14 @@ use Elastica\Aggregation\Sum;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class NormalizeAggregationTest extends BaseAggregationTest
+class NormalizeAggregationTest extends BaseAggregationTestCase
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $expected = [
@@ -58,9 +57,7 @@ class NormalizeAggregationTest extends BaseAggregationTest
         $this->assertEquals($expected, $dateHistogramAgg->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testNormalizeAggregation(): void
     {
         $this->_checkVersion('7.9');

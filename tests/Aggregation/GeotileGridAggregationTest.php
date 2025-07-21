@@ -9,15 +9,14 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class GeotileGridAggregationTest extends BaseAggregationTest
+class GeotileGridAggregationTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGeotileGridAggregation(): void
     {
         $agg = new GeotileGridAggregation('tile', 'location');

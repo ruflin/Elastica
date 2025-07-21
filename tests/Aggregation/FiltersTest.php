@@ -11,15 +11,14 @@ use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\Term;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class FiltersTest extends BaseAggregationTest
+class FiltersTest extends BaseAggregationTestCase
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArrayUsingNamedFilters(): void
     {
         $expected = [
@@ -58,9 +57,7 @@ class FiltersTest extends BaseAggregationTest
         $this->assertEquals($expected, $agg->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testMixNamedAndAnonymousFilters(): void
     {
         $this->expectException(InvalidException::class);
@@ -71,9 +68,7 @@ class FiltersTest extends BaseAggregationTest
         $agg->addFilter(new Term(['color' => '0']));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testMixAnonymousAndNamedFilters(): void
     {
         $this->expectException(InvalidException::class);
@@ -85,9 +80,7 @@ class FiltersTest extends BaseAggregationTest
         $agg->addFilter(new Term(['color' => '0']), '0');
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArrayUsingAnonymousFilters(): void
     {
         $expected = [
@@ -118,9 +111,7 @@ class FiltersTest extends BaseAggregationTest
         $this->assertEquals($expected, $agg->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArrayUsingOtherBucket(): void
     {
         $expected = [
@@ -145,9 +136,7 @@ class FiltersTest extends BaseAggregationTest
         $this->assertEquals($expected, $agg->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testFilterAggregation(): void
     {
         $agg = new Filters('by_color');
@@ -173,9 +162,7 @@ class FiltersTest extends BaseAggregationTest
         $this->assertEquals(1, $resultsForRed['avg_price']['value']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetOtherBucket(): void
     {
         $agg = new Filters('by_color');
@@ -201,9 +188,7 @@ class FiltersTest extends BaseAggregationTest
         $this->assertEquals((5 + 8 + 3) / 3, $resultsForOtherBucket['avg_price']['value']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetOtherBucketKey(): void
     {
         $agg = new Filters('by_color');

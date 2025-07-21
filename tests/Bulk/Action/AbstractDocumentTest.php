@@ -7,15 +7,14 @@ namespace Elastica\Test\Bulk\Action;
 use Elastica\Bulk\Action\AbstractDocument;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class AbstractDocumentTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testCreateAbstractDocumentWithInvalidParameter(): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -24,9 +23,7 @@ class AbstractDocumentTest extends BaseTest
         AbstractDocument::create(new \stdClass());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testCreateAbstractDocumentWithScript(): void
     {
         $this->expectException(\InvalidArgumentException::class);

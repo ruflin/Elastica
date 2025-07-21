@@ -11,6 +11,7 @@ use Elastica\Query;
 use Elastica\Query\CombinedFields;
 use Elastica\ResultSet;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
@@ -24,9 +25,7 @@ class CombinedFieldsQueryTest extends BaseTest
         ['id' => '4', 'title' => 'John',    'body' => 'not Doe',  'abstract' => 'Consectetur'],
     ];
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testMinimumShouldMatch(): void
     {
         // Note that the OR operator is the default.
@@ -39,9 +38,7 @@ class CombinedFieldsQueryTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testAndOperator(): void
     {
         $combinedFields = new CombinedFields();
@@ -53,9 +50,7 @@ class CombinedFieldsQueryTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testZeroTerm(): void
     {
         $combinedFields = new CombinedFields();
@@ -72,9 +67,7 @@ class CombinedFieldsQueryTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testBaseCombinedFields(): void
     {
         $combinedFields = new CombinedFields();

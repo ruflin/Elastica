@@ -9,15 +9,14 @@ use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class MappingTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testMappingStoreFields(): void
     {
         $client = $this->_getClient();
@@ -68,9 +67,7 @@ class MappingTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testNestedMapping(): void
     {
         $client = $this->_getClient();
@@ -110,9 +107,7 @@ class MappingTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testJoinMapping(): void
     {
         $client = $this->_getClient();
@@ -191,9 +186,7 @@ class MappingTest extends BaseTest
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testMappingExample(): void
     {
         $index = $this->_createIndex();
@@ -232,13 +225,11 @@ class MappingTest extends BaseTest
     }
 
     /**
-     * @group functional
-     *
-     * Test setting a dynamic template and validate whether the right mapping is applied after adding a document which
-     * should match the dynamic template.
-     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/dynamic-templates.html
      */
+    #[Group('functional
+Test setting a dynamic template and validate whether the right mapping is applied after adding a document which
+should match the dynamic template.')]
     public function testDynamicTemplate(): void
     {
         $index = $this->_createIndex();
@@ -281,9 +272,7 @@ class MappingTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetMeta(): void
     {
         $index = $this->_createIndex();
@@ -301,9 +290,7 @@ class MappingTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetters(): void
     {
         $properties = [

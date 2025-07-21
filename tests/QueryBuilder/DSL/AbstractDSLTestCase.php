@@ -8,7 +8,7 @@ use Elastica\Exception\NotImplementedException;
 use Elastica\QueryBuilder\DSL;
 use Elastica\Test\Base as BaseTest;
 
-abstract class AbstractDSLTest extends BaseTest
+abstract class AbstractDSLTestCase extends BaseTest
 {
     protected function _assertImplemented(DSL $dsl, string $methodName, string $className, array $arguments): void
     {

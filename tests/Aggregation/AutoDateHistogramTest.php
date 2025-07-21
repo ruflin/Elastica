@@ -6,15 +6,14 @@ namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\AutoDateHistogram;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class AutoDateHistogramTest extends BaseAggregationTest
+class AutoDateHistogramTest extends BaseAggregationTestCase
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAvgBucketAggregation(): void
     {
         $aggregationKey = 'aggs';

@@ -8,15 +8,14 @@ use Elastica\Aggregation\Range;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class RangeTest extends BaseAggregationTest
+class RangeTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testRangeAggregation(): void
     {
         $agg = new Range('range');
@@ -30,9 +29,7 @@ class RangeTest extends BaseAggregationTest
         $this->assertEquals(3, $results['buckets'][0]['doc_count']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testRangeKeyedAggregation(): void
     {
         $agg = new Range('range');
@@ -50,9 +47,7 @@ class RangeTest extends BaseAggregationTest
         $this->assertSame($expected, \array_keys($results['buckets']));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testRangeAggregationWithKey(): void
     {
         $agg = new Range('range');

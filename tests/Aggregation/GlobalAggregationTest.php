@@ -6,15 +6,14 @@ namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Avg;
 use Elastica\Aggregation\GlobalAggregation;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class GlobalAggregationTest extends BaseAggregationTest
+class GlobalAggregationTest extends BaseAggregationTestCase
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $expected = [

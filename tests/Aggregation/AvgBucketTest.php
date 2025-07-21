@@ -11,15 +11,14 @@ use Elastica\Aggregation\Terms;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class AvgBucketTest extends BaseAggregationTest
+class AvgBucketTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testAvgBucketAggregation(): void
     {
         $query = Query::create([])
@@ -44,9 +43,7 @@ class AvgBucketTest extends BaseAggregationTest
         $this->assertEquals(161.5, $results['avg_likes_by_page']['value']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstructThroughSetters(): void
     {
         $aggregation = (new AvgBucket('avg_bucket', 'pages>avg_likes_by_page'))

@@ -9,17 +9,16 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Script\Script;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class MaxTest extends BaseAggregationTest
+class MaxTest extends BaseAggregationTestCase
 {
     private const MAX_PRICE = 8;
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $expected = [
@@ -47,9 +46,7 @@ class MaxTest extends BaseAggregationTest
         $this->assertEquals($expected, $agg->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testMaxAggregation(): void
     {
         $index = $this->_getIndexForTest();
@@ -72,9 +69,7 @@ class MaxTest extends BaseAggregationTest
         $this->assertEquals(self::MAX_PRICE * 1.2, $results['value']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testMaxAggregationWithMissing(): void
     {
         // feature is buggy on version prior 7.5;

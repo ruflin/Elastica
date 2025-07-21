@@ -24,8 +24,10 @@
         "guzzlehttp/guzzle": "^7.2",
         "phpstan/phpstan": "^1.5",
         "phpstan/phpstan-phpunit": "^1.1",
-        "phpunit/phpunit": "^9.6",
-        "symfony/phpunit-bridge": "^6.0"
+        "phpunit/phpunit": "^10.5"
+    },
+    "conflict": {
+        "guzzlehttp/psr7": "<2.0.0"
     },
     "suggest": {
         "aws/aws-sdk-php": "Allow using IAM authentication with Amazon ElasticSearch Service",

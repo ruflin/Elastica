@@ -10,15 +10,15 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class DiversifiedSamplerTest extends BaseAggregationTest
+class DiversifiedSamplerTest extends BaseAggregationTestCase
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $expected = [
@@ -52,11 +52,8 @@ class DiversifiedSamplerTest extends BaseAggregationTest
         $this->assertEquals($expected, $agg->toArray());
     }
 
-    /**
-     * @dataProvider shardSizeAndMaxDocPerValueProvider
-     *
-     * @group functional
-     */
+    #[DataProvider('shardSizeAndMaxDocPerValueProvider')]
+    #[Group('functional')]
     public function testSamplerAggregation(int $shardSize, int $maxDocPerValue, int $docCount): void
     {
         $agg = new DiversifiedSampler('price_diversified_sampler');
@@ -77,7 +74,7 @@ class DiversifiedSamplerTest extends BaseAggregationTest
         $this->assertEquals($docCount, $results['doc_count']);
     }
 
-    public function shardSizeAndMaxDocPerValueProvider(): array
+    public static function shardSizeAndMaxDocPerValueProvider(): array
     {
         return [
             [1, 1, 2],

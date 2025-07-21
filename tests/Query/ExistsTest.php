@@ -6,15 +6,14 @@ namespace Elastica\Test\Query;
 
 use Elastica\Query\Exists;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class ExistsTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $field = 'test';
@@ -24,9 +23,7 @@ class ExistsTest extends BaseTest
         $this->assertEquals($expectedArray, $query->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetField(): void
     {
         $field = 'test';

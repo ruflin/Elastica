@@ -7,15 +7,14 @@ namespace Elastica\Test\Query;
 use Elastica\Query\Nested;
 use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class NestedTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetQuery(): void
     {
         $queryString = new QueryString('test');

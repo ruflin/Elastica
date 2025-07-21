@@ -10,7 +10,6 @@ use Elastica\Client;
 use Elastica\Index;
 use Elastica\Test\Transport\NodePool\TraceableSimpleNodePool;
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Util\Test as TestUtil;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -168,22 +167,16 @@ class Base extends TestCase
 
     protected function _isUnitGroup(): bool
     {
-        $groups = TestUtil::getGroups(\get_class($this), $this->getName(false));
-
-        return \in_array('unit', $groups, true);
+        return \in_array('unit', $this->groups(), true);
     }
 
     protected function _isFunctionalGroup(): bool
     {
-        $groups = TestUtil::getGroups(\get_class($this), $this->getName(false));
-
-        return \in_array('functional', $groups, true);
+        return \in_array('functional', $this->groups(), true);
     }
 
     protected function _isBenchmarkGroup(): bool
     {
-        $groups = TestUtil::getGroups(\get_class($this), $this->getName(false));
-
-        return \in_array('benchmark', $groups, true);
+        return \in_array('benchmark', $this->groups(), true);
     }
 }

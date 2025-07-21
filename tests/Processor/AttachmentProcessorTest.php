@@ -9,15 +9,14 @@ use Elastica\Document;
 use Elastica\Mapping;
 use Elastica\Processor\AttachmentProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class AttachmentProcessorTest extends BasePipelineTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAttachment(): void
     {
         $processor = new AttachmentProcessor('data');
@@ -31,9 +30,7 @@ class AttachmentProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAttachmentWithNonDefaultOptions(): void
     {
         $processor = new AttachmentProcessor('data');
@@ -55,9 +52,7 @@ class AttachmentProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testAttachmentAddPdf(): void
     {
         $attachment = new AttachmentProcessor('data');
@@ -97,9 +92,7 @@ class AttachmentProcessorTest extends BasePipelineTest
         $this->assertEquals(0, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testAttachmentAddPdfFileContent(): void
     {
         $attachment = new AttachmentProcessor('data');
@@ -142,9 +135,7 @@ class AttachmentProcessorTest extends BasePipelineTest
         $this->assertEquals(0, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testAddWordxFile(): void
     {
         $attachment = new AttachmentProcessor('data');
@@ -185,9 +176,7 @@ class AttachmentProcessorTest extends BasePipelineTest
         $this->assertEquals(0, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testExcludeFileSource(): void
     {
         $attachment = new AttachmentProcessor('data');

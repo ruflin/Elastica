@@ -11,15 +11,14 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class BucketSortTest extends BaseAggregationTest
+class BucketSortTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testBucketSortAggregation(): void
     {
         $bucketSortAggregation = new BucketSort('sort_by_bucket');

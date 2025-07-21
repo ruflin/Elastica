@@ -11,33 +11,28 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class ReverseNestedTest extends BaseAggregationTest
+class ReverseNestedTest extends BaseAggregationTestCase
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testPathNotSetIfNull(): void
     {
         $agg = new ReverseNested('nested');
         $this->assertFalse($agg->hasParam('path'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testPathSetIfNotNull(): void
     {
         $agg = new ReverseNested('nested', 'some_field');
         $this->assertEquals('some_field', $agg->getParam('path'));
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testReverseNestedAggregation(): void
     {
         $agg = new Nested('comments', 'comments');

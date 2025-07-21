@@ -11,15 +11,14 @@ use Elastica\Aggregation\StatsBucket;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class StatsBucketTest extends BaseAggregationTest
+class StatsBucketTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testStatBucketAggregation(): void
     {
         $bucketScriptAggregation = new StatsBucket('result', 'age_groups>max_weight');
@@ -44,9 +43,7 @@ class StatsBucketTest extends BaseAggregationTest
         $this->assertEquals(180, $results['sum']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstructThroughSetters(): void
     {
         $aggregation = (new StatsBucket('bucket_part', 'age_groups>max_weight'))

@@ -10,15 +10,14 @@ use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\Terms;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class SignificantTermsTest extends BaseAggregationTest
+class SignificantTermsTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSignificantTermsAggregation(): void
     {
         $agg = new SignificantTerms('significantTerms');
@@ -37,9 +36,7 @@ class SignificantTermsTest extends BaseAggregationTest
         $this->assertEquals('1500', $results['buckets'][0]['key']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSignificantTermsAggregationWithBackgroundFilter(): void
     {
         $agg = new SignificantTerms('significantTerms');
@@ -59,9 +56,7 @@ class SignificantTermsTest extends BaseAggregationTest
         $this->assertEquals('4500', $results['buckets'][0]['key']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSignificantTermsAggregationWithBackgroundFilterWithLegacyFilter(): void
     {
         $agg = new SignificantTerms('significantTerms');

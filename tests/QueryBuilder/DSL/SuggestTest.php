@@ -6,15 +6,14 @@ namespace Elastica\Test\QueryBuilder\DSL;
 
 use Elastica\QueryBuilder\DSL;
 use Elastica\Suggest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class SuggestTest extends AbstractDSLTest
+class SuggestTest extends AbstractDSLTestCase
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testType(): void
     {
         $suggestDSL = new DSL\Suggest();
@@ -23,9 +22,7 @@ class SuggestTest extends AbstractDSLTest
         $this->assertEquals(DSL::TYPE_SUGGEST, $suggestDSL->getType());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testInterface(): void
     {
         $suggestDSL = new DSL\Suggest();

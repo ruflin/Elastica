@@ -7,18 +7,14 @@ namespace Elastica\Test\QueryBuilder\DSL;
 use Elastica\Query;
 use Elastica\Query\MatchQuery;
 use Elastica\QueryBuilder\DSL;
-use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class QueryTest extends AbstractDSLTest
+class QueryTest extends AbstractDSLTestCase
 {
-    use ExpectDeprecationTrait;
-
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testType(): void
     {
         $queryDSL = new DSL\Query();
@@ -27,9 +23,7 @@ class QueryTest extends AbstractDSLTest
         $this->assertEquals(DSL::TYPE_QUERY, $queryDSL->getType());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testMatch(): void
     {
         $match = (new DSL\Query())
@@ -39,9 +33,7 @@ class QueryTest extends AbstractDSLTest
         $this->assertEquals('value', $match->getParam('field'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testInterface(): void
     {
         $queryDSL = new DSL\Query();

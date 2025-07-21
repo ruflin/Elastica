@@ -6,15 +6,14 @@ namespace Elastica\Test\Processor;
 
 use Elastica\Processor\DateIndexNameProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class DateIndexNameProcessorTest extends BasePipelineTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testDateIndexName(): void
     {
         $processor = new DateIndexNameProcessor('date1', 'M');
@@ -29,9 +28,7 @@ class DateIndexNameProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testDateIndexNameWithNonDefaultOptions(): void
     {
         $processor = (new DateIndexNameProcessor('date1', 'M'))

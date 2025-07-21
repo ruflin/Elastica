@@ -9,12 +9,12 @@ use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
- * @group functional
- *
  * @internal
  */
+#[Group('functional')]
 class ResponseFunctionalTest extends BaseTest
 {
     public function testResponse(): void

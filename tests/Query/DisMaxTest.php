@@ -9,15 +9,14 @@ use Elastica\Query\DisMax;
 use Elastica\Query\Ids;
 use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class DisMaxTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $query = new DisMax();
@@ -55,9 +54,7 @@ class DisMaxTest extends BaseTest
         $this->assertEquals($expectedArray, $query->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testQuery(): void
     {
         $index = $this->_createIndex();
@@ -87,9 +84,7 @@ class DisMaxTest extends BaseTest
         $this->assertEquals(3, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testQueryArray(): void
     {
         $index = $this->_createIndex();

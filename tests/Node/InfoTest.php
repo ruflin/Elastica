@@ -7,15 +7,14 @@ namespace Elastica\Test\Node;
 use Elastica\Node;
 use Elastica\Node\Info as NodeInfo;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class InfoTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGet(): void
     {
         $client = $this->_getClient();
@@ -37,9 +36,7 @@ class InfoTest extends BaseTest
         $this->assertNull($info->get('test', 'notest', 'notexist'));
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testHasPlugin(): void
     {
         $client = $this->_getClient();
@@ -56,9 +53,7 @@ class InfoTest extends BaseTest
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetId(): void
     {
         $client = $this->_getClient();
@@ -75,9 +70,7 @@ class InfoTest extends BaseTest
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetName(): void
     {
         $client = $this->_getClient();
@@ -92,9 +85,7 @@ class InfoTest extends BaseTest
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testParams(): void
     {
         $client = $this->_getClient();

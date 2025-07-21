@@ -20,6 +20,8 @@ use Elastica\Exception\RequestEntityTooLargeException;
 use Elastica\Response as ElasticaResponse;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -27,9 +29,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 class BulkTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSend(): void
     {
         $index = $this->_createIndex();
@@ -139,9 +139,7 @@ class BulkTest extends BaseTest
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testUnicodeBulkSend(): void
     {
         $index = $this->_createIndex();
@@ -168,9 +166,7 @@ class BulkTest extends BaseTest
         $this->assertSame($newDocument3, $actions[2]->getDocument());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetIndex(): void
     {
         $client = $this->_getClient();
@@ -195,9 +191,7 @@ class BulkTest extends BaseTest
         $this->assertEquals('index', $bulk->getIndex());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAddActions(): void
     {
         $client = $this->_getClient();
@@ -225,9 +219,7 @@ class BulkTest extends BaseTest
         $this->assertSame($action2, $getActions[1]);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAddRawData(): void
     {
         $bulk = new Bulk($this->_getClient());
@@ -277,11 +269,8 @@ class BulkTest extends BaseTest
         $this->assertFalse($actions[4]->hasSource());
     }
 
-    /**
-     * @group unit
-     *
-     * @dataProvider invalidRawDataProvider
-     */
+    #[DataProvider('invalidRawDataProvider')]
+    #[Group('unit')]
     public function testInvalidRawData($rawData, $failMessage): void
     {
         $this->expectException(InvalidException::class);
@@ -293,7 +282,7 @@ class BulkTest extends BaseTest
         $this->fail($failMessage);
     }
 
-    public function invalidRawDataProvider(): array
+    public static function invalidRawDataProvider(): array
     {
         return [
             [
@@ -333,9 +322,7 @@ class BulkTest extends BaseTest
         ];
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testErrorRequest(): void
     {
         $index = $this->_createIndex();
@@ -364,9 +351,7 @@ class BulkTest extends BaseTest
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testRawDocumentDataRequest(): void
     {
         $index = $this->_createIndex();
@@ -409,9 +394,7 @@ class BulkTest extends BaseTest
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testUpdate(): void
     {
         $index = $this->_createIndex();
@@ -542,9 +525,7 @@ class BulkTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testUpsert(): void
     {
         $index = $this->_createIndex();
@@ -590,9 +571,7 @@ class BulkTest extends BaseTest
         $this->assertEquals('Maradona', $docData['name']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testScriptUpsert(): void
     {
         $index = $this->_createIndex();
@@ -656,9 +635,7 @@ class BulkTest extends BaseTest
         $this->assertEquals($subField2['field_2'], $doc->getData()['sub_field_2'][0]['field_2']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetPath(): void
     {
         $client = $this->_getClient();
@@ -672,9 +649,7 @@ class BulkTest extends BaseTest
         $this->assertEquals($indexName.'/_bulk', $bulk->getPath());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testRetry(): void
     {
         $index = $this->_createIndex();
@@ -727,9 +702,7 @@ class BulkTest extends BaseTest
         $this->assertEquals(5, $metadata['retry_on_conflict']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetShardTimeout(): void
     {
         $bulk = new Bulk($this->_getClient());
@@ -737,9 +710,7 @@ class BulkTest extends BaseTest
         $this->assertSame($bulk, $bulk->setShardTimeout('10s'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetRequestParam(): void
     {
         $bulk = new Bulk($this->_getClient());
@@ -747,9 +718,7 @@ class BulkTest extends BaseTest
         $this->assertSame($bulk, $bulk->setRequestParam('key', 'value'));
     }
 
-    /**
-     * @group benchmark
-     */
+    #[Group('benchmark')]
     public function testMemoryUsage(): void
     {
         $index = $this->_createIndex();
@@ -780,9 +749,7 @@ class BulkTest extends BaseTest
         $this->assertLessThan(1.41, $endMemory / $startMemory);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testHasIndex(): void
     {
         $client = $this->_getClient();
@@ -793,9 +760,7 @@ class BulkTest extends BaseTest
         $this->assertTrue($bulk->hasIndex());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSendRequestEntityTooLargeExceptionIf413Response(): void
     {
         $response = new ElasticaResponse('', 413);

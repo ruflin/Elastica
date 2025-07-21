@@ -9,6 +9,7 @@ use Elastica\Query\BoolQuery;
 use Elastica\Suggest;
 use Elastica\Suggest\Term;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
@@ -17,9 +18,8 @@ class SuggestTest extends BaseTest
 {
     /**
      * Create self test.
-     *
-     * @group functional
      */
+    #[Group('functional')]
     public function testCreateSelf(): void
     {
         $suggest = new Suggest();
@@ -31,9 +31,8 @@ class SuggestTest extends BaseTest
 
     /**
      * Create with suggest test.
-     *
-     * @group functional
      */
+    #[Group('functional')]
     public function testCreateWithSuggest(): void
     {
         $suggest1 = new Term('suggest1', '_all');
@@ -45,9 +44,8 @@ class SuggestTest extends BaseTest
 
     /**
      * Create with non suggest test.
-     *
-     * @group functional
      */
+    #[Group('functional')]
     public function testCreateWithNonSuggest(): void
     {
         try {

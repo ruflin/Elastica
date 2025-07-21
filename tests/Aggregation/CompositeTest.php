@@ -9,15 +9,14 @@ use Elastica\Aggregation\Terms;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class CompositeTest extends BaseAggregationTest
+class CompositeTest extends BaseAggregationTestCase
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSize(): void
     {
         $composite = new Composite('products');
@@ -32,9 +31,7 @@ class CompositeTest extends BaseAggregationTest
         $this->assertEquals($expected, $composite->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAddSource(): void
     {
         $expected = [
@@ -56,9 +53,7 @@ class CompositeTest extends BaseAggregationTest
         $this->assertEquals($expected, $composite->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAddAfter(): void
     {
         $checkpoint = ['checkpointproduct' => 'checkpoint'];
@@ -73,9 +68,7 @@ class CompositeTest extends BaseAggregationTest
         $this->assertEquals($expected, $composite->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testCompositeNoAfterAggregation(): void
     {
         $composite = new Composite('products');
@@ -114,9 +107,7 @@ class CompositeTest extends BaseAggregationTest
         $this->assertEquals($expected, $results);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testCompositeWithSizeAggregation(): void
     {
         $composite = new Composite('products');
@@ -150,9 +141,7 @@ class CompositeTest extends BaseAggregationTest
         $this->assertEquals($expected, $results);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testCompositeWithAfterAggregation(): void
     {
         $composite = new Composite('products');
@@ -180,9 +169,7 @@ class CompositeTest extends BaseAggregationTest
         $this->assertEquals($expected, $results);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testCompositeWithNullAfter(): void
     {
         $composite = new Composite('products');

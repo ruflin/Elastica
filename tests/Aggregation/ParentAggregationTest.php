@@ -9,15 +9,14 @@ use Elastica\Aggregation\Terms;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class ParentAggregationTest extends BaseAggregationTest
+class ParentAggregationTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testParentAggregation(): void
     {
         $agg = new ParentAggregation('question');
@@ -43,9 +42,7 @@ class ParentAggregationTest extends BaseAggregationTest
         $this->assertArrayHasKey('tags', $parentAggregations);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testParentAggregationCount(): void
     {
         $topNames = new Terms('top-names');

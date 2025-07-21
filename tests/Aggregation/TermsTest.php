@@ -10,15 +10,15 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class TermsTest extends BaseAggregationTest
+class TermsTest extends BaseAggregationTestCase
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testIncludePattern(): void
     {
         $agg = new Terms('terms');
@@ -27,9 +27,7 @@ class TermsTest extends BaseAggregationTest
         $this->assertSame('pattern*', $agg->getParam('include'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testIncludeExactMatch(): void
     {
         $agg = new Terms('terms');
@@ -38,9 +36,7 @@ class TermsTest extends BaseAggregationTest
         $this->assertSame(['first', 'second'], $agg->getParam('include'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testIncludeWithPartitions(): void
     {
         $agg = new Terms('terms');
@@ -52,9 +48,7 @@ class TermsTest extends BaseAggregationTest
         ], $agg->getParam('include'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testExcludePattern(): void
     {
         $agg = new Terms('terms');
@@ -63,9 +57,7 @@ class TermsTest extends BaseAggregationTest
         $this->assertSame('pattern*', $agg->getParam('exclude'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testExcludeExactMatch(): void
     {
         $agg = new Terms('terms');
@@ -74,9 +66,7 @@ class TermsTest extends BaseAggregationTest
         $this->assertSame(['first', 'second'], $agg->getParam('exclude'));
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testTermsAggregation(): void
     {
         $agg = new Terms('terms');
@@ -90,9 +80,7 @@ class TermsTest extends BaseAggregationTest
         $this->assertEquals('blue', $results['buckets'][0]['key']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testTermsSetOrder(): void
     {
         $agg = new Terms('terms');
@@ -106,9 +94,7 @@ class TermsTest extends BaseAggregationTest
         $this->assertEquals('blue', $results['buckets'][2]['key']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testTermsWithMissingAggregation(): void
     {
         $agg = new Terms('terms');
@@ -123,9 +109,7 @@ class TermsTest extends BaseAggregationTest
         $this->assertEquals('blue', $results['buckets'][0]['key']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testTermsSetOrders(): void
     {
         $agg = new Terms('terms');
@@ -144,9 +128,7 @@ class TermsTest extends BaseAggregationTest
         $this->assertSame('blue', $results['buckets'][2]['key']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testTermsSetMissingBucketUnit(): void
     {
         $agg = new Terms('terms');
@@ -155,11 +137,8 @@ class TermsTest extends BaseAggregationTest
         $this->assertTrue($agg->getParam('missing_bucket'));
     }
 
-    /**
-     * @dataProvider termsSetMissingBucketProvider
-     *
-     * @group functional
-     */
+    #[DataProvider('termsSetMissingBucketProvider')]
+    #[Group('functional')]
     public function testTermsSetMissingBucketFunctional(
         string $field,
         int $expectedCountValues,
@@ -181,7 +160,7 @@ class TermsTest extends BaseAggregationTest
         $this->assertCount($expectedCountValues, $results['buckets']);
     }
 
-    public function termsSetMissingBucketProvider(): \Traversable
+    public static function termsSetMissingBucketProvider(): \Traversable
     {
         yield [
             'field' => 'color',

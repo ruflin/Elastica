@@ -7,15 +7,14 @@ namespace Elastica\Test\QueryBuilder\DSL;
 use Elastica\Aggregation;
 use Elastica\Query\Exists;
 use Elastica\QueryBuilder\DSL;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class AggregationTest extends AbstractDSLTest
+class AggregationTest extends AbstractDSLTestCase
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testType(): void
     {
         $aggregationDSL = new DSL\Aggregation();
@@ -24,9 +23,7 @@ class AggregationTest extends AbstractDSLTest
         $this->assertEquals(DSL::TYPE_AGGREGATION, $aggregationDSL->getType());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testInterface(): void
     {
         $aggregationDSL = new DSL\Aggregation();

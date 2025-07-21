@@ -8,15 +8,14 @@ use Elastica\Aggregation\ExtendedStats;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class ExtendedStatsTest extends BaseAggregationTest
+class ExtendedStatsTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testExtendedStatsAggregation(): void
     {
         $agg = new ExtendedStats('stats');
@@ -34,9 +33,7 @@ class ExtendedStatsTest extends BaseAggregationTest
         $this->assertArrayHasKey('sum_of_squares', $results);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testExtendedStatsAggregationWithMissing(): void
     {
         $agg = new ExtendedStats('stats');
