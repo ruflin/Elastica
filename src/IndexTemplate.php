@@ -61,7 +61,7 @@ class IndexTemplate
     public function delete(): Response
     {
         return $this->_client->toElasticaResponse(
-            $this->_client->indices()->deleteTemplate(['name' => $this->getName()])
+            $this->_client->indices()->deleteIndexTemplate(['name' => $this->getName()])
         );
     }
 
@@ -81,7 +81,7 @@ class IndexTemplate
     public function create(array $args = []): Response
     {
         return $this->_client->toElasticaResponse(
-            $this->_client->indices()->putTemplate(['name' => $this->getName(), 'body' => $args])
+            $this->_client->indices()->putIndexTemplate(['name' => $this->getName(), 'body' => $args])
         );
     }
 
@@ -96,7 +96,7 @@ class IndexTemplate
      */
     public function exists(): bool
     {
-        $response = $this->_client->indices()->existsTemplate(['name' => $this->getName()]);
+        $response = $this->_client->indices()->existsIndexTemplate(['name' => $this->getName()]);
 
         return 200 === $response->getStatusCode();
     }
