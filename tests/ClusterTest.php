@@ -29,7 +29,10 @@ class ClusterTest extends BaseTest
         }
 
         $nodes = $cluster->getNodeNames();
-        $this->assertSame(\sort($expectedNodeNames), \sort($nodes));
+        \sort($expectedNodeNames);
+        \sort($nodes);
+
+        $this->assertSame($expectedNodeNames, $nodes);
     }
 
     public function testGetNodes(): void

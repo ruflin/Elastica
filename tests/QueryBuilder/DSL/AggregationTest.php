@@ -12,18 +12,16 @@ use PHPUnit\Framework\Attributes\Group;
 /**
  * @internal
  */
+#[Group('unit')]
 class AggregationTest extends AbstractDSLTestCase
 {
-    #[Group('unit')]
     public function testType(): void
     {
         $aggregationDSL = new DSL\Aggregation();
 
-        $this->assertInstanceOf(DSL::class, $aggregationDSL);
         $this->assertEquals(DSL::TYPE_AGGREGATION, $aggregationDSL->getType());
     }
 
-    #[Group('unit')]
     public function testInterface(): void
     {
         $aggregationDSL = new DSL\Aggregation();

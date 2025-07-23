@@ -1,172 +1,235 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Method Elastica\\\\QueryBuilder\\:\\:aggregation\\(\\) should return Elastica\\\\QueryBuilder\\\\DSL\\\\Aggregation but returns Elastica\\\\QueryBuilder\\\\Facade\\.$#"
+			message: '#^Method Elastica\\QueryBuilder\:\:aggregation\(\) should return Elastica\\QueryBuilder\\DSL\\Aggregation but returns Elastica\\QueryBuilder\\Facade\.$#'
+			identifier: return.type
 			count: 1
 			path: src/QueryBuilder.php
 
 		-
-			message: "#^Method Elastica\\\\QueryBuilder\\:\\:collapse\\(\\) should return Elastica\\\\QueryBuilder\\\\DSL\\\\Collapse but returns Elastica\\\\QueryBuilder\\\\Facade\\.$#"
+			message: '#^Method Elastica\\QueryBuilder\:\:collapse\(\) should return Elastica\\QueryBuilder\\DSL\\Collapse but returns Elastica\\QueryBuilder\\Facade\.$#'
+			identifier: return.type
 			count: 1
 			path: src/QueryBuilder.php
 
 		-
-			message: "#^Method Elastica\\\\QueryBuilder\\:\\:query\\(\\) should return Elastica\\\\QueryBuilder\\\\DSL\\\\Query but returns Elastica\\\\QueryBuilder\\\\Facade\\.$#"
+			message: '#^Method Elastica\\QueryBuilder\:\:query\(\) should return Elastica\\QueryBuilder\\DSL\\Query but returns Elastica\\QueryBuilder\\Facade\.$#'
+			identifier: return.type
 			count: 1
 			path: src/QueryBuilder.php
 
 		-
-			message: "#^Method Elastica\\\\QueryBuilder\\:\\:suggest\\(\\) should return Elastica\\\\QueryBuilder\\\\DSL\\\\Suggest but returns Elastica\\\\QueryBuilder\\\\Facade\\.$#"
+			message: '#^Method Elastica\\QueryBuilder\:\:suggest\(\) should return Elastica\\QueryBuilder\\DSL\\Suggest but returns Elastica\\QueryBuilder\\Facade\.$#'
+			identifier: return.type
 			count: 1
 			path: src/QueryBuilder.php
 
 		-
-			message: "#^Parameter \\#1 \\$precision of method Elastica\\\\Aggregation\\\\GeohashGrid\\:\\:setPrecision\\(\\) expects int\\|string, float given\\.$#"
+			message: '#^Parameter \#1 \$precision of method Elastica\\Aggregation\\GeohashGrid\:\:setPrecision\(\) expects int\|string, float given\.$#'
+			identifier: argument.type
 			count: 1
 			path: tests/Aggregation/GeohashGridTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$data of static method Elastica\\\\Bulk\\\\Action\\\\AbstractDocument\\:\\:create\\(\\) expects Elastica\\\\Document\\|Elastica\\\\Script\\\\AbstractScript, stdClass given\\.$#"
+			message: '#^Parameter \#1 \$data of static method Elastica\\Bulk\\Action\\AbstractDocument\:\:create\(\) expects Elastica\\Document\|Elastica\\Script\\AbstractScript, stdClass given\.$#'
+			identifier: argument.type
 			count: 1
 			path: tests/Bulk/Action/AbstractDocumentTest.php
 
 		-
-			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$counter\\.$#"
+			message: '#^Parameter \#1 \$expected of method PHPUnit\\Framework\\Assert\:\:assertSame\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: tests/Bulk/Action/UpdateDocumentTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Elastica\\\\Bulk\\\\Response'' and Elastica\\Bulk\\Response will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Bulk/ResponseSetTest.php
+
+		-
+			message: '#^Access to an undefined property Elastica\\Document\:\:\$counter\.$#'
+			identifier: property.notFound
 			count: 1
 			path: tests/BulkTest.php
 
 		-
-			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$name\\.$#"
+			message: '#^Access to an undefined property Elastica\\Document\:\:\$name\.$#'
+			identifier: property.notFound
 			count: 1
 			path: tests/BulkTest.php
 
 		-
-			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$test\\.$#"
+			message: '#^Access to an undefined property Elastica\\Document\:\:\$test\.$#'
+			identifier: property.notFound
 			count: 3
 			path: tests/BulkTest.php
 
 		-
-			message: "#^Call to an undefined method Elastica\\\\Bulk\\\\Action\\:\\:getDocument\\(\\)\\.$#"
+			message: '#^Call to an undefined method Elastica\\Bulk\\Action\:\:getDocument\(\)\.$#'
+			identifier: method.notFound
 			count: 3
 			path: tests/BulkTest.php
 
 		-
-			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$age\\.$#"
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Elastica\\\\Bulk\\\\Response'' and Elastica\\Bulk\\Response will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/BulkTest.php
+
+		-
+			message: '#^Access to an undefined property Elastica\\Document\:\:\$age\.$#'
+			identifier: property.notFound
 			count: 1
 			path: tests/ClientFunctionalTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$data of method Elastica\\\\Client\\:\\:updateDocument\\(\\) expects array\\|Elastica\\\\Document\\|Elastica\\\\Script\\\\AbstractScript, stdClass given\\.$#"
+			message: '#^Parameter \#2 \$data of method Elastica\\Client\:\:updateDocument\(\) expects array\|Elastica\\Document\|Elastica\\Script\\AbstractScript, stdClass given\.$#'
+			identifier: argument.type
 			count: 1
 			path: tests/ClientFunctionalTest.php
 
 		-
-			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$field1\\.$#"
+			message: '#^Access to an undefined property Elastica\\Document\:\:\$field1\.$#'
+			identifier: property.notFound
 			count: 1
 			path: tests/DocumentTest.php
 
 		-
-			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$field2\\.$#"
+			message: '#^Access to an undefined property Elastica\\Document\:\:\$field2\.$#'
+			identifier: property.notFound
 			count: 1
 			path: tests/DocumentTest.php
 
 		-
-			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$field3\\.$#"
+			message: '#^Access to an undefined property Elastica\\Document\:\:\$field3\.$#'
+			identifier: property.notFound
 			count: 1
 			path: tests/DocumentTest.php
 
 		-
-			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$field4\\.$#"
+			message: '#^Access to an undefined property Elastica\\Document\:\:\$field4\.$#'
+			identifier: property.notFound
 			count: 1
 			path: tests/DocumentTest.php
 
 		-
-			message: "#^Access to an undefined property Elastica\\\\Document\\:\\:\\$field5\\.$#"
+			message: '#^Access to an undefined property Elastica\\Document\:\:\$field5\.$#'
+			identifier: property.notFound
 			count: 1
 			path: tests/DocumentTest.php
 
 		-
-			message: "#^Dead catch \\- Elastica\\\\Exception\\\\InvalidException is never thrown in the try block\\.$#"
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Elastica\\\\Document'' and Elastica\\Document will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 2
+			path: tests/DocumentTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 6
+			path: tests/DocumentTest.php
+
+		-
+			message: '#^Dead catch \- Elastica\\Exception\\InvalidException is never thrown in the try block\.$#'
+			identifier: catch.neverThrown
 			count: 1
 			path: tests/DocumentTest.php
 
 		-
-			message: "#^Expression \"\\$document\\-\\>field5\" on a separate line does not do anything\\.$#"
+			message: '#^Expression "\$document\-\>field5" on a separate line does not do anything\.$#'
+			identifier: expr.resultUnused
 			count: 1
 			path: tests/DocumentTest.php
 
 		-
-			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
 			count: 1
 			path: tests/DocumentTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$name of class Elastica\\\\IndexTemplate constructor expects string, null given\\.$#"
+			message: '#^Parameter \#2 \$name of class Elastica\\IndexTemplate constructor expects string, null given\.$#'
+			identifier: argument.type
 			count: 1
 			path: tests/IndexTemplateTest.php
 
 		-
-			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
 			count: 1
 			path: tests/IndexTest.php
 
 		-
-			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
 			count: 2
 			path: tests/Multi/SearchTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$clauses of class Elastica\\\\Query\\\\SpanNear constructor expects array\\<Elastica\\\\Query\\\\AbstractSpanQuery\\>, array\\<int, Elastica\\\\Query\\\\Term\\> given\\.$#"
+			message: '#^Parameter \#1 \$clauses of class Elastica\\Query\\SpanNear constructor expects array\<Elastica\\Query\\AbstractSpanQuery\>, array\<int, Elastica\\Query\\Term\> given\.$#'
+			identifier: argument.type
 			count: 1
 			path: tests/Query/SpanNearTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$clauses of class Elastica\\\\Query\\\\SpanOr constructor expects array\\<Elastica\\\\Query\\\\AbstractSpanQuery\\>, array\\<int, Elastica\\\\Query\\\\Term\\> given\\.$#"
+			message: '#^Parameter \#1 \$clauses of class Elastica\\Query\\SpanOr constructor expects array\<Elastica\\Query\\AbstractSpanQuery\>, array\<int, Elastica\\Query\\Term\> given\.$#'
+			identifier: argument.type
 			count: 1
 			path: tests/Query/SpanOrTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$term of method Elastica\\\\Query\\\\Terms\\:\\:addTerm\\(\\) expects bool\\|float\\|int\\|string, stdClass given\\.$#"
+			message: '#^Parameter \#1 \$term of method Elastica\\Query\\Terms\:\:addTerm\(\) expects bool\|float\|int\|string, stdClass given\.$#'
+			identifier: argument.type
 			count: 1
 			path: tests/Query/TermsTest.php
 
 		-
-			message: "#^Call to an undefined method ReflectionType\\:\\:getName\\(\\)\\.$#"
+			message: '#^Call to an undefined method ReflectionType\:\:getName\(\)\.$#'
+			identifier: method.notFound
 			count: 2
 			path: tests/QueryBuilder/DSL/AbstractDSLTestCase.php
 
 		-
-			message: "#^Call to an undefined method ReflectionType\\:\\:isBuiltin\\(\\)\\.$#"
+			message: '#^Call to an undefined method ReflectionType\:\:isBuiltin\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: tests/QueryBuilder/DSL/AbstractDSLTestCase.php
 
 		-
-			message: "#^Call to an undefined method Elastica\\\\QueryBuilder\\:\\:custom\\(\\)\\.$#"
+			message: '#^Call to an undefined method Elastica\\QueryBuilder\:\:custom\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: tests/QueryBuilderTest.php
 
 		-
-			message: "#^Call to an undefined method Elastica\\\\QueryBuilder\\:\\:invalid\\(\\)\\.$#"
+			message: '#^Call to an undefined method Elastica\\QueryBuilder\:\:invalid\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: tests/QueryBuilderTest.php
 
 		-
-			message: "#^Expression \"\\$index\\-\\>search\\('elastica search'\\)\\[3\\]\" on a separate line does not do anything\\.$#"
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
 			count: 1
-			path: tests/ResultSetTest.php
+			path: tests/QueryTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$indices of method Elastica\\\\Search\\:\\:addIndices\\(\\) expects array\\<Elastica\\\\Index\\>, array\\<int, stdClass\\> given\\.$#"
+			message: '#^Parameter \#1 \$indices of method Elastica\\Search\:\:addIndices\(\) expects array\<Elastica\\Index\>, array\<int, stdClass\> given\.$#'
+			identifier: argument.type
 			count: 1
 			path: tests/SearchTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$indices of method Elastica\\\\Search\\:\\:addIndicesByName\\(\\) expects array\\<string\\>, array\\<int, stdClass\\> given\\.$#"
+			message: '#^Parameter \#1 \$indices of method Elastica\\Search\:\:addIndicesByName\(\) expects array\<string\>, array\<int, stdClass\> given\.$#'
+			identifier: argument.type
 			count: 1
 			path: tests/SearchTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$suggestion of static method Elastica\\\\Suggest\\:\\:create\\(\\) expects Elastica\\\\Suggest\\|Elastica\\\\Suggest\\\\AbstractSuggest, Elastica\\\\Query\\\\BoolQuery given\\.$#"
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Elastica\\\\Response'' and Elastica\\Response will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
 			count: 1
-			path: tests/SuggestTest.php
-
+			path: tests/StatusTest.php

@@ -131,12 +131,10 @@ class BulkTest extends BaseTest
 
         $this->assertEquals(3, $index->count());
 
-        try {
-            $index->getDocument(3);
-            $this->fail('Document #3 should be deleted');
-        } catch (NotFoundException $e) {
-            $this->assertTrue(true);
-        }
+        $this->expectException(NotFoundException::class);
+        $this->expectExceptionMessage('doc id 3 not found');
+
+        $index->getDocument(3);
     }
 
     #[Group('functional')]

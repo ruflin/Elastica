@@ -14,12 +14,12 @@ use PHPUnit\Framework\Attributes\Group;
 /**
  * @internal
  */
+#[Group('unit')]
 class SuggestTest extends BaseTest
 {
     /**
      * Create self test.
      */
-    #[Group('functional')]
     public function testCreateSelf(): void
     {
         $suggest = new Suggest();
@@ -32,7 +32,6 @@ class SuggestTest extends BaseTest
     /**
      * Create with suggest test.
      */
-    #[Group('functional')]
     public function testCreateWithSuggest(): void
     {
         $suggest1 = new Term('suggest1', '_all');
@@ -42,16 +41,10 @@ class SuggestTest extends BaseTest
         $this->assertTrue($suggest->hasParam('suggestion'));
     }
 
-    /**
-     * Create with non suggest test.
-     */
-    #[Group('functional')]
     public function testCreateWithNonSuggest(): void
     {
-        try {
-            Suggest::create(new BoolQuery());
-            $this->fail();
-        } catch (NotImplementedException $e) {
-        }
+        $this->expectException(NotImplementedException::class);
+
+        Suggest::create(new BoolQuery());
     }
 }

@@ -595,7 +595,6 @@ class SearchTest extends BaseTest
 
         $search->addIndex($index);
         $resultSet = $search->search();
-        $this->assertInstanceOf(ResultSet::class, $resultSet);
         $this->assertCount(10, $resultSet);
         $this->assertEquals(11, $resultSet->getTotalHits());
 

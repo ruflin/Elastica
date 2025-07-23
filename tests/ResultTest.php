@@ -90,7 +90,6 @@ class ResultTest extends BaseTest
 
         $resultSet = $index->search('hans');
 
-        $this->assertNotNull($resultSet->getTotalTime(), 'Get Total Time should never be a null value');
         $this->assertEquals(
             'integer',
             \gettype($resultSet->getTotalTime()),

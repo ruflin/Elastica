@@ -18,9 +18,9 @@ use PHPUnit\Framework\Attributes\Group;
 /**
  * @internal
  */
+#[Group('unit')]
 class ResponseSetTest extends BaseTest
 {
-    #[Group('unit')]
     public function testConstructor(): void
     {
         [$responseData, $actions] = self::_getFixture();
@@ -31,14 +31,12 @@ class ResponseSetTest extends BaseTest
     }
 
     #[DataProvider('isOkDataProvider')]
-    #[Group('unit')]
     public function testIsOk(array $responseData, array $actions, bool $expected): void
     {
         $responseSet = $this->_createResponseSet($responseData, $actions);
         $this->assertEquals($expected, $responseSet->isOk());
     }
 
-    #[Group('unit')]
     public function testGetError(): void
     {
         [$responseData, $actions] = self::_getFixture();
@@ -72,7 +70,6 @@ class ResponseSetTest extends BaseTest
         }
     }
 
-    #[Group('unit')]
     public function testGetBulkResponses(): void
     {
         [$responseData, $actions] = self::_getFixture();
@@ -94,7 +91,6 @@ class ResponseSetTest extends BaseTest
         }
     }
 
-    #[Group('unit')]
     public function testIterator(): void
     {
         [$responseData, $actions] = self::_getFixture();

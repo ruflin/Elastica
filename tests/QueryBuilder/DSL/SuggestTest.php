@@ -11,18 +11,16 @@ use PHPUnit\Framework\Attributes\Group;
 /**
  * @internal
  */
+#[Group('unit')]
 class SuggestTest extends AbstractDSLTestCase
 {
-    #[Group('unit')]
     public function testType(): void
     {
         $suggestDSL = new DSL\Suggest();
 
-        $this->assertInstanceOf(DSL::class, $suggestDSL);
         $this->assertEquals(DSL::TYPE_SUGGEST, $suggestDSL->getType());
     }
 
-    #[Group('unit')]
     public function testInterface(): void
     {
         $suggestDSL = new DSL\Suggest();

@@ -12,18 +12,16 @@ use PHPUnit\Framework\Attributes\Group;
 /**
  * @internal
  */
+#[Group('unit')]
 class QueryTest extends AbstractDSLTestCase
 {
-    #[Group('unit')]
     public function testType(): void
     {
         $queryDSL = new DSL\Query();
 
-        $this->assertInstanceOf(DSL::class, $queryDSL);
         $this->assertEquals(DSL::TYPE_QUERY, $queryDSL->getType());
     }
 
-    #[Group('unit')]
     public function testMatch(): void
     {
         $match = (new DSL\Query())
@@ -33,7 +31,6 @@ class QueryTest extends AbstractDSLTestCase
         $this->assertEquals('value', $match->getParam('field'));
     }
 
-    #[Group('unit')]
     public function testInterface(): void
     {
         $queryDSL = new DSL\Query();

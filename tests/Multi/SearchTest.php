@@ -6,7 +6,6 @@ namespace Elastica\Test\Multi;
 
 use Elastica\Document;
 use Elastica\Index;
-use Elastica\Multi\ResultSet as MultiResultSet;
 use Elastica\Multi\Search as MultiSearch;
 use Elastica\Query;
 use Elastica\Query\Term;
@@ -129,7 +128,6 @@ class SearchTest extends BaseTest
 
         $multiResultSet = $multiSearch->search();
 
-        $this->assertInstanceOf(MultiResultSet::class, $multiResultSet);
         $this->assertCount(2, $multiResultSet);
         $this->assertContainsOnlyInstancesOf(ResultSet::class, $multiResultSet);
 
@@ -155,7 +153,6 @@ class SearchTest extends BaseTest
         $search2->getQuery()->setSize(0);
         $multiResultSet = $multiSearch->search();
 
-        $this->assertInstanceOf(MultiResultSet::class, $multiResultSet);
         $this->assertCount(2, $multiResultSet);
 
         $resultSets = $multiResultSet->getResultSets();
@@ -215,7 +212,6 @@ class SearchTest extends BaseTest
 
         $multiResultSet = $multiSearch->search();
 
-        $this->assertInstanceOf(MultiResultSet::class, $multiResultSet);
         $this->assertCount(2, $multiResultSet);
         $this->assertContainsOnlyInstancesOf(ResultSet::class, $multiResultSet);
         $this->assertInstanceOf(ResultSet::class, $multiResultSet['search1']);
@@ -243,7 +239,6 @@ class SearchTest extends BaseTest
         $search2->getQuery()->setSize(0);
         $multiResultSet = $multiSearch->search();
 
-        $this->assertInstanceOf(MultiResultSet::class, $multiResultSet);
         $this->assertCount(2, $multiResultSet);
 
         $resultSets = $multiResultSet->getResultSets();
@@ -385,7 +380,6 @@ class SearchTest extends BaseTest
         $search2->getQuery()->setSize(0);
         $multiResultSet = $multiSearch->search();
 
-        $this->assertInstanceOf(MultiResultSet::class, $multiResultSet);
         $this->assertCount(2, $multiResultSet);
 
         $resultSets = $multiResultSet->getResultSets();
@@ -464,7 +458,6 @@ class SearchTest extends BaseTest
 
         $multiResultSet = $multiSearch->search();
 
-        $this->assertInstanceOf(MultiResultSet::class, $multiResultSet);
         $this->assertCount(2, $multiResultSet);
 
         $resultSets = $multiResultSet->getResultSets();

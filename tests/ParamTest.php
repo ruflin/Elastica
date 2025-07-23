@@ -18,7 +18,6 @@ class ParamTest extends BaseTest
     public function testToArrayEmpty(): void
     {
         $param = new Param();
-        $this->assertInstanceOf(Param::class, $param);
         $this->assertEquals(['param' => []], $param->toArray());
     }
 
@@ -29,7 +28,6 @@ class ParamTest extends BaseTest
         $params = ['hello' => 'word', 'nicolas' => 'ruflin'];
         $param->setParams($params);
 
-        $this->assertInstanceOf(Param::class, $param);
         $this->assertEquals(['param' => $params], $param->toArray());
     }
 

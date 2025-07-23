@@ -14,9 +14,9 @@ use PHPUnit\Framework\Attributes\Group;
 /**
  * @internal
  */
+#[Group('unit')]
 class DocumentTest extends BaseTest
 {
-    #[Group('unit')]
     public function testAddFile(): void
     {
         $fileName = '/dev/null';
@@ -29,7 +29,6 @@ class DocumentTest extends BaseTest
         $this->assertSame($doc, $returnValue);
     }
 
-    #[Group('unit')]
     public function testAddGeoPoint(): void
     {
         $doc = new Document();
@@ -38,7 +37,6 @@ class DocumentTest extends BaseTest
         $this->assertSame($doc, $returnValue);
     }
 
-    #[Group('unit')]
     public function testSetData(): void
     {
         $doc = new Document();
@@ -47,7 +45,6 @@ class DocumentTest extends BaseTest
         $this->assertSame($doc, $returnValue);
     }
 
-    #[Group('unit')]
     public function testToArray(): void
     {
         $id = '17';
@@ -64,7 +61,6 @@ class DocumentTest extends BaseTest
         $this->assertEquals($result, $doc->toArray());
     }
 
-    #[Group('unit')]
     public function testSetIndex(): void
     {
         $document = new Document();
@@ -78,7 +74,6 @@ class DocumentTest extends BaseTest
         $this->assertEquals('index', $document->getIndex());
     }
 
-    #[Group('unit')]
     public function testHasId(): void
     {
         $document = new Document();
@@ -91,7 +86,6 @@ class DocumentTest extends BaseTest
         $this->assertTrue($document->hasId());
     }
 
-    #[Group('unit')]
     public function testGetSetHasRefresh(): void
     {
         $document = new Document();
@@ -117,7 +111,6 @@ class DocumentTest extends BaseTest
         $this->assertEquals(Reindex::REFRESH_WAIT_FOR, $document->getRefresh());
     }
 
-    #[Group('unit')]
     public function testGetOptions(): void
     {
         $document = new Document();
@@ -141,7 +134,6 @@ class DocumentTest extends BaseTest
         $this->assertArrayNotHasKey('parent', $options);
     }
 
-    #[Group('unit')]
     public function testGetSetHasRemove(): void
     {
         $document = new Document('1', ['field1' => 'value1', 'field2' => 'value2', 'field3' => 'value3', 'field4' => null]);
@@ -193,7 +185,6 @@ class DocumentTest extends BaseTest
         $this->assertNotEquals($data, $newData);
     }
 
-    #[Group('unit')]
     public function testDataPropertiesOverloading(): void
     {
         $document = new Document('1', ['field1' => 'value1', 'field2' => 'value2', 'field3' => 'value3', 'field4' => null]);
@@ -243,7 +234,6 @@ class DocumentTest extends BaseTest
         $this->assertNotEquals($data, $newData);
     }
 
-    #[Group('unit')]
     public function testSerializedData(): void
     {
         $data = '{"user":"rolf"}';
@@ -273,7 +263,6 @@ class DocumentTest extends BaseTest
         }
     }
 
-    #[Group('unit')]
     public function testUpsert(): void
     {
         $document = new Document();
@@ -289,7 +278,6 @@ class DocumentTest extends BaseTest
         $this->assertSame($upsert, $document->getUpsert());
     }
 
-    #[Group('unit')]
     public function testDocAsUpsert(): void
     {
         $document = new Document();

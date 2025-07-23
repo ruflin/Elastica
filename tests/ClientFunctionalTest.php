@@ -8,7 +8,6 @@ use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastic\Elasticsearch\Transport\Adapter\AdapterOptions;
 use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Bulk;
-use Elastica\Bulk\ResponseSet;
 use Elastica\Document;
 use Elastica\Exception\NotFoundException;
 use Elastica\Script\Script;
@@ -472,7 +471,6 @@ class ClientFunctionalTest extends BaseTest
 
         $document = $index->getDocument(1);
 
-        $this->assertInstanceOf(Document::class, $document);
         $data = $document->getData();
         $this->assertArrayHasKey('field1', $data);
         $this->assertEquals('value1', $data['field1']);
@@ -488,7 +486,6 @@ class ClientFunctionalTest extends BaseTest
 
         $document = $index->getDocument(1);
 
-        $this->assertInstanceOf(Document::class, $document);
         $data = $document->getData();
         $this->assertArrayHasKey('field1', $data);
         $this->assertEquals('value1', $data['field1']);
@@ -536,7 +533,6 @@ class ClientFunctionalTest extends BaseTest
         $client->updateDocument(1, $newDocument, $index->getName());
 
         $document = $index->getDocument(1);
-        $this->assertInstanceOf(Document::class, $document);
         $data = $document->getData();
         $this->assertArrayHasKey('field1', $data);
         $this->assertEquals('value1', $data['field1']);
@@ -547,7 +543,6 @@ class ClientFunctionalTest extends BaseTest
         $client->updateDocument(1, $newDocument, $index->getName());
 
         $document = $index->getDocument(1);
-        $this->assertInstanceOf(Document::class, $document);
         $data = $document->getData();
         $this->assertArrayHasKey('field1', $data);
         $this->assertEquals('value1updated', $data['field1']);
@@ -609,7 +604,6 @@ class ClientFunctionalTest extends BaseTest
 
         $response = $client->addDocuments($docs);
 
-        $this->assertInstanceOf(ResponseSet::class, $response);
         $this->assertCount(3, $response);
         $this->assertTrue($response->isOk());
         $this->assertFalse($response->hasError());
@@ -626,7 +620,6 @@ class ClientFunctionalTest extends BaseTest
 
         $response = $client->deleteDocuments($deleteDocs);
 
-        $this->assertInstanceOf(ResponseSet::class, $response);
         $this->assertCount(2, $response);
         $this->assertTrue($response->isOk());
         $this->assertFalse($response->hasError());
@@ -650,7 +643,6 @@ class ClientFunctionalTest extends BaseTest
 
         $response = $client->addDocuments($docs);
 
-        $this->assertInstanceOf(ResponseSet::class, $response);
         $this->assertCount(3, $response);
         $this->assertTrue($response->isOk());
         $this->assertFalse($response->hasError());
@@ -667,7 +659,6 @@ class ClientFunctionalTest extends BaseTest
 
         $response = $client->deleteDocuments($deleteDocs, ['refresh' => true]);
 
-        $this->assertInstanceOf(ResponseSet::class, $response);
         $this->assertCount(2, $response);
         $this->assertTrue($response->isOk());
         $this->assertFalse($response->hasError());
@@ -827,8 +818,6 @@ class ClientFunctionalTest extends BaseTest
         $index->refresh();
 
         $query = '{"query":{"query_string":{"query":"ruflin"}}}';
-
-        $path = $index->getName().'/_search';
 
         $response = $client->search(['body' => $query]);
         $responseArray = $response->asArray();
