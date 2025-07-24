@@ -12,7 +12,6 @@ use Elastica\Mapping;
 use Elastica\Query\QueryString;
 use Elastica\Query\SimpleQueryString;
 use Elastica\Query\Term;
-use Elastica\Request;
 use Elastica\Script\Script;
 use Elastica\Status;
 use Elastica\Test\Base as BaseTest;
@@ -153,14 +152,14 @@ class IndexTest extends BaseTest
 
         $index->refresh();
 
-        $this->assertEquals(2, $index->count('', Request::GET));
+        $this->assertEquals(2, $index->count(''));
 
         $query = new Term();
         $key = 'name';
         $value = 'nicolas';
         $query->setTerm($key, $value);
 
-        $this->assertEquals(1, $index->count($query, Request::GET));
+        $this->assertEquals(1, $index->count($query));
     }
 
     #[Group('unit')]
@@ -735,10 +734,10 @@ class IndexTest extends BaseTest
         $index->addDocuments($docs);
         $index->refresh();
 
-        $resultSet = $index->search('hans', null, Request::GET);
+        $resultSet = $index->search('hans', null);
         $this->assertEquals(1, $resultSet->count());
 
-        $count = $index->count('hans', Request::GET);
+        $count = $index->count('hans');
         $this->assertEquals(1, $count);
     }
 

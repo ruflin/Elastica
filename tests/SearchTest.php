@@ -14,7 +14,6 @@ use Elastica\Query;
 use Elastica\Query\FunctionScore;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
-use Elastica\Request;
 use Elastica\ResultSet;
 use Elastica\Script\Script;
 use Elastica\Search;
@@ -446,7 +445,7 @@ class SearchTest extends BaseTest
         $client = $this->_getClient();
         $search1 = new Search($client);
 
-        $result = $search1->search([], [], 'GET');
+        $result = $search1->search([], []);
         $this->assertFalse($result->getResponse()->hasError());
     }
 
@@ -542,19 +541,19 @@ class SearchTest extends BaseTest
 
         $search->addIndex($index);
 
-        $count = $search->count('farrelley', false, Request::GET);
+        $count = $search->count('farrelley', false);
         $this->assertEquals(5, $count);
 
-        $count = $search->count('marley', false, Request::GET);
+        $count = $search->count('marley', false);
         $this->assertEquals(6, $count);
 
-        $count = $search->count('', false, Request::GET);
+        $count = $search->count('', false);
         $this->assertEquals(6, $count, 'Uses previous query set');
 
-        $count = $search->count(new MatchAll(), false, Request::GET);
+        $count = $search->count(new MatchAll(), false);
         $this->assertEquals(11, $count);
 
-        $count = $search->count('bunny', false, Request::GET);
+        $count = $search->count('bunny', false);
         $this->assertEquals(0, $count);
     }
 

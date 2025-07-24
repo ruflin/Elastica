@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Backward Compatibility Breaks
 * Dropped support for PHP <8.1 [#2246](https://github.com/ruflin/Elastica/pull/2246)
+* Removed 3rd `$method` argument from the `Elastica\SearchableInterface::search` and `Elastica\SearchableInterface::count` as they are not unused anymore. The following classes are affected: `Elastica\Search` and `Elastica\Index` [#2256](https://github.com/ruflin/Elastica/pull/2256)
+* Removed `Elastica\Request` class as constants are not used anymore and no longer needed. [#2256](https://github.com/ruflin/Elastica/pull/2256)
 ### Added
 ### Changed
 * Upgrade PHPUnit from 9.5 to 10.5 [#2251](https://github.com/ruflin/Elastica/pull/2251)

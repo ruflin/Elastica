@@ -527,18 +527,18 @@ class Index implements SearchableInterface
         return $search;
     }
 
-    public function search($query = '', ?array $options = null, string $method = Request::POST): ResultSet
+    public function search($query = '', ?array $options = null): ResultSet
     {
         $search = $this->createSearch($query, $options);
 
-        return $search->search('', null, $method);
+        return $search->search('', null);
     }
 
-    public function count($query = '', string $method = Request::POST): int
+    public function count($query = ''): int
     {
         $search = $this->createSearch($query);
 
-        return $search->count('', false, $method);
+        return $search->count('', false);
     }
 
     /**
