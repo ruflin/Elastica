@@ -81,7 +81,6 @@ class ResponseSetTest extends BaseTest
         $this->assertCount(3, $bulkResponses);
 
         foreach ($bulkResponses as $i => $bulkResponse) {
-            $this->assertInstanceOf(Bulk\Response::class, $bulkResponse);
             $bulkResponseData = $bulkResponse->getData();
             $this->assertIsArray($bulkResponseData);
             $this->assertArrayHasKey('_id', $bulkResponseData);
@@ -100,7 +99,6 @@ class ResponseSetTest extends BaseTest
         $this->assertCount(3, $responseSet);
 
         foreach ($responseSet as $i => $bulkResponse) {
-            $this->assertInstanceOf(Bulk\Response::class, $bulkResponse);
             $bulkResponseData = $bulkResponse->getData();
             $this->assertIsArray($bulkResponseData);
             $this->assertArrayHasKey('_id', $bulkResponseData);

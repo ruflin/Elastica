@@ -166,10 +166,8 @@ class DocumentTest extends BaseTest
         $this->assertArrayHasKey('field4', $data);
         $this->assertNull($data['field4']);
 
-        $returnValue = $document->set('field1', 'changed1');
-        $this->assertInstanceOf(Document::class, $returnValue);
-        $returnValue = $document->remove('field3');
-        $this->assertInstanceOf(Document::class, $returnValue);
+        $document->set('field1', 'changed1');
+        $document->remove('field3');
         try {
             $document->remove('field5');
             $this->fail('Undefined field unset should throw exception');

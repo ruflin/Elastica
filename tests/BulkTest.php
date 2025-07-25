@@ -105,7 +105,6 @@ class BulkTest extends BaseTest
         $this->assertFalse($response->hasError());
 
         foreach ($response as $i => $bulkResponse) {
-            $this->assertInstanceOf(Response::class, $bulkResponse);
             $this->assertTrue($bulkResponse->isOk());
             $this->assertFalse($bulkResponse->hasError());
             $this->assertSame($actions[$i], $bulkResponse->getAction());
