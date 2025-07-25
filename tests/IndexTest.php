@@ -752,7 +752,7 @@ class IndexTest extends BaseTest
                 'index' => [
                     'merge' => [
                         'policy' => [
-                            'expunge_deletes_allowed' => 0,
+                            'expunge_deletes_allowed' => 10,
                         ],
                     ],
                     'number_of_shards' => 3,
@@ -782,8 +782,6 @@ class IndexTest extends BaseTest
 
         $stats = $index->getStats()->getData();
         $this->assertSame(1, $stats['_all']['primaries']['docs']['count']);
-
-        $this->markTestSkipped('Failed asserting that 2 is identical to 0.');
         $this->assertSame(0, $stats['_all']['primaries']['docs']['deleted']);
     }
 
