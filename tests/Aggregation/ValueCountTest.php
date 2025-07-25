@@ -8,15 +8,14 @@ use Elastica\Aggregation\ValueCount;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class ValueCountTest extends BaseAggregationTest
+class ValueCountTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testValueCountAggregation(): void
     {
         $agg = new ValueCount('count', 'price');

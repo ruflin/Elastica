@@ -8,15 +8,14 @@ use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Document;
 use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class QueryStringTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSearchMultipleFields(): void
     {
         $str = \uniqid();
@@ -46,9 +45,7 @@ class QueryStringTest extends BaseTest
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSearch(): void
     {
         $index = $this->_createIndex();
@@ -66,9 +63,8 @@ class QueryStringTest extends BaseTest
 
     /**
      * Tests if search in multiple fields is possible.
-     *
-     * @group functional
      */
+    #[Group('functional')]
     public function testSearchFields(): void
     {
         $index = $this->_createIndex();
@@ -87,9 +83,8 @@ class QueryStringTest extends BaseTest
 
     /**
      * Tests if search in multiple fields is possible.
-     *
-     * @group functional
      */
+    #[Group('functional')]
     public function testSearchFieldsValidationException(): void
     {
         $index = $this->_createIndex();
@@ -116,9 +111,7 @@ class QueryStringTest extends BaseTest
         }
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetDefaultOperator(): void
     {
         $operator = 'AND';
@@ -130,9 +123,7 @@ class QueryStringTest extends BaseTest
         $this->assertEquals($data['query_string']['default_operator'], $operator);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetDefaultField(): void
     {
         $default = 'field1';
@@ -144,9 +135,7 @@ class QueryStringTest extends BaseTest
         $this->assertEquals($data['query_string']['default_field'], $default);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetAnalyzer(): void
     {
         $value = 'test';
@@ -156,9 +145,7 @@ class QueryStringTest extends BaseTest
         $this->assertEquals($value, $query->toArray()['query_string']['analyzer']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetAllowLeadingWildcard(): void
     {
         $value = true;
@@ -168,9 +155,7 @@ class QueryStringTest extends BaseTest
         $this->assertEquals($value, $query->toArray()['query_string']['allow_leading_wildcard']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetEnablePositionIncrements(): void
     {
         $value = true;
@@ -180,9 +165,7 @@ class QueryStringTest extends BaseTest
         $this->assertEquals($value, $query->toArray()['query_string']['enable_position_increments']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetFuzzyPrefixLength(): void
     {
         $value = 1;
@@ -192,9 +175,7 @@ class QueryStringTest extends BaseTest
         $this->assertEquals($value, $query->toArray()['query_string']['fuzzy_prefix_length']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetFuzzyMinSim(): void
     {
         $value = 0.1;
@@ -204,9 +185,7 @@ class QueryStringTest extends BaseTest
         $this->assertEquals($value, $query->toArray()['query_string']['fuzzy_min_sim']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetAnalyzeWildcard(): void
     {
         $value = true;
@@ -216,9 +195,7 @@ class QueryStringTest extends BaseTest
         $this->assertEquals($value, $query->toArray()['query_string']['analyze_wildcard']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetTieBreaker(): void
     {
         $value = 0.2;
@@ -228,9 +205,7 @@ class QueryStringTest extends BaseTest
         $this->assertEquals($value, $query->toArray()['query_string']['tie_breaker']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetRewrite(): void
     {
         $rewrite = 'scoring_boolean';
@@ -242,9 +217,7 @@ class QueryStringTest extends BaseTest
         $this->assertEquals($data['query_string']['rewrite'], $rewrite);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetTimezone(): void
     {
         $timezone = 'Europe/Paris';
@@ -264,9 +237,7 @@ class QueryStringTest extends BaseTest
         $this->assertSame($expected, $query->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetPhraseSlop(): void
     {
         $phraseSlop = 9;
@@ -278,9 +249,7 @@ class QueryStringTest extends BaseTest
         $this->assertEquals($phraseSlop, $data['query_string']['phrase_slop']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetBoost(): void
     {
         $index = $this->_createIndex();

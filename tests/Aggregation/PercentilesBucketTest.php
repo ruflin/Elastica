@@ -11,15 +11,14 @@ use Elastica\Aggregation\Terms;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class PercentilesBucketTest extends BaseAggregationTest
+class PercentilesBucketTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testPercentilesBucketAggregation(): void
     {
         $query = Query::create([])
@@ -49,9 +48,7 @@ class PercentilesBucketTest extends BaseAggregationTest
         );
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstructThroughSetters(): void
     {
         $aggregation = (new PercentilesBucket('percentiles_bucket', 'pages>avg_likes_by_page'))

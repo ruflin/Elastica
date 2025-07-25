@@ -8,15 +8,14 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\SplitProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class SplitProcessorTest extends BasePipelineTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSplit(): void
     {
         $processor = new SplitProcessor('joined_array_field', '-');
@@ -31,9 +30,7 @@ class SplitProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSplitWithNonDefaultOptions(): void
     {
         $processor = (new SplitProcessor('joined_array_field', '-'))
@@ -53,9 +50,7 @@ class SplitProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSplitField(): void
     {
         $split = new SplitProcessor('name', '&');

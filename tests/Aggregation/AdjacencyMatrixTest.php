@@ -11,15 +11,14 @@ use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\Term;
 use Elastica\Query\Terms;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class AdjacencyMatrixTest extends BaseAggregationTest
+class AdjacencyMatrixTest extends BaseAggregationTestCase
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $expected = [
@@ -58,9 +57,7 @@ class AdjacencyMatrixTest extends BaseAggregationTest
         $this->assertEquals($expected, $agg->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArraySeparator(): void
     {
         $expected = [
@@ -83,9 +80,7 @@ class AdjacencyMatrixTest extends BaseAggregationTest
         $this->assertEquals($expected, $agg->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testAdjacencyMatrixAggregation(): void
     {
         $agg = new AdjacencyMatrix('interactions');

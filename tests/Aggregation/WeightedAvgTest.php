@@ -9,15 +9,14 @@ use Elastica\Document;
 use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class WeightedAvgTest extends BaseAggregationTest
+class WeightedAvgTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testWeightedAvgAggregation(): void
     {
         $agg = new WeightedAvg('weighted');
@@ -35,9 +34,7 @@ class WeightedAvgTest extends BaseAggregationTest
         $this->assertEquals((5 * 3 + 8 + 1 + 3 * $weightWhenMissing) / 7.0, $results['weighted']['value']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testItsNotPossibleToMixValueFieldAndScript(): void
     {
         $agg = new WeightedAvg('weighted');
@@ -47,9 +44,7 @@ class WeightedAvgTest extends BaseAggregationTest
         $agg->setValueScript('doc.price.value + 1');
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testItsNotPossibleToMixValueScriptAndField(): void
     {
         $agg = new WeightedAvg('weighted');
@@ -59,9 +54,7 @@ class WeightedAvgTest extends BaseAggregationTest
         $agg->setValue('price');
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testItsNotPossibleToMixWeightFieldAndScript(): void
     {
         $agg = new WeightedAvg('weighted');
@@ -71,9 +64,7 @@ class WeightedAvgTest extends BaseAggregationTest
         $agg->setWeightScript('doc.weight.value + 1');
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testItsNotPossibleToMixWeightScriptAndField(): void
     {
         $agg = new WeightedAvg('weighted');

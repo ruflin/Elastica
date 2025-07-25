@@ -6,6 +6,7 @@ namespace Elastica\Test\Cluster\Health;
 
 use Elastica\Cluster\Health\Shard;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
@@ -33,57 +34,43 @@ class ShardTest extends BaseTest
         $this->_shard = new Shard(2, $shardData);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetShardNumber(): void
     {
         $this->assertEquals(2, $this->_shard->getShardNumber());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetStatus(): void
     {
         $this->assertEquals('red', $this->_shard->getStatus());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testisPrimaryActive(): void
     {
         $this->assertTrue($this->_shard->isPrimaryActive());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testIsActive(): void
     {
         $this->assertTrue($this->_shard->isActive());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testIsRelocating(): void
     {
         $this->assertFalse($this->_shard->isRelocating());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testIsInitialized(): void
     {
         $this->assertFalse($this->_shard->isInitialized());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testIsUnassigned(): void
     {
         $this->assertTrue($this->_shard->isUnassigned());

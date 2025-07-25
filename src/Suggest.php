@@ -38,8 +38,6 @@ class Suggest extends Param
     }
 
     /**
-     * @param AbstractSuggest|Suggest $suggestion
-     *
      * @throws NotImplementedException
      */
     public static function create($suggestion): self

@@ -11,15 +11,14 @@ use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\Range;
 use Elastica\Query\Term;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class FilterTest extends BaseAggregationTest
+class FilterTest extends BaseAggregationTestCase
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $expected = [
@@ -38,9 +37,7 @@ class FilterTest extends BaseAggregationTest
         $this->assertEquals($expected, $agg->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testFilterAggregation(): void
     {
         $agg = new Filter('filter');
@@ -58,9 +55,7 @@ class FilterTest extends BaseAggregationTest
         $this->assertEquals((5 + 8) / 2.0, $results);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testFilterNoSubAggregation(): void
     {
         $agg = new Avg('price');
@@ -75,9 +70,7 @@ class FilterTest extends BaseAggregationTest
         $this->assertEquals((5 + 8 + 1 + 3) / 4.0, $results);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstruct(): void
     {
         $agg = new Filter('foo', new Term(['color' => 'blue']));
@@ -93,9 +86,7 @@ class FilterTest extends BaseAggregationTest
         $this->assertEquals($expected, $agg->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstructWithoutFilter(): void
     {
         $agg = new Filter('foo');

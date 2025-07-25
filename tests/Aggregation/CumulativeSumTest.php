@@ -10,15 +10,14 @@ use Elastica\Aggregation\Sum;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class CumulativeSumTest extends BaseAggregationTest
+class CumulativeSumTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testCumulativeSumAggregation(): void
     {
         $query = Query::create([])
@@ -44,9 +43,7 @@ class CumulativeSumTest extends BaseAggregationTest
         $this->assertEquals(58, $results['sales_per_month']['buckets'][2]['cumulative_sales']['value']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstructThroughSetters(): void
     {
         $aggregation = (new CumulativeSum('cumulative_sum', 'sales'))

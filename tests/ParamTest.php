@@ -7,38 +7,31 @@ namespace Elastica\Test;
 use Elastica\Exception\InvalidException;
 use Elastica\Param;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class ParamTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArrayEmpty(): void
     {
         $param = new Param();
-        $this->assertInstanceOf(Param::class, $param);
         $this->assertEquals(['param' => []], $param->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetParams(): void
     {
         $param = new Param();
         $params = ['hello' => 'word', 'nicolas' => 'ruflin'];
         $param->setParams($params);
 
-        $this->assertInstanceOf(Param::class, $param);
         $this->assertEquals(['param' => $params], $param->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetGetParam(): void
     {
         $param = new Param();
@@ -53,9 +46,7 @@ class ParamTest extends BaseTest
         $this->assertEquals($value, $param->getParam($key));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAddParam(): void
     {
         $param = new Param();
@@ -69,9 +60,7 @@ class ParamTest extends BaseTest
         $this->assertEquals([$value], $param->getParam($key));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAddParam2(): void
     {
         $param = new Param();
@@ -87,9 +76,7 @@ class ParamTest extends BaseTest
         $this->assertEquals([$value1, $value2], $param->getParam($key));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetParamInvalid(): void
     {
         $this->expectException(InvalidException::class);
@@ -99,9 +86,7 @@ class ParamTest extends BaseTest
         $param->getParam('notest');
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testHasParam(): void
     {
         $param = new Param();

@@ -8,17 +8,16 @@ use Elastica\Aggregation\Min;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class MinTest extends BaseAggregationTest
+class MinTest extends BaseAggregationTestCase
 {
     private const MIN_PRICE = 1;
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testMinAggregation(): void
     {
         $agg = new Min('min_price');
@@ -31,9 +30,7 @@ class MinTest extends BaseAggregationTest
         $this->assertEquals(self::MIN_PRICE, $results['value']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testMinAggregationWithMissing(): void
     {
         // feature is buggy on version prior 7.5;

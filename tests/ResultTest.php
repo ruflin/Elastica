@@ -9,15 +9,14 @@ use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Result;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class ResultTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetters(): void
     {
         // Creates a new index 'xodoa'
@@ -39,9 +38,7 @@ class ResultTest extends BaseTest
         $this->assertEquals('hans', $result->username);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetIdNoSource(): void
     {
         // Creates a new index 'xodoa'
@@ -78,9 +75,7 @@ class ResultTest extends BaseTest
         $this->assertIsArray($result->getData());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetTotalTimeReturnsExpectedResults(): void
     {
         $index = $this->_createIndex();
@@ -95,7 +90,6 @@ class ResultTest extends BaseTest
 
         $resultSet = $index->search('hans');
 
-        $this->assertNotNull($resultSet->getTotalTime(), 'Get Total Time should never be a null value');
         $this->assertEquals(
             'integer',
             \gettype($resultSet->getTotalTime()),
@@ -103,9 +97,7 @@ class ResultTest extends BaseTest
         );
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetSort(): void
     {
         $index = $this->_createIndex();
@@ -122,9 +114,7 @@ class ResultTest extends BaseTest
         $this->assertSame(['3'], $result->getSort());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetSortWithNoSorting(): void
     {
         $index = $this->_createIndex();
@@ -140,9 +130,7 @@ class ResultTest extends BaseTest
         $this->assertNull($result->getSort());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testHasFields(): void
     {
         $data = ['value set'];

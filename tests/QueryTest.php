@@ -20,15 +20,15 @@ use Elastica\Script\ScriptFields;
 use Elastica\Search;
 use Elastica\Suggest;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class QueryTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testRawQuery(): void
     {
         $textQuery = new Term(['title' => 'test']);
@@ -41,9 +41,7 @@ class QueryTest extends BaseTest
         $this->assertEquals($query1->toArray(), $query2->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSuggestShouldNotRemoveOtherParameters(): void
     {
         $query1 = new Query();
@@ -61,9 +59,7 @@ class QueryTest extends BaseTest
         $this->assertEquals($query1->toArray(), $query2->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testArrayQuery(): void
     {
         $query = [
@@ -82,9 +78,7 @@ class QueryTest extends BaseTest
         $this->assertEquals($query1->toArray(), $query2->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetSort(): void
     {
         $index = $this->_createIndex();
@@ -129,9 +123,7 @@ class QueryTest extends BaseTest
         $this->assertEquals('guschti', $second['firstname']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAddSort(): void
     {
         $query = new Query();
@@ -141,9 +133,7 @@ class QueryTest extends BaseTest
         $this->assertEquals($query->getParam('sort'), [$sortParam]);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetTrackScores(): void
     {
         $query = new Query();
@@ -153,9 +143,7 @@ class QueryTest extends BaseTest
         $this->assertEquals($param, $query->getParam('track_scores'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetRawQuery(): void
     {
         $query = new Query();
@@ -166,9 +154,7 @@ class QueryTest extends BaseTest
         $this->assertEquals($params, $query->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetStoredFields(): void
     {
         $query = (new Query())
@@ -183,9 +169,7 @@ class QueryTest extends BaseTest
         $this->assertCount(2, $data['stored_fields']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGetQuery(): void
     {
         $query = new Query();
@@ -204,9 +188,7 @@ class QueryTest extends BaseTest
         $this->assertSame($termQuery, $query->getQuery());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetQueryToArrayCast(): void
     {
         $query = new Query();
@@ -222,9 +204,7 @@ class QueryTest extends BaseTest
         $this->assertEquals($query->toArray(), $anotherQuery->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testNotCloneInnerObjects(): void
     {
         $query = new Query();
@@ -239,9 +219,7 @@ class QueryTest extends BaseTest
         $this->assertEquals($query->toArray(), $anotherQuery->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetQueryToArrayChangeQuery(): void
     {
         $query = new Query();
@@ -258,9 +236,7 @@ class QueryTest extends BaseTest
         $this->assertNotEquals($queryArray, $query->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetScriptFieldsToArrayCast(): void
     {
         $query = new Query();
@@ -277,9 +253,7 @@ class QueryTest extends BaseTest
         $this->assertEquals($query->toArray(), $anotherQuery->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAddScriptFieldsToArrayCast(): void
     {
         $query = new Query();
@@ -295,9 +269,7 @@ class QueryTest extends BaseTest
         $this->assertEquals($query->toArray(), $anotherQuery->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAddScriptFieldToExistingScriptFields(): void
     {
         $script1 = new Script('s1');
@@ -320,9 +292,7 @@ class QueryTest extends BaseTest
         $this->assertEquals($query->toArray(), $anotherQuery->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAddAggregationToArrayCast(): void
     {
         $query = new Query();
@@ -339,9 +309,7 @@ class QueryTest extends BaseTest
         $this->assertEquals($query->toArray(), $anotherQuery->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetSuggestToArrayCast(): void
     {
         $query = new Query();
@@ -358,9 +326,7 @@ class QueryTest extends BaseTest
         $this->assertEquals($query->toArray(), $anotherQuery->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetRescoreToArrayCast(): void
     {
         $query = new Query();
@@ -377,9 +343,7 @@ class QueryTest extends BaseTest
         $this->assertEquals($query->toArray(), $anotherQuery->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetPostFilterToArrayCast(): void
     {
         $query = new Query();
@@ -394,9 +358,7 @@ class QueryTest extends BaseTest
         $this->assertEquals($query->toArray(), $anotherQuery->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testRawPostFilter(): void
     {
         $query = (new Query())
@@ -420,9 +382,7 @@ class QueryTest extends BaseTest
         ], $query->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testNoSource(): void
     {
         $index = $this->_createIndex();
@@ -459,9 +419,7 @@ class QueryTest extends BaseTest
         $this->assertNotEmpty($result->getData());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetCollapseToArrayCast(): void
     {
         $query = new Query();
@@ -478,9 +436,7 @@ class QueryTest extends BaseTest
         $this->assertEquals($query->toArray(), $anotherQuery->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testCollapseArrayStructure(): void
     {
         $query = new Query();
@@ -514,9 +470,7 @@ class QueryTest extends BaseTest
         $this->assertEquals($expected, $actual['collapse']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testCollapseSecondLevelArrayStructure(): void
     {
         $query = new Query();
@@ -557,9 +511,7 @@ class QueryTest extends BaseTest
         $this->assertEquals($expected, $actual['collapse']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testIndicesBoostQuery(): void
     {
         $query = (new Query(new Term(['field' => 'value'])))
@@ -581,9 +533,7 @@ class QueryTest extends BaseTest
         $this->assertSame($expected, $query->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testPointInTimeInQuery(): void
     {
         $query = new Query();
@@ -597,9 +547,7 @@ class QueryTest extends BaseTest
         $this->assertSame('5m', $queryAsArray['pit']['keep_alive']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testPointInTimeQueryExecution(): void
     {
         $index = $this->_createIndex();
@@ -611,9 +559,7 @@ class QueryTest extends BaseTest
         $this->assertSame($pitId, $search->search()->getPointInTimeId());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetTrackTotalHitsIsInParams(): void
     {
         $query = new Query();
@@ -622,7 +568,7 @@ class QueryTest extends BaseTest
         $this->assertFalse($query->getParam('track_total_hits'));
     }
 
-    public function provideSetTrackTotalHitsInvalidValue(): iterable
+    public static function provideSetTrackTotalHitsInvalidValue(): iterable
     {
         yield 'string' => ['string string'];
         yield 'null' => [null];
@@ -630,11 +576,8 @@ class QueryTest extends BaseTest
         yield 'array' => [[]];
     }
 
-    /**
-     * @group functional
-     *
-     * @dataProvider provideSetTrackTotalHitsInvalidValue
-     */
+    #[DataProvider('provideSetTrackTotalHitsInvalidValue')]
+    #[Group('functional')]
     public function testSetTrackTotalHitsInvalidValue($value): void
     {
         $this->expectException(InvalidException::class);
@@ -642,9 +585,7 @@ class QueryTest extends BaseTest
         (new Query())->setTrackTotalHits($value);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetTrackTotalHits(): void
     {
         $index = $this->_createIndex();

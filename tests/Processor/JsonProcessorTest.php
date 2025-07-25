@@ -8,15 +8,14 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\JsonProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class JsonProcessorTest extends BasePipelineTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testJson(): void
     {
         $processor = new JsonProcessor('string_source');
@@ -30,9 +29,7 @@ class JsonProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testJsonWithNonDefaultOptions(): void
     {
         $processor = (new JsonProcessor('string_source'))
@@ -53,9 +50,7 @@ class JsonProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testJsonField(): void
     {
         $json = new JsonProcessor('name');

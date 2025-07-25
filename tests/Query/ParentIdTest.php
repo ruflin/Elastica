@@ -9,15 +9,14 @@ use Elastica\Query\ParentId;
 use Elastica\QueryBuilder\DSL\Query;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class ParentIdTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $query = new ParentId('join', '1');
@@ -32,9 +31,7 @@ class ParentIdTest extends BaseTest
         $this->assertEquals($expectedArray, $query->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testParentId(): void
     {
         $client = $this->_getClient();
@@ -125,9 +122,7 @@ class ParentIdTest extends BaseTest
         $this->assertEquals(2, $results->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testQueryBuilderParentId(): void
     {
         $client = $this->_getClient();

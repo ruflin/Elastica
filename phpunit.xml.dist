@@ -5,25 +5,21 @@
         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
         colors="true"
         beStrictAboutOutputDuringTests="true"
-        verbose="true"
         failOnWarning="true"
         failOnIncomplete="true"
         failOnRisky="true"
+        failOnDeprecation="true"
         executionOrder="random"
+        displayDetailsOnTestsThatTriggerDeprecations="true"
+        displayDetailsOnPhpunitDeprecations="true"
+        displayDetailsOnTestsThatTriggerWarnings="true"
         bootstrap="tests/bootstrap.php"
 >
-    <coverage>
+    <source>
         <include>
-            <directory>src/</directory>
+            <directory>src</directory>
         </include>
-        <exclude>
-            <file>src/Query/Match.php</file>
-        </exclude>
-    </coverage>
-
-    <listeners>
-        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>
-    </listeners>
+    </source>
 
     <testsuites>
         <testsuite name="default">

@@ -12,6 +12,7 @@ use Elastica\Query\MatchAll;
 use Elastica\Query\Term;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
@@ -20,9 +21,7 @@ class FunctionScoreTest extends BaseTest
 {
     protected $locationOrigin = '32.804654, -117.242594';
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $priceOrigin = 0;
@@ -59,9 +58,7 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals($expected, $query->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testDecayWeight(): void
     {
         $priceOrigin = 0;
@@ -122,9 +119,7 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals($expected, $query->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGauss(): void
     {
         $query = new FunctionScore();
@@ -138,9 +133,7 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals("Mr. Frostie's", $result0['name']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGaussMultiValue(): void
     {
         $query = new FunctionScore();
@@ -163,9 +156,7 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals("Miller's Field", $result0['name']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAddWeightFunction(): void
     {
         $filter = new Term(['price' => 4.5]);
@@ -179,9 +170,7 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals($query->toArray(), $sameQuery->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testLegacyFilterAddWeightFunction(): void
     {
         $query = new FunctionScore();
@@ -195,9 +184,7 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals($query->toArray(), $sameQuery->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testWeight(): void
     {
         $filter = new Term(['price' => 4.5]);
@@ -229,9 +216,7 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals("Mr. Frostie's", $result0['name']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testWeightWithLegacyFilter(): void
     {
         $filter = new Term(['price' => 4.5]);
@@ -263,9 +248,7 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals("Mr. Frostie's", $result0['name']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testRandomScore(): void
     {
         $filter = new Term(['price' => 4.5]);
@@ -301,9 +284,7 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals("Miller's Field", $result0['name']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testRandomScoreWithLegacyFilter(): void
     {
         $filter = new Term(['price' => 4.5]);
@@ -339,9 +320,7 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals("Miller's Field", $result0['name']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testRandomScoreWeight(): void
     {
         $filter = new Term(['price' => 4.5]);
@@ -370,9 +349,7 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals($expected, $query->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testRandomScoreWeightWithLegacyFilter(): void
     {
         $filter = new Term(['price' => 4.5]);
@@ -401,9 +378,7 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals($expected, $query->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testRandomScoreWithoutSeed(): void
     {
         $query = new FunctionScore();
@@ -414,9 +389,7 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals(2, $response->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testRandomScoreWithoutField(): void
     {
         $filter = new Term(['price' => 4.5]);
@@ -451,9 +424,7 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals("Miller's Field", $result0['name']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testScriptScore(): void
     {
         $scriptString = "_score * doc['price'].value";
@@ -485,9 +456,7 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals("Miller's Field", $result0['name']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetMinScore(): void
     {
         $expected = [
@@ -520,9 +489,7 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals(1, $results[0]->getId());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testFieldValueFactor(): void
     {
         $expected = [

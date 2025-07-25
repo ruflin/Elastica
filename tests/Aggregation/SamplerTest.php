@@ -9,15 +9,15 @@ use Elastica\Aggregation\Sum;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class SamplerTest extends BaseAggregationTest
+class SamplerTest extends BaseAggregationTestCase
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $expected = [
@@ -44,11 +44,8 @@ class SamplerTest extends BaseAggregationTest
         $this->assertEquals($expected, $agg->toArray());
     }
 
-    /**
-     * @dataProvider shardSizeProvider
-     *
-     * @group functional
-     */
+    #[DataProvider('shardSizeProvider')]
+    #[Group('functional')]
     public function testSamplerAggregation(int $shardSize, int $docCount): void
     {
         $agg = new Sampler('price_sampler');
@@ -66,7 +63,7 @@ class SamplerTest extends BaseAggregationTest
         $this->assertEquals($docCount, $results['doc_count']);
     }
 
-    public function shardSizeProvider(): array
+    public static function shardSizeProvider(): array
     {
         return [
             [1, 2],

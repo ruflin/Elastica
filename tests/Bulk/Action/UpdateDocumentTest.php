@@ -8,15 +8,14 @@ use Elastica\Bulk\Action\UpdateDocument;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class UpdateDocumentTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testUpdateDocument(): void
     {
         $document = new Document(null, ['foo' => 'bar']);
@@ -55,9 +54,7 @@ class UpdateDocumentTest extends BaseTest
         $this->assertEquals($expected, (string) $action);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testUpdateDocumentAsUpsert(): void
     {
         $document = (new Document('1', ['foo' => 'bar'], 'index'))

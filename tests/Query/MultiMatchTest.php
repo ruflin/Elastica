@@ -11,6 +11,7 @@ use Elastica\Query;
 use Elastica\Query\MultiMatch;
 use Elastica\ResultSet;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
@@ -24,9 +25,7 @@ class MultiMatchTest extends BaseTest
         ['id' => '4', 'name' => 'John',    'last_name' => 'not Doe',  'full_name' => 'John not Doe'],
     ];
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testMinimumShouldMatch(): void
     {
         $multiMatch = new MultiMatch();
@@ -38,9 +37,7 @@ class MultiMatchTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testAndOperator(): void
     {
         $multiMatch = new MultiMatch();
@@ -52,9 +49,7 @@ class MultiMatchTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testTypePhrasePrefix(): void
     {
         $multiMatch = new MultiMatch();
@@ -66,9 +61,7 @@ class MultiMatchTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testTypeBoolPrefix(): void
     {
         $multiMatch = new MultiMatch();
@@ -80,9 +73,7 @@ class MultiMatchTest extends BaseTest
         $this->assertEquals(2, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testFuzzy(): void
     {
         $multiMatch = new MultiMatch();
@@ -110,9 +101,7 @@ class MultiMatchTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testFuzzyWithOptions1(): void
     {
         // Here Elasticsearch will not accept mispells
@@ -127,9 +116,7 @@ class MultiMatchTest extends BaseTest
         $this->assertEquals(0, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testFuzzyWithOptions2(): void
     {
         // Here with a 'M' search we should hit 'Moraes' first
@@ -146,9 +133,7 @@ class MultiMatchTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testZeroTerm(): void
     {
         $multiMatch = new MultiMatch();
@@ -166,9 +151,7 @@ class MultiMatchTest extends BaseTest
         $this->assertEquals(4, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testBaseMultiMatch(): void
     {
         $multiMatch = new MultiMatch();

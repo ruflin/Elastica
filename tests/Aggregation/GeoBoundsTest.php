@@ -9,15 +9,14 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class GeoBoundsTest extends BaseAggregationTest
+class GeoBoundsTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGeoBoundsAggregation(): void
     {
         $agg = new GeoBounds('viewport', 'location');

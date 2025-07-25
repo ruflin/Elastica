@@ -8,15 +8,14 @@ use Elastica\Aggregation\Stats;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class StatsTest extends BaseAggregationTest
+class StatsTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testStatsAggregation(): void
     {
         $agg = new Stats('stats');
@@ -33,9 +32,7 @@ class StatsTest extends BaseAggregationTest
         $this->assertEquals(5 + 8 + 1 + 3, $results['sum']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testStatsAggregationWithMissing(): void
     {
         $agg = new Stats('stats');

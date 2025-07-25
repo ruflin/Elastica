@@ -8,15 +8,14 @@ use Elastica\Document;
 use Elastica\Query\MatchNone;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class MatchNoneTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $query = new MatchNone();
@@ -26,9 +25,7 @@ class MatchNoneTest extends BaseTest
         $this->assertEquals($expectedArray, $query->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testMatchNone(): void
     {
         $index = $this->_createIndex();
