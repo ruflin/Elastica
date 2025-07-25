@@ -8,8 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Backward Compatibility Breaks
 ### Added
+* Added support for Component Template [#2257](https://github.com/ruflin/Elastica/pull/2257)
+* Added support for Index Template, using `useLegacy = false`  [#2257](https://github.com/ruflin/Elastica/pull/2257)
+* Added Template class to target only legacy Template [#2257](https://github.com/ruflin/Elastica/pull/2257)
 ### Changed
 ### Deprecated
+* Deprecated `Elastica\Template` because it's deprecated since version 7.8 on ElasticSearch [#2257](https://github.com/ruflin/Elastica/pull/2257)
 ### Removed
 ### Fixed
 * `Elastica\Query\BoolQuery::toArray` no longer changes `$this->_params` to \stdClass when empty [#2241](https://github.com/ruflin/Elastica/pull/2241)
