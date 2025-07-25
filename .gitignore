@@ -16,3 +16,5 @@ atlassian-ide-plugin.xml
 
 composer.lock
 composer.phar
+
+.vscode/mcp.json
