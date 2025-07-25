@@ -43,25 +43,6 @@ class IndexTemplateTest extends BaseTest
     /**
      * @group functional
      */
-    public function testLegacyCreateTemplate(): void
-    {
-        $template = [
-            'index_patterns' => 'te*',
-            'settings' => [
-                'number_of_shards' => 1,
-            ],
-        ];
-        $name = 'index_legacy_template1';
-        $indexTemplate = new IndexTemplate($this->_getClient(), $name);
-        $indexTemplate->create($template);
-        $this->assertTrue($indexTemplate->exists());
-        $indexTemplate->delete();
-        $this->assertFalse($indexTemplate->exists());
-    }
-
-    /**
-     * @group functional
-     */
     public function testCreateTemplate(): void
     {
         $template = [
@@ -71,36 +52,11 @@ class IndexTemplateTest extends BaseTest
             ],
         ];
         $name = 'index_template1';
-        $indexTemplate = new IndexTemplate($this->_getClient(), $name, false);
+        $indexTemplate = new IndexTemplate($this->_getClient(), $name);
         $indexTemplate->create($template);
         $this->assertTrue($indexTemplate->exists());
         $indexTemplate->delete();
         $this->assertFalse($indexTemplate->exists());
-    }
-
-    /**
-     * @group functional
-     */
-    public function testLegacyCreateAlreadyExistsTemplateException(): void
-    {
-        $template = [
-            'index_patterns' => 'te*',
-            'settings' => [
-                'number_of_shards' => 1,
-            ],
-        ];
-        $name = 'index_legacy_template1';
-        $indexTemplate = new IndexTemplate($this->_getClient(), $name);
-        $indexTemplate->create($template);
-        try {
-            $indexTemplate->create($template);
-        } catch (ClientResponseException $e) {
-            $error = \json_decode((string) $e->getResponse()->getBody(), true)['error']['root_cause'][0] ?? null;
-
-            $this->assertNotEquals('index_template_already_exists_exception', $error['type']);
-            $this->assertEquals('resource_already_exists_exception', $error['type']);
-            $this->assertEquals(400, $e->getResponse()->getStatusCode());
-        }
     }
 
     /**
@@ -115,7 +71,7 @@ class IndexTemplateTest extends BaseTest
             ],
         ];
         $name = 'index_template1';
-        $indexTemplate = new IndexTemplate($this->_getClient(), $name, false);
+        $indexTemplate = new IndexTemplate($this->_getClient(), $name);
         $indexTemplate->create($template);
         try {
             $indexTemplate->create($template);

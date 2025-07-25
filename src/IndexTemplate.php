@@ -33,35 +33,14 @@ class IndexTemplate
     protected $_client;
 
     /**
-     * Indicates if we should use the legacy template API.
-     *
-     * @var bool
-     */
-    protected $_useLegacy;
-
-    /**
-     * Legacy template object if using the legacy API.
-     *
-     * @var Template
-     */
-    protected $_legacyTemplate;
-
-    /**
      * Creates a new index template object.
      *
      * @param string $name Index template name
      *
      * @throws InvalidException
      */
-    public function __construct(Client $client, $name, $useLegacy = true)
+    public function __construct(Client $client, $name)
     {
-        $this->_useLegacy = $useLegacy;
-        if ($useLegacy) {
-            $this->_legacyTemplate = new Template($client, $name);
-
-            return;
-        }
-
         $this->_client = $client;
 
         if (!\is_scalar($name)) {
@@ -81,10 +60,6 @@ class IndexTemplate
      */
     public function delete(): Response
     {
-        if ($this->_useLegacy) {
-            return $this->_legacyTemplate->delete();
-        }
-
         return $this->_client->toElasticaResponse(
             $this->_client->indices()->deleteTemplate(['name' => $this->getName()])
         );
@@ -105,10 +80,6 @@ class IndexTemplate
      */
     public function create(array $args = []): Response
     {
-        if ($this->_useLegacy) {
-            return $this->_legacyTemplate->create($args);
-        }
-
         return $this->_client->toElasticaResponse(
             $this->_client->indices()->putTemplate(['name' => $this->getName(), 'body' => $args])
         );
@@ -125,9 +96,6 @@ class IndexTemplate
      */
     public function exists(): bool
     {
-        if ($this->_useLegacy) {
-            return $this->_legacyTemplate->exists();
-        }
         $response = $this->_client->indices()->existsTemplate(['name' => $this->getName()]);
 
         return 200 === $response->getStatusCode();
@@ -138,10 +106,6 @@ class IndexTemplate
      */
     public function getName(): string
     {
-        if ($this->_useLegacy) {
-            return $this->_legacyTemplate->getName();
-        }
-
         return $this->_name;
     }
 
@@ -150,10 +114,6 @@ class IndexTemplate
      */
     public function getClient(): Client
     {
-        if ($this->_useLegacy) {
-            return $this->_legacyTemplate->getClient();
-        }
-
         return $this->_client;
     }
 }
