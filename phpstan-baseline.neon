@@ -127,12 +127,6 @@ parameters:
 			path: tests/DocumentTest.php
 
 		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 6
-			path: tests/DocumentTest.php
-
-		-
 			message: '#^Dead catch \- Elastica\\Exception\\InvalidException is never thrown in the try block\.$#'
 			identifier: catch.neverThrown
 			count: 1
@@ -149,12 +143,6 @@ parameters:
 			identifier: deadCode.unreachable
 			count: 1
 			path: tests/DocumentTest.php
-
-		-
-			message: '#^Parameter \#2 \$name of class Elastica\\IndexTemplate constructor expects string, null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/IndexTemplateTest.php
 
 		-
 			message: '#^Unreachable statement \- code above always terminates\.$#'
@@ -209,12 +197,6 @@ parameters:
 			identifier: method.notFound
 			count: 1
 			path: tests/QueryBuilderTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/QueryTest.php
 
 		-
 			message: '#^Parameter \#1 \$indices of method Elastica\\Search\:\:addIndices\(\) expects array\<Elastica\\Index\>, array\<int, stdClass\> given\.$#'

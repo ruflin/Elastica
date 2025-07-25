@@ -178,7 +178,7 @@ class QueryTest extends BaseTest
             $query->getQuery();
             $this->fail('should throw exception because query does not exist');
         } catch (InvalidException $e) {
-            $this->assertTrue(true);
+            // Expected exception
         }
 
         $termQuery = new Term();

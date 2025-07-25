@@ -36,7 +36,7 @@ class IndexTemplateTest extends BaseTest
         $this->expectException(InvalidException::class);
 
         $client = $this->_getClient();
-        new IndexTemplate($client, null);
+        new IndexTemplate($client, null); // @phpstan-ignore-line
     }
 
     #[Group('functional')]
