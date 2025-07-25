@@ -10,7 +10,6 @@ use Elastica\Bulk\Action\AbstractDocument;
 use Elastica\Bulk\Action\CreateDocument;
 use Elastica\Bulk\Action\IndexDocument;
 use Elastica\Bulk\Action\UpdateDocument;
-use Elastica\Bulk\Response;
 use Elastica\Client;
 use Elastica\Document;
 use Elastica\Exception\Bulk\ResponseException;

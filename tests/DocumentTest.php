@@ -191,12 +191,6 @@ class DocumentTest extends BaseTest
         $this->assertEquals('value2', $document->field2);
         $this->assertEquals('value3', $document->field3);
         $this->assertNull($document->field4);
-        try {
-            $document->field5;
-            $this->fail('Undefined field get should throw exception');
-        } catch (InvalidException $e) {
-            // Expected exception
-        }
 
         $this->assertTrue(isset($document->field1));
         $this->assertTrue(isset($document->field2));
@@ -230,6 +224,14 @@ class DocumentTest extends BaseTest
         $newData = $document->getData();
 
         $this->assertNotEquals($data, $newData);
+    }
+
+    public function testUndefinedFieldAccessThrowsException(): void
+    {
+        $document = new Document('1', ['field1' => 'value1']);
+
+        $this->expectException(InvalidException::class);
+        $document->field5;
     }
 
     public function testSerializedData(): void

@@ -42,7 +42,6 @@ parameters:
 			count: 1
 			path: tests/Bulk/Action/UpdateDocumentTest.php
 
-
 		-
 			message: '#^Access to an undefined property Elastica\\Document\:\:\$counter\.$#'
 			identifier: property.notFound
@@ -67,7 +66,6 @@ parameters:
 			count: 3
 			path: tests/BulkTest.php
 
-
 		-
 			message: '#^Access to an undefined property Elastica\\Document\:\:\$age\.$#'
 			identifier: property.notFound
@@ -83,7 +81,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Elastica\\Document\:\:\$field1\.$#'
 			identifier: property.notFound
-			count: 1
+			count: 2
 			path: tests/DocumentTest.php
 
 		-
@@ -110,13 +108,17 @@ parameters:
 			count: 1
 			path: tests/DocumentTest.php
 
-
 		-
 			message: '#^Dead catch \- Elastica\\Exception\\InvalidException is never thrown in the try block\.$#'
 			identifier: catch.neverThrown
 			count: 1
 			path: tests/DocumentTest.php
 
+		-
+			message: '#^Expression "\$document\-\>field5" on a separate line does not do anything\.$#'
+			identifier: expr.resultUnused
+			count: 1
+			path: tests/DocumentTest.php
 
 		-
 			message: '#^Unreachable statement \- code above always terminates\.$#'

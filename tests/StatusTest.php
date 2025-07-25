@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Elastica\Test;
 
 use Elastic\Elasticsearch\Exception\ClientResponseException;
-use Elastica\Response;
 use Elastica\Status;
 use Elastica\Test\Base as BaseTest;
 use PHPUnit\Framework\Attributes\Group;
@@ -21,7 +20,7 @@ class StatusTest extends BaseTest
         $index = $this->_createIndex();
         $status = new Status($index->getClient());
         $response = $status->getResponse();
-        $this->assertNotNull($response);
+        $this->assertIsArray($response->getData());
     }
 
     #[Group('functional')]
