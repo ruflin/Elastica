@@ -9,15 +9,14 @@ use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Reindex;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
+#[Group('unit')]
 class DocumentTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
     public function testAddFile(): void
     {
         $fileName = '/dev/null';
@@ -30,9 +29,6 @@ class DocumentTest extends BaseTest
         $this->assertSame($doc, $returnValue);
     }
 
-    /**
-     * @group unit
-     */
     public function testAddGeoPoint(): void
     {
         $doc = new Document();
@@ -41,9 +37,6 @@ class DocumentTest extends BaseTest
         $this->assertSame($doc, $returnValue);
     }
 
-    /**
-     * @group unit
-     */
     public function testSetData(): void
     {
         $doc = new Document();
@@ -52,9 +45,6 @@ class DocumentTest extends BaseTest
         $this->assertSame($doc, $returnValue);
     }
 
-    /**
-     * @group unit
-     */
     public function testToArray(): void
     {
         $id = '17';
@@ -71,9 +61,6 @@ class DocumentTest extends BaseTest
         $this->assertEquals($result, $doc->toArray());
     }
 
-    /**
-     * @group unit
-     */
     public function testSetIndex(): void
     {
         $document = new Document();
@@ -87,9 +74,6 @@ class DocumentTest extends BaseTest
         $this->assertEquals('index', $document->getIndex());
     }
 
-    /**
-     * @group unit
-     */
     public function testHasId(): void
     {
         $document = new Document();
@@ -102,9 +86,6 @@ class DocumentTest extends BaseTest
         $this->assertTrue($document->hasId());
     }
 
-    /**
-     * @group unit
-     */
     public function testGetSetHasRefresh(): void
     {
         $document = new Document();
@@ -130,9 +111,6 @@ class DocumentTest extends BaseTest
         $this->assertEquals(Reindex::REFRESH_WAIT_FOR, $document->getRefresh());
     }
 
-    /**
-     * @group unit
-     */
     public function testGetOptions(): void
     {
         $document = new Document();
@@ -156,9 +134,6 @@ class DocumentTest extends BaseTest
         $this->assertArrayNotHasKey('parent', $options);
     }
 
-    /**
-     * @group unit
-     */
     public function testGetSetHasRemove(): void
     {
         $document = new Document('1', ['field1' => 'value1', 'field2' => 'value2', 'field3' => 'value3', 'field4' => null]);
@@ -210,9 +185,6 @@ class DocumentTest extends BaseTest
         $this->assertNotEquals($data, $newData);
     }
 
-    /**
-     * @group unit
-     */
     public function testDataPropertiesOverloading(): void
     {
         $document = new Document('1', ['field1' => 'value1', 'field2' => 'value2', 'field3' => 'value3', 'field4' => null]);
@@ -262,9 +234,6 @@ class DocumentTest extends BaseTest
         $this->assertNotEquals($data, $newData);
     }
 
-    /**
-     * @group unit
-     */
     public function testSerializedData(): void
     {
         $data = '{"user":"rolf"}';
@@ -294,9 +263,6 @@ class DocumentTest extends BaseTest
         }
     }
 
-    /**
-     * @group unit
-     */
     public function testUpsert(): void
     {
         $document = new Document();
@@ -312,9 +278,6 @@ class DocumentTest extends BaseTest
         $this->assertSame($upsert, $document->getUpsert());
     }
 
-    /**
-     * @group unit
-     */
     public function testDocAsUpsert(): void
     {
         $document = new Document();

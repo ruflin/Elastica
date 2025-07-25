@@ -8,15 +8,14 @@ use Elastica\Aggregation\Avg;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class AvgTest extends BaseAggregationTest
+class AvgTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testAvgAggregation(): void
     {
         $agg = new Avg('avg');
@@ -32,9 +31,7 @@ class AvgTest extends BaseAggregationTest
         $this->assertEquals((5 + 8 + 1 + 3) / 4.0, $results['avg']['value']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testAvgAggregationWithMissingValue(): void
     {
         $agg = new Avg('avg');

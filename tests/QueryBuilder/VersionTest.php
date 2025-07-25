@@ -7,12 +7,12 @@ namespace Elastica\Test\QueryBuilder;
 use Elastica\QueryBuilder\DSL;
 use Elastica\QueryBuilder\Version;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
- * @group unit
- *
  * @internal
  */
+#[Group('unit')]
 class VersionTest extends BaseTest
 {
     public function testVersions(): void

@@ -19,11 +19,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Backward Compatibility Breaks
 * Dropped support for PHP <8.1 [#2246](https://github.com/ruflin/Elastica/pull/2246)
+* Removed 3rd `$method` argument from the `Elastica\SearchableInterface::search` and `Elastica\SearchableInterface::count` as they are not unused anymore. The following classes are affected: `Elastica\Search` and `Elastica\Index` [#2256](https://github.com/ruflin/Elastica/pull/2256)
+* Removed `Elastica\Request` class as constants are not used anymore and no longer needed. [#2256](https://github.com/ruflin/Elastica/pull/2256)
 ### Added
 * Added support for Component Template [#2257](https://github.com/ruflin/Elastica/pull/2257)
 * Added support for Index Template, using `useLegacy = false`  [#2257](https://github.com/ruflin/Elastica/pull/2257)
 * Added Template class to target only legacy Template [#2257](https://github.com/ruflin/Elastica/pull/2257)
+* Added support for PHP 8.5 [#2253](https://github.com/ruflin/Elastica/pull/2253)
 ### Changed
+* Upgrade PHPUnit from 9.5 to 10.5 [#2251](https://github.com/ruflin/Elastica/pull/2251)
+* Update phpstan to 2.x [#2252](https://github.com/ruflin/Elastica/pull/2252)
 ### Deprecated
 * Deprecated `Elastica\Template` because it's deprecated since version 7.8 on ElasticSearch [#2257](https://github.com/ruflin/Elastica/pull/2257)
 ### Removed

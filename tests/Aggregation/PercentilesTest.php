@@ -7,15 +7,14 @@ namespace Elastica\Test\Aggregation;
 use Elastica\Aggregation\Percentiles;
 use Elastica\Document;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class PercentilesTest extends BaseAggregationTest
+class PercentilesTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testConstruct(): void
     {
         $agg = new Percentiles('price_percentile');
@@ -25,9 +24,7 @@ class PercentilesTest extends BaseAggregationTest
         $this->assertSame('price', $agg->getParam('field'));
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetField(): void
     {
         $agg = (new Percentiles('price_percentile'))
@@ -37,9 +34,7 @@ class PercentilesTest extends BaseAggregationTest
         $this->assertSame('price', $agg->getParam('field'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testCompression(): void
     {
         $expected = [
@@ -60,9 +55,7 @@ class PercentilesTest extends BaseAggregationTest
         $this->assertEquals($expected, $agg->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testHdr(): void
     {
         $expected = [
@@ -83,9 +76,7 @@ class PercentilesTest extends BaseAggregationTest
         $this->assertEquals($expected, $agg->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetPercents(): void
     {
         $percents = [1, 2, 3];
@@ -96,9 +87,7 @@ class PercentilesTest extends BaseAggregationTest
         $this->assertSame($percents, $agg->getParam('percents'));
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testAddPercent(): void
     {
         $percents = [1, 2, 3];
@@ -112,9 +101,7 @@ class PercentilesTest extends BaseAggregationTest
         $this->assertEquals($percents, $agg->getParam('percents'));
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetScript(): void
     {
         $script = 'doc["load_time"].value / 20';
@@ -125,9 +112,7 @@ class PercentilesTest extends BaseAggregationTest
         $this->assertEquals($script, $agg->getParam('script'));
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testActualWork(): void
     {
         // prepare
@@ -169,9 +154,7 @@ class PercentilesTest extends BaseAggregationTest
         $this->assertEquals(1000.0, $aggResult['values']['99.0']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testKeyed(): void
     {
         $expected = [
@@ -241,9 +224,7 @@ class PercentilesTest extends BaseAggregationTest
         $this->assertEquals($expected, $aggResult);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testMissing(): void
     {
         $expected = [

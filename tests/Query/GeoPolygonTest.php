@@ -10,15 +10,14 @@ use Elastica\Query;
 use Elastica\Query\GeoPolygon;
 use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class GeoPolygonTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGeoPoint(): void
     {
         $index = $this->_createIndex();

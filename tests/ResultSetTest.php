@@ -8,15 +8,14 @@ use Elastica\Document;
 use Elastica\Exception\InvalidException;
 use Elastica\Result;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class ResultSetTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetters(): void
     {
         $index = $this->_createIndex();
@@ -40,9 +39,7 @@ class ResultSetTest extends BaseTest
         $this->assertCount(3, $resultSet);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testArrayAccess(): void
     {
         $index = $this->_createIndex();
@@ -59,9 +56,7 @@ class ResultSetTest extends BaseTest
         $this->assertArrayNotHasKey(3, $resultSet);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testDocumentsAccess(): void
     {
         $index = $this->_createIndex();
@@ -82,9 +77,7 @@ class ResultSetTest extends BaseTest
         $this->assertEquals('elastica search', $documents[0]->get('name'));
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testInvalidOffsetCreation(): void
     {
         $this->expectException(InvalidException::class);
@@ -97,9 +90,7 @@ class ResultSetTest extends BaseTest
         $resultSet[1] = new Result(['_id' => 'fakeresult']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testInvalidOffsetGet(): void
     {
         $this->expectException(InvalidException::class);

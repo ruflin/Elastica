@@ -7,15 +7,14 @@ namespace Elastica\Test\Aggregation;
 use Elastica\Aggregation\Cardinality;
 use Elastica\Index;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class AggregationMetadataTest extends BaseAggregationTest
+class AggregationMetadataTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testAggregationSimpleMetadata(): void
     {
         $aggName = 'mock';
@@ -32,9 +31,7 @@ class AggregationMetadataTest extends BaseAggregationTest
         $this->assertEquals($metadata, $results['meta']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testAggregationComplexMetadata(): void
     {
         $aggName = 'mock';

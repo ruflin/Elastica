@@ -9,15 +9,15 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class CardinalityTest extends BaseAggregationTest
+class CardinalityTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testCardinalityAggregation(): void
     {
         $agg = new Cardinality('cardinality');
@@ -30,9 +30,7 @@ class CardinalityTest extends BaseAggregationTest
         $this->assertEquals(3, $results['value']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testCardinalityAggregationWithMissing(): void
     {
         $agg = new Cardinality('cardinality');
@@ -46,7 +44,7 @@ class CardinalityTest extends BaseAggregationTest
         $this->assertEquals(4, $results['value']);
     }
 
-    public function validPrecisionThresholdProvider(): array
+    public static function validPrecisionThresholdProvider(): array
     {
         return [
             'negative-int' => [-140],
@@ -56,11 +54,8 @@ class CardinalityTest extends BaseAggregationTest
         ];
     }
 
-    /**
-     * @dataProvider validPrecisionThresholdProvider
-     *
-     * @group unit
-     */
+    #[DataProvider('validPrecisionThresholdProvider')]
+    #[Group('unit')]
     public function testPrecisionThreshold(int $threshold): void
     {
         $agg = new Cardinality('threshold');
@@ -70,11 +65,8 @@ class CardinalityTest extends BaseAggregationTest
         $this->assertIsInt($agg->getParam('precision_threshold'));
     }
 
-    /**
-     * @dataProvider validRehashProvider
-     *
-     * @group unit
-     */
+    #[DataProvider('validRehashProvider')]
+    #[Group('unit')]
     public function testRehash(bool $rehash): void
     {
         $agg = new Cardinality('rehash');
@@ -84,7 +76,7 @@ class CardinalityTest extends BaseAggregationTest
         $this->assertIsBool($agg->getParam('rehash'));
     }
 
-    public function validRehashProvider(): array
+    public static function validRehashProvider(): array
     {
         return [
             'true' => [true],

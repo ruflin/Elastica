@@ -11,15 +11,14 @@ use Elastica\Aggregation\Max;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class ExtendedStatsBucketTest extends BaseAggregationTest
+class ExtendedStatsBucketTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testExtendedStatBucketAggregation(): void
     {
         $bucketScriptAggregation = new ExtendedStatsBucket('result', 'age_groups>max_weight');
@@ -53,9 +52,7 @@ class ExtendedStatsBucketTest extends BaseAggregationTest
         ], $results['std_deviation_bounds']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testOverrideBucketsPathThroughSetters(): void
     {
         $serialDiffAgg = new ExtendedStatsBucket('bucket_part', 'foobar');

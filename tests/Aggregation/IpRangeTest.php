@@ -9,15 +9,14 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class IpRangeTest extends BaseAggregationTest
+class IpRangeTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testIpRangeAggregation(): void
     {
         $agg = new IpRange('ip', 'address');
@@ -42,9 +41,7 @@ class IpRangeTest extends BaseAggregationTest
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testIpRangeKeyedAggregation(): void
     {
         $agg = new IpRange('ip', 'address');

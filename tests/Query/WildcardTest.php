@@ -8,15 +8,15 @@ use Elastica\Document;
 use Elastica\Mapping;
 use Elastica\Query\Wildcard;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class WildcardTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstruct(): void
     {
         $wildcard = new Wildcard('name', 'aaa*');
@@ -28,9 +28,7 @@ class WildcardTest extends BaseTest
         $this->assertSame(1.0, $data['boost']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $wildcard = new Wildcard('name', 'value*', 2.0);
@@ -49,9 +47,7 @@ class WildcardTest extends BaseTest
         $this->assertEquals($expectedArray, $wildcard->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSearchWithAnalyzer(): void
     {
         $client = $this->_getClient();
@@ -104,11 +100,8 @@ class WildcardTest extends BaseTest
         $this->assertEquals(0, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     *
-     * @dataProvider caseInsensitiveDataProvider
-     */
+    #[DataProvider('caseInsensitiveDataProvider')]
+    #[Group('functional')]
     public function testCaseInsensitive(bool $expected): void
     {
         // feature doesn't exist on version prior 7.10;
@@ -129,7 +122,7 @@ class WildcardTest extends BaseTest
         $this->assertEquals($expectedArray, $query->toArray());
     }
 
-    public function caseInsensitiveDataProvider(): iterable
+    public static function caseInsensitiveDataProvider(): iterable
     {
         yield [true];
         yield [false];

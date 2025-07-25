@@ -10,15 +10,14 @@ use Elastica\Query\SpanNear;
 use Elastica\Query\SpanTerm;
 use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class SpanNearTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstructWrongTypeInvalid(): void
     {
         $this->expectException(InvalidException::class);
@@ -29,9 +28,7 @@ class SpanNearTest extends BaseTest
         new SpanNear([$term1, $term2]);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstructValid(): void
     {
         $field = 'name';
@@ -65,9 +62,7 @@ class SpanNearTest extends BaseTest
         $this->assertEquals($expected, $spanNearQuery->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSpanNearTerm(): void
     {
         $field = 'lorem';

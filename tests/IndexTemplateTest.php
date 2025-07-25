@@ -8,6 +8,7 @@ use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Exception\InvalidException;
 use Elastica\IndexTemplate;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * IndexTemplate class tests.
@@ -16,9 +17,7 @@ use Elastica\Test\Base as BaseTest;
  */
 class IndexTemplateTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testInstantiate(): void
     {
         $name = 'index_template1';
@@ -29,9 +28,7 @@ class IndexTemplateTest extends BaseTest
         $this->assertEquals($name, $indexTemplate->getName());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testIncorrectInstantiate(): void
     {
         $this->expectException(InvalidException::class);
@@ -40,9 +37,7 @@ class IndexTemplateTest extends BaseTest
         new IndexTemplate($client, null);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testCreateTemplate(): void
     {
         $template = [
@@ -59,9 +54,7 @@ class IndexTemplateTest extends BaseTest
         $this->assertFalse($indexTemplate->exists());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testCreateAlreadyExistsTemplateException(): void
     {
         $template = [

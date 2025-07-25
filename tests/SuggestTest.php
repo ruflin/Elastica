@@ -9,16 +9,16 @@ use Elastica\Query\BoolQuery;
 use Elastica\Suggest;
 use Elastica\Suggest\Term;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
+#[Group('unit')]
 class SuggestTest extends BaseTest
 {
     /**
      * Create self test.
-     *
-     * @group functional
      */
     public function testCreateSelf(): void
     {
@@ -31,8 +31,6 @@ class SuggestTest extends BaseTest
 
     /**
      * Create with suggest test.
-     *
-     * @group functional
      */
     public function testCreateWithSuggest(): void
     {
@@ -43,17 +41,10 @@ class SuggestTest extends BaseTest
         $this->assertTrue($suggest->hasParam('suggestion'));
     }
 
-    /**
-     * Create with non suggest test.
-     *
-     * @group functional
-     */
     public function testCreateWithNonSuggest(): void
     {
-        try {
-            Suggest::create(new BoolQuery());
-            $this->fail();
-        } catch (NotImplementedException $e) {
-        }
+        $this->expectException(NotImplementedException::class);
+
+        Suggest::create(new BoolQuery());
     }
 }

@@ -66,6 +66,15 @@ tools/phpdocumentor.phar:
 run-phpdoc: tools/phpdocumentor.phar
 	tools/phpdocumentor.phar --directory=src --target=build/docs
 
+.PHONY: run-phpstan
+run-phpstan: composer-install
+	vendor/bin/phpstan analyse --no-progress --no-interaction
+
+.PHONY: fix-phpstan-baseline
+fix-phpstan-baseline: composer-install
+	vendor/bin/phpstan analyse --no-progress --no-interaction --generate-baseline phpstan-baseline.neon
+
+
 ##
 ## Docker commands
 ##

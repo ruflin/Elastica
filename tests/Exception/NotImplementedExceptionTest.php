@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace Elastica\Test\Exception;
 
 use Elastica\Exception\NotImplementedException;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class NotImplementedExceptionTest extends AbstractExceptionTest
+class NotImplementedExceptionTest extends AbstractExceptionTestCase
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testInstance(): void
     {
         $code = 4;

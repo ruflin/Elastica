@@ -6,15 +6,14 @@ namespace Elastica\Test;
 
 use Elastica\Node;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class NodeTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testCreateNode(): void
     {
         $client = $this->_getClient();
@@ -25,9 +24,7 @@ class NodeTest extends BaseTest
         $this->assertSame($name, $node->getId());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetInfo(): void
     {
         $client = $this->_getClient();
@@ -41,9 +38,7 @@ class NodeTest extends BaseTest
         $this->assertSame($node, $info->getNode());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetStats(): void
     {
         $client = $this->_getClient();
@@ -57,9 +52,7 @@ class NodeTest extends BaseTest
         $this->assertSame($node, $stats->getNode());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGetName(): void
     {
         $client = $this->_getClient();

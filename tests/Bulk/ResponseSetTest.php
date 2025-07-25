@@ -12,41 +12,34 @@ use Elastica\Exception\Bulk\Response\ActionException;
 use Elastica\Exception\Bulk\ResponseException;
 use Elastica\Response;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
+#[Group('unit')]
 class ResponseSetTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
     public function testConstructor(): void
     {
-        [$responseData, $actions] = $this->_getFixture();
+        [$responseData, $actions] = self::_getFixture();
 
         $responseSet = $this->_createResponseSet($responseData, $actions);
 
         $this->assertEquals(200, $responseSet->getStatus());
     }
 
-    /**
-     * @group unit
-     *
-     * @dataProvider isOkDataProvider
-     */
+    #[DataProvider('isOkDataProvider')]
     public function testIsOk(array $responseData, array $actions, bool $expected): void
     {
         $responseSet = $this->_createResponseSet($responseData, $actions);
         $this->assertEquals($expected, $responseSet->isOk());
     }
 
-    /**
-     * @group unit
-     */
     public function testGetError(): void
     {
-        [$responseData, $actions] = $this->_getFixture();
+        [$responseData, $actions] = self::_getFixture();
         $responseData['items'][1]['index']['ok'] = false;
         $responseData['items'][1]['index']['error'] = 'SomeExceptionMessage';
         $responseData['items'][2]['index']['ok'] = false;
@@ -77,12 +70,9 @@ class ResponseSetTest extends BaseTest
         }
     }
 
-    /**
-     * @group unit
-     */
     public function testGetBulkResponses(): void
     {
-        [$responseData, $actions] = $this->_getFixture();
+        [$responseData, $actions] = self::_getFixture();
 
         $responseSet = $this->_createResponseSet($responseData, $actions);
 
@@ -101,12 +91,9 @@ class ResponseSetTest extends BaseTest
         }
     }
 
-    /**
-     * @group unit
-     */
     public function testIterator(): void
     {
-        [$responseData, $actions] = $this->_getFixture();
+        [$responseData, $actions] = self::_getFixture();
 
         $responseSet = $this->_createResponseSet($responseData, $actions);
 
@@ -130,9 +117,9 @@ class ResponseSetTest extends BaseTest
         $this->assertTrue($responseSet->valid());
     }
 
-    public function isOkDataProvider(): \Generator
+    public static function isOkDataProvider(): \Generator
     {
-        [$responseData, $actions] = $this->_getFixture();
+        [$responseData, $actions] = self::_getFixture();
 
         yield [$responseData, $actions, true];
         $responseData['items'][2]['index']['ok'] = false;
@@ -157,7 +144,7 @@ class ResponseSetTest extends BaseTest
         return $bulk->send();
     }
 
-    protected function _getFixture(): array
+    protected static function _getFixture(): array
     {
         $responseData = [
             'took' => 5,

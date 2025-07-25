@@ -10,15 +10,14 @@ use Elastica\Aggregation\Max;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class DerivativeTest extends BaseAggregationTest
+class DerivativeTest extends BaseAggregationTestCase
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $expected = [
@@ -44,9 +43,7 @@ class DerivativeTest extends BaseAggregationTest
         $this->assertEquals($expected, $maxAgg->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testMaxAggregation(): void
     {
         $index = $this->getIndexForTest();

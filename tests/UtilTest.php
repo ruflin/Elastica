@@ -6,23 +6,22 @@ namespace Elastica\Test;
 
 use Elastica\Test\Base as BaseTest;
 use Elastica\Util;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class UtilTest extends BaseTest
 {
-    /**
-     * @group unit
-     *
-     * @dataProvider getIsDateMathEscapedPairs
-     */
+    #[DataProvider('getIsDateMathEscapedPairs')]
+    #[Group('unit')]
     public function testIsDateMathEscaped($requestUri, $expectedIsEscaped): void
     {
         $this->assertEquals($expectedIsEscaped, Util::isDateMathEscaped($requestUri));
     }
 
-    public function getIsDateMathEscapedPairs(): array
+    public static function getIsDateMathEscapedPairs(): array
     {
         return [
             ['', false],
@@ -35,17 +34,14 @@ class UtilTest extends BaseTest
         ];
     }
 
-    /**
-     * @group unit
-     *
-     * @dataProvider getEscapeDateMathPairs
-     */
+    #[DataProvider('getEscapeDateMathPairs')]
+    #[Group('unit')]
     public function testEscapeDateMath($requestUri, $expectedEscapedRequestUri): void
     {
         $this->assertEquals($expectedEscapedRequestUri, Util::escapeDateMath($requestUri));
     }
 
-    public function getEscapeDateMathPairs(): array
+    public static function getEscapeDateMathPairs(): array
     {
         return [
             ['', ''],
@@ -67,17 +63,14 @@ class UtilTest extends BaseTest
         ];
     }
 
-    /**
-     * @group unit
-     *
-     * @dataProvider getEscapeTermPairs
-     */
+    #[DataProvider('getEscapeTermPairs')]
+    #[Group('unit')]
     public function testEscapeTerm($unescaped, $escaped): void
     {
         $this->assertEquals($escaped, Util::escapeTerm($unescaped));
     }
 
-    public function getEscapeTermPairs(): array
+    public static function getEscapeTermPairs(): array
     {
         return [
             ['', ''],
@@ -89,17 +82,14 @@ class UtilTest extends BaseTest
         ];
     }
 
-    /**
-     * @group unit
-     *
-     * @dataProvider getReplaceBooleanWordsPairs
-     */
+    #[DataProvider('getReplaceBooleanWordsPairs')]
+    #[Group('unit')]
     public function testReplaceBooleanWords($before, $after): void
     {
         $this->assertEquals($after, Util::replaceBooleanWords($before));
     }
 
-    public function getReplaceBooleanWordsPairs(): array
+    public static function getReplaceBooleanWordsPairs(): array
     {
         return [
             ['to be OR not to be', 'to be || not to be'],
@@ -111,9 +101,7 @@ class UtilTest extends BaseTest
         ];
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testEscapeTermSpecialCharacters(): void
     {
         $before = '\\+-&&||!(){}[]^"~*?:/<>';
@@ -122,9 +110,7 @@ class UtilTest extends BaseTest
         $this->assertEquals(Util::escapeTerm($before), $after);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToCamelCase(): void
     {
         $string = 'hello_world';
@@ -134,9 +120,7 @@ class UtilTest extends BaseTest
         $this->assertEquals('HowAreYouToday', Util::toCamelCase($string));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToSnakeCase(): void
     {
         $this->assertSame('foo_bar', Util::toSnakeCase('fooBar'));
@@ -144,9 +128,7 @@ class UtilTest extends BaseTest
         $this->assertSame('how_are_you_today', Util::toSnakeCase('HowAreYouToday'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConvertDateTimeObjectWithTimezone(): void
     {
         $dateTimeObject = new \DateTime();
@@ -159,9 +141,7 @@ class UtilTest extends BaseTest
         $this->assertEquals($convertedString, $date);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConvertDateTimeObjectWithoutTimezone(): void
     {
         $dateTimeObject = new \DateTime();
@@ -174,9 +154,7 @@ class UtilTest extends BaseTest
         $this->assertEquals($convertedString, $date);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConvertDateWithInt(): void
     {
         $dateInt = 1705361024;
@@ -188,9 +166,7 @@ class UtilTest extends BaseTest
         $this->assertEquals($convertedString, $date);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConvertDateWithString(): void
     {
         $dateString = 'Mon, 15 Jan 2024 23:23:44 GMT';

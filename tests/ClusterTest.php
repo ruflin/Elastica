@@ -7,12 +7,12 @@ namespace Elastica\Test;
 use Elastica\Cluster;
 use Elastica\Node;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
- * @group functional
- *
  * @internal
  */
+#[Group('functional')]
 class ClusterTest extends BaseTest
 {
     public function testGetNodeNames(): void
@@ -29,7 +29,10 @@ class ClusterTest extends BaseTest
         }
 
         $nodes = $cluster->getNodeNames();
-        $this->assertSame(\sort($expectedNodeNames), \sort($nodes));
+        \sort($expectedNodeNames);
+        \sort($nodes);
+
+        $this->assertSame($expectedNodeNames, $nodes);
     }
 
     public function testGetNodes(): void

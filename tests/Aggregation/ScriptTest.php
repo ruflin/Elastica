@@ -9,15 +9,14 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Script\Script;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class ScriptTest extends BaseAggregationTest
+class ScriptTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testAggregationScript(): void
     {
         $agg = new Sum('sum');
@@ -31,9 +30,7 @@ class ScriptTest extends BaseAggregationTest
         $this->assertEquals(5 + 8 + 1 + 3, $results['value']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testAggregationScriptAsString(): void
     {
         $agg = new Sum('sum');
@@ -46,9 +43,7 @@ class ScriptTest extends BaseAggregationTest
         $this->assertEquals(5 + 8 + 1 + 3, $results['value']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetScript(): void
     {
         $aggregation = 'sum';

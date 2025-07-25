@@ -8,15 +8,14 @@ use Elastica\Document;
 use Elastica\Query\SpanFirst;
 use Elastica\Query\SpanTerm;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class SpanFirstTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $query = new SpanFirst();
@@ -35,9 +34,7 @@ class SpanFirstTest extends BaseTest
         ], $data);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSpanNearTerm(): void
     {
         $field = 'lorem';

@@ -9,15 +9,14 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class DateHistogramTest extends BaseAggregationTest
+class DateHistogramTest extends BaseAggregationTestCase
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstructForCalendarInterval(): void
     {
         $agg = new DateHistogram('hist', 'created', '1h');
@@ -32,9 +31,7 @@ class DateHistogramTest extends BaseAggregationTest
         $this->assertSame($expected, $agg->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstructForFixedInterval(): void
     {
         $agg = new DateHistogram('hist', 'created', '2h');
@@ -49,9 +46,7 @@ class DateHistogramTest extends BaseAggregationTest
         $this->assertSame($expected, $agg->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testDateHistogramAggregation(): void
     {
         $agg = new DateHistogram('hist', 'created', '1h');
@@ -75,9 +70,7 @@ class DateHistogramTest extends BaseAggregationTest
         $this->assertEquals(1, $nonDocCount);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testDateHistogramAggregationWithMissing(): void
     {
         $agg = new DateHistogram('hist', 'created', '1h');
@@ -102,9 +95,7 @@ class DateHistogramTest extends BaseAggregationTest
         $this->assertEquals(1, $nonDocCount);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testDateHistogramKeyedAggregation(): void
     {
         $agg = new DateHistogram('hist', 'created', '1h');
@@ -123,9 +114,7 @@ class DateHistogramTest extends BaseAggregationTest
         $this->assertSame($expected, \array_keys($results['buckets']));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetOffset(): void
     {
         $agg = (new DateHistogram('hist', 'created', '1h'))
@@ -143,9 +132,7 @@ class DateHistogramTest extends BaseAggregationTest
         $this->assertSame($expected, $agg->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSetOffsetWorks(): void
     {
         $agg = new DateHistogram('hist', 'created', '1m');
@@ -158,9 +145,7 @@ class DateHistogramTest extends BaseAggregationTest
         $this->assertEquals('2014-01-29T00:19:40.000Z', $results['buckets'][0]['key_as_string']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetTimezone(): void
     {
         $agg = (new DateHistogram('hist', 'created', '1h'))

@@ -8,15 +8,14 @@ use Elastica\Document;
 use Elastica\Query;
 use Elastica\Query\MatchPhrase;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class HighlightTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testHightlightSearch(): void
     {
         $index = $this->_createIndex();

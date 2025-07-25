@@ -10,15 +10,14 @@ use Elastica\Query\AbstractGeoShape;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\GeoShapeProvided;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class GeoShapeProvidedTest extends BaseTest
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSearch(): void
     {
         $index = $this->_createIndex();
@@ -60,9 +59,7 @@ class GeoShapeProvidedTest extends BaseTest
         $index->delete();
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstructEnvelope(): void
     {
         $envelope = [
@@ -86,9 +83,7 @@ class GeoShapeProvidedTest extends BaseTest
         $this->assertEquals($expected, $gsp->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstructPolygon(): void
     {
         $polygon = [[102.0, 2.0], [103.0, 2.0], [103.0, 3.0], [103.0, 3.0], [102.0, 2.0]];
@@ -109,9 +104,7 @@ class GeoShapeProvidedTest extends BaseTest
         $this->assertEquals($expected, $gsp->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetRelation(): void
     {
         $gsp = new GeoShapeProvided('location', [[25.0, 75.0], [75.0, 25.0]]);

@@ -7,15 +7,14 @@ namespace Elastica\Test\Query;
 use Elastica\Document;
 use Elastica\Query\SpanTerm;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class SpanTermTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstruct(): void
     {
         $field = 'name';
@@ -31,9 +30,7 @@ class SpanTermTest extends BaseTest
         $this->assertEquals($expectedArray, $query->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSpanTerm(): void
     {
         $field = 'name';

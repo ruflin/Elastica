@@ -7,6 +7,8 @@ namespace Elastica\Test\Script;
 use Elastica\Exception\InvalidException;
 use Elastica\Script\ScriptId;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
@@ -15,9 +17,7 @@ class ScriptIdTest extends BaseTest
 {
     private const SCRIPT_ID = 'my_script';
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstructor(): void
     {
         $script = new ScriptId(self::SCRIPT_ID);
@@ -58,9 +58,7 @@ class ScriptIdTest extends BaseTest
         $this->assertEquals(ScriptId::LANG_PAINLESS, $script->getLang());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testCreateString(): void
     {
         $script = ScriptId::create(self::SCRIPT_ID);
@@ -75,9 +73,7 @@ class ScriptIdTest extends BaseTest
         $this->assertEquals($expected, $script->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testCreateScript(): void
     {
         $data = new ScriptId(self::SCRIPT_ID);
@@ -88,9 +84,7 @@ class ScriptIdTest extends BaseTest
         $this->assertSame($data, $script);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testCreateArray(): void
     {
         $params = [
@@ -115,11 +109,8 @@ class ScriptIdTest extends BaseTest
         $this->assertEquals(ScriptId::LANG_PAINLESS, $script->getLang());
     }
 
-    /**
-     * @group unit
-     *
-     * @dataProvider dataProviderCreateInvalid
-     */
+    #[DataProvider('dataProviderCreateInvalid')]
+    #[Group('unit')]
     public function testCreateInvalid($data): void
     {
         $this->expectException(InvalidException::class);
@@ -127,7 +118,7 @@ class ScriptIdTest extends BaseTest
         ScriptId::create($data);
     }
 
-    public function dataProviderCreateInvalid(): array
+    public static function dataProviderCreateInvalid(): array
     {
         return [
             [
@@ -142,9 +133,7 @@ class ScriptIdTest extends BaseTest
         ];
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetLang(): void
     {
         $script = new ScriptId(self::SCRIPT_ID, [], ScriptId::LANG_PAINLESS);
@@ -153,9 +142,7 @@ class ScriptIdTest extends BaseTest
         $this->assertEquals(ScriptId::LANG_PAINLESS, $script->getLang());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetScriptId(): void
     {
         $script = new ScriptId(self::SCRIPT_ID);
