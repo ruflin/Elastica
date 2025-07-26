@@ -17,10 +17,9 @@ class HasParent extends AbstractQuery
 {
     /**
      * @param AbstractQuery|array|BaseQuery|string|null $query
+     * @param string                                    $type  Parent document type
      *
      * @phpstan-param TCreateQueryArgsMatching $query
-     *
-     * @param string $type Parent document type
      */
     public function __construct($query, string $type)
     {

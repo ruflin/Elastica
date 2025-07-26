@@ -20,7 +20,7 @@ final class WithConsecutive
     /**
      * @param array<mixed> $parameterGroups
      *
-     * @return array<int, callback<mixed>>
+     * @return array<int, callable<mixed>>
      */
     public static function create(...$parameterGroups): array
     {

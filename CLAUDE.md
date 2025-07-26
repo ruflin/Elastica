@@ -11,10 +11,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Filter tests by name: `make docker-run-phpunit PHPUNIT_OPTIONS="--filter=ClientTest"`
 
 ### Code Quality
-- Check coding standards: `make docker-run-phpcs`
-- Fix coding standards: `make docker-fix-phpcs`
+- Check coding standards: `make run-phpcs`
+- Fix coding standards: `make fix-phpcs`
+- Check coding standards (Docker): `make docker-run-phpcs`
+- Fix coding standards (Docker): `make docker-fix-phpcs`
 - Run PHPStan analysis: `make run-phpstan`
 - Fix PHPStan baseline: `make fix-phpstan-baseline`
+- Run PHPStan analysis (Docker): `make docker-run-phpstan`
+- Fix PHPStan baseline (Docker): `make docker-fix-phpstan-baseline`
 
 ### Docker Environment
 - Start development environment: `make docker-start`
