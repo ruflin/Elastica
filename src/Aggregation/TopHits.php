@@ -50,6 +50,8 @@ class TopHits extends AbstractAggregation
     /**
      * How the top matching hits should be sorted. By default the hits are sorted by the score of the main query.
      *
+     * @param array<string, mixed> $sortArgs
+     *
      * @return $this
      */
     public function setSort(array $sortArgs): self
@@ -60,7 +62,7 @@ class TopHits extends AbstractAggregation
     /**
      * Allows to control how the _source field is returned with every hit.
      *
-     * @param array|bool|string $params Fields to be returned or false to disable source
+     * @param array<int, string>|bool|string $params Fields to be returned or false to disable source
      *
      * @return $this
      */
@@ -92,7 +94,7 @@ class TopHits extends AbstractAggregation
     /**
      * Set script fields.
      *
-     * @param array|ScriptFields $scriptFields
+     * @param array<string, AbstractScript>|ScriptFields $scriptFields
      *
      * @return $this
      */
@@ -124,6 +126,8 @@ class TopHits extends AbstractAggregation
     /**
      * Sets highlight arguments for the results.
      *
+     * @param array<string, mixed> $highlightArgs
+     *
      * @return $this
      */
     public function setHighlight(array $highlightArgs): self
@@ -133,6 +137,8 @@ class TopHits extends AbstractAggregation
 
     /**
      * Allows to return the field data representation of a field for each hit.
+     *
+     * @param array<int, string> $fields
      *
      * @return $this
      */

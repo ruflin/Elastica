@@ -65,7 +65,7 @@ class Param implements ArrayableInterface, \Countable
     /**
      * Sets (overwrites) all params of this object.
      *
-     * @param array $params Parameter list
+     * @param array<string, mixed> $params Parameter list
      *
      * @return $this
      */
@@ -130,7 +130,7 @@ class Param implements ArrayableInterface, \Countable
     /**
      * Returns the params array.
      *
-     * @return array Params
+     * @return array<string, mixed> Params
      */
     public function getParams()
     {

@@ -1,6 +1,876 @@
 parameters:
 	ignoreErrors:
 		-
+			message: '#^Method Elastica\\Aggregation\\WeightedAvg\:\:setValueType\(\) has parameter \$valueType with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Aggregation/WeightedAvg.php
+
+		-
+			message: '#^Method Elastica\\Bulk\\Action\\AbstractDocument\:\:_getMetadata\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Bulk/Action/AbstractDocument.php
+
+		-
+			message: '#^Method Elastica\\Bulk\\Action\\DeleteDocument\:\:_getMetadata\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Bulk/Action/DeleteDocument.php
+
+		-
+			message: '#^Method Elastica\\Bulk\\Action\\IndexDocument\:\:_getMetadata\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Bulk/Action/IndexDocument.php
+
+		-
+			message: '#^Method Elastica\\Bulk\\Response\:\:__construct\(\) has parameter \$responseData with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Bulk/Response.php
+
+		-
+			message: '#^Class Elastica\\Bulk\\ResponseSet implements generic interface Iterator but does not specify its types\: TKey, TValue$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Bulk/ResponseSet.php
+
+		-
+			message: '#^Method Elastica\\Bulk\\ResponseSet\:\:getFullError\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Bulk/ResponseSet.php
+
+		-
+			message: '#^Method Elastica\\ClientConfiguration\:\:fromArray\(\) has parameter \$config with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ClientConfiguration.php
+
+		-
+			message: '#^Method Elastica\\ClientConfiguration\:\:getAll\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ClientConfiguration.php
+
+		-
+			message: '#^Method Elastica\\Cluster\:\:getState\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Cluster.php
+
+		-
+			message: '#^Property Elastica\\Cluster\:\:\$_data type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Cluster.php
+
+		-
+			message: '#^Method Elastica\\Cluster\\Health\:\:_retrieveHealthData\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Cluster/Health.php
+
+		-
+			message: '#^Method Elastica\\Cluster\\Health\:\:getData\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Cluster/Health.php
+
+		-
+			message: '#^Property Elastica\\Cluster\\Health\:\:\$_data type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Cluster/Health.php
+
+		-
+			message: '#^Method Elastica\\Cluster\\Health\\Index\:\:__construct\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Cluster/Health/Index.php
+
+		-
+			message: '#^Property Elastica\\Cluster\\Health\\Index\:\:\$_data type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Cluster/Health/Index.php
+
+		-
+			message: '#^Method Elastica\\Cluster\\Health\\Shard\:\:__construct\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Cluster/Health/Shard.php
+
+		-
+			message: '#^Property Elastica\\Cluster\\Health\\Shard\:\:\$_data type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Cluster/Health/Shard.php
+
+		-
+			message: '#^Method Elastica\\Cluster\\Settings\:\:get\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Cluster/Settings.php
+
+		-
+			message: '#^Method Elastica\\Cluster\\Settings\:\:getPersistent\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Cluster/Settings.php
+
+		-
+			message: '#^Method Elastica\\Cluster\\Settings\:\:getTransient\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Cluster/Settings.php
+
+		-
+			message: '#^Method Elastica\\Cluster\\Settings\:\:set\(\) has parameter \$settings with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Cluster/Settings.php
+
+		-
+			message: '#^Method Elastica\\Cluster\\Settings\:\:setPersistent\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Cluster/Settings.php
+
+		-
+			message: '#^Method Elastica\\Cluster\\Settings\:\:setTransient\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Cluster/Settings.php
+
+		-
+			message: '#^Method Elastica\\Document\:\:__get\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Document.php
+
+		-
+			message: '#^Method Elastica\\Document\:\:__set\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Document.php
+
+		-
+			message: '#^Method Elastica\\Document\:\:get\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Document.php
+
+		-
+			message: '#^Method Elastica\\Document\:\:get\(\) has parameter \$key with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Document.php
+
+		-
+			message: '#^Method Elastica\\Document\:\:set\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Document.php
+
+		-
+			message: '#^Method Elastica\\Index\\Recovery\:\:getData\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Index/Recovery.php
+
+		-
+			message: '#^Method Elastica\\Index\\Recovery\:\:getRecoveryData\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Index/Recovery.php
+
+		-
+			message: '#^Property Elastica\\Index\\Recovery\:\:\$_data type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Index/Recovery.php
+
+		-
+			message: '#^Method Elastica\\Index\\Settings\:\:get\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Index/Settings.php
+
+		-
+			message: '#^Method Elastica\\Index\\Settings\:\:set\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Index/Settings.php
+
+		-
+			message: '#^Property Elastica\\Index\\Settings\:\:\$_data type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Index/Settings.php
+
+		-
+			message: '#^Method Elastica\\Index\\Stats\:\:get\(\) has parameter \$args with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Index/Stats.php
+
+		-
+			message: '#^Method Elastica\\Index\\Stats\:\:getData\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Index/Stats.php
+
+		-
+			message: '#^Property Elastica\\Index\\Stats\:\:\$_data type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Index/Stats.php
+
+		-
+			message: '#^Method Elastica\\IndexTemplate\:\:create\(\) has parameter \$args with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IndexTemplate.php
+
+		-
+			message: '#^Method Elastica\\JSON\:\:parse\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/JSON.php
+
+		-
+			message: '#^Method Elastica\\Mapping\:\:__construct\(\) has parameter \$properties with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Mapping.php
+
+		-
+			message: '#^Method Elastica\\Mapping\:\:create\(\) has parameter \$mapping with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Mapping.php
+
+		-
+			message: '#^Method Elastica\\Mapping\:\:getProperties\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Mapping.php
+
+		-
+			message: '#^Method Elastica\\Mapping\:\:send\(\) has parameter \$query with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Mapping.php
+
+		-
+			message: '#^Method Elastica\\Mapping\:\:setMeta\(\) has parameter \$meta with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Mapping.php
+
+		-
+			message: '#^Method Elastica\\Mapping\:\:setProperties\(\) has parameter \$properties with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Mapping.php
+
+		-
+			message: '#^Method Elastica\\Mapping\:\:setSource\(\) has parameter \$source with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Mapping.php
+
+		-
+			message: '#^Method Elastica\\Mapping\:\:toArray\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Mapping.php
+
+		-
+			message: '#^Property Elastica\\Mapping\:\:\$_mapping type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Mapping.php
+
+		-
+			message: '#^Class Elastica\\Multi\\ResultSet implements generic interface ArrayAccess but does not specify its types\: TKey, TValue$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Multi/ResultSet.php
+
+		-
+			message: '#^Class Elastica\\Multi\\ResultSet implements generic interface Iterator but does not specify its types\: TKey, TValue$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Multi/ResultSet.php
+
+		-
+			message: '#^Method Elastica\\Multi\\Search\:\:_getSearchDataHeader\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Multi/Search.php
+
+		-
+			message: '#^Property Elastica\\Multi\\Search\:\:\$HEADER_OPTIONS has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Multi/Search.php
+
+		-
+			message: '#^Property Elastica\\Multi\\Search\:\:\$_options type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Multi/Search.php
+
+		-
+			message: '#^Method Elastica\\Node\\Info\:\:__construct\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Node/Info.php
+
+		-
+			message: '#^Method Elastica\\Node\\Info\:\:get\(\) has parameter \$args with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Node/Info.php
+
+		-
+			message: '#^Method Elastica\\Node\\Info\:\:getData\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Node/Info.php
+
+		-
+			message: '#^Method Elastica\\Node\\Info\:\:getPlugins\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Node/Info.php
+
+		-
+			message: '#^Method Elastica\\Node\\Info\:\:refresh\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Node/Info.php
+
+		-
+			message: '#^Property Elastica\\Node\\Info\:\:\$_data type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Node/Info.php
+
+		-
+			message: '#^Property Elastica\\Node\\Info\:\:\$_params type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Node/Info.php
+
+		-
+			message: '#^Method Elastica\\Node\\Stats\:\:get\(\) has parameter \$args with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Node/Stats.php
+
+		-
+			message: '#^Method Elastica\\Node\\Stats\:\:get\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Node/Stats.php
+
+		-
+			message: '#^Method Elastica\\Node\\Stats\:\:getData\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Node/Stats.php
+
+		-
+			message: '#^Property Elastica\\Node\\Stats\:\:\$_data type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Node/Stats.php
+
+		-
+			message: '#^Method Elastica\\Param\:\:_convertArrayable\(\) has parameter \$array with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Param.php
+
+		-
+			message: '#^Method Elastica\\Param\:\:_convertArrayable\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Param.php
+
+		-
+			message: '#^Method Elastica\\Param\:\:_setRawParam\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Param.php
+
+		-
+			message: '#^Method Elastica\\Pipeline\:\:setRawProcessors\(\) has parameter \$processors with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Pipeline.php
+
+		-
+			message: '#^Method Elastica\\Processor\\AppendProcessor\:\:__construct\(\) has parameter \$value with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Processor/AppendProcessor.php
+
+		-
+			message: '#^Method Elastica\\Processor\\AppendProcessor\:\:setValue\(\) has parameter \$value with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Processor/AppendProcessor.php
+
+		-
+			message: '#^Method Elastica\\Processor\\AttachmentProcessor\:\:setProperties\(\) has parameter \$properties with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Processor/AttachmentProcessor.php
+
+		-
+			message: '#^Method Elastica\\Processor\\DateIndexNameProcessor\:\:setDateFormats\(\) has parameter \$formats with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Processor/DateIndexNameProcessor.php
+
+		-
+			message: '#^Method Elastica\\Processor\\DateProcessor\:\:__construct\(\) has parameter \$formats with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Processor/DateProcessor.php
+
+		-
+			message: '#^Method Elastica\\Processor\\DateProcessor\:\:setFormats\(\) has parameter \$formats with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Processor/DateProcessor.php
+
+		-
+			message: '#^Method Elastica\\Processor\\ForeachProcessor\:\:__construct\(\) has parameter \$processor with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Processor/ForeachProcessor.php
+
+		-
+			message: '#^Method Elastica\\Processor\\ForeachProcessor\:\:setRawProcessor\(\) has parameter \$processor with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Processor/ForeachProcessor.php
+
+		-
+			message: '#^Method Elastica\\Processor\\KvProcessor\:\:setExcludeKeys\(\) has parameter \$listOfKeys with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Processor/KvProcessor.php
+
+		-
+			message: '#^Method Elastica\\Processor\\KvProcessor\:\:setIncludeKeys\(\) has parameter \$listOfKeys with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Processor/KvProcessor.php
+
+		-
+			message: '#^Method Elastica\\Processor\\RemoveProcessor\:\:__construct\(\) has parameter \$field with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Processor/RemoveProcessor.php
+
+		-
+			message: '#^Method Elastica\\Processor\\RemoveProcessor\:\:setField\(\) has parameter \$field with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Processor/RemoveProcessor.php
+
+		-
+			message: '#^Method Elastica\\Processor\\SetProcessor\:\:__construct\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Processor/SetProcessor.php
+
+		-
+			message: '#^Method Elastica\\Processor\\SetProcessor\:\:setValue\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Processor/SetProcessor.php
+
+		-
+			message: '#^Method Elastica\\Query\\AbstractGeoDistance\:\:__construct\(\) has parameter \$location with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/AbstractGeoDistance.php
+
+		-
+			message: '#^Method Elastica\\Query\\AbstractGeoDistance\:\:_getLocationData\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/AbstractGeoDistance.php
+
+		-
+			message: '#^Method Elastica\\Query\\AbstractGeoDistance\:\:setLocation\(\) has parameter \$location with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/AbstractGeoDistance.php
+
+		-
+			message: '#^Method Elastica\\Query\\BoolQuery\:\:_addQuery\(\) has parameter \$args with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/BoolQuery.php
+
+		-
+			message: '#^Method Elastica\\Query\\BoolQuery\:\:addMust\(\) has parameter \$args with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/BoolQuery.php
+
+		-
+			message: '#^Method Elastica\\Query\\BoolQuery\:\:addMustNot\(\) has parameter \$args with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/BoolQuery.php
+
+		-
+			message: '#^Method Elastica\\Query\\BoolQuery\:\:addShould\(\) has parameter \$args with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/BoolQuery.php
+
+		-
+			message: '#^Method Elastica\\Query\\CombinedFields\:\:setFields\(\) has parameter \$fields with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/CombinedFields.php
+
+		-
+			message: '#^Method Elastica\\Query\\CombinedFields\:\:setMinimumShouldMatch\(\) has parameter \$minimumShouldMatch with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Query/CombinedFields.php
+
+		-
+			message: '#^Method Elastica\\Query\\DisMax\:\:addQuery\(\) has parameter \$args with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/DisMax.php
+
+		-
+			message: '#^Method Elastica\\Query\\DistanceFeature\:\:__construct\(\) has parameter \$origin with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Query/DistanceFeature.php
+
+		-
+			message: '#^Method Elastica\\Query\\DistanceFeature\:\:setOrigin\(\) has parameter \$origin with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/DistanceFeature.php
+
+		-
+			message: '#^Method Elastica\\Query\\FunctionScore\:\:addFunction\(\) has parameter \$functionParams with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/FunctionScore.php
+
+		-
+			message: '#^Property Elastica\\Query\\FunctionScore\:\:\$_functions has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Query/FunctionScore.php
+
+		-
+			message: '#^Method Elastica\\Query\\GeoBoundingBox\:\:__construct\(\) has parameter \$coordinates with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/GeoBoundingBox.php
+
+		-
+			message: '#^Method Elastica\\Query\\GeoBoundingBox\:\:addCoordinates\(\) has parameter \$coordinates with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/GeoBoundingBox.php
+
+		-
+			message: '#^Method Elastica\\Query\\GeoDistance\:\:__construct\(\) has parameter \$location with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/GeoDistance.php
+
+		-
+			message: '#^Method Elastica\\Query\\GeoPolygon\:\:__construct\(\) has parameter \$points with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/GeoPolygon.php
+
+		-
+			message: '#^Property Elastica\\Query\\GeoPolygon\:\:\$_points type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/GeoPolygon.php
+
+		-
+			message: '#^Method Elastica\\Query\\GeoShapeProvided\:\:__construct\(\) has parameter \$coordinates with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/GeoShapeProvided.php
+
+		-
+			message: '#^Property Elastica\\Query\\GeoShapeProvided\:\:\$_coordinates type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/GeoShapeProvided.php
+
+		-
+			message: '#^Method Elastica\\Query\\Ids\:\:__construct\(\) has parameter \$ids with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/Ids.php
+
+		-
+			message: '#^Method Elastica\\Query\\Ids\:\:setIds\(\) has parameter \$ids with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/Ids.php
+
+		-
+			message: '#^Method Elastica\\Query\\InnerHits\:\:setFieldDataFields\(\) has parameter \$fields with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/InnerHits.php
+
+		-
+			message: '#^Method Elastica\\Query\\InnerHits\:\:setHighlight\(\) has parameter \$highlightArgs with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/InnerHits.php
+
+		-
+			message: '#^Method Elastica\\Query\\InnerHits\:\:setSort\(\) has parameter \$sortArgs with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/InnerHits.php
+
+		-
+			message: '#^Method Elastica\\Query\\InnerHits\:\:setSource\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/InnerHits.php
+
+		-
+			message: '#^Method Elastica\\Query\\MatchPhrase\:\:__construct\(\) has parameter \$values with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Query/MatchPhrase.php
+
+		-
+			message: '#^Method Elastica\\Query\\MatchPhrase\:\:setField\(\) has parameter \$values with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Query/MatchPhrase.php
+
+		-
+			message: '#^Method Elastica\\Query\\MatchQuery\:\:__construct\(\) has parameter \$values with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Query/MatchQuery.php
+
+		-
+			message: '#^Method Elastica\\Query\\MatchQuery\:\:setField\(\) has parameter \$values with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Query/MatchQuery.php
+
+		-
+			message: '#^Method Elastica\\Query\\MatchQuery\:\:setFieldFuzziness\(\) has parameter \$fuzziness with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Query/MatchQuery.php
+
+		-
+			message: '#^Method Elastica\\Query\\MoreLikeThis\:\:setFields\(\) has parameter \$fields with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/MoreLikeThis.php
+
+		-
+			message: '#^Method Elastica\\Query\\MoreLikeThis\:\:setStopWords\(\) has parameter \$stopWords with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/MoreLikeThis.php
+
+		-
+			message: '#^Method Elastica\\Query\\MultiMatch\:\:setFields\(\) has parameter \$fields with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/MultiMatch.php
+
+		-
+			message: '#^Method Elastica\\Query\\MultiMatch\:\:setMinimumShouldMatch\(\) has parameter \$minimumShouldMatch with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Query/MultiMatch.php
+
+		-
+			message: '#^Method Elastica\\Query\\Percolate\:\:setDocument\(\) has parameter \$document with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/Percolate.php
+
+		-
+			message: '#^Method Elastica\\Query\\Percolate\:\:setDocumentPreference\(\) has parameter \$preference with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/Percolate.php
+
+		-
+			message: '#^Method Elastica\\Query\\Prefix\:\:__construct\(\) has parameter \$prefix with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/Prefix.php
+
+		-
+			message: '#^Method Elastica\\Query\\Prefix\:\:setPrefix\(\) has parameter \$value with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/Prefix.php
+
+		-
+			message: '#^Method Elastica\\Query\\Prefix\:\:setRawPrefix\(\) has parameter \$prefix with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/Prefix.php
+
+		-
+			message: '#^Method Elastica\\Query\\QueryString\:\:setFields\(\) has parameter \$fields with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/QueryString.php
+
+		-
+			message: '#^Method Elastica\\Query\\Range\:\:__construct\(\) has parameter \$args with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/Range.php
+
+		-
+			message: '#^Method Elastica\\Query\\Range\:\:addField\(\) has parameter \$args with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/Range.php
+
+		-
+			message: '#^Method Elastica\\Query\\Script\:\:__construct\(\) has parameter \$script with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/Script.php
+
+		-
+			message: '#^Method Elastica\\Query\\Script\:\:setScript\(\) has parameter \$script with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/Script.php
+
+		-
+			message: '#^Method Elastica\\Query\\Simple\:\:__construct\(\) has parameter \$query with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/Simple.php
+
+		-
+			message: '#^Method Elastica\\Query\\Simple\:\:setQuery\(\) has parameter \$query with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/Simple.php
+
+		-
+			message: '#^Property Elastica\\Query\\Simple\:\:\$_query type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/Simple.php
+
+		-
+			message: '#^Method Elastica\\Query\\SimpleQueryString\:\:__construct\(\) has parameter \$fields with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/SimpleQueryString.php
+
+		-
+			message: '#^Method Elastica\\Query\\SpanFirst\:\:__construct\(\) has parameter \$match with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/SpanFirst.php
+
+		-
+			message: '#^Method Elastica\\Query\\SpanFirst\:\:_setQuery\(\) has parameter \$args with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/SpanFirst.php
+
+		-
+			message: '#^Method Elastica\\Query\\SpanFirst\:\:setMatch\(\) has parameter \$args with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/SpanFirst.php
+
+		-
+			message: '#^Method Elastica\\Query\\SpanMulti\:\:__construct\(\) has parameter \$match with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/SpanMulti.php
+
+		-
+			message: '#^Method Elastica\\Query\\SpanMulti\:\:_setQuery\(\) has parameter \$args with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/SpanMulti.php
+
+		-
+			message: '#^Method Elastica\\Query\\SpanMulti\:\:setMatch\(\) has parameter \$args with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/SpanMulti.php
+
+		-
+			message: '#^Method Elastica\\Query\\SpanTerm\:\:__construct\(\) has parameter \$term with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/SpanTerm.php
+
+		-
+			message: '#^Method Elastica\\Query\\SpanTerm\:\:setRawTerm\(\) has parameter \$term with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/SpanTerm.php
+
+		-
+			message: '#^Method Elastica\\Query\\SpanTerm\:\:setTerm\(\) has parameter \$value with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/SpanTerm.php
+
+		-
+			message: '#^Method Elastica\\Query\\Term\:\:__construct\(\) has parameter \$term with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/Term.php
+
+		-
+			message: '#^Method Elastica\\Query\\Term\:\:setRawTerm\(\) has parameter \$term with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query/Term.php
+
+		-
+			message: '#^Method Elastica\\QueryBuilder\:\:__call\(\) has parameter \$arguments with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
 			message: '#^Method Elastica\\QueryBuilder\:\:aggregation\(\) should return Elastica\\QueryBuilder\\DSL\\Aggregation but returns Elastica\\QueryBuilder\\Facade\.$#'
 			identifier: return.type
 			count: 1
@@ -25,6 +895,564 @@ parameters:
 			path: src/QueryBuilder.php
 
 		-
+			message: '#^Method Elastica\\QueryBuilder\\DSL\\Aggregation\:\:bucket_script\(\) has parameter \$bucketsPath with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder/DSL/Aggregation.php
+
+		-
+			message: '#^Method Elastica\\QueryBuilder\\DSL\\Aggregation\:\:geo_distance\(\) has parameter \$origin with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder/DSL/Aggregation.php
+
+		-
+			message: '#^Method Elastica\\QueryBuilder\\DSL\\Query\:\:distance_feature\(\) has parameter \$origin with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder/DSL/Query.php
+
+		-
+			message: '#^Method Elastica\\QueryBuilder\\DSL\\Query\:\:geo_bounding_box\(\) has parameter \$coordinates with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder/DSL/Query.php
+
+		-
+			message: '#^Method Elastica\\QueryBuilder\\DSL\\Query\:\:geo_distance\(\) has parameter \$location with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder/DSL/Query.php
+
+		-
+			message: '#^Method Elastica\\QueryBuilder\\DSL\\Query\:\:geo_polygon\(\) has parameter \$points with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder/DSL/Query.php
+
+		-
+			message: '#^Method Elastica\\QueryBuilder\\DSL\\Query\:\:ids\(\) has parameter \$ids with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder/DSL/Query.php
+
+		-
+			message: '#^Method Elastica\\QueryBuilder\\DSL\\Query\:\:prefix\(\) has parameter \$prefix with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder/DSL/Query.php
+
+		-
+			message: '#^Method Elastica\\QueryBuilder\\DSL\\Query\:\:range\(\) has parameter \$args with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder/DSL/Query.php
+
+		-
+			message: '#^Method Elastica\\QueryBuilder\\DSL\\Query\:\:simple_query_string\(\) has parameter \$fields with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder/DSL/Query.php
+
+		-
+			message: '#^Method Elastica\\QueryBuilder\\DSL\\Query\:\:span_first\(\) has parameter \$match with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder/DSL/Query.php
+
+		-
+			message: '#^Method Elastica\\QueryBuilder\\DSL\\Query\:\:span_multi_term\(\) has parameter \$match with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder/DSL/Query.php
+
+		-
+			message: '#^Method Elastica\\QueryBuilder\\DSL\\Query\:\:span_near\(\) has parameter \$clauses with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder/DSL/Query.php
+
+		-
+			message: '#^Method Elastica\\QueryBuilder\\DSL\\Query\:\:span_or\(\) has parameter \$clauses with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder/DSL/Query.php
+
+		-
+			message: '#^Method Elastica\\QueryBuilder\\DSL\\Query\:\:span_term\(\) has parameter \$term with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder/DSL/Query.php
+
+		-
+			message: '#^Method Elastica\\QueryBuilder\\DSL\\Query\:\:term\(\) has parameter \$term with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder/DSL/Query.php
+
+		-
+			message: '#^Method Elastica\\QueryBuilder\\DSL\\Query\:\:terms\(\) has parameter \$terms with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder/DSL/Query.php
+
+		-
+			message: '#^Method Elastica\\QueryBuilder\\Facade\:\:__call\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/QueryBuilder/Facade.php
+
+		-
+			message: '#^Method Elastica\\QueryBuilder\\Facade\:\:__call\(\) has parameter \$arguments with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder/Facade.php
+
+		-
+			message: '#^Property Elastica\\QueryBuilder\\Version\:\:\$collapsers type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder/Version.php
+
+		-
+			message: '#^Property Elastica\\QueryBuilder\\Version\\Version700\:\:\$collapsers type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder/Version/Version700.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:__construct\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:_getBody\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:_getBody\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:_getDestPartBody\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:_getDestPartBody\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:_getSourcePartBody\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:_getSourcePartBody\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:_resolveBodyOptions\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:_resolveBodyOptions\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:_resolveDestOptions\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:_resolveDestOptions\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:_resolveSourceOptions\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:_resolveSourceOptions\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:_setBodyScript\(\) has parameter \$body with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:_setBodyScript\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:_setSourceQuery\(\) has parameter \$sourceBody with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:_setSourceQuery\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:getTaskId\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:setRequestsPerSecond\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:setScroll\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:setTimeout\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Reindex\:\:setWaitForActiveShards\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Reindex.php
+
+		-
+			message: '#^Method Elastica\\Rescore\\Query\:\:toArray\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Rescore/Query.php
+
+		-
+			message: '#^Method Elastica\\Response\:\:__construct\(\) has parameter \$responseString with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Response.php
+
+		-
+			message: '#^Method Elastica\\Response\:\:getFullError\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Response.php
+
+		-
+			message: '#^Method Elastica\\Response\:\:getShardsStatistics\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Response.php
+
+		-
+			message: '#^Property Elastica\\Response\:\:\$_response type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Response.php
+
+		-
+			message: '#^Property Elastica\\Response\:\:\$_transferInfo type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Response.php
+
+		-
+			message: '#^Method Elastica\\Result\:\:__construct\(\) has parameter \$hit with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Result.php
+
+		-
+			message: '#^Method Elastica\\Result\:\:getData\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Result.php
+
+		-
+			message: '#^Method Elastica\\Result\:\:getExplanation\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Result.php
+
+		-
+			message: '#^Method Elastica\\Result\:\:getFields\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Result.php
+
+		-
+			message: '#^Method Elastica\\Result\:\:getHighlights\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Result.php
+
+		-
+			message: '#^Method Elastica\\Result\:\:getHit\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Result.php
+
+		-
+			message: '#^Method Elastica\\Result\:\:getInnerHits\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Result.php
+
+		-
+			message: '#^Method Elastica\\Result\:\:getSource\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Result.php
+
+		-
+			message: '#^Method Elastica\\Result\:\:setParam\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Result.php
+
+		-
+			message: '#^Property Elastica\\Result\:\:\$_hit type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Result.php
+
+		-
+			message: '#^Class Elastica\\ResultSet implements generic interface ArrayAccess but does not specify its types\: TKey, TValue$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/ResultSet.php
+
+		-
+			message: '#^Class Elastica\\ResultSet implements generic interface Iterator but does not specify its types\: TKey, TValue$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/ResultSet.php
+
+		-
+			message: '#^Method Elastica\\ResultSet\:\:getAggregation\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ResultSet.php
+
+		-
+			message: '#^Method Elastica\\ResultSet\:\:getAggregations\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ResultSet.php
+
+		-
+			message: '#^Method Elastica\\ResultSet\:\:getSuggests\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ResultSet.php
+
+		-
+			message: '#^Method Elastica\\ResultSet\\ProcessorInterface\:\:process\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/ResultSet/ProcessorInterface.php
+
+		-
+			message: '#^Method Elastica\\Script\\AbstractScript\:\:__construct\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Script/AbstractScript.php
+
+		-
+			message: '#^Method Elastica\\Script\\AbstractScript\:\:_createFromArray\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Script/AbstractScript.php
+
+		-
+			message: '#^Method Elastica\\Script\\AbstractScript\:\:_createFromArray\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Script/AbstractScript.php
+
+		-
+			message: '#^Method Elastica\\Script\\AbstractScript\:\:create\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Script/AbstractScript.php
+
+		-
+			message: '#^Method Elastica\\Script\\AbstractScript\:\:getScriptTypeArray\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Script/AbstractScript.php
+
+		-
+			message: '#^Method Elastica\\Script\\Script\:\:__construct\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Script/Script.php
+
+		-
+			message: '#^Method Elastica\\Script\\Script\:\:getScriptTypeArray\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Script/Script.php
+
+		-
+			message: '#^Method Elastica\\Script\\ScriptId\:\:__construct\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Script/ScriptId.php
+
+		-
+			message: '#^Method Elastica\\Script\\ScriptId\:\:getScriptTypeArray\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Script/ScriptId.php
+
+		-
+			message: '#^Class Elastica\\Scroll implements generic interface Iterator but does not specify its types\: TKey, TValue$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Scroll.php
+
+		-
+			message: '#^Property Elastica\\Scroll\:\:\$_options type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Scroll.php
+
+		-
+			message: '#^Property Elastica\\Scroll\:\:\$currentPage has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Scroll.php
+
+		-
+			message: '#^Property Elastica\\Scroll\:\:\$totalPages has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Scroll.php
+
+		-
+			message: '#^Method Elastica\\Search\:\:addOption\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Search.php
+
+		-
+			message: '#^Method Elastica\\Search\:\:count\(\) has parameter \$query with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Search.php
+
+		-
+			message: '#^Method Elastica\\Search\:\:getOption\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Search.php
+
+		-
+			message: '#^Method Elastica\\Search\:\:getOptions\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Search.php
+
+		-
+			message: '#^Method Elastica\\Search\:\:setOption\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Search.php
+
+		-
+			message: '#^Method Elastica\\Search\:\:setOptions\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Search.php
+
+		-
+			message: '#^Property Elastica\\Search\:\:\$_options type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Search.php
+
+		-
+			message: '#^Method Elastica\\Snapshot\:\:createSnapshot\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Snapshot.php
+
+		-
+			message: '#^Method Elastica\\Snapshot\:\:getAllRepositories\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Snapshot.php
+
+		-
+			message: '#^Method Elastica\\Snapshot\:\:getAllSnapshots\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Snapshot.php
+
+		-
+			message: '#^Method Elastica\\Snapshot\:\:getRepository\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Snapshot.php
+
+		-
+			message: '#^Method Elastica\\Snapshot\:\:getSnapshot\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Snapshot.php
+
+		-
+			message: '#^Method Elastica\\Snapshot\:\:registerRepository\(\) has parameter \$settings with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Snapshot.php
+
+		-
+			message: '#^Method Elastica\\Snapshot\:\:restoreSnapshot\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Snapshot.php
+
+		-
+			message: '#^Method Elastica\\Suggest\:\:create\(\) has parameter \$suggestion with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Suggest.php
+
+		-
 			message: '#^Parameter \#1 \$precision of method Elastica\\Aggregation\\GeohashGrid\:\:setPrecision\(\) expects int\|string, float given\.$#'
 			identifier: argument.type
 			count: 1
@@ -45,6 +1473,18 @@ parameters:
 		-
 			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Elastica\\\\Bulk\\\\Response'' and Elastica\\Bulk\\Response will always evaluate to true\.$#'
 			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Bulk/ResponseSetTest.php
+
+		-
+			message: '#^Method Elastica\\Test\\Bulk\\ResponseSetTest\:\:testIsOk\(\) has parameter \$actions with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Bulk/ResponseSetTest.php
+
+		-
+			message: '#^Method Elastica\\Test\\Bulk\\ResponseSetTest\:\:testIsOk\(\) has parameter \$responseData with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: tests/Bulk/ResponseSetTest.php
 
@@ -85,7 +1525,7 @@ parameters:
 			path: tests/ClientFunctionalTest.php
 
 		-
-			message: '#^Parameter \#2 \$data of method Elastica\\Client\:\:updateDocument\(\) expects array\|Elastica\\Document\|Elastica\\Script\\AbstractScript, stdClass given\.$#'
+			message: '#^Parameter \#2 \$data of method Elastica\\Client\:\:updateDocument\(\) expects array\<string, mixed\>\|Elastica\\Document\|Elastica\\Script\\AbstractScript, stdClass given\.$#'
 			identifier: argument.type
 			count: 1
 			path: tests/ClientFunctionalTest.php
@@ -151,6 +1591,12 @@ parameters:
 			path: tests/DocumentTest.php
 
 		-
+			message: '#^Method Elastica\\Test\\Exception\\AbstractExceptionTestCase\:\:_getExceptionClass\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/Exception/AbstractExceptionTestCase.php
+
+		-
 			message: '#^Parameter \#2 \$name of class Elastica\\IndexTemplate constructor expects string, null given\.$#'
 			identifier: argument.type
 			count: 1
@@ -199,6 +1645,24 @@ parameters:
 			path: tests/QueryBuilder/DSL/AbstractDSLTestCase.php
 
 		-
+			message: '#^Method Elastica\\Test\\QueryBuilder\\DSL\\AbstractDSLTestCase\:\:_assertImplemented\(\) has parameter \$arguments with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/QueryBuilder/DSL/AbstractDSLTestCase.php
+
+		-
+			message: '#^Method Elastica\\Test\\QueryBuilder\\DSL\\AbstractDSLTestCase\:\:_assertNotImplemented\(\) has parameter \$arguments with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/QueryBuilder/DSL/AbstractDSLTestCase.php
+
+		-
+			message: '#^Method Elastica\\Test\\QueryBuilder\\VersionTest\:\:assertVersions\(\) has parameter \$dsl with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/QueryBuilder/VersionTest.php
+
+		-
 			message: '#^Call to an undefined method Elastica\\QueryBuilder\:\:custom\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -215,6 +1679,48 @@ parameters:
 			identifier: method.alreadyNarrowedType
 			count: 1
 			path: tests/QueryTest.php
+
+		-
+			message: '#^Method Elastica\\Test\\QueryTest\:\:provideSetTrackTotalHitsInvalidValue\(\) return type has no value type specified in iterable type iterable\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/QueryTest.php
+
+		-
+			message: '#^Method Elastica\\Test\\QueryTest\:\:testSetTrackTotalHitsInvalidValue\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: tests/QueryTest.php
+
+		-
+			message: '#^Method Elastica\\Test\\ReindexTest\:\:_addDocs\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/ReindexTest.php
+
+		-
+			message: '#^Method Elastica\\Test\\Script\\ScriptIdTest\:\:dataProviderCreateInvalid\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Script/ScriptIdTest.php
+
+		-
+			message: '#^Method Elastica\\Test\\Script\\ScriptIdTest\:\:testCreateInvalid\(\) has parameter \$data with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: tests/Script/ScriptIdTest.php
+
+		-
+			message: '#^Method Elastica\\Test\\Script\\ScriptTest\:\:dataProviderCreateInvalid\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Script/ScriptTest.php
+
+		-
+			message: '#^Method Elastica\\Test\\Script\\ScriptTest\:\:testCreateInvalid\(\) has parameter \$data with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: tests/Script/ScriptTest.php
 
 		-
 			message: '#^Parameter \#1 \$indices of method Elastica\\Search\:\:addIndices\(\) expects array\<Elastica\\Index\>, array\<int, stdClass\> given\.$#'

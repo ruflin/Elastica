@@ -21,9 +21,9 @@ class GeoDistance extends AbstractAggregation
     public const DEFAULT_UNIT_VALUE = 'm';
 
     /**
-     * @param string       $name   the name if this aggregation
-     * @param string       $field  the field on which to perform this aggregation
-     * @param array|string $origin the point from which distances will be calculated
+     * @param string                              $name   the name if this aggregation
+     * @param string                              $field  the field on which to perform this aggregation
+     * @param array<string, float>|array<int, float>|string $origin the point from which distances will be calculated
      */
     public function __construct(string $name, string $field, $origin)
     {
@@ -46,7 +46,7 @@ class GeoDistance extends AbstractAggregation
     /**
      * Set the origin point from which distances will be calculated.
      *
-     * @param array|string $origin valid formats are array("lat" => 52.3760, "lon" => 4.894), "52.3760, 4.894", and array(4.894, 52.3760)
+     * @param array<string, float>|array<int, float>|string $origin valid formats are array("lat" => 52.3760, "lon" => 4.894), "52.3760, 4.894", and array(4.894, 52.3760)
      *
      * @return $this
      */

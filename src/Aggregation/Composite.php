@@ -23,6 +23,8 @@ class Composite extends AbstractAggregation
     }
 
     /**
+     * @param array<string, mixed>|null $checkpoint
+     *
      * @return $this
      */
     public function addAfter(?array $checkpoint): self

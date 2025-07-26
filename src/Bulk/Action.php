@@ -16,7 +16,7 @@ class Action
     public const OP_TYPE_UPDATE = 'update';
 
     /**
-     * @var array
+     * @var array<int, string>
      */
     public static $opTypes = [
         self::OP_TYPE_CREATE,
@@ -31,15 +31,19 @@ class Action
     protected $_opType;
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     protected $_metadata = [];
 
     /**
-     * @var array|string
+     * @var array<string, mixed>|string
      */
     protected $_source = [];
 
+    /**
+     * @param array<string, mixed> $metadata
+     * @param array<string, mixed> $source
+     */
     public function __construct(string $opType = self::OP_TYPE_INDEX, array $metadata = [], array $source = [])
     {
         $this->setOpType($opType);
@@ -87,6 +91,8 @@ class Action
     }
 
     /**
+     * @param array<string, mixed> $metadata
+     *
      * @return $this
      */
     public function setMetadata(array $metadata): self
@@ -96,18 +102,24 @@ class Action
         return $this;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getMetadata(): array
     {
         return $this->_metadata;
     }
 
+    /**
+     * @return array<string, array<string, mixed>>
+     */
     public function getActionMetadata(): array
     {
         return [$this->_opType => $this->getMetadata()];
     }
 
     /**
-     * @param array|string $source
+     * @param array<string, mixed>|string $source
      *
      * @return $this
      */
@@ -119,7 +131,7 @@ class Action
     }
 
     /**
-     * @return array|string
+     * @return array<string, mixed>|string
      */
     public function getSource()
     {
@@ -168,6 +180,9 @@ class Action
         return $this;
     }
 
+    /**
+     * @return array<int, mixed>
+     */
     public function toArray(): array
     {
         $data[] = $this->getActionMetadata();

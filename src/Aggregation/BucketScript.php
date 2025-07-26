@@ -13,6 +13,9 @@ class BucketScript extends AbstractAggregation implements GapPolicyInterface
 {
     use Traits\GapPolicyTrait;
 
+    /**
+     * @param array<string, string> $bucketsPath
+     */
     public function __construct(string $name, array $bucketsPath, string $script)
     {
         parent::__construct($name);
@@ -23,6 +26,8 @@ class BucketScript extends AbstractAggregation implements GapPolicyInterface
 
     /**
      * Set the buckets_path for this aggregation.
+     *
+     * @param array<string, string> $bucketsPath
      *
      * @return $this
      */

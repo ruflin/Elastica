@@ -29,7 +29,7 @@ class Terms extends AbstractTermsAggregation
     /**
      * Sets a list of bucket sort orders.
      *
-     * @param array $orders a list of [<aggregationField>|"_count"|"_term" => <direction>] definitions
+     * @param array<int, array<string, string>> $orders a list of [<aggregationField>|"_count"|"_term" => <direction>] definitions
      *
      * @return $this
      */
