@@ -68,11 +68,11 @@ run-phpdoc: tools/phpdocumentor.phar
 
 .PHONY: run-phpstan
 run-phpstan: composer-install
-	vendor/bin/phpstan analyse --no-progress --no-interaction
+	vendor/bin/phpstan analyse --no-progress --no-interaction --memory-limit=1G
 
 .PHONY: fix-phpstan-baseline
 fix-phpstan-baseline: composer-install
-	vendor/bin/phpstan analyse --no-progress --no-interaction --generate-baseline phpstan-baseline.neon
+	vendor/bin/phpstan analyse --no-progress --no-interaction --generate-baseline phpstan-baseline.neon --memory-limit=1G
 
 
 ##

@@ -118,4 +118,4 @@ jobs:
 
       - name: 'Run phpstan'
         run: |
-          vendor/bin/phpstan analyse --no-progress --error-format=github
+          vendor/bin/phpstan analyse --no-progress --error-format=github --memory-limit=1G
