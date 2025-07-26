@@ -74,6 +74,9 @@ class DiversifiedSamplerTest extends BaseAggregationTestCase
         $this->assertEquals($docCount, $results['doc_count']);
     }
 
+    /**
+     * @return array<int, array{int, int, int}>
+     */
     public static function shardSizeAndMaxDocPerValueProvider(): array
     {
         return [

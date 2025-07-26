@@ -217,6 +217,9 @@ class TopHitsTest extends BaseAggregationTestCase
         $this->assertEquals([2, 4], $resultDocs);
     }
 
+    /**
+     * @return array<string, array{string|array<string>}>
+     */
     public static function limitedSourceProvider(): array
     {
         return [
@@ -227,7 +230,10 @@ class TopHitsTest extends BaseAggregationTestCase
 
     #[DataProvider('limitedSourceProvider')]
     #[Group('functional')]
-    public function testAggregateWithLimitedSource($source): void
+    /**
+     * @param string|array<int, string> $source
+     */
+    public function testAggregateWithLimitedSource(mixed $source): void
     {
         $agg = (new TopHits('top_tag_hits'))
             ->setSource($source)
@@ -381,6 +387,9 @@ class TopHitsTest extends BaseAggregationTestCase
         return $index;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     protected function getOuterAggregationResult(AbstractAggregation $innerAgg): array
     {
         $outerAgg = (new Terms('top_tags'))

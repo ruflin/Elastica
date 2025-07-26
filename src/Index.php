@@ -83,7 +83,7 @@ class Index implements SearchableInterface
      * Sets the mappings for the current index.
      *
      * @param Mapping $mapping MappingType object
-     * @param array   $query   querystring when put mapping (for example update_all_types)
+     * @param array<string, mixed>   $query   querystring when put mapping (for example update_all_types)
      */
     public function setMapping(Mapping $mapping, array $query = []): Response
     {
@@ -92,6 +92,8 @@ class Index implements SearchableInterface
 
     /**
      * Gets all mappings for the current index.
+     *
+     * @return array<string, mixed>
      *
      * @throws MissingParameterException if a required parameter is missing
      * @throws NoNodeAvailableException  if all the hosts are offline
@@ -121,7 +123,7 @@ class Index implements SearchableInterface
     }
 
     /**
-     * @param array|string $data
+     * @param array<string, mixed>|string $data
      *
      * @return Document
      */
@@ -134,7 +136,7 @@ class Index implements SearchableInterface
      * Uses _bulk to send documents to the server.
      *
      * @param Document[] $docs    Array of Elastica\Document
-     * @param array      $options Array of query params to use for query. For possible options check es api
+     * @param array<string, mixed>      $options Array of query params to use for query. For possible options check es api
      *
      * @throws MissingParameterException if a required parameter is missing
      * @throws NoNodeAvailableException  if all the hosts are offline
@@ -162,7 +164,7 @@ class Index implements SearchableInterface
      * @phpstan-param TCreateQueryArgsMatching $query
      *
      * @param AbstractScript $script  Script
-     * @param array          $options Optional params
+     * @param array<string, mixed>          $options Optional params
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html
      *
@@ -242,8 +244,8 @@ class Index implements SearchableInterface
     /**
      * Uses _bulk to send documents to the server.
      *
-     * @param array|Document[] $docs    Array of Elastica\Document
-     * @param array            $options Array of query params to use for query. For possible options check es api
+     * @param array<int, Document>|Document[] $docs    Array of Elastica\Document
+     * @param array<string, mixed>            $options Array of query params to use for query. For possible options check es api
      *
      * @throws MissingParameterException if a required parameter is missing
      * @throws NoNodeAvailableException  if all the hosts are offline
@@ -269,7 +271,7 @@ class Index implements SearchableInterface
      * Get the document from search index.
      *
      * @param int|string $id      Document id
-     * @param array      $options options for the get request
+     * @param array<string, mixed>      $options options for the get request
      *
      * @throws MissingParameterException if a required parameter is missing
      * @throws NoNodeAvailableException  if all the hosts are offline
@@ -314,6 +316,9 @@ class Index implements SearchableInterface
     /**
      * Deletes a document by its unique identifier.
      *
+     * @param string $id Document id
+     * @param array<string, mixed> $options Optional parameters
+     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete.html
      *
      * @throws MissingParameterException if a required parameter is missing
@@ -345,7 +350,7 @@ class Index implements SearchableInterface
      *
      * @phpstan-param TCreateQueryArgsMatching $query
      *
-     * @param array $options Optional params
+     * @param array<string, mixed> $options Optional params
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
      *
@@ -431,7 +436,7 @@ class Index implements SearchableInterface
      *
      * Detailed arguments can be found here in the ES documentation.
      *
-     * @param array $args Additional arguments
+     * @param array<string, mixed> $args Additional arguments
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-forcemerge.html
      *
@@ -471,8 +476,8 @@ class Index implements SearchableInterface
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html
      *
-     * @param array $args    Additional arguments to pass to the Create endpoint
-     * @param array $options Associative array of options (option=>value)
+     * @param array<string, mixed> $args    Additional arguments to pass to the Create endpoint
+     * @param array<string, mixed> $options Associative array of options (option=>value)
      *
      * @throws MissingParameterException if a required parameter is missing
      * @throws NoNodeAvailableException  if all the hosts are offline
@@ -518,6 +523,11 @@ class Index implements SearchableInterface
         return 200 === $response->getStatusCode();
     }
 
+    /**
+     * @param mixed $query
+     * @param array<string, mixed>|null $options
+     * @param BuilderInterface|null $builder
+     */
     public function createSearch($query = '', ?array $options = null, ?BuilderInterface $builder = null): Search
     {
         $search = new Search($this->getClient(), $builder);
@@ -527,6 +537,10 @@ class Index implements SearchableInterface
         return $search;
     }
 
+    /**
+     * @param mixed $query
+     * @param array<string, mixed>|null $options
+     */
     public function search($query = '', ?array $options = null): ResultSet
     {
         $search = $this->createSearch($query, $options);
@@ -704,6 +718,8 @@ class Index implements SearchableInterface
     /**
      * Flushes the index to storage.
      *
+     * @param array<string, mixed> $options Optional parameters
+     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-flush.html
      *
      * @throws MissingParameterException if a required parameter is missing
@@ -722,7 +738,7 @@ class Index implements SearchableInterface
     /**
      * Can be used to change settings during runtime. One example is to use it for bulk updating.
      *
-     * @param array $data Data array
+     * @param array<string, mixed> $data Data array
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html
      *
@@ -742,8 +758,10 @@ class Index implements SearchableInterface
     /**
      * Run the analysis on the index.
      *
-     * @param array $body request body for the `_analyze` API, see API documentation for the required properties
-     * @param array $args Additional arguments
+     * @param array<string, mixed> $body request body for the `_analyze` API, see API documentation for the required properties
+     * @param array<string, mixed> $args Additional arguments
+     *
+     * @return array<int, mixed>
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-analyze.html
      *
@@ -778,7 +796,7 @@ class Index implements SearchableInterface
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
      *
      * @param AbstractScript|Document $data    Document or Script with update data
-     * @param array                   $options array of query params to use for query
+     * @param array<string, mixed>                   $options array of query params to use for query
      */
     public function updateDocument($data, array $options = []): Response
     {

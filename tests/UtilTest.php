@@ -16,11 +16,14 @@ class UtilTest extends BaseTest
 {
     #[DataProvider('getIsDateMathEscapedPairs')]
     #[Group('unit')]
-    public function testIsDateMathEscaped($requestUri, $expectedIsEscaped): void
+    public function testIsDateMathEscaped(string $requestUri, bool $expectedIsEscaped): void
     {
         $this->assertEquals($expectedIsEscaped, Util::isDateMathEscaped($requestUri));
     }
 
+    /**
+     * @return array<int, array{string, bool}>
+     */
     public static function getIsDateMathEscapedPairs(): array
     {
         return [
@@ -36,11 +39,14 @@ class UtilTest extends BaseTest
 
     #[DataProvider('getEscapeDateMathPairs')]
     #[Group('unit')]
-    public function testEscapeDateMath($requestUri, $expectedEscapedRequestUri): void
+    public function testEscapeDateMath(string $requestUri, string $expectedEscapedRequestUri): void
     {
         $this->assertEquals($expectedEscapedRequestUri, Util::escapeDateMath($requestUri));
     }
 
+    /**
+     * @return array<int, array{string, string}>
+     */
     public static function getEscapeDateMathPairs(): array
     {
         return [
@@ -65,11 +71,14 @@ class UtilTest extends BaseTest
 
     #[DataProvider('getEscapeTermPairs')]
     #[Group('unit')]
-    public function testEscapeTerm($unescaped, $escaped): void
+    public function testEscapeTerm(string $unescaped, string $escaped): void
     {
         $this->assertEquals($escaped, Util::escapeTerm($unescaped));
     }
 
+    /**
+     * @return array<int, array{string, string}>
+     */
     public static function getEscapeTermPairs(): array
     {
         return [
@@ -84,11 +93,14 @@ class UtilTest extends BaseTest
 
     #[DataProvider('getReplaceBooleanWordsPairs')]
     #[Group('unit')]
-    public function testReplaceBooleanWords($before, $after): void
+    public function testReplaceBooleanWords(string $before, string $after): void
     {
         $this->assertEquals($after, Util::replaceBooleanWords($before));
     }
 
+    /**
+     * @return array<int, array{string, string}>
+     */
     public static function getReplaceBooleanWordsPairs(): array
     {
         return [

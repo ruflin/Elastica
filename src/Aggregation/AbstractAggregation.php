@@ -19,7 +19,7 @@ abstract class AbstractAggregation extends Param implements NameableInterface
     protected $_name;
 
     /**
-     * @var array Subaggregations belonging to this aggregation
+     * @var array<string, AbstractAggregation> Subaggregations belonging to this aggregation
      */
     protected $_aggs = [];
 
@@ -53,6 +53,8 @@ abstract class AbstractAggregation extends Param implements NameableInterface
 
     /**
      * Retrieve all subaggregations belonging to this aggregation.
+     *
+     * @return array<string, AbstractAggregation>
      */
     public function getAggs(): array
     {
@@ -84,7 +86,7 @@ abstract class AbstractAggregation extends Param implements NameableInterface
      * @see \Elastica\Aggregation\AbstractAggregation::getMeta()
      * @see \Elastica\Aggregation\AbstractAggregation::clearMeta()
      *
-     * @param array $meta Metadata to be attached to the aggregation
+     * @param array<string, mixed> $meta Metadata to be attached to the aggregation
      *
      * @return $this
      */
@@ -105,6 +107,8 @@ abstract class AbstractAggregation extends Param implements NameableInterface
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/agg-metadata.html
      * @see \Elastica\Aggregation\AbstractAggregation::setMeta()
      * @see \Elastica\Aggregation\AbstractAggregation::clearMeta()
+     *
+     * @return array<string, mixed>|null
      */
     public function getMeta(): ?array
     {
@@ -138,7 +142,7 @@ abstract class AbstractAggregation extends Param implements NameableInterface
         return $array;
     }
 
-    protected function _getBaseName()
+    protected function _getBaseName(): string
     {
         $shortName = (new \ReflectionClass($this))->getShortName();
         $shortName = \preg_replace('/Aggregation$/', '', $shortName);

@@ -19,7 +19,7 @@ class Document extends AbstractUpdateAction
     /**
      * Document data.
      *
-     * @var array Document data
+     * @var array<string, mixed> Document data
      */
     protected $_data = [];
 
@@ -38,9 +38,9 @@ class Document extends AbstractUpdateAction
     /**
      * Creates a new document.
      *
-     * @param string|null  $id    The document ID, if null it will be created
-     * @param array|string $data  Data array
-     * @param Index|string $index Index name
+     * @param string|null                $id    The document ID, if null it will be created
+     * @param array<string, mixed>|string $data  Data array
+     * @param Index|string               $index Index name
      */
     public function __construct(?string $id = null, $data = [], $index = '')
     {
@@ -176,7 +176,7 @@ class Document extends AbstractUpdateAction
     /**
      * Overwrites the current document data with the given data.
      *
-     * @param array|string $data Data array
+     * @param array<string, mixed>|string $data Data array
      */
     public function setData($data): self
     {
@@ -188,7 +188,7 @@ class Document extends AbstractUpdateAction
     /**
      * Returns the document data.
      *
-     * @return array|string Document data
+     * @return array<string, mixed>|string Document data
      */
     public function getData()
     {
@@ -236,6 +236,8 @@ class Document extends AbstractUpdateAction
 
     /**
      * Returns the document as an array.
+     *
+     * @return array<string, mixed>
      */
     public function toArray(): array
     {
@@ -246,7 +248,7 @@ class Document extends AbstractUpdateAction
     }
 
     /**
-     * @param array|Document $data
+     * @param array<string, mixed>|Document $data
      *
      * @throws InvalidException If invalid data has been provided
      */

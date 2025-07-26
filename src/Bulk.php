@@ -38,7 +38,7 @@ class Bulk
     protected $_index;
 
     /**
-     * @var array request parameters to the bulk api
+     * @var array<string, mixed> request parameters to the bulk api
      */
     protected $_requestParams = [];
 
@@ -196,7 +196,7 @@ class Bulk
     }
 
     /**
-     * @param AbstractScript|array|Document $data
+     * @param AbstractScript|array<int, AbstractScript|Document>|Document $data
      *
      * @return $this
      */
@@ -220,6 +220,8 @@ class Bulk
     }
 
     /**
+     * @param array<int, array<string, mixed>> $data
+     *
      * @throws InvalidException
      *
      * @return $this
@@ -284,6 +286,9 @@ class Bulk
         return $this->setRequestParam('timeout', $time);
     }
 
+    /**
+     * @return array<int, array<string, mixed>>
+     */
     public function toArray(): array
     {
         $data = [];

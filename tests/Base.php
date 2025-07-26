@@ -47,7 +47,7 @@ class Base extends TestCase
     }
 
     /**
-     * @param array $config Additional configuration params. Host and Port are already set
+     * @param array<string, mixed> $config Additional configuration params. Host and Port are already set
      */
     protected function _getClient(array $config = [], ?LoggerInterface $logger = null): Client
     {
@@ -123,7 +123,7 @@ class Base extends TestCase
         $client->ingest()->putPipeline(['id' => 'renaming', 'body' => $body]);
     }
 
-    protected function _checkPlugin($plugin): void
+    protected function _checkPlugin(string $plugin): void
     {
         $nodes = $this->_getClient()->getCluster()->getNodes();
         if (!$nodes[0]->getInfo()->hasPlugin($plugin)) {
@@ -131,14 +131,14 @@ class Base extends TestCase
         }
     }
 
-    protected function _getVersion()
+    protected function _getVersion(): string
     {
         $data = $this->_getClient()->info()->asArray();
 
         return \substr($data['version']['number'], 0, 1);
     }
 
-    protected function _checkVersion($version): void
+    protected function _checkVersion(string $version): void
     {
         $data = $this->_getClient()->info()->asArray();
         $installedVersion = $data['version']['number'];

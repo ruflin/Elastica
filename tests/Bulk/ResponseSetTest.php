@@ -31,6 +31,10 @@ class ResponseSetTest extends BaseTest
     }
 
     #[DataProvider('isOkDataProvider')]
+    /**
+     * @param array<string, mixed> $responseData
+     * @param array<Action> $actions
+     */
     public function testIsOk(array $responseData, array $actions, bool $expected): void
     {
         $responseSet = $this->_createResponseSet($responseData, $actions);
@@ -126,6 +130,10 @@ class ResponseSetTest extends BaseTest
         yield [$responseData, $actions, false];
     }
 
+    /**
+     * @param array<string, mixed> $responseData
+     * @param array<Action> $actions
+     */
     protected function _createResponseSet(array $responseData, array $actions): ResponseSet
     {
         $client = $this->createMock(Client::class);
@@ -144,6 +152,9 @@ class ResponseSetTest extends BaseTest
         return $bulk->send();
     }
 
+    /**
+     * @return array{array<string, mixed>, array<Action>}
+     */
     protected static function _getFixture(): array
     {
         $responseData = [

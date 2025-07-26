@@ -269,7 +269,7 @@ class BulkTest extends BaseTest
 
     #[DataProvider('invalidRawDataProvider')]
     #[Group('unit')]
-    public function testInvalidRawData($rawData, $failMessage): void
+    public function testInvalidRawData(mixed $rawData, string $failMessage): void
     {
         $this->expectException(InvalidException::class);
 
@@ -280,6 +280,9 @@ class BulkTest extends BaseTest
         $this->fail($failMessage);
     }
 
+    /**
+     * @return array<int, array{mixed, string}>
+     */
     public static function invalidRawDataProvider(): array
     {
         return [

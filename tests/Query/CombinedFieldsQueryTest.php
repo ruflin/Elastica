@@ -18,6 +18,9 @@ use PHPUnit\Framework\Attributes\Group;
  */
 class CombinedFieldsQueryTest extends BaseTest
 {
+    /**
+     * @var array<int, array<string, string>>
+     */
     private static $data = [
         ['id' => '1', 'title' => 'Rodolfo', 'body' => 'Moraes',   'abstract' => 'Lorem'],
         ['id' => '2', 'title' => 'Tristan', 'body' => 'Maindron', 'abstract' => 'Dolor'],

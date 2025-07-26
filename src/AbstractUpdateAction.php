@@ -73,6 +73,8 @@ class AbstractUpdateAction extends Param
     /**
      * Sets the version parameters of a document for use with optimistic concurrency control.
      *
+     * @param array<string, mixed> $responseData
+     *
      * @return $this
      */
     public function setVersionParams(array $responseData): self
@@ -253,7 +255,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param array|string $fields
+     * @param array<string>|string $fields
      *
      * @return $this
      */
@@ -443,7 +445,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param array|Document $data
+     * @param array<string, mixed>|Document $data
      *
      * @return $this
      */
@@ -472,9 +474,9 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param array $fields if empty array all options will be returned
+     * @param array<string> $fields if empty array all options will be returned
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function getOptions(array $fields = [])
     {

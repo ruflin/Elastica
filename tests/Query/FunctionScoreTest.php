@@ -19,7 +19,7 @@ use PHPUnit\Framework\Attributes\Group;
  */
 class FunctionScoreTest extends BaseTest
 {
-    protected $locationOrigin = '32.804654, -117.242594';
+    protected string $locationOrigin = '32.804654, -117.242594';
 
     #[Group('unit')]
     public function testToArray(): void

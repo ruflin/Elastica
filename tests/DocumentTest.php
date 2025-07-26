@@ -40,7 +40,7 @@ class DocumentTest extends BaseTest
     public function testSetData(): void
     {
         $doc = new Document();
-        $returnValue = $doc->setData(['data']);
+        $returnValue = $doc->setData(['key' => 'data']);
 
         $this->assertSame($doc, $returnValue);
     }

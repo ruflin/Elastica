@@ -59,6 +59,9 @@ class Client implements ClientInterface
 
     private Transport $_transport;
 
+    /**
+     * @param string|array<string, mixed> $config
+     */
     public function __construct(string|array $config = [], ?LoggerInterface $logger = null)
     {
         $config = \is_string($config) ? ['hosts' => [$config]] : $config;
@@ -141,7 +144,7 @@ class Client implements ClientInterface
     /**
      * Sets specific config values (updates and keeps default values).
      *
-     * @param array $config Params
+     * @param array<string, mixed> $config Params
      */
     public function setConfig(array $config): self
     {
@@ -157,7 +160,7 @@ class Client implements ClientInterface
      *
      * @throws InvalidException if the given key is not found in the configuration
      *
-     * @return array|bool|string
+     * @return array<string, mixed>|bool|string
      */
     public function getConfig(string $key = '')
     {
@@ -175,10 +178,10 @@ class Client implements ClientInterface
     }
 
     /**
-     * @param array|string $keys    config key or path of config keys
+     * @param array<int, string>|string $keys    config key or path of config keys
      * @param mixed        $default default value will be returned if key was not found
      */
-    public function getConfigValue($keys, $default = null)
+    public function getConfigValue($keys, $default = null): mixed
     {
         $value = $this->_config->getAll();
         foreach ((array) $keys as $key) {
@@ -209,7 +212,8 @@ class Client implements ClientInterface
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
-     * @param array|Document[] $docs Array of Elastica\Document
+     * @param array<int, Document> $docs Array of Elastica\Document
+     * @param array<string, mixed> $requestParams
      *
      * @throws InvalidException          If docs is empty
      * @throws MissingParameterException if a required parameter is missing
@@ -244,7 +248,8 @@ class Client implements ClientInterface
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
-     * @param array|Document[] $docs Array of Elastica\Document
+     * @param array<int, Document> $docs Array of Elastica\Document
+     * @param array<string, mixed> $requestParams
      *
      * @throws InvalidException          If docs is empty
      * @throws MissingParameterException if a required parameter is missing
@@ -275,9 +280,9 @@ class Client implements ClientInterface
      * Update document, using update script. Requires elasticsearch >= 0.19.0.
      *
      * @param int|string                    $id      document id
-     * @param AbstractScript|array|Document $data    raw data for request body
+     * @param AbstractScript|array<string, mixed>|Document $data    raw data for request body
      * @param string                        $index   index to update
-     * @param array                         $options array of query params to use for query. For possible options check es api
+     * @param array<string, mixed>          $options array of query params to use for query. For possible options check es api
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
      *
@@ -344,7 +349,8 @@ class Client implements ClientInterface
     /**
      * Bulk deletes documents.
      *
-     * @param array|Document[] $docs
+     * @param array<int, Document> $docs
+     * @param array<string, mixed> $requestParams
      *
      * @throws InvalidException
      * @throws MissingParameterException if a required parameter is missing
@@ -391,7 +397,7 @@ class Client implements ClientInterface
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
-     * @param array        $ids     Document ids
+     * @param array<int, string|int> $ids     Document ids
      * @param Index|string $index   Index name
      * @param bool|string  $routing Optional routing key for all ids
      *
@@ -442,6 +448,8 @@ class Client implements ClientInterface
      *         array('doc' => array('field2' => 'value2')),
      * );
      *
+     * @param array<int, array<string, mixed>> $params
+     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @throws InvalidException
@@ -465,6 +473,9 @@ class Client implements ClientInterface
         return $bulk->send();
     }
 
+    /**
+     * @param array<string, mixed> $params
+     */
     public function baseBulk(array $params): Response
     {
         return $this->toElasticaResponse($this->elasticClientBulk($params));
@@ -503,6 +514,8 @@ class Client implements ClientInterface
 
     /**
      * Force merges all search indices.
+     *
+     * @param array<string, mixed> $args
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-forcemerge.html
      *
@@ -561,6 +574,9 @@ class Client implements ClientInterface
         return ResponseConverter::toElastica($elasticsearchResponse);
     }
 
+    /**
+     * @param array<string, mixed> $config
+     */
     protected function _buildTransport(array $config): Transport
     {
         $hosts = isset($config['hosts']) && \is_array($config['hosts']) ? $config['hosts'] : [ClientConfiguration::DEFAULT_HOST];
@@ -645,6 +661,10 @@ class Client implements ClientInterface
         }
     }
 
+    /**
+     * @param array<string, mixed> $config
+     * @param array<string, mixed> $clientOptions
+     */
     protected function setTransportClientOptions(HttpClientInterface $client, array $config, array $clientOptions = []): HttpClientInterface
     {
         if (empty($config) && empty($clientOptions)) {

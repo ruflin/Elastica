@@ -122,6 +122,9 @@ class WildcardTest extends BaseTest
         $this->assertEquals($expectedArray, $query->toArray());
     }
 
+    /**
+     * @return iterable<int, array{bool}>
+     */
     public static function caseInsensitiveDataProvider(): iterable
     {
         yield [true];

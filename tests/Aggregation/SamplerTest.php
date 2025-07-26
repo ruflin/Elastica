@@ -63,6 +63,9 @@ class SamplerTest extends BaseAggregationTestCase
         $this->assertEquals($docCount, $results['doc_count']);
     }
 
+    /**
+     * @return array<int, array{int, int}>
+     */
     public static function shardSizeProvider(): array
     {
         return [

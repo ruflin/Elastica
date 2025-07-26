@@ -44,6 +44,9 @@ class CardinalityTest extends BaseAggregationTestCase
         $this->assertEquals(4, $results['value']);
     }
 
+    /**
+     * @return array<string, array{int}>
+     */
     public static function validPrecisionThresholdProvider(): array
     {
         return [
@@ -76,6 +79,9 @@ class CardinalityTest extends BaseAggregationTestCase
         $this->assertIsBool($agg->getParam('rehash'));
     }
 
+    /**
+     * @return array<string, array{bool}>
+     */
     public static function validRehashProvider(): array
     {
         return [

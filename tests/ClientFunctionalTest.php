@@ -874,7 +874,7 @@ class ClientFunctionalTest extends BaseTest
     }
 
     #[DataProvider('endpointQueryRequestDataProvider')]
-    public function testEndpointQueryRequest($query, $totalHits): void
+    public function testEndpointQueryRequest(string $query, int $totalHits): void
     {
         $client = $this->_getClient();
 
@@ -900,6 +900,9 @@ class ClientFunctionalTest extends BaseTest
         $this->assertEquals($totalHits, $responseArray['hits']['total']['value']);
     }
 
+    /**
+     * @return array<int, array{string, int}>
+     */
     public static function endpointQueryRequestDataProvider(): array
     {
         return [
@@ -908,6 +911,10 @@ class ClientFunctionalTest extends BaseTest
         ];
     }
 
+    /**
+     * @param array<string, mixed> $config
+     * @param array<string, mixed> $clientOptions
+     */
     protected function setHttpClientOptions(HttpClientInterface $client, array $config, array $clientOptions = []): HttpClientInterface
     {
         if (empty($config) && empty($clientOptions)) {

@@ -160,6 +160,9 @@ class TermsTest extends BaseAggregationTestCase
         $this->assertCount($expectedCountValues, $results['buckets']);
     }
 
+    /**
+     * @return \Traversable<int, array{field: string, expectedCountValues: int, isSetMissingBucket: bool}>
+     */
     public static function termsSetMissingBucketProvider(): \Traversable
     {
         yield [

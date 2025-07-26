@@ -18,6 +18,9 @@ use PHPUnit\Framework\Attributes\Group;
  */
 class MultiMatchTest extends BaseTest
 {
+    /**
+     * @var array<int, array<string, string>>
+     */
     private static $data = [
         ['id' => '1', 'name' => 'Rodolfo', 'last_name' => 'Moraes',   'full_name' => 'Rodolfo Moraes'],
         ['id' => '2', 'name' => 'Tristan', 'last_name' => 'Maindron', 'full_name' => 'Tristan Maindron'],
