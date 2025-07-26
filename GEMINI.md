@@ -71,7 +71,7 @@ Elastica is a PHP client library for Elasticsearch with a well-structured, objec
 ### Design Patterns Used
 - **Factory Pattern**: `Query::create()` handles multiple input types
 - **Strategy Pattern**: `BuilderInterface` for flexible result set construction
-- **Parameter Management**: Base `Param` class provides consistent interface
+- **Parameter Management**: The Base `Param` class provides a consistent interface for managing parameters across different components. It standardizes how parameters are set, retrieved, and validated, ensuring uniformity and reducing code duplication. This pattern is particularly useful for handling complex configurations and query parameters in a predictable and reusable manner.
 - **Traits**: Extensive use for code reuse (BucketsPathTrait, GapPolicyTrait)
 
 ## Testing Requirements
