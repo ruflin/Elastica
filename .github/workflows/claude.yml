@@ -1,0 +1,70 @@
+name: Claude Code
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+  issues:
+    types: [opened, assigned]
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  claude:
+    if: |
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
+      (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: read
+      id-token: write
+      actions: read # Required for Claude to read CI results on PRs
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 10
+
+      - name: Run Claude Code
+        id: claude
+        uses: anthropics/claude-code-action@beta
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+
+          # This is an optional setting that allows Claude to read CI results on PRs
+          additional_permissions: |
+            actions: read
+          
+          # Optional: Specify model (defaults to Claude Sonnet 4, uncomment for Claude Opus 4)
+          # model: "claude-opus-4-20250514"
+          
+          # Optional: Customize the trigger phrase (default: @claude)
+          # trigger_phrase: "/claude"
+          
+          # Optional: Trigger when specific user is assigned to an issue
+          # assignee_trigger: "claude-bot"
+          
+          # Allow Claude to run Elastica development commands
+          allowed_tools: "Bash(make docker-run-phpunit),Bash(make run-phpcs),Bash(make fix-phpcs),Bash(make run-phpstan),Bash(make docker-run-phpcs),Bash(make docker-fix-phpcs),Bash(make docker-run-phpstan)"
+          
+          # Custom instructions for Elastica PHP project
+          custom_instructions: |
+            Follow PSR-2 coding standards and use strict type declarations
+            Use comprehensive PHPDoc annotations for all methods and properties
+            Reference Elasticsearch documentation for API methods where applicable
+            Ensure compatibility with supported PHP versions (8.1+)
+            All classes must be final unless meant to be extended
+            All methods and properties must have type declarations
+            Follow existing code patterns and use existing libraries/utilities
+            Changelog entries required for all code changes (except tests)
+          
+          # Optional: Custom environment variables for Claude
+          # claude_env: |
+          #   NODE_ENV: test
+

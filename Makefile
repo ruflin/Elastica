@@ -68,11 +68,11 @@ run-phpdoc: tools/phpdocumentor.phar
 
 .PHONY: run-phpstan
 run-phpstan: composer-install
-	vendor/bin/phpstan analyse --no-progress --no-interaction
+	vendor/bin/phpstan analyse --no-progress --no-interaction --memory-limit=1G
 
 .PHONY: fix-phpstan-baseline
 fix-phpstan-baseline: composer-install
-	vendor/bin/phpstan analyse --no-progress --no-interaction --generate-baseline phpstan-baseline.neon
+	vendor/bin/phpstan analyse --no-progress --no-interaction --generate-baseline phpstan-baseline.neon --memory-limit=1G
 
 
 ##
@@ -98,6 +98,14 @@ docker-run-phpcs:
 .PHONY: docker-fix-phpcs
 docker-fix-phpcs:
 	${DOCKER_COMPOSE_CMD} ${DOCKER_COMPOSE_OPTIONS} exec php env TERM=xterm-256color make fix-phpcs
+
+.PHONY: docker-run-phpstan
+docker-run-phpstan:
+	${DOCKER_COMPOSE_CMD} ${DOCKER_COMPOSE_OPTIONS} exec php env TERM=xterm-256color vendor/bin/phpstan analyse --no-progress --no-interaction --memory-limit=1G
+
+.PHONY: docker-fix-phpstan-baseline
+docker-fix-phpstan-baseline:
+	${DOCKER_COMPOSE_CMD} ${DOCKER_COMPOSE_OPTIONS} exec php env TERM=xterm-256color vendor/bin/phpstan analyse --no-progress --no-interaction --generate-baseline phpstan-baseline.neon --memory-limit=1G
 
 .PHONY: docker-shell
 docker-shell:

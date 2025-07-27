@@ -48,7 +48,7 @@ class GeoShapePreIndexed extends AbstractGeoShape
         string $path,
         string $indexedId,
         string $indexedIndex,
-        string $indexedPath
+        string $indexedPath,
     ) {
         $this->_path = $path;
         $this->_indexedId = $indexedId;
