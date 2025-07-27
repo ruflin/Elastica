@@ -782,4 +782,48 @@ class BulkTest extends BaseTest
         $this->expectException(RequestEntityTooLargeException::class);
         $bulk->send();
     }
+
+    #[Group('unit')]
+    public function testAddDocumentWithNullClientDoesNotThrowError(): void
+    {
+        $clientMock = $this->createMock(Client::class);
+        $bulk = new Bulk($clientMock);
+
+        // Use reflection to simulate the scenario where _client might be null
+        $reflection = new \ReflectionClass($bulk);
+        $clientProperty = $reflection->getProperty('_client');
+        $clientProperty->setAccessible(true);
+        $clientProperty->setValue($bulk, null);
+
+        $document = new Document('1', ['name' => 'Test Document']);
+
+        // This should not throw an error even when _client is null
+        $bulk->addDocument($document);
+
+        $actions = $bulk->getActions();
+        $this->assertCount(1, $actions);
+        $this->assertInstanceOf(AbstractDocument::class, $actions[0]);
+    }
+
+    #[Group('unit')]
+    public function testAddScriptWithNullClientDoesNotThrowError(): void
+    {
+        $clientMock = $this->createMock(Client::class);
+        $bulk = new Bulk($clientMock);
+
+        // Use reflection to simulate the scenario where _client might be null
+        $reflection = new \ReflectionClass($bulk);
+        $clientProperty = $reflection->getProperty('_client');
+        $clientProperty->setAccessible(true);
+        $clientProperty->setValue($bulk, null);
+
+        $script = new Script('ctx._source.name = params.name', ['name' => 'Test Script'], 'painless');
+
+        // This should not throw an error even when _client is null
+        $bulk->addScript($script);
+
+        $actions = $bulk->getActions();
+        $this->assertCount(1, $actions);
+        $this->assertInstanceOf(AbstractDocument::class, $actions[0]);
+    }
 }
