@@ -6,15 +6,14 @@ namespace Elastica\Test\Processor;
 
 use Elastica\Processor\KvProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class KvProcessorTest extends BasePipelineTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testKv(): void
     {
         $processor = new KvProcessor('message', ' ', '=');
@@ -30,9 +29,7 @@ class KvProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testKvWithNonDefaultOptions(): void
     {
         $processor = (new KvProcessor('message', ' ', '='))
@@ -59,9 +56,7 @@ class KvProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testKVIncludeExludeKeys(): void
     {
         $kv = new KvProcessor('field1', '&', '=');

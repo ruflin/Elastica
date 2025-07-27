@@ -9,15 +9,14 @@ use Elastica\Index;
 use Elastica\Suggest;
 use Elastica\Suggest\Term;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class TermTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $suggest = new Suggest();
@@ -53,9 +52,7 @@ class TermTest extends BaseTest
         $this->assertEquals($expected, $suggest->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testDistanceAlgorithm(): void
     {
         $suggest = new Suggest();
@@ -93,9 +90,7 @@ class TermTest extends BaseTest
         $this->assertEquals($expected, $suggest->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSuggestResults(): void
     {
         $suggest = new Suggest();
@@ -119,9 +114,7 @@ class TermTest extends BaseTest
         $this->assertEquals('food', $suggests['suggest1'][0]['options'][0]['text']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSuggestNoResults(): void
     {
         $termSuggest = new Term('suggest1', 'text');

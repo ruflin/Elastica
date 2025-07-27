@@ -1,0 +1,23 @@
+# This file contains recommended steps for setting up the Elastica project.
+
+steps:
+  - name: "Install dependencies"
+    description: "Install the project's dependencies using Composer."
+    run: "make composer-install"
+    optional: false
+
+  - name: "Run tests"
+    description: "Run the test suite using PHPUnit."
+    run: "make run-phpunit"
+    optional: true
+
+  - name: "Check code style"
+    description: "Check for code style violations using php-cs-fixer."
+    run: "make run-phpcs"
+    optional: true
+
+  - name: "Fix code style"
+    description: "Automatically fix code style violations."
+    run: "make fix-phpcs"
+    optional: true
+

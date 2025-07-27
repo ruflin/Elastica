@@ -18,8 +18,8 @@ class JSONTest extends TestCase
 {
     public function testStringifyMustNotThrowExceptionOnValid(): void
     {
-        JSON::stringify([]);
-        $this->assertTrue(true);
+        $value = JSON::stringify([]);
+        $this->assertEmpty($value);
     }
 
     public function testStringifyMustThrowExceptionNanOrInf(): void
@@ -28,8 +28,8 @@ class JSONTest extends TestCase
         $this->expectExceptionMessage('Inf and NaN cannot be JSON encoded');
 
         $arr = [\NAN, \INF];
-        JSON::stringify($arr);
-        $this->assertTrue(true);
+        $value = JSON::stringify($arr);
+        $this->assertEmpty($value);
     }
 
     public function testStringifyMustThrowExceptionMaximumDepth(): void
@@ -38,7 +38,7 @@ class JSONTest extends TestCase
         $this->expectExceptionMessage('Maximum stack depth exceeded');
 
         $arr = [[[]]];
-        JSON::stringify($arr, 0, 0);
-        $this->assertTrue(true);
+        $value = JSON::stringify($arr, 0, 0);
+        $this->assertEmpty($value);
     }
 }

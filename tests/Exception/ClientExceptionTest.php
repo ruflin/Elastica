@@ -7,6 +7,6 @@ namespace Elastica\Test\Exception;
 /**
  * @internal
  */
-class ClientExceptionTest extends AbstractExceptionTest
+class ClientExceptionTest extends AbstractExceptionTestCase
 {
 }

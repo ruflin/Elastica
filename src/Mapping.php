@@ -145,8 +145,6 @@ class Mapping
     /**
      * Converts the mapping to an array.
      *
-     * @throws InvalidException
-     *
      * @return array Mapping as array
      */
     public function toArray(): array

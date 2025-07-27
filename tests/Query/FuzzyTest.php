@@ -8,15 +8,14 @@ use Elastica\Document;
 use Elastica\Exception\InvalidException;
 use Elastica\Query\Fuzzy;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class FuzzyTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAddField(): void
     {
         $fuzzy = new Fuzzy();
@@ -30,9 +29,7 @@ class FuzzyTest extends BaseTest
         $this->assertEquals($sameFuzzy->toArray(), $fuzzy->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testToArray(): void
     {
         $fuzzy = new Fuzzy();
@@ -75,9 +72,7 @@ class FuzzyTest extends BaseTest
         $this->assertEquals($expectedArray, $fuzzy->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testNeedSetFieldBeforeOption(): void
     {
         $fuzzy = new Fuzzy();
@@ -86,9 +81,7 @@ class FuzzyTest extends BaseTest
         $fuzzy->setFieldOption('boost', 1.0);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testQuery(): void
     {
         $client = $this->_getClient();
@@ -116,9 +109,7 @@ class FuzzyTest extends BaseTest
         $this->assertEquals(2, $resultSet->count());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testResetSingleField(): void
     {
         $fuzzy = new Fuzzy();
@@ -134,9 +125,7 @@ class FuzzyTest extends BaseTest
         $this->assertEquals($expected, $fuzzy->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testOnlySetSingleField(): void
     {
         $fuzzy = new Fuzzy();

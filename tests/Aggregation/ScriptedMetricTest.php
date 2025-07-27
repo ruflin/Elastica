@@ -9,15 +9,14 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class ScriptedMetricTest extends BaseAggregationTest
+class ScriptedMetricTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testScriptedMetricAggregation(): void
     {
         $agg = new ScriptedMetric(

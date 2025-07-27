@@ -8,15 +8,14 @@ use Elastica\Aggregation\Histogram;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class HistogramTest extends BaseAggregationTest
+class HistogramTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testHistogramAggregation(): void
     {
         $agg = new Histogram('hist', 'price', 10);
@@ -32,9 +31,7 @@ class HistogramTest extends BaseAggregationTest
         $this->assertEquals(2, $buckets[3]['doc_count']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testHistogramAggregationWithMissing(): void
     {
         $agg = new Histogram('hist', 'price', 10);
@@ -51,9 +48,7 @@ class HistogramTest extends BaseAggregationTest
         $this->assertEquals(3, $buckets[3]['doc_count']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testHistogramKeyedAggregation(): void
     {
         $agg = new Histogram('hist', 'price', 10);

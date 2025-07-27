@@ -110,13 +110,22 @@ class Client implements ClientInterface
         throw new \Exception('Not supported');
     }
 
+    public function setServerless(bool $value): ClientInterface
+    {
+        throw new \Exception('Not supported');
+    }
+
+    public function getServerless(): bool
+    {
+        return false;
+    }
+
     /**
      * Get current version.
      *
      * @throws NoNodeAvailableException if all the hosts are offline
      * @throws ClientResponseException  if the status code of response is 4xx
      * @throws ServerResponseException  if the status code of response is 5xx
-     * @throws ClientException
      */
     public function getVersion(): string
     {

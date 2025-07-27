@@ -10,6 +10,7 @@ use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query\Percolate;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
@@ -21,9 +22,7 @@ class PercolateTest extends BaseTest
      */
     private $index;
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testPercolateQueryOnNewDocument(): void
     {
         $this->_prepareIndexForPercolate();
@@ -61,9 +60,7 @@ class PercolateTest extends BaseTest
         $this->assertEquals(0, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testPercolateQueryOnExistingDocument(): void
     {
         $this->_prepareIndexForPercolate();
@@ -102,9 +99,7 @@ class PercolateTest extends BaseTest
         $this->assertEquals(0, $resultSet->count());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetField(): void
     {
         $field = 'field1';
@@ -116,9 +111,7 @@ class PercolateTest extends BaseTest
         $this->assertEquals($data['percolate']['field'], $field);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetDocument(): void
     {
         $query = new Percolate();
@@ -130,9 +123,7 @@ class PercolateTest extends BaseTest
         $this->assertEquals($data['percolate']['document'], $doc->getData());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetDocumentIndex(): void
     {
         $client = $this->createMock(Client::class);
@@ -145,9 +136,7 @@ class PercolateTest extends BaseTest
         $this->assertEquals($data['percolate']['index'], $index->getName());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetDocumentId(): void
     {
         $id = 3;
@@ -159,9 +148,7 @@ class PercolateTest extends BaseTest
         $this->assertEquals($data['percolate']['id'], $id);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetDocumentRouting(): void
     {
         $routing = 'testRout';
@@ -173,9 +160,7 @@ class PercolateTest extends BaseTest
         $this->assertEquals($data['percolate']['routing'], $routing);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetDocumentPreference(): void
     {
         $preference = ['pref1' => 'test', 'pref2' => 'test2'];
@@ -187,9 +172,7 @@ class PercolateTest extends BaseTest
         $this->assertEquals($data['percolate']['preference'], $preference);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetDocumentVersion(): void
     {
         $version = 10;

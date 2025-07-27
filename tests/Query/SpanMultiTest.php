@@ -11,15 +11,14 @@ use Elastica\Query\Regexp;
 use Elastica\Query\SpanMulti;
 use Elastica\Query\Wildcard;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class SpanMultiTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstructValid(): void
     {
         $field = 'name';
@@ -58,9 +57,7 @@ class SpanMultiTest extends BaseTest
         $this->assertEquals($expected, $spanMultiQuery->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSpanMulti(): void
     {
         $field = 'lorem';

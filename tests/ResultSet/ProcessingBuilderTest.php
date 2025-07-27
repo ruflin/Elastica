@@ -11,13 +11,13 @@ use Elastica\ResultSet\BuilderInterface;
 use Elastica\ResultSet\ProcessingBuilder;
 use Elastica\ResultSet\ProcessorInterface;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
- * @group unit
- *
  * @internal
  */
+#[Group('unit')]
 class ProcessingBuilderTest extends BaseTest
 {
     /**

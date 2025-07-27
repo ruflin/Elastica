@@ -9,15 +9,14 @@ use Elastica\Query;
 use Elastica\Script\Script;
 use Elastica\Script\ScriptFields;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class ScriptFieldsTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testNewScriptFields(): void
     {
         $script = new Script('1 + 2');
@@ -41,9 +40,7 @@ class ScriptFieldsTest extends BaseTest
         $this->assertSame($script, $scriptFields->getParam('test'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetScriptFields(): void
     {
         $query = new Query();
@@ -61,9 +58,7 @@ class ScriptFieldsTest extends BaseTest
         $this->assertSame($script, $query->getParam('script_fields')->getParam('test'));
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testQuery(): void
     {
         $index = $this->_createIndex();
@@ -86,9 +81,7 @@ class ScriptFieldsTest extends BaseTest
         $this->assertEquals(3, $first['test'][0]);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testScriptFieldWithJoin(): void
     {
         $client = $this->_getClient();

@@ -10,15 +10,14 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class NestedTest extends BaseAggregationTest
+class NestedTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testNestedAggregation(): void
     {
         $agg = new Nested('resellers', 'resellers');

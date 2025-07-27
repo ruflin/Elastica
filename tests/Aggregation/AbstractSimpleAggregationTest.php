@@ -11,19 +11,16 @@ use PHPUnit\Framework\MockObject\MockObject;
 /**
  * @internal
  */
-class AbstractSimpleAggregationTest extends BaseAggregationTest
+class AbstractSimpleAggregationTest extends BaseAggregationTestCase
 {
     /**
      * @var AbstractSimpleAggregation&MockObject
      */
-    private $aggregation;
+    private MockObject $aggregation;
 
     protected function setUp(): void
     {
-        $this->aggregation = $this->getMockForAbstractClass(
-            AbstractSimpleAggregation::class,
-            ['whatever']
-        );
+        $this->aggregation = $this->createMock(AbstractSimpleAggregation::class);
     }
 
     public function testToArrayThrowsExceptionOnUnsetParams(): void

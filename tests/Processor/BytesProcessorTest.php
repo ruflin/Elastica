@@ -6,15 +6,14 @@ namespace Elastica\Test\Processor;
 
 use Elastica\Processor\BytesProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class BytesProcessorTest extends BasePipelineTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testBytes(): void
     {
         $processor = new BytesProcessor('foo');
@@ -28,9 +27,7 @@ class BytesProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testBytesWithTargetField(): void
     {
         $processor = (new BytesProcessor('foo'))
@@ -47,9 +44,7 @@ class BytesProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testBytesWithNonDefaultOptions(): void
     {
         $processor = (new BytesProcessor('foo'))

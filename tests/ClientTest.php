@@ -8,12 +8,12 @@ use Elastica\Client;
 use Elastica\ClientConfiguration;
 use Elastica\Exception\InvalidException;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
- * @group unit
- *
  * @internal
  */
+#[Group('unit')]
 class ClientTest extends BaseTest
 {
     public function testItConstruct(): void

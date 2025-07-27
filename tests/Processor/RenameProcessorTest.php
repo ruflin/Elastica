@@ -8,15 +8,14 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\RenameProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class RenameProcessorTest extends BasePipelineTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testRename(): void
     {
         $processor = new RenameProcessor('foo', 'foobar');
@@ -31,9 +30,7 @@ class RenameProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testRenameWithNonDefaultOptions(): void
     {
         $processor = (new RenameProcessor('foo', 'foobar'))
@@ -53,9 +50,7 @@ class RenameProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testRenameField(): void
     {
         $rename = new RenameProcessor('package', 'packages');

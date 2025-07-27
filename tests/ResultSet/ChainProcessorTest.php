@@ -10,12 +10,12 @@ use Elastica\ResultSet;
 use Elastica\ResultSet\ChainProcessor;
 use Elastica\ResultSet\ProcessorInterface;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
- * @group unit
- *
  * @internal
  */
+#[Group('unit')]
 class ChainProcessorTest extends BaseTest
 {
     public function testProcessor(): void

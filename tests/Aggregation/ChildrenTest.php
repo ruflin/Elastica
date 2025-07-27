@@ -9,15 +9,14 @@ use Elastica\Aggregation\Terms;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class ChildrenTest extends BaseAggregationTest
+class ChildrenTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testChildrenAggregation(): void
     {
         $agg = new Children('answer');
@@ -43,9 +42,7 @@ class ChildrenTest extends BaseAggregationTest
         $this->assertArrayHasKey('name', $childrenAggregations);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testChildrenAggregationCount(): void
     {
         $agg = new Children('answer');

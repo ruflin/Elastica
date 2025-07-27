@@ -9,15 +9,14 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class GeoDistanceTest extends BaseAggregationTest
+class GeoDistanceTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGeoDistanceAggregation(): void
     {
         $agg = new GeoDistance('geo', 'location', ['lat' => 32.804654, 'lon' => -117.242594]);
@@ -31,9 +30,7 @@ class GeoDistanceTest extends BaseAggregationTest
         $this->assertEquals(2, $results['buckets'][0]['doc_count']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGeoDistanceKeyedAggregation(): void
     {
         $agg = new GeoDistance('geo', 'location', ['lat' => 32.804654, 'lon' => -117.242594]);

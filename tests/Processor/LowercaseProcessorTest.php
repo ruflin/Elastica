@@ -8,15 +8,14 @@ use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Processor\LowercaseProcessor;
 use Elastica\Test\BasePipeline as BasePipelineTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class LowercaseProcessorTest extends BasePipelineTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testLowercase(): void
     {
         $processor = new LowercaseProcessor('foo');
@@ -30,9 +29,7 @@ class LowercaseProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testLowercaseWithNonDefaultOptions(): void
     {
         $processor = (new LowercaseProcessor('foo'))
@@ -51,9 +48,7 @@ class LowercaseProcessorTest extends BasePipelineTest
         $this->assertEquals($expected, $processor->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testLowercaseField(): void
     {
         $lcase = new LowercaseProcessor('name');

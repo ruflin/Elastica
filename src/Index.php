@@ -157,12 +157,11 @@ class Index implements SearchableInterface
     /**
      * Update entries in the db based on a query.
      *
-     * @param AbstractQuery|array|Query|string|null $query Query object or array
+     * @param AbstractQuery|array|Query|string|null $query   Query object or array
+     * @param AbstractScript                        $script  Script
+     * @param array                                 $options Optional params
      *
      * @phpstan-param TCreateQueryArgsMatching $query
-     *
-     * @param AbstractScript $script  Script
-     * @param array          $options Optional params
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html
      *
@@ -341,11 +340,10 @@ class Index implements SearchableInterface
     /**
      * Deletes documents matching the given query.
      *
-     * @param AbstractQuery|array|Query|string|null $query Query object or array
+     * @param AbstractQuery|array|Query|string|null $query   Query object or array
+     * @param array                                 $options Optional params
      *
      * @phpstan-param TCreateQueryArgsMatching $query
-     *
-     * @param array $options Optional params
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
      *
@@ -527,18 +525,18 @@ class Index implements SearchableInterface
         return $search;
     }
 
-    public function search($query = '', ?array $options = null, string $method = Request::POST): ResultSet
+    public function search($query = '', ?array $options = null): ResultSet
     {
         $search = $this->createSearch($query, $options);
 
-        return $search->search('', null, $method);
+        return $search->search('', null);
     }
 
-    public function count($query = '', string $method = Request::POST): int
+    public function count($query = ''): int
     {
         $search = $this->createSearch($query);
 
-        return $search->count('', false, $method);
+        return $search->count('', false);
     }
 
     /**

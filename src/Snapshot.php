@@ -233,7 +233,7 @@ class Snapshot
             'repository' => $repository,
             'snapshot' => $name,
             'body' => $options,
-            'wait_for_completion' => $waitForCompletion ? 'true' : 'false',
+            'wait_for_completion' => (bool) $waitForCompletion,
         ];
 
         return $this->_client->toElasticaResponse(

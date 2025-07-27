@@ -272,10 +272,9 @@ class Search
      * Search in the set indices.
      *
      * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest|null $query
+     * @param array<string, mixed>|null                                              $options associative array of options (option=>value)
      *
      * @phpstan-param TCreateQueryArgs $query
-     *
-     * @param array<string, mixed>|null $options associative array of options (option=>value)
      *
      * @throws InvalidException
      * @throws NoNodeAvailableException if all the hosts are offline
@@ -283,7 +282,7 @@ class Search
      * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
      */
-    public function search($query = '', ?array $options = null, string $method = Request::POST): ResultSet
+    public function search($query = '', ?array $options = null): ResultSet
     {
         $this->setOptionsAndQuery($options, $query);
 
@@ -323,7 +322,7 @@ class Search
      *
      * @phpstan-return ($fullResult is false ? int : ResultSet)
      */
-    public function count($query = '', bool $fullResult = false, string $method = Request::POST)
+    public function count($query = '', bool $fullResult = false)
     {
         $this->setOptionsAndQuery(null, $query);
 

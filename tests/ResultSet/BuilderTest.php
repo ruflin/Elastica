@@ -8,12 +8,12 @@ use Elastica\Query;
 use Elastica\Response;
 use Elastica\ResultSet\DefaultBuilder;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
- * @group unit
- *
  * @internal
  */
+#[Group('unit')]
 class BuilderTest extends BaseTest
 {
     /**

@@ -11,15 +11,14 @@ use Elastica\Aggregation\Terms;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class SumBucketTest extends BaseAggregationTest
+class SumBucketTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testSumBucketAggregation(): void
     {
         $query = Query::create([])
@@ -44,9 +43,7 @@ class SumBucketTest extends BaseAggregationTest
         $this->assertEquals(491, $results['sum_likes_by_page']['value']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testConstructThroughSetters(): void
     {
         $aggregation = (new SumBucket('sum_bucket', 'pages>sum_likes_by_page'))

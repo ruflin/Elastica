@@ -10,15 +10,14 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class DateRangeTest extends BaseAggregationTest
+class DateRangeTest extends BaseAggregationTestCase
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetTimezone(): void
     {
         $agg = (new DateRange('name'))
@@ -36,9 +35,7 @@ class DateRangeTest extends BaseAggregationTest
         $this->assertEquals($expected, $agg->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testDateRangeAggregation(): void
     {
         $agg = new DateRange('date');
@@ -58,9 +55,7 @@ class DateRangeTest extends BaseAggregationTest
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testDateRangeAggregationWithMissing(): void
     {
         $agg = new DateRange('date');
@@ -81,9 +76,7 @@ class DateRangeTest extends BaseAggregationTest
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testDateRangeKeyedAggregation(): void
     {
         $agg = new DateRange('date');
@@ -102,9 +95,7 @@ class DateRangeTest extends BaseAggregationTest
         $this->assertSame($expected, \array_keys($results['buckets']));
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testDateRangeSetFormat(): void
     {
         $agg = new DateRange('date');
@@ -119,9 +110,7 @@ class DateRangeTest extends BaseAggregationTest
         $this->assertEquals('1390958535000', $results['buckets'][0]['to_as_string']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testDateRangeSetFormatAccordingToFormatTargetField(): void
     {
         $agg = new DateRange('date');

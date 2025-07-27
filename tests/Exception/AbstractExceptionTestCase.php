@@ -6,12 +6,11 @@ namespace Elastica\Test\Exception;
 
 use Elastica\Exception\ExceptionInterface;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
-abstract class AbstractExceptionTest extends BaseTest
+abstract class AbstractExceptionTestCase extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testInheritance(): void
     {
         $className = $this->_getExceptionClass();

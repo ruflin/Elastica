@@ -9,15 +9,14 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
-class GeohashGridTest extends BaseAggregationTest
+class GeohashGridTest extends BaseAggregationTestCase
 {
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGeohashGridAggregationWithNumericalPrecision(): void
     {
         $agg = new GeohashGrid('hash', 'location');
@@ -31,9 +30,7 @@ class GeohashGridTest extends BaseAggregationTest
         $this->assertEquals(1, $results['buckets'][1]['doc_count']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testGeohashGridAggregationWithDistancePrecision(): void
     {
         $agg = new GeohashGrid('hash', 'location');
@@ -47,9 +44,7 @@ class GeohashGridTest extends BaseAggregationTest
         $this->assertEquals(1, $results['buckets'][1]['doc_count']);
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGeohashGridAggregationWithNotAllowedPrecision(): void
     {
         $this->expectException(\TypeError::class);

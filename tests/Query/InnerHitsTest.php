@@ -16,15 +16,14 @@ use Elastica\ResultSet;
 use Elastica\Script\Script;
 use Elastica\Script\ScriptFields;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
 class InnerHitsTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetSize(): void
     {
         $innerHits = (new InnerHits())
@@ -34,9 +33,7 @@ class InnerHitsTest extends BaseTest
         $this->assertSame(12, $innerHits->getParam('size'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetFrom(): void
     {
         $innerHits = (new InnerHits())
@@ -46,9 +43,7 @@ class InnerHitsTest extends BaseTest
         $this->assertSame(12, $innerHits->getParam('from'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetSort(): void
     {
         $sort = ['last_activity_date' => ['order' => 'desc']];
@@ -59,9 +54,7 @@ class InnerHitsTest extends BaseTest
         $this->assertSame($sort, $innerHits->getParam('sort'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetSource(): void
     {
         $fields = ['title', 'tags'];
@@ -72,9 +65,7 @@ class InnerHitsTest extends BaseTest
         $this->assertSame($fields, $innerHits->getParam('_source'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetVersion(): void
     {
         $innerHits = (new InnerHits())
@@ -88,9 +79,7 @@ class InnerHitsTest extends BaseTest
         $this->assertFalse($innerHits->getParam('version'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetExplain(): void
     {
         $innerHits = (new InnerHits())
@@ -104,9 +93,7 @@ class InnerHitsTest extends BaseTest
         $this->assertFalse($innerHits->getParam('explain'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetHighlight(): void
     {
         $highlight = [
@@ -121,9 +108,7 @@ class InnerHitsTest extends BaseTest
         $this->assertSame($highlight, $innerHits->getParam('highlight'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetFieldDataFields(): void
     {
         $fields = ['title', 'tags'];
@@ -134,9 +119,7 @@ class InnerHitsTest extends BaseTest
         $this->assertSame($fields, $innerHits->getParam('docvalue_fields'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testSetScriptFields(): void
     {
         $script = new Script('1 + 2');
@@ -149,9 +132,7 @@ class InnerHitsTest extends BaseTest
         $this->assertSame($scriptFields, $innerHits->getParam('script_fields'));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testAddScriptField(): void
     {
         $script = new Script('2+3');
@@ -162,9 +143,7 @@ class InnerHitsTest extends BaseTest
         $this->assertSame(['five' => $script->toArray()], $innerHits->getParam('script_fields')->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testInnerHitsNested(): void
     {
         $queryString = new SimpleQueryString('windows newton', ['title', 'users.name']);
@@ -179,9 +158,7 @@ class InnerHitsTest extends BaseTest
         $this->assertEquals('Newton', $innerHitsResults['users']['hits']['hits'][0]['_source']['name']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testInnerHitsParentChildren(): void
     {
         $queryString = new SimpleQueryString('linux cool');
@@ -203,9 +180,7 @@ class InnerHitsTest extends BaseTest
         $this->assertEquals([6, 7], $responsesId);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testInnerHitsLimitedSource(): void
     {
         $innerHits = (new InnerHits())
@@ -223,9 +198,7 @@ class InnerHitsTest extends BaseTest
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testInnerHitsWithOffset(): void
     {
         $queryString = new SimpleQueryString('linux cool');
@@ -244,9 +217,7 @@ class InnerHitsTest extends BaseTest
         $this->assertEquals(7, $responses[0]['_id']);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testInnerHitsWithSort(): void
     {
         $queryString = new SimpleQueryString('linux cool');
@@ -270,9 +241,7 @@ class InnerHitsTest extends BaseTest
         $this->assertEquals([7, 6], $responsesId);
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testInnerHitsWithExplain(): void
     {
         $matchAll = new MatchAll();
@@ -290,9 +259,7 @@ class InnerHitsTest extends BaseTest
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testInnerHitsWithVersion(): void
     {
         $matchAll = new MatchAll();
@@ -310,9 +277,7 @@ class InnerHitsTest extends BaseTest
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testInnerHitsWithScriptFields(): void
     {
         $matchAll = new MatchAll();
@@ -336,9 +301,7 @@ class InnerHitsTest extends BaseTest
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testInnerHitsWithHighlight(): void
     {
         $queryString = new SimpleQueryString('question simon', ['title', 'users.name']);
@@ -357,9 +320,7 @@ class InnerHitsTest extends BaseTest
         }
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testInnerHitsWithFieldData(): void
     {
         $queryString = new SimpleQueryString('question simon', ['title', 'users.name']);
