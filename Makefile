@@ -63,7 +63,7 @@ tools/phpdocumentor.phar:
 	chmod +x tools/phpdocumentor.phar
 
 tools/php-coveralls.phar:
-	curl https://github.com/php-coveralls/php-coveralls/releases/download/v2.5.3/php-coveralls.phar -o tools/php-coveralls.phar --silent -L; \
+	curl https://github.com/php-coveralls/php-coveralls/releases/download/v2.8.0/php-coveralls.phar -o tools/php-coveralls.phar --silent -L; \
 	chmod +x tools/php-coveralls.phar
 
 .PHONY: run-phpdoc
