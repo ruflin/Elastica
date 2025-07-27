@@ -11,10 +11,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Filter tests by name: `make docker-run-phpunit PHPUNIT_OPTIONS="--filter=ClientTest"`
 
 ### Code Quality
-- Check coding standards: `make docker-run-phpcs`
-- Fix coding standards: `make docker-fix-phpcs`
+- Check coding standards: `make run-phpcs`
+- Fix coding standards: `make fix-phpcs`
+- Check coding standards (Docker): `make docker-run-phpcs`
+- Fix coding standards (Docker): `make docker-fix-phpcs`
 - Run PHPStan analysis: `make run-phpstan`
 - Fix PHPStan baseline: `make fix-phpstan-baseline`
+- Run PHPStan analysis (Docker): `make docker-run-phpstan`
+- Fix PHPStan baseline (Docker): `make docker-fix-phpstan-baseline`
 
 ### Docker Environment
 - Start development environment: `make docker-start`
@@ -74,6 +78,9 @@ Uses Docker for consistent development environment. The project supports Elastic
 - PHPStan level 5 static analysis
 - Strict type declarations required (`declare(strict_types=1);`)
 - Comprehensive PHPDoc type annotations
+- All classes must be final unless meant to be extended
+- All methods and properties must have type declarations
+- Changelog entries required for all code changes (except tests)
 
 ## Key Implementation Notes
 
@@ -109,3 +116,15 @@ Comprehensive exception hierarchy:
 - `NotFoundException` for missing resources
 
 The codebase emphasizes flexibility, type safety, and clean separation of concerns while maintaining backward compatibility.
+
+## Additional Development Notes
+
+### Documentation Requirements
+- All methods calling Elasticsearch APIs must include links to official Elasticsearch documentation
+- All classes, methods, and properties require comprehensive docblocks
+- Test methods must include `@covers` and `@group` annotations
+
+### Tool Chain
+- Uses phive/phar for tool management (php-cs-fixer, etc.)
+- Docker Compose environment with multiple service configurations
+- Automated baseline management for PHPStan analysis

@@ -272,10 +272,9 @@ class Search
      * Search in the set indices.
      *
      * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest|null $query
+     * @param array<string, mixed>|null                                              $options associative array of options (option=>value)
      *
      * @phpstan-param TCreateQueryArgs $query
-     *
-     * @param array<string, mixed>|null $options associative array of options (option=>value)
      *
      * @throws InvalidException
      * @throws NoNodeAvailableException if all the hosts are offline

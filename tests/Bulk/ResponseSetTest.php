@@ -37,6 +37,15 @@ class ResponseSetTest extends BaseTest
         $this->assertEquals($expected, $responseSet->isOk());
     }
 
+    public static function isOkDataProvider(): \Generator
+    {
+        [$responseData, $actions] = self::_getFixture();
+
+        yield [$responseData, $actions, true];
+        $responseData['items'][2]['index']['ok'] = false;
+        yield [$responseData, $actions, false];
+    }
+
     public function testGetError(): void
     {
         [$responseData, $actions] = self::_getFixture();
@@ -115,15 +124,6 @@ class ResponseSetTest extends BaseTest
 
         $this->assertEquals(0, $responseSet->key());
         $this->assertTrue($responseSet->valid());
-    }
-
-    public static function isOkDataProvider(): \Generator
-    {
-        [$responseData, $actions] = self::_getFixture();
-
-        yield [$responseData, $actions, true];
-        $responseData['items'][2]['index']['ok'] = false;
-        yield [$responseData, $actions, false];
     }
 
     protected function _createResponseSet(array $responseData, array $actions): ResponseSet

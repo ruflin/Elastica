@@ -38,11 +38,10 @@ interface SearchableInterface
      *      }
      * }
      *
-     * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest|null $query Array with all query data inside or a Elastica\Query object
+     * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest|null $query   Array with all query data inside or a Elastica\Query object
+     * @param array<string, mixed>|null                                              $options associative array of options (option=>value)
      *
      * @phpstan-param TCreateQueryArgs $query
-     *
-     * @param array<string, mixed>|null $options associative array of options (option=>value)
      *
      * @throws NoNodeAvailableException if all the hosts are offline
      * @throws ClientResponseException  if the status code of response is 4xx
@@ -72,10 +71,9 @@ interface SearchableInterface
 
     /**
      * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest|null $query
+     * @param array<string, mixed>|null                                              $options
      *
      * @phpstan-param TCreateQueryArgs $query
-     *
-     * @param array<string, mixed>|null $options
      */
     public function createSearch($query = '', ?array $options = null): Search;
 }
