@@ -13,6 +13,7 @@ atlassian-ide-plugin.xml
 /nbproject
 /tools
 /vendor
+/_worktrees
 
 composer.lock
 composer.phar
