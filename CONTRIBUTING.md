@@ -79,6 +79,37 @@ Examples:
  - filter the test to run: `make docker-run-phpunit PHPUNIT_OPTIONS="--filter=ClientTest"`
  - run tests for a specific test-class: `make docker-run-phpunit PHPUNIT_OPTIONS="test/Elastica/ClientTest.php"`
 
+## Troubleshooting
+
+### Version Compatibility Issues
+If you encounter Elasticsearch version compatibility errors during testing:
+
+1. **Check ES Version**: Ensure the Elasticsearch version matches the branch expectations:
+   - Branch 9.x expects ES 9.x
+   - Branch 8.x expects ES 8.x
+
+2. **Set Correct ES Version**: Use the `ES_VERSION` parameter when starting Docker:
+   ```bash
+   make docker-start ES_VERSION=9.0.0
+   ```
+
+3. **Version Mismatch Errors**: If you see errors like "Accept version must be either version 8 or 7, but found 9":
+   - Stop containers: `make docker-stop`
+   - Start with correct version: `make docker-start ES_VERSION=9.0.0`
+   - For 9.x branch development, ES 9.x is required
+
+### GPG/Network Issues
+If you encounter GPG keyserver or network connectivity issues:
+
+1. **GPG Key Download Failures**: These are typically non-critical warnings during tool installation
+2. **Behind Corporate Firewall**: Configure Docker to use appropriate proxy settings
+3. **Network Timeouts**: Retry the command or use a different network connection
+
+### Test Environment Issues
+- **Unit Tests Only**: Run `make docker-run-phpunit PHPUNIT_OPTIONS="--group=unit"` to skip functional tests that require ES connectivity
+- **Memory Issues**: Ensure Docker has sufficient memory allocated (at least 4GB recommended)
+- **Port Conflicts**: Check that ports 9200 and 9300 are not in use by other applications
+
 ## Coding
 
 ### Rules

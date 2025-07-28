@@ -9,7 +9,7 @@ tools/phive.phar:
 	mkdir tools; \
 	wget --no-clobber --output-document=tools/phive.phar "https://phar.io/releases/phive.phar" --quiet; \
     wget --no-clobber --output-document=tools/phive.phar.asc "https://phar.io/releases/phive.phar.asc" --quiet; \
-    gpg --keyserver hkps.pool.sks-keyservers.net --recv-keys 0x9D8A98B29B2D5D79; \
+    gpg --keyserver hkps://keys.openpgp.org --recv-keys 0x9D8A98B29B2D5D79; \
     gpg --verify tools/phive.phar.asc tools/phive.phar; \
     rm tools/phive.phar.asc; \
     chmod +x tools/phive.phar;
@@ -55,12 +55,16 @@ run-phpunit-coverage: composer-install
 	exit $$EXIT_STATUS
 
 .PHONY: run-coveralls
-run-coveralls:
+run-coveralls: tools/php-coveralls.phar
 	tools/php-coveralls.phar -v
 
 tools/phpdocumentor.phar:
-	curl http://www.phpdoc.org/phpDocumentor.phar -o tools/phpdocumentor.phar --silent -L; \
+	curl https://www.phpdoc.org/phpDocumentor.phar -o tools/phpdocumentor.phar --silent -L; \
 	chmod +x tools/phpdocumentor.phar
+
+tools/php-coveralls.phar:
+	curl https://github.com/php-coveralls/php-coveralls/releases/download/v2.8.0/php-coveralls.phar -o tools/php-coveralls.phar --silent -L; \
+	chmod +x tools/php-coveralls.phar
 
 .PHONY: run-phpdoc
 run-phpdoc: tools/phpdocumentor.phar
