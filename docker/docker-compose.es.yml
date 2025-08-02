@@ -3,7 +3,17 @@ version: '3.8'
 services:
     es01:
         container_name: es01
-        image: &image docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION:-8.18.4}
+        image: &image docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION:-8.19.0}
+        command: &command >
+          bash -c "
+              ELASTIC_VERSION=$(bin/elasticsearch --version | grep -oP 'Version: \\K[0-9]+\\.[0-9]+\\.[0-9]+' | awk -F. '{print $1*100+$2}');
+
+              if [ $$ELASTIC_VERSION -lt 800 ]; then
+                ./bin/elasticsearch-plugin list | grep -q ingest-attachment || ./bin/elasticsearch-plugin install --batch ingest-attachment;
+              fi;
+
+              /usr/local/bin/docker-entrypoint.sh;
+            "
         environment: &environment
             node.name: es01
             cluster.name: es-docker-cluster
@@ -23,12 +33,13 @@ services:
             - data01:/usr/share/elasticsearch/data
             - esrepo:/usr/share/elasticsearch/repository
         ports:
-            - "9200:9200"
+            - 9200:9200
         networks: &networks
             - elastic
     es02:
         container_name: es02
         image: *image
+        command: *command
         environment:
             <<: *environment
             node.name: es02
