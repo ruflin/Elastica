@@ -36,14 +36,14 @@ class Index implements SearchableInterface
      *
      * @var string Index name
      */
-    protected $_name;
+    protected string $_name;
 
     /**
      * Client object.
      *
      * @var Client Client object
      */
-    protected $_client;
+    protected Client $_client;
 
     /**
      * Creates a new index object.

@@ -24,17 +24,15 @@ class GeoShapeProvided extends AbstractGeoShape
 
     /**
      * Type of the geo_shape.
-     *
-     * @var string
      */
-    protected $_shapeType;
+    protected string $_shapeType;
 
     /**
      * Coordinates making up geo_shape.
      *
      * @var array Coordinates making up geo_shape
      */
-    protected $_coordinates;
+    protected array $_coordinates;
 
     /**
      * Construct geo_shape query.

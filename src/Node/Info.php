@@ -39,7 +39,7 @@ class Info
      *
      * @var BaseNode Node object
      */
-    protected $_node;
+    protected BaseNode $_node;
 
     /**
      * Query parameters.

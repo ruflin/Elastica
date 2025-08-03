@@ -16,12 +16,12 @@ class Index
     /**
      * @var string the name of the index
      */
-    protected $_name;
+    protected string $_name;
 
     /**
      * @var array the index health data
      */
-    protected $_data;
+    protected array $_data;
 
     /**
      * @param string $name the name of the index

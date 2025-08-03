@@ -23,7 +23,7 @@ class Health
     /**
      * @var Client client object
      */
-    protected $_client;
+    protected Client $_client;
 
     /**
      * @var array the cluster health data

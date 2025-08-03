@@ -32,10 +32,8 @@ class Stats
 
     /**
      * Index.
-     *
-     * @var Index
      */
-    protected $_index;
+    protected Index $_index;
 
     /**
      * Construct.

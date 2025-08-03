@@ -11,7 +11,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     /**
      * @var Response[]
      */
-    protected $_bulkResponses = [];
+    protected array $_bulkResponses;
 
     /**
      * @var int

@@ -28,14 +28,14 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      *
      * @var Query Query object
      */
-    private $_query;
+    private Query $_query;
 
     /**
      * Response.
      *
      * @var Response Response object
      */
-    private $_response;
+    private Response $_response;
 
     /**
      * Results.

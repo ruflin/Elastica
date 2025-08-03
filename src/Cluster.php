@@ -25,7 +25,7 @@ class Cluster
      *
      * @var Client Client object
      */
-    protected $_client;
+    protected Client $_client;
 
     /**
      * Cluster state response.

@@ -12,10 +12,7 @@ use Elastica\Script\AbstractScript;
  */
 class TermsSet extends AbstractQuery
 {
-    /**
-     * @var string
-     */
-    private $field;
+    private string $field;
 
     /**
      * @param array<bool|float|int|string> $terms

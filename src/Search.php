@@ -69,15 +69,10 @@ class Search
 
     /**
      * Client object.
-     *
-     * @var Client
      */
-    protected $_client;
+    protected Client $_client;
 
-    /**
-     * @var BuilderInterface|null
-     */
-    private $builder;
+    private BuilderInterface $builder;
 
     public function __construct(Client $client, ?BuilderInterface $builder = null)
     {

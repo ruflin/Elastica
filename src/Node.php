@@ -16,10 +16,8 @@ class Node
 {
     /**
      * Client.
-     *
-     * @var Client
      */
-    protected $_client;
+    protected Client $_client;
 
     /**
      * @var string Unique node id

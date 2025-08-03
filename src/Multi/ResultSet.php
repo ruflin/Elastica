@@ -20,7 +20,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
      *
      * @var array|BaseResultSet[] Result Sets
      */
-    protected $_resultSets = [];
+    protected array $_resultSets;
 
     /**
      * Current position.
@@ -29,10 +29,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
      */
     protected $_position = 0;
 
-    /**
-     * @var Response
-     */
-    protected $_response;
+    protected Response $_response;
 
     /**
      * @param BaseResultSet[] $resultSets

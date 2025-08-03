@@ -10,15 +10,9 @@ use Elastica\ResultSet;
 
 class ProcessingBuilder implements BuilderInterface
 {
-    /**
-     * @var BuilderInterface
-     */
-    private $builder;
+    private BuilderInterface $builder;
 
-    /**
-     * @var ProcessorInterface
-     */
-    private $processor;
+    private ProcessorInterface $processor;
 
     public function __construct(BuilderInterface $builder, ProcessorInterface $processor)
     {

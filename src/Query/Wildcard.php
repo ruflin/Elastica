@@ -20,10 +20,7 @@ class Wildcard extends AbstractQuery
     public const REWRITE_CONSTANT_SCORE_BOOLEAN = 'constant_score_boolean';
     public const REWRITE_SCORING_BOOLEAN = 'scoring_boolean';
 
-    /**
-     * @var string
-     */
-    private $field;
+    private string $field;
 
     public function __construct(string $field, string $value, float $boost = 1.0)
     {

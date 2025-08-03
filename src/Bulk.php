@@ -22,10 +22,7 @@ class Bulk
 {
     public const DELIMITER = "\n";
 
-    /**
-     * @var Client
-     */
-    protected $_client;
+    protected Client $_client;
 
     /**
      * @var Action[]

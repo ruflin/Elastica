@@ -19,7 +19,7 @@ class Settings
     /**
      * @var Client Client object
      */
-    protected $_client;
+    protected Client $_client;
 
     /**
      * Creates a cluster object.
