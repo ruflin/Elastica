@@ -28,7 +28,6 @@ jobs:
     runs-on: 'ubuntu-24.04'
     name: 'PHPUnit (PHP ${{ matrix.php }}, ES ${{ matrix.elasticsearch }})'
     timeout-minutes: 10
-    continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
         php:
@@ -37,12 +36,10 @@ jobs:
           - '8.3'
           - '8.4'
           - '8.5'
-        experimental:
-          - false
         dependencies:
           - 'highest'
         elasticsearch:
-          - '9.0.4'
+          - '9.1.0'
       fail-fast: false
     steps:
       - name: 'Checkout'
@@ -74,7 +71,7 @@ jobs:
           sudo sysctl -w vm.swappiness=1
           sudo sysctl -w fs.file-max=262144
           sudo sysctl -w vm.max_map_count=262144
-          docker compose --file=docker/docker-compose.proxy.yml --file=docker/docker-compose.es.yml up --detach
+          docker compose --file=docker/compose.proxy.yaml --file=docker/compose.es.yaml up --detach
 
           docker run --rm --network=docker_elastic curlimages/curl --max-time 120 --retry-max-time 120 --retry 120 --retry-delay 5 --retry-all-errors --show-error --silent http://es01:9200
           docker run --rm --network=docker_elastic curlimages/curl --max-time 120 --retry-max-time 120 --retry 120 --retry-delay 5 --retry-all-errors --show-error --silent http://es02:9200
@@ -93,7 +90,7 @@ jobs:
       - name: Elasticsearch Logs
         if: always()
         run: |
-          docker compose --file=docker/docker-compose.proxy.yml --file=docker/docker-compose.es.yml logs es01 es02
+          docker compose --file=docker/compose.proxy.yaml --file=docker/compose.es.yaml logs es01 es02
 
   phpstan:
     runs-on: 'ubuntu-24.04'
