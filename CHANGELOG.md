@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Removed 3rd `$method` argument from the `Elastica\SearchableInterface::search` and `Elastica\SearchableInterface::count` as they are not unused anymore. The following classes are affected: `Elastica\Search` and `Elastica\Index` [#2255](https://github.com/ruflin/Elastica/pull/2255)
 * Removed `Elastica\Request` class as constants are not used anymore and no longer needed. [#2255](https://github.com/ruflin/Elastica/pull/2255)
 ### Added
+* Added support for PHP 8.5 [#2254](https://github.com/ruflin/Elastica/pull/2254)
 ### Changed
 ### Deprecated
 ### Removed
