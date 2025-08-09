@@ -6,7 +6,7 @@ jobs:
     name: 'Coding style'
     steps:
       - name: 'Checkout'
-        uses: 'actions/checkout@v3'
+        uses: 'actions/checkout@v4'
 
       - name: 'Setup PHP'
         uses: 'shivammathur/setup-php@v2'
@@ -23,6 +23,27 @@ jobs:
       - name: 'Check composer.json'
         run: |
           composer-normalize --diff --dry-run --indent-size=4 --indent-style=space --no-update-lock
+
+  coding-standards:
+    runs-on: 'ubuntu-24.04'
+    name: 'Coding standards'
+    steps:
+      - name: 'Checkout'
+        uses: 'actions/checkout@v4'
+
+      - name: 'Setup PHP'
+        uses: 'shivammathur/setup-php@v2'
+        with:
+          php-version: '8.1'
+          tools: composer
+
+      - name: 'Install dependencies with Composer'
+        uses: 'ramsey/composer-install@v3'
+        with:
+          composer-options: '--prefer-dist'
+
+      - name: 'Run Rector'
+        run: make run-rector
 
   phpunit:
     runs-on: 'ubuntu-24.04'

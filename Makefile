@@ -14,8 +14,6 @@ tools/phive.phar:
     chmod +x tools/phive.phar;
 
 vendor/autoload.php:
-	# Installing Symfony Flex: parallel download of dependency libs
-	composer global require --no-progress --no-scripts --no-plugins symfony/flex
 	composer install --prefer-dist --no-interaction ${COMPOSER_FLAGS}
 
 tools/php-cs-fixer.phar: tools/phive.phar
@@ -77,6 +75,14 @@ run-phpstan: composer-install
 fix-phpstan-baseline: composer-install
 	vendor/bin/phpstan analyse --no-progress --no-interaction --generate-baseline phpstan-baseline.neon --memory-limit=1G
 
+.PHONY: run-rector
+run-rector: composer-install
+	vendor/bin/rector process --dry-run --no-progress-bar
+
+.PHONY: fix-rector
+fix-rector: composer-install
+	vendor/bin/rector process --no-progress-bar
+
 
 ##
 ## Docker commands
@@ -113,6 +119,14 @@ docker-fix-phpstan-baseline:
 .PHONY: docker-shell
 docker-shell:
 	docker compose ${DOCKER_COMPOSE_OPTIONS} exec php sh
+
+.PHONY: docker-run-rector
+docker-run-rector:
+	docker compose ${DOCKER_COMPOSE_OPTIONS} exec php env TERM=xterm-256color vendor/bin/rector process --dry-run --no-progress-bar
+
+.PHONY: docker-fix-rector
+docker-fix-rector:
+	docker compose ${DOCKER_COMPOSE_OPTIONS} exec php env TERM=xterm-256color vendor/bin/rector process --no-progress-bar
 
 ## Additional commands
 
