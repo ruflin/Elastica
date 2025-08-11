@@ -43,7 +43,7 @@ class TemplateTest extends BaseTest
     public function testCreateTemplate(): void
     {
         $templateArgs = [
-            'index_patterns' => 'te*',
+            'index_patterns' => 'oldte*',
             'settings' => [
                 'number_of_shards' => 1,
             ],
@@ -60,7 +60,7 @@ class TemplateTest extends BaseTest
     public function testCreateAlreadyExistsTemplateException(): void
     {
         $templateArgs = [
-            'index_patterns' => 'te*',
+            'index_patterns' => 'oldte*',
             'settings' => [
                 'number_of_shards' => 1,
             ],
