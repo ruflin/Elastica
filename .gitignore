@@ -1,5 +1,7 @@
 .DS_Store
 .idea
+.vscode
+
 *.iml
 .php-cs-fixer.php
 .php-cs-fixer.cache
@@ -13,8 +15,8 @@ atlassian-ide-plugin.xml
 /nbproject
 /tools
 /vendor
+/_worktrees
 
 composer.lock
 composer.phar
 
-.vscode/mcp.json

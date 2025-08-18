@@ -1,5 +1,4 @@
-DOCKER_COMPOSE_OPTIONS	= --project-name=elastica --file=docker/docker-compose.yml --file=docker/docker-compose.proxy.yml --file=docker/docker-compose.es.yml
-DOCKER_COMPOSE_CMD := $(shell if [ ! -z "`docker compose version`" ]; then echo "docker compose"; else echo "docker-compose"; fi 2>/dev/null)
+DOCKER_COMPOSE_OPTIONS	= --project-name=elastica --file=docker/compose.yaml --file=docker/compose.proxy.yaml --file=docker/compose.es.yaml
 
 .PHONY: clean
 clean:
@@ -9,7 +8,7 @@ tools/phive.phar:
 	mkdir tools; \
 	wget --no-clobber --output-document=tools/phive.phar "https://phar.io/releases/phive.phar" --quiet; \
     wget --no-clobber --output-document=tools/phive.phar.asc "https://phar.io/releases/phive.phar.asc" --quiet; \
-    gpg --keyserver hkps.pool.sks-keyservers.net --recv-keys 0x9D8A98B29B2D5D79; \
+    gpg --keyserver hkps://keys.openpgp.org --recv-keys 0x9D8A98B29B2D5D79; \
     gpg --verify tools/phive.phar.asc tools/phive.phar; \
     rm tools/phive.phar.asc; \
     chmod +x tools/phive.phar;
@@ -55,12 +54,16 @@ run-phpunit-coverage: composer-install
 	exit $$EXIT_STATUS
 
 .PHONY: run-coveralls
-run-coveralls:
+run-coveralls: tools/php-coveralls.phar
 	tools/php-coveralls.phar -v
 
 tools/phpdocumentor.phar:
-	curl http://www.phpdoc.org/phpDocumentor.phar -o tools/phpdocumentor.phar --silent -L; \
+	curl https://www.phpdoc.org/phpDocumentor.phar -o tools/phpdocumentor.phar --silent -L; \
 	chmod +x tools/phpdocumentor.phar
+
+tools/php-coveralls.phar:
+	curl https://github.com/php-coveralls/php-coveralls/releases/download/v2.8.0/php-coveralls.phar -o tools/php-coveralls.phar --silent -L; \
+	chmod +x tools/php-coveralls.phar
 
 .PHONY: run-phpdoc
 run-phpdoc: tools/phpdocumentor.phar
@@ -81,35 +84,35 @@ fix-phpstan-baseline: composer-install
 
 .PHONY: docker-start
 docker-start:
-	${DOCKER_COMPOSE_CMD} ${DOCKER_COMPOSE_OPTIONS} up ${DOCKER_OPTIONS}
+	docker compose ${DOCKER_COMPOSE_OPTIONS} up ${DOCKER_OPTIONS}
 
 .PHONY: docker-stop
 docker-stop:
-	${DOCKER_COMPOSE_CMD} ${DOCKER_COMPOSE_OPTIONS} down
+	docker compose ${DOCKER_COMPOSE_OPTIONS} down
 
 .PHONY: docker-run-phpunit
 docker-run-phpunit:
-	${DOCKER_COMPOSE_CMD} ${DOCKER_COMPOSE_OPTIONS} exec php env TERM=xterm-256color make run-phpunit PHPUNIT_OPTIONS=${PHPUNIT_OPTIONS}
+	docker compose ${DOCKER_COMPOSE_OPTIONS} exec php env TERM=xterm-256color make run-phpunit PHPUNIT_OPTIONS=${PHPUNIT_OPTIONS}
 
 .PHONY: docker-run-phpcs
 docker-run-phpcs:
-	${DOCKER_COMPOSE_CMD} ${DOCKER_COMPOSE_OPTIONS} exec php env TERM=xterm-256color make run-phpcs
+	docker compose ${DOCKER_COMPOSE_OPTIONS} exec php env TERM=xterm-256color make run-phpcs
 
 .PHONY: docker-fix-phpcs
 docker-fix-phpcs:
-	${DOCKER_COMPOSE_CMD} ${DOCKER_COMPOSE_OPTIONS} exec php env TERM=xterm-256color make fix-phpcs
+	docker compose ${DOCKER_COMPOSE_OPTIONS} exec php env TERM=xterm-256color make fix-phpcs
 
 .PHONY: docker-run-phpstan
 docker-run-phpstan:
-	${DOCKER_COMPOSE_CMD} ${DOCKER_COMPOSE_OPTIONS} exec php env TERM=xterm-256color vendor/bin/phpstan analyse --no-progress --no-interaction --memory-limit=1G
+	docker compose ${DOCKER_COMPOSE_OPTIONS} exec php env TERM=xterm-256color vendor/bin/phpstan analyse --no-progress --no-interaction --memory-limit=1G
 
 .PHONY: docker-fix-phpstan-baseline
 docker-fix-phpstan-baseline:
-	${DOCKER_COMPOSE_CMD} ${DOCKER_COMPOSE_OPTIONS} exec php env TERM=xterm-256color vendor/bin/phpstan analyse --no-progress --no-interaction --generate-baseline phpstan-baseline.neon --memory-limit=1G
+	docker compose ${DOCKER_COMPOSE_OPTIONS} exec php env TERM=xterm-256color vendor/bin/phpstan analyse --no-progress --no-interaction --generate-baseline phpstan-baseline.neon --memory-limit=1G
 
 .PHONY: docker-shell
 docker-shell:
-	${DOCKER_COMPOSE_CMD} ${DOCKER_COMPOSE_OPTIONS} exec php sh
+	docker compose ${DOCKER_COMPOSE_OPTIONS} exec php sh
 
 ## Additional commands
 

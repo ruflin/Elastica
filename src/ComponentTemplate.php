@@ -12,16 +12,16 @@ use Elastica\Exception\ClientException;
 use Elastica\Exception\InvalidException;
 
 /**
- * Elastica index template object.
+ * Elastica component template object.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-templates.html
  */
-class IndexTemplate
+class ComponentTemplate
 {
     /**
-     * Index template name.
+     * Component template name.
      *
-     * @var string Index template name
+     * @var string Component template name
      */
     protected $_name;
 
@@ -31,9 +31,9 @@ class IndexTemplate
     protected $_client;
 
     /**
-     * Creates a new index template object.
+     * Creates a new component template object.
      *
-     * @param string $name Index template name
+     * @param string $name Component template name
      *
      * @throws InvalidException
      */
@@ -42,13 +42,13 @@ class IndexTemplate
         $this->_client = $client;
 
         if (!\is_scalar($name)) {
-            throw new InvalidException('Index template should be a scalar type');
+            throw new InvalidException('Component template should be a scalar type');
         }
         $this->_name = (string) $name;
     }
 
     /**
-     * Deletes the index template.
+     * Deletes the component template.
      *
      * @throws MissingParameterException if a required parameter is missing
      * @throws NoNodeAvailableException  if all the hosts are offline
@@ -59,12 +59,12 @@ class IndexTemplate
     public function delete(): Response
     {
         return $this->_client->toElasticaResponse(
-            $this->_client->indices()->deleteIndexTemplate(['name' => $this->getName()])
+            $this->_client->cluster()->deleteComponentTemplate(['name' => $this->getName()])
         );
     }
 
     /**
-     * Creates a new index template with the given arguments.
+     * Creates a new component template with the given arguments.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-templates.html
      *
@@ -79,12 +79,12 @@ class IndexTemplate
     public function create(array $args = []): Response
     {
         return $this->_client->toElasticaResponse(
-            $this->_client->indices()->putIndexTemplate(['name' => $this->getName(), 'body' => $args])
+            $this->_client->cluster()->putComponentTemplate(['name' => $this->getName(), 'body' => $args])
         );
     }
 
     /**
-     * Checks if the given index template is already created.
+     * Checks if the given component template is already created.
      *
      * @throws MissingParameterException if a required parameter is missing
      * @throws NoNodeAvailableException  if all the hosts are offline
@@ -94,13 +94,13 @@ class IndexTemplate
      */
     public function exists(): bool
     {
-        $response = $this->_client->indices()->existsIndexTemplate(['name' => $this->getName()]);
+        $response = $this->_client->cluster()->existsComponentTemplate(['name' => $this->getName()]);
 
         return 200 === $response->getStatusCode();
     }
 
     /**
-     * Returns the index template name.
+     * Returns the component template name.
      */
     public function getName(): string
     {
@@ -108,7 +108,7 @@ class IndexTemplate
     }
 
     /**
-     * Returns index template client.
+     * Returns component template client.
      */
     public function getClient(): Client
     {

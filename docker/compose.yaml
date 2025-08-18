@@ -1,13 +1,11 @@
-version: '3.4'
-
-# This is a docker-compose template file for running docker's containers locally.
-# It must be combined with `docker-compose.es.yml`
+# This is a docker compose template file for running docker's containers locally.
+# It must be combined with `compose.es.yaml`
 # See: docker-start unit in Makefile
 
 services:
     php:
         container_name: php
-        build: 
+        build:
             dockerfile: php/Dockerfile
         volumes:
             - ../:/var/www/html
@@ -17,7 +15,7 @@ services:
             - ES_HOST=es01
             - PROXY_HOST=proxy
             - ES_VERSION=${ES_VERSION}
-        stdin_open: true 
+        stdin_open: true
         tty: true
 
 networks:
