@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased](https://github.com/ruflin/Elastica/compare/8.x...9.x)
+### Backward Compatibility Breaks
+* `Elastica\IndexTemplate` now works only with new `_index_template` API. You should use `Elastica\Template` to use the deprecated API [#2274](https://github.com/ruflin/Elastica/pull/2274)
+### Added
+* Added support for Component Template [#2274](https://github.com/ruflin/Elastica/pull/2274)
+* Added support for Index Template  [#2274](https://github.com/ruflin/Elastica/pull/2274)
+* Added Template class to target only legacy Template [#2274](https://github.com/ruflin/Elastica/pull/2274)
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/8.1.0...8.x)
 
 ### Backward Compatibility Breaks

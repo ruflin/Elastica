@@ -12,16 +12,19 @@ use Elastica\Exception\ClientException;
 use Elastica\Exception\InvalidException;
 
 /**
- * Elastica index template object.
+ * Elastica legacy index template object.
  *
+ * @author Dmitry Balabka <dmitry.balabka@gmail.com>
+ *
+ * @deprecated _template have been deprecated in Elasticsearch 7.8 and will be removed in a future version. You should use the IndexTemplate class instead.
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-templates.html
  */
-class IndexTemplate
+class Template
 {
     /**
-     * Index template name.
+     * Template name.
      *
-     * @var string Index template name
+     * @var string Template name
      */
     protected $_name;
 
@@ -59,7 +62,7 @@ class IndexTemplate
     public function delete(): Response
     {
         return $this->_client->toElasticaResponse(
-            $this->_client->indices()->deleteIndexTemplate(['name' => $this->getName()])
+            $this->_client->indices()->deleteTemplate(['name' => $this->getName()])
         );
     }
 
@@ -79,7 +82,7 @@ class IndexTemplate
     public function create(array $args = []): Response
     {
         return $this->_client->toElasticaResponse(
-            $this->_client->indices()->putIndexTemplate(['name' => $this->getName(), 'body' => $args])
+            $this->_client->indices()->putTemplate(['name' => $this->getName(), 'body' => $args])
         );
     }
 
@@ -94,7 +97,7 @@ class IndexTemplate
      */
     public function exists(): bool
     {
-        $response = $this->_client->indices()->existsIndexTemplate(['name' => $this->getName()]);
+        $response = $this->_client->indices()->existsTemplate(['name' => $this->getName()]);
 
         return 200 === $response->getStatusCode();
     }
