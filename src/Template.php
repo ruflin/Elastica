@@ -24,7 +24,7 @@ class Template
     /**
      * Index template name.
      *
-     * @var string Index pattern
+     * @var string Template name
      */
     protected $_name;
 
