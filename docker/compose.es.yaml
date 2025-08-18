@@ -1,11 +1,7 @@
-version: '3.8'
-
 services:
     es01:
         container_name: es01
-        image: &image docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION:-9.0.4}
-        command: &command >
-            /bin/sh -c "(./bin/elasticsearch-plugin list | grep -q ingest-attachment || ./bin/elasticsearch-plugin install --batch ingest-attachment) && /usr/local/bin/docker-entrypoint.sh"
+        image: &image docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION:-9.1.0}
         environment: &environment
             node.name: es01
             cluster.name: es-docker-cluster
@@ -31,7 +27,6 @@ services:
     es02:
         container_name: es02
         image: *image
-        command: *command
         environment:
             <<: *environment
             node.name: es02

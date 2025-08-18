@@ -6,6 +6,8 @@
 /.php-cs-fixer.dist.php export-ignore
 /CHANGELOG.md merge=union
 /CONTRIBUTING.md export-ignore
+/CLAUDE.md export-ignore
+/GEMINI.md export-ignore
 /UPGRADE-8.0.md export-ignore
 /codecov.yml export-ignore
 /docker export-ignore
