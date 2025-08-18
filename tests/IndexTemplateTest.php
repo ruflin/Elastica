@@ -8,6 +8,7 @@ use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Exception\InvalidException;
 use Elastica\IndexTemplate;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * IndexTemplate class tests.
@@ -23,7 +24,7 @@ class IndexTemplateTest extends BaseTest
     {
         $name = 'index_template1';
         $client = $this->_getClient();
-        $indexTemplate = new IndexTemplate($client, $name);
+        $indexTemplate = new IndexTemplate($client, $name, false);
 
         $this->assertSame($client, $indexTemplate->getClient());
         $this->assertEquals($name, $indexTemplate->getName());
@@ -37,7 +38,7 @@ class IndexTemplateTest extends BaseTest
         $this->expectException(InvalidException::class);
 
         $client = $this->_getClient();
-        new IndexTemplate($client, null);
+        new IndexTemplate($client, null, false);
     }
 
     /**
@@ -46,7 +47,7 @@ class IndexTemplateTest extends BaseTest
     public function testLegacyCreateTemplate(): void
     {
         $template = [
-            'index_patterns' => 'te*',
+            'index_patterns' => 'legacyte*',
             'settings' => [
                 'number_of_shards' => 1,
             ],
@@ -66,8 +67,10 @@ class IndexTemplateTest extends BaseTest
     {
         $template = [
             'index_patterns' => 'te*',
-            'settings' => [
-                'number_of_shards' => 1,
+            'template' => [
+                'settings' => [
+                    'number_of_shards' => 1,
+                ],
             ],
         ];
         $name = 'index_template1';
@@ -84,7 +87,7 @@ class IndexTemplateTest extends BaseTest
     public function testLegacyCreateAlreadyExistsTemplateException(): void
     {
         $template = [
-            'index_patterns' => 'te*',
+            'index_patterns' => 'legacyte*',
             'settings' => [
                 'number_of_shards' => 1,
             ],

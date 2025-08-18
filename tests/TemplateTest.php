@@ -8,6 +8,7 @@ use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Exception\InvalidException;
 use Elastica\Template;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Template class tests.
@@ -48,7 +49,7 @@ class TemplateTest extends BaseTest
     public function testCreateTemplate(): void
     {
         $templateArgs = [
-            'index_patterns' => 'te*',
+            'index_patterns' => 'oldte*',
             'settings' => [
                 'number_of_shards' => 1,
             ],
@@ -67,7 +68,7 @@ class TemplateTest extends BaseTest
     public function testCreateAlreadyExistsTemplateException(): void
     {
         $templateArgs = [
-            'index_patterns' => 'te*',
+            'index_patterns' => 'oldte*',
             'settings' => [
                 'number_of_shards' => 1,
             ],

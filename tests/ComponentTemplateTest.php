@@ -69,7 +69,7 @@ class ComponentTemplateTest extends BaseTest
      */
     public function testCreateAlreadyExistsTemplateException(): void
     {
-        $templateArgs = [
+        $componentTemplateArgs = [
             'template' => [
                 'mappings' => [
                     'properties' => [
@@ -82,9 +82,9 @@ class ComponentTemplateTest extends BaseTest
         ];
         $name = 'component_template1';
         $template = new ComponentTemplate($this->_getClient(), $name);
-        $template->create($templateArgs);
+        $template->create($componentTemplateArgs);
         try {
-            $template->create($templateArgs);
+            $template->create($componentTemplateArgs);
         } catch (ClientResponseException $e) {
             $error = \json_decode((string) $e->getResponse()->getBody(), true)['error']['root_cause'][0] ?? null;
 
