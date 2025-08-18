@@ -117,7 +117,7 @@ class IndexTemplateTest extends BaseTest
                 'settings' => [
                     'number_of_shards' => 1,
                 ],
-            ]
+            ],
         ];
         $name = 'index_template1';
         $indexTemplate = new IndexTemplate($this->_getClient(), $name, false);
