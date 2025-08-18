@@ -6,26 +6,28 @@ namespace Elastica\Test;
 
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Exception\InvalidException;
-use Elastica\IndexTemplate;
+use Elastica\Template;
 use Elastica\Test\Base as BaseTest;
 use PHPUnit\Framework\Attributes\Group;
 
 /**
- * IndexTemplate class tests.
+ * Template class tests.
+ *
+ * @author Dmitry Balabka <dmitry.balabka@intexsys.lv>
  *
  * @internal
  */
-class IndexTemplateTest extends BaseTest
+class TemplateTest extends BaseTest
 {
     #[Group('unit')]
     public function testInstantiate(): void
     {
-        $name = 'index_template1';
+        $name = 'template1';
         $client = $this->_getClient();
-        $indexTemplate = new IndexTemplate($client, $name);
+        $template = new Template($client, $name);
 
-        $this->assertSame($client, $indexTemplate->getClient());
-        $this->assertEquals($name, $indexTemplate->getName());
+        $this->assertSame($client, $template->getClient());
+        $this->assertEquals($name, $template->getName());
     }
 
     #[Group('unit')]
@@ -34,44 +36,40 @@ class IndexTemplateTest extends BaseTest
         $this->expectException(InvalidException::class);
 
         $client = $this->_getClient();
-        new IndexTemplate($client, null);
+        new Template($client, null);
     }
 
     #[Group('functional')]
     public function testCreateTemplate(): void
     {
-        $template = [
-            'index_patterns' => 'te*',
-            'template' => [
-                'settings' => [
-                    'number_of_shards' => 1,
-                ],
+        $templateArgs = [
+            'index_patterns' => 'oldte*',
+            'settings' => [
+                'number_of_shards' => 1,
             ],
         ];
-        $name = 'index_template1';
-        $indexTemplate = new IndexTemplate($this->_getClient(), $name);
-        $indexTemplate->create($template);
-        $this->assertTrue($indexTemplate->exists());
-        $indexTemplate->delete();
-        $this->assertFalse($indexTemplate->exists());
+        $name = 'template1';
+        $template = new Template($this->_getClient(), $name);
+        $template->create($templateArgs);
+        $this->assertTrue($template->exists());
+        $template->delete();
+        $this->assertFalse($template->exists());
     }
 
     #[Group('functional')]
     public function testCreateAlreadyExistsTemplateException(): void
     {
-        $template = [
-            'index_patterns' => 'te*',
-            'template' => [
-                'settings' => [
-                    'number_of_shards' => 1,
-                ],
+        $templateArgs = [
+            'index_patterns' => 'oldte*',
+            'settings' => [
+                'number_of_shards' => 1,
             ],
         ];
-        $name = 'index_template1';
-        $indexTemplate = new IndexTemplate($this->_getClient(), $name);
-        $indexTemplate->create($template);
+        $name = 'template1';
+        $template = new Template($this->_getClient(), $name);
+        $template->create($templateArgs);
         try {
-            $indexTemplate->create($template);
+            $template->create($templateArgs);
         } catch (ClientResponseException $e) {
             $error = \json_decode((string) $e->getResponse()->getBody(), true)['error']['root_cause'][0] ?? null;
 

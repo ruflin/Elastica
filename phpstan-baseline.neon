@@ -151,10 +151,20 @@ parameters:
 			path: tests/DocumentTest.php
 
 		-
+			message: '#^Parameter \#2 \$name of class Elastica\\ComponentTemplate constructor expects string, null given\.$#'
+			count: 1
+			path: tests/ComponentTemplateTest.php
+
+		-
 			message: '#^Parameter \#2 \$name of class Elastica\\IndexTemplate constructor expects string, null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: tests/IndexTemplateTest.php
+
+		-
+			message: '#^Parameter \#2 \$name of class Elastica\\Template constructor expects string, null given\.$#'
+			count: 1
+			path: tests/TemplateTest.php
 
 		-
 			message: '#^Unreachable statement \- code above always terminates\.$#'
