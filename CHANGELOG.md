@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added support for Component Template [#2257](https://github.com/ruflin/Elastica/pull/2257)
 * Added support for Index Template, using `useLegacy = false`  [#2257](https://github.com/ruflin/Elastica/pull/2257)
 * Added Template class to target only legacy Template [#2257](https://github.com/ruflin/Elastica/pull/2257)
+* Added support for PHP 8.5 [#2254](https://github.com/ruflin/Elastica/pull/2254)
 ### Changed
 ### Deprecated
 * Deprecated `Elastica\Template` because it's deprecated since version 7.8 on ElasticSearch [#2257](https://github.com/ruflin/Elastica/pull/2257)

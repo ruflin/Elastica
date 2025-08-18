@@ -3,9 +3,17 @@ version: '3.8'
 services:
     es01:
         container_name: es01
-        image: &image docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION:-8.11.1}
+        image: &image docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION:-8.19.0}
         command: &command >
-            /bin/sh -c "(./bin/elasticsearch-plugin list | grep -q ingest-attachment || ./bin/elasticsearch-plugin install --batch ingest-attachment) && /usr/local/bin/docker-entrypoint.sh"
+          bash -c "
+              ELASTIC_VERSION=$(bin/elasticsearch --version | grep -oP 'Version: \\K[0-9]+\\.[0-9]+\\.[0-9]+' | awk -F. '{print $1*100+$2}');
+
+              if [ $$ELASTIC_VERSION -lt 800 ]; then
+                ./bin/elasticsearch-plugin list | grep -q ingest-attachment || ./bin/elasticsearch-plugin install --batch ingest-attachment;
+              fi;
+
+              /usr/local/bin/docker-entrypoint.sh;
+            "
         environment: &environment
             node.name: es01
             cluster.name: es-docker-cluster
