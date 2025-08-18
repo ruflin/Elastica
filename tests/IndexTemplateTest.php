@@ -113,9 +113,11 @@ class IndexTemplateTest extends BaseTest
     {
         $template = [
             'index_patterns' => 'te*',
-            'settings' => [
-                'number_of_shards' => 1,
-            ],
+            'template' => [
+                'settings' => [
+                    'number_of_shards' => 1,
+                ],
+            ]
         ];
         $name = 'index_template1';
         $indexTemplate = new IndexTemplate($this->_getClient(), $name, false);
