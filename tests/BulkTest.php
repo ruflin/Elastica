@@ -792,7 +792,6 @@ class BulkTest extends BaseTest
         // Use reflection to simulate the scenario where _client might be null
         $reflection = new \ReflectionClass($bulk);
         $clientProperty = $reflection->getProperty('_client');
-        $clientProperty->setAccessible(true);
         $clientProperty->setValue($bulk, null);
 
         $document = new Document('1', ['name' => 'Test Document']);
@@ -814,7 +813,6 @@ class BulkTest extends BaseTest
         // Use reflection to simulate the scenario where _client might be null
         $reflection = new \ReflectionClass($bulk);
         $clientProperty = $reflection->getProperty('_client');
-        $clientProperty->setAccessible(true);
         $clientProperty->setValue($bulk, null);
 
         $script = new Script('ctx._source.name = params.name', ['name' => 'Test Script'], 'painless');
