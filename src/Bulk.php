@@ -135,7 +135,7 @@ class Bulk
      */
     public function addDocument(Document $document, ?string $opType = null): self
     {
-        if (!$document->hasRetryOnConflict() && null !== $this->_client) {
+        if (null !== $this->_client && !$document->hasRetryOnConflict()) {
             $retry = $this->_client->getConfigValue('retryOnConflict', 0);
 
             if ($retry > 0) {
@@ -167,7 +167,7 @@ class Bulk
      */
     public function addScript(AbstractScript $script, ?string $opType = null): self
     {
-        if (!$script->hasRetryOnConflict() && null !== $this->_client) {
+        if (null !== $this->_client && !$script->hasRetryOnConflict()) {
             $retry = $this->_client->getConfigValue('retryOnConflict', 0);
 
             if ($retry > 0) {
