@@ -15,6 +15,14 @@
         displayDetailsOnTestsThatTriggerWarnings="true"
         bootstrap="tests/bootstrap.php"
 >
+    <php>
+        <deprecations>
+            <ignore>
+                <directory>vendor/guzzlehttp/guzzle/src/Handler/</directory>
+                <message>#Function curl_close\(\) is deprecated#</message>
+            </ignore>
+        </deprecations>
+    </php>
     <source>
         <include>
             <directory>src</directory>
