@@ -28,7 +28,7 @@ class Template
      */
     protected string $_name;
 
-    protected \Elastica\Client $_client;
+    protected Client $_client;
 
     /**
      * Creates a new index template object.
