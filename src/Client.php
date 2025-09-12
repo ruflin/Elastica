@@ -588,7 +588,7 @@ class Client implements ClientInterface
 
         $transport = $builder->build();
 
-        // The default retries is equal to the number of hosts
+        // The default retries number is equal to the number of hosts
         if (isset($config['retries']) && (int) $config['retries'] >= 0) {
             $transport->setRetries($config['retries']);
         } else {
