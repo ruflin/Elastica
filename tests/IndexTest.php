@@ -752,7 +752,7 @@ class IndexTest extends BaseTest
                 'index' => [
                     'merge' => [
                         'policy' => [
-                            'expunge_deletes_allowed' => 0,
+                            'expunge_deletes_allowed' => 10,
                         ],
                     ],
                     'number_of_shards' => 3,
@@ -777,7 +777,7 @@ class IndexTest extends BaseTest
         $this->assertSame(1, $stats['_all']['primaries']['docs']['count']);
         $this->assertGreaterThanOrEqual(1, $stats['_all']['primaries']['docs']['deleted']);
 
-        $index->forcemerge(['only_expunge_deletes' => true]);
+        $index->forcemerge(['max_num_segments' => 1]);
         $index->refresh();
 
         $stats = $index->getStats()->getData();
