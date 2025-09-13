@@ -176,4 +176,83 @@ class ClientTest extends BaseTest
 
         self::assertSame(['Authorization' => \sprintf('ApiKey %s', $apiKey)], $client->getTransport()->getHeaders());
     }
+
+    /**
+     * @covers \Elastica\Client::_buildTransport
+     *
+     * @group unit
+     */
+    public function testBuildTransportWithZeroRetries(): void
+    {
+        $client = new Client([
+            'hosts' => ['localhost:9200'],
+            'retries' => 0,
+        ]);
+
+        // Verify that the transport is created successfully with zero retries
+        $transport = $client->getTransport();
+        $this->assertNotNull($transport);
+
+        // The transport should be configured with 0 retries
+        $this->assertEquals(0, $transport->getRetries());
+    }
+
+    /**
+     * @covers \Elastica\Client::_buildTransport
+     *
+     * @group unit
+     */
+    public function testBuildTransportWithNegativeRetries(): void
+    {
+        $client = new Client([
+            'hosts' => ['localhost:9200', 'localhost:9201'],
+            'retries' => -1,
+        ]);
+
+        // Verify that the transport is created successfully
+        $transport = $client->getTransport();
+        $this->assertNotNull($transport);
+
+        // With negative retries, it should fall back to host count (2 hosts)
+        $this->assertEquals(2, $transport->getRetries());
+    }
+
+    /**
+     * @covers \Elastica\Client::_buildTransport
+     *
+     * @group unit
+     */
+    public function testBuildTransportWithPositiveRetries(): void
+    {
+        $client = new Client([
+            'hosts' => ['localhost:9200'],
+            'retries' => 3,
+        ]);
+
+        // Verify that the transport is created successfully
+        $transport = $client->getTransport();
+        $this->assertNotNull($transport);
+
+        // Should use the specified retry count
+        $this->assertEquals(3, $transport->getRetries());
+    }
+
+    /**
+     * @covers \Elastica\Client::_buildTransport
+     *
+     * @group unit
+     */
+    public function testBuildTransportWithoutRetriesConfig(): void
+    {
+        $client = new Client([
+            'hosts' => ['localhost:9200', 'localhost:9201', 'localhost:9202'],
+        ]);
+
+        // Verify that the transport is created successfully
+        $transport = $client->getTransport();
+        $this->assertNotNull($transport);
+
+        // Without retries config, it should default to host count (3 hosts)
+        $this->assertEquals(3, $transport->getRetries());
+    }
 }

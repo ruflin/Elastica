@@ -157,12 +157,11 @@ class Index implements SearchableInterface
     /**
      * Update entries in the db based on a query.
      *
-     * @param AbstractQuery|array|Query|string|null $query Query object or array
+     * @param AbstractQuery|array|Query|string|null $query   Query object or array
+     * @param AbstractScript                        $script  Script
+     * @param array                                 $options Optional params
      *
      * @phpstan-param TCreateQueryArgsMatching $query
-     *
-     * @param AbstractScript $script  Script
-     * @param array          $options Optional params
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html
      *
@@ -341,11 +340,10 @@ class Index implements SearchableInterface
     /**
      * Deletes documents matching the given query.
      *
-     * @param AbstractQuery|array|Query|string|null $query Query object or array
+     * @param AbstractQuery|array|Query|string|null $query   Query object or array
+     * @param array                                 $options Optional params
      *
      * @phpstan-param TCreateQueryArgsMatching $query
-     *
-     * @param array $options Optional params
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
      *
