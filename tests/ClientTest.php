@@ -176,4 +176,16 @@ class ClientTest extends BaseTest
 
         self::assertSame(['Authorization' => \sprintf('ApiKey %s', $apiKey)], $client->getTransport()->getHeaders());
     }
+
+    /**
+     * @covers \Elastica\Client::_buildTransport
+     */
+    public function testRetriesConfigurationWithZeroRetries(): void
+    {
+        $client = new Client(['retries' => 0]);
+
+        // Verify that zero retries is properly set on the transport
+        $transport = $client->getTransport();
+        $this->assertEquals(0, $transport->getRetries());
+    }
 }
