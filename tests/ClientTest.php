@@ -183,7 +183,7 @@ class ClientTest extends BaseTest
     public function testRetriesConfigurationWithZeroRetries(): void
     {
         $client = new Client(['retries' => 0]);
-        
+
         // Verify that zero retries is properly set on the transport
         $transport = $client->getTransport();
         $this->assertEquals(0, $transport->getRetries());
@@ -195,7 +195,7 @@ class ClientTest extends BaseTest
     public function testRetriesConfigurationWithPositiveRetries(): void
     {
         $client = new Client(['retries' => 3]);
-        
+
         // Verify that positive retries is properly set on the transport
         $transport = $client->getTransport();
         $this->assertEquals(3, $transport->getRetries());
@@ -207,7 +207,7 @@ class ClientTest extends BaseTest
     public function testRetriesConfigurationWithNegativeRetries(): void
     {
         $client = new Client(['retries' => -1]);
-        
+
         // Verify that negative retries falls back to default (number of hosts)
         $transport = $client->getTransport();
         $this->assertEquals(1, $transport->getRetries()); // Default host count
@@ -220,9 +220,9 @@ class ClientTest extends BaseTest
     {
         $client = new Client([
             'hosts' => ['localhost:9200', 'localhost:9201', 'localhost:9202'],
-            'retries' => 0
+            'retries' => 0,
         ]);
-        
+
         // Verify that zero retries is properly set even with multiple hosts
         $transport = $client->getTransport();
         $this->assertEquals(0, $transport->getRetries());
@@ -234,7 +234,7 @@ class ClientTest extends BaseTest
     public function testRetriesConfigurationDefaultBehavior(): void
     {
         $client = new Client(['hosts' => ['localhost:9200', 'localhost:9201']]);
-        
+
         // Verify that when no retries is specified, it defaults to host count
         $transport = $client->getTransport();
         $this->assertEquals(2, $transport->getRetries()); // Number of hosts
@@ -246,7 +246,7 @@ class ClientTest extends BaseTest
     public function testRetriesConfigurationWithStringZero(): void
     {
         $client = new Client(['retries' => '0']);
-        
+
         // Verify that string '0' is properly converted to integer 0
         $transport = $client->getTransport();
         $this->assertEquals(0, $transport->getRetries());
