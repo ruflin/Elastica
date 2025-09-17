@@ -163,7 +163,7 @@ class TermsTest extends BaseAggregationTest
     public function testTermsSetMissingBucketFunctional(
         string $field,
         int $expectedCountValues,
-        bool $isSetMissingBucket
+        bool $isSetMissingBucket,
     ): void {
         $terms = new Terms('terms');
         $terms->setField($field);
