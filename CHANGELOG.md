@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 ### Fixed
 * `Elastica\Query\BoolQuery::toArray` no longer changes `$this->_params` to \stdClass when empty [#2241](https://github.com/ruflin/Elastica/pull/2241)
+* Fixed Client retries configuration to allow zero retries by changing condition from `> 0` to `>= 0` [#2278](https://github.com/ruflin/Elastica/pull/2278)
 ### Security
 
 ## [8.1.0](https://github.com/ruflin/Elastica/compare/8.0.0...8.1.0)

@@ -110,6 +110,16 @@ class Client implements ClientInterface
         throw new \Exception('Not supported');
     }
 
+    public function setServerless(bool $value): ClientInterface
+    {
+        throw new \Exception('Not supported');
+    }
+
+    public function getServerless(): bool
+    {
+        return false;
+    }
+
     /**
      * Get current version.
      *
@@ -589,8 +599,8 @@ class Client implements ClientInterface
         $transport = $builder->build();
 
         // The default retries is equal to the number of hosts
-        if (isset($config['retries']) && (int) $config['retries'] > 0) {
-            $transport->setRetries($config['retries']);
+        if (isset($config['retries']) && (int) $config['retries'] >= 0) {
+            $transport->setRetries((int) $config['retries']);
         } else {
             $transport->setRetries(\count($hosts));
         }

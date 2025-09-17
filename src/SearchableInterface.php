@@ -38,12 +38,11 @@ interface SearchableInterface
      *      }
      * }
      *
-     * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest|null $query Array with all query data inside or a Elastica\Query object
+     * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest|null $query   Array with all query data inside or a Elastica\Query object
+     * @param array<string, mixed>|null                                              $options associative array of options (option=>value)
+     * @param string                                                                 $method  Request method, see Request's constants
      *
      * @phpstan-param TCreateQueryArgs $query
-     *
-     * @param array<string, mixed>|null $options associative array of options (option=>value)
-     * @param string                    $method  Request method, see Request's constants
      *
      * @throws NoNodeAvailableException if all the hosts are offline
      * @throws ClientResponseException  if the status code of response is 4xx
@@ -58,11 +57,10 @@ interface SearchableInterface
      *
      * If no query is set, matchall query is created
      *
-     * @param AbstractQuery|array|Query|string|null $query Array with all query data inside or a Elastica\Query object
+     * @param AbstractQuery|array|Query|string|null $query  Array with all query data inside or a Elastica\Query object
+     * @param string                                $method Request method, see Request's constants
      *
      * @phpstan-param TCreateQueryArgsMatching $query
-     *
-     * @param string $method Request method, see Request's constants
      *
      * @throws NoNodeAvailableException if all the hosts are offline
      * @throws ClientResponseException  if the status code of response is 4xx
@@ -75,10 +73,9 @@ interface SearchableInterface
 
     /**
      * @param AbstractQuery|AbstractSuggest|array|Collapse|Query|string|Suggest|null $query
+     * @param array<string, mixed>|null                                              $options
      *
      * @phpstan-param TCreateQueryArgs $query
-     *
-     * @param array<string, mixed>|null $options
      */
     public function createSearch($query = '', ?array $options = null): Search;
 }
