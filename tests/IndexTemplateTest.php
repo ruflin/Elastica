@@ -8,11 +8,10 @@ use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Exception\InvalidException;
 use Elastica\IndexTemplate;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * IndexTemplate class tests.
- *
- * @author Dmitry Balabka <dmitry.balabka@intexsys.lv>
  *
  * @internal
  */
@@ -25,7 +24,7 @@ class IndexTemplateTest extends BaseTest
     {
         $name = 'index_template1';
         $client = $this->_getClient();
-        $indexTemplate = new IndexTemplate($client, $name);
+        $indexTemplate = new IndexTemplate($client, $name, false);
 
         $this->assertSame($client, $indexTemplate->getClient());
         $this->assertEquals($name, $indexTemplate->getName());
@@ -39,21 +38,21 @@ class IndexTemplateTest extends BaseTest
         $this->expectException(InvalidException::class);
 
         $client = $this->_getClient();
-        new IndexTemplate($client, null);
+        new IndexTemplate($client, null, false);
     }
 
     /**
      * @group functional
      */
-    public function testCreateTemplate(): void
+    public function testLegacyCreateTemplate(): void
     {
         $template = [
-            'index_patterns' => 'te*',
+            'index_patterns' => 'legacyte*',
             'settings' => [
                 'number_of_shards' => 1,
             ],
         ];
-        $name = 'index_template1';
+        $name = 'index_legacy_template1';
         $indexTemplate = new IndexTemplate($this->_getClient(), $name);
         $indexTemplate->create($template);
         $this->assertTrue($indexTemplate->exists());
@@ -64,16 +63,64 @@ class IndexTemplateTest extends BaseTest
     /**
      * @group functional
      */
-    public function testCreateAlreadyExistsTemplateException(): void
+    public function testCreateTemplate(): void
     {
         $template = [
             'index_patterns' => 'te*',
+            'template' => [
+                'settings' => [
+                    'number_of_shards' => 1,
+                ],
+            ],
+        ];
+        $name = 'index_template1';
+        $indexTemplate = new IndexTemplate($this->_getClient(), $name, false);
+        $indexTemplate->create($template);
+        $this->assertTrue($indexTemplate->exists());
+        $indexTemplate->delete();
+        $this->assertFalse($indexTemplate->exists());
+    }
+
+    /**
+     * @group functional
+     */
+    public function testLegacyCreateAlreadyExistsTemplateException(): void
+    {
+        $template = [
+            'index_patterns' => 'legacyte*',
             'settings' => [
                 'number_of_shards' => 1,
             ],
         ];
-        $name = 'index_template1';
+        $name = 'index_legacy_template1';
         $indexTemplate = new IndexTemplate($this->_getClient(), $name);
+        $indexTemplate->create($template);
+        try {
+            $indexTemplate->create($template);
+        } catch (ClientResponseException $e) {
+            $error = \json_decode((string) $e->getResponse()->getBody(), true)['error']['root_cause'][0] ?? null;
+
+            $this->assertNotEquals('index_template_already_exists_exception', $error['type']);
+            $this->assertEquals('resource_already_exists_exception', $error['type']);
+            $this->assertEquals(400, $e->getResponse()->getStatusCode());
+        }
+    }
+
+    /**
+     * @group functional
+     */
+    public function testCreateAlreadyExistsTemplateException(): void
+    {
+        $template = [
+            'index_patterns' => 'te*',
+            'template' => [
+                'settings' => [
+                    'number_of_shards' => 1,
+                ],
+            ],
+        ];
+        $name = 'index_template1';
+        $indexTemplate = new IndexTemplate($this->_getClient(), $name, false);
         $indexTemplate->create($template);
         try {
             $indexTemplate->create($template);
