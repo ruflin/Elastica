@@ -4,22 +4,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/8.1.0...8.x)
+## [8.2](https://github.com/ruflin/Elastica/compare/8.2.0...8.x)
 
 ### Backward Compatibility Breaks
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [Unreleased](https://github.com/ruflin/Elastica/compare/8.1.0...8.2.0)
+
 ### Added
 * Added support for PHP 8.5 [#2254](https://github.com/ruflin/Elastica/pull/2254)
 * Added support for Component Template [#2257](https://github.com/ruflin/Elastica/pull/2257)
 * Added support for Index Template, using `useLegacy = false`  [#2257](https://github.com/ruflin/Elastica/pull/2257)
 * Added Template class to target only legacy Template [#2257](https://github.com/ruflin/Elastica/pull/2257)
-### Changed
+
 ### Deprecated
 * Deprecated `Elastica\Template` because it's deprecated since version 7.8 on ElasticSearch [#2257](https://github.com/ruflin/Elastica/pull/2257)
-### Removed
+
 ### Fixed
 * `Elastica\Query\BoolQuery::toArray` no longer changes `$this->_params` to \stdClass when empty [#2241](https://github.com/ruflin/Elastica/pull/2241)
 * Fixed Client retries configuration to allow zero retries by changing condition from `> 0` to `>= 0` [#2278](https://github.com/ruflin/Elastica/pull/2278)
-### Security
 
 ## [8.1.0](https://github.com/ruflin/Elastica/compare/8.0.0...8.1.0)
 
