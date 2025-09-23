@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/8.1.0...8.2.0)
+## [8.2.0](https://github.com/ruflin/Elastica/compare/8.1.0...8.2.0)
 
 ### Added
 * Added support for PHP 8.5 [#2254](https://github.com/ruflin/Elastica/pull/2254)
