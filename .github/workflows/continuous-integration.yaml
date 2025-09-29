@@ -1,74 +1,74 @@
-name: 'Continuous integration'
-on: ['push', 'pull_request']
+name: "Continuous integration"
+on: ["push", "pull_request"]
 jobs:
   cs:
-    runs-on: 'ubuntu-20.04'
-    name: 'Coding style'
+    runs-on: "ubuntu-24.04"
+    name: "Coding style"
     steps:
-      - name: 'Checkout'
-        uses: 'actions/checkout@v3'
+      - name: "Checkout"
+        uses: "actions/checkout@v3"
 
-      - name: 'Setup PHP'
-        uses: 'shivammathur/setup-php@v2'
+      - name: "Setup PHP"
+        uses: "shivammathur/setup-php@v2"
         with:
-          php-version: '7.4'
-          coverage: 'none'
-          extensions: 'json, mbstring, tokenizer'
-          tools: 'composer-normalize:2.28.0, php-cs-fixer:3.9.5'
+          php-version: "7.4"
+          coverage: "none"
+          extensions: "json, mbstring, tokenizer"
+          tools: "composer-normalize:2.28.0, php-cs-fixer:3.9.5"
 
-      - name: 'Check PHP code'
+      - name: "Check PHP code"
         run: |
           php-cs-fixer fix --diff --dry-run --allow-risky=yes --using-cache=no
 
-      - name: 'Check composer.json'
+      - name: "Check composer.json"
         run: |
           composer-normalize --diff --dry-run --indent-size=4 --indent-style=space --no-update-lock
 
   phpunit:
-    runs-on: 'ubuntu-20.04'
-    name: 'PHPUnit (PHP ${{ matrix.php }}, ES ${{ matrix.elasticsearch }})'
+    runs-on: "ubuntu-24.04"
+    name: "PHPUnit (PHP ${{ matrix.php }}, ES ${{ matrix.elasticsearch }})"
     timeout-minutes: 10
     strategy:
       matrix:
         php:
-          - '7.2'
-          - '7.3'
-          - '7.4'
-          - '8.0'
-          - '8.1'
+          - "7.2"
+          - "7.3"
+          - "7.4"
+          - "8.0"
+          - "8.1"
         dependencies:
-          - 'highest'
+          - "highest"
         elasticsearch:
-          - '7.15.2'
+          - "7.15.2"
         include:
           # Test with the lowest set of dependencies
-          - dependencies: 'lowest'
-            php: '7.2'
-            elasticsearch: '7.15.2'
+          - dependencies: "lowest"
+            php: "7.2"
+            elasticsearch: "7.15.2"
       fail-fast: false
     steps:
-      - name: 'Checkout'
-        uses: 'actions/checkout@v3'
+      - name: "Checkout"
+        uses: "actions/checkout@v3"
 
-      - name: 'Setup PHP'
-        uses: 'shivammathur/setup-php@v2'
+      - name: "Setup PHP"
+        uses: "shivammathur/setup-php@v2"
         with:
-          php-version: '${{ matrix.php }}'
-          coverage: 'pcov'
-          tools: 'pecl, composer:v2'
-          extensions: 'curl, json, mbstring, openssl'
+          php-version: "${{ matrix.php }}"
+          coverage: "pcov"
+          tools: "pecl, composer:v2"
+          extensions: "curl, json, mbstring, openssl"
 
-      - name: 'Install dependencies with Composer'
-        uses: 'ramsey/composer-install@v2'
+      - name: "Install dependencies with Composer"
+        uses: "ramsey/composer-install@v2"
         with:
-          dependency-versions: '${{ matrix.dependencies }}'
-          composer-options: '--prefer-dist'
+          dependency-versions: "${{ matrix.dependencies }}"
+          composer-options: "--prefer-dist"
 
-      - name: 'Run unit tests'
+      - name: "Run unit tests"
         run: |
           vendor/bin/phpunit --group unit --coverage-clover=build/coverage/unit-coverage.xml
 
-      - name: 'Setup Elasticsearch'
+      - name: "Setup Elasticsearch"
         run: |
           sudo swapoff -a
           sudo sysctl -w vm.swappiness=1
@@ -78,44 +78,43 @@ jobs:
           docker run --rm --network=docker_elastic curlimages/curl --max-time 120 --retry-max-time 120 --retry 120 --retry-delay 5 --retry-all-errors --show-error --silent http://es01:9200
           docker run --rm --network=docker_elastic curlimages/curl --max-time 120 --retry-max-time 120 --retry 120 --retry-delay 5 --retry-all-errors --show-error --silent http://es02:9200
 
-      - name: 'Run functional tests'
+      - name: "Run functional tests"
         run: |
           vendor/bin/phpunit --group functional --coverage-clover=build/coverage/functional-coverage.xml
 
-      - name: 'Upload coverage to Codecov'
+      - name: "Upload coverage to Codecov"
         uses: codecov/codecov-action@v2
         with:
-            files: build/coverage/unit-coverage.xml,build/coverage/functional-coverage.xml
+          files: build/coverage/unit-coverage.xml,build/coverage/functional-coverage.xml
 
   phpstan:
-    runs-on: 'ubuntu-20.04'
-    name: 'PHPStan (PHP ${{ matrix.php }}, ES ${{ matrix.elasticsearch }})'
+    runs-on: "ubuntu-24.04"
+    name: "PHPStan (PHP ${{ matrix.php }}, ES ${{ matrix.elasticsearch }})"
     timeout-minutes: 10
     strategy:
       matrix:
         php:
-          - '8.1'
+          - "8.1"
         elasticsearch:
-          - '7.15.2'
+          - "7.15.2"
       fail-fast: false
     steps:
-      - name: 'Checkout'
-        uses: 'actions/checkout@v3'
+      - name: "Checkout"
+        uses: "actions/checkout@v3"
 
-      - name: 'Setup PHP'
-        uses: 'shivammathur/setup-php@v2'
+      - name: "Setup PHP"
+        uses: "shivammathur/setup-php@v2"
         with:
-          php-version: '${{ matrix.php }}'
-          coverage: 'none'
-          tools: 'pecl, composer:v2'
-          extensions: 'curl, json, mbstring, openssl'
+          php-version: "${{ matrix.php }}"
+          coverage: "none"
+          tools: "pecl, composer:v2"
+          extensions: "curl, json, mbstring, openssl"
 
-
-      - name: 'Install dependencies with Composer'
-        uses: 'ramsey/composer-install@v2'
+      - name: "Install dependencies with Composer"
+        uses: "ramsey/composer-install@v2"
         with:
-          composer-options: '--prefer-dist'
+          composer-options: "--prefer-dist"
 
-      - name: 'Run phpstan'
+      - name: "Run phpstan"
         run: |
           vendor/bin/phpstan analyse --no-progress --error-format=github
