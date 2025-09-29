@@ -279,7 +279,7 @@ class BulkTest extends BaseTest
      * @group unit
      *
      * @dataProvider invalidRawDataProvider
-     * 
+     *
      * @param mixed $rawData
      * @param mixed $failMessage
      */
