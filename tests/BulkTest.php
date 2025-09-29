@@ -703,8 +703,8 @@ JSON;
         $metadata = $actions[0]->getMetadata();
         $this->assertEquals(5, $metadata['retry_on_conflict']);
 
-        // Test retry via client
-        $client->getConnection()->setParam('retryOnConflict', 5);
+        // Test retry via client configuration (fixed implementation)
+        $client->setConfigValue('retryOnConflict', 5);
         $doc2 = new Document('2', ['name' => 'Invisible Woman']);
         $doc2->setOpType(Action::OP_TYPE_UPDATE);
 
@@ -818,5 +818,103 @@ JSON;
 
         $this->expectException(RequestEntityTooLargeException::class);
         $bulk->send();
+    }
+
+    /**
+     * @group unit
+     * Test that verifies the fix for issue #2219 - hasConnection() error
+     */
+    public function testRetryOnConflictFromClientConfig(): void
+    {
+        $client = $this->_getClient();
+        
+        // Set retryOnConflict in client configuration
+        $client->setConfigValue('retryOnConflict', 3);
+        
+        // Create documents without explicit retryOnConflict
+        $doc1 = new Document('1', ['name' => 'Test Document 1']);
+        $doc2 = new Document('2', ['name' => 'Test Document 2']);
+        
+        // Create scripts without explicit retryOnConflict
+        $script1 = new Script('ctx._source.name = "Updated"');
+        $script2 = new Script('ctx._source.status = "active"');
+        
+        // Test that addDocument correctly applies retryOnConflict from client config
+        $bulk = new Bulk($client);
+        $bulk->addDocument($doc1);
+        $bulk->addScript($script1);
+        
+        $actions = $bulk->getActions();
+        
+        // Verify that retry_on_conflict is set from client configuration
+        $this->assertCount(2, $actions);
+        
+        $docMetadata = $actions[0]->getMetadata();
+        $this->assertEquals(3, $docMetadata['retry_on_conflict']);
+        
+        $scriptMetadata = $actions[1]->getMetadata();
+        $this->assertEquals(3, $scriptMetadata['retry_on_conflict']);
+    }
+
+    /**
+     * @group unit
+     * Test that verifies documents with explicit retryOnConflict are not overridden
+     */
+    public function testRetryOnConflictExplicitValueNotOverridden(): void
+    {
+        $client = $this->_getClient();
+        
+        // Set retryOnConflict in client configuration
+        $client->setConfigValue('retryOnConflict', 5);
+        
+        // Create document with explicit retryOnConflict
+        $doc = new Document('1', ['name' => 'Test Document']);
+        $doc->setRetryOnConflict(2); // Explicit value
+        
+        // Create script with explicit retryOnConflict
+        $script = new Script('ctx._source.name = "Updated"');
+        $script->setRetryOnConflict(1); // Explicit value
+        
+        $bulk = new Bulk($client);
+        $bulk->addDocument($doc);
+        $bulk->addScript($script);
+        
+        $actions = $bulk->getActions();
+        
+        // Verify that explicit values are preserved
+        $docMetadata = $actions[0]->getMetadata();
+        $this->assertEquals(2, $docMetadata['retry_on_conflict']);
+        
+        $scriptMetadata = $actions[1]->getMetadata();
+        $this->assertEquals(1, $scriptMetadata['retry_on_conflict']);
+    }
+
+    /**
+     * @group unit
+     * Test that verifies zero retryOnConflict from client config is not applied
+     */
+    public function testRetryOnConflictZeroNotApplied(): void
+    {
+        $client = $this->_getClient();
+        
+        // Set retryOnConflict to 0 in client configuration
+        $client->setConfigValue('retryOnConflict', 0);
+        
+        // Create document without explicit retryOnConflict
+        $doc = new Document('1', ['name' => 'Test Document']);
+        $script = new Script('ctx._source.name = "Updated"');
+        
+        $bulk = new Bulk($client);
+        $bulk->addDocument($doc);
+        $bulk->addScript($script);
+        
+        $actions = $bulk->getActions();
+        
+        // Verify that retry_on_conflict is not set when value is 0
+        $docMetadata = $actions[0]->getMetadata();
+        $this->assertArrayNotHasKey('retry_on_conflict', $docMetadata);
+        
+        $scriptMetadata = $actions[1]->getMetadata();
+        $this->assertArrayNotHasKey('retry_on_conflict', $scriptMetadata);
     }
 }
