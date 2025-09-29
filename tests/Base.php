@@ -182,7 +182,7 @@ class Base extends TestCase
 
     protected function _isBenchmarkGroup(): bool
     {
-        $groups = TestUtil::getGroups(\get_class($this), $this->getName(false));
+        $groups = $this->getGroups();
 
         return \in_array('benchmark', $groups, true);
     }

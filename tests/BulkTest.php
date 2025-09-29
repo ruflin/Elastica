@@ -728,6 +728,57 @@ class BulkTest extends BaseTest
     }
 
     /**
+     * Test for issue #2219: Fatal error when using retryOnConflict in bulk operations
+     * This test reproduces the issue where hasConnection() method was called on null
+     * causing a fatal error in Elastica 7.3.2 when retryOnConflict logic was backported
+     * without adapting to the new configuration-based approach.
+     * 
+     * This test demonstrates that the current code works correctly and doesn't have the issue.
+     * If the problematic code existed, this test would fail with:
+     * "Call to undefined method Elastica\Client::hasConnection()"
+     * or "Call to a member function hasConnection() on null"
+     * 
+     * @group unit
+     * @see https://github.com/ruflin/Elastica/issues/2219
+     */
+    public function testRetryOnConflictFatalErrorIssue2219(): void
+    {
+        $client = $this->_getClient();
+
+        // Set retryOnConflict configuration to trigger the problematic code path
+        $client->setConfigValue('retryOnConflict', 3);
+
+        // Create a document without explicit retryOnConflict to trigger the config-based logic
+        $document = new Document('1', ['name' => 'Test Document']);
+        $document->setOpType(Action::OP_TYPE_UPDATE);
+
+        $bulk = new Bulk($client);
+        
+        // This should trigger the problematic code path that would call hasConnection()
+        // on a null object, causing a fatal error in the problematic version
+        // If the problematic code existed, this would throw: "Call to a member function hasConnection() on null"
+        $bulk->addDocument($document);
+
+        // Verify the retryOnConflict was set from configuration
+        $actions = $bulk->getActions();
+        $this->assertCount(1, $actions);
+        
+        $metadata = $actions[0]->getMetadata();
+        $this->assertEquals(3, $metadata['retry_on_conflict']);
+
+        // Test with script as well
+        $script = new Script('ctx._source.name = "Updated"');
+        $bulk2 = new Bulk($client);
+        $bulk2->addScript($script);
+
+        $actions2 = $bulk2->getActions();
+        $this->assertCount(1, $actions2);
+        
+        $metadata2 = $actions2[0]->getMetadata();
+        $this->assertEquals(3, $metadata2['retry_on_conflict']);
+    }
+
+    /**
      * @group unit
      */
     public function testSetShardTimeout(): void
