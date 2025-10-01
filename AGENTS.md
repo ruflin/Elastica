@@ -34,7 +34,7 @@ This file provides guidance to AI agents when working with code in this reposito
 - `make docker-run-phpunit PHPUNIT_OPTIONS="--filter=ClientTest"`: Filter tests by name.
 - `make docker-run-phpcs`: Check coding standards.
 - `make docker-fix-phpcs`: Fix coding standards automatically.
-- `make run-phpstan`: Run static analysis.
+- `make docker-run-phpstan`: Run static analysis.
 - `make composer-install`: Install dependencies.
 - `make composer-update`: Update dependencies.
 
@@ -48,9 +48,9 @@ This file provides guidance to AI agents when working with code in this reposito
 
 ### Code Quality
 
-- **Checking coding standards**: `make run-phpcs`
-- **Fixing coding standards**: `make fix-phpcs`
-- **Running static analysis**: `make run-phpstan`
+- **Checking coding standards**: `make docker-run-phpcs`
+- **Fixing coding standards**: `make docker-fix-phpcs`
+- **Running static analysis**: `make docker-run-phpstan`
 
 ## Knowledge
 
