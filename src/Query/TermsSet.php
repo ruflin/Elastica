@@ -17,7 +17,7 @@ class TermsSet extends AbstractQuery
     /**
      * @param string                       $field
      * @param array<bool|float|int|string> $terms
-     * @param AbstractScript|string|int    $minimumShouldMatch
+     * @param AbstractScript|int|string    $minimumShouldMatch
      */
     public function __construct(string $field, array $terms, $minimumShouldMatch)
     {
