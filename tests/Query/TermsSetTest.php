@@ -34,6 +34,23 @@ class TermsSetTest extends BaseTest
     }
 
     #[Group('unit')]
+    public function testMinimumShouldMatchNumber(): void
+    {
+        $expected = [
+            'terms_set' => [
+                'field' => [
+                    'terms' => ['foo', 'bar'],
+                    'minimum_should_match' => 1,
+                ],
+            ],
+        ];
+
+        $query = new TermsSet('field', ['foo', 'bar'], 1);
+
+        $this->assertSame($expected, $query->toArray());
+    }
+
+    #[Group('unit')]
     public function testEmptyField(): void
     {
         $this->expectException(InvalidException::class);
