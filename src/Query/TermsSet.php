@@ -15,7 +15,6 @@ class TermsSet extends AbstractQuery
     private string $field;
 
     /**
-     * @param string                       $field
      * @param array<bool|float|int|string> $terms
      * @param AbstractScript|int|string    $minimumShouldMatch
      */
