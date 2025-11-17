@@ -16,7 +16,7 @@ class TermsSet extends AbstractQuery
 
     /**
      * @param array<bool|float|int|string> $terms
-     * @param AbstractScript|string        $minimumShouldMatch
+     * @param AbstractScript|int|string    $minimumShouldMatch
      */
     public function __construct(string $field, array $terms, $minimumShouldMatch)
     {
@@ -27,7 +27,9 @@ class TermsSet extends AbstractQuery
         $this->field = $field;
         $this->setTerms($terms);
 
-        if (\is_string($minimumShouldMatch)) {
+        if (\is_int($minimumShouldMatch)) {
+            $this->setMinimumShouldMatch($minimumShouldMatch);
+        } elseif (\is_string($minimumShouldMatch)) {
             $this->setMinimumShouldMatchField($minimumShouldMatch);
         } elseif ($minimumShouldMatch instanceof AbstractScript) {
             $this->setMinimumShouldMatchScript($minimumShouldMatch);
@@ -42,6 +44,11 @@ class TermsSet extends AbstractQuery
     public function setTerms(array $terms): self
     {
         return $this->addParam($this->field, $terms, 'terms');
+    }
+
+    public function setMinimumShouldMatch(int $minimumShouldMatch): self
+    {
+        return $this->addParam($this->field, $minimumShouldMatch, 'minimum_should_match');
     }
 
     public function setMinimumShouldMatchField(string $minimumShouldMatchField): self
