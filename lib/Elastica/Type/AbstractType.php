@@ -97,7 +97,7 @@ abstract class AbstractType implements SearchableInterface
      *
      * @throws \Elastica\Exception\InvalidException
      */
-    public function __construct(Client $client = null)
+    public function __construct(?Client $client = null)
     {
         if (!$client) {
             $client = new Client();

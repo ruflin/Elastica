@@ -84,7 +84,7 @@ class Client
      * @param callback        $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
      * @param LoggerInterface $logger
      */
-    public function __construct(array $config = [], $callback = null, LoggerInterface $logger = null)
+    public function __construct(array $config = [], $callback = null, ?LoggerInterface $logger = null)
     {
         $this->_callback = $callback;
 

@@ -18,7 +18,7 @@ class ErrorsCollector
      */
     private $testCase;
 
-    public function __construct(TestCase $testCase = null)
+    public function __construct(?TestCase $testCase = null)
     {
         $this->testCase = $testCase;
     }

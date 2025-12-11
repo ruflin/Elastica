@@ -293,7 +293,7 @@ class Aggregation implements DSL
      *
      * @return FilterAggregation
      */
-    public function filter($name, AbstractQuery $filter = null)
+    public function filter($name, ?AbstractQuery $filter = null)
     {
         return new FilterAggregation($name, $filter);
     }

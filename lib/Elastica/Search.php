@@ -80,7 +80,7 @@ class Search
      * @param \Elastica\Client $client  Client object
      * @param BuilderInterface $builder
      */
-    public function __construct(Client $client, BuilderInterface $builder = null)
+    public function __construct(Client $client, ?BuilderInterface $builder = null)
     {
         $this->_builder = $builder ?: new DefaultBuilder();
         $this->_client = $client;

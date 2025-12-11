@@ -35,7 +35,7 @@ class Mapping
      * @param \Elastica\Type $type       OPTIONAL Type object
      * @param array          $properties OPTIONAL Properties
      */
-    public function __construct(Type $type = null, array $properties = [])
+    public function __construct(?Type $type = null, array $properties = [])
     {
         if ($type) {
             $this->setType($type);

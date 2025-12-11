@@ -72,7 +72,7 @@ class FunctionScore extends AbstractQuery
      *
      * @return $this
      */
-    public function addFunction($functionType, $functionParams, AbstractQuery $filter = null, $weight = null)
+    public function addFunction($functionType, $functionParams, ?AbstractQuery $filter = null, $weight = null)
     {
         $function = [
             $functionType => $functionParams,
@@ -100,7 +100,7 @@ class FunctionScore extends AbstractQuery
      *
      * @return $this
      */
-    public function addScriptScoreFunction(AbstractScript $script, AbstractQuery $filter = null, $weight = null)
+    public function addScriptScoreFunction(AbstractScript $script, ?AbstractQuery $filter = null, $weight = null)
     {
         return $this->addFunction('script_score', $script, $filter, $weight);
     }
@@ -128,7 +128,7 @@ class FunctionScore extends AbstractQuery
         $offset = null,
         $decay = null,
         $weight = null,
-        AbstractQuery $filter = null,
+        ?AbstractQuery $filter = null,
         $multiValueMode = null
     ) {
         $functionParams = [
@@ -157,7 +157,7 @@ class FunctionScore extends AbstractQuery
         $modifier = null,
         $missing = null,
         $weight = null,
-        AbstractQuery $filter = null
+        ?AbstractQuery $filter = null
     ) {
         $functionParams = [
             'field' => $field,
@@ -184,7 +184,7 @@ class FunctionScore extends AbstractQuery
      *
      * @return $this
      */
-    public function addWeightFunction($weight, AbstractQuery $filter = null)
+    public function addWeightFunction($weight, ?AbstractQuery $filter = null)
     {
         return $this->addFunction('weight', $weight, $filter);
     }
@@ -199,7 +199,7 @@ class FunctionScore extends AbstractQuery
      *
      * @return $this
      */
-    public function addRandomScoreFunction($seed, AbstractQuery $filter = null, $weight = null, $field = null)
+    public function addRandomScoreFunction($seed, ?AbstractQuery $filter = null, $weight = null, $field = null)
     {
         $functionParams = [
             'seed' => $seed,

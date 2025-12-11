@@ -425,7 +425,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-not-query.html
      */
-    public function span_not(AbstractSpanQuery $include = null, AbstractSpanQuery $exclude = null)
+    public function span_not(?AbstractSpanQuery $include = null, ?AbstractSpanQuery $exclude = null)
     {
         return new SpanNot($include, $exclude);
     }
@@ -468,7 +468,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-containing-query.html
      */
-    public function span_containing(AbstractSpanQuery $little = null, AbstractSpanQuery $big = null)
+    public function span_containing(?AbstractSpanQuery $little = null, ?AbstractSpanQuery $big = null)
     {
         return new SpanContaining($little, $big);
     }
@@ -483,7 +483,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-within-query.html
      */
-    public function span_within(AbstractSpanQuery $little = null, AbstractSpanQuery $big = null)
+    public function span_within(?AbstractSpanQuery $little = null, ?AbstractSpanQuery $big = null)
     {
         return new SpanWithin($little, $big);
     }

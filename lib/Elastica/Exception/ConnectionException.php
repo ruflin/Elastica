@@ -29,7 +29,7 @@ class ConnectionException extends \RuntimeException implements ExceptionInterfac
      * @param \Elastica\Request  $request
      * @param \Elastica\Response $response
      */
-    public function __construct($message, Request $request = null, Response $response = null)
+    public function __construct($message, ?Request $request = null, ?Response $response = null)
     {
         $this->_request = $request;
         $this->_response = $response;

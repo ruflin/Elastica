@@ -24,7 +24,7 @@ class GuzzleException extends ConnectionException
      * @param \Elastica\Request                       $request
      * @param \Elastica\Response                      $response
      */
-    public function __construct(TransferException $guzzleException, Request $request = null, Response $response = null)
+    public function __construct(TransferException $guzzleException, ?Request $request = null, ?Response $response = null)
     {
         $this->_guzzleException = $guzzleException;
         $message = $this->getErrorMessage($this->getGuzzleException());

@@ -15,7 +15,7 @@ class Derivative extends AbstractAggregation
      * @param string      $name
      * @param string|null $bucketsPath
      */
-    public function __construct(string $name, string $bucketsPath = null)
+    public function __construct(string $name, ?string $bucketsPath = null)
     {
         parent::__construct($name);
 

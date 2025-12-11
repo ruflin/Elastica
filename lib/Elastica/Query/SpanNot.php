@@ -17,7 +17,7 @@ class SpanNot extends AbstractSpanQuery
      * @param AbstractSpanQuery $include OPTIONAL
      * @param AbstractSpanQuery $exclude OPTIONAL
      */
-    public function __construct(AbstractSpanQuery $include = null, AbstractSpanQuery $exclude = null)
+    public function __construct(?AbstractSpanQuery $include = null, ?AbstractSpanQuery $exclude = null)
     {
         if (null !== $include) {
             $this->setInclude($include);

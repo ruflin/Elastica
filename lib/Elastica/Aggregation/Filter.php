@@ -16,7 +16,7 @@ class Filter extends AbstractAggregation
      * @param string        $name
      * @param AbstractQuery $filter
      */
-    public function __construct($name, AbstractQuery $filter = null)
+    public function __construct($name, ?AbstractQuery $filter = null)
     {
         parent::__construct($name);
 

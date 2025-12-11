@@ -64,7 +64,7 @@ class Base extends TestCase
      *
      * @return Client
      */
-    protected function _getClient(array $params = [], $callback = null, LoggerInterface $logger = null)
+    protected function _getClient(array $params = [], $callback = null, ?LoggerInterface $logger = null)
     {
         $config = [
             'host' => $this->_getHost(),

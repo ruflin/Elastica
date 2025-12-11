@@ -119,7 +119,7 @@ class Type implements SearchableInterface
      *
      * @return Response
      */
-    public function addObject($object, Document $doc = null)
+    public function addObject($object, ?Document $doc = null)
     {
         if (!isset($this->_serializer)) {
             throw new RuntimeException('No serializer defined');
@@ -336,7 +336,7 @@ class Type implements SearchableInterface
      *
      * @return Search
      */
-    public function createSearch($query = '', $options = null, BuilderInterface $builder = null)
+    public function createSearch($query = '', $options = null, ?BuilderInterface $builder = null)
     {
         $search = $this->getIndex()->createSearch($query, $options, $builder);
         $search->addType($this);
