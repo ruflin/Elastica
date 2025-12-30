@@ -81,18 +81,24 @@ All tests use reflection to simulate the null client scenario and verify that no
 
 ### 8.x Branch
 - ❌ **Issue Still Exists** - The following lines still lack null checks:
-  - Line 139: `addDocument()` method
-  - Line 171: `addScript()` method
-  - Line 350: `_processResponse()` method for autoPopulate
+  - Line 139: `addDocument()` method - calls `$this->_client->getConfigValue()` without null check
+  - Line 171: `addScript()` method - calls `$this->_client->getConfigValue()` without null check
+  - Line 350: `_processResponse()` method - calls `$this->_client->getConfigValue()` without null check for autoPopulate
 
-### 7.x Branch (fix-2219)
-- ✅ **Fixed** - A fix was previously applied to this branch, but it uses an older codebase structure
+### 7.x Branch
+- ❌ **Issue Still Exists** - The issue exists but in a different form due to older codebase structure:
+  - Line 133: `addDocument()` method - calls `$this->_client->hasConnection()` without null check
+  - Line 161: `addScript()` method - calls `$this->_client->hasConnection()` without null check
+  - Line 341: `_processResponse()` method - calls `$this->_client->getConfigValue()` without null check for autoPopulate
+
+**Note:** The 7.x branch uses a different API structure (Connection-based) for `addDocument()` and `addScript()`, but still has the same null client vulnerability. The fix would need to be adapted to check for null before calling `hasConnection()`.
 
 ## Recommendations
 
 1. **Apply the same fix to 8.x branch** - The issue exists there and should be fixed for consistency
-2. **Backport tests** - The unit tests should also be added to 8.x branch
-3. **Consider making `_client` nullable** - If null is a valid state, consider updating the type hint to `?Client` and adding proper null handling throughout the class
+2. **Apply fix to 7.x branch** - The issue exists there but requires adaptation due to different API structure (Connection-based vs ConfigValue-based)
+3. **Backport tests** - The unit tests should also be added to 8.x and 7.x branches (adapted for their respective code structures)
+4. **Consider making `_client` nullable** - If null is a valid state, consider updating the type hint to `?Client` and adding proper null handling throughout the class
 
 ## Files Modified
 
