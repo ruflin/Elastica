@@ -1,5 +1,5 @@
-Elastica: elasticsearch PHP Client
-==================================
+Elastica: elasticsearch PHP Client - PHP 8.4 preparation
+=========================================================
 
 [![Latest Stable Version](https://poser.pugx.org/ruflin/Elastica/v/stable.png)](https://packagist.org/packages/ruflin/elastica)
 [![Build Status](https://secure.travis-ci.org/ruflin/Elastica.png?branch=master)](http://travis-ci.org/ruflin/Elastica)
