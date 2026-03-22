@@ -16,6 +16,7 @@ tools/phive.phar:
 
 vendor/autoload.php:
 	# Installing Symfony Flex: parallel download of dependency libs
+	composer global config --no-plugins allow-plugins.symfony/flex true
 	composer global require --no-progress --no-scripts --no-plugins symfony/flex
 	composer install --prefer-dist --no-interaction ${COMPOSER_FLAGS}
 
