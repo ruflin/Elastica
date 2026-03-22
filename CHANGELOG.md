@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Backward Compatibility Breaks
 ### Added
+* Added support for "search after" based pagination [#1645](https://github.com/ruflin/Elastica/issues/1645)
+
 ### Changed
 ### Deprecated
 ### Removed
