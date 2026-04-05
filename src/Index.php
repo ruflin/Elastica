@@ -473,7 +473,7 @@ class Index implements SearchableInterface
     {
         $search = $this->createSearch($query, $options);
 
-        return $search->search('', null, $method);
+        return $search->search($query, null, $method);
     }
 
     /**
@@ -483,7 +483,7 @@ class Index implements SearchableInterface
     {
         $search = $this->createSearch($query);
 
-        return $search->count('', false, $method);
+        return $search->count($query, false, $method);
     }
 
     /**
