@@ -540,6 +540,88 @@ class Index implements SearchableInterface
     }
 
     /**
+     * Iterates over all documents, matching given query, using "search after" based pagination.
+     *
+     * @see \Elastica\Query::setSearchAfter()
+     *
+     * @param mixed $query search query with sort by unique document field.
+     * @param int $batchSize the number of rows to be returned in each batch (e.g. each query size).
+     * @param array|null $options search request options.
+     * @return \Generator|\Elastica\Document[] list of all documents matched the given query as iterator.
+     */
+    public function each($query = '', int $batchSize = 100, ?array $options = null): \Generator
+    {
+        if ($batchSize < 1) {
+            throw new InvalidException('Batch size must be greater than 0.');
+        }
+
+        $query = clone Query::create($query);
+
+        if (!$query->hasParam('sort')) {
+            throw new InvalidException('Query must have "sort" parameter in order to use "search after" based iteration.');
+        }
+
+        $query->setSize($batchSize);
+
+        while (true) {
+            $resultSet = $this->search($query, $options);
+            foreach ($resultSet->getDocuments() as $document) {
+                yield $document;
+            }
+
+            if (count($resultSet->getDocuments()) < $batchSize) {
+                break;
+            }
+
+            $query->setSearchAfter($document->getSort());
+        }
+    }
+
+    /**
+     * Iterates over all documents in batches, matching given query, using "search after" based pagination.
+     *
+     * @see \Elastica\Query::setSearchAfter()
+     *
+     * @param mixed $query search query with sort by unique document field.
+     * @param int $batchSize the number of rows to be returned in each batch (e.g. each query size).
+     * @param array|null $options search request options.
+     * @return \Generator|\Elastica\Document[][] list of document batches matched the given query as iterator.
+     */
+    public function batch($query = '', int $batchSize = 100, ?array $options = null): \Generator
+    {
+        if ($batchSize < 1) {
+            throw new InvalidException('Batch size must be greater than 0.');
+        }
+
+        $query = clone Query::create($query);
+
+        if (!$query->hasParam('sort')) {
+            throw new InvalidException('Query must have "sort" parameter in order to use "search after" based iteration.');
+        }
+
+        $query->setSize($batchSize);
+
+        while (true) {
+            $resultSet = $this->search($query, $options);
+
+            $documents = $resultSet->getDocuments();
+            if (empty($documents)) {
+                break;
+            }
+
+            yield $documents;
+
+            if (count($documents) < $batchSize) {
+                break;
+            }
+
+            $lastDocument = array_pop($documents);
+
+            $query->setSearchAfter($lastDocument->getSort());
+        }
+    }
+
+    /**
      * Opens an index.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-open-close.html
