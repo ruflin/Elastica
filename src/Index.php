@@ -551,17 +551,7 @@ class Index implements SearchableInterface
      */
     public function each($query = '', int $batchSize = 100, ?array $options = null): \Generator
     {
-        if ($batchSize < 1) {
-            throw new InvalidException('Batch size must be greater than 0.');
-        }
-
-        $query = clone Query::create($query);
-
-        if (!$query->hasParam('sort')) {
-            throw new InvalidException('Query must have "sort" parameter in order to use "search after" based iteration.');
-        }
-
-        $query->setSize($batchSize);
+        $query = $this->prepareSearchAfterIteratorQuery($query, $batchSize);
 
         while (true) {
             $resultSet = $this->search($query, $options);
@@ -589,17 +579,7 @@ class Index implements SearchableInterface
      */
     public function batch($query = '', int $batchSize = 100, ?array $options = null): \Generator
     {
-        if ($batchSize < 1) {
-            throw new InvalidException('Batch size must be greater than 0.');
-        }
-
-        $query = clone Query::create($query);
-
-        if (!$query->hasParam('sort')) {
-            throw new InvalidException('Query must have "sort" parameter in order to use "search after" based iteration.');
-        }
-
-        $query->setSize($batchSize);
+        $query = $this->prepareSearchAfterIteratorQuery($query, $batchSize);
 
         while (true) {
             $resultSet = $this->search($query, $options);
@@ -619,6 +599,27 @@ class Index implements SearchableInterface
 
             $query->setSearchAfter($lastDocument->getSort());
         }
+    }
+
+    private function prepareSearchAfterIteratorQuery(mixed $query, int $batchSize): Query
+    {
+        if ($batchSize < 1) {
+            throw new InvalidException('Batch size must be greater than 0.');
+        }
+
+        $query = clone Query::create($query); // if original query is object - keep it intact
+
+        if (!$query->hasParam('sort')) {
+            throw new InvalidException('Query must have "sort" parameter in order to use "search after" based iteration.');
+        }
+
+        if ($query->hasParam('from') && 0 !== $query->getParam('from')) {
+            throw new InvalidException('Query must not specify "from" parameter in order to use "search after" based iteration.');
+        }
+
+        $query->setSize($batchSize);
+
+        return $query;
     }
 
     /**
