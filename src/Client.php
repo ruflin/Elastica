@@ -24,6 +24,7 @@ use Elastica\Bulk\ResponseSet;
 use Elastica\Exception\Bulk\ResponseException as BulkResponseException;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\InvalidException;
+use Elastica\Exception\NotImplementedException;
 use Elastica\Script\AbstractScript;
 use Psr\Http\Client\ClientInterface as HttpClientInterface;
 use Psr\Http\Message\RequestInterface;
@@ -80,12 +81,12 @@ class Client implements ClientInterface
 
     public function setAsync(bool $async): self
     {
-        throw new \Exception('Not supported');
+        throw new NotImplementedException('Async mode is not supported by Elastica.');
     }
 
     public function getAsync(): bool
     {
-        throw new \Exception('Not supported');
+        throw new NotImplementedException('Async mode is not supported by Elastica.');
     }
 
     public function setElasticMetaHeader(bool $active): self
@@ -102,17 +103,17 @@ class Client implements ClientInterface
 
     public function setResponseException(bool $active): self
     {
-        throw new \Exception('Not supported');
+        throw new NotImplementedException('Toggling the response-exception behaviour is not supported by Elastica.');
     }
 
     public function getResponseException(): bool
     {
-        throw new \Exception('Not supported');
+        throw new NotImplementedException('Toggling the response-exception behaviour is not supported by Elastica.');
     }
 
     public function setServerless(bool $value): ClientInterface
     {
-        throw new \Exception('Not supported');
+        throw new NotImplementedException('Serverless mode is not supported by Elastica.');
     }
 
     public function getServerless(): bool

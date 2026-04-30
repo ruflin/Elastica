@@ -6,8 +6,11 @@ namespace Elastica\Test;
 
 use Elastica\Client;
 use Elastica\ClientConfiguration;
+use Elastica\Exception\ExceptionInterface;
 use Elastica\Exception\InvalidException;
+use Elastica\Exception\NotImplementedException;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 
 /**
@@ -250,5 +253,40 @@ class ClientTest extends BaseTest
         // Verify that string '0' is properly converted to integer 0
         $transport = $client->getTransport();
         $this->assertEquals(0, $transport->getRetries());
+    }
+
+    /**
+     * @return iterable<string, array{0: callable(Client): mixed}>
+     */
+    public static function unsupportedClientFeaturesProvider(): iterable
+    {
+        yield 'setAsync' => [static fn (Client $client) => $client->setAsync(true)];
+        yield 'getAsync' => [static fn (Client $client) => $client->getAsync()];
+        yield 'setResponseException' => [static fn (Client $client) => $client->setResponseException(true)];
+        yield 'getResponseException' => [static fn (Client $client) => $client->getResponseException()];
+        yield 'setServerless' => [static fn (Client $client) => $client->setServerless(true)];
+    }
+
+    #[DataProvider('unsupportedClientFeaturesProvider')]
+    public function testUnsupportedFeaturesThrowNotImplementedException(callable $invocation): void
+    {
+        $client = new Client();
+
+        $this->expectException(NotImplementedException::class);
+
+        $invocation($client);
+    }
+
+    public function testNotImplementedExceptionIsCatchableAsElasticaException(): void
+    {
+        $client = new Client();
+
+        try {
+            $client->setAsync(true);
+            $this->fail('Expected NotImplementedException was not thrown.');
+        } catch (ExceptionInterface $e) {
+            $this->assertInstanceOf(NotImplementedException::class, $e);
+            $this->assertInstanceOf(\BadMethodCallException::class, $e);
+        }
     }
 }
