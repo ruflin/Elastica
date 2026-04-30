@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Elastica;
 
+use Elastica\Exception\InvalidException;
+
 /**
  * Elastica tools.
  *
@@ -173,18 +175,24 @@ class Util
     /**
      * Converts given time to format: 1995-12-31T23:59:59Z.
      *
-     * This is the lucene date format
+     * This is the lucene date format.
      *
-     * @param int|string $date Date input (could be string etc.) -> must be supported by strtotime
+     * @param int|string $date Unix timestamp (int) or a string accepted by `strtotime`
+     *
+     * @throws InvalidException if `$date` is a string that cannot be parsed
      *
      * @return string Converted date string
      */
-    public static function convertDate($date)
+    public static function convertDate($date): string
     {
         if (\is_int($date)) {
             $timestamp = $date;
         } else {
             $timestamp = \strtotime($date);
+
+            if (false === $timestamp) {
+                throw new InvalidException(\sprintf('Unparseable date: "%s"', $date));
+            }
         }
 
         return \date('Y-m-d\TH:i:s\Z', $timestamp);
