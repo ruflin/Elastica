@@ -795,6 +795,26 @@ class IndexTest extends BaseTest
     }
 
     #[Group('functional')]
+    public function testForcemergeForwardsArgsToRequest(): void
+    {
+        $index = $this->_createIndex();
+        $index->addDocument(new Document('1', ['foo' => 'bar']));
+        $index->refresh();
+
+        $index->forcemerge(['max_num_segments' => 1, 'flush' => 'true']);
+
+        $lastRequest = $index->getClient()->getLastRequest();
+        $this->assertNotNull($lastRequest);
+
+        \parse_str($lastRequest->getUri()->getQuery(), $query);
+
+        // Without the fix the additional arguments are silently dropped by
+        // a malformed array_merge() call in Index::forcemerge().
+        $this->assertSame('1', $query['max_num_segments'] ?? null);
+        $this->assertSame('true', $query['flush'] ?? null);
+    }
+
+    #[Group('functional')]
     public function testAnalyze(): void
     {
         $index = $this->_createIndex();

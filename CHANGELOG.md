@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 ### Removed
 ### Fixed
+* Fixed `Elastica\Index::forcemerge()` silently dropping the `$args` argument due to a malformed `array_merge()` call. Additional options such as `max_num_segments` and `flush` are now forwarded to Elasticsearch as documented.
 ### Security
 
 

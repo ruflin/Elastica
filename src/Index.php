@@ -449,10 +449,10 @@ class Index implements SearchableInterface
      * @throws ServerResponseException   if the status code of response is 5xx
      * @throws ClientException
      */
-    public function forcemerge($args = []): Response
+    public function forcemerge(array $args = []): Response
     {
         return $this->_client->toElasticaResponse(
-            $this->_client->indices()->forcemerge(\array_merge(['index' => $this->getName(), $args]))
+            $this->_client->indices()->forcemerge(\array_merge(['index' => $this->getName()], $args))
         );
     }
 
