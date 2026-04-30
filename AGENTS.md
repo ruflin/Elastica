@@ -40,17 +40,19 @@ Sources live under `src/` (PSR-4 `Elastica\\`); tests under `tests/`
 ## Coding standards
 
 - `declare(strict_types=1);` everywhere.
-- All classes in the `Elastica` namespace; `final` unless designed for extension.
+- All classes live in the `Elastica` namespace. Follow the existing public API
+  design when deciding on visibility and `final`.
 - All methods, properties, and parameters typed; PHPDoc where it adds info.
 - Coding style: PHP-CS-Fixer with `@PSR2`, `@Symfony`, `@PhpCsFixer`,
   `@PHP80Migration(:risky)`, `@PHPUnit100Migration:risky` rule sets.
 - Static analysis: PHPStan level 5 must pass.
-- Testing: PHPUnit 10.5; methods need `@covers` and `@group unit|functional`.
+- Testing: PHPUnit 10.5.
 
 ## Architecture
 
-Core components: `Client` (entry point, extends `elasticsearch-php`), `Index`,
-`Search`, `Query`, `Document`.
+Core components: `Client` (entry point, implements `Elastic\Elasticsearch\ClientInterface`
+and reuses traits/transport from the official `elasticsearch-php` client),
+`Index`, `Search`, `Query`, `Document`.
 
 Key namespaces:
 
@@ -69,7 +71,10 @@ shared `Param` base for parameter handling, traits for reuse.
 
 - Test layout mirrors `src/` under `tests/`.
 - Test classes extend `Elastica\Test\Base` and live in `Elastica\Test`.
-- Method names start with `test`; require `@covers` and a `@group` annotation.
+- Method names start with `test`.
+- Every test must declare exactly one group via the PHPUnit attribute
+  `#[Group('unit')]`, `#[Group('functional')]`, or `#[Group('benchmark')]`
+  (enforced in `Elastica\Test\Base::setUp`).
 
 ## Configuration files
 

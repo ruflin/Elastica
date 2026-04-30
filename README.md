@@ -16,7 +16,7 @@ All library issues should go to the [issue tracker from GitHub](https://github.c
 
 This release is compatible with all Elasticsearch 9.0 releases and onwards.
 
-The testsuite is run against the most recent minor version of Elasticsearch, currently 9.1.
+The testsuite is run against the most recent minor version of Elasticsearch, currently 9.1.0.
 
 ## Contributing
 
