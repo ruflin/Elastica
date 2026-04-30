@@ -1,42 +1,65 @@
 # Contributing
-Help is very welcomed. Code contributions must be done in respect of [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md).
-More details on how to contribute and guidelines for [pull requests](http://elastica.io/contribute/pull-request.html) can be found [here](http://elastica.io/contribute/).
 
-See [Coding guidelines](http://elastica.io/contribute/coding-guidelines.html) for tips on how to do so.
-All changes must be documented in the [CHANGELOG.md](https://github.com/ruflin/Elastica/blob/master/CHANGELOG.md).
+Help is very welcomed. Code contributions must follow the coding style enforced
+by `php-cs-fixer` (see `.php-cs-fixer.dist.php`), which combines the `@PSR2`,
+`@Symfony`, `@PhpCsFixer`, `@PHP80Migration:risky` and `@PHPUnit100Migration:risky`
+rule sets. Run `make docker-fix-phpcs` to auto-format your changes.
+
+See [`AGENTS.md`](./AGENTS.md) for a concise overview of the project's
+architecture, key commands and testing requirements; both human contributors
+and AI agents are expected to follow it.
+
+All functional changes must be documented in
+[`CHANGELOG.md`](./CHANGELOG.md). Test-only changes are exempt.
 
 ## Issues
-* Bugs & Feature requests: If you found a bug, open an issue on [Github](https://github.com/ruflin/Elastica/issues).
-    Please search for already reported similar issues before opening a new one.
-    You should include code examples (with dependencies if needed) and your Elastica version to the issue description.
-* Questions & Problems: If you have questions or a specific problem, use the [Elastica Gitter](https://gitter.im/ruflin/Elastica)
-    Chat or open an issue on [Stackoverflow](http://stackoverflow.com/questions/tagged/elastica).
-    Make sure to assign the tag Elastica.
+
+* **Bugs & feature requests**: open an issue on
+  [GitHub](https://github.com/ruflin/Elastica/issues). Search the existing
+  issues first. Include a minimal reproduction, your Elastica version, and
+  the targeted Elasticsearch version.
+* **Security vulnerabilities**: do not open a public issue. See
+  [`SECURITY.md`](./SECURITY.md) for the private disclosure process.
+* **Questions**: open a question on
+  [Stack Overflow](https://stackoverflow.com/questions/tagged/elastica) and
+  tag it with `elastica`, or start a
+  [GitHub Discussion](https://github.com/ruflin/Elastica/discussions).
 
 ## Setup
-Elastica uses docker for its development environment.
-Make sure you have both `docker` and  [docker-compose](https://docs.docker.com/compose/install/) installed.
 
-This repository comes with a set of docker-compose.yml templates used for the CI and the local development.
+Elastica uses Docker for its development environment. Install
+[Docker Engine](https://docs.docker.com/engine/install/) (which ships
+the bundled `docker compose` v2 plugin); a separate `docker-compose` v1
+binary is no longer required.
 
-To start a local docker instance run `make docker-start`: the command will pull the required containers for PHP and ES.
-The containers will start and display the logs from ES, terminating the command will stop the containers too.
-Use `make docker-start DOCKER_OPTIONS="--detach"` to start the containers in a detached mode.
-The docker containers can be stopped with `make docker-stop`.
+The repository ships several Compose files under `docker/` (PHP runner,
+Elasticsearch cluster, optional reverse proxy) that the `make` targets
+combine for you.
 
-The ES server version started by that command can be configured by passing a `ES_VERSION=` parameter.
-As an example, running `make docker-start ES_VERSION=9.1.0` will use the `9.1.0` release.
-If you specify an ES version, use the same version when stopping the containers: `make docker-stop ES_VERSION=9.1.0`.
+* `make docker-start` — pull and start PHP + Elasticsearch in the
+  foreground. Logs stream from ES; `Ctrl-C` stops the stack.
+* `make docker-start DOCKER_OPTIONS="--detach"` — start in detached mode.
+* `make docker-stop` — stop the stack.
+
+The Elasticsearch image is selected with the `ES_VERSION=` make
+variable, e.g. `make docker-start ES_VERSION=9.1.0`. Use the **same**
+`ES_VERSION` when stopping (`make docker-stop ES_VERSION=9.1.0`) so
+Compose finds the matching project name.
 
 ### Local Docker configuration
-For ES to properly run, the `vm.max_map_count=262144` system configuration is needed by ES to properly spin up the nodes.
-To update such configuration:
- - For Linux: `sudo sysctl -w vm.max_map_count=262144`
- - For macOS with 'Docker for Mac':
-   - from the command line, run `screen ~/Library/Containers/com.docker.docker/Data/vms/0/tty`
-   - press enter and run `sysctl -w vm.max_map_count=262144`
 
-Further details here: [https://www.elastic.co/guide/en/elasticsearch/reference/master/docker.html#_set_vm_max_map_count_to_at_least_262144]
+Elasticsearch requires `vm.max_map_count >= 262144` on the host kernel.
+
+* **Linux**: `sudo sysctl -w vm.max_map_count=262144`.
+* **macOS / Windows with Docker Desktop**: the value is enforced inside
+  the Linux VM that Docker Desktop manages. Recent versions of Docker
+  Desktop already set a sufficient value out of the box; if you hit a
+  bootstrap error, follow the steps from the
+  [Docker Desktop troubleshooting guide](https://docs.docker.com/desktop/troubleshoot/topics/).
+
+See the upstream
+[Elasticsearch Docker reference](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#_set_vm_max_map_count_to_at_least_262144)
+for additional details.
 
 ### Local commands
 Check out the Makefile for other commands that can be used to run tests and other operations:
@@ -44,11 +67,14 @@ Check out the Makefile for other commands that can be used to run tests and othe
 * Run the tests before creating the pull request using docker-compose locally.
 
 ### PHP Tools
-Elastica uses [phive](https://phar.io/) to manage PHP tools and their installation.
-Those tools are available under the `tools/` directory and are installed when need by a command (see below).
 
-Some of the installed tools are:
-  - `php-cs-fixer.phar`: PHP Coding styles
+Elastica uses [phive](https://phar.io/) to manage PHP tools and their
+installation. The list of pinned tool versions lives in `phive.xml` and
+is the source of truth.
+
+Tools are downloaded into `tools/` on demand by the `make` targets that
+need them (e.g. `install-phpcs` -> `tools/php-cs-fixer.phar`). You do
+not have to invoke `phive` directly.
 
 ## Commands
 The advantage in using the commands below is that no local tools and libraries have to be installed and it is guaranteed
@@ -112,37 +138,49 @@ If you encounter GPG keyserver or network connectivity issues:
 ## Coding
 
 ### Rules
-* Pull requests are made against the default branch (currently `9.x`).
-    Changes are never pushed directly (without pull request) into the default branch.
-* We use the Forking Workflow.
-    https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow
-* Follow the coding guidelines.
-* Use a feature branch for every pull request.
-    Don't open a pull request from your default branch.
+
+* Pull requests target the default branch (currently `9.x`). Changes are
+  never pushed directly to the default branch.
+* We use the
+  [forking workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow).
+* Use a feature branch for every pull request. Don't open a pull request
+  from your fork's default branch.
+* All classes use `declare(strict_types=1);`.
+* Properties, parameters and return types must be type-declared. Use
+  PHPDoc only when it adds information beyond the declared types
+  (generics, array shapes, etc.).
+* Classes that are not designed to be extended should be marked `final`.
+* Static analysis (`make docker-run-phpstan`) and coding-style checks
+  (`make docker-run-phpcs`) must pass.
 
 ### Pull Requests
-* One change per pull requests: Keep your pull requests as small as possible.
-    Only one change should happen per pull request.
-    This makes it easier to review and provided feedback.
-    If you have a large pull request, try to split it up in multiple smaller requests.
-* Commit messages: Make sure that your commit messages have meaning and provide an understanding on what was changed
-    without looking at the code.
-* Pull requests should be opened as early as possible as pull requests are also here for communication / discussing changes.
-    Add a comment when your pull request is ready to be merged.
-* Tests: Your addition / change must be tested and the builds must be green.
-    Test your changes locally.
-    Add unit tests and if possible functional tests.
-    Don't forget to add the group to your tests.
-* Update the CHANGELOG.md file with your changes
-* Backward Compatibility breaks: In case you break backward compatibility, provide details on why this is needed.
-* Merge: No one should ever merge their own pull request
 
-### Name Spaces & Classes
-Most name spaces and classes are self explanatory and use cases can be taken from classes which already exist.
+* **One change per pull request**. Keep PRs small; if a change is large,
+  split it into incremental PRs to make review tractable.
+* **Commit messages**: write meaningful commit messages that explain
+  *why* the change is needed. Conventional Commits (`fix:`, `feat:`,
+  `chore:`, `refactor:`, `docs:`) are preferred but not required.
+* **Tests**: every change must be covered by tests. Use
+  `#[PHPUnit\Framework\Attributes\Group('unit')]`,
+  `#[Group('functional')]`, or `#[Group('benchmark')]` attributes (the
+  bootstrap enforces exactly one group per test). Functional tests
+  require a running Elasticsearch container.
+* **Changelog**: add an entry under the `[Unreleased]` section in
+  `CHANGELOG.md` for any user-visible change.
+* **Backward-compatibility breaks**: if you must break BC, document the
+  rationale in the PR description and list the change under the
+  `Backward Compatibility Breaks` heading in `CHANGELOG.md`.
+* **Merging**: only maintainers merge pull requests; contributors should
+  not merge their own PRs.
 
-#### Tool Namespace
-The namespace Tool is used for making more complex functionality of Elastica available to the users.
-In general it maps existing functionality of Elastica and offers simplified functions.
+### Namespaces & classes
 
-#### Util Class
-The util class is used for all static functions which are used in the Elastica library but don't access the library itself.
+Most namespaces and classes are self-explanatory; look for existing
+classes in the same namespace as a template.
+
+* **`Util`** holds static helpers that don't depend on the rest of the
+  library (date conversion, escaping, etc.).
+* **`Exception`** holds the exception hierarchy. Concrete leaves are
+  `final`; intermediate classes used as catch-targets remain open.
+* **`Query`, `Aggregation`, `Suggest`** mirror Elasticsearch's request
+  taxonomy, with shared base classes such as `AbstractQuery`.
