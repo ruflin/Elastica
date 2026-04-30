@@ -219,6 +219,16 @@ class Index implements SearchableInterface
             ]
         );
 
+        // `if_seq_no` and `if_primary_term` enable optimistic concurrency control.
+        // The first document in a shard has `_seq_no = 0`, so `getOptions()` (which
+        // filters out falsy values) cannot be used for these keys.
+        if ($doc->hasSequenceNumber()) {
+            $options['if_seq_no'] = $doc->getSequenceNumber();
+        }
+        if ($doc->hasPrimaryTerm()) {
+            $options['if_primary_term'] = $doc->getPrimaryTerm();
+        }
+
         $params['body'] = $doc->getData();
         $params = \array_merge($params, $options);
 
