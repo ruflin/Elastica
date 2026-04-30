@@ -19,6 +19,9 @@ class Wildcard extends AbstractQuery
     public const REWRITE_CONSTANT_SCORE = 'constant_score';
     public const REWRITE_CONSTANT_SCORE_BOOLEAN = 'constant_score_boolean';
     public const REWRITE_SCORING_BOOLEAN = 'scoring_boolean';
+    public const REWRITE_TOP_TERMS_BLENDED_FREQS_N = 'top_terms_blended_freqs_N';
+    public const REWRITE_TOP_TERMS_BOOST_N = 'top_terms_boost_N';
+    public const REWRITE_TOP_TERMS_N = 'top_terms_N';
 
     private string $field;
 

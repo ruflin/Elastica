@@ -36,12 +36,14 @@ class FuzzyTest extends BaseTest
 
         $fuzzy->setField('user', 'Nicolas');
         $fuzzy->setFieldOption('boost', 1.0);
+        $fuzzy->setRewrite(Fuzzy::REWRITE_SCORING_BOOLEAN);
 
         $expectedArray = [
             'fuzzy' => [
                 'user' => [
                     'value' => 'Nicolas',
                     'boost' => 1.0,
+                    'rewrite' => 'scoring_boolean',
                 ],
             ],
         ];

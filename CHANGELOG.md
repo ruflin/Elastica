@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 * Added support for numeric `minimum_should_match` values in `TermsSet` query [#2293](https://github.com/ruflin/Elastica/pull/2293)
 * Added support for "search after" based pagination [#1645](https://github.com/ruflin/Elastica/issues/1645)
+* `Elastica\Query\Fuzzy::setRewrite` rewrite param setter and possible values as constants [#2242](https://github.com/ruflin/Elastica/pull/2242)
+* `Elastica\Query\Prefix::setRewrite` rewrite param setter and possible values as constants [#2242](https://github.com/ruflin/Elastica/pull/2242)
+* `Elastica\Query\Regexp::setRewrite` rewrite param setter and possible values as constants [#2242](https://github.com/ruflin/Elastica/pull/2242)
+* Add constants for all possible rewrite values in `Elastica\Query\Wildcard` [#2242](https://github.com/ruflin/Elastica/pull/2242)
 * Added support for the `seq_no_primary_term` search option and the `if_seq_no` / `if_primary_term` index options to enable optimistic concurrency control [#2284](https://github.com/ruflin/Elastica/pull/2284)
 ### Changed
 ### Deprecated
@@ -30,6 +34,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added support for Component Template [#2274](https://github.com/ruflin/Elastica/pull/2274)
 * Added support for Index Template  [#2274](https://github.com/ruflin/Elastica/pull/2274)
 * Added Template class to target only legacy Template [#2274](https://github.com/ruflin/Elastica/pull/2274)
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [Unreleased](https://github.com/ruflin/Elastica/compare/8.1.0...8.x)
+
+### Backward Compatibility Breaks
+* Dropped support for PHP <8.1 [#2246](https://github.com/ruflin/Elastica/pull/2246)
+* Removed 3rd `$method` argument from the `Elastica\SearchableInterface::search` and `Elastica\SearchableInterface::count` as they are not unused anymore. The following classes are affected: `Elastica\Search` and `Elastica\Index` [#2256](https://github.com/ruflin/Elastica/pull/2256)
+* Removed `Elastica\Request` class as constants are not used anymore and no longer needed. [#2256](https://github.com/ruflin/Elastica/pull/2256)
+### Added
 * Added support for PHP 8.5 [#2253](https://github.com/ruflin/Elastica/pull/2253)
 
 ### Changed

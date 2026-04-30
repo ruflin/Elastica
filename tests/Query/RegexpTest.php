@@ -21,12 +21,14 @@ class RegexpTest extends BaseTest
         $boost = 2;
 
         $query = new Regexp($field, $value, $boost);
+        $query->setRewrite(Regexp::REWRITE_SCORING_BOOLEAN);
 
         $expectedArray = [
             'regexp' => [
                 $field => [
                     'value' => $value,
                     'boost' => $boost,
+                    'rewrite' => 'scoring_boolean',
                 ],
             ],
         ];

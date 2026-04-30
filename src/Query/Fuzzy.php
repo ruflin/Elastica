@@ -16,6 +16,16 @@ use Elastica\Exception\InvalidException;
 class Fuzzy extends AbstractQuery
 {
     /**
+     * Rewrite methods: @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-term-rewrite.html.
+     */
+    public const REWRITE_CONSTANT_SCORE = 'constant_score';
+    public const REWRITE_CONSTANT_SCORE_BOOLEAN = 'constant_score_boolean';
+    public const REWRITE_SCORING_BOOLEAN = 'scoring_boolean';
+    public const REWRITE_TOP_TERMS_BLENDED_FREQS_N = 'top_terms_blended_freqs_N';
+    public const REWRITE_TOP_TERMS_BOOST_N = 'top_terms_boost_N';
+    public const REWRITE_TOP_TERMS_N = 'top_terms_N';
+
+    /**
      * Construct a fuzzy query.
      *
      * @param string|null $value String to search for
@@ -61,5 +71,18 @@ class Fuzzy extends AbstractQuery
         $params[$key][$option] = $value;
 
         return $this->setParam($key, $params[$key]);
+    }
+
+    /**
+     * Set the method used to rewrite the query.
+     * Use one of the Fuzzy::REWRITE_* constants, or provide your own.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-term-rewrite.html
+     */
+    public function setRewrite(string $rewriteMode): self
+    {
+        $this->setFieldOption('rewrite', $rewriteMode);
+
+        return $this;
     }
 }
