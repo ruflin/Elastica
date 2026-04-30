@@ -7,8 +7,10 @@ namespace Elastica\Test;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Client;
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Mapping;
+use Elastica\Query;
 use Elastica\Query\QueryString;
 use Elastica\Query\SimpleQueryString;
 use Elastica\Query\Term;
@@ -855,5 +857,118 @@ class IndexTest extends BaseTest
         $index->forcemerge();
 
         $this->assertEquals([], $index->getAliases());
+    }
+
+    #[Group('functional')]
+    public function testIterateEach(): void
+    {
+        $index = $this->_createIndex();
+        $index->setMapping(new Mapping([
+            'country_id' => ['type' => 'integer'],
+            'region_id' => ['type' => 'integer'],
+        ]));
+
+        $index->addDocuments([
+            new Document('1', ['country_id' => 1, 'region_id' => 1]),
+            new Document('2', ['country_id' => 1, 'region_id' => 2]),
+            new Document('3', ['country_id' => 2, 'region_id' => 3]),
+        ]);
+        $index->refresh();
+
+        $query = new Query();
+        $query->setSize(2);
+        $query->setSort([
+            'region_id' => 'desc',
+        ]);
+
+        $documentIds = [];
+        foreach ($index->each($query, 2) as $document) {
+            $documentIds[] = $document->getId();
+        }
+
+        $this->assertEquals(['3', '2', '1'], $documentIds);
+    }
+
+    #[Group('functional')]
+    public function testIterateBatch(): void
+    {
+        $index = $this->_createIndex();
+        $index->setMapping(new Mapping([
+            'country_id' => ['type' => 'integer'],
+            'region_id' => ['type' => 'integer'],
+        ]));
+
+        $index->addDocuments([
+            new Document('1', ['country_id' => 1, 'region_id' => 1]),
+            new Document('2', ['country_id' => 1, 'region_id' => 2]),
+            new Document('3', ['country_id' => 2, 'region_id' => 3]),
+        ]);
+        $index->refresh();
+
+        $query = new Query();
+        $query->setSize(2);
+        $query->setSort([
+            'region_id' => 'desc',
+        ]);
+
+        $documentIds = [];
+        foreach ($index->batch($query, 2) as $documents) {
+            foreach ($documents as $document) {
+                $documentIds[] = $document->getId();
+            }
+        }
+
+        $this->assertEquals(['3', '2', '1'], $documentIds);
+    }
+
+    #[Group('functional')]
+    public function testIterateThrowsWhenSortIsMissing(): void
+    {
+        $index = $this->_createIndex();
+
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessageMatches('/sort/');
+
+        \iterator_to_array($index->each(new Query(), 10));
+    }
+
+    #[Group('functional')]
+    public function testIterateThrowsWhenFromIsNonZero(): void
+    {
+        $index = $this->_createIndex();
+
+        $query = new Query();
+        $query->setSort(['_id' => 'asc']);
+        $query->setFrom(5);
+
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessageMatches('/from/');
+
+        \iterator_to_array($index->each($query, 10));
+    }
+
+    #[Group('functional')]
+    public function testIterateThrowsWhenBatchSizeIsZero(): void
+    {
+        $index = $this->_createIndex();
+
+        $query = new Query();
+        $query->setSort(['_id' => 'asc']);
+
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessageMatches('/[Bb]atch size/');
+
+        \iterator_to_array($index->each($query, 0));
+    }
+
+    #[Group('functional')]
+    public function testBatchIterateThrowsWhenSortIsMissing(): void
+    {
+        $index = $this->_createIndex();
+
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessageMatches('/sort/');
+
+        \iterator_to_array($index->batch(new Query(), 10));
     }
 }

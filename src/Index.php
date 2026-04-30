@@ -540,6 +540,93 @@ class Index implements SearchableInterface
     }
 
     /**
+     * Iterates over all documents, matching given query, using "search after" based pagination.
+     *
+     * @param mixed      $query     search query with sort by unique document field
+     * @param int        $batchSize the number of rows to be returned in each batch (e.g. each query size).
+     * @param array|null $options   search request options
+     *
+     * @see \Elastica\Query::setSearchAfter()
+     *
+     * @return Document[]|\Generator list of all documents matched the given query as iterator
+     */
+    public function each($query = '', int $batchSize = 100, ?array $options = null): \Generator
+    {
+        $query = $this->prepareSearchAfterIteratorQuery($query, $batchSize);
+
+        while (true) {
+            $documents = $this->search($query, $options)->getDocuments();
+            $count = \count($documents);
+            if (0 === $count) {
+                break;
+            }
+
+            foreach ($documents as $document) {
+                yield $document;
+            }
+
+            if ($count < $batchSize) {
+                break;
+            }
+
+            $query->setSearchAfter($documents[$count - 1]->getSort());
+        }
+    }
+
+    /**
+     * Iterates over all documents in batches, matching given query, using "search after" based pagination.
+     *
+     * @param mixed      $query     search query with sort by unique document field
+     * @param int        $batchSize the number of rows to be returned in each batch (e.g. each query size).
+     * @param array|null $options   search request options
+     *
+     * @see \Elastica\Query::setSearchAfter()
+     *
+     * @return Document[][]|\Generator list of document batches matched the given query as iterator
+     */
+    public function batch($query = '', int $batchSize = 100, ?array $options = null): \Generator
+    {
+        $query = $this->prepareSearchAfterIteratorQuery($query, $batchSize);
+
+        while (true) {
+            $documents = $this->search($query, $options)->getDocuments();
+            $count = \count($documents);
+            if (0 === $count) {
+                break;
+            }
+
+            yield $documents;
+
+            if ($count < $batchSize) {
+                break;
+            }
+
+            $query->setSearchAfter($documents[$count - 1]->getSort());
+        }
+    }
+
+    private function prepareSearchAfterIteratorQuery(mixed $query, int $batchSize): Query
+    {
+        if ($batchSize < 1) {
+            throw new InvalidException('Batch size must be greater than 0.');
+        }
+
+        $query = clone Query::create($query); // if original query is object - keep it intact
+
+        if (!$query->hasParam('sort')) {
+            throw new InvalidException('Query must have "sort" parameter in order to use "search after" based iteration.');
+        }
+
+        if ($query->hasParam('from') && 0 !== $query->getParam('from')) {
+            throw new InvalidException('Query must not specify "from" parameter in order to use "search after" based iteration.');
+        }
+
+        $query->setSize($batchSize);
+
+        return $query;
+    }
+
+    /**
      * Opens an index.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-open-close.html
