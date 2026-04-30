@@ -452,7 +452,7 @@ class Index implements SearchableInterface
     public function forcemerge($args = []): Response
     {
         return $this->_client->toElasticaResponse(
-            $this->_client->indices()->forcemerge(\array_merge(['index' => $this->getName(), $args]))
+            $this->_client->indices()->forcemerge(\array_merge(['index' => $this->getName()], $args))
         );
     }
 
