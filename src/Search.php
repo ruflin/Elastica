@@ -41,6 +41,7 @@ class Search
     public const OPTION_SHARD_REQUEST_CACHE = 'request_cache';
     public const OPTION_FILTER_PATH = 'filter_path';
     public const OPTION_TYPED_KEYS = 'typed_keys';
+    public const OPTION_SEQ_NO_PRIMARY_TERM = 'seq_no_primary_term';
 
     /*
      * Search types
@@ -413,6 +414,7 @@ class Search
             case self::OPTION_SHARD_REQUEST_CACHE:
             case self::OPTION_FILTER_PATH:
             case self::OPTION_TYPED_KEYS:
+            case self::OPTION_SEQ_NO_PRIMARY_TERM:
                 return;
         }
 

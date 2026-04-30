@@ -530,10 +530,15 @@ class IndexTest extends BaseTest
 
         $index1Doc = $index1->getDocument(1);
 
-        $index2->addDocument($index1Doc);
-        $index2Doc = $index1->getDocument(1);
+        // Sequence number and primary term are bound to the source index/shard;
+        // strip them when re-indexing the document into a different index so they
+        // are not interpreted as optimistic concurrency control checks on the target.
+        $index2Doc = new Document($index1Doc->getId(), $index1Doc->getData());
 
-        $this->assertEquals('Hello world', $index2Doc->get('title'));
+        $index2->addDocument($index2Doc);
+        $reloaded = $index2->getDocument(1);
+
+        $this->assertEquals('Hello world', $reloaded->get('title'));
     }
 
     #[Group('functional')]
@@ -970,5 +975,57 @@ class IndexTest extends BaseTest
         $this->expectExceptionMessageMatches('/sort/');
 
         \iterator_to_array($index->batch(new Query(), 10));
+    }
+
+    /**
+     * @covers \Elastica\Index::addDocument
+     */
+    #[Group('functional')]
+    public function testAddDocumentWithIfSeqNoAndIfPrimaryTermSucceedsOnMatch(): void
+    {
+        $index = $this->_createIndex();
+        $index->addDocument(new Document('1', ['title' => 'original']));
+        $index->refresh();
+
+        $retrieved = $index->getDocument('1');
+        $this->assertTrue($retrieved->hasSequenceNumber());
+        $this->assertTrue($retrieved->hasPrimaryTerm());
+
+        $update = new Document('1', ['title' => 'updated']);
+        $update->setSequenceNumber($retrieved->getSequenceNumber());
+        $update->setPrimaryTerm($retrieved->getPrimaryTerm());
+
+        $response = $index->addDocument($update);
+        $this->assertTrue($response->isOk());
+
+        $index->refresh();
+        $this->assertSame('updated', $index->getDocument('1')->get('title'));
+    }
+
+    /**
+     * @covers \Elastica\Index::addDocument
+     */
+    #[Group('functional')]
+    public function testAddDocumentWithStaleIfSeqNoFailsWithVersionConflict(): void
+    {
+        $index = $this->_createIndex();
+        $index->addDocument(new Document('1', ['title' => 'original']));
+        $index->refresh();
+
+        $retrieved = $index->getDocument('1');
+        $staleSeqNo = $retrieved->getSequenceNumber();
+        $staleTerm = $retrieved->getPrimaryTerm();
+
+        $first = new Document('1', ['title' => 'first update']);
+        $first->setSequenceNumber($staleSeqNo);
+        $first->setPrimaryTerm($staleTerm);
+        $this->assertTrue($index->addDocument($first)->isOk());
+
+        $second = new Document('1', ['title' => 'second update']);
+        $second->setSequenceNumber($staleSeqNo);
+        $second->setPrimaryTerm($staleTerm);
+
+        $this->expectException(ClientResponseException::class);
+        $index->addDocument($second);
     }
 }
