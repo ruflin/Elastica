@@ -329,7 +329,7 @@ class Search
 
         $params = [
             'body' => $query->toArray(),
-            [self::OPTION_SEARCH_TYPE => self::OPTION_SEARCH_TYPE_QUERY_THEN_FETCH],
+            self::OPTION_SEARCH_TYPE => self::OPTION_SEARCH_TYPE_QUERY_THEN_FETCH,
         ];
 
         if ($indices = $this->getIndices()) {

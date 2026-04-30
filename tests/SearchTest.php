@@ -504,6 +504,32 @@ class SearchTest extends BaseTest
     }
 
     #[Group('functional')]
+    public function testCountSendsSearchTypeQueryThenFetch(): void
+    {
+        $client = $this->_getClient();
+        $index = $client->getIndex('count_search_type_test');
+        $index->create([], ['recreate' => true]);
+        $index->addDocument(new Document('1', ['foo' => 'bar']));
+        $index->refresh();
+
+        $search = new Search($client);
+        $search->addIndex($index);
+        $search->count(new MatchAll());
+
+        $lastRequest = $client->getLastRequest();
+        $this->assertNotNull($lastRequest);
+
+        \parse_str($lastRequest->getUri()->getQuery(), $query);
+
+        // Without the fix, the search_type option was wrapped in a numeric-keyed
+        // sub-array of $params and silently dropped from the request.
+        $this->assertSame(
+            Search::OPTION_SEARCH_TYPE_QUERY_THEN_FETCH,
+            $query[Search::OPTION_SEARCH_TYPE] ?? null
+        );
+    }
+
+    #[Group('functional')]
     public function testCountRequestGet(): void
     {
         $client = $this->_getClient();
