@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 ### Fixed
 ### Security
+* Pinned every third-party GitHub Action (`actions/checkout`, `shivammathur/setup-php`, `ramsey/composer-install`, `codecov/codecov-action`, `anthropics/claude-code-action`) to a full commit SHA with a trailing version comment. Floating tags can be silently rewritten by the action publisher; pinning to a SHA prevents supply-chain hijacks (cf. the March 2025 `tj-actions/changed-files` incident).
 
 
 ## [9.0.0](https://github.com/ruflin/Elastica/compare/8.x...9.0.0)

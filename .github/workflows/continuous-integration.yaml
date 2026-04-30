@@ -6,10 +6,10 @@ jobs:
     name: 'Coding style'
     steps:
       - name: 'Checkout'
-        uses: 'actions/checkout@v4'
+        uses: 'actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5' # v4.3.1
 
       - name: 'Setup PHP'
-        uses: 'shivammathur/setup-php@v2'
+        uses: 'shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f' # 2.37.0
         with:
           php-version: '8.1'
           coverage: 'none'
@@ -29,16 +29,16 @@ jobs:
     name: 'Coding standards'
     steps:
       - name: 'Checkout'
-        uses: 'actions/checkout@v4'
+        uses: 'actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5' # v4.3.1
 
       - name: 'Setup PHP'
-        uses: 'shivammathur/setup-php@v2'
+        uses: 'shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f' # 2.37.0
         with:
           php-version: '8.1'
           tools: composer
 
       - name: 'Install dependencies with Composer'
-        uses: 'ramsey/composer-install@v3'
+        uses: 'ramsey/composer-install@a8d0d959dab41457692a5e2041bd9b757a119e3f' # 3.2.1
         with:
           composer-options: '--prefer-dist'
 
@@ -64,10 +64,10 @@ jobs:
       fail-fast: false
     steps:
       - name: 'Checkout'
-        uses: 'actions/checkout@v4'
+        uses: 'actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5' # v4.3.1
 
       - name: 'Setup PHP'
-        uses: 'shivammathur/setup-php@v2'
+        uses: 'shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f' # 2.37.0
         with:
           php-version: '${{ matrix.php }}'
           coverage: 'pcov'
@@ -75,7 +75,7 @@ jobs:
           extensions: 'curl, json, mbstring, openssl'
 
       - name: 'Install dependencies with Composer'
-        uses: 'ramsey/composer-install@v3'
+        uses: 'ramsey/composer-install@a8d0d959dab41457692a5e2041bd9b757a119e3f' # 3.2.1
         with:
           dependency-versions: '${{ matrix.dependencies }}'
           composer-options: '--prefer-dist'
@@ -104,7 +104,7 @@ jobs:
           vendor/bin/phpunit --group functional --coverage-clover=build/coverage/functional-coverage.xml
 
       - name: 'Upload coverage to Codecov'
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@f32b3a3741e1053eb607407145bc9619351dc93b # v2.1.0
         with:
             files: build/coverage/unit-coverage.xml,build/coverage/functional-coverage.xml
 
@@ -119,10 +119,10 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: 'Checkout'
-        uses: 'actions/checkout@v4'
+        uses: 'actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5' # v4.3.1
 
       - name: 'Setup PHP'
-        uses: 'shivammathur/setup-php@v2'
+        uses: 'shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f' # 2.37.0
         with:
           php-version: '8.1'
           coverage: 'none'
@@ -130,7 +130,7 @@ jobs:
           extensions: 'curl, json, mbstring, openssl'
 
       - name: 'Install dependencies with Composer'
-        uses: 'ramsey/composer-install@v3'
+        uses: 'ramsey/composer-install@a8d0d959dab41457692a5e2041bd9b757a119e3f' # 3.2.1
         with:
           composer-options: '--prefer-dist'
 
