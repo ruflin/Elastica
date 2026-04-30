@@ -11,6 +11,6 @@ namespace Elastica\Exception;
  *
  * @author Evgeniy Sokolov <ewgraf@gmail.com>
  */
-class DeprecatedException extends NotImplementedException
+final class DeprecatedException extends NotImplementedException
 {
 }

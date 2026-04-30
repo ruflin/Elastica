@@ -11,7 +11,7 @@ use Elastica\Exception\BulkException;
 /**
  * Bulk Response exception.
  */
-class ResponseException extends BulkException
+final class ResponseException extends BulkException
 {
     /**
      * @var ResponseSet ResponseSet object

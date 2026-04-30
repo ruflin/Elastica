@@ -9,6 +9,6 @@ namespace Elastica\Exception;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class ClientException extends \RuntimeException implements ExceptionInterface
+final class ClientException extends \RuntimeException implements ExceptionInterface
 {
 }

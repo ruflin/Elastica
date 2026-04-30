@@ -9,6 +9,6 @@ namespace Elastica\Exception;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class InvalidException extends \InvalidArgumentException implements ExceptionInterface
+final class InvalidException extends \InvalidArgumentException implements ExceptionInterface
 {
 }
