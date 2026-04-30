@@ -9,6 +9,7 @@ use Elastic\Elasticsearch\Exception\MissingParameterException;
 use Elastic\Elasticsearch\Exception\ServerResponseException;
 use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Exception\ClientException;
+use Elastica\Exception\InvalidException;
 
 /**
  * Represents elasticsearch task.
@@ -107,12 +108,15 @@ class Task extends Param
     }
 
     /**
-     * @throws \Exception
+     * @throws InvalidException        if no task id is set
+     * @throws ClientResponseException if the status code of response is 4xx
+     * @throws ServerResponseException if the status code of response is 5xx
+     * @throws ClientException
      */
     public function cancel(): Response
     {
         if ('' === $this->_id) {
-            throw new \Exception('No task id given');
+            throw new InvalidException('No task id given');
         }
 
         return $this->_client->toElasticaResponse(
