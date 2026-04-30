@@ -878,7 +878,7 @@ class Index implements SearchableInterface
     public function updateDocument($data, array $options = []): Response
     {
         if (!($data instanceof Document) && !($data instanceof AbstractScript)) {
-            throw new \InvalidArgumentException('Data should be a Document or Script');
+            throw new InvalidException('Data should be a Document or Script');
         }
 
         if (!$data->hasId()) {
