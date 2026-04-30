@@ -104,9 +104,14 @@ jobs:
           vendor/bin/phpunit --group functional --coverage-clover=build/coverage/functional-coverage.xml
 
       - name: 'Upload coverage to Codecov'
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v5
         with:
-            files: build/coverage/unit-coverage.xml,build/coverage/functional-coverage.xml
+          files: build/coverage/unit-coverage.xml,build/coverage/functional-coverage.xml
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
+          # Tokenless uploads from forks are flaky in v5; only request OIDC
+          # when the workflow is running on the head repository.
+          use_oidc: ${{ !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork) }}
 
       - name: Elasticsearch Logs
         if: always()
