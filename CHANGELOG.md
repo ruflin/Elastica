@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 * `Elastica\Util::convertDate()` now throws `Elastica\Exception\InvalidException` when given a string that `strtotime()` cannot parse, instead of silently producing `1970-01-01T00:00:00Z`. The return type has also been narrowed to `string` and a typo-prone `null` argument is no longer accepted at runtime.
 * Bumped `codecov/codecov-action` from `v2` to `v7` and aligned it with the v7 input contract (`token`, `fail_ci_if_error: false`, conditional `use_oidc`) [#2327](https://github.com/ruflin/Elastica/pull/2327).
+* Refreshed `CONTRIBUTING.md` to match the current contributor workflow: the actual `php-cs-fixer` rule sets used by `.php-cs-fixer.dist.php` (no longer "PSR-2 only"), the `docker compose` v2 plugin instead of the legacy `docker-compose` binary, references to `AGENTS.md` and `SECURITY.md`, the modern PHPUnit `#[Group]` attribute, the `final`-by-default convention, and Stack Overflow / GitHub Discussions in place of Gitter.
 ### Deprecated
 ### Removed
 ### Fixed
