@@ -16,10 +16,7 @@ use Elastica\QueryBuilder\Version;
  */
 class QueryBuilder
 {
-    /**
-     * @var Version
-     */
-    private $_version;
+    private Version $_version;
 
     /**
      * @var Facade[]

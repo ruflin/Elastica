@@ -24,7 +24,8 @@
         "guzzlehttp/guzzle": "^7.2",
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-phpunit": "^2.0",
-        "phpunit/phpunit": "^10.5"
+        "phpunit/phpunit": "^10.5",
+        "rector/rector": "^2.1"
     },
     "conflict": {
         "guzzlehttp/psr7": "<2.0.0"

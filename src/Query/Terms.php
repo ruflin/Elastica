@@ -16,10 +16,7 @@ use Elastica\Exception\InvalidException;
  */
 class Terms extends AbstractQuery
 {
-    /**
-     * @var string
-     */
-    private $field;
+    private string $field;
 
     /**
      * @param list<bool|float|int|string> $terms Terms list, leave empty if building a terms-lookup query

@@ -16,12 +16,12 @@ class Shard
     /**
      * @var int the shard index/number
      */
-    protected $_shardNumber;
+    protected int $_shardNumber;
 
     /**
      * @var array the shard health data
      */
-    protected $_data;
+    protected array $_data;
 
     /**
      * @param int   $shardNumber the shard index/number

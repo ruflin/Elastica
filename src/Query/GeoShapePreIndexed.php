@@ -17,24 +17,18 @@ class GeoShapePreIndexed extends AbstractGeoShape
 {
     /**
      * elasticsearch id of the pre-indexed shape.
-     *
-     * @var string
      */
-    protected $_indexedId;
+    protected string $_indexedId;
 
     /**
      *  elasticsearch index of the pre-indexed shape.
-     *
-     * @var string
      */
-    protected $_indexedIndex;
+    protected string $_indexedIndex;
 
     /**
      *  elasticsearch path/field name of the pre-indexed shape.
-     *
-     * @var string
      */
-    protected $_indexedPath;
+    protected string $_indexedPath;
 
     /**
      * Construct geo_shape query with a pre-indexed shape.

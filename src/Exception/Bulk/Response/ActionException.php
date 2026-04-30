@@ -5,17 +5,14 @@ declare(strict_types=1);
 namespace Elastica\Exception\Bulk\Response;
 
 use Elastica\Bulk\Action;
-use Elastica\Bulk\Response as BulkResponse;
+use Elastica\Bulk\Response;
 use Elastica\Exception\BulkException;
 
 class ActionException extends BulkException
 {
-    /**
-     * @var BulkResponse
-     */
-    protected $_response;
+    protected Response $_response;
 
-    public function __construct(BulkResponse $response)
+    public function __construct(Response $response)
     {
         $this->_response = $response;
 
@@ -27,12 +24,12 @@ class ActionException extends BulkException
         return $this->getResponse()->getAction();
     }
 
-    public function getResponse(): BulkResponse
+    public function getResponse(): Response
     {
         return $this->_response;
     }
 
-    public function getErrorMessage(BulkResponse $response): string
+    public function getErrorMessage(Response $response): string
     {
         $error = $response->getError();
         $opType = $response->getOpType();

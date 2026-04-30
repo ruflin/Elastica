@@ -25,10 +25,7 @@ class Scroll implements \Iterator
      */
     public $expiryTime;
 
-    /**
-     * @var Search
-     */
-    protected $_search;
+    protected Search $_search;
 
     /**
      * @var string|null

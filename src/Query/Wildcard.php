@@ -23,10 +23,7 @@ class Wildcard extends AbstractQuery
     public const REWRITE_TOP_TERMS_BOOST_N = 'top_terms_boost_N';
     public const REWRITE_TOP_TERMS_N = 'top_terms_N';
 
-    /**
-     * @var string
-     */
-    private $field;
+    private string $field;
 
     public function __construct(string $field, string $value, float $boost = 1.0)
     {

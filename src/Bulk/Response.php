@@ -8,15 +8,9 @@ use Elastica\Response as BaseResponse;
 
 class Response extends BaseResponse
 {
-    /**
-     * @var Action
-     */
-    protected $_action;
+    protected Action $_action;
 
-    /**
-     * @var string
-     */
-    protected $_opType;
+    protected string $_opType;
 
     /**
      * @param array|string $responseData

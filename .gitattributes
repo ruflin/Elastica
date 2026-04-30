@@ -18,3 +18,4 @@
 /phpstan-baseline.neon export-ignore
 /phpunit.xml.dist export-ignore
 /tests export-ignore
+/rector.php export-ignore

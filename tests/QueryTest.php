@@ -621,4 +621,44 @@ class QueryTest extends BaseTest
         $this->assertEquals(25, $resultSet->getTotalHits());
         $this->assertEquals('gte', $resultSet->getTotalHitsRelation());
     }
+
+    #[Group('functional')]
+    public function testSearchAfter(): void
+    {
+        $index = $this->_createIndex();
+        $index->setMapping(new Mapping([
+            'country_id' => ['type' => 'integer'],
+            'region_id' => ['type' => 'integer'],
+        ]));
+
+        $index->addDocuments([
+            new Document('1', ['country_id' => 1, 'region_id' => 1]),
+            new Document('2', ['country_id' => 1, 'region_id' => 2]),
+            new Document('3', ['country_id' => 2, 'region_id' => 3]),
+        ]);
+        $index->refresh();
+
+        $query = new Query();
+        $query->setSize(2);
+        $query->setSort([
+            'country_id' => 'desc',
+            'region_id' => 'asc',
+        ]);
+        $firstPageResultSet = $index->search($query);
+
+        $documents = $firstPageResultSet->getDocuments();
+        $this->assertCount(2, $documents);
+
+        /** @var Document $lastDocument */
+        $lastDocument = \array_pop($documents);
+
+        $this->assertNotEmpty($lastDocument->getSort());
+
+        $query->setSearchAfter($lastDocument->getSort());
+
+        $secondPageResultSet = $index->search($query);
+        $documents = $secondPageResultSet->getDocuments();
+        $this->assertCount(1, $documents);
+        $this->assertSame('2', $documents[0]->getId());
+    }
 }

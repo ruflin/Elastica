@@ -26,7 +26,7 @@ class Pipeline extends Param
     /**
      * @var Client Client object
      */
-    protected $_client;
+    protected Client $_client;
 
     public function __construct(Client $client)
     {

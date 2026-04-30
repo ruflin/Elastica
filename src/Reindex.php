@@ -41,15 +41,9 @@ class Reindex extends Param
     public const SLICES = 'slices';
     public const SLICES_AUTO = 'auto';
 
-    /**
-     * @var Index
-     */
-    protected $_oldIndex;
+    protected Index $_oldIndex;
 
-    /**
-     * @var Index
-     */
-    protected $_newIndex;
+    protected Index $_newIndex;
 
     /**
      * @var Response|null

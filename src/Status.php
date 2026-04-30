@@ -32,10 +32,7 @@ class Status
      */
     protected $_data;
 
-    /**
-     * @var Client
-     */
-    protected $_client;
+    protected Client $_client;
 
     public function __construct(Client $client)
     {

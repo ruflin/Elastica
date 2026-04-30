@@ -23,12 +23,9 @@ class ComponentTemplate
      *
      * @var string Component template name
      */
-    protected $_name;
+    protected string $_name;
 
-    /**
-     * @var Client
-     */
-    protected $_client;
+    protected Client $_client;
 
     /**
      * Creates a new component template object.

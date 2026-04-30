@@ -26,12 +26,9 @@ class Template
      *
      * @var string Template name
      */
-    protected $_name;
+    protected string $_name;
 
-    /**
-     * @var Client
-     */
-    protected $_client;
+    protected Client $_client;
 
     /**
      * Creates a new index template object.

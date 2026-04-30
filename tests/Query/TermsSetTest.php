@@ -34,6 +34,23 @@ class TermsSetTest extends BaseTest
     }
 
     #[Group('unit')]
+    public function testMinimumShouldMatchNumber(): void
+    {
+        $expected = [
+            'terms_set' => [
+                'field' => [
+                    'terms' => ['foo', 'bar'],
+                    'minimum_should_match' => 1,
+                ],
+            ],
+        ];
+
+        $query = new TermsSet('field', ['foo', 'bar'], 1);
+
+        $this->assertSame($expected, $query->toArray());
+    }
+
+    #[Group('unit')]
     public function testEmptyField(): void
     {
         $this->expectException(InvalidException::class);
@@ -107,6 +124,40 @@ class TermsSetTest extends BaseTest
         $query = new TermsSet('skills', ['js', 'c++'], 'skill_count');
         $resultSet = $index->search($query);
 
+        $this->assertEquals(0, $resultSet->count());
+    }
+
+    #[Group('functional')]
+    public function testMinimumShouldMatchNumberSearch(): void
+    {
+        $index = $this->_createIndex();
+
+        $index->addDocuments([
+            new Document('1', ['skills' => ['php', 'js']]),
+            new Document('2', ['skills' => ['php']]),
+            new Document('3', ['skills' => ['java']]),
+        ]);
+
+        $index->refresh();
+
+        // minimum_should_match = 1: should match documents with at least 1 of the terms
+        $query = new TermsSet('skills', ['php'], 1);
+        $resultSet = $index->search($query);
+        $this->assertEquals(2, $resultSet->count());
+
+        // minimum_should_match = 1: should match documents with at least 1 of the terms
+        $query = new TermsSet('skills', ['php', 'java'], 1);
+        $resultSet = $index->search($query);
+        $this->assertEquals(3, $resultSet->count());
+
+        // minimum_should_match = 2: should match documents with at least 2 of the terms
+        $query = new TermsSet('skills', ['php', 'js'], 2);
+        $resultSet = $index->search($query);
+        $this->assertEquals(1, $resultSet->count());
+
+        // minimum_should_match = 2: should match documents with at least 2 of the terms
+        $query = new TermsSet('skills', ['php', 'java'], 2);
+        $resultSet = $index->search($query);
         $this->assertEquals(0, $resultSet->count());
     }
 

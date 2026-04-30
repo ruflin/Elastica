@@ -35,7 +35,7 @@ class Recovery
      *
      * @var BaseIndex Index object
      */
-    protected $_index;
+    protected BaseIndex $_index;
 
     /**
      * Construct.

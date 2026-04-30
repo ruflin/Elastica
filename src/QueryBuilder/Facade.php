@@ -13,15 +13,9 @@ use Elastica\Exception\QueryBuilderException;
  */
 class Facade
 {
-    /**
-     * @var DSL
-     */
-    private $_dsl;
+    private DSL $_dsl;
 
-    /**
-     * @var Version
-     */
-    private $_version;
+    private Version $_version;
 
     /**
      * Constructor.

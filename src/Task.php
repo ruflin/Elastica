@@ -23,10 +23,8 @@ class Task extends Param
 
     /**
      * Task id, e.g. in form of nodeNumber:taskId.
-     *
-     * @var string
      */
-    protected $_id;
+    protected string $_id;
 
     /**
      * @var Response
@@ -38,10 +36,7 @@ class Task extends Param
      */
     protected $_data;
 
-    /**
-     * @var Client
-     */
-    protected $_client;
+    protected Client $_client;
 
     public function __construct(Client $client, string $id)
     {

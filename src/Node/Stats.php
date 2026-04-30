@@ -39,7 +39,7 @@ class Stats
      *
      * @var BaseNode Node object
      */
-    protected $_node;
+    protected BaseNode $_node;
 
     /**
      * Create new stats for node.

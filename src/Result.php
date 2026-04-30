@@ -18,7 +18,7 @@ class Result
      *
      * @var array Hit array
      */
-    protected $_hit = [];
+    protected array $_hit;
 
     /**
      * @param array $hit Hit data

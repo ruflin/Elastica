@@ -17,10 +17,7 @@ use Elastica\Search as BaseSearch;
  */
 class Search
 {
-    /**
-     * @var Client
-     */
-    protected $_client;
+    protected Client $_client;
 
     /**
      * @var array
@@ -42,10 +39,7 @@ class Search
         'preference',
     ];
 
-    /**
-     * @var MultiBuilderInterface
-     */
-    private $_builder;
+    private MultiBuilderInterface $_builder;
 
     public function __construct(Client $client, ?MultiBuilderInterface $builder = null)
     {
