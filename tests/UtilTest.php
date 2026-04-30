@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Elastica\Test;
 
+use Elastica\Exception\InvalidException;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Util;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -176,5 +177,14 @@ class UtilTest extends BaseTest
         $date = \date('Y-m-d\TH:i:s\Z', \strtotime($dateString));
 
         $this->assertEquals($convertedString, $date);
+    }
+
+    #[Group('unit')]
+    public function testConvertDateWithUnparseableStringThrows(): void
+    {
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessage('Unparseable date: "definitely not a date"');
+
+        Util::convertDate('definitely not a date');
     }
 }
