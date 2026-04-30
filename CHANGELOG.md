@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 ### Removed
 ### Fixed
+* Fixed `Elastica\Search::count()` silently dropping the `search_type=query_then_fetch` option due to a malformed array literal that wrapped it in a numeric-keyed sub-array.
 ### Security
 
 
