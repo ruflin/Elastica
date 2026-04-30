@@ -478,13 +478,15 @@ class Query extends Param
     }
 
     /**
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/paginate-search-results.html#search-after
-     *
      * Allows retrieval of the next page of hits using sort values from previous page.
+     *
      * The value of {@see \Elastica\Document::getSort()} should be passed as argument here.
      *
-     * @param array $searchAfter the sort of the last document from previous search result set.
-     * @return static self reference.
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/paginate-search-results.html#search-after
+     *
+     * @param array $searchAfter the sort of the last document from previous search result set
+     *
+     * @return static self reference
      */
     public function setSearchAfter(array $searchAfter): self
     {

@@ -542,62 +542,66 @@ class Index implements SearchableInterface
     /**
      * Iterates over all documents, matching given query, using "search after" based pagination.
      *
+     * @param mixed      $query     search query with sort by unique document field
+     * @param int        $batchSize the number of rows to be returned in each batch (e.g. each query size).
+     * @param array|null $options   search request options
+     *
      * @see \Elastica\Query::setSearchAfter()
      *
-     * @param mixed $query search query with sort by unique document field.
-     * @param int $batchSize the number of rows to be returned in each batch (e.g. each query size).
-     * @param array|null $options search request options.
-     * @return \Generator|\Elastica\Document[] list of all documents matched the given query as iterator.
+     * @return Document[]|\Generator list of all documents matched the given query as iterator
      */
     public function each($query = '', int $batchSize = 100, ?array $options = null): \Generator
     {
         $query = $this->prepareSearchAfterIteratorQuery($query, $batchSize);
 
         while (true) {
-            $resultSet = $this->search($query, $options);
-            foreach ($resultSet->getDocuments() as $document) {
-                yield $document;
-            }
-
-            if (count($resultSet->getDocuments()) < $batchSize) {
+            $documents = $this->search($query, $options)->getDocuments();
+            $count = \count($documents);
+            if (0 === $count) {
                 break;
             }
 
-            $query->setSearchAfter($document->getSort());
+            foreach ($documents as $document) {
+                yield $document;
+            }
+
+            if ($count < $batchSize) {
+                break;
+            }
+
+            $query->setSearchAfter($documents[$count - 1]->getSort());
         }
     }
 
     /**
      * Iterates over all documents in batches, matching given query, using "search after" based pagination.
      *
+     * @param mixed      $query     search query with sort by unique document field
+     * @param int        $batchSize the number of rows to be returned in each batch (e.g. each query size).
+     * @param array|null $options   search request options
+     *
      * @see \Elastica\Query::setSearchAfter()
      *
-     * @param mixed $query search query with sort by unique document field.
-     * @param int $batchSize the number of rows to be returned in each batch (e.g. each query size).
-     * @param array|null $options search request options.
-     * @return \Generator|\Elastica\Document[][] list of document batches matched the given query as iterator.
+     * @return Document[][]|\Generator list of document batches matched the given query as iterator
      */
     public function batch($query = '', int $batchSize = 100, ?array $options = null): \Generator
     {
         $query = $this->prepareSearchAfterIteratorQuery($query, $batchSize);
 
         while (true) {
-            $resultSet = $this->search($query, $options);
-
-            $documents = $resultSet->getDocuments();
-            if (empty($documents)) {
+            $documents = $this->search($query, $options)->getDocuments();
+            $count = \count($documents);
+            if (0 === $count) {
                 break;
             }
 
             yield $documents;
 
-            if (count($documents) < $batchSize) {
+            if ($count < $batchSize) {
                 break;
             }
 
-            $lastDocument = array_pop($documents);
-
-            $query->setSearchAfter($lastDocument->getSort());
+            $query->setSearchAfter($documents[$count - 1]->getSort());
         }
     }
 

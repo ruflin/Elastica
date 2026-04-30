@@ -7,6 +7,7 @@ namespace Elastica\Test;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastica\Client;
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Mapping;
 use Elastica\Query;
@@ -918,5 +919,56 @@ class IndexTest extends BaseTest
         }
 
         $this->assertEquals(['3', '2', '1'], $documentIds);
+    }
+
+    #[Group('functional')]
+    public function testIterateThrowsWhenSortIsMissing(): void
+    {
+        $index = $this->_createIndex();
+
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessageMatches('/sort/');
+
+        \iterator_to_array($index->each(new Query(), 10));
+    }
+
+    #[Group('functional')]
+    public function testIterateThrowsWhenFromIsNonZero(): void
+    {
+        $index = $this->_createIndex();
+
+        $query = new Query();
+        $query->setSort(['_id' => 'asc']);
+        $query->setFrom(5);
+
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessageMatches('/from/');
+
+        \iterator_to_array($index->each($query, 10));
+    }
+
+    #[Group('functional')]
+    public function testIterateThrowsWhenBatchSizeIsZero(): void
+    {
+        $index = $this->_createIndex();
+
+        $query = new Query();
+        $query->setSort(['_id' => 'asc']);
+
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessageMatches('/[Bb]atch size/');
+
+        \iterator_to_array($index->each($query, 0));
+    }
+
+    #[Group('functional')]
+    public function testBatchIterateThrowsWhenSortIsMissing(): void
+    {
+        $index = $this->_createIndex();
+
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessageMatches('/sort/');
+
+        \iterator_to_array($index->batch(new Query(), 10));
     }
 }

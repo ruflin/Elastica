@@ -37,12 +37,6 @@ parameters:
 			path: tests/Bulk/Action/AbstractDocumentTest.php
 
 		-
-			message: '#^Parameter \#1 \$expected of method PHPUnit\\Framework\\Assert\:\:assertSame\(\) contains unresolvable type\.$#'
-			identifier: argument.unresolvableType
-			count: 1
-			path: tests/Bulk/Action/UpdateDocumentTest.php
-
-		-
 			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Elastica\\\\Bulk\\\\Response'' and Elastica\\Bulk\\Response will always evaluate to true\.$#'
 			identifier: method.alreadyNarrowedType
 			count: 1

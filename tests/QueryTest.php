@@ -650,8 +650,7 @@ class QueryTest extends BaseTest
         $this->assertCount(2, $documents);
 
         /** @var Document $lastDocument */
-        $lastDocument = array_pop($documents);
-        $lastDocument->getParam('sort');
+        $lastDocument = \array_pop($documents);
 
         $this->assertNotEmpty($lastDocument->getSort());
 
@@ -660,5 +659,6 @@ class QueryTest extends BaseTest
         $secondPageResultSet = $index->search($query);
         $documents = $secondPageResultSet->getDocuments();
         $this->assertCount(1, $documents);
+        $this->assertSame('2', $documents[0]->getId());
     }
 }

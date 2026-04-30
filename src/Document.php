@@ -235,11 +235,9 @@ class Document extends AbstractUpdateAction
     }
 
     /**
-     * @see \Elastica\Query::setSearchAfter()
-     *
      * Returns the sort position for this document, which can be used as starting offset to search next hits page.
      *
-     * @return array
+     * @see \Elastica\Query::setSearchAfter()
      */
     public function getSort(): array
     {
