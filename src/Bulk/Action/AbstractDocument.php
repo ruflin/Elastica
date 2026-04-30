@@ -7,6 +7,7 @@ namespace Elastica\Bulk\Action;
 use Elastica\AbstractUpdateAction;
 use Elastica\Bulk\Action;
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
 use Elastica\Script\AbstractScript;
 
 abstract class AbstractDocument extends Action
@@ -58,7 +59,7 @@ abstract class AbstractDocument extends Action
     /**
      * @param AbstractScript|Document $data
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidException
      *
      * @return $this
      */
@@ -69,7 +70,7 @@ abstract class AbstractDocument extends Action
         } elseif ($data instanceof Document) {
             $this->setDocument($data);
         } else {
-            throw new \InvalidArgumentException('Data should be a Document or a Script.');
+            throw new InvalidException('Data should be a Document or a Script.');
         }
 
         return $this;
@@ -120,21 +121,20 @@ abstract class AbstractDocument extends Action
      */
     public static function create($data, ?string $opType = null): self
     {
-        // Check type
         if (!$data instanceof Document && !$data instanceof AbstractScript) {
-            throw new \InvalidArgumentException('The data needs to be a Document or a Script.');
+            throw new InvalidException('The data needs to be a Document or a Script.');
         }
 
         if (null === $opType && $data->hasOpType()) {
             $opType = $data->getOpType();
         }
 
-        // Check that scripts can only be used for updates
+        // Scripts can only be used for updates.
         if ($data instanceof AbstractScript) {
             if (null === $opType) {
                 $opType = self::OP_TYPE_UPDATE;
             } elseif (self::OP_TYPE_UPDATE !== $opType) {
-                throw new \InvalidArgumentException('Scripts can only be used with the update operation type.');
+                throw new InvalidException('Scripts can only be used with the update operation type.');
             }
         }
 
