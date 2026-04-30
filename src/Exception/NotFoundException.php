@@ -9,6 +9,6 @@ namespace Elastica\Exception;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class NotFoundException extends \RuntimeException implements ExceptionInterface
+final class NotFoundException extends \RuntimeException implements ExceptionInterface
 {
 }

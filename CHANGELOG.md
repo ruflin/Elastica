@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Backward Compatibility Breaks
 * `Query\Terms` now throws `InvalidException` for non-list terms instead of building an invalid query. Use `array_values()` to reindex sparse or associative arrays before passing them to the constructor or `setTerms()` [#2139](https://github.com/ruflin/Elastica/issues/2139) [#2335](https://github.com/ruflin/Elastica/pull/2335).
+* Marked the leaf exception classes `Elastica\Exception\ClientException`, `Elastica\Exception\InvalidException`, `Elastica\Exception\NotFoundException`, `Elastica\Exception\QueryBuilderException`, `Elastica\Exception\RequestEntityTooLargeException`, `Elastica\Exception\RuntimeException`, `Elastica\Exception\DeprecatedException`, `Elastica\Exception\Bulk\Response\ActionException` and `Elastica\Exception\Bulk\ResponseException` as `final`. These nine exceptions never had subclasses inside the project; in the unlikely case downstream code subclassed one of them, switch to composition or open an issue describing the use case [#2311](https://github.com/ruflin/Elastica/pull/2311).
 ### Added
 * Added support for numeric `minimum_should_match` values in `TermsSet` query [#2293](https://github.com/ruflin/Elastica/pull/2293)
 * Added support for "search after" based pagination [#1645](https://github.com/ruflin/Elastica/issues/1645)
