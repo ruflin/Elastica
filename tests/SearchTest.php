@@ -665,4 +665,43 @@ class SearchTest extends BaseTest
 
         $this->assertEquals(25, $query->getParam('size'));
     }
+
+    /**
+     * @covers \Elastica\Search::setOption
+     */
+    #[Group('unit')]
+    public function testSetSeqNoPrimaryTermOption(): void
+    {
+        $search = new Search($this->createMock(Client::class));
+        $search->setOption(Search::OPTION_SEQ_NO_PRIMARY_TERM, true);
+
+        $this->assertTrue($search->hasOption(Search::OPTION_SEQ_NO_PRIMARY_TERM));
+        $this->assertTrue($search->getOption(Search::OPTION_SEQ_NO_PRIMARY_TERM));
+    }
+
+    /**
+     * @covers \Elastica\Search::search
+     */
+    #[Group('functional')]
+    public function testSearchWithSeqNoPrimaryTermReturnsValuesOnHits(): void
+    {
+        $index = $this->_createIndex();
+        $index->addDocument(new Document('1', ['title' => 'document one']));
+        $index->refresh();
+
+        $search = new Search($this->_getClient());
+        $search->addIndex($index);
+        $search->setOption(Search::OPTION_SEQ_NO_PRIMARY_TERM, true);
+
+        $resultSet = $search->search();
+        $this->assertGreaterThan(0, $resultSet->count());
+
+        foreach ($resultSet as $result) {
+            $hit = $result->getHit();
+            $this->assertArrayHasKey('_seq_no', $hit);
+            $this->assertArrayHasKey('_primary_term', $hit);
+            $this->assertIsInt($hit['_seq_no']);
+            $this->assertIsInt($hit['_primary_term']);
+        }
+    }
 }
