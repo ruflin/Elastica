@@ -1,0 +1,42 @@
+version: 2
+
+updates:
+  - package-ecosystem: composer
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Etc/UTC
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+    groups:
+      php-static-analysis:
+        patterns:
+          - "phpstan/*"
+          - "rector/*"
+      php-testing:
+        patterns:
+          - "phpunit/*"
+          - "guzzlehttp/*"
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Etc/UTC
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - github-actions
+
+  - package-ecosystem: docker
+    directory: "/docker/php"
+    schedule:
+      interval: monthly
+    labels:
+      - dependencies
+      - docker

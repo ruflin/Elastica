@@ -1,6 +1,33 @@
 name: 'Continuous integration'
 on: ['push', 'pull_request']
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
+  audit:
+    runs-on: 'ubuntu-24.04'
+    name: 'Composer audit'
+    steps:
+      - name: 'Checkout'
+        uses: 'actions/checkout@v4'
+
+      - name: 'Setup PHP'
+        uses: 'shivammathur/setup-php@v2'
+        with:
+          php-version: '8.4'
+          coverage: 'none'
+          tools: 'composer:v2'
+
+      - name: 'Install dependencies with Composer'
+        uses: 'ramsey/composer-install@v3'
+        with:
+          composer-options: '--prefer-dist'
+
+      - name: 'Run composer audit'
+        run: composer audit --abandoned=report --no-interaction
+
   cs:
     runs-on: 'ubuntu-24.04'
     name: 'Coding style'

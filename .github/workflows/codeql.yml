@@ -1,0 +1,44 @@
+name: 'CodeQL'
+
+on:
+  push:
+    branches: ['9.x']
+  pull_request:
+    branches: ['9.x']
+  schedule:
+    # Run weekly to catch newly published advisories.
+    - cron: '17 6 * * 1'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  analyze:
+    name: 'Analyze (${{ matrix.language }})'
+    runs-on: 'ubuntu-24.04'
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ['actions']
+        # PHP support in CodeQL is in beta as of 2026; revisit and add 'php'
+        # to the matrix once it leaves beta.
+    steps:
+      - name: 'Checkout'
+        uses: 'actions/checkout@v4'
+
+      - name: 'Initialize CodeQL'
+        uses: 'github/codeql-action/init@v3'
+        with:
+          languages: ${{ matrix.language }}
+          queries: 'security-and-quality'
+
+      - name: 'Perform CodeQL Analysis'
+        uses: 'github/codeql-action/analyze@v3'
+        with:
+          category: '/language:${{ matrix.language }}'
