@@ -16,12 +16,12 @@ All library issues should go to the [issue tracker from GitHub](https://github.c
 
 This release is compatible with all Elasticsearch 9.0 releases and onwards.
 
-The testsuite is run against the most recent minor version of Elasticsearch, currently 9.0.0
+The testsuite is run against the most recent minor version of Elasticsearch, currently 9.1.
 
 ## Contributing
 
 Contributions are always welcome.
-For details on how to contribute, check the [CONTRIBUTING](https://github.com/ruflin/Elastica/blob/master/CONTRIBUTING.md) file.
+For details on how to contribute, check the [CONTRIBUTING](CONTRIBUTING.md) file.
 
 ## Versions & Dependencies
 
@@ -30,7 +30,7 @@ It is generally recommended to use the latest point release of the relevant bran
 
 | Elastica branch                                    | ElasticSearch | elasticsearch-php | PHP            |
 |----------------------------------------------------|---------------|-------------------|----------------|
-| [9.x](https://github.com/ruflin/Elastica/tree/9.x) | 9.x           | ^9.0              | >=8.1 <8.5     |
+| [9.x](https://github.com/ruflin/Elastica/tree/9.x) | 9.x           | ^9.0              | >=8.1 <8.6     |
 | [8.x](https://github.com/ruflin/Elastica/tree/8.x) | 8.x           | ^8.4              | >=8.0 <8.4     |
 | [7.x](https://github.com/ruflin/Elastica/tree/7.x) | 7.x           | ^7.0              | ^7.2 \|\| ^8.0 |
 | [6.x](https://github.com/ruflin/Elastica/tree/6.x) | 6.x           | ^6.0              | ^7.0 \|\| ^8.0 |

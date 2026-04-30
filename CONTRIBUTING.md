@@ -25,12 +25,11 @@ Use `make docker-start DOCKER_OPTIONS="--detach"` to start the containers in a d
 The docker containers can be stopped with `make docker-stop`.
 
 The ES server version started by that command can be configured by passing a `ES_VERSION=` parameter.
-As an example, running `make docker-start ES_VERSION=7.5.0` will use `7.5.0` release.
-If you specify an ES version, use the same version when stopping the containers: `make docker-stop ES_VERSION=7.5.0`.
+As an example, running `make docker-start ES_VERSION=9.1.0` will use the `9.1.0` release.
+If you specify an ES version, use the same version when stopping the containers: `make docker-stop ES_VERSION=9.1.0`.
 
 ### Local Docker configuration
 For ES to properly run, the `vm.max_map_count=262144` system configuration is needed by ES to properly spin up the nodes.
-for further information.
 To update such configuration:
  - For Linux: `sudo sysctl -w vm.max_map_count=262144`
  - For macOS with 'Docker for Mac':
@@ -77,7 +76,7 @@ arguments to the invocation of the tool.
 Examples:
  - run a specific group of tests: `make docker-run-phpunit PHPUNIT_OPTIONS="--group=unit"`
  - filter the test to run: `make docker-run-phpunit PHPUNIT_OPTIONS="--filter=ClientTest"`
- - run tests for a specific test-class: `make docker-run-phpunit PHPUNIT_OPTIONS="test/Elastica/ClientTest.php"`
+ - run tests for a specific test-class: `make docker-run-phpunit PHPUNIT_OPTIONS="tests/ClientTest.php"`
 
 ## Troubleshooting
 
@@ -90,12 +89,12 @@ If you encounter Elasticsearch version compatibility errors during testing:
 
 2. **Set Correct ES Version**: Use the `ES_VERSION` parameter when starting Docker:
    ```bash
-   make docker-start ES_VERSION=9.0.0
+   make docker-start ES_VERSION=9.1.0
    ```
 
 3. **Version Mismatch Errors**: If you see errors like "Accept version must be either version 8 or 7, but found 9":
    - Stop containers: `make docker-stop`
-   - Start with correct version: `make docker-start ES_VERSION=9.0.0`
+   - Start with correct version: `make docker-start ES_VERSION=9.1.0`
    - For 9.x branch development, ES 9.x is required
 
 ### GPG/Network Issues
@@ -113,13 +112,13 @@ If you encounter GPG keyserver or network connectivity issues:
 ## Coding
 
 ### Rules
-* Pull requests are made to master.
-    Changes are never pushed directly (without pull request) into master.
+* Pull requests are made against the default branch (currently `9.x`).
+    Changes are never pushed directly (without pull request) into the default branch.
 * We use the Forking Workflow.
     https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow
 * Follow the coding guidelines.
 * Use a feature branch for every pull request.
-    Don't open a pull request from your master branch.
+    Don't open a pull request from your default branch.
 
 ### Pull Requests
 * One change per pull requests: Keep your pull requests as small as possible.
