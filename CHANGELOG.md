@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 ### Removed
 ### Fixed
+* Fixed `Elastica\Bulk::_processResponse()` running version-param population on `Script` payloads. A missing pair of parentheses caused the `document.autoPopulate` config branch to fire for any payload due to PHP `&&`/`||` precedence; it now correctly applies only to `Document` instances.
 ### Security
 
 
