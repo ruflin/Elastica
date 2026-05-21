@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 ### Removed
 ### Fixed
+* `Elastica\Index::refresh()` now refreshes only the targeted index instead of the entire cluster (previously it issued `POST /_refresh`, now it issues `POST /{index}/_refresh`) [#2313](https://github.com/ruflin/Elastica/issues/2313)
 ### Security
 
 

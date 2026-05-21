@@ -1028,4 +1028,23 @@ class IndexTest extends BaseTest
         $this->expectException(ClientResponseException::class);
         $index->addDocument($second);
     }
+
+    #[Group('functional')]
+    public function testRefreshTargetsIndexAndNotCluster(): void
+    {
+        $index = $this->_createIndex();
+        $client = $index->getClient();
+
+        $response = $index->refresh();
+
+        $this->assertTrue($response->isOk());
+
+        $lastRequest = $client->getLastRequest();
+        $this->assertNotNull($lastRequest);
+        $this->assertSame(
+            \sprintf('/%s/_refresh', $index->getName()),
+            $lastRequest->getUri()->getPath(),
+            'Index::refresh() must target the specific index, not the whole cluster'
+        );
+    }
 }
