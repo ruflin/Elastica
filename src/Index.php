@@ -470,7 +470,7 @@ class Index implements SearchableInterface
     public function refresh(): Response
     {
         return $this->_client->toElasticaResponse(
-            $this->_client->indices()->refresh()
+            $this->_client->indices()->refresh(['index' => $this->getName()])
         );
     }
 
