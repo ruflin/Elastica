@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 ### Fixed
 * `Client::deleteIds()` now accepts integer document IDs again by casting them to string before `Action::setId()` [#2316](https://github.com/ruflin/Elastica/issues/2316) [#2318](https://github.com/ruflin/Elastica/pull/2318)
+* `Elastica\Index::refresh()` now refreshes only the targeted index instead of the entire cluster (previously it issued `POST /_refresh`, now it issues `POST /{index}/_refresh`) [#2313](https://github.com/ruflin/Elastica/issues/2313)
 ### Security
 
 
