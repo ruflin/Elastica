@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added support for numeric `minimum_should_match` values in `TermsSet` query [#2293](https://github.com/ruflin/Elastica/pull/2293)
 * Added support for "search after" based pagination [#1645](https://github.com/ruflin/Elastica/issues/1645)
 * Added support for the `seq_no_primary_term` search option and the `if_seq_no` / `if_primary_term` index options to enable optimistic concurrency control [#2284](https://github.com/ruflin/Elastica/pull/2284)
+* Added `Elastica\Query\Knn` and `Elastica\Query::setKnn()` to support top-level kNN search (single or multiple kNN searches), with optional filters, similarity threshold and boost
 ### Changed
 * `Elastica\Util::convertDate()` now throws `Elastica\Exception\InvalidException` when given a string that `strtotime()` cannot parse, instead of silently producing `1970-01-01T00:00:00Z`. The return type has also been narrowed to `string` and a typo-prone `null` argument is no longer accepted at runtime.
 ### Deprecated

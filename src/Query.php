@@ -7,6 +7,7 @@ namespace Elastica;
 use Elastica\Aggregation\AbstractAggregation;
 use Elastica\Exception\InvalidException;
 use Elastica\Query\AbstractQuery;
+use Elastica\Query\Knn;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
 use Elastica\Rescore\Query as QueryRescore;
@@ -52,6 +53,7 @@ use Elastica\Suggest\AbstractSuggest;
  *     from?: int,
  *     highlight?: THighlightArgs,
  *     indices_boost?: array<string, float>,
+ *     knn?: array<string, mixed>|list<array<string, mixed>>,
  *     min_score?: float,
  *     pit?: PointInTime,
  *     post_filter?: AbstractQuery,
@@ -336,7 +338,7 @@ class Query extends Param
      */
     public function toArray(): array
     {
-        if (!$this->hasSuggest && !isset($this->_params['query'])) {
+        if (!isset($this->_params['knn']) && !$this->hasSuggest && !isset($this->_params['query'])) {
             $this->setQuery(new MatchAll());
         }
 
@@ -493,5 +495,27 @@ class Query extends Param
         $this->setParam('search_after', $searchAfter);
 
         return $this;
+    }
+
+    /**
+     * Sets a top-level kNN search.
+     *
+     * Pass a list of {@see Knn} to combine several kNN searches in the same request.
+     * The Knn is serialized at call time, so further mutations on the passed object
+     * are not reflected in the query - compose it fully before calling setKnn().
+     *
+     * @param Knn|list<Knn> $knn
+     *
+     * @see https://www.elastic.co/docs/solutions/search/vector/knn
+     */
+    public function setKnn(Knn|array $knn): self
+    {
+        if (\is_array($knn)) {
+            $value = \array_map(static fn (Knn $k): array => $k->toArray()['knn'], $knn);
+        } else {
+            $value = $knn->toArray()['knn'];
+        }
+
+        return $this->setParam('knn', $value);
     }
 }
