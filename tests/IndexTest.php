@@ -18,6 +18,7 @@ use Elastica\Script\Script;
 use Elastica\Status;
 use Elastica\Test\Base as BaseTest;
 use PHPUnit\Framework\Attributes\Group;
+use Psr\Http\Message\RequestInterface;
 
 /**
  * @internal
@@ -1040,7 +1041,7 @@ class IndexTest extends BaseTest
         $this->assertTrue($response->isOk());
 
         $lastRequest = $client->getLastRequest();
-        $this->assertNotNull($lastRequest);
+        $this->assertInstanceOf(RequestInterface::class, $lastRequest);
         $this->assertSame(
             \sprintf('/%s/_refresh', $index->getName()),
             $lastRequest->getUri()->getPath(),
