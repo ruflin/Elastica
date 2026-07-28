@@ -49,6 +49,11 @@ jobs:
     runs-on: 'ubuntu-24.04'
     name: 'PHPUnit (PHP ${{ matrix.php }}, ES ${{ matrix.elasticsearch }})'
     timeout-minutes: 10
+    permissions:
+      contents: read
+      # Required for the Codecov OIDC token exchange below. id-token is never
+      # granted by default, so it has to be requested explicitly.
+      id-token: write
     strategy:
       matrix:
         php:
