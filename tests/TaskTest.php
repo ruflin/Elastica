@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Elastica\Test;
 
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Task;
 use PHPUnit\Framework\Attributes\Group;
@@ -61,7 +62,7 @@ class TaskTest extends Base
     #[Group('unit')]
     public function testCancelThrowsExceptionWithEmptyTaskId(): void
     {
-        $this->expectException(\Exception::class);
+        $this->expectException(InvalidException::class);
         $this->expectExceptionMessage('No task id given');
 
         $task = new Task($this->_getClient(), '');

@@ -6,8 +6,11 @@ namespace Elastica\Test;
 
 use Elastica\Client;
 use Elastica\ClientConfiguration;
+use Elastica\Exception\ExceptionInterface;
 use Elastica\Exception\InvalidException;
+use Elastica\Exception\NotImplementedException;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 
 /**
@@ -97,48 +100,12 @@ class ClientTest extends BaseTest
         $this->assertTrue($client->getConfig('bigintConversion'));
     }
 
-    public function testGetAsync(): void
-    {
-        $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('Not supported');
-
-        $client = new Client();
-        $client->getAsync();
-    }
-
     public function testSetElasticMetaHeader(): void
     {
         $client = new Client();
         $client->setElasticMetaHeader(true);
 
         $this->assertTrue($client->getElasticMetaHeader());
-    }
-
-    public function testSetAsync(): void
-    {
-        $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('Not supported');
-
-        $client = new Client();
-        $client->setAsync(true);
-    }
-
-    public function testSetResponseException(): void
-    {
-        $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('Not supported');
-
-        $client = new Client();
-        $client->setResponseException(true);
-    }
-
-    public function testGetResponseException(): void
-    {
-        $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('Not supported');
-
-        $client = new Client();
-        $client->getResponseException();
     }
 
     public function testClientConnectionWithCloudId(): void
@@ -250,5 +217,46 @@ class ClientTest extends BaseTest
         // Verify that string '0' is properly converted to integer 0
         $transport = $client->getTransport();
         $this->assertEquals(0, $transport->getRetries());
+    }
+
+    #[DataProvider('unsupportedClientFeaturesProvider')]
+    public function testUnsupportedFeaturesThrowNotImplementedException(callable $invocation, string $expectedMessage): void
+    {
+        $client = new Client();
+
+        $this->expectException(NotImplementedException::class);
+        $this->expectExceptionMessage($expectedMessage);
+
+        $invocation($client);
+    }
+
+    /**
+     * @return iterable<string, array{0: callable(Client): mixed, 1: string}>
+     */
+    public static function unsupportedClientFeaturesProvider(): iterable
+    {
+        $async = 'Async mode is not supported by Elastica.';
+        $responseException = 'Toggling the response-exception behaviour is not supported by Elastica.';
+
+        yield 'setAsync' => [static fn (Client $client) => $client->setAsync(true), $async];
+        yield 'getAsync' => [static fn (Client $client) => $client->getAsync(), $async];
+        yield 'setResponseException' => [static fn (Client $client) => $client->setResponseException(true), $responseException];
+        yield 'getResponseException' => [static fn (Client $client) => $client->getResponseException(), $responseException];
+        yield 'setServerless' => [static fn (Client $client) => $client->setServerless(true), 'Serverless mode is not supported by Elastica.'];
+    }
+
+    public function testNotImplementedExceptionIsCatchableAsElasticaException(): void
+    {
+        $client = new Client();
+
+        try {
+            $client->setAsync(true);
+            $this->fail('Expected NotImplementedException was not thrown.');
+        } catch (ExceptionInterface $e) {
+            // Reaching this block already proves the exception is part of the Elastica
+            // umbrella; asserting the SPL parent pins the guarantee that callers
+            // catching \BadMethodCallException keep working.
+            $this->assertInstanceOf(\BadMethodCallException::class, $e);
+        }
     }
 }
