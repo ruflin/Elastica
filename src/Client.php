@@ -414,7 +414,7 @@ class Client implements ClientInterface
 
         foreach ($ids as $id) {
             $action = new Action(Action::OP_TYPE_DELETE);
-            $action->setId($id);
+            $action->setId((string) $id);
 
             if (!empty($routing)) {
                 $action->setRouting($routing);
