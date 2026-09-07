@@ -47,10 +47,13 @@ echo "==> Bringing up the docker-compose stack (Elasticsearch + proxy + php)"
 sudo -E "${COMPOSE[@]}" up --detach --remove-orphans
 
 echo "==> Waiting for the Elasticsearch cluster to become healthy"
+# Elasticsearch is published on localhost:9200. On a cold boot the first polls
+# race ES startup and fail; the `|| true` keeps a failed poll from aborting the
+# script under `set -euo pipefail` so the loop can keep waiting.
 healthy=0
 for _ in $(seq 1 60); do
-    status="$(sudo docker exec es01 curl -s "http://localhost:9200/_cluster/health" 2>/dev/null \
-        | sed -n 's/.*"status":"\([^"]*\)".*/\1/p')"
+    status="$(curl -s "http://localhost:9200/_cluster/health" 2>/dev/null \
+        | sed -n 's/.*"status":"\([^"]*\)".*/\1/p' || true)"
     if [ "$status" = "green" ] || [ "$status" = "yellow" ]; then
         echo "    Elasticsearch cluster status: $status"
         healthy=1
