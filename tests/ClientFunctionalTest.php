@@ -348,6 +348,27 @@ class ClientFunctionalTest extends BaseTest
         $this->assertEquals(0, $totalHits);
     }
 
+    /**
+     * Integer IDs must be accepted by deleteIds() after strict_types made
+     * Action::setId(string) reject implicit int-to-string coercion.
+     *
+     * @see https://github.com/ruflin/Elastica/issues/2316
+     */
+    #[Group('functional')]
+    public function testDeleteIdsWithIntegerIds(): void
+    {
+        $index = $this->_createIndex();
+        $index->addDocument(new Document('185755', ['username' => 'hans']));
+        $index->refresh();
+
+        $this->assertEquals(1, $index->search('username:hans')->getTotalHits());
+
+        $index->getClient()->deleteIds([185755], $index);
+        $index->refresh();
+
+        $this->assertEquals(0, $index->search('username:hans')->getTotalHits());
+    }
+
     public function testOneInvalidConnection(): void
     {
         $client = $this->_getClient([
