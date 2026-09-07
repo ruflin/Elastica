@@ -1,0 +1,11 @@
+{
+    "name": "Elastica (PHP + Elasticsearch)",
+    "user": "ubuntu",
+    "install": "bash .cursor/install.sh",
+    "start": "bash .cursor/start.sh",
+    "ports": [
+        { "name": "elasticsearch", "port": 9200 },
+        { "name": "proxy", "port": 8000 },
+        { "name": "proxy-403", "port": 8001 }
+    ]
+}
