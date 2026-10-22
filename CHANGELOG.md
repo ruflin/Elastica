@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 ### Removed
 ### Fixed
+* Fixed requests with a body over 1 MB failing with the `Elastic\Transport\Client\Curl` HTTP client because of the `Expect: 100-continue` header [#2322](https://github.com/ruflin/Elastica/pull/2322)
 ### Security
 
 

@@ -15,6 +15,7 @@ use Elastic\Elasticsearch\Traits\EndpointTrait;
 use Elastic\Elasticsearch\Traits\NamespaceTrait;
 use Elastic\Elasticsearch\Transport\Adapter\AdapterInterface;
 use Elastic\Elasticsearch\Transport\Adapter\AdapterOptions;
+use Elastic\Transport\Client\Curl;
 use Elastic\Transport\Exception\NoAsyncClientException;
 use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastic\Transport\Transport;
@@ -626,6 +627,14 @@ class Client implements ClientInterface
             $transport->setHeader('Accept-Encoding', 'gzip');
         }
 
+        /*
+         * Curl sends "Expect: 100-continue" for a body over 1 MB
+         * and the Curl client of elastic/transport takes "100 Continue" for the response
+         */
+        if ($this->isCurlHttpClient($transport)) {
+            $transport->setHeader('Expect', '');
+        }
+
         return $transport;
     }
 
@@ -643,6 +652,14 @@ class Client implements ClientInterface
         } catch (NoAsyncClientException $e) {
             return false;
         }
+    }
+
+    /**
+     * Returns true if the transport HTTP client is the Curl client of elastic/transport.
+     */
+    protected function isCurlHttpClient(Transport $transport): bool
+    {
+        return $transport->getClient() instanceof Curl;
     }
 
     protected function setTransportClientOptions(HttpClientInterface $client, array $config, array $clientOptions = []): HttpClientInterface
