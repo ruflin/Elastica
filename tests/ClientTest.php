@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Elastica\Test;
 
+use Elastic\Transport\Client\Curl;
 use Elastica\Client;
 use Elastica\ClientConfiguration;
 use Elastica\Exception\InvalidException;
 use Elastica\Test\Base as BaseTest;
+use GuzzleHttp\Client as GuzzleClient;
 use PHPUnit\Framework\Attributes\Group;
 
 /**
@@ -54,6 +56,20 @@ class ClientTest extends BaseTest
 
         $this->assertEquals($hosts, $client->getConfig('hosts'));
         $this->assertEquals('https://my-host.com:9300', $client->getTransport()->getNodePool()->nextNode()->getUri());
+    }
+
+    public function testItDisablesExpectHeaderForCurlClient(): void
+    {
+        $client = new Client(['transport_config' => ['http_client' => new Curl()]]);
+
+        $this->assertSame(['Expect' => ''], $client->getTransport()->getHeaders());
+    }
+
+    public function testItDoesNotSetExpectHeaderForGuzzleClient(): void
+    {
+        $client = new Client(['transport_config' => ['http_client' => new GuzzleClient()]]);
+
+        $this->assertArrayNotHasKey('Expect', $client->getTransport()->getHeaders());
     }
 
     public function testAddDocumentsEmpty(): void

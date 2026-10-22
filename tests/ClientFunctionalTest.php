@@ -6,10 +6,13 @@ namespace Elastica\Test;
 
 use Elastic\Elasticsearch\Response\Elasticsearch;
 use Elastic\Elasticsearch\Transport\Adapter\AdapterOptions;
+use Elastic\Transport\Client\Curl;
 use Elastic\Transport\Exception\NoNodeAvailableException;
 use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Exception\NotFoundException;
+use Elastica\Query;
+use Elastica\Query\Terms;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Test\Transport\NodePool\TraceableSimpleNodePool;
@@ -906,6 +909,25 @@ class ClientFunctionalTest extends BaseTest
             ['ruflin', 1],
             ['ruflin2', 0],
         ];
+    }
+
+    /**
+     * Test search with a body over 1 MB, for which curl sends `Expect: 100-continue`.
+     */
+    public function testSearchWithLargeBodyUsingCurlClient(): void
+    {
+        $client = $this->_getClient([
+            'transport_config' => [
+                'http_client' => new Curl(),
+            ],
+        ]);
+        $index = $client->getIndex($this->_createIndex()->getName());
+
+        // 12000 terms of 100 chars make a body of about 1.2 MB
+        $terms = \array_map(static fn (int $i): string => \str_pad((string) $i, 100, 'x'), \range(1, 12000));
+
+        $resultSet = $index->search(new Query(new Terms('name', $terms)));
+        $this->assertSame(0, $resultSet->getTotalHits());
     }
 
     protected function setHttpClientOptions(HttpClientInterface $client, array $config, array $clientOptions = []): HttpClientInterface
