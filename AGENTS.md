@@ -104,8 +104,8 @@ traits for reuse.
 - Test layout generally mirrors `src/` under `tests/`.
 - Test classes extend `Elastica\Test\Base` (directly or via a shared base such
   as `BaseAggregationTestCase`) and live in `Elastica\Test`.
-  `ClientConfigurationTest` and `JSONTest` extend `TestCase` directly and so
-  skip the group check below. Don't copy them.
+  `ClientConfigurationTest` extends `TestCase` directly and so skips the group
+  check in `Base::setUp`. It declares its group explicitly; don't copy it.
 - Method names start with `test`.
 - Declare one group per test via the PHPUnit attribute `#[Group('unit')]`,
   `#[Group('functional')]`, or `#[Group('benchmark')]`. `Base::setUp` fails any
