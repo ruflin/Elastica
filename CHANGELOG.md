@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added support for PHP 8.6 [#2320](https://github.com/ruflin/Elastica/pull/2320)
 ### Changed
 * `Elastica\Util::convertDate()` now throws `Elastica\Exception\InvalidException` when given a string that `strtotime()` cannot parse, instead of silently producing `1970-01-01T00:00:00Z`. The return type has also been narrowed to `string` and a typo-prone `null` argument is no longer accepted at runtime.
+* Added a `phpunit-lowest` CI job that installs dependencies with `--prefer-lowest --prefer-stable` and runs the unit tests on PHP 8.1, ensuring that the minimum constraints declared in `composer.json` keep working.
 ### Deprecated
 ### Removed
 ### Fixed
