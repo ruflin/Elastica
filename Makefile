@@ -7,11 +7,11 @@ clean:
 tools/phive.phar:
 	mkdir tools; \
 	wget --no-clobber --output-document=tools/phive.phar "https://phar.io/releases/phive.phar" --quiet; \
-    wget --no-clobber --output-document=tools/phive.phar.asc "https://phar.io/releases/phive.phar.asc" --quiet; \
-    gpg --keyserver hkps://keys.openpgp.org --recv-keys 0x9D8A98B29B2D5D79; \
-    gpg --verify tools/phive.phar.asc tools/phive.phar; \
-    rm tools/phive.phar.asc; \
-    chmod +x tools/phive.phar;
+	wget --no-clobber --output-document=tools/phive.phar.asc "https://phar.io/releases/phive.phar.asc" --quiet; \
+	gpg --keyserver hkps://keys.openpgp.org --recv-keys 0x9D8A98B29B2D5D79; \
+	gpg --verify tools/phive.phar.asc tools/phive.phar; \
+	rm tools/phive.phar.asc; \
+	chmod +x tools/phive.phar;
 
 vendor/autoload.php:
 	composer install --prefer-dist --no-interaction ${COMPOSER_FLAGS}
