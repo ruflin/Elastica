@@ -11,7 +11,9 @@ Guidance for AI agents working in this repository.
   - Follow the project's coding standards and architectural patterns.
   - Use the Docker-based development environment.
   - Preserve backward compatibility and type safety.
-  - Add tests for any new or changed behaviour.
+  - Add tests for any new or changed behaviour. Every bug fix needs a
+    regression test that was seen failing without the fix; see
+    [Bug fixes](#bug-fixes).
   - Update `CHANGELOG.md` for every functional change (test-only changes excluded); see [Changelog](#changelog).
   - Open pull requests against `9.x` (the default branch) from a feature branch. Never push to `9.x` directly (see `CONTRIBUTING.md`).
   - Keep pull requests as small as possible: one change per PR. Split larger work into a series of small, independently reviewable PRs. For example, land a refactor separately from the feature that needs it, and keep unrelated cleanups out of feature PRs.
@@ -118,6 +120,25 @@ traits for reuse.
 - Functional tests run `DELETE /_all` in `Base::tearDown`, which removes every
   index in the cluster. Only run them against the local Docker cluster or another
   disposable one, never a shared cluster.
+
+### Bug fixes
+
+Every bug fix needs a regression test in the same PR, and you must verify that
+the test was red before the fix and is green with it:
+
+1. Write the test and run it against the unfixed `src/`. Revert only `src/`
+   (for example `git checkout 9.x -- src/`, or set the fix aside in a temporary
+   WIP commit; never bare `git stash`).
+2. Confirm it fails because of the bug, with an assertion on the wrong
+   behaviour, not because of a syntax error, missing fixture or setup problem.
+3. Restore the fix and confirm the test passes.
+4. In the PR description, state that the test failed without the fix and passes
+   with it, and quote the failing message in one line.
+
+Exempt are fixes with no testable behaviour (documentation, CI, comments,
+type-only changes). Say so in the PR description instead. If a test can't be
+made to fail deterministically (for example it depends on cluster timing), say
+that too rather than claiming the check.
 
 ## Changelog
 
