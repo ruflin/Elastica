@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/9.0.0...9.x)
 
 ### Backward Compatibility Breaks
+* Marked the leaf exception classes `Elastica\Exception\ClientException`, `Elastica\Exception\InvalidException`, `Elastica\Exception\NotFoundException`, `Elastica\Exception\QueryBuilderException`, `Elastica\Exception\RequestEntityTooLargeException`, `Elastica\Exception\RuntimeException`, `Elastica\Exception\DeprecatedException`, `Elastica\Exception\Bulk\Response\ActionException` and `Elastica\Exception\Bulk\ResponseException` as `final`. Per the convention documented in `AGENTS.md`, classes that are not explicitly meant to be extended should be `final`. These nine exceptions never had subclasses inside the project; in the unlikely case downstream code subclassed one of them, switch to composition or open an issue describing the use case.
 ### Added
 * Added support for numeric `minimum_should_match` values in `TermsSet` query [#2293](https://github.com/ruflin/Elastica/pull/2293)
 * Added support for "search after" based pagination [#1645](https://github.com/ruflin/Elastica/issues/1645)

@@ -9,6 +9,6 @@ namespace Elastica\Exception;
  *
  * @author Manuel Andreo Garcia <andreo.garcia@googlemail.com>
  */
-class QueryBuilderException extends \RuntimeException implements ExceptionInterface
+final class QueryBuilderException extends \RuntimeException implements ExceptionInterface
 {
 }

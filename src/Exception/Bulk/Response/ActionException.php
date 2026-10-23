@@ -8,7 +8,7 @@ use Elastica\Bulk\Action;
 use Elastica\Bulk\Response;
 use Elastica\Exception\BulkException;
 
-class ActionException extends BulkException
+final class ActionException extends BulkException
 {
     protected Response $_response;
 
