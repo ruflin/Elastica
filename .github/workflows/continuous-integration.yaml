@@ -24,6 +24,13 @@ jobs:
         run: |
           composer-normalize --diff --dry-run --indent-size=4 --indent-style=space --no-update-lock
 
+      - name: 'Check editorconfig'
+        run: |
+          curl -fsSL -o /tmp/editorconfig-checker.tar.gz https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v4.0.2/editorconfig-checker-linux-amd64.tar.gz
+          echo '44efaef3ed14c6ab52eb87481d78e5e5c204796dccf26e2f4598a61ba17f8003  /tmp/editorconfig-checker.tar.gz' | sha256sum --check
+          tar -xzf /tmp/editorconfig-checker.tar.gz -C /tmp editorconfig-checker
+          /tmp/editorconfig-checker
+
   coding-standards:
     runs-on: 'ubuntu-24.04'
     name: 'Coding standards'
