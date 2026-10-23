@@ -27,7 +27,7 @@ jobs:
       actions: read # Required for Claude to read CI results on PRs
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 10
 
@@ -40,19 +40,19 @@ jobs:
           # This is an optional setting that allows Claude to read CI results on PRs
           additional_permissions: |
             actions: read
-          
+
           # Optional: Specify model (defaults to Claude Sonnet 4, uncomment for Claude Opus 4)
           # model: "claude-opus-4-20250514"
-          
+
           # Optional: Customize the trigger phrase (default: @claude)
           # trigger_phrase: "/claude"
-          
+
           # Optional: Trigger when specific user is assigned to an issue
           # assignee_trigger: "claude-bot"
-          
+
           # Allow Claude to run Elastica development commands
           allowed_tools: "Bash(make docker-run-phpunit),Bash(make run-phpcs),Bash(make fix-phpcs),Bash(make run-phpstan),Bash(make docker-run-phpcs),Bash(make docker-fix-phpcs),Bash(make docker-run-phpstan)"
-          
+
           # Custom instructions for Elastica PHP project
           custom_instructions: |
             Follow PSR-2 coding standards and use strict type declarations
@@ -63,7 +63,7 @@ jobs:
             All methods and properties must have type declarations
             Follow existing code patterns and use existing libraries/utilities
             Changelog entries required for all code changes (except tests)
-          
+
           # Optional: Custom environment variables for Claude
           # claude_env: |
           #   NODE_ENV: test
