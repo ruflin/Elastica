@@ -78,7 +78,13 @@ class ClusterTest extends BaseTest
 
     public function testGetHealth(): void
     {
-        $health = $this->_getClient()->getCluster()->getHealth();
+        $client = $this->_getClient();
+
+        // Replicas of indices created by earlier tests (or lazily by ES, like .tasks) may still be
+        // initializing on the 2-node test cluster, which reports yellow until they are allocated
+        $client->cluster()->health(['wait_for_status' => 'green', 'timeout' => '30s']);
+
+        $health = $client->getCluster()->getHealth();
         $this->assertSame('green', $health->getStatus());
     }
 
