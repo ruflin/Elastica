@@ -40,10 +40,6 @@ Guidance for AI agents working in this repository.
 
 Gotchas:
 
-- `PHPUNIT_OPTIONS` takes a single argument. The Makefile passes it unquoted,
-  so `PHPUNIT_OPTIONS="--group=unit --filter=X"` fails with `make: unrecognized
-  option`. To combine options, use `make docker-shell`, then run
-  `vendor/bin/phpunit --group=unit --filter=X` inside the container.
 - `docker-run-phpstan` and `docker-run-rector` call `vendor/bin/*` without
   installing dependencies first. On a fresh checkout, run
   `make docker-run-phpunit` once, or run `make composer-install` inside
