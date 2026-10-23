@@ -20,9 +20,7 @@ All functional changes must be documented in
   the targeted Elasticsearch version.
 * **Security vulnerabilities**: do not open a public issue. See
   [`SECURITY.md`](./SECURITY.md) for the private disclosure process.
-* **Questions**: open a question on
-  [Stack Overflow](https://stackoverflow.com/questions/tagged/elastica) and
-  tag it with `elastica`, or start a
+* **Questions**: start a
   [GitHub Discussion](https://github.com/ruflin/Elastica/discussions).
 
 ## Setup
