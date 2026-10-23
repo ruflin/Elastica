@@ -133,6 +133,11 @@ If you encounter GPG keyserver or network connectivity issues:
     Test your changes locally.
     Add unit tests and if possible functional tests.
     Don't forget to add the group to your tests.
+* Bug fixes: Every bug fix needs a regression test.
+    Run the new test against the code without your fix and make sure it fails because of the bug,
+    then make sure it passes with the fix.
+    Mention this in the pull request description.
+    Changes without testable behaviour (documentation, CI) are exempt, say so in the description.
 * Update the CHANGELOG.md file with your changes
 * Backward Compatibility breaks: In case you break backward compatibility, provide details on why this is needed.
 * Merge: No one should ever merge their own pull request
