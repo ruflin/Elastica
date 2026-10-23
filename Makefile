@@ -98,7 +98,7 @@ docker-stop:
 
 .PHONY: docker-run-phpunit
 docker-run-phpunit:
-	docker compose ${DOCKER_COMPOSE_OPTIONS} exec php env TERM=xterm-256color make run-phpunit PHPUNIT_OPTIONS=${PHPUNIT_OPTIONS}
+	docker compose ${DOCKER_COMPOSE_OPTIONS} exec php env TERM=xterm-256color make run-phpunit PHPUNIT_OPTIONS="${PHPUNIT_OPTIONS}"
 
 .PHONY: docker-run-phpcs
 docker-run-phpcs:
