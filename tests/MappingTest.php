@@ -225,11 +225,12 @@ class MappingTest extends BaseTest
     }
 
     /**
+     * Test setting a dynamic template and validate whether the right mapping is applied after adding a document which
+     * should match the dynamic template.
+     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/dynamic-templates.html
      */
-    #[Group('functional
-Test setting a dynamic template and validate whether the right mapping is applied after adding a document which
-should match the dynamic template.')]
+    #[Group('functional')]
     public function testDynamicTemplate(): void
     {
         $index = $this->_createIndex();
