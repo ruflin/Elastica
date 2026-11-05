@@ -21,6 +21,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `Client::deleteIds()` now accepts integer document IDs again by casting them to string before `Action::setId()` [#2316](https://github.com/ruflin/Elastica/issues/2316) [#2317](https://github.com/ruflin/Elastica/pull/2317)
 * `Elastica\Index::refresh()` now refreshes only the targeted index instead of the entire cluster (previously it issued `POST /_refresh`, now it issues `POST /{index}/_refresh`) [#2313](https://github.com/ruflin/Elastica/issues/2313)
 ### Security
+* Added a `SECURITY.md` file describing the supported branches and the private vulnerability-disclosure process.
+* Added a `composer audit` job to the CI pipeline so PRs surface known advisories early.
+* Added a CodeQL workflow that runs `security-and-quality` queries on the repository's GitHub Actions on every push, pull request, and weekly on a schedule.
+* Added Dependabot configuration to keep Composer, GitHub Actions, and Docker dependencies up to date.
+* Added a workflow `concurrency` group to cancel in-progress runs when a new commit lands on the same pull request.
 
 
 ## [9.0.0](https://github.com/ruflin/Elastica/compare/8.x...9.0.0)
