@@ -8,6 +8,7 @@ use Elastica\Document;
 use Elastica\Exception\InvalidException;
 use Elastica\Query\Terms;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 
 /**
@@ -15,6 +16,59 @@ use PHPUnit\Framework\Attributes\Group;
  */
 class TermsTest extends BaseTest
 {
+    #[DataProvider('nonListTermsProvider')]
+    #[Group('unit')]
+    public function testConstructorRejectsNonListTerms(array $terms): void
+    {
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessage('Terms must be a list. Use array_values() to reindex the terms.');
+
+        new Terms('name', $terms);
+    }
+
+    #[DataProvider('nonListTermsProvider')]
+    #[Group('unit')]
+    public function testSetTermsRejectsNonListTerms(array $terms): void
+    {
+        $query = new Terms('name', ['original']);
+
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessage('Terms must be a list. Use array_values() to reindex the terms.');
+
+        try {
+            $query->setTerms($terms);
+        } finally {
+            $this->assertSame(['terms' => ['name' => ['original']]], $query->toArray());
+        }
+    }
+
+    public static function nonListTermsProvider(): iterable
+    {
+        yield 'removed first term' => [[1 => 'foo', 2 => 'bar']];
+        yield 'gap between terms' => [[0 => 'foo', 2 => 'bar']];
+        yield 'out of order keys' => [[1 => 'foo', 0 => 'bar']];
+        yield 'string keys' => [['first' => 'foo', 'second' => 'bar']];
+    }
+
+    #[DataProvider('listTermsProvider')]
+    #[Group('unit')]
+    public function testListTerms(array $terms): void
+    {
+        $expected = ['terms' => ['name' => $terms]];
+        $this->assertSame($expected, (new Terms('name', $terms))->toArray());
+
+        $query = (new Terms('name'))->setTermsLookup('index_name', '1', 'terms');
+        $this->assertSame($query, $query->setTerms($terms));
+        $this->assertSame($expected, $query->toArray());
+    }
+
+    public static function listTermsProvider(): iterable
+    {
+        yield 'empty list' => [[]];
+        yield 'scalar types and duplicates' => [[true, false, 1, 1.5, 'foo', 'foo']];
+        yield 'reindexed terms' => [\array_values([1 => 'foo', 2 => 'bar'])];
+    }
+
     #[Group('unit')]
     public function testSetTermsLookup(): void
     {

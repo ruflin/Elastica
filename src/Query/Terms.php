@@ -38,6 +38,10 @@ class Terms extends AbstractQuery
      */
     public function setTerms(array $terms): self
     {
+        if (!\array_is_list($terms)) {
+            throw new InvalidException('Terms must be a list. Use array_values() to reindex the terms.');
+        }
+
         return $this->setParam($this->field, $terms);
     }
 
