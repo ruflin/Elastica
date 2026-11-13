@@ -25,7 +25,7 @@ class IndexDocument extends AbstractDocument
 
     protected function _getMetadata(AbstractUpdateAction $action): array
     {
-        return $action->getOptions([
+        $metadata = $action->getOptions([
             '_index',
             '_id',
             'version',
@@ -34,5 +34,7 @@ class IndexDocument extends AbstractDocument
             'parent',
             'retry_on_conflict',
         ]);
+
+        return $this->_addConcurrencyControlMetadata($action, $metadata);
     }
 }
