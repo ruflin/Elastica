@@ -15,14 +15,14 @@ class DeleteDocument extends AbstractDocument
 
     protected function _getMetadata(AbstractUpdateAction $action): array
     {
-        return $action->getOptions([
+        $metadata = $action->getOptions([
             '_index',
             '_id',
-            'if_seq_no',
-            'if_primary_term',
             'version_type',
             'routing',
             'parent',
         ]);
+
+        return $this->_addConcurrencyControlMetadata($action, $metadata);
     }
 }
