@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Elastica\Test;
 
 use Elastica\JSON;
-use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * JSONTest.
@@ -14,12 +14,13 @@ use PHPUnit\Framework\TestCase;
  *
  * @internal
  */
-class JSONTest extends TestCase
+#[Group('unit')]
+class JSONTest extends Base
 {
     public function testStringifyMustNotThrowExceptionOnValid(): void
     {
         $value = JSON::stringify([]);
-        $this->assertEmpty($value);
+        $this->assertSame('[]', $value);
     }
 
     public function testStringifyMustThrowExceptionNanOrInf(): void
