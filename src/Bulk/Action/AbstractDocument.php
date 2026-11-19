@@ -148,4 +148,26 @@ abstract class AbstractDocument extends Action
     }
 
     abstract protected function _getMetadata(AbstractUpdateAction $source): array;
+
+    /**
+     * Adds the optimistic concurrency control options (`if_seq_no` and `if_primary_term`) to the metadata.
+     *
+     * The first document in a shard has `_seq_no = 0`, so these keys cannot be read with `getOptions()`,
+     * which filters out falsy values.
+     *
+     * @param array<string, mixed> $metadata
+     *
+     * @return array<string, mixed>
+     */
+    protected function _addConcurrencyControlMetadata(AbstractUpdateAction $action, array $metadata): array
+    {
+        if ($action->hasSequenceNumber()) {
+            $metadata['if_seq_no'] = $action->getSequenceNumber();
+        }
+        if ($action->hasPrimaryTerm()) {
+            $metadata['if_primary_term'] = $action->getPrimaryTerm();
+        }
+
+        return $metadata;
+    }
 }
