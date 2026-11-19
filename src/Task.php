@@ -108,9 +108,10 @@ class Task extends Param
     }
 
     /**
-     * @throws InvalidException        if no task id is set
-     * @throws ClientResponseException if the status code of response is 4xx
-     * @throws ServerResponseException if the status code of response is 5xx
+     * @throws InvalidException         if no task id is set
+     * @throws NoNodeAvailableException if all the hosts are offline
+     * @throws ClientResponseException  if the status code of response is 4xx
+     * @throws ServerResponseException  if the status code of response is 5xx
      * @throws ClientException
      */
     public function cancel(): Response

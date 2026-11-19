@@ -79,11 +79,17 @@ class Client implements ClientInterface
         return $this->_transport;
     }
 
+    /**
+     * @throws NotImplementedException
+     */
     public function setAsync(bool $async): self
     {
         throw new NotImplementedException('Async mode is not supported by Elastica.');
     }
 
+    /**
+     * @throws NotImplementedException
+     */
     public function getAsync(): bool
     {
         throw new NotImplementedException('Async mode is not supported by Elastica.');
@@ -101,16 +107,25 @@ class Client implements ClientInterface
         return $this->elasticMetaHeader;
     }
 
+    /**
+     * @throws NotImplementedException
+     */
     public function setResponseException(bool $active): self
     {
         throw new NotImplementedException('Toggling the response-exception behaviour is not supported by Elastica.');
     }
 
+    /**
+     * @throws NotImplementedException
+     */
     public function getResponseException(): bool
     {
         throw new NotImplementedException('Toggling the response-exception behaviour is not supported by Elastica.');
     }
 
+    /**
+     * @throws NotImplementedException
+     */
     public function setServerless(bool $value): ClientInterface
     {
         throw new NotImplementedException('Serverless mode is not supported by Elastica.');

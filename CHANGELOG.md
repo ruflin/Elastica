@@ -16,8 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 * `Elastica\Util::convertDate()` now throws `Elastica\Exception\InvalidException` when given a string that `strtotime()` cannot parse, instead of silently producing `1970-01-01T00:00:00Z`. The return type has also been narrowed to `string` and a typo-prone `null` argument is no longer accepted at runtime.
 * Bumped `codecov/codecov-action` from `v2` to `v7` and aligned it with the v7 input contract (`token`, `fail_ci_if_error: false`, conditional `use_oidc`) [#2327](https://github.com/ruflin/Elastica/pull/2327).
-* `Elastica\Client::setAsync()`, `getAsync()`, `setResponseException()`, `getResponseException()` and `setServerless()` now throw `Elastica\Exception\NotImplementedException` (a `BadMethodCallException` implementing `Elastica\Exception\ExceptionInterface`) instead of a generic `\Exception` when called. Callers can now catch a typed exception.
-* `Elastica\Task::cancel()` now throws `Elastica\Exception\InvalidException` (instead of a generic `\Exception`) when no task id is set.
+* `Elastica\Client::setAsync()`, `getAsync()`, `setResponseException()`, `getResponseException()` and `setServerless()` now throw `Elastica\Exception\NotImplementedException` (a `BadMethodCallException` implementing `Elastica\Exception\ExceptionInterface`) instead of a generic `\Exception` when called. Callers can now catch a typed exception [#2303](https://github.com/ruflin/Elastica/pull/2303).
+* `Elastica\Task::cancel()` now throws `Elastica\Exception\InvalidException` (instead of a generic `\Exception`) when no task id is set [#2303](https://github.com/ruflin/Elastica/pull/2303).
 ### Deprecated
 ### Removed
 ### Fixed
