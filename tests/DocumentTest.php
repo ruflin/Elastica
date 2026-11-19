@@ -95,7 +95,7 @@ class DocumentTest extends BaseTest
             $document->getRefresh();
             $this->fail('Undefined refresh option should throw exception');
         } catch (InvalidException $e) {
-            $this->assertTrue(true);
+            $this->addToAssertionCount(1);
         }
 
         $document->setRefresh(false);
@@ -146,7 +146,7 @@ class DocumentTest extends BaseTest
             $document->get('field5');
             $this->fail('Undefined field get should throw exception');
         } catch (InvalidException $e) {
-            $this->assertTrue(true);
+            $this->addToAssertionCount(1);
         }
 
         $this->assertTrue($document->has('field1'));
@@ -174,7 +174,7 @@ class DocumentTest extends BaseTest
             $document->remove('field5');
             $this->fail('Undefined field unset should throw exception');
         } catch (InvalidException $e) {
-            $this->assertTrue(true);
+            $this->addToAssertionCount(1);
         }
 
         $this->assertEquals('changed1', $document->get('field1'));
@@ -197,7 +197,7 @@ class DocumentTest extends BaseTest
             $document->field5;
             $this->fail('Undefined field get should throw exception');
         } catch (InvalidException $e) {
-            $this->assertTrue(true);
+            $this->addToAssertionCount(1);
         }
 
         $this->assertTrue(isset($document->field1));
@@ -223,7 +223,7 @@ class DocumentTest extends BaseTest
             unset($document->field5);
             $this->fail('Undefined field unset should throw exception');
         } catch (InvalidException $e) {
-            $this->assertTrue(true);
+            $this->addToAssertionCount(1);
         }
 
         $this->assertEquals('changed1', $document->field1);
@@ -245,21 +245,21 @@ class DocumentTest extends BaseTest
             $document->get('user');
             $this->fail('User field should not be available');
         } catch (InvalidException $e) {
-            $this->assertTrue(true);
+            $this->addToAssertionCount(1);
         }
 
         try {
             $document->remove('user');
             $this->fail('User field should not be available for removal');
         } catch (InvalidException $e) {
-            $this->assertTrue(true);
+            $this->addToAssertionCount(1);
         }
 
         try {
             $document->set('name', 'shawn');
             $this->fail('Document should not allow to set new data');
         } catch (InvalidException $e) {
-            $this->assertTrue(true);
+            $this->addToAssertionCount(1);
         }
     }
 
