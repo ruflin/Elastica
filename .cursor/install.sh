@@ -26,7 +26,7 @@ APT_INSTALL="sudo -E apt-get install -y -q --no-install-recommends -o Dpkg::Opti
 
 echo "==> Installing base packages (PHP, Composer prerequisites, Make, tooling)"
 sudo -E apt-get update -qq
-# PHP 8.3 (within the project's ~8.1..~8.5 support range) plus the extensions
+# PHP 8.3 (within the project's ~8.1..~8.6 support range) plus the extensions
 # required by PHPUnit / PHPStan / php-cs-fixer, and helpers used by the Makefile.
 $APT_INSTALL \
     make git curl wget unzip gnupg ca-certificates \

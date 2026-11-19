@@ -17,8 +17,8 @@ set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_ROOT"
 
-# Elasticsearch is pinned to this release for the 9.x branch (see README.md).
-export ES_VERSION="${ES_VERSION:-9.1.0}"
+# Elasticsearch defaults to the version used by CI and docker/compose.es.yaml.
+export ES_VERSION="${ES_VERSION:-9.5.5}"
 
 COMPOSE=(docker compose
     --project-name=elastica
