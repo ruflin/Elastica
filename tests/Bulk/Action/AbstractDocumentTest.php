@@ -36,6 +36,18 @@ class AbstractDocumentTest extends BaseTest
     }
 
     #[Group('unit')]
+    public function testSetDataWithInvalidParameter(): void
+    {
+        $action = AbstractDocument::create(new Document('1', ['foo' => 'bar'], 'index'));
+
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessage('Data should be a Document or a Script.');
+
+        // @phpstan-ignore argument.type
+        $action->setData(new \stdClass());
+    }
+
+    #[Group('unit')]
     #[DataProvider('concurrencyControlProvider')]
     public function testDocumentConcurrencyControlMetadata(string $opType, int $sequenceNumber): void
     {

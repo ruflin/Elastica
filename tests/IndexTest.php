@@ -1048,4 +1048,16 @@ class IndexTest extends BaseTest
             'Index::refresh() must target the specific index, not the whole cluster'
         );
     }
+
+    #[Group('unit')]
+    public function testUpdateDocumentWithInvalidDataThrowsInvalidException(): void
+    {
+        $index = new Index($this->createMock(Client::class), 'test');
+
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessage('Data should be a Document or Script');
+
+        // @phpstan-ignore argument.type
+        $index->updateDocument(new \stdClass());
+    }
 }
