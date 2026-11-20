@@ -58,6 +58,25 @@ CI runs these gates. Run the ones your change can affect before you report it do
 - PHPUnit: `make docker-run-phpunit` with ES running, or `--group=unit` if it is not
 - `composer.json` normalisation: CI runs `composer-normalize` (no `make` target)
 
+## Cloud Agent environment
+
+The Cloud Agent environment is provisioned by `.cursor/install.sh` (host
+toolchain + Docker + `composer install`) and `.cursor/start.sh` (kernel
+settings, Docker daemon, and the docker-compose stack). Non-obvious details:
+
+- Elasticsearch, the nginx proxy, and the php container run via docker-compose
+  and are published on `localhost` (`:9200`, `:8000`, `:8001`).
+- The PHP toolchain also runs natively on the host, so `vendor/bin/phpunit`,
+  `make run-phpunit`, `make run-phpstan`, and `make run-phpcs` work directly
+  against the dockerized Elasticsearch. `vendor/` is created on the host and
+  bind-mounted into the php container, so `make docker-run-phpunit` reuses it.
+- Containers cannot reach the public internet in this VM; run `composer` on the
+  host (`.cursor/install.sh` already does). Docker uses the `fuse-overlayfs`
+  storage driver because the default overlay driver cannot mount here.
+- `start.sh` creates the php container with `ES_VERSION=9.5.5`, which
+  `make docker-run-phpunit` inherits. When running PHPUnit directly on the host,
+  export `ES_VERSION=9.5.5` first (a few version-gated tests read it).
+
 ## Project overview
 
 Elastica is a PHP client for Elasticsearch with an object-oriented architecture.
