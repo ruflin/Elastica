@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Elastica\Query;
 
+use Elastica\Exception\InvalidException;
+
 /**
  * Ids Query.
  *
@@ -18,7 +20,7 @@ class Ids extends AbstractQuery
     /**
      * Creates filter object.
      *
-     * @param array $ids List of ids
+     * @param list<int|string> $ids List of ids
      */
     public function __construct(array $ids = [])
     {
@@ -42,13 +44,17 @@ class Ids extends AbstractQuery
     /**
      * Sets the ids to filter.
      *
-     * @param array|string $ids List of ids
+     * @param list<int|string>|string $ids List of ids
      *
      * @return $this
      */
     public function setIds($ids): self
     {
         if (\is_array($ids)) {
+            if (!\array_is_list($ids)) {
+                throw new InvalidException('Ids must be a list. Use array_values() to reindex the ids.');
+            }
+
             $this->_params['values'] = $ids;
         } else {
             $this->_params['values'] = [$ids];

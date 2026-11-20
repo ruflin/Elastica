@@ -15,8 +15,8 @@ class TermsSet extends AbstractQuery
     private string $field;
 
     /**
-     * @param array<bool|float|int|string> $terms
-     * @param AbstractScript|int|string    $minimumShouldMatch
+     * @param list<bool|float|int|string> $terms
+     * @param AbstractScript|int|string   $minimumShouldMatch
      */
     public function __construct(string $field, array $terms, $minimumShouldMatch)
     {
@@ -39,10 +39,14 @@ class TermsSet extends AbstractQuery
     }
 
     /**
-     * @param array<bool|float|int|string> $terms
+     * @param list<bool|float|int|string> $terms
      */
     public function setTerms(array $terms): self
     {
+        if (!\array_is_list($terms)) {
+            throw new InvalidException('Terms must be a list. Use array_values() to reindex the terms.');
+        }
+
         return $this->addParam($this->field, $terms, 'terms');
     }
 
