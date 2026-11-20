@@ -48,9 +48,7 @@ class GeoDistanceTest extends BaseAggregationTestCase
         $this->assertSame($expected, \array_keys($results['buckets']));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testGeoDistanceAggregationWithKey(): void
     {
         $agg = new GeoDistance('geo', 'location', ['lat' => 32.804654, 'lon' => -117.242594]);

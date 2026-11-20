@@ -64,9 +64,7 @@ class IpRangeTest extends BaseAggregationTestCase
         $this->assertSame($expected, \array_keys($results['buckets']));
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testIpRangeAggregationWithKey(): void
     {
         $agg = new IpRange('ip', 'address');
