@@ -708,6 +708,49 @@ class BulkTest extends BaseTest
         $this->assertSame($bulk, $bulk->setShardTimeout('10s'));
     }
 
+    /**
+     * Regression: when the global `document.autoPopulate` config is enabled,
+     * `Bulk::_processResponse()` must not invoke `setVersionParams()` on a
+     * Script payload. Prior to the fix, operator precedence caused the
+     * fallback branch to fire for any payload, including Scripts.
+     */
+    #[Group('unit')]
+    public function testProcessResponseDoesNotPopulateScriptWhenAutoPopulateEnabled(): void
+    {
+        $client = $this->_getClient();
+        $client->setConfigValue('document', ['autoPopulate' => true]);
+
+        $script = new Script('ctx._source.foo = "bar"');
+        $script->setId('1');
+
+        $bulk = new Bulk($client);
+        $bulk->addScript($script, Action::OP_TYPE_UPDATE);
+
+        // Synthesise a successful bulk response carrying version metadata that
+        // would otherwise be copied onto the Script via setVersionParams().
+        $response = new ElasticaResponse([
+            'errors' => false,
+            'items' => [
+                [
+                    'update' => [
+                        '_id' => '1',
+                        '_version' => 99,
+                        '_seq_no' => 42,
+                        '_primary_term' => 7,
+                        'status' => 200,
+                    ],
+                ],
+            ],
+        ], 200);
+
+        $reflection = new \ReflectionMethod(Bulk::class, '_processResponse');
+        $reflection->invoke($bulk, $response);
+
+        $this->assertFalse($script->hasVersion(), 'Scripts must not be auto-populated with _version');
+        $this->assertFalse($script->hasSequenceNumber(), 'Scripts must not be auto-populated with _seq_no');
+        $this->assertFalse($script->hasPrimaryTerm(), 'Scripts must not be auto-populated with _primary_term');
+    }
+
     #[Group('unit')]
     public function testSetRequestParam(): void
     {
