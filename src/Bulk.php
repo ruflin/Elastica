@@ -195,6 +195,8 @@ class Bulk
     /**
      * @param AbstractScript|array|Document $data
      *
+     * @throws InvalidException
+     *
      * @return $this
      */
     public function addData($data, ?string $opType = null)
@@ -209,7 +211,7 @@ class Bulk
             } elseif ($actionData instanceof Document) {
                 $this->addDocument($actionData, $opType);
             } else {
-                throw new \InvalidArgumentException('Data should be a Document, a Script or an array containing Documents and/or Scripts');
+                throw new InvalidException('Data should be a Document, a Script or an array containing Documents and/or Scripts');
             }
         }
 

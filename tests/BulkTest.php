@@ -782,4 +782,15 @@ class BulkTest extends BaseTest
         $this->expectException(RequestEntityTooLargeException::class);
         $bulk->send();
     }
+
+    #[Group('unit')]
+    public function testAddDataWithInvalidItemThrowsInvalidException(): void
+    {
+        $bulk = new Bulk($this->createMock(Client::class));
+
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessage('Data should be a Document, a Script or an array containing Documents and/or Scripts');
+
+        $bulk->addData([new \stdClass()]);
+    }
 }

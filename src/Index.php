@@ -874,11 +874,13 @@ class Index implements SearchableInterface
      *
      * @param AbstractScript|Document $data    Document or Script with update data
      * @param array                   $options array of query params to use for query
+     *
+     * @throws InvalidException
      */
     public function updateDocument($data, array $options = []): Response
     {
         if (!($data instanceof Document) && !($data instanceof AbstractScript)) {
-            throw new \InvalidArgumentException('Data should be a Document or Script');
+            throw new InvalidException('Data should be a Document or Script');
         }
 
         if (!$data->hasId()) {
