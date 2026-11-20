@@ -26,6 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `Elastica\Index::refresh()` now refreshes only the targeted index instead of the entire cluster (previously it issued `POST /_refresh`, now it issues `POST /{index}/_refresh`) [#2313](https://github.com/ruflin/Elastica/issues/2313)
 * Bulk `index`, `create` and `update` actions now send the `if_seq_no` / `if_primary_term` optimistic concurrency control options, which were silently dropped, and bulk `delete` actions no longer drop `if_seq_no` when it is `0` [#2058](https://github.com/ruflin/Elastica/issues/2058) [#2336](https://github.com/ruflin/Elastica/pull/2336)
 ### Security
+* Added a `composer audit` job to the CI pipeline so PRs surface known advisories early [#2306](https://github.com/ruflin/Elastica/pull/2306).
+* Added a CodeQL workflow that runs `security-and-quality` queries on the repository's GitHub Actions on every push, pull request, and weekly on a schedule [#2306](https://github.com/ruflin/Elastica/pull/2306).
+* Added Dependabot configuration to keep Composer, GitHub Actions, and Docker dependencies up to date [#2306](https://github.com/ruflin/Elastica/pull/2306).
+* Added a workflow `concurrency` group to cancel in-progress runs when a new commit lands on the same pull request [#2306](https://github.com/ruflin/Elastica/pull/2306).
 
 
 ## [9.0.0](https://github.com/ruflin/Elastica/compare/8.x...9.0.0)
