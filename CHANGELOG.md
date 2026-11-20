@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 * `Elastica\Util::convertDate()` now throws `Elastica\Exception\InvalidException` when given a string that `strtotime()` cannot parse, instead of silently producing `1970-01-01T00:00:00Z`. The return type has also been narrowed to `string` and a typo-prone `null` argument is no longer accepted at runtime.
 * Bumped `codecov/codecov-action` from `v2` to `v7` and aligned it with the v7 input contract (`token`, `fail_ci_if_error: false`, conditional `use_oidc`) [#2327](https://github.com/ruflin/Elastica/pull/2327).
+* Added a `phpunit-lowest` CI job that installs dependencies with `--prefer-lowest --prefer-stable` and runs the unit tests on PHP 8.1, ensuring that the minimum constraints declared in `composer.json` keep working [#2308](https://github.com/ruflin/Elastica/pull/2308).
 ### Deprecated
 ### Removed
 ### Fixed
