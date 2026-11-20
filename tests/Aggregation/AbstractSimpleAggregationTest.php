@@ -6,21 +6,22 @@ namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\AbstractSimpleAggregation;
 use Elastica\Exception\InvalidException;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @internal
  */
+#[Group('unit')]
 class AbstractSimpleAggregationTest extends BaseAggregationTestCase
 {
-    /**
-     * @var AbstractSimpleAggregation&MockObject
-     */
-    private MockObject $aggregation;
+    private AbstractSimpleAggregation $aggregation;
 
     protected function setUp(): void
     {
-        $this->aggregation = $this->createMock(AbstractSimpleAggregation::class);
+        parent::setUp();
+
+        // A mock would replace toArray(), the method under test, so use a real subclass with no params set.
+        $this->aggregation = new class('test') extends AbstractSimpleAggregation {};
     }
 
     public function testToArrayThrowsExceptionOnUnsetParams(): void

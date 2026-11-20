@@ -9,6 +9,7 @@ use Elastica\Exception\InvalidException;
 use Elastica\Query\TermsSet;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 
 /**
@@ -57,6 +58,74 @@ class TermsSetTest extends BaseTest
         $this->expectExceptionMessage('TermsSet field name has to be set');
 
         new TermsSet('', ['foo', 'bar'], 'match_field');
+    }
+
+    #[DataProvider('nonListTermsProvider')]
+    #[Group('unit')]
+    public function testConstructorRejectsNonListTerms(array $terms): void
+    {
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessage('Terms must be a list. Use array_values() to reindex the terms.');
+
+        new TermsSet('field', $terms, 1);
+    }
+
+    #[DataProvider('nonListTermsProvider')]
+    #[Group('unit')]
+    public function testSetTermsRejectsNonListTerms(array $terms): void
+    {
+        $query = new TermsSet('field', ['original'], 1);
+
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessage('Terms must be a list. Use array_values() to reindex the terms.');
+
+        try {
+            $query->setTerms($terms);
+        } finally {
+            $this->assertSame([
+                'terms_set' => [
+                    'field' => [
+                        'terms' => ['original'],
+                        'minimum_should_match' => 1,
+                    ],
+                ],
+            ], $query->toArray());
+        }
+    }
+
+    public static function nonListTermsProvider(): iterable
+    {
+        yield 'removed first term' => [[1 => 'foo', 2 => 'bar']];
+        yield 'gap between terms' => [[0 => 'foo', 2 => 'bar']];
+        yield 'out of order keys' => [[1 => 'foo', 0 => 'bar']];
+        yield 'string keys' => [['first' => 'foo', 'second' => 'bar']];
+    }
+
+    #[DataProvider('listTermsProvider')]
+    #[Group('unit')]
+    public function testListTerms(array $terms): void
+    {
+        $expected = [
+            'terms_set' => [
+                'field' => [
+                    'terms' => $terms,
+                    'minimum_should_match' => 1,
+                ],
+            ],
+        ];
+
+        $this->assertSame($expected, (new TermsSet('field', $terms, 1))->toArray());
+
+        $query = new TermsSet('field', ['initial'], 1);
+        $this->assertSame($query, $query->setTerms($terms));
+        $this->assertSame($expected, $query->toArray());
+    }
+
+    public static function listTermsProvider(): iterable
+    {
+        yield 'empty list' => [[]];
+        yield 'scalar types and duplicates' => [[true, false, 1, 1.5, 'foo', 'foo']];
+        yield 'reindexed terms' => [\array_values([1 => 'foo', 2 => 'bar'])];
     }
 
     #[Group('functional')]

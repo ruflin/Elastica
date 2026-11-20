@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Query\Ids;
 use Elastica\Test\Base as BaseTest;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 
 /**
@@ -22,6 +24,10 @@ class IdsTest extends BaseTest
     {
         parent::setUp();
 
+        if (!$this->_isFunctionalGroup()) {
+            return;
+        }
+
         $this->index = $this->_createIndex();
 
         $this->index->addDocument(new Document('1', ['name' => 'hello world']));
@@ -29,6 +35,59 @@ class IdsTest extends BaseTest
         $this->index->addDocument(new Document('3', ['name' => 'ruflin']));
 
         $this->index->refresh();
+    }
+
+    #[DataProvider('nonListIdsProvider')]
+    #[Group('unit')]
+    public function testConstructorRejectsNonListIds(array $ids): void
+    {
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessage('Ids must be a list. Use array_values() to reindex the ids.');
+
+        new Ids($ids);
+    }
+
+    #[DataProvider('nonListIdsProvider')]
+    #[Group('unit')]
+    public function testSetIdsRejectsNonListIds(array $ids): void
+    {
+        $query = new Ids(['1']);
+
+        $this->expectException(InvalidException::class);
+        $this->expectExceptionMessage('Ids must be a list. Use array_values() to reindex the ids.');
+
+        try {
+            $query->setIds($ids);
+        } finally {
+            $this->assertSame(['ids' => ['values' => ['1']]], $query->toArray());
+        }
+    }
+
+    public static function nonListIdsProvider(): iterable
+    {
+        yield 'removed first id' => [[1 => '1', 2 => '2']];
+        yield 'gap between ids' => [[0 => '1', 2 => '2']];
+        yield 'out of order keys' => [[1 => '1', 0 => '2']];
+        yield 'string keys' => [['first' => '1', 'second' => '2']];
+    }
+
+    #[DataProvider('listIdsProvider')]
+    #[Group('unit')]
+    public function testListIds(array $ids): void
+    {
+        $expected = ['ids' => ['values' => $ids]];
+        $this->assertSame($expected, (new Ids($ids))->toArray());
+
+        $query = new Ids(['initial']);
+        $this->assertSame($query, $query->setIds($ids));
+        $this->assertSame($expected, $query->toArray());
+    }
+
+    public static function listIdsProvider(): iterable
+    {
+        yield 'empty list' => [[]];
+        yield 'string ids and duplicates' => [['1', '2', '1']];
+        yield 'reindexed ids' => [\array_values([1 => '1', 2 => '2'])];
     }
 
     #[Group('functional')]

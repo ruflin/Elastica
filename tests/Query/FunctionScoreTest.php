@@ -519,9 +519,7 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals(2, $results[0]->getId());
     }
 
-    /**
-     * @group unit
-     */
+    #[Group('unit')]
     public function testDecayExponential(): void
     {
         $query = new FunctionScore();
@@ -554,9 +552,7 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals($expected, $query->toArray());
     }
 
-    /**
-     * @group functional
-     */
+    #[Group('functional')]
     public function testDecayExponentialFunctional(): void
     {
         $query = new FunctionScore();
