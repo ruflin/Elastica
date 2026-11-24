@@ -58,6 +58,7 @@ class AggregationTest extends AbstractDSLTestCase
         $this->_assertImplemented($aggregationDSL, 'sum', Aggregation\Sum::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'sum_bucket', Aggregation\SumBucket::class, ['name', 'buckets_path']);
         $this->_assertImplemented($aggregationDSL, 'terms', Aggregation\Terms::class, ['name']);
+        $this->_assertImplemented($aggregationDSL, 'multi_terms', Aggregation\MultiTerms::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'top_hits', Aggregation\TopHits::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'value_count', Aggregation\ValueCount::class, ['name', 'field']);
         $this->_assertImplemented($aggregationDSL, 'bucket_script', Aggregation\BucketScript::class, ['name', [], 'script']);

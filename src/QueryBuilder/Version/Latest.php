@@ -15,5 +15,8 @@ namespace Elastica\QueryBuilder\Version;
  */
 class Latest extends Version700
 {
-    // this class always points to the latest valid DSL version
+    public function __construct()
+    {
+        $this->aggregations[] = 'multi_terms';
+    }
 }
