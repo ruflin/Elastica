@@ -14,6 +14,18 @@ namespace Elastica\Suggest;
 class Completion extends AbstractSuggest
 {
     /**
+     * Set category or geographic query contexts, including boosts and prefix matching.
+     *
+     * @param array<string, array> $contexts Context names mapped to their query values
+     *
+     * @return $this
+     */
+    public function setContexts(array $contexts): self
+    {
+        return $this->setParam('contexts', $contexts ?: new \stdClass());
+    }
+
+    /**
      * Set fuzzy parameter.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html#fuzzy

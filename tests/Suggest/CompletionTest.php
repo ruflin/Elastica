@@ -19,6 +19,48 @@ use PHPUnit\Framework\Attributes\Group;
 class CompletionTest extends BaseTest
 {
     #[Group('unit')]
+    public function testContexts(): void
+    {
+        $suggest = new Completion('suggestName', 'fieldName');
+        $contexts = [
+            'genre' => ['rock', ['context' => 'jazz', 'boost' => 2, 'prefix' => true]],
+            'location' => [['context' => ['lat' => 40.73, 'lon' => -74.1], 'precision' => 4]],
+        ];
+
+        $this->assertSame($suggest, $suggest->setContexts($contexts));
+        $this->assertSame($contexts, $suggest->toArray()['completion']['contexts']);
+        $suggest->setContexts(['genre' => ['classical']]);
+        $this->assertSame(['genre' => ['classical']], $suggest->toArray()['completion']['contexts']);
+        $suggest->setContexts([]);
+        $this->assertSame('{}', \json_encode($suggest->toArray()['completion']['contexts']));
+    }
+
+    #[Group('functional')]
+    public function testCategoryContextFiltersSuggestions(): void
+    {
+        $index = $this->_createIndex();
+        $index->setMapping(new Mapping([
+            'suggest' => [
+                'type' => 'completion',
+                'contexts' => [['name' => 'genre', 'type' => 'category']],
+            ],
+        ]));
+        $index->addDocuments([
+            new Document('1', ['suggest' => ['input' => 'Nirvana', 'contexts' => ['genre' => ['rock']]]]),
+            new Document('2', ['suggest' => ['input' => 'Night music', 'contexts' => ['genre' => ['jazz']]]]),
+        ]);
+        $index->refresh();
+
+        $suggest = new Completion('music', 'suggest');
+        $suggest->setPrefix('Ni')->setContexts(['genre' => ['rock']]);
+        $options = $index->search(Query::create($suggest))->getSuggests()['music'][0]['options'];
+
+        $this->assertCount(1, $options);
+        $this->assertSame('Nirvana', $options[0]['text']);
+        $this->assertSame('1', $options[0]['_id']);
+    }
+
+    #[Group('unit')]
     public function testToArray(): void
     {
         $suggest = new Completion('suggestName', 'fieldName');
