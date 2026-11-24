@@ -15,6 +15,31 @@ use Elastica\Test\Base as BaseTest;
 class GeoShapePreIndexedTest extends BaseTest
 {
     /**
+     * @group unit
+     */
+    public function testIndexedShapeRouting(): void
+    {
+        foreach (['tenant-42', '0', ''] as $routing) {
+            $query = new GeoShapePreIndexed('location', '1', 'shapes', 'boundary', $routing);
+            $query->setRelation(AbstractGeoShape::RELATION_DISJOINT);
+
+            $this->assertSame([
+                'geo_shape' => [
+                    'location' => [
+                        'indexed_shape' => [
+                            'id' => '1',
+                            'index' => 'shapes',
+                            'path' => 'boundary',
+                            'routing' => $routing,
+                        ],
+                        'relation' => AbstractGeoShape::RELATION_DISJOINT,
+                    ],
+                ],
+            ], $query->toArray());
+        }
+    }
+
+    /**
      * @group functional
      */
     public function testSearch(): void
