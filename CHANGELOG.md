@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Backward Compatibility Breaks
 ### Added
-* Added optional routing for pre-indexed geo shapes [#2216](https://github.com/ruflin/Elastica/issues/2216).
+* Added optional routing for pre-indexed geo shapes [#2216](https://github.com/ruflin/Elastica/issues/2216) [#2346](https://github.com/ruflin/Elastica/pull/2346).
 ### Changed
 ### Deprecated
 ### Removed
