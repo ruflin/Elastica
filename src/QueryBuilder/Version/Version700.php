@@ -44,6 +44,7 @@ class Version700 extends Version
         'simple_query_string',
         'range',
         'regexp',
+        'script',
         'span_first',
         'span_multi_term',
         'span_near',
