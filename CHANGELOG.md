@@ -37,6 +37,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `Client::deleteIds()` now accepts integer document IDs again by casting them to string before `Action::setId()` [#2316](https://github.com/ruflin/Elastica/issues/2316) [#2317](https://github.com/ruflin/Elastica/pull/2317)
 * `Elastica\Index::refresh()` now refreshes only the targeted index instead of the entire cluster (previously it issued `POST /_refresh`, now it issues `POST /{index}/_refresh`) [#2313](https://github.com/ruflin/Elastica/issues/2313)
 * Bulk `index`, `create` and `update` actions now send the `if_seq_no` / `if_primary_term` optimistic concurrency control options, which were silently dropped, and bulk `delete` actions no longer drop `if_seq_no` when it is `0` [#2058](https://github.com/ruflin/Elastica/issues/2058) [#2336](https://github.com/ruflin/Elastica/pull/2336)
+* `Elastica\Util::convertDate()` now returns UTC, as the `Z` at the end says, instead of the time in the default timezone
+### Security
 
 
 ## [9.0.0](https://github.com/ruflin/Elastica/compare/8.x...9.0.0)

@@ -195,7 +195,7 @@ class Util
             }
         }
 
-        return \date('Y-m-d\TH:i:s\Z', $timestamp);
+        return \gmdate('Y-m-d\TH:i:s\Z', $timestamp);
     }
 
     /**
