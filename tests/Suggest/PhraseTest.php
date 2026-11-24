@@ -6,6 +6,7 @@ namespace Elastica\Test\Suggest;
 
 use Elastica\Document;
 use Elastica\Index;
+use Elastica\Query\MatchPhrase;
 use Elastica\Suggest;
 use Elastica\Suggest\CandidateGenerator\DirectGenerator;
 use Elastica\Suggest\Phrase;
@@ -17,6 +18,26 @@ use PHPUnit\Framework\Attributes\Group;
  */
 class PhraseTest extends BaseTest
 {
+    #[Group('unit')]
+    public function testCollate(): void
+    {
+        $phrase = new Phrase('suggest1', 'text');
+        $query = new MatchPhrase('{{field_name}}', '{{suggestion}}');
+
+        $this->assertSame($phrase, $phrase->setCollate($query, ['field_name' => 'text'], true));
+        $this->assertSame([
+            'query' => ['source' => ['match_phrase' => ['{{field_name}}' => '{{suggestion}}']]],
+            'params' => ['field_name' => 'text'],
+            'prune' => true,
+        ], $phrase->toArray()['phrase']['collate']);
+
+        $phrase->setCollate(new MatchPhrase('text', '{{suggestion}}'));
+        $this->assertSame([
+            'query' => ['source' => ['match_phrase' => ['text' => '{{suggestion}}']]],
+            'prune' => false,
+        ], $phrase->toArray()['phrase']['collate']);
+    }
+
     #[Group('unit')]
     public function testToArray(): void
     {
@@ -70,6 +91,26 @@ class PhraseTest extends BaseTest
 
         $this->assertEquals('elasticsearch is <suggest>bonsai cool</suggest>', $suggests['suggest1'][0]['options'][0]['highlighted']);
         $this->assertEquals('elasticsearch is bonsai cool', $suggests['suggest1'][0]['options'][0]['text']);
+    }
+
+    #[Group('functional')]
+    public function testCollateMatchesSuggestedPhrases(): void
+    {
+        $phrase = (new Phrase('suggest1', 'text'))
+            ->setText('elasticsearch is bansai coor')
+            ->setAnalyzer('simple')
+            ->addDirectGenerator(new DirectGenerator('text'))
+            ->setCollate(new MatchPhrase('{{field_name}}', '{{suggestion}}'), ['field_name' => 'text'], true)
+        ;
+
+        $result = $this->_getIndexForTest()->search((new Suggest())->addSuggestion($phrase));
+        $options = $result->getSuggests()['suggest1'][0]['options'];
+
+        $this->assertCount(3, $options);
+        $this->assertSame('elasticsearch is bonsai cool', $options[0]['text']);
+        $this->assertTrue($options[0]['collate_match']);
+        $this->assertFalse($options[1]['collate_match']);
+        $this->assertFalse($options[2]['collate_match']);
     }
 
     protected function _getIndexForTest(): Index

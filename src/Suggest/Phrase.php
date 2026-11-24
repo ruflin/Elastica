@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Elastica\Suggest;
 
+use Elastica\Query\AbstractQuery;
 use Elastica\Suggest\CandidateGenerator\DirectGenerator;
 
 /**
@@ -91,6 +92,25 @@ class Phrase extends AbstractSuggest
             'pre_tag' => $preTag,
             'post_tag' => $postTag,
         ]);
+    }
+
+    /**
+     * Check suggestions against a query template using the {{suggestion}} variable.
+     * With pruning enabled, each returned option includes its collate_match result.
+     *
+     * @param array<string, mixed> $params Additional template parameters
+     *
+     * @return $this
+     */
+    public function setCollate(AbstractQuery $query, array $params = [], bool $prune = false): self
+    {
+        $collate = ['query' => ['source' => $query]];
+        if ($params) {
+            $collate['params'] = $params;
+        }
+        $collate['prune'] = $prune;
+
+        return $this->setParam('collate', $collate);
     }
 
     /**
