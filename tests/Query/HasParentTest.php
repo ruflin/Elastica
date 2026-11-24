@@ -6,6 +6,7 @@ namespace Elastica\Test\Query;
 
 use Elastica\Mapping;
 use Elastica\Query\HasParent;
+use Elastica\Query\InnerHits;
 use Elastica\Query\MatchAll;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
@@ -16,6 +17,35 @@ use PHPUnit\Framework\Attributes\Group;
  */
 class HasParentTest extends BaseTest
 {
+    #[Group('unit')]
+    public function testInnerHits(): void
+    {
+        $match = new MatchAll();
+        $query = new HasParent($match, 'question');
+        $innerHits = (new InnerHits())->setName('parents')->setSize(1)->setSource(['text']);
+
+        $this->assertSame($query, $query->setInnerHits($innerHits));
+        $this->assertEquals([
+            'has_parent' => [
+                'query' => $match->toArray(),
+                'parent_type' => 'question',
+                'inner_hits' => ['name' => 'parents', 'size' => 1, '_source' => ['text']],
+            ],
+        ], $query->toArray());
+    }
+
+    #[Group('unit')]
+    public function testEmptyInnerHits(): void
+    {
+        $query = new HasParent(new MatchAll(), 'question');
+        $query->setInnerHits(new InnerHits());
+
+        $this->assertJsonStringEqualsJsonString(
+            '{"has_parent":{"query":{"match_all":{}},"parent_type":"question","inner_hits":{}}}',
+            \json_encode($query->toArray(), \JSON_THROW_ON_ERROR)
+        );
+    }
+
     #[Group('unit')]
     public function testToArray(): void
     {
