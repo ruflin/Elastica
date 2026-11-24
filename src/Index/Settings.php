@@ -65,6 +65,18 @@ class Settings
     }
 
     /**
+     * Returns the index creation timestamp in milliseconds since the Unix epoch.
+     *
+     * The string preserves Elasticsearch's value without integer-size limitations.
+     */
+    public function getCreationDate(): ?string
+    {
+        $date = $this->get('creation_date');
+
+        return null === $date ? null : (string) $date;
+    }
+
+    /**
      * Returns the current settings of the index.
      *
      * If param is set, only specified setting is return.
