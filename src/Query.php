@@ -308,6 +308,22 @@ class Query extends Param
     }
 
     /**
+     * Set runtime fields for this search without changing the index mapping.
+     *
+     * @param array<string, array>|RuntimeMappings $runtimeMappings
+     *
+     * @return $this
+     */
+    public function setRuntimeMappings(array|RuntimeMappings $runtimeMappings): self
+    {
+        if (\is_array($runtimeMappings)) {
+            $runtimeMappings = new RuntimeMappings($runtimeMappings);
+        }
+
+        return $this->setParam('runtime_mappings', $runtimeMappings);
+    }
+
+    /**
      * Adds a Script to the query.
      */
     public function addScriptField(string $name, AbstractScript $script): self
@@ -345,6 +361,10 @@ class Query extends Param
         }
 
         $array = $this->_convertArrayable($this->_params);
+
+        if (isset($array['runtime_mappings']) && [] === $array['runtime_mappings']) {
+            $array['runtime_mappings'] = new \stdClass();
+        }
 
         if (isset($array['suggest'])) {
             $array['suggest'] = $array['suggest']['suggest'];

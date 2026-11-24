@@ -144,6 +144,20 @@ class Search
         return $this;
     }
 
+    /**
+     * Set runtime fields on the current query.
+     *
+     * @param array<string, array>|RuntimeMappings $runtimeMappings
+     *
+     * @return $this
+     */
+    public function setRuntimeMappings(array|RuntimeMappings $runtimeMappings): self
+    {
+        $this->getQuery()->setRuntimeMappings($runtimeMappings);
+
+        return $this;
+    }
+
     public function setOption(string $key, $value): self
     {
         $this->validateOption($key);
