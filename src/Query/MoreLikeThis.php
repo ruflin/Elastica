@@ -30,7 +30,7 @@ class MoreLikeThis extends AbstractQuery
     /**
      * Set the "like" value.
      *
-     * @param Document|self|string $like
+     * @param array|Document|string $like A document, text, or a list mixing documents, text and raw document definitions
      *
      * @return $this
      */
@@ -161,20 +161,34 @@ class MoreLikeThis extends AbstractQuery
     {
         $array = parent::toArray();
 
-        // If _id is provided, perform MLT on an existing document from the index
-        // If _source is provided, perform MLT on a document provided as an input
-        if (!empty($array['more_like_this']['like']['_id'])) {
-            $doc = $array['more_like_this']['like'];
-            $doc = \array_intersect_key($doc, ['_index' => 1, '_id' => 1]);
-            $array['more_like_this']['like'] = $doc;
-        } elseif (!empty($array['more_like_this']['like']['_source'])) {
-            $doc = $array['more_like_this']['like'];
-            $doc['doc'] = $array['more_like_this']['like']['_source'];
-            unset($doc['_id'], $doc['_source'], $doc['if_seq_no'], $doc['if_primary_term']);
+        // Raw DSL entries may carry options that Document does not expose.
+        if (\is_array($this->_params['like'] ?? null)) {
+            foreach ($this->_params['like'] as $key => $value) {
+                if ($value instanceof Document) {
+                    $array['more_like_this']['like'][$key] = $this->normalizeLikeDocument($array['more_like_this']['like'][$key]);
+                }
+            }
+        }
 
-            $array['more_like_this']['like'] = $doc;
+        if (\is_array($array['more_like_this']['like'] ?? null)) {
+            $array['more_like_this']['like'] = $this->normalizeLikeDocument($array['more_like_this']['like']);
         }
 
         return $array;
+    }
+
+    private function normalizeLikeDocument(array $document): array
+    {
+        // If _id is provided, perform MLT on an existing document from the index
+        // If _source is provided, perform MLT on a document provided as an input
+        if (!empty($document['_id'])) {
+            return \array_intersect_key($document, ['_index' => 1, '_id' => 1]);
+        }
+        if (!empty($document['_source'])) {
+            $document['doc'] = $document['_source'];
+            unset($document['_id'], $document['_source'], $document['if_seq_no'], $document['if_primary_term']);
+        }
+
+        return $document;
     }
 }
