@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Elastica\Test\Multi;
 
+use Elastic\Elasticsearch\Response\Elasticsearch;
+use Elastica\Client;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Multi\Search as MultiSearch;
 use Elastica\Query;
 use Elastica\Query\Term;
+use Elastica\Response;
 use Elastica\ResultSet;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
@@ -19,6 +22,32 @@ use PHPUnit\Framework\Attributes\Group;
  */
 class SearchTest extends BaseTest
 {
+    #[Group('unit')]
+    public function testRequestOptionsReachMultiSearch(): void
+    {
+        $response = $this->createMock(Elasticsearch::class);
+        $client = $this->createMock(Client::class);
+        $client->expects($this->once())->method('msearch')->with([
+            'body' => "{\"index\":[\"catalogue\"]}\n{\"query\":{\"match_all\":{}}}\n",
+            'search_type' => 'dfs_query_then_fetch',
+            'max_concurrent_searches' => 2,
+            'filter_path' => ['responses.hits.hits._source', 'responses.error'],
+        ])->willReturn($response);
+        $client->method('toElasticaResponse')->willReturn(new Response(['responses' => []], 200));
+
+        $search = new Search($client);
+        $search->addIndex(new Index($client, 'catalogue'));
+        $multiSearch = new MultiSearch($client);
+        $multiSearch->addSearch($search);
+        $multiSearch->setSearchType('dfs_query_then_fetch');
+        $this->assertSame($multiSearch, $multiSearch->setOption('max_concurrent_searches', 1));
+        $multiSearch->setOption('max_concurrent_searches', 2);
+        $this->assertSame($multiSearch, $multiSearch->addOption('filter_path', 'responses.hits.hits._source'));
+        $multiSearch->addOption('filter_path', 'responses.error');
+
+        $this->assertCount(0, $multiSearch->search());
+    }
+
     #[Group('unit')]
     public function testConstruct(): void
     {

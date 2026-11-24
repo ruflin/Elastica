@@ -116,7 +116,29 @@ class Search
      */
     public function setSearchType(string $searchType): self
     {
-        $this->_options[BaseSearch::OPTION_SEARCH_TYPE] = $searchType;
+        return $this->setOption(BaseSearch::OPTION_SEARCH_TYPE, $searchType);
+    }
+
+    /**
+     * Options for the entire _msearch request, independent of per-search headers.
+     *
+     * @return $this
+     */
+    public function setOption(string $key, mixed $value): self
+    {
+        $this->_options[$key] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Append a value to a request option, such as a filter_path list.
+     *
+     * @return $this
+     */
+    public function addOption(string $key, mixed $value): self
+    {
+        $this->_options[$key][] = $value;
 
         return $this;
     }
