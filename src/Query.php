@@ -308,6 +308,18 @@ class Query extends Param
     }
 
     /**
+     * Associate this search with groups reported by the index search statistics API.
+     *
+     * @param list<string> $groups
+     *
+     * @return $this
+     */
+    public function setStats(array $groups): self
+    {
+        return $this->setParam('stats', $groups);
+    }
+
+    /**
      * Adds a Script to the query.
      */
     public function addScriptField(string $name, AbstractScript $script): self
