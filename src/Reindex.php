@@ -67,10 +67,12 @@ class Reindex extends Param
      */
     public function run(): Response
     {
-        $body = $this->_getBody($this->_oldIndex, $this->_newIndex, $this->getParams());
+        $params = $this->getParams();
+        $body = $this->_getBody($this->_oldIndex, $this->_newIndex, $params);
+        unset($params['source'], $params['dest']);
 
         $this->_lastResponse = $this->_oldIndex->getClient()->toElasticaResponse(
-            $this->_oldIndex->getClient()->reindex(\array_merge(['body' => $body], $this->getParams()))
+            $this->_oldIndex->getClient()->reindex(\array_merge(['body' => $body], $params))
         );
 
         return $this->_lastResponse;
@@ -111,6 +113,28 @@ class Reindex extends Param
         $this->setParam(self::QUERY, $query);
     }
 
+    /**
+     * Set native source options, overriding the constructor index and flat source options.
+     *
+     * This supports multiple indices, batch size and remote connection settings.
+     *
+     * @return $this
+     */
+    public function setSource(array $source): self
+    {
+        return $this->setParam('source', $source);
+    }
+
+    /**
+     * Set native destination options, overriding the constructor index and flat destination options.
+     *
+     * @return $this
+     */
+    public function setDestination(array $destination): self
+    {
+        return $this->setParam('dest', $destination);
+    }
+
     public function setPipeline(Pipeline $pipeline): void
     {
         $this->setParam(self::PIPELINE, $pipeline);
@@ -145,7 +169,7 @@ class Reindex extends Param
     {
         $sourceBody = \array_merge([
             'index' => $index->getName(),
-        ], $this->_resolveSourceOptions($params));
+        ], $this->_resolveSourceOptions($params), $params['source'] ?? []);
 
         return $this->_setSourceQuery($sourceBody);
     }
@@ -154,7 +178,7 @@ class Reindex extends Param
     {
         $destBody = \array_merge([
             'index' => $index->getName(),
-        ], $this->_resolveDestOptions($params));
+        ], $this->_resolveDestOptions($params), $params['dest'] ?? []);
 
         // Resolves the pipeline name
         $pipeline = $destBody[self::PIPELINE] ?? null;

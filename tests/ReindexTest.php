@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Elastica\Test;
 
 use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Elastic\Elasticsearch\Response\Elasticsearch;
+use Elastica\Client;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Pipeline;
@@ -13,6 +15,7 @@ use Elastica\Processor\UppercaseProcessor;
 use Elastica\Query\MatchQuery;
 use Elastica\Reindex;
 use Elastica\Script\Script;
+use GuzzleHttp\Psr7\Response as Psr7Response;
 use PHPUnit\Framework\Attributes\Group;
 
 /**
@@ -20,6 +23,74 @@ use PHPUnit\Framework\Attributes\Group;
  */
 class ReindexTest extends Base
 {
+    #[Group('unit')]
+    public function testNativeSourceAndDestinationOptions(): void
+    {
+        $response = new Elasticsearch();
+        $response->setResponse(new Psr7Response(200, [
+            'Content-Type' => 'application/json',
+            Elasticsearch::HEADER_CHECK => Elasticsearch::PRODUCT_NAME,
+        ], '{"created":2}'));
+        $client = $this->getMockBuilder(Client::class)->disableOriginalConstructor()->onlyMethods(['reindex'])->getMock();
+        $client->expects($this->once())->method('reindex')
+            ->with($this->callback(static function (array $params): bool {
+                self::assertArrayNotHasKey('source', $params);
+                self::assertArrayNotHasKey('dest', $params);
+                self::assertSame('2m', $params[Reindex::TIMEOUT]);
+                self::assertSame(10, $params[Reindex::REQUESTS_PER_SECOND]);
+                self::assertSame([
+                    'source' => [
+                        'index' => ['first', 'second'],
+                        'query' => ['match' => ['category' => 'books']],
+                        'size' => 25,
+                        'remote' => ['host' => 'http://remote:9200', 'connect_timeout' => '30s'],
+                    ],
+                    'dest' => ['index' => 'destination', 'op_type' => 'create', 'routing' => '=tenant-1'],
+                ], $params['body']);
+
+                return true;
+            }))
+            ->willReturn($response)
+        ;
+
+        $reindex = new Reindex(new Index($client, 'first'), new Index($client, 'destination'), [
+            Reindex::QUERY => new MatchQuery('category', 'books'),
+            Reindex::OPERATION_TYPE => Reindex::OPERATION_TYPE_CREATE,
+            Reindex::TIMEOUT => '2m',
+            Reindex::REQUESTS_PER_SECOND => 10,
+        ]);
+        $this->assertSame($reindex, $reindex->setSource([
+            'index' => ['first', 'second'],
+            'size' => 25,
+            'remote' => ['host' => 'http://remote:9200', 'connect_timeout' => '30s'],
+        ]));
+        $this->assertSame($reindex, $reindex->setDestination(['routing' => '=tenant-1']));
+        $this->assertSame(2, $reindex->run()->getData()['created']);
+    }
+
+    #[Group('functional')]
+    public function testReindexMultipleSourcesWithRoutingAndBatchSize(): void
+    {
+        $first = $this->_createIndex('first');
+        $second = $this->_createIndex('second');
+        $destination = $this->_createIndex('destination');
+        $first->addDocument(new Document('1', ['name' => 'first']));
+        $second->addDocument(new Document('2', ['name' => 'second']));
+        $first->refresh();
+        $second->refresh();
+
+        $reindex = new Reindex($first, $destination);
+        $reindex->setSource(['index' => [$first->getName(), $second->getName()], 'size' => 1]);
+        $reindex->setDestination(['routing' => '=tenant-1']);
+        $response = $reindex->run();
+        $destination->refresh();
+
+        $this->assertSame(2, $response->getData()['created']);
+        $this->assertSame(2, $destination->count());
+        $this->assertSame('first', $destination->getDocument('1', ['routing' => 'tenant-1'])->getData()['name']);
+        $this->assertSame('second', $destination->getDocument('2', ['routing' => 'tenant-1'])->getData()['name']);
+    }
+
     #[Group('functional')]
     public function testReindex(): void
     {
