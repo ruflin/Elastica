@@ -151,6 +151,27 @@ that too rather than claiming the check.
   `* Added support for ... [#2293](https://github.com/ruflin/Elastica/pull/2293)`.
   If the PR number isn't known yet, add the link once the PR is open.
 
+## Reviewing a pull request
+
+CI covers coding style, Rector, PHPStan and PHPUnit. Don't re-check those.
+Verify the following by hand and report each item as pass, fail or not
+applicable (the human-facing rules are in `CONTRIBUTING.md`):
+
+- Targets `9.x` from a feature branch and is one focused change.
+- `CHANGELOG.md` has an entry under `[Unreleased]` in the matching heading,
+  linking the PR. Test-only changes are exempt.
+- Every changed behaviour has a test. Each test declares exactly one
+  `#[Group]`, functional tests are used where Elasticsearch behaviour
+  matters, and tests calling deprecated APIs use `hideDeprecated()`.
+- Bug fixes: the description states the test failed without the fix and
+  passes with it, quoting the failing message. Exempt fixes say so.
+- Backward compatibility: no new `final`, narrowed visibility, or removed or
+  retyped public API unless listed under `Backward Compatibility Breaks`
+  with the rationale in the description.
+- No syntax or functions newer than PHP 8.1.
+- No new entries in `phpstan-baseline.neon`.
+- New code matches the existing API design and the `src/` to `tests/` layout.
+
 ## Configuration files
 
 - `composer.json` — dependencies and autoloading (PSR-4; keep normalised)
