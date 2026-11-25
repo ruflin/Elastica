@@ -102,6 +102,35 @@ Examples:
  - filter the test to run: `make docker-run-phpunit PHPUNIT_OPTIONS="--filter=ClientTest"`
  - run tests for a specific test-class: `make docker-run-phpunit PHPUNIT_OPTIONS="tests/ClientTest.php"`
 
+## Releasing
+
+Only maintainers cut releases. Versions follow Elasticsearch's major version,
+so a new major waits for a new Elasticsearch major. Features and the
+documented `Backward Compatibility Breaks` of the current major go into a
+minor release (`9.1.0`); a release with only fixes is a patch release.
+
+1. Pull the latest `9.x` and check that CI is green on it.
+2. Open a draft pull request against `9.x` that changes only `CHANGELOG.md`:
+   * rename the filled `[Unreleased]` section to `[X.Y.Z]` with the compare
+     link `.../compare/<previous>...X.Y.Z`; leave no date, like the existing
+     sections;
+   * add a fresh, empty `[Unreleased]` section that compares `X.Y.Z...9.x`;
+   * drop empty headings from the released section;
+   * make sure every entry links its pull request or issue.
+3. Merge it and wait for CI on the merge commit to pass. Do not merge other
+   pull requests until the tag exists: anything merged earlier is not in the
+   tag, but its changelog entry would end up in the release section.
+4. Create a signed tag without a `v` prefix on the merge commit and push it:
+   `git tag -s X.Y.Z -m X.Y.Z <merge-commit> && git push origin X.Y.Z`.
+5. Create the GitHub release with the changelog section as notes, followed by
+   GitHub's generated notes under an `# Auto generated release notes` heading
+   (as in the existing releases):
+   `gh api repos/ruflin/Elastica/releases/generate-notes -f tag_name=X.Y.Z -f previous_tag_name=<previous> --jq .body`,
+   then `gh release create X.Y.Z --verify-tag --title X.Y.Z --notes-file <file>`.
+6. Check that Packagist lists the new version and that every entry in the
+   release section is in the tag
+   (`git merge-base --is-ancestor <commit> X.Y.Z`).
+
 ## Troubleshooting
 
 ### Version Compatibility Issues

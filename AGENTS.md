@@ -16,6 +16,7 @@ Guidance for AI agents working in this repository.
     [Bug fixes](#bug-fixes).
   - Update `CHANGELOG.md` for every functional change (test-only changes excluded); see [Changelog](#changelog).
   - Open pull requests against `9.x` (the default branch) from a feature branch. Never push to `9.x` directly (see `CONTRIBUTING.md`).
+  - Releases: follow [Releasing](CONTRIBUTING.md#releasing). Pushing the tag and creating the GitHub release are outward-facing, so ask the user first.
   - Keep pull requests as small as possible: one change per PR. Split larger work into a series of small, independently reviewable PRs. For example, land a refactor separately from the feature that needs it, and keep unrelated cleanups out of feature PRs.
 
 ## Environment
