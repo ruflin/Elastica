@@ -4,28 +4,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/9.0.0...9.x)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/9.1.0...9.x)
+
+### Backward Compatibility Breaks
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [9.1.0](https://github.com/ruflin/Elastica/compare/9.0.0...9.1.0)
 
 ### Backward Compatibility Breaks
 * `Query\Terms` now throws `InvalidException` for non-list terms instead of building an invalid query. Use `array_values()` to reindex sparse or associative arrays before passing them to the constructor or `setTerms()` [#2139](https://github.com/ruflin/Elastica/issues/2139) [#2335](https://github.com/ruflin/Elastica/pull/2335).
 * `Elastica\Client::setAsync()`, `getAsync()`, `setResponseException()`, `getResponseException()` and `setServerless()` now throw `Elastica\Exception\NotImplementedException` with feature-specific messages instead of a generic `\Exception` [#2303](https://github.com/ruflin/Elastica/pull/2303).
 * `Elastica\Task::cancel()` now throws `Elastica\Exception\InvalidException` instead of a generic `\Exception` when no task ID is set. Both new exception types implement `Elastica\Exception\ExceptionInterface` and extend `\LogicException`, so an earlier `catch (\LogicException)` now handles these failures before `catch (\Exception)` [#2303](https://github.com/ruflin/Elastica/pull/2303).
 * `Query\TermsSet` and `Query\Ids` now throw `InvalidException` for non-list array arguments instead of building an invalid query. Use `array_values()` to reindex sparse or associative arrays before passing them to the constructor or `setTerms()` / `setIds()` [#2139](https://github.com/ruflin/Elastica/issues/2139) [#2338](https://github.com/ruflin/Elastica/pull/2338).
+
 ### Added
 * Added support for numeric `minimum_should_match` values in `TermsSet` query [#2293](https://github.com/ruflin/Elastica/pull/2293)
-* Added support for "search after" based pagination [#1645](https://github.com/ruflin/Elastica/issues/1645)
+* Added support for "search after" based pagination [#1645](https://github.com/ruflin/Elastica/issues/1645) [#2299](https://github.com/ruflin/Elastica/pull/2299)
 * Added support for the `seq_no_primary_term` search option and the `if_seq_no` / `if_primary_term` index options to enable optimistic concurrency control [#2284](https://github.com/ruflin/Elastica/pull/2284)
 * Added support for PHP 8.6 [#2320](https://github.com/ruflin/Elastica/pull/2320)
+
 ### Changed
-* `Elastica\Util::convertDate()` now throws `Elastica\Exception\InvalidException` when given a string that `strtotime()` cannot parse, instead of silently producing `1970-01-01T00:00:00Z`. The return type has also been narrowed to `string` and a typo-prone `null` argument is no longer accepted at runtime.
+* `Elastica\Util::convertDate()` now throws `Elastica\Exception\InvalidException` when given a string that `strtotime()` cannot parse, instead of silently producing `1970-01-01T00:00:00Z`. The return type has also been narrowed to `string` and a typo-prone `null` argument is no longer accepted at runtime. [#2305](https://github.com/ruflin/Elastica/pull/2305)
 * Bumped `codecov/codecov-action` from `v2` to `v7` and aligned it with the v7 input contract (`token`, `fail_ci_if_error: false`, conditional `use_oidc`) [#2327](https://github.com/ruflin/Elastica/pull/2327).
-### Deprecated
-### Removed
+
 ### Fixed
 * `Client::deleteIds()` now accepts integer document IDs again by casting them to string before `Action::setId()` [#2316](https://github.com/ruflin/Elastica/issues/2316) [#2317](https://github.com/ruflin/Elastica/pull/2317)
 * `Elastica\Index::refresh()` now refreshes only the targeted index instead of the entire cluster (previously it issued `POST /_refresh`, now it issues `POST /{index}/_refresh`) [#2313](https://github.com/ruflin/Elastica/issues/2313)
 * Bulk `index`, `create` and `update` actions now send the `if_seq_no` / `if_primary_term` optimistic concurrency control options, which were silently dropped, and bulk `delete` actions no longer drop `if_seq_no` when it is `0` [#2058](https://github.com/ruflin/Elastica/issues/2058) [#2336](https://github.com/ruflin/Elastica/pull/2336)
-### Security
 
 
 ## [9.0.0](https://github.com/ruflin/Elastica/compare/8.x...9.0.0)
