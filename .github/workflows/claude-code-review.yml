@@ -44,12 +44,11 @@ jobs:
 
           # Direct prompt for automated review (no @claude mention needed)
           direct_prompt: |
-            Please review this pull request and provide feedback on:
-            - Code quality and best practices
-            - Potential bugs or issues
-            - Performance considerations
-            - Security concerns
-            - Test coverage
+            Review this pull request against the "Reviewing a pull request"
+            section of AGENTS.md. Report each checklist item as pass, fail or
+            not applicable. Then report code-level issues: correctness,
+            security and test quality. CI already covers coding style,
+            Rector, PHPStan and PHPUnit.
 
             Be constructive and helpful in your feedback.
 
