@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 ### Removed
 ### Fixed
+* `Elastica\Util::convertDate()` now returns UTC, as the `Z` at the end says, instead of the time in the default timezone [#2344](https://github.com/ruflin/Elastica/pull/2344)
 ### Security
 
 ## [9.1.0](https://github.com/ruflin/Elastica/compare/9.0.0...9.1.0)

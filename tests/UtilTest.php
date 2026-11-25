@@ -162,9 +162,7 @@ class UtilTest extends BaseTest
 
         $convertedString = Util::convertDate($dateInt);
 
-        $date = \date('Y-m-d\TH:i:s\Z', $dateInt);
-
-        $this->assertEquals($convertedString, $date);
+        $this->assertSame('2024-01-15T23:23:44Z', $convertedString);
     }
 
     #[Group('unit')]
@@ -174,9 +172,23 @@ class UtilTest extends BaseTest
 
         $convertedString = Util::convertDate($dateString);
 
-        $date = \date('Y-m-d\TH:i:s\Z', \strtotime($dateString));
+        $this->assertSame('2024-01-15T23:23:44Z', $convertedString);
+    }
 
-        $this->assertEquals($convertedString, $date);
+    #[Group('unit')]
+    public function testConvertDateIsInUtcInAnyDefaultTimezone(): void
+    {
+        $timezone = \date_default_timezone_get();
+
+        try {
+            \date_default_timezone_set('America/New_York');
+
+            $this->assertSame('2024-01-15T23:23:44Z', Util::convertDate(1705361024));
+            $this->assertSame('2024-01-15T23:23:44Z', Util::convertDate('Mon, 15 Jan 2024 23:23:44 GMT'));
+            $this->assertSame('2024-01-15T23:23:44Z', Util::convertDate('2024-01-15 18:23:44'));
+        } finally {
+            \date_default_timezone_set($timezone);
+        }
     }
 
     #[Group('unit')]
