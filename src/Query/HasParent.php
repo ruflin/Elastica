@@ -65,6 +65,16 @@ class HasParent extends AbstractQuery
         return $this->setParam('_scope', $scope);
     }
 
+    /**
+     * Set inner hits.
+     *
+     * @return $this
+     */
+    public function setInnerHits(InnerHits $innerHits): self
+    {
+        return $this->setParam('inner_hits', $innerHits);
+    }
+
     public function toArray(): array
     {
         $array = parent::toArray();
