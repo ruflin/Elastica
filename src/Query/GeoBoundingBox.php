@@ -18,7 +18,7 @@ class GeoBoundingBox extends AbstractQuery
     /**
      * Construct BoundingBoxQuery.
      *
-     * @param array $coordinates Array with top left coordinate as first and bottom right coordinate as second element
+     * @param array $coordinates Positional top-left/bottom-right pair or a named Elasticsearch bounding box
      */
     public function __construct(string $key, array $coordinates)
     {
@@ -28,23 +28,38 @@ class GeoBoundingBox extends AbstractQuery
     /**
      * Add coordinates.
      *
-     * @param array $coordinates Array with top left coordinate as first and bottom right coordinate as second element
+     * @param array $coordinates Positional top-left/bottom-right pair or a named Elasticsearch bounding box
      *
-     * @throws InvalidException If $coordinates doesn't have two elements
+     * @throws InvalidException If $coordinates doesn't describe a bounding box
      *
      * @return $this
      */
     public function addCoordinates(string $key, array $coordinates): self
     {
+        if (isset($coordinates['top_left'], $coordinates['bottom_right'])
+            || isset($coordinates['top_right'], $coordinates['bottom_left'])
+            || isset($coordinates['top'], $coordinates['left'], $coordinates['bottom'], $coordinates['right'])
+            || isset($coordinates['wkt'])) {
+            return $this->setRawCoordinates($key, $coordinates);
+        }
+
         if (!isset($coordinates[0], $coordinates[1])) {
             throw new InvalidException('expected $coordinates to be an array with two elements');
         }
 
-        $this->setParam($key, [
+        return $this->setRawCoordinates($key, [
             'top_left' => $coordinates[0],
             'bottom_right' => $coordinates[1],
         ]);
+    }
 
-        return $this;
+    /**
+     * Set a bounding box in Elasticsearch's native format without converting its coordinates.
+     *
+     * @return $this
+     */
+    public function setRawCoordinates(string $key, array $coordinates): self
+    {
+        return $this->setParam($key, $coordinates);
     }
 }
