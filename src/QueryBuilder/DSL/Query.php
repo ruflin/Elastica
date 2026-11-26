@@ -35,6 +35,7 @@ use Elastica\Query\Prefix;
 use Elastica\Query\QueryString;
 use Elastica\Query\Range;
 use Elastica\Query\Regexp;
+use Elastica\Query\Script;
 use Elastica\Query\SimpleQueryString;
 use Elastica\Query\SpanContaining;
 use Elastica\Query\SpanFirst;
@@ -356,6 +357,16 @@ class Query implements DSL
     public function regexp(string $key = '', ?string $value = null, float $boost = 1.0): Regexp
     {
         return new Regexp($key, $value, $boost);
+    }
+
+    /**
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-script-query.html
+     *
+     * @param AbstractScript|array|string|null $script
+     */
+    public function script($script = null): Script
+    {
+        return new Script($script);
     }
 
     /**

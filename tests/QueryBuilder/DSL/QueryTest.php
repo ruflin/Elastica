@@ -6,7 +6,11 @@ namespace Elastica\Test\QueryBuilder\DSL;
 
 use Elastica\Query;
 use Elastica\Query\MatchQuery;
+use Elastica\QueryBuilder;
 use Elastica\QueryBuilder\DSL;
+use Elastica\QueryBuilder\Version\Version700;
+use Elastica\Script\Script;
+use Elastica\Script\ScriptId;
 use PHPUnit\Framework\Attributes\Group;
 
 /**
@@ -55,6 +59,7 @@ class QueryTest extends AbstractDSLTestCase
         $this->_assertImplemented($queryDSL, 'query_string', Query\QueryString::class, []);
         $this->_assertImplemented($queryDSL, 'range', Query\Range::class, ['field', []]);
         $this->_assertImplemented($queryDSL, 'regexp', Query\Regexp::class, ['field', 'value', 1.0]);
+        $this->_assertImplemented($queryDSL, 'script', Query\Script::class, []);
         $this->_assertImplemented($queryDSL, 'simple_query_string', Query\SimpleQueryString::class, ['query']);
         $this->_assertImplemented($queryDSL, 'term', Query\Term::class, []);
         $this->_assertImplemented($queryDSL, 'terms', Query\Terms::class, ['field', []]);
@@ -75,5 +80,33 @@ class QueryTest extends AbstractDSLTestCase
         $this->_assertImplemented($queryDSL, 'span_containing', Query\SpanContaining::class, []);
         $this->_assertImplemented($queryDSL, 'span_within', Query\SpanWithin::class, []);
         $this->_assertImplemented($queryDSL, 'span_not', Query\SpanNot::class, []);
+    }
+
+    public function testScriptQueryBuilder(): void
+    {
+        $script = new Script("doc['price'].value > params.minimum", ['minimum' => 10], 'painless');
+        $query = (new QueryBuilder())->query()->script($script);
+
+        $this->assertSame(['script' => ['script' => [
+            'source' => "doc['price'].value > params.minimum",
+            'params' => ['minimum' => 10],
+            'lang' => 'painless',
+        ]]], $query->toArray());
+
+        $stored = (new QueryBuilder(new Version700()))->query()->script(new ScriptId('filter-price', ['minimum' => 10]));
+        $this->assertSame(['script' => ['script' => [
+            'id' => 'filter-price',
+            'params' => ['minimum' => 10],
+        ]]], $stored->toArray());
+    }
+
+    public function testScriptInputForms(): void
+    {
+        $dsl = new DSL\Query();
+        $expected = ['script' => ['script' => ['source' => 'true']]];
+
+        $this->assertSame($expected, $dsl->script('true')->toArray());
+        $this->assertSame($expected, $dsl->script(['script' => ['source' => 'true']])->toArray());
+        $this->assertSame($expected, $dsl->script()->setScript('true')->toArray());
     }
 }
