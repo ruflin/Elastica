@@ -19,6 +19,40 @@ use PHPUnit\Framework\Attributes\Group;
  */
 class MoreLikeThisTest extends BaseTest
 {
+    #[Group('unit')]
+    public function testLikeDocumentList(): void
+    {
+        $stored = new Document('1', ['title' => 'Stored source'], 'articles');
+        $artificial = new Document('', ['title' => 'An artificial document'], 'articles');
+        $query = new MoreLikeThis();
+        $this->assertSame($query, $query->setLike([$stored, $artificial]));
+
+        $expected = ['more_like_this' => ['like' => [
+            ['_id' => '1', '_index' => 'articles'],
+            ['_index' => 'articles', 'doc' => ['title' => 'An artificial document']],
+        ]]];
+        $this->assertEquals($expected, $query->toArray());
+        $this->assertEquals($expected, $query->toArray());
+        $this->assertSame([$stored, $artificial], $query->getParam('like'));
+        $this->assertSame(['title' => 'Stored source'], $stored->getData());
+    }
+
+    #[Group('unit')]
+    public function testMixedLikeListKeepsRawDocumentOptions(): void
+    {
+        $raw = ['_id' => '2', '_index' => 'articles', 'routing' => 'tenant-42', 'fields' => ['title']];
+        $query = new MoreLikeThis();
+        $query->setLike(['some text', new Document('1', [], 'articles'), $raw]);
+
+        $this->assertSame([
+            'more_like_this' => ['like' => [
+                'some text',
+                ['_id' => '1', '_index' => 'articles'],
+                $raw,
+            ]],
+        ], $query->toArray());
+    }
+
     #[Group('functional')]
     public function testSearch(): void
     {
