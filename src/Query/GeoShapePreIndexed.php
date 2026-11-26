@@ -30,36 +30,46 @@ class GeoShapePreIndexed extends AbstractGeoShape
      */
     protected string $_indexedPath;
 
+    protected ?string $_indexedRouting;
+
     /**
      * Construct geo_shape query with a pre-indexed shape.
      *
-     * @param string $path         The path/field of the shape searched
-     * @param string $indexedId    Id of the pre-indexed shape
-     * @param string $indexedIndex Index of the pre-indexed shape
-     * @param string $indexedPath  Path of the pre-indexed shape
+     * @param string      $path           The path/field of the shape searched
+     * @param string      $indexedId      Id of the pre-indexed shape
+     * @param string      $indexedIndex   Index of the pre-indexed shape
+     * @param string      $indexedPath    Path of the pre-indexed shape
+     * @param string|null $indexedRouting Routing of the pre-indexed shape
      */
     public function __construct(
         string $path,
         string $indexedId,
         string $indexedIndex,
         string $indexedPath,
+        ?string $indexedRouting = null,
     ) {
         $this->_path = $path;
         $this->_indexedId = $indexedId;
         $this->_indexedIndex = $indexedIndex;
         $this->_indexedPath = $indexedPath;
+        $this->_indexedRouting = $indexedRouting;
     }
 
     public function toArray(): array
     {
+        $indexedShape = [
+            'id' => $this->_indexedId,
+            'index' => $this->_indexedIndex,
+            'path' => $this->_indexedPath,
+        ];
+        if (null !== $this->_indexedRouting) {
+            $indexedShape['routing'] = $this->_indexedRouting;
+        }
+
         return [
             'geo_shape' => [
                 $this->_path => [
-                    'indexed_shape' => [
-                        'id' => $this->_indexedId,
-                        'index' => $this->_indexedIndex,
-                        'path' => $this->_indexedPath,
-                    ],
+                    'indexed_shape' => $indexedShape,
                     'relation' => $this->_relation,
                 ],
             ],
