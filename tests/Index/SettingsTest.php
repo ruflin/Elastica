@@ -15,6 +15,34 @@ use PHPUnit\Framework\Attributes\Group;
  */
 class SettingsTest extends BaseTest
 {
+    #[Group('unit')]
+    public function testCreationDatePreservesMilliseconds(): void
+    {
+        $settings = $this->getMockBuilder(IndexSettings::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['get'])
+            ->getMock()
+        ;
+        $settings->expects($this->exactly(3))->method('get')->with('creation_date')
+            ->willReturnOnConsecutiveCalls('1795501805123', 0, null)
+        ;
+
+        $this->assertSame('1795501805123', $settings->getCreationDate());
+        $this->assertSame('0', $settings->getCreationDate());
+        $this->assertNull($settings->getCreationDate());
+    }
+
+    #[Group('functional')]
+    public function testCreationDateFromIndex(): void
+    {
+        $settings = $this->_createIndex()->getSettings();
+        $date = $settings->getCreationDate();
+
+        $this->assertNotNull($date);
+        $this->assertSame($settings->get('creation_date'), $date);
+        $this->assertMatchesRegularExpression('/^\d{13}$/', $date);
+    }
+
     #[Group('functional')]
     public function testGet(): void
     {
