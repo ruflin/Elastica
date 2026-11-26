@@ -27,6 +27,7 @@ use Elastica\Aggregation\IpRange;
 use Elastica\Aggregation\Max;
 use Elastica\Aggregation\Min;
 use Elastica\Aggregation\Missing;
+use Elastica\Aggregation\MultiTerms;
 use Elastica\Aggregation\Nested;
 use Elastica\Aggregation\NormalizeAggregation;
 use Elastica\Aggregation\Percentiles;
@@ -318,6 +319,14 @@ class Aggregation implements DSL
     public function terms(string $name): Terms
     {
         return new Terms($name);
+    }
+
+    /**
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-multi-terms-aggregation.html
+     */
+    public function multi_terms(string $name): MultiTerms
+    {
+        return new MultiTerms($name);
     }
 
     /**

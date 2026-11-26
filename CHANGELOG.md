@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `Query\TermsSet` and `Query\Ids` now throw `InvalidException` for non-list array arguments instead of building an invalid query. Use `array_values()` to reindex sparse or associative arrays before passing them to the constructor or `setTerms()` / `setIds()` [#2139](https://github.com/ruflin/Elastica/issues/2139) [#2338](https://github.com/ruflin/Elastica/pull/2338).
 
 ### Added
+* Added the `MultiTerms` aggregation and query-builder helper for grouping by multiple fields or scripts [#2071](https://github.com/ruflin/Elastica/issues/2071) [#2348](https://github.com/ruflin/Elastica/pull/2348).
 * Added support for numeric `minimum_should_match` values in `TermsSet` query [#2293](https://github.com/ruflin/Elastica/pull/2293)
 * Added support for "search after" based pagination [#1645](https://github.com/ruflin/Elastica/issues/1645) [#2299](https://github.com/ruflin/Elastica/pull/2299)
 * Added support for the `seq_no_primary_term` search option and the `if_seq_no` / `if_primary_term` index options to enable optimistic concurrency control [#2284](https://github.com/ruflin/Elastica/pull/2284)
