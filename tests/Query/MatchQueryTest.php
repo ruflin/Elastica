@@ -15,6 +15,33 @@ use PHPUnit\Framework\Attributes\Group;
 class MatchQueryTest extends BaseTest
 {
     #[Group('unit')]
+    public function testParametersAfterScalarConstructor(): void
+    {
+        foreach (['search text', '', '0', 0, false] as $value) {
+            $query = new MatchQuery('title', $value);
+            $this->assertSame($query, $query->setFieldBoost('title', 2.0));
+            $query->setFieldOperator('title', MatchQuery::OPERATOR_AND);
+
+            $this->assertSame([
+                'match' => ['title' => ['query' => $value, 'boost' => 2.0, 'operator' => 'and']],
+            ], $query->toArray());
+        }
+    }
+
+    #[Group('unit')]
+    public function testParametersAfterSetField(): void
+    {
+        $query = new MatchQuery();
+        $query->setField('title', 'search text');
+        $query->setFieldAnalyzer('title', 'simple');
+        $query->setFieldQuery('title', 'replacement text');
+
+        $this->assertSame([
+            'match' => ['title' => ['query' => 'replacement text', 'analyzer' => 'simple']],
+        ], $query->toArray());
+    }
+
+    #[Group('unit')]
     public function testToArray(): void
     {
         $field = 'test';

@@ -50,6 +50,8 @@ class MatchQuery extends AbstractQuery
     {
         if (!isset($this->_params[$field])) {
             $this->_params[$field] = [];
+        } elseif (!\is_array($this->_params[$field])) {
+            $this->_params[$field] = ['query' => $this->_params[$field]];
         }
 
         $this->_params[$field][$key] = $value;
