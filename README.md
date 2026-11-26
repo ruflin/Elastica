@@ -6,6 +6,7 @@
 [![Total Downloads](https://poser.pugx.org/ruflin/Elastica/downloads)](https://packagist.org/packages/ruflin/elastica)
 
 All documentation for Elastica can be found under [Elastica.io](http://Elastica.io/).
+For a runnable PHPUnit example, see [testing application code without Elasticsearch](docs/testing.md).
 If you have questions, don't hesitate to ask them in our
 [GitHub Discussions](https://github.com/ruflin/Elastica/discussions).
 
