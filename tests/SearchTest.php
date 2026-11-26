@@ -28,6 +28,40 @@ use PHPUnit\Framework\Attributes\Group;
 class SearchTest extends BaseTest
 {
     #[Group('unit')]
+    public function testStatsGroupsOnCurrentQuery(): void
+    {
+        $search = new Search($this->_getClient());
+        $this->assertSame($search, $search->setStats(['first']));
+        $this->assertSame(['first'], $search->getQuery()->toArray()['stats']);
+
+        $query = new Query(new QueryString('hello'));
+        $search->setQuery($query);
+        $search->setStats(['second']);
+        $this->assertSame($query, $search->getQuery());
+        $this->assertSame(['second'], $query->toArray()['stats']);
+    }
+
+    #[Group('functional')]
+    public function testSearchRecordsStatsGroups(): void
+    {
+        $index = $this->_createIndex();
+        $index->addDocument(new Document('1', ['name' => 'test']));
+        $index->refresh();
+        $search = $index->createSearch();
+        $search->setStats(['interactive', 'catalog']);
+        $this->assertCount(1, $search->search());
+
+        $stats = $index->getClient()->indices()->stats([
+            'index' => $index->getName(),
+            'metric' => 'search',
+            'groups' => 'interactive,catalog',
+        ])->asArray();
+        $groups = $stats['indices'][$index->getName()]['total']['search']['groups'];
+        $this->assertSame(1, $groups['interactive']['query_total']);
+        $this->assertSame(1, $groups['catalog']['query_total']);
+    }
+
+    #[Group('unit')]
     public function testConstruct(): void
     {
         $client = $this->_getClient();

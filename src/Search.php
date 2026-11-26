@@ -144,6 +144,20 @@ class Search
         return $this;
     }
 
+    /**
+     * Set statistics groups on the current query.
+     *
+     * @param list<string> $groups
+     *
+     * @return $this
+     */
+    public function setStats(array $groups): self
+    {
+        $this->getQuery()->setStats($groups);
+
+        return $this;
+    }
+
     public function setOption(string $key, $value): self
     {
         $this->validateOption($key);

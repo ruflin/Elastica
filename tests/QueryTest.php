@@ -29,6 +29,20 @@ use PHPUnit\Framework\Attributes\Group;
 class QueryTest extends BaseTest
 {
     #[Group('unit')]
+    public function testSearchStatsGroups(): void
+    {
+        $query = new Query(new Term(['title' => 'test']));
+        $this->assertSame($query, $query->setStats(['interactive', 'catalog']));
+        $this->assertSame(['interactive', 'catalog'], $query->toArray()['stats']);
+        $this->assertSame(['term' => ['title' => 'test']], $query->toArray()['query']);
+
+        $query->setStats(['batch']);
+        $this->assertSame(['batch'], $query->toArray()['stats']);
+        $query->setStats([]);
+        $this->assertSame([], $query->toArray()['stats']);
+    }
+
+    #[Group('unit')]
     public function testRawQuery(): void
     {
         $textQuery = new Term(['title' => 'test']);
